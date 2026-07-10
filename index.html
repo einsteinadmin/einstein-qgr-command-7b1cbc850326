@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QGR Command Center · Q3 2026 Cycle</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Bebas+Neue&display=swap');
+
+  :root {
+    --orange: #EF8B22;
+    --orange-900: #CC5500;
+    --orange-50: #FEF6EC;
+    --blue:   #0979C3;
+    --blue-50: #EBF4FB;
+    --navy:   #1B3A5C;
+    --navy-500: #27343D;
+    --ink:    #2A2A2A;
+    --gray:   #6B6B6B;
+    --light:  #F7F5F1;
+    --line:   #E5E1DA;
+    --teal:   #0E8F84;
+    --red:    #C0392B;
+    --yellow: #C99A1E;
+    --green:  #3F8F4F;
+    --white:  #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: 'Roboto', -apple-system, sans-serif;
+    background: var(--light);
+    color: var(--ink);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 { font-family: 'Roboto', sans-serif; color: var(--navy); }
+
+  button { font-family: inherit; cursor: pointer; }
+  textarea, input { font-family: inherit; }
+
+  /* ============ TOP BAR ============ */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 8px rgba(27,58,92,0.06);
+  }
+  .topbar-inner {
+    max-width: 1240px; margin: 0 auto;
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .brand-block { display: flex; flex-direction: column; margin-right: auto; }
+  .brand-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 0.5px; color: var(--navy);
+    line-height: 1;
+  }
+  .brand-sub { font-size: 0.68rem; color: var(--gray); letter-spacing: 0.5px; margin-top: 2px; }
+
+  .countdown-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--orange-50); color: var(--orange-900);
+    border: 1px solid #F5D9B8;
+    font-size: 0.78rem; font-weight: 700;
+    padding: 6px 12px; border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.78rem; font-weight: 700;
+    padding: 8px 14px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--white); color: var(--navy);
+    text-decoration: none;
+  }
+  .btn:hover { border-color: var(--blue); color: var(--blue); }
+  .btn.primary { background: var(--orange); border-color: var(--orange); color: var(--navy-500); font-weight: 700; }
+  .btn.primary:hover { background: var(--orange-900); border-color: var(--orange-900); color: var(--white); }
+  .btn.ghost { background: transparent; border-color: transparent; color: var(--gray); }
+  .btn.small { padding: 5px 10px; font-size: 0.7rem; }
+
+  .gear-menu { position: relative; }
+  .gear-dropdown {
+    display: none;
+    position: absolute; right: 0; top: calc(100% + 6px);
+    background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(27,58,92,0.16);
+    min-width: 220px; overflow: hidden; z-index: 200;
+  }
+  .gear-dropdown.open { display: block; }
+  .gear-dropdown button {
+    display: block; width: 100%; text-align: left;
+    padding: 10px 14px; font-size: 0.82rem; background: none; border: none; color: var(--ink);
+  }
+  .gear-dropdown button:hover { background: var(--orange-50); color: var(--orange-900); }
+  .gear-dropdown .danger:hover { background: #FBEAEA; color: var(--red); }
+
+  /* Tabs */
+  .tabs {
+    max-width: 1240px; margin: 0 auto;
+    display: flex; gap: 4px; padding: 0 20px;
+    border-top: 1px solid var(--line);
+  }
+  .tab-btn {
+    background: none; border: none; border-bottom: 3px solid transparent;
+    padding: 10px 16px; font-size: 0.86rem; font-weight: 700; color: var(--gray);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tab-btn.active { color: var(--orange-900); border-bottom-color: var(--orange); }
+  .tab-btn:hover:not(.active) { color: var(--navy); }
+
+  /* ============ MAIN ============ */
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 28px 20px 100px; }
+  .zone { display: none; }
+  .zone.active { display: block; }
+
+  .section {
+    background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px 24px; margin-bottom: 22px;
+  }
+  .section-eyebrow {
+    font-size: 0.68rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--orange-900); margin-bottom: 6px;
+  }
+  .section-title { font-size: 1.3rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .section-desc { font-size: 0.85rem; color: var(--gray); margin-bottom: 16px; }
+
+  /* Gate timeline */
+  .gate-strip {
+    display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;
+    scrollbar-width: thin;
+  }
+  .gate-card {
+    flex: 0 0 auto; width: 190px;
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+    background: var(--light); cursor: pointer;
+    transition: transform 0.1s ease;
+  }
+  .gate-card:hover { transform: translateY(-2px); border-color: var(--blue); }
+  .gate-card .gate-date { font-size: 0.7rem; font-weight: 800; color: var(--navy); letter-spacing: 0.3px; }
+  .gate-card .gate-label { font-size: 0.78rem; color: var(--ink); margin-top: 4px; line-height: 1.35; }
+  .gate-dot {
+    display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+    margin-top: 8px; background: var(--gray);
+  }
+  .gate-dot.upcoming { background: #C0C2C4; }
+  .gate-dot.today { background: var(--orange); box-shadow: 0 0 0 4px var(--orange-50); }
+  .gate-dot.done { background: var(--teal); }
+  .gate-status-label { font-size: 0.64rem; color: var(--gray); margin-left: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Phase accordion */
+  .phase-block { border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+  .phase-head {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    background: var(--light); cursor: pointer;
+  }
+  .phase-head:hover { background: #F0ECE3; }
+  .phase-letter {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: var(--orange-900);
+    min-width: 26px;
+  }
+  .phase-head-text { flex: 1; }
+  .phase-head-title { font-size: 0.92rem; font-weight: 700; color: var(--navy); }
+  .phase-head-window { font-size: 0.72rem; color: var(--gray); }
+  .phase-progress-wrap { display: flex; align-items: center; gap: 8px; min-width: 130px; }
+  .progress-bar-track { flex: 1; height: 7px; background: #E2E3E4; border-radius: 999px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--teal); border-radius: 999px; transition: width 0.2s ease; }
+  .progress-bar-pct { font-size: 0.7rem; color: var(--gray); font-weight: 700; min-width: 32px; text-align: right; }
+  .phase-caret { font-size: 0.8rem; color: var(--gray); transition: transform 0.15s ease; }
+  .phase-block.open .phase-caret { transform: rotate(90deg); }
+  .phase-items { display: none; padding: 6px 16px 16px 54px; }
+  .phase-block.open .phase-items { display: block; }
+  .phase-item-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #F0EEE8; }
+  .phase-item-row:last-child { border-bottom: none; }
+  .phase-item-check {
+    width: 18px; height: 18px; border-radius: 5px; border: 2px solid #C0C2C4;
+    flex: 0 0 auto; margin-top: 2px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; color: var(--white); background: var(--white);
+  }
+  .phase-item-check.checked { background: var(--teal); border-color: var(--teal); }
+  .phase-item-text-wrap { flex: 1; }
+  .phase-item-text { font-size: 0.84rem; color: var(--ink); }
+  .phase-item-text.checked-text { color: var(--gray); text-decoration: line-through; }
+  .phase-item-note {
+    width: 100%; margin-top: 6px; border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 8px; font-size: 0.78rem; color: var(--ink); resize: vertical; min-height: 32px;
+    background: var(--light);
+  }
+  .note-toggle { font-size: 0.7rem; color: var(--blue); background: none; border: none; padding: 2px 0; margin-top: 2px; }
+
+  .overall-progress { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .overall-progress .progress-bar-track { height: 10px; }
+
+  /* Tracker table */
+  .tracker-table-wrap { overflow-x: auto; }
+  table.tracker { width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 560px; }
+  table.tracker th {
+    text-align: left; padding: 8px 10px; background: var(--light); color: var(--navy);
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 2px solid var(--line);
+  }
+  table.tracker td { padding: 8px 10px; border-bottom: 1px solid #F0EEE8; }
+  table.tracker td.leader-name { font-weight: 700; color: var(--navy); white-space: nowrap; }
+  .cycle-cell {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--white); font-size: 1.1rem; user-select: none;
+  }
+  .cycle-cell:hover { border-color: var(--blue); }
+  .tracker-note { font-size: 0.76rem; color: var(--gray); margin-top: 12px; line-height: 1.5; }
+
+  /* Rock cards */
+  .rock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .rock-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: var(--light); }
+  .rock-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .rock-name { font-size: 0.98rem; font-weight: 700; color: var(--navy); }
+  .status-pill {
+    font-size: 0.62rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  .status-pill.sg { background: #DCEFE0; color: var(--green); }
+  .status-pill.g  { background: #E4F3E1; color: #4C9A54; }
+  .status-pill.y  { background: #FBF1D8; color: var(--yellow); }
+  .status-pill.r  { background: #FAE0DE; color: var(--red); }
+  .finish-line { font-size: 0.8rem; color: var(--gray); margin-top: 8px; line-height: 1.4; }
+  .aar-toggle {
+    margin-top: 12px; font-size: 0.76rem; font-weight: 700; color: var(--blue);
+    background: none; border: none; padding: 0;
+  }
+  .aar-form { display: none; margin-top: 12px; }
+  .aar-form.open { display: block; }
+  .aar-q { margin-bottom: 12px; }
+  .aar-q label { display: block; font-size: 0.74rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .aar-q textarea {
+    width: 100%; min-height: 56px; border: 1px solid var(--line); border-radius: 6px;
+    padding: 7px 9px; font-size: 0.8rem; color: var(--ink); resize: vertical; background: var(--white);
+  }
+
+  /* Materials shelf */
+  .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .material-tile {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+    background: var(--light); text-decoration: none; color: var(--ink);
+  }
+  .material-tile:hover { border-color: var(--blue); background: var(--blue-50); text-decoration: none; }
+  .material-icon { font-size: 1.3rem; }
+  .material-label { font-size: 0.82rem; font-weight: 700; color: var(--navy); }
+  .material-sub { font-size: 0.68rem; color: var(--gray); }
+
+  /* Agenda */
+  .agenda-day { margin-bottom: 18px; }
+  .agenda-day-title { font-size: 0.92rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .agenda-list { display: flex; flex-direction: column; gap: 6px; }
+  .agenda-row { display: flex; align-items: center; gap: 8px; }
+  .agenda-row input[type="text"] {
+    flex: 1; border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px;
+    font-size: 0.82rem; background: var(--white); color: var(--ink);
+  }
+  .agenda-remove { background: none; border: none; color: var(--gray); font-size: 0.9rem; padding: 4px 8px; }
+  .agenda-remove:hover { color: var(--red); }
+  .agenda-add { margin-top: 6px; }
+
+  /* Decision log / who-owns-what */
+  .decision-form { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .decision-form input, .decision-form select {
+    border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 0.82rem;
+    background: var(--white); color: var(--ink);
+  }
+  .decision-form input[name="text"] { flex: 2; min-width: 220px; }
+  .decision-form input[name="owner"] { flex: 1; min-width: 120px; }
+  .decision-form input[name="due"] { flex: 1; min-width: 130px; }
+  .decision-form input[name="link"] { flex: 1; min-width: 150px; }
+
+  table.decision-tbl { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  table.decision-tbl th {
+    text-align: left; padding: 8px 10px; background: var(--light); color: var(--navy);
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 2px solid var(--line);
+  }
+  table.decision-tbl td { padding: 9px 10px; border-bottom: 1px solid #F0EEE8; vertical-align: top; }
+  table.decision-tbl td a { color: var(--blue); font-size: 0.78rem; }
+  .status-select {
+    border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; font-size: 0.74rem; background: var(--white);
+  }
+  .row-del { background: none; border: none; color: var(--gray); font-size: 0.85rem; }
+  .row-del:hover { color: var(--red); }
+  .empty-hint { font-size: 0.8rem; color: var(--gray); font-style: italic; padding: 10px 0; }
+
+  /* Rollout checklist reuse */
+  .simple-checklist { display: flex; flex-direction: column; gap: 4px; }
+  .simple-check-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid #F0EEE8; }
+
+  /* Changelog */
+  .changelog-list { display: flex; flex-direction: column; gap: 0; }
+  .changelog-entry { display: flex; gap: 16px; padding: 12px 4px; border-bottom: 1px solid #F0EEE8; font-size: 0.84rem; }
+  .changelog-date { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; color: var(--orange-900); min-width: 76px; }
+  .changelog-add { display: flex; gap: 8px; margin-top: 10px; }
+  .changelog-add input { flex: 1; border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 0.82rem; }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(27,29,31,0.5);
+    z-index: 500; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--white); border-radius: 14px; max-width: 560px; width: 100%;
+    padding: 24px; max-height: 84vh; overflow-y: auto;
+  }
+  .modal-box h3 { font-size: 1.1rem; margin-bottom: 10px; }
+  .modal-box p { font-size: 0.82rem; color: var(--gray); margin-bottom: 12px; }
+  .modal-box textarea {
+    width: 100%; min-height: 200px; border: 1px solid var(--line); border-radius: 8px;
+    padding: 10px; font-size: 0.8rem; font-family: monospace; margin-bottom: 12px;
+  }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--navy-500); color: var(--white); padding: 10px 20px; border-radius: 999px;
+    font-size: 0.82rem; z-index: 600; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+  }
+  .toast.show { opacity: 1; }
+
+  footer.hq-footer { text-align: center; font-size: 0.72rem; color: #999; padding: 20px 0 60px; }
+
+  @media (max-width: 640px) {
+    .brand-title { font-size: 1.3rem; }
+    .wrap { padding: 20px 14px 90px; }
+    .section { padding: 16px 16px; }
+    .tabs { padding: 0 10px; }
+    .tab-btn { padding: 10px 10px; font-size: 0.8rem; }
+    .rock-grid { grid-template-columns: 1fr; }
+    .decision-form input { min-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand-block">
+      <div class="brand-title">QGR Command Center</div>
+      <div class="brand-sub">Q3 2026 Cycle</div>
+    </div>
+    <div id="countdownChip" class="countdown-chip">— days to QGR</div>
+    <div class="topbar-actions">
+      <button class="btn" id="exportBtn">⬇ Export</button>
+      <div class="gear-menu">
+        <button class="btn ghost" id="gearBtn">⚙</button>
+        <div class="gear-dropdown" id="gearDropdown">
+          <button id="importOpenBtn">⬆ Import JSON</button>
+          <button id="resetQuarterBtn" class="danger">🗑 Reset quarter…</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" data-zone="zone1">🗓 Runway</button>
+    <button class="tab-btn" data-zone="zone2">🏁 The Room</button>
+    <button class="tab-btn" data-zone="zone3">📦 Aftermath</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="zone active" id="zone1">
+
+    <div class="section">
+      <div class="section-eyebrow">Pre-QGR</div>
+      <div class="section-title">Gate timeline</div>
+      <div class="section-desc">Click a gate to cycle its status manually (upcoming → today → done → upcoming). Auto-computed from today’s date on load.</div>
+      <div class="gate-strip" id="gateStrip"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Runway</div>
+      <div class="section-title">Phase checklist</div>
+      <div class="section-desc">Six phases, A through F. Check items as they land; add a note on any item by tapping ✎.</div>
+      <div class="overall-progress">
+        <span style="font-size:0.78rem; font-weight:700; color:var(--navy); white-space:nowrap;">Overall</span>
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="overallProgressFill" style="width:0%"></div></div>
+        <span class="progress-bar-pct" id="overallProgressPct">0%</span>
+      </div>
+      <div id="phaseAccordion"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Runway</div>
+      <div class="section-title">Team pre-work tracker</div>
+      <div class="section-desc">Click a cell to cycle: ⬜ not started → 🟡 sent/reminded → ✅ verified.</div>
+      <div class="tracker-table-wrap">
+        <table class="tracker" id="trackerTable"></table>
+      </div>
+      <div class="tracker-note">
+        Constraints ownership: <strong>Win Demand</strong> = Amanda + Matisen · <strong>Optimize Capacity</strong> = Mike + Brian ·
+        <strong>Attract &amp; Develop Movers</strong> = Anne. Everyone also owns a PACe step.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Runway</div>
+      <div class="section-title">My rocks — AAR workspace</div>
+      <div class="section-desc">Six Q2 rocks. Expand a card for Rob’s 6-question AAR — autosaves as you type.</div>
+      <div class="rock-grid" id="rockGrid"></div>
+    </div>
+
+  </div>
+
+  <div class="zone" id="zone2">
+
+    <div class="section">
+      <div class="section-eyebrow">The Room</div>
+      <div class="section-title">Agenda blocks</div>
+      <div class="section-desc">Editable — seeded from Phase F. Add or remove lines for either QGR day.</div>
+      <div id="agendaWrap"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">The Room</div>
+      <div class="section-title">Materials shelf</div>
+      <div class="section-desc">One-click open, new tab, for anything you need on screen during the room.</div>
+      <div class="materials-grid" id="materialsGrid"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">The Room</div>
+      <div class="section-title">Live decision log</div>
+      <div class="section-desc">The room’s capture surface. Add a row per decision as it happens — mirrors into Aftermath automatically.</div>
+      <div class="decision-form">
+        <input type="text" name="text" id="decText" placeholder="Decision text…">
+        <input type="text" name="owner" id="decOwner" placeholder="Owner">
+        <input type="text" name="due" id="decDue" placeholder="Due (e.g. 8/1)">
+        <input type="text" name="link" id="decLink" placeholder="Pulse link (optional)">
+        <button class="btn primary" id="decAddBtn">+ Add</button>
+      </div>
+      <div class="tracker-table-wrap">
+        <table class="decision-tbl" id="decisionTableRoom"></table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="zone" id="zone3">
+
+    <div class="section">
+      <div class="section-eyebrow">Aftermath</div>
+      <div class="section-title">Who-owns-what</div>
+      <div class="section-desc">Auto-mirrors the decision log from The Room, plus manual adds. Update status as things move.</div>
+      <div class="decision-form">
+        <input type="text" name="text" id="decText2" placeholder="Decision / rock…">
+        <input type="text" name="owner" id="decOwner2" placeholder="Owner">
+        <input type="text" name="due" id="decDue2" placeholder="Due (e.g. 8/1)">
+        <input type="text" name="link" id="decLink2" placeholder="Pulse link (optional)">
+        <button class="btn primary" id="decAddBtn2">+ Add</button>
+      </div>
+      <div class="tracker-table-wrap">
+        <table class="decision-tbl" id="decisionTableAftermath"></table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Aftermath</div>
+      <div class="section-title">Rollout checklist</div>
+      <div class="section-desc">The follow-through list. Check off as each lands.</div>
+      <div class="simple-checklist" id="rolloutChecklist"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Aftermath</div>
+      <div class="section-title">Changelog</div>
+      <div class="section-desc">Dated entries — every session that touches this project appends here.</div>
+      <div class="changelog-list" id="changelogList"></div>
+      <div class="changelog-add">
+        <input type="text" id="changelogInput" placeholder="Add a changelog entry…">
+        <button class="btn" id="changelogAddBtn">+ Add</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="hq-footer">
+    QGR Command Center · Q3 2026 Cycle · internal use — do not share outside Einstein · state saved locally in this browser
+  </footer>
+
+</div>
+
+<!-- Import modal -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal-box">
+    <h3>Import JSON</h3>
+    <p>Paste a full-state export JSON below. This will overwrite current state after you confirm.</p>
+    <textarea id="importTextarea" placeholder="Paste exported JSON here…"></textarea>
+    <div class="modal-actions">
+      <button class="btn ghost" id="importCancelBtn">Cancel</button>
+      <button class="btn primary" id="importConfirmBtn">Import &amp; overwrite</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ============================================================
+     SEED DATA
+     ============================================================ */
+
+  var LS_PREFIX = 'qgrhq-q3-2026-';
+  var LS_KEYS = {
+    gates: LS_PREFIX + 'gates',
+    phases: LS_PREFIX + 'phases',
+    tracker: LS_PREFIX + 'tracker',
+    aar: LS_PREFIX + 'aar',
+    agenda: LS_PREFIX + 'agenda',
+    decisions: LS_PREFIX + 'decisions',
+    rollout: LS_PREFIX + 'rollout',
+    changelog: LS_PREFIX + 'changelog',
+    activeZone: LS_PREFIX + 'activeZone'
+  };
+
+  var GATES_SEED = [
+    { id: 'g1', date: 'Fri 7/10 1pm',      label: 'Rob Lynch monthly 1:1', dateVal: '2026-07-10T13:00:00', status: 'auto' },
+    { id: 'g2', date: 'Fri 7/10 3:45pm',   label: 'Prosper call (Q3 forecast + PTO cost model + feeds Cameron’s constraints)', dateVal: '2026-07-10T15:45:00', status: 'auto' },
+    { id: 'g3', date: 'Mon 7/13 10am',     label: 'KP/Laura website workshop (design handoff push)', dateVal: '2026-07-13T10:00:00', status: 'auto' },
+    { id: 'g4', date: 'Mon–Wed 7/13–15',   label: 'Dallas trip (final Branch Visits rock push + game)', dateVal: '2026-07-13T00:00:00', status: 'auto' },
+    { id: 'g5', date: 'Tue 7/15 1–5pm',    label: 'Rob Q3 pre-work workshop (Mural constraints + ITP one-pagers DUE)', dateVal: '2026-07-15T13:00:00', status: 'auto' },
+    { id: 'g6', date: 'Mon 7/20',          label: 'Cameron + Paul QGR prep day (start of prep cycle)', dateVal: '2026-07-20T09:00:00', status: 'auto' },
+    { id: 'g7', date: 'Tue 7/21',          label: 'Ben (Prosper) joins prep half-day via Zoom', dateVal: '2026-07-21T09:00:00', status: 'auto' },
+    { id: 'g8', date: 'Wed–Thu 7/29–30',   label: 'Roundtable QGR (two half-days, execution only)', dateVal: '2026-07-29T09:00:00', status: 'auto' }
+  ];
+
+  var QGR_DATE = new Date('2026-07-29T09:00:00');
+
+  var PHASES_SEED = [
+    {
+      id: 'A', title: 'Signal collection', window: 'now → 7/15',
+      items: [
+        'Team adds biggest constraints/opportunities to Master Backlog + Mural',
+        'Theme/dashboard/rewards ideas from Claims + Sales (Amanda)',
+        'QGR docs & folder access check',
+        'Collect eNPS survey results + slide content',
+        'Review/update Master Backlog (dedupe, emoji statuses)',
+        'People Analyzer — Roundtable + branches run in advance',
+        'Q2 results snapshot (SG/G/R per rock off dashboard)',
+        'QG success-rate tracker refresh (7-quarter parser)'
+      ]
+    },
+    {
+      id: 'B', title: 'Rob pre-work workshop', window: '7/15 1–5pm',
+      items: [
+        'Cameron’s own 3 constraints entered in Mural',
+        'ITP one-pager sent to Rob (✅ done)',
+        'Flywheel + PACe review with team',
+        'AAR 6-questions homework assigned to leaders'
+      ]
+    },
+    {
+      id: 'C', title: 'Financial + data window', window: '7/16–7/19',
+      items: [
+        'Q3 reforecast lands (Ben model off first 2 wks July actuals + Matisen revenue reforecast)',
+        'Revenue targets drafted for next quarter',
+        'Sales + personnel budgets adjusted to new targets',
+        'Financial analysis skill run on Q2 data',
+        'Marketing tab review'
+      ]
+    },
+    {
+      id: 'D', title: 'Cameron + Paul prep days', window: '7/20–7/21, Ben joins 7/21',
+      items: [
+        'Review financial analysis + validate numbers',
+        'Rock candidates drafted for all leaders (Albert first pass, 70–80% right)',
+        'Cameron’s own Q3 rocks finalized + pressure-tested',
+        '7 Strata / FACe review (⭐ includes Paul title item — see meeting-prep queue)',
+        'OPSP for owners',
+        'Theme decision (Back to School training theme = leading candidate; Estimate Accuracy likely Q4)',
+        'Dinner/activity reservations',
+        'Print praise for Roundtable',
+        'Connections Brief #2 (pulse 12447028023, 7/27)'
+      ]
+    },
+    {
+      id: 'E', title: 'Matisen data day', window: '~7/27–28',
+      items: [
+        'Dashboards + Games scoring + branch data clean',
+        'First QGR CSV feed verified end-to-end (EMMA MCP)',
+        'Align Matisen’s Q3 rocks (watch scope: 5→3 lesson from Q2)',
+        'Quarterly package build gut-check'
+      ]
+    },
+    {
+      id: 'F', title: 'Roundtable QGR', window: '7/29–30',
+      items: [
+        '3 best things',
+        'Last-quarter major numbers review (new slide deck)',
+        'People Analyzers as a group',
+        'Finalize Q2 SG/G/R for all leadership + directs',
+        'Rob exercises',
+        'Cascading goals chart finalized',
+        'Revenue targets buy-in (NI bonus is company-wide)',
+        'Bonus Goals / Mid-Quarter Pivots section per leader (the Anne mechanic — Cameron sign-off, one-for-one displacement, documented why)',
+        'Quarterly theme locked + poster/rewards/dashboard',
+        'Manager presentation started'
+      ]
+    }
+  ];
+
+  var TRACKER_LEADERS = ['Amanda', 'Brian', 'Mike', 'Matisen', 'Anne', 'Paul', 'Cameron'];
+  var TRACKER_COLS = ['Mural 3 constraints', 'ITP one-pager to Rob', 'AAR / 6-questions'];
+  var TRACKER_CYCLE = ['⬜', '🟡', '✅'];
+
+  var ROCKS_SEED = [
+    {
+      id: 'r1', name: 'Ideal Team Player', status: 'sg',
+      finish: 'Done; one-pager ready for Rob.'
+    },
+    {
+      id: 'r2', name: 'Variable Pricing (rollout + weekly cadence)', status: 'sg',
+      finish: 'Live + Tuesday cadence running; document clean for AAR.'
+    },
+    {
+      id: 'r3', name: 'Einstein Dojo / COS scaling', status: 'g',
+      finish: '6/7 → 7/7 COS live; 6/6 spokes reporting on the pull model as of 7/9 (strongest network state ever). Write the story.'
+    },
+    {
+      id: 'r4', name: 'AI Wedge Audit + MVP scoping', status: 'g',
+      finish: 'Audit done + MVP scoped (Matisen-driven; EMMA read-only MCP in QA). Confirm scope is written down.'
+    },
+    {
+      id: 'r5', name: 'Branch Visits', status: 'g',
+      finish: 'Remaining visits on the Dallas trip 7/13–15.'
+    },
+    {
+      id: 'r6', name: 'Website Redesign / Smart Move Pt 2', status: 'y',
+      finish: 'Design locked + handed to KP/Emma to build. Cut list + Mon 7/13 Laura workshop = the push. (Rock formally marked Done 7/3 as “In-depth review + HQ-ready → KP handoff” — AAR should tell that story honestly.)'
+    }
+  ];
+
+  var STATUS_LABEL = { sg: 'Super Green', g: 'Green', y: 'Yellow', r: 'Red' };
+
+  var AAR_QUESTIONS = [
+    { key: 'achieve', label: 'Achieve / partial / miss?' },
+    { key: 'brutal', label: 'Brutal facts' },
+    { key: 'metrics', label: 'Activity-vs-progress metrics' },
+    { key: 'learnings', label: 'Bullets-fired learnings' },
+    { key: 'risks', label: 'Risks / fragilities' },
+    { key: 'ssk', label: 'Start / stop / keep' }
+  ];
+
+  var AGENDA_SEED = {
+    day1: {
+      label: 'Wed 7/29',
+      items: [
+        '3 best things',
+        'Last-quarter major numbers review (new slide deck)',
+        'People Analyzers as a group',
+        'Finalize Q2 SG/G/R for all leadership + directs',
+        'Rob exercises'
+      ]
+    },
+    day2: {
+      label: 'Thu 7/30',
+      items: [
+        'Cascading goals chart finalized',
+        'Revenue targets buy-in (NI bonus is company-wide)',
+        'Bonus Goals / Mid-Quarter Pivots section per leader',
+        'Quarterly theme locked + poster/rewards/dashboard',
+        'Manager presentation started'
+      ]
+    }
+  };
+
+  var MATERIALS_SEED = [
+    { icon: '📊', label: 'Goals Dashboard', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/goals-dashboard/' },
+    { icon: '🌀', label: 'Flywheel', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-flywheel/' },
+    { icon: '🧭', label: 'PACe', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-pace/' },
+    { icon: '🏛', label: 'Pillars', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-pillars/' },
+    { icon: '🎨', label: 'Rob’s Mural', sub: 'app.mural.co', url: 'https://app.mural.co/t/scalingup7158/m/scalingup7158/1782656311798/62c4addf26b51244ac88ac2ce71c322264bad748' },
+    { icon: '📈', label: 'Q2 Cascading Goals sheet', sub: 'docs.google.com', url: 'https://docs.google.com/spreadsheets/d/1CEwbltgyvNbpl5_1pVsWL70qaCMGgDE9Jk7RGm1eAsM' },
+    { icon: '📋', label: 'Master Backlog', sub: 'einsteinmoving.monday.com', url: 'https://einsteinmoving.monday.com/boards/18408300070' },
+    { icon: '🗂', label: 'QGR Packet HQ — Packet project (Matisen)', sub: 'local file', url: '../QGR Packet/qgr-hq.html' }
+  ];
+
+  var ROLLOUT_SEED = [
+    'Finalize Cascading Goals chart + statuses',
+    'Move selected pulses on Master Backlog',
+    'OPSP page 1',
+    'Branch scorecards + QG packet remainder',
+    'Quarterly theme/poster/rewards (~$10–20/FTE budget)',
+    'Manager presentation → regional distribution',
+    'Vision summary page for movers/CX',
+    'Pay-confirm conversations',
+    'Debrief/retro',
+    'Recognition budget (0.5–1% payroll) ideas'
+  ];
+
+  var CHANGELOG_SEED = [
+    { date: '7/9', text: 'HQ built.' }
+  ];
+
+  /* ============================================================
+     STORAGE HELPERS
+     ============================================================ */
+
+  function loadState(key, fallback) {
+    try {
+      var raw = localStorage.getItem(key);
+      if (raw === null) return fallback;
+      return JSON.parse(raw);
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  var saveTimers = {};
+  function saveState(key, value) {
+    clearTimeout(saveTimers[key]);
+    saveTimers[key] = setTimeout(function () {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (e) {
+        console.warn('qgrhq save failed', key, e);
+      }
+    }, 250);
+  }
+  function saveStateNow(key, value) {
+    clearTimeout(saveTimers[key]);
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+
+  /* ============================================================
+     STATE (in-memory, hydrated from localStorage)
+     ============================================================ */
+
+  var state = {
+    gates: loadState(LS_KEYS.gates, {}),           // { gateId: 'upcoming'|'today'|'done'|'auto' }
+    phases: loadState(LS_KEYS.phases, {}),         // { 'A-0': {checked:bool, note:''}, ... }
+    tracker: loadState(LS_KEYS.tracker, {}),       // { 'Amanda-0': 0|1|2, ... }
+    aar: loadState(LS_KEYS.aar, {}),               // { 'r1-achieve': 'text', ... }
+    agenda: loadState(LS_KEYS.agenda, null),       // { day1:{label,items:[]}, day2:{...} } or null = use seed
+    decisions: loadState(LS_KEYS.decisions, []),   // [{id,text,owner,due,link,status}]
+    rollout: loadState(LS_KEYS.rollout, {}),       // { idx: bool }
+    changelog: loadState(LS_KEYS.changelog, null), // [{date,text}] or null = use seed
+    activeZone: loadState(LS_KEYS.activeZone, 'zone1')
+  };
+
+  if (state.agenda === null) {
+    state.agenda = JSON.parse(JSON.stringify(AGENDA_SEED));
+  }
+  if (state.changelog === null) {
+    state.changelog = JSON.parse(JSON.stringify(CHANGELOG_SEED));
+  }
+
+  /* ============================================================
+     UTIL
+     ============================================================ */
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { el.classList.remove('show'); }, 2200);
+  }
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function todayISODate() {
+    var d = new Date();
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+
+  /* ============================================================
+     COUNTDOWN + GATE STATUS
+     ============================================================ */
+
+  function computeAutoGateStatus(gate) {
+    var now = new Date();
+    var gd = new Date(gate.dateVal);
+    var sameDay = now.getFullYear() === gd.getFullYear() &&
+                  now.getMonth() === gd.getMonth() &&
+                  now.getDate() === gd.getDate();
+    if (sameDay) return 'today';
+    return now > gd ? 'done' : 'upcoming';
+  }
+
+  function renderCountdown() {
+    var now = new Date();
+    var msPerDay = 1000 * 60 * 60 * 24;
+    var diff = Math.ceil((QGR_DATE - now) / msPerDay);
+    var chip = document.getElementById('countdownChip');
+    if (diff > 0) {
+      chip.textContent = diff + ' day' + (diff === 1 ? '' : 's') + ' to QGR';
+    } else if (diff === 0) {
+      chip.textContent = 'QGR is today';
+    } else {
+      chip.textContent = 'QGR wrapped ' + Math.abs(diff) + ' day' + (Math.abs(diff) === 1 ? '' : 's') + ' ago';
+    }
+  }
+
+  function cycleGateStatus(current) {
+    var order = ['upcoming', 'today', 'done'];
+    var idx = order.indexOf(current);
+    if (idx === -1) idx = 0;
+    return order[(idx + 1) % order.length];
+  }
+
+  function renderGateStrip() {
+    var wrap = document.getElementById('gateStrip');
+    wrap.innerHTML = '';
+    GATES_SEED.forEach(function (g) {
+      var override = state.gates[g.id];
+      var status = (override && override !== 'auto') ? override : computeAutoGateStatus(g);
+      var card = document.createElement('div');
+      card.className = 'gate-card';
+      card.innerHTML =
+        '<div class="gate-date">' + esc(g.date) + '</div>' +
+        '<div class="gate-label">' + esc(g.label) + '</div>' +
+        '<div><span class="gate-dot ' + status + '"></span><span class="gate-status-label">' + status + '</span></div>';
+      card.addEventListener('click', function () {
+        var curOverride = state.gates[g.id];
+        var curStatus = (curOverride && curOverride !== 'auto') ? curOverride : computeAutoGateStatus(g);
+        state.gates[g.id] = cycleGateStatus(curStatus);
+        saveState(LS_KEYS.gates, state.gates);
+        renderGateStrip();
+      });
+      wrap.appendChild(card);
+    });
+  }
+
+  /* ============================================================
+     PHASE CHECKLIST
+     ============================================================ */
+
+  var phaseOpenState = {}; // in-memory only, not persisted
+
+  function phaseItemKey(phaseId, idx) { return phaseId + '-' + idx; }
+
+  function getPhaseProgress(phase) {
+    var total = phase.items.length;
+    var done = 0;
+    phase.items.forEach(function (_, idx) {
+      var k = phaseItemKey(phase.id, idx);
+      if (state.phases[k] && state.phases[k].checked) done++;
+    });
+    return { done: done, total: total, pct: total ? Math.round((done / total) * 100) : 0 };
+  }
+
+  function getOverallProgress() {
+    var done = 0, total = 0;
+    PHASES_SEED.forEach(function (phase) {
+      phase.items.forEach(function (_, idx) {
+        total++;
+        var k = phaseItemKey(phase.id, idx);
+        if (state.phases[k] && state.phases[k].checked) done++;
+      });
+    });
+    return { done: done, total: total, pct: total ? Math.round((done / total) * 100) : 0 };
+  }
+
+  function renderOverallProgress() {
+    var p = getOverallProgress();
+    document.getElementById('overallProgressFill').style.width = p.pct + '%';
+    document.getElementById('overallProgressPct').textContent = p.pct + '%';
+  }
+
+  function renderPhaseAccordion() {
+    var wrap = document.getElementById('phaseAccordion');
+    wrap.innerHTML = '';
+    PHASES_SEED.forEach(function (phase) {
+      var progress = getPhaseProgress(phase);
+      var block = document.createElement('div');
+      block.className = 'phase-block' + (phaseOpenState[phase.id] ? ' open' : '');
+      block.innerHTML =
+        '<div class="phase-head" data-phase="' + phase.id + '">' +
+          '<div class="phase-letter">' + esc(phase.id) + '</div>' +
+          '<div class="phase-head-text">' +
+            '<div class="phase-head-title">' + esc(phase.title) + '</div>' +
+            '<div class="phase-head-window">' + esc(phase.window) + '</div>' +
+          '</div>' +
+          '<div class="phase-progress-wrap">' +
+            '<div class="progress-bar-track"><div class="progress-bar-fill" style="width:' + progress.pct + '%"></div></div>' +
+            '<span class="progress-bar-pct">' + progress.done + '/' + progress.total + '</span>' +
+          '</div>' +
+          '<div class="phase-caret">▸</div>' +
+        '</div>' +
+        '<div class="phase-items" id="phase-items-' + phase.id + '"></div>';
+      wrap.appendChild(block);
+
+      var itemsWrap = block.querySelector('#phase-items-' + phase.id);
+      phase.items.forEach(function (itemText, idx) {
+        var k = phaseItemKey(phase.id, idx);
+        var itemState = state.phases[k] || { checked: false, note: '', noteOpen: false };
+        var row = document.createElement('div');
+        row.className = 'phase-item-row';
+        row.innerHTML =
+          '<div class="phase-item-check' + (itemState.checked ? ' checked' : '') + '" data-key="' + k + '">' + (itemState.checked ? '✓' : '') + '</div>' +
+          '<div class="phase-item-text-wrap">' +
+            '<div class="phase-item-text' + (itemState.checked ? ' checked-text' : '') + '">' + esc(itemText) + '</div>' +
+            '<button class="note-toggle" data-key="' + k + '">' + (itemState.note ? '✎ edit note' : '✎ add note') + '</button>' +
+            '<textarea class="phase-item-note" data-key="' + k + '" placeholder="Note…" style="display:' + (itemState.noteOpen ? 'block' : 'none') + '">' + esc(itemState.note || '') + '</textarea>' +
+          '</div>';
+        itemsWrap.appendChild(row);
+      });
+
+      block.querySelector('.phase-head').addEventListener('click', function () {
+        phaseOpenState[phase.id] = !phaseOpenState[phase.id];
+        renderPhaseAccordion();
+      });
+
+      itemsWrap.querySelectorAll('.phase-item-check').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var k = el.getAttribute('data-key');
+          var cur = state.phases[k] || { checked: false, note: '', noteOpen: false };
+          cur.checked = !cur.checked;
+          state.phases[k] = cur;
+          saveState(LS_KEYS.phases, state.phases);
+          renderPhaseAccordion();
+          renderOverallProgress();
+        });
+      });
+
+      itemsWrap.querySelectorAll('.note-toggle').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var k = el.getAttribute('data-key');
+          var cur = state.phases[k] || { checked: false, note: '', noteOpen: false };
+          cur.noteOpen = !cur.noteOpen;
+          state.phases[k] = cur;
+          saveStateNow(LS_KEYS.phases, state.phases);
+          renderPhaseAccordion();
+        });
+      });
+
+      itemsWrap.querySelectorAll('.phase-item-note').forEach(function (el) {
+        el.addEventListener('click', function (e) { e.stopPropagation(); });
+        el.addEventListener('input', function () {
+          var k = el.getAttribute('data-key');
+          var cur = state.phases[k] || { checked: false, note: '', noteOpen: true };
+          cur.note = el.value;
+          state.phases[k] = cur;
+          saveState(LS_KEYS.phases, state.phases);
+        });
+      });
+    });
+  }
+
+  /* ============================================================
+     TEAM PRE-WORK TRACKER
+     ============================================================ */
+
+  function trackerKey(leader, colIdx) { return leader + '-' + colIdx; }
+
+  function renderTracker() {
+    var table = document.getElementById('trackerTable');
+    var html = '<thead><tr><th>Leader</th>';
+    TRACKER_COLS.forEach(function (c) { html += '<th>' + esc(c) + '</th>'; });
+    html += '</tr></thead><tbody>';
+    TRACKER_LEADERS.forEach(function (leader) {
+      html += '<tr><td class="leader-name">' + esc(leader) + '</td>';
+      TRACKER_COLS.forEach(function (_, colIdx) {
+        var k = trackerKey(leader, colIdx);
+        var val = state.tracker[k] || 0;
+        html += '<td><span class="cycle-cell" data-key="' + k + '">' + TRACKER_CYCLE[val] + '</span></td>';
+      });
+      html += '</tr>';
+    });
+    html += '</tbody>';
+    table.innerHTML = html;
+
+    table.querySelectorAll('.cycle-cell').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var k = el.getAttribute('data-key');
+        var val = state.tracker[k] || 0;
+        val = (val + 1) % TRACKER_CYCLE.length;
+        state.tracker[k] = val;
+        saveState(LS_KEYS.tracker, state.tracker);
+        el.textContent = TRACKER_CYCLE[val];
+      });
+    });
+  }
+
+  /* ============================================================
+     ROCK / AAR CARDS
+     ============================================================ */
+
+  var rockOpenState = {};
+
+  function aarKey(rockId, qKey) { return rockId + '-' + qKey; }
+
+  function renderRockGrid() {
+    var wrap = document.getElementById('rockGrid');
+    wrap.innerHTML = '';
+    ROCKS_SEED.forEach(function (rock) {
+      var card = document.createElement('div');
+      card.className = 'rock-card';
+      var aarHtml = '';
+      AAR_QUESTIONS.forEach(function (q) {
+        var k = aarKey(rock.id, q.key);
+        var val = state.aar[k] || '';
+        aarHtml +=
+          '<div class="aar-q">' +
+            '<label>' + esc(q.label) + '</label>' +
+            '<textarea data-key="' + k + '" placeholder="…">' + esc(val) + '</textarea>' +
+          '</div>';
+      });
+      card.innerHTML =
+        '<div class="rock-card-top">' +
+          '<div class="rock-name">' + esc(rock.name) + '</div>' +
+          '<div class="status-pill ' + rock.status + '">' + esc(STATUS_LABEL[rock.status]) + '</div>' +
+        '</div>' +
+        '<div class="finish-line">' + esc(rock.finish) + '</div>' +
+        '<button class="aar-toggle" data-rock="' + rock.id + '">' + (rockOpenState[rock.id] ? '▾ hide AAR' : '▸ open AAR (6 questions)') + '</button>' +
+        '<div class="aar-form' + (rockOpenState[rock.id] ? ' open' : '') + '" id="aar-form-' + rock.id + '">' + aarHtml + '</div>';
+      wrap.appendChild(card);
+
+      card.querySelector('.aar-toggle').addEventListener('click', function () {
+        rockOpenState[rock.id] = !rockOpenState[rock.id];
+        renderRockGrid();
+      });
+
+      card.querySelectorAll('.aar-q textarea').forEach(function (ta) {
+        ta.addEventListener('input', function () {
+          var k = ta.getAttribute('data-key');
+          state.aar[k] = ta.value;
+          saveState(LS_KEYS.aar, state.aar);
+        });
+      });
+    });
+  }
+
+  /* ============================================================
+     AGENDA (ZONE 2)
+     ============================================================ */
+
+  function renderAgenda() {
+    var wrap = document.getElementById('agendaWrap');
+    wrap.innerHTML = '';
+    ['day1', 'day2'].forEach(function (dayKey) {
+      var day = state.agenda[dayKey];
+      var dayBlock = document.createElement('div');
+      dayBlock.className = 'agenda-day';
+      var listHtml = '';
+      day.items.forEach(function (item, idx) {
+        listHtml +=
+          '<div class="agenda-row">' +
+            '<input type="text" data-day="' + dayKey + '" data-idx="' + idx + '" value="' + esc(item) + '">' +
+            '<button class="agenda-remove" data-day="' + dayKey + '" data-idx="' + idx + '">✕</button>' +
+          '</div>';
+      });
+      dayBlock.innerHTML =
+        '<div class="agenda-day-title">' + esc(day.label) + '</div>' +
+        '<div class="agenda-list">' + listHtml + '</div>' +
+        '<button class="btn small agenda-add" data-day="' + dayKey + '">+ Add line</button>';
+      wrap.appendChild(dayBlock);
+    });
+
+    wrap.querySelectorAll('.agenda-list input[type="text"]').forEach(function (el) {
+      el.addEventListener('input', function () {
+        var d = el.getAttribute('data-day');
+        var idx = parseInt(el.getAttribute('data-idx'), 10);
+        state.agenda[d].items[idx] = el.value;
+        saveState(LS_KEYS.agenda, state.agenda);
+      });
+    });
+
+    wrap.querySelectorAll('.agenda-remove').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var d = el.getAttribute('data-day');
+        var idx = parseInt(el.getAttribute('data-idx'), 10);
+        state.agenda[d].items.splice(idx, 1);
+        saveStateNow(LS_KEYS.agenda, state.agenda);
+        renderAgenda();
+      });
+    });
+
+    wrap.querySelectorAll('.agenda-add').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var d = el.getAttribute('data-day');
+        state.agenda[d].items.push('');
+        saveStateNow(LS_KEYS.agenda, state.agenda);
+        renderAgenda();
+      });
+    });
+  }
+
+  /* ============================================================
+     MATERIALS SHELF
+     ============================================================ */
+
+  function renderMaterials() {
+    var wrap = document.getElementById('materialsGrid');
+    wrap.innerHTML = '';
+    MATERIALS_SEED.forEach(function (m) {
+      var a = document.createElement('a');
+      a.className = 'material-tile';
+      a.href = m.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.innerHTML =
+        '<div class="material-icon">' + m.icon + '</div>' +
+        '<div>' +
+          '<div class="material-label">' + esc(m.label) + '</div>' +
+          '<div class="material-sub">' + esc(m.sub) + '</div>' +
+        '</div>';
+      wrap.appendChild(a);
+    });
+  }
+
+  /* ============================================================
+     DECISION LOG (shared store, rendered in Room + Aftermath)
+     ============================================================ */
+
+  var DECISION_STATUSES = ['open', 'pulsed', 'done'];
+
+  function renderDecisionTable(tableId, showStatusEditor) {
+    var table = document.getElementById(tableId);
+    if (!state.decisions.length) {
+      table.innerHTML = '<tbody><tr><td class="empty-hint">No decisions logged yet.</td></tr></tbody>';
+      return;
+    }
+    var html = '<thead><tr><th>Decision / rock</th><th>Owner</th><th>Due</th><th>Status</th><th>Link</th><th></th></tr></thead><tbody>';
+    state.decisions.forEach(function (d) {
+      html +=
+        '<tr>' +
+          '<td>' + esc(d.text) + '</td>' +
+          '<td>' + esc(d.owner) + '</td>' +
+          '<td>' + esc(d.due) + '</td>' +
+          '<td>' +
+            '<select class="status-select" data-id="' + d.id + '">' +
+              DECISION_STATUSES.map(function (s) {
+                return '<option value="' + s + '"' + (d.status === s ? ' selected' : '') + '>' + s + '</option>';
+              }).join('') +
+            '</select>' +
+          '</td>' +
+          '<td>' + (d.link ? '<a href="' + esc(d.link) + '" target="_blank" rel="noopener noreferrer">open →</a>' : '<span style="color:#bbb">—</span>') + '</td>' +
+          '<td><button class="row-del" data-id="' + d.id + '">✕</button></td>' +
+        '</tr>';
+    });
+    html += '</tbody>';
+    table.innerHTML = html;
+
+    table.querySelectorAll('.status-select').forEach(function (el) {
+      el.addEventListener('change', function () {
+        var id = el.getAttribute('data-id');
+        var d = state.decisions.find(function (x) { return x.id === id; });
+        if (d) { d.status = el.value; saveStateNow(LS_KEYS.decisions, state.decisions); }
+      });
+    });
+    table.querySelectorAll('.row-del').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var id = el.getAttribute('data-id');
+        state.decisions = state.decisions.filter(function (x) { return x.id !== id; });
+        saveStateNow(LS_KEYS.decisions, state.decisions);
+        renderAllDecisionTables();
+      });
+    });
+  }
+
+  function renderAllDecisionTables() {
+    renderDecisionTable('decisionTableRoom');
+    renderDecisionTable('decisionTableAftermath');
+  }
+
+  function addDecisionFromForm(prefix) {
+    var textEl = document.getElementById(prefix === 'room' ? 'decText' : 'decText2');
+    var ownerEl = document.getElementById(prefix === 'room' ? 'decOwner' : 'decOwner2');
+    var dueEl = document.getElementById(prefix === 'room' ? 'decDue' : 'decDue2');
+    var linkEl = document.getElementById(prefix === 'room' ? 'decLink' : 'decLink2');
+    var text = textEl.value.trim();
+    if (!text) { toast('Add decision text first'); return; }
+    state.decisions.push({
+      id: 'd' + Date.now() + Math.random().toString(36).slice(2, 7),
+      text: text,
+      owner: ownerEl.value.trim(),
+      due: dueEl.value.trim(),
+      link: linkEl.value.trim(),
+      status: 'open'
+    });
+    saveStateNow(LS_KEYS.decisions, state.decisions);
+    textEl.value = ''; ownerEl.value = ''; dueEl.value = ''; linkEl.value = '';
+    renderAllDecisionTables();
+    toast('Decision logged');
+  }
+
+  /* ============================================================
+     ROLLOUT CHECKLIST
+     ============================================================ */
+
+  function renderRolloutChecklist() {
+    var wrap = document.getElementById('rolloutChecklist');
+    wrap.innerHTML = '';
+    ROLLOUT_SEED.forEach(function (text, idx) {
+      var checked = !!state.rollout[idx];
+      var row = document.createElement('div');
+      row.className = 'simple-check-row';
+      row.innerHTML =
+        '<div class="phase-item-check' + (checked ? ' checked' : '') + '" data-idx="' + idx + '">' + (checked ? '✓' : '') + '</div>' +
+        '<div class="phase-item-text' + (checked ? ' checked-text' : '') + '">' + esc(text) + '</div>';
+      wrap.appendChild(row);
+      row.querySelector('.phase-item-check').addEventListener('click', function () {
+        state.rollout[idx] = !state.rollout[idx];
+        saveStateNow(LS_KEYS.rollout, state.rollout);
+        renderRolloutChecklist();
+      });
+    });
+  }
+
+  /* ============================================================
+     CHANGELOG
+     ============================================================ */
+
+  function renderChangelog() {
+    var wrap = document.getElementById('changelogList');
+    wrap.innerHTML = '';
+    state.changelog.slice().reverse().forEach(function (entry) {
+      var row = document.createElement('div');
+      row.className = 'changelog-entry';
+      row.innerHTML =
+        '<div class="changelog-date">' + esc(entry.date) + '</div>' +
+        '<div>' + esc(entry.text) + '</div>';
+      wrap.appendChild(row);
+    });
+  }
+
+  function addChangelogEntry() {
+    var input = document.getElementById('changelogInput');
+    var text = input.value.trim();
+    if (!text) return;
+    var now = new Date();
+    var dateLabel = (now.getMonth() + 1) + '/' + now.getDate();
+    state.changelog.push({ date: dateLabel, text: text });
+    saveStateNow(LS_KEYS.changelog, state.changelog);
+    input.value = '';
+    renderChangelog();
+    toast('Changelog updated');
+  }
+
+  /* ============================================================
+     TAB SWITCHING
+     ============================================================ */
+
+  function activateZone(zoneId) {
+    document.querySelectorAll('.zone').forEach(function (z) { z.classList.remove('active'); });
+    document.getElementById(zoneId).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-zone') === zoneId);
+    });
+    state.activeZone = zoneId;
+    saveStateNow(LS_KEYS.activeZone, zoneId);
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
+  /* ============================================================
+     EXPORT / IMPORT / RESET
+     ============================================================ */
+
+  function buildFullExport() {
+    return {
+      exportedAt: new Date().toISOString(),
+      tool: 'QGR Command Center · Q3 2026 Cycle',
+      state: {
+        gates: state.gates,
+        phases: state.phases,
+        tracker: state.tracker,
+        aar: state.aar,
+        agenda: state.agenda,
+        decisions: state.decisions,
+        rollout: state.rollout,
+        changelog: state.changelog,
+        activeZone: state.activeZone
+      }
+    };
+  }
+
+  function downloadJSON(obj, filename) {
+    var blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function doExport() {
+    var payload = buildFullExport();
+    downloadJSON(payload, 'qgr-hq-export-' + todayISODate() + '.json');
+    toast('Export downloaded');
+  }
+
+  function applyImportedState(imported) {
+    var s = imported && imported.state ? imported.state : imported;
+    if (!s) { toast('Import failed — no state found'); return; }
+    state.gates = s.gates || {};
+    state.phases = s.phases || {};
+    state.tracker = s.tracker || {};
+    state.aar = s.aar || {};
+    state.agenda = s.agenda || JSON.parse(JSON.stringify(AGENDA_SEED));
+    state.decisions = s.decisions || [];
+    state.rollout = s.rollout || {};
+    state.changelog = s.changelog || JSON.parse(JSON.stringify(CHANGELOG_SEED));
+    state.activeZone = s.activeZone || 'zone1';
+
+    saveStateNow(LS_KEYS.gates, state.gates);
+    saveStateNow(LS_KEYS.phases, state.phases);
+    saveStateNow(LS_KEYS.tracker, state.tracker);
+    saveStateNow(LS_KEYS.aar, state.aar);
+    saveStateNow(LS_KEYS.agenda, state.agenda);
+    saveStateNow(LS_KEYS.decisions, state.decisions);
+    saveStateNow(LS_KEYS.rollout, state.rollout);
+    saveStateNow(LS_KEYS.changelog, state.changelog);
+    saveStateNow(LS_KEYS.activeZone, state.activeZone);
+
+    renderAll();
+    activateZone(state.activeZone);
+    toast('Import complete');
+  }
+
+  function doReset() {
+    var confirmed = window.confirm('Reset the quarter? This archives current state to a JSON download, then clears everything for the next cycle. This cannot be undone in-browser.');
+    if (!confirmed) return;
+    var payload = buildFullExport();
+    downloadJSON(payload, 'qgr-hq-archive-' + todayISODate() + '.json');
+
+    Object.keys(LS_KEYS).forEach(function (k) { localStorage.removeItem(LS_KEYS[k]); });
+
+    state.gates = {};
+    state.phases = {};
+    state.tracker = {};
+    state.aar = {};
+    state.agenda = JSON.parse(JSON.stringify(AGENDA_SEED));
+    state.decisions = [];
+    state.rollout = {};
+    state.changelog = JSON.parse(JSON.stringify(CHANGELOG_SEED));
+    state.activeZone = 'zone1';
+
+    renderAll();
+    activateZone('zone1');
+    toast('Quarter reset — archive downloaded');
+  }
+
+  /* ============================================================
+     WIRE-UP
+     ============================================================ */
+
+  function renderAll() {
+    renderCountdown();
+    renderGateStrip();
+    renderPhaseAccordion();
+    renderOverallProgress();
+    renderTracker();
+    renderRockGrid();
+    renderAgenda();
+    renderMaterials();
+    renderAllDecisionTables();
+    renderRolloutChecklist();
+    renderChangelog();
+  }
+
+  function init() {
+    renderAll();
+    activateZone(state.activeZone || 'zone1');
+
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        activateZone(btn.getAttribute('data-zone'));
+      });
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', doExport);
+
+    var gearBtn = document.getElementById('gearBtn');
+    var gearDropdown = document.getElementById('gearDropdown');
+    gearBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      gearDropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', function () {
+      gearDropdown.classList.remove('open');
+    });
+
+    var importModal = document.getElementById('importModal');
+    document.getElementById('importOpenBtn').addEventListener('click', function () {
+      gearDropdown.classList.remove('open');
+      document.getElementById('importTextarea').value = '';
+      importModal.classList.add('open');
+    });
+    document.getElementById('importCancelBtn').addEventListener('click', function () {
+      importModal.classList.remove('open');
+    });
+    document.getElementById('importConfirmBtn').addEventListener('click', function () {
+      var raw = document.getElementById('importTextarea').value.trim();
+      if (!raw) { toast('Paste JSON first'); return; }
+      try {
+        var parsed = JSON.parse(raw);
+        applyImportedState(parsed);
+        importModal.classList.remove('open');
+      } catch (e) {
+        toast('Invalid JSON — could not import');
+      }
+    });
+    importModal.addEventListener('click', function (e) {
+      if (e.target === importModal) importModal.classList.remove('open');
+    });
+
+    document.getElementById('resetQuarterBtn').addEventListener('click', function () {
+      gearDropdown.classList.remove('open');
+      doReset();
+    });
+
+    document.getElementById('decAddBtn').addEventListener('click', function () { addDecisionFromForm('room'); });
+    document.getElementById('decAddBtn2').addEventListener('click', function () { addDecisionFromForm('aftermath'); });
+    document.getElementById('changelogAddBtn').addEventListener('click', addChangelogEntry);
+    document.getElementById('changelogInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') addChangelogEntry();
+    });
+
+    setInterval(renderCountdown, 60 * 1000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
