@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>SWT + 7 Strata Worksheet · Q3 2026</title>
+<style>
+  :root { --navy:#1c2b4a; --orange:#e8762d; --bg:#f6f4ef; --card:#fff; --line:#e3ded4; --muted:#64748b; --green:#0d8a4f; --red:#c2372f; --blue:#2563eb; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--navy); padding:20px; max-width:1000px; margin:0 auto; }
+  h1 { font-size:1.35rem; } h1 em { color:var(--orange); font-style:normal; }
+  .sub { color:var(--muted); font-size:.85rem; margin:4px 0 14px; }
+  .bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:14px; position:sticky; top:0; background:var(--bg); padding:8px 0; z-index:5; }
+  .btn { border:1px solid var(--line); background:var(--card); padding:7px 14px; border-radius:8px; font-weight:700; font-size:.82rem; cursor:pointer; }
+  .btn.primary { background:var(--orange); border-color:var(--orange); color:#fff; }
+  .prog { font-size:.8rem; color:var(--muted); margin-left:auto; }
+  h2 { font-size:1.05rem; margin:22px 0 4px; scroll-margin-top:64px; }
+  .seccount { font-size:.72rem; font-weight:700; color:var(--blue); }
+  .jump { font-size:.76rem; font-weight:700; }
+  .strata-grid { display:grid; grid-template-columns:1fr; gap:10px; } @media(min-width:760px){ .strata-grid { grid-template-columns:1fr 1fr; } }
+  .h2sub { font-size:.78rem; color:var(--muted); margin-bottom:8px; }
+  .row { background:var(--card); border:1px solid var(--line); border-radius:9px; padding:8px 12px; margin-bottom:6px; display:flex; flex-wrap:wrap; gap:6px 10px; align-items:flex-start; }
+  .row.compact { background:transparent; border:none; border-bottom:1px solid var(--line); border-radius:0; padding:3px 10px; margin-bottom:0; }
+  .row.compact textarea { font-size:.82rem; padding:2px 0; }
+  .row.cut { opacity:.45; } .row.cut textarea { text-decoration:line-through; }
+  .row.proposed { border-left:4px solid var(--blue); }
+  .row.newrow { border-left:4px solid var(--green); }
+  .origin { flex-shrink:0; font-size:.62rem; font-weight:800; border-radius:4px; padding:2px 6px; margin-top:6px; letter-spacing:.03em; }
+  .origin.april { background:#eef0f4; color:var(--muted); }
+  .origin.proposed { background:#dbeafe; color:var(--blue); }
+  .origin.added { background:#d5f0e2; color:var(--green); }
+  textarea { flex:1; border:none; background:transparent; font:inherit; font-size:.86rem; resize:none; line-height:1.45; padding:4px 0; min-height:24px; overflow:hidden; }
+  textarea:focus { outline:none; background:#fdfaf4; }
+  .why { flex-basis:100%; font-size:.72rem; color:var(--muted); margin:0 0 1px 52px; line-height:1.4; }
+  .acts { display:flex; gap:4px; flex-shrink:0; margin-top:4px; }
+  .act { border:1px solid var(--line); background:#faf8f4; border-radius:7px; font-size:.8rem; font-weight:700; padding:7px 13px; cursor:pointer; min-width:38px; }
+  .acts { gap:8px; }
+  .act.on-keep { background:var(--green); border-color:var(--green); color:#fff; }
+  .act.on-cut { background:var(--red); border-color:var(--red); color:#fff; }
+  .addbtn { font-size:.76rem; font-weight:700; color:var(--orange); background:none; border:1px dashed var(--orange); border-radius:8px; padding:5px 12px; cursor:pointer; margin:2px 0 10px; }
+  .stratum { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 14px; }
+  .stratum h3 { font-size:.88rem; margin-bottom:4px; }
+  .stratum .flag { font-size:.76rem; color:var(--blue); margin-top:4px; font-weight:600; }
+  .stratum textarea { width:100%; border:1px solid var(--line); border-radius:7px; padding:7px 9px; background:#fff; }
+  .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:var(--navy); color:#fff; padding:9px 18px; border-radius:8px; font-size:.82rem; opacity:0; transition:opacity .25s; pointer-events:none; z-index:20; }
+  .toast.show { opacity:1; }
+  .foot { color:var(--muted); font-size:.72rem; margin:26px 0 8px; line-height:1.5; }
+  a { color:var(--orange); }
+</style>
+</head>
+<body>
+<h1>SWT + <em>7 Strata</em> Worksheet — Q3 2026</h1>
+<div class="sub">Mirrors the Growth Toolkit pages, lives in the kit. Blue rows = Albert's proposed changes (rule Keep/Cut) · grey = April as-written (default keep; edit freely) · green = added live. Autosaves in this browser. <a href="index.html">← QGR HQ</a></div>
+
+<div class="bar">
+  <button class="btn primary" id="exportMd">⬇ Export (markdown)</button>
+  <button class="btn" id="exportJson">⬇ JSON backup / re-seed</button>
+  <button class="btn" id="resetBtn">Reset to seed</button>
+  <span class="jump"><a href="#h-trends">Trends</a> · <a href="#h-strengths">Strengths</a> · <a href="#h-weaknesses">Weaknesses</a> · <a href="#h-strata">Strata</a></span>
+  <span class="prog" id="prog"></span>
+</div>
+
+<h2 id="h-trends">Trends <span class="seccount" data-sec="trends"></span></h2>
+<div class="h2sub">Significant changes in technology, markets, consumer + social trends that might impact us.</div>
+<div id="sec-trends"></div>
+
+<h2 id="h-strengths">Strengths / Core Competencies <span class="seccount" data-sec="strengths"></span></h2>
+<div class="h2sub">Inherent strengths that have been the source of our success.</div>
+<div id="sec-strengths"></div>
+
+<h2 id="h-weaknesses">Weaknesses <span class="seccount" data-sec="weaknesses"></span></h2>
+<div class="h2sub">Inherent weaknesses that aren't likely to change.</div>
+<div id="sec-weaknesses"></div>
+
+<h2 id="h-strata">7 Strata</h2>
+<div class="h2sub">Edit any box; blue flags = Albert's discussion points for this cycle.</div>
+<div id="sec-strata" class="strata-grid"></div>
+
+<div class="foot">Re-seed each quarter: Albert replaces the SEED object below with last quarter's export + fresh proposals (the pre-seed loop). Export feeds: OPSP builder left page · Master Backlog (new/changed items) · the QG packet strategy section.</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+var LS='swt-strata-q3-2026-v1';
+
+// ═══ SEED — Albert replaces this block each quarter (April Q2 as-written + 7/20 proposals) ═══
+var SEED = {
+ quarter:'Q3 2026',
+ trends:[
+  {t:'HUGE: Tariff uncertainty, weakening economy, rising inflation, weakening of dollar',o:'april'},
+  {t:'IRAN: Rising diesel fuel costs',o:'april',why:'Albert: verify still live — April-era line'},
+  {t:'HUGE: Uncertainty around Federal Reserve moves, interest rates, continued housing-market slowdown',o:'april'},
+  {t:'HUGE: AI (agents, coding, marketing, analysis, content) in software and virtual estimates',o:'april'},
+  {t:'HUGE: Rising insurance costs — fleet alone +40% (~$200K) 2025→2026; TOTAL exposure ≈$903K/yr and UNOWNED as a rock candidate',o:'proposed',why:'Strengthened from the April line — Brief #1 + 7/20 audit: this trend wants an owner, not a bullet'},
+  {t:'NEW: AI adoption fatigue as a workforce reality — where AI fronts humans is now a norms question',o:'proposed',why:'eNPS AI-fatigue roster (Lukas, Austin L, Garrison) + "AI answering branch emails lands discouraging" (Matisen)'},
+  {t:'NEW: AI-search / LLM demand discovery — how customers find movers is shifting',o:'proposed',why:'KP LLM SEO audit already queued (MB 11728394136)'},
+  {t:'Commercial real estate issues — finding good branch spots',o:'april'},
+  {t:'Change in work culture (Gen Z work expectations)',o:'april'},
+  {t:'Personalization — more personalized offerings + higher service levels expected',o:'april'},
+  {t:'More savvy competition (private equity entry, sophisticated competitor software)',o:'april'},
+  {t:'More severe weather instances',o:'april'},
+  {t:'Used truck market is terrible — hard to cycle out trucks',o:'april'},
+  {t:'Trucks more expensive due to environmental regulations',o:'april'},
+  {t:'More senior relocations, fewer corporate relocations',o:'april'}
+ ],
+ strengths:[
+  {t:'Culture and quality of movers',o:'april'},
+  {t:'Operational excellence (Scaling Up and other best practices)',o:'april'},
+  {t:'Customer service',o:'april'},
+  {t:'Proprietary software (EMMA)',o:'april'},
+  {t:'Mover training',o:'april'},
+  {t:'In great markets (market positioning)',o:'april'},
+  {t:'Mover hiring (excellent cost per application)',o:'april'},
+  {t:'Strong compensation and benefits package (industry leader in mover pay)',o:'april'},
+  {t:'Data driven',o:'april'},
+  {t:'UPGRADE: AI as a concrete operating capability — 7-leader COS network live, validated AI wedges in production (call grading, HR Command Center, VP dynamic model)',o:'proposed',why:'Was "AI forward" aspiration in April; Q2 made it real (AARs, COS network state)'},
+  {t:'NEW: Proprietary training platform — zero-bug beta, full 90-day onboarding→lead system (the Q3 theme chassis)',o:'proposed',why:'Mike AAR'},
+  {t:'NEW: Weekly dashboard/cadence discipline — a repeatable operating pattern, not luck',o:'proposed',why:'Named independently in 4 AARs (hiring dashboard SG, fleet dashboard, VP Tuesday cadence)'}
+ ],
+ weaknesses:[
+  {t:'IN MOTION (was HUGE): Tying mover promotions to quantifiable KPIs — framework decided 7/2, Rippling pull proven; first cohort = Anne\'s Q3 CRIT',o:'proposed',why:'Downgrade from HUGE-unsolved'},
+  {t:'HUGE: Education / change velocity — the org\'s ability to absorb change and improve quickly',o:'april',why:'Albert: KEEP — now with receipts: 7-voice eNPS pace-of-change cluster + "slow down before speeding up" (Amanda AAR)'},
+  {t:'HUGE: Data overload + inconsistent accuracy on data reporting',o:'april',why:'Albert: KEEP — the quarter\'s best-evidenced weakness: Games scoring fork, TUR definition gap, Rippling hours outage, conversion-basis break. Governance workstream = the proposed answer'},
+  {t:'HUGE: Need to educate customers on hidden fees and our value',o:'april'},
+  {t:'HUGE: Lack of lead triage — getting leads to highest converters',o:'april',why:'Albert: KEEP — now a named Q3 rock candidate (C2 demand pursuit)'},
+  {t:'HUGE: Manager training and manager bench',o:'april',why:'Albert: KEEP — the single biggest eNPS cluster (7+ voices) + Rob convergence'},
+  {t:'NEW HUGE candidate: Single-person tech dependency — the Matisen queue',o:'proposed',why:'Named independently by Paul, Amanda + Matisen\'s own AAR; 4 of his anonymous eNPS entries; he\'s "ready to talk backup/delegation"'},
+  {t:'NEW: Goal-definition hygiene — definitions that can\'t be graded unambiguously',o:'proposed',why:'4 separate failures this quarter: scoring fork, inverted G/SG dates, other-team-gated bars, over-specified activities'},
+  {t:'Lack of business development strategies',o:'april'},
+  {t:'Becoming a strength slowly: lack of regular weekly KPI reporting + financial metrics (especially individual)',o:'april'},
+  {t:'Marketing spend ROI visibility + lack of multi-channel approach',o:'april'},
+  {t:'Overall leadership development and Growth Ladder defined',o:'april'},
+  {t:'Job is hard manual labor',o:'april'},
+  {t:'REWORD: Comp margin — mover comp cycle shipped (~$586K/yr, 37.8% of revenue); now a monitored position, not a drift',o:'proposed',why:'Was "giving away too much margin… could be a problem if we give mover raises in 26" — the raises happened, deliberately'},
+  {t:'General efficiency and focus for managers (ongoing performance management)',o:'april'},
+  {t:'Need to be able to grow smaller branches more quickly',o:'april'},
+  {t:'Management sometimes struggles with pace of rollouts + lack of feedback prior to rollouts',o:'april'},
+  {t:'Improving mover retention long term',o:'april'},
+  {t:'Bottlenecks in tech development side',o:'april',why:'Albert: consider merging with the new single-person-dependency line — same root'},
+  {t:'Cybersecurity threats',o:'april'}
+ ],
+ strata:[
+  {name:'Words You Own (Mindshare)', text:'Smart Moving · The "Smart Move System"', flag:''},
+  {name:'Sandbox + Brand Promises', text:'WHO: Middle-to-upper-income people moving in TX or FL who want their move easy and fun. WHAT: Peace of mind while moving + an easy transition. PROMISES: Easy · Happy customers for life · Do what we promise · Care for your stuff like it\'s our own. KPIs: conv rates, lead response times · NPS + reviews · estimate accuracy, late discounts · damages + ticket resolutions', flag:'⚑ KPI wording carries the broken 40% conversion basis — update once the replacement KPI is decided (Open Question 5). Flag, don\'t wordsmith yet.'},
+  {name:'Brand Promise Guarantee (Catalytic Mechanism)', text:'On Time Guarantee · No Worries Damage Coverage · No-obligations booking (no cancellation fee or deposit)', flag:''},
+  {name:'One-PHRASE Strategy (Key to Making Money)', text:'Operational excellence, happy team members, and wheels on the road.', flag:''},
+  {name:'Differentiating Activities (3–5 Hows)', text:'Simple pricing + transparent value · Autobooking + EMMA · Damage coverage included (backed by CX team) · Meet Your Mover · On Time Guarantee · Actual employees · Quirky/fun brand', flag:''},
+  {name:'X-Factor (10x–100x Advantage)', text:'Mover recruitment, retention, training, and CULTURE', flag:'⚑ Say it out loud in the room: the Q3 theme runs directly AT the X-Factor. Discussion: is the COS/AI layer a second X-Factor or an enabler of this one? (April\'s answer: enabler — probably still right.)'},
+  {name:'Profit per X (Economic Engine)', text:'Profit per Truck (may move to margin-per-employee or margin-per-customer if additional services launch)', flag:'⚑ T1\'s TUR-definition fix changes how Profit/Truck is MEASURED, not the choice.'},
+  {name:'BHAG (10–25 yr)', text:'300 trucks on the road by 2033 ($100M revenue). Not updating as of Q1 2026 unless the additional-services beta changes the model.', flag:''}
+ ]
+};
+// ═══ end SEED ═══
+
+var state; try { state = JSON.parse(localStorage.getItem(LS)); } catch(e){}
+if (!state) state = JSON.parse(JSON.stringify(SEED));
+else {
+  // merge: append any seed rows this saved state has never seen (match by text) — rulings survive
+  ['trends','strengths','weaknesses'].forEach(function(sec){
+    var have = {}; (state[sec]||[]).forEach(function(it){ have[it.t] = true; });
+    SEED[sec].forEach(function(it){ if(!have[it.t]) state[sec].push(JSON.parse(JSON.stringify(it))); });
+  });
+}
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); renderProg(); }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+function toast(t){ var el=document.getElementById('toast'); el.textContent=t; el.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(function(){el.classList.remove('show');},2200); }
+
+function ensureFields(it){ if(it.d===undefined) it.d = (it.o==='april'?'keep':null); return it; }
+
+function renderList(sec){
+  var wrap = document.getElementById('sec-'+sec);
+  wrap.innerHTML = '';
+  state[sec].forEach(function(it, i){
+    ensureFields(it);
+    var row = document.createElement('div');
+    row.className = 'row ' + (it.o==='april' ? 'compact' : (it.o==='added'?'newrow':it.o)) + (it.d==='cut'?' cut':'');
+    row.innerHTML =
+      (it.o==='april' ? '' : '<span class="origin '+it.o+'">'+(it.o==='added'?'ADDED':'PROPOSED')+'</span>')+
+      '<textarea data-sec="'+sec+'" data-i="'+i+'" rows="1">'+esc(it.t)+'</textarea>'+
+      '<div class="acts">'+
+        '<button class="act'+(it.d==='keep'?' on-keep':'')+'" data-sec="'+sec+'" data-i="'+i+'" data-d="keep">✓</button>'+
+        '<button class="act'+(it.d==='cut'?' on-cut':'')+'" data-sec="'+sec+'" data-i="'+i+'" data-d="cut">✕</button>'+
+      '</div>'+
+      (it.why ? '<div class="why">'+esc(it.why)+'</div>' : '');
+    wrap.appendChild(row);
+  });
+  var add = document.createElement('button');
+  add.className = 'addbtn';
+  add.textContent = '+ add row';
+  add.addEventListener('click', function(){ state[sec].push({t:'', o:'added', d:'keep'}); save(); render(); });
+  wrap.appendChild(add);
+
+  wrap.querySelectorAll('textarea').forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){
+      state[el.dataset.sec][+el.dataset.i].t = el.value; autosize(el); save();
+    });
+  });
+  wrap.querySelectorAll('.act').forEach(function(el){
+    el.addEventListener('click', function(){
+      var it = state[el.dataset.sec][+el.dataset.i];
+      it.d = (it.d === el.dataset.d) ? null : el.dataset.d;
+      save(); renderList(el.dataset.sec); renderCounts();
+      toast(it.d ? (it.d==='keep'?'Kept':'Cut') + ' — saved' : 'Ruling cleared');
+    });
+  });
+}
+
+function renderStrata(){
+  var wrap = document.getElementById('sec-strata');
+  wrap.innerHTML = '';
+  state.strata.forEach(function(s, i){
+    var box = document.createElement('div');
+    box.className = 'stratum';
+    box.innerHTML = '<h3>'+esc(s.name)+'</h3>'+
+      '<textarea data-i="'+i+'" rows="2">'+esc(s.text)+'</textarea>'+
+      (s.flag ? '<div class="flag">'+esc(s.flag)+'</div>' : '');
+    wrap.appendChild(box);
+  });
+  wrap.querySelectorAll('textarea').forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ state.strata[+el.dataset.i].text = el.value; autosize(el); save(); });
+  });
+}
+
+function autosize(el){ el.style.height='auto'; el.style.height=(el.scrollHeight)+'px'; }
+
+function renderCounts(){
+  document.querySelectorAll('.seccount').forEach(function(el){
+    var sec = el.dataset.sec, open = 0;
+    state[sec].forEach(function(it){ if(it.o==='proposed' && !it.d) open++; });
+    el.textContent = open ? '— ' + open + ' to rule' : '— ✓ ruled';
+  });
+}
+function renderProg(){
+  var total=0, ruled=0;
+  ['trends','strengths','weaknesses'].forEach(function(sec){
+    state[sec].forEach(function(it){ if(it.o==='proposed'){ total++; if(it.d) ruled++; } });
+  });
+  document.getElementById('prog').textContent = ruled+' / '+total+' proposals ruled on';
+}
+
+function render(){ renderList('trends'); renderList('strengths'); renderList('weaknesses'); renderStrata(); renderProg(); renderCounts(); }
+
+document.getElementById('exportMd').addEventListener('click', function(){
+  var L=['# SWT + 7 Strata — '+state.quarter+' — exported '+new Date().toLocaleString(),''];
+  ['trends','strengths','weaknesses'].forEach(function(sec){
+    L.push('## '+sec.charAt(0).toUpperCase()+sec.slice(1));
+    state[sec].forEach(function(it){
+      if(it.d==='cut'){ L.push('- ~~'+it.t+'~~ [CUT]'); }
+      else { L.push('- '+it.t+(it.o!=='april'?' ['+it.o.toUpperCase()+(it.d?'/'+it.d:'/UNRULED')+']':'')); }
+    });
+    L.push('');
+  });
+  L.push('## 7 Strata');
+  state.strata.forEach(function(s){ L.push('### '+s.name); L.push(s.text); if(s.flag) L.push('_'+s.flag+'_'); L.push(''); });
+  var md=L.join('\n');
+  var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([md],{type:'text/markdown'})); a.download='swt-strata-'+state.quarter.replace(/\s/g,'')+'.md'; a.click();
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(md).then(function(){ toast('Markdown copied + downloaded'); }, function(){ toast('Downloaded (clipboard blocked — use the file)'); });
+  } else { toast('Downloaded (no clipboard here — use the file)'); }
+});
+
+document.getElementById('exportJson').addEventListener('click', function(){
+  var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,1)],{type:'application/json'})); a.download='swt-strata-state.json'; a.click();
+  toast('JSON downloaded — Albert re-seeds next quarter from this');
+});
+
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if(confirm('Reset everything to the seeded version? Your edits + rulings will be lost.')){
+    state = JSON.parse(JSON.stringify(SEED)); save(); render();
+  }
+});
+
+render();
+})();
+</script>
+</body>
+</html>

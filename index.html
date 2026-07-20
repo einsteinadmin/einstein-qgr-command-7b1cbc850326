@@ -543,7 +543,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.8 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.9 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -690,6 +690,7 @@
           ctx: "BACKLOG INPUT. Draft verdict: strata mostly STAND — flags: conv-rate KPI wording awaits the replacement decision · X-Factor vs COS-layer question. FACe: Paul=CFO locked (execution only); still open — Mike's role-split + Calvin." },
         { text: 'PACe + Flywheel SELF-EVALUATION — grade every element, update the live artifacts',
           url: 'https://einsteinadmin.github.io/einstein-flywheel/', urlLabel: 'Flywheel',
+          url2: 'https://einsteinadmin.github.io/einstein-pace/', url2Label: 'PACe',
           ctx: 'BACKLOG INPUT (7/20 standing step): the constraints exercise seeds FROM these; this grades us ACROSS them. Owner-pass = strawman; leadership re-grades Day 1. Push grades into the hosted pages.' },
         { text: 'CASh / Power of One — cash-improvement pass (Paul + Ben, Tue)',
           ctx: 'BACKLOG INPUT: each worthwhile 1% move (price/volume/COGS/overheads/debtor-stock-creditor days) lands as an MB candidate w/ owner. Worksheets = Growth Toolkit pp.12–13; run it even though Rob still owes his updated tools. Seeds in the refresh draft.' },
@@ -1152,6 +1153,7 @@
         var linkHtml = it.url
           ? ' <a class="item-link" href="' + esc(it.url) + '" target="_blank" rel="noopener noreferrer">' + esc(it.urlLabel || 'open') + ' ↗</a>'
           : '';
+        if (it.url2) linkHtml += ' <a class="item-link" href="' + esc(it.url2) + '" target="_blank" rel="noopener noreferrer">' + esc(it.url2Label || 'open') + ' ↗</a>';
         var ctxHtml = it.ctx ? '<div class="item-ctx">' + esc(it.ctx) + '</div>' : '';
         var row = document.createElement('div');
         row.className = 'phase-item-row';
