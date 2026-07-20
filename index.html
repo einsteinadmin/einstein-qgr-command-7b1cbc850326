@@ -543,7 +543,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v2.7 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v2.8 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -743,12 +743,15 @@
         'People Analyzers as a group',
         'Finalize Q2 SG/G/R for all leadership + directs',
         'PACe + Flywheel self-evaluation — leadership grades each element (Cam/Paul owner-pass = the strawman)',
-        'Rob exercises'
+        'Rob exercises',
+        'Lunch walk DP: comms + policy-rollout improvements (Q2 template ritual)',
+        'OPSP page 2 + Vision Summary — finalize Roundtable draft in the builder'
       ]
     },
     day2: {
       label: 'Thu 7/30',
       items: [
+        'Praise handouts + Legends of the Quarter',
         'Cascading goals chart finalized',
         'Revenue targets buy-in (NI bonus is company-wide)',
         'Bonus Goals / Mid-Quarter Pivots section per leader',
@@ -758,7 +761,10 @@
         'CASh / Power of One — Paul + Ben block (placeholder until fleshed out)',
         'DECIDE: Damages reframe (Anne 7/16 plan — branch-level baseline, pause individual accountability, monthly training themes; bonus/games/promotion implications)',
         'DECIDE: AI/tool governance workstream — Q3 candidate (central data bus + EMMA toolkit + monthly Big Rocks review; Master Backlog 12556198241)',
-        'Manager presentation started'
+        'Manager presentation started',
+        'Divide & conquer presentation slides (Branch + Mover OPSPs) — parallel: quarterly O3s',
+        'Remaining to-dos — Roundtable OPSPs → pulses + presentation ownership assigned',
+        'Debrief + sensitive-doc access cleanup'
       ]
     }
   };
@@ -870,7 +876,7 @@
   }
   // One-time agenda refresh (7/20 Scaling Up cross-check): rebuild from the new seed,
   // preserving checked/notes for items whose text matches and keeping user-added lines.
-  if (!state.agenda._su0720) {
+  if (!state.agenda._su0720b) {
     ['day1', 'day2'].forEach(function (dayKey) {
       var old = (state.agenda[dayKey] && state.agenda[dayKey].items) || [];
       var rebuilt = AGENDA_SEED[dayKey].items.map(function (t) {
@@ -886,6 +892,7 @@
       state.agenda[dayKey] = { label: AGENDA_SEED[dayKey].label, items: rebuilt };
     });
     state.agenda._su0720 = true;
+    state.agenda._su0720b = true; // 7/20 pm: Q2 day-of template cross-reference merged
     saveStateNow(LS_KEYS.agenda, state.agenda);
   }
   if (state.changelog === null) {
