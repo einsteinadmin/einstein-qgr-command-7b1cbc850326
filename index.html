@@ -446,7 +446,7 @@
     <div class="section">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">Agenda — the live QGR checklist (7/29–30)</div>
-      <div class="section-desc">THIS is where the QGR itself runs — check blocks off as the room moves, ✎-note each one (decisions, quotes, parking-lot). Runway Phase F only tracks readiness; no more duplication. Notes ride the normal Export, or copy them alone here:</div>
+      <div class="section-desc">THIS is where the QGR itself runs — check blocks off as the room moves, ✎-note each one (decisions, quotes, parking-lot). Runway Phase ③ only tracks readiness; no more duplication. Notes ride the normal Export, or copy them alone here:</div>
       <div style="margin-bottom:10px"><button class="btn" id="roomNotesBtn">⬇ Copy Room notes (markdown)</button></div>
       <div id="agendaWrap"></div>
     </div>
@@ -542,7 +542,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.0 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.1 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -653,7 +653,7 @@
           url: 'https://einsteinmoving.monday.com/boards/18408300070', urlLabel: 'Master Backlog',
           ctx: '7/20: 81 heavy pulses got TL;DR master summaries; 26 dupes closed; eNPS evidence attached. Final pass after all exports land.' },
         { text: "Collect Amanda's next-quarter theme/dashboard/rewards ideas (Claims + Sales)",
-          ctx: 'Idea-collection FROM Amanda — her eNPS export + AAR carry most of it.' },
+          ctx: 'Idea-collection FROM Amanda — her eNPS export + AAR carry most of it; anything extra → her Monday sync.' },
         'Q2 results snapshot (SG/G/R per rock off dashboard)',
         'QG success-rate tracker refresh (7-quarter parser)',
         { text: 'Q3 reforecast lands (Ben model off first 2 wks July actuals + Matisen revenue reforecast)',
@@ -682,7 +682,7 @@
         'Personnel plans — Management Movement & Training Board (Daniel/N. Austin transition, Garland + Tampa new-manager dev)',
         { text: 'PACe + Flywheel SELF-EVALUATION — Cameron + Paul grade every element, update the live artifacts',
           url: 'https://einsteinadmin.github.io/einstein-flywheel/', urlLabel: 'Flywheel',
-          ctx: 'New standing step (7/20): the constraints exercise SEEDS from these but never evaluated us across them. Owner-pass = the strawman; leadership re-grades at QGR Day 1.' },
+          ctx: 'New standing step (7/20 Scaling Up cross-check): the constraints exercise SEEDS from these but never evaluated us across them. Owner-pass = the strawman; leadership re-grades at QGR Day 1. Push the grades into the hosted Flywheel + PACe pages.' },
         { text: 'SWT + OPSP left-page refresh — Cameron + Paul pass in the OPSP builder',
           url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder',
           ctx: 'Baseline = the Q2 26 Growth Toolkit workbook (in the kit). The room re-reads these aloud Day 1 (go-slow-to-go-fast).' },
@@ -691,7 +691,7 @@
           ctx: 'The shortlist trust check (20–30 min): audit the deltas, never the whole warehouse. Export decisions to Albert.' },
         { text: 'Rock slate red-pen in the Triage Room (after the 2:30 export compile lands)',
           url: 'qgr-triage-room.html', urlLabel: 'Triage Room',
-          ctx: 'Albert loads SELF grades + AAR digests + new candidates first. Export/E at EOD back to Albert.' },
+          ctx: 'Albert loads SELF grades + AAR digests + new candidates first. Red-pen against the draft + eNPS addendum (rock-candidates-q3-DRAFT-2026-07-18.md, in the kit). Export/E at EOD back to Albert.' },
         { text: 'Whiteboard map — major projects × cross-dept dependencies (the Matisen-bottleneck catcher)',
           url: 'qgr-triage-room.html', urlLabel: 'dependency board (23 rows)' },
         'Cameron’s own Q3 rocks finalized + pressure-tested',
@@ -821,7 +821,7 @@
   var TOOLKIT_SEED = [
     { icon: '📘', label: 'Master pulse + SOP (Monday)', sub: 'pulse 12581466585 — the reproducible QGR playbook: Drive 3-tier setup, three-session model, learnings ledger', url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12581466585' },
     { icon: '🛠', label: 'QGR Triage Room', sub: 'the workbench — Q2 review · Q3 triage · dependencies', url: 'qgr-triage-room.html' },
-    { icon: '📅', label: 'Day-1 Runsheet (Mon 7/20)', sub: "today's script — detail view of Phase D", url: 'day1-runsheet-2026-07-20.html' },
+    { icon: '📅', label: 'Day-1 Runsheet (Mon 7/20)', sub: "today's script — detail view of Phase ②", url: 'day1-runsheet-2026-07-20.html' },
     { icon: '🧮', label: 'People Analyzer — Leadership (BETA)', sub: 'LOCAL ONLY (leadership evals, never hosted) — opens via localhost:8136 on Cam\'s machines; Q2 run w/ Paul = the trial', url: 'http://localhost:8136/people-analyzer-leadership.html' },
     { icon: '🪨', label: 'Q3 Rock Slate — first pass', sub: 'LOCAL FILE only (personnel detail) — red-pen draft + eNPS addendum', url: 'rock-candidates-q3-DRAFT-2026-07-18.md' },
     { icon: '💬', label: 'eNPS Rollup (7/20)', sub: 'LOCAL FILE only (people-sensitive) — Lane A goal fuel · Lane B follow-ups', url: 'enps-rollup-2026-07-20.md' },
