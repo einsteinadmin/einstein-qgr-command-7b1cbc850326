@@ -392,11 +392,12 @@
         (2) The <b>rock draft</b> is the shortlist: Albert curates the warehouse down to per-leader rock candidates. Curation weights, in order: cross-leader convergence at Rob's constraint session (Flywheel + PACe lenses) → Rob's coaching reads → Q2 carries (explicit kill/carry/restructure, nothing auto-carries) → MB lens/priority flags → hard rules (2 CRITs each, Matisen 4-cap, dependencies named). It is judgment, 70–80% right by design — which is why every pass ships with a <b>curation receipt</b> (per-rock provenance + the near-misses and why not) for the Cameron+Paul alignment pass: audit the deltas, never the whole warehouse.
         (3) The <b>Triage Room</b> is the showroom: cards seeded from the shortlist only; kill/edit/promote decisions happen there and export back to Albert.
         (4) <b>Write-back:</b> every decision lands back in the Master Backlog + cascading sheet — nothing stays decided only inside a tool. Feedback loop on this HQ itself: ✎-note anything, Export, hand Albert the JSON (or say it in chat) — folded in + redeployed same session, changelog records it.
-        <br><br><b>The three-session model (locked 7/20, Scaling Up cross-check):</b>
-        <b>Session 1 — Owners</b> (Cameron + Paul, + Ben for numbers): strategy + financials + cash — SWT/7-Strata/FACe refresh, PACe + Flywheel self-evaluation, left-page OPSP pass, reforecast, CASh/Power-of-One.
-        <b>Session 2 — Leadership QGR</b> (two half-days): AAR TL;DR round + praise, slow open (SWT + first 3 columns aloud), re-grade PACe/Flywheel as a group, rocks + theme locked, the PACe one-process pick, Rockefeller-Habits pick, everyone's column 7.
-        <b>Session 3 — Cascade</b>: town hall / manager presentation + vision summary down to branches.
-        Standing pre-work ~2 wks out = the Flywheel/PACe constraints exercise with all leaders (it replaces Harnish's top-3-issues ask — constraints ARE the issues). Customer-input wire-up beyond GatherUp = deliberately deferred until regular customer outreach exists.
+        <br><br><b>The four beats (Cameron's model, confirmed 7/20 — the Runway phases mirror this exactly):</b>
+        <b>① Data collection + Flywheel/PACe review:</b> People Analyzers, AARs, customer feedback, financial + marketing analysis, branch scorecards (when possible), the Flywheel/PACe constraints exercise (~2 wks out, all leaders — it replaces the top-3-issues ask), CASh/Power-of-One, 7 Strata + SWT — all of it POPULATES the Master Backlog and makes it complete.
+        <b>② Cam + Paul triage:</b> triage the backlog → rocks + theme at a HIGH level; leadership's general goals laid out, general theme established; QG packet mostly locked by EOQ. (Raw-backlog triage is heavy — the shortlist + curation receipt + Triage Room exist to carry it.)
+        <b>③ Matisen data confirm → leadership readiness:</b> data day cleans + verifies everything; final gut check on goals/overlaps/dependencies; packet READY before leadership walks in.
+        <b>④ Leadership QGR → Cascade:</b> review 7 Strata, SWT, People Analyzers, last quarter's results + the packet AS A TEAM → finalize own goals w/ exact statuses, directs' goals w/ measurables, theme + mechanics + rewards, OPSP + Vision Summary → build the manager/mover/CET presentations for the following week (Phase ④ on the Runway).
+        Owners POPULATE the strategy artifacts in ①–②; leadership REVIEWS + FINALIZES them in the room — that double-touch is by design. Customer-input wire-up beyond GatherUp = deliberately deferred until regular customer outreach exists.
       </div>
     </div>
 
@@ -542,7 +543,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.1 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.2 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -635,7 +636,7 @@
 
   var PHASES_SEED = [
     {
-      id: 'P1', title: '① Pre-QGR — signals + data', window: 'T-3 wks → T-2 days · constraints exercise ~2 wks out',
+      id: 'P1', title: '① Data collection + Flywheel/PACe review', window: 'T-3 wks onward · constraints exercise ~2 wks out',
       items: [
         { text: 'Flywheel/PACe constraints exercise with ALL leaders (Rob session) — 3 constraints/opportunities each, both lenses; ITP one-pagers; AAR homework assigned',
           ctx: 'The standing ~2-wks-out step (replaces the top-3-issues ask — constraints ARE the issues). Ran 7/15.' },
@@ -666,19 +667,19 @@
           ctx: 'Split 7/20 per Cameron: tool first, then run, then cascade (next two items).' },
         "People Analyzer — run for Cameron + Paul's directs (with the tool)",
         'People Analyzer — cascade: each leader runs it for their team → movers',
-        'Matisen data day (~7/27–28): dashboards + Games scoring + branch data clean',
-        'Matisen data day: EMMA CSV feed verified end-to-end',
-        'Matisen data day: align his Q3 rocks (4-cap; 5→3 lesson) + package build gut-check'
+        { text: 'Customer feedback pull (GatherUp/NPS/reviews themes)',
+          ctx: 'This cycle = GatherUp + review mining only; full customer Start/Stop/Keep wire-up deliberately deferred until regular customer outreach exists.' },
+        'Branch scorecards refresh (when possible — feeds the QG packet)'
       ]
     },
     {
-      id: 'P2', title: '② Cameron + Paul — owners’ days', window: '7/20–22, Ben Tue 9–1 · in attack order',
+      id: 'P2', title: '② Cameron + Paul — strategy review + triage', window: '7/20–22, Ben Tue 9–1 · in attack order',
       items: [
         { text: 'Theme decision (Back to School training = leading candidate; Estimate Accuracy likely Q4)',
           url: 'qgr-triage-room.html', urlLabel: 'Triage Room',
           ctx: 'Decision surface = Triage Room Q3 view. Theme queue on the MB: 12556457451 Speed to Competence · 12556457452 Demand Pursuit · 12556457453 Estimate Accuracy (Q4).' },
-        { text: '7 Strata / FACe review — ⭐ Paul title conversation',
-          ctx: "The queued item: retire CFO/COO → CFAO or plain CFO (Rob 7/10 rec: Paul = CFO, drop COO — Mike is Head of Ops; org chart update = Anne). Same block: Mike's Dept-Head/Regional split ask (MB 12556464031) + Amanda's Calvin-role question." },
+        { text: '7 Strata / FACe review',
+          ctx: "Paul = CFO is LOCKED — execution only (org chart = Anne, then comms), no re-deliberation. Still open in this block: Mike's Dept-Head/Regional split ask (MB 12556464031) + Amanda's Calvin-role question." },
         'Personnel plans — Management Movement & Training Board (Daniel/N. Austin transition, Garland + Tampa new-manager dev)',
         { text: 'PACe + Flywheel SELF-EVALUATION — Cameron + Paul grade every element, update the live artifacts',
           url: 'https://einsteinadmin.github.io/einstein-flywheel/', urlLabel: 'Flywheel',
@@ -707,12 +708,19 @@
         'Print praise for Roundtable',
         { text: 'Connections Brief #2 (Albert)',
           url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12447028023', urlLabel: 'pulse 12447028023',
-          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' }
+          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' },
+        { text: 'QG packet mostly locked by EOQ (qgr-packet-builder skill)',
+          ctx: 'General goals per leader + general theme established during these days; packet chassis fills as data lands.' }
       ]
     },
     {
-      id: 'P3', title: '③ Leadership QGR — readiness (the QGR itself runs in The Room tab)', window: '7/29–30, Rob 2 half-days',
+      id: 'P3', title: '③ Data confirm + Leadership readiness (the QGR itself runs in The Room tab)', window: 'Matisen data day ~7/27–28 · QGR 7/29–30, Rob 2 half-days',
       items: [
+        'Matisen data day: dashboards + Games scoring + branch data confirmed clean',
+        'Matisen data day: EMMA CSV feed verified end-to-end',
+        { text: 'Matisen data day: goals/overlaps/dependencies FINAL GUT CHECK + align his Q3 rocks (4-cap)',
+          ctx: 'The last look before leadership walks in — every rock leaning on Matisen must name its deliverable in his slate.' },
+        'QG packet READY to go',
         'Pre-reads out to leadership (walking pack v2 + eNPS one-pager) ≥2 days ahead',
         { text: 'Room readiness: packet built + materials shelf loaded + OPSP builder up on screen',
           ctx: 'The full Day 1/Day 2 agenda lives in The Room tab as a live checklist with per-block notes — no duplicate list here.' },
