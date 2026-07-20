@@ -410,7 +410,7 @@
     <div class="section">
       <div class="section-eyebrow">Runway</div>
       <div class="section-title">Phase checklist</div>
-      <div class="section-desc">Six phases, A through F. Check items as they land; add a note on any item by tapping ✎.</div>
+      <div class="section-desc">Four phases in attack order: ① Pre-QGR signals + data · ② Cameron + Paul owners' days · ③ Leadership QGR readiness (the QGR itself runs in The Room tab) · ④ Cascade to front line. Check items as they land; ✎ to note.</div>
       <div class="overall-progress">
         <span style="font-size:0.78rem; font-weight:700; color:var(--navy); white-space:nowrap;">Overall</span>
         <div class="progress-bar-track"><div class="progress-bar-fill" id="overallProgressFill" style="width:0%"></div></div>
@@ -496,9 +496,8 @@
 
     <div class="section">
       <div class="section-eyebrow">Aftermath</div>
-      <div class="section-title">Rollout checklist</div>
-      <div class="section-desc">The follow-through list. Check off as each lands.</div>
-      <div class="simple-checklist" id="rolloutChecklist"></div>
+      <div class="section-title">Rollout → moved</div>
+      <div class="section-desc">The rollout checklist is now <b>Phase ④ Cascade</b> on the Runway tab (single list, no duplication). This tab keeps the decision log + changelog.</div>
     </div>
 
     <div class="section">
@@ -543,7 +542,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v2.9 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.0 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -551,19 +550,59 @@
   // intentionally abandoned — the export superseded it.
 
   var DEFAULT_PHASES = {
-    'A-0': { checked: true,  note: '', noteOpen: false },
-    'A-3': { checked: true,  note: "Still getting individual leaders' exports but Cam/Paul side has been reviewed and updated.", noteOpen: false },
-    'A-4': { checked: true,  note: "Done once initially (7/16 reconciliation). Final dedupe + cleanup after all AARs/eNPS exports land — Albert's multi-agent consolidation audit launched 7/20.", noteOpen: false },
-    'A-6': { checked: false, note: 'Pending projected status today for everyone but Anne (hers Tue AM).', noteOpen: false },
-    'B-0': { checked: true,  note: '', noteOpen: false },
-    'B-1': { checked: true,  note: '', noteOpen: false },
-    'B-2': { checked: true,  note: '', noteOpen: false },
-    'B-3': { checked: true,  note: '', noteOpen: false },
-    'C-0': { checked: false, note: 'Pending. Should have it in the next day or two.', noteOpen: false },
-    'C-1': { checked: true,  note: 'Already done and confirmed with regionals and branches.', noteOpen: false },
-    'C-2': { checked: false, note: 'July targets already in place run higher than projected Aug revenue needs; Aug–Oct targets usually wait until closer to EOM. Handle by EOM — not a QGR blocker.', noteOpen: false },
-    'D-7': { checked: false, note: 'Deliberately moved later in the order per Cameron 7/20 — reforecast lands ~Tue 7/21 with Ben.', noteOpen: false }
+    '_v4': true,
+    'P1-0': { checked: true,  note: '', noteOpen: false },
+    'P1-1': { checked: true,  note: '', noteOpen: false },
+    'P1-2': { checked: true,  note: 'Q3 3-tier built + Roundtable folder shared (writer, no Nhel) 7/20; blank toolkit copied into Owners.', noteOpen: false },
+    'P1-4': { checked: true,  note: "Still getting individual leaders' exports but Cam/Paul side has been reviewed and updated.", noteOpen: false },
+    'P1-5': { checked: true,  note: "Done once initially (7/16 reconciliation); 7/20 deep pass: 81 master summaries + 26 dupes closed. Final pass after all AAR/eNPS exports land.", noteOpen: false },
+    'P1-7': { checked: false, note: 'Pending projected status today for everyone but Anne (hers Tue AM).', noteOpen: false },
+    'P1-9': { checked: false, note: 'Pending. Should have it in the next day or two.', noteOpen: false },
+    'P1-10': { checked: true, note: 'Already done and confirmed with regionals and branches.', noteOpen: false },
+    'P1-11': { checked: false, note: 'July targets already in place run higher than projected Aug revenue needs; Aug–Oct targets usually wait until closer to EOM. Handle by EOM — not a QGR blocker.', noteOpen: false },
+    'P2-9': { checked: false, note: 'Deliberately moved later in the order per Cameron 7/20 — reforecast lands ~Tue 7/21 with Ben.', noteOpen: false }
   };
+
+  // v3.0 migration: old A–F phase keys + the retired rollout checklist → the four-phase P keys.
+  var V4_PHASE_MAP = {
+    'P1-0': ['B-0','B-1','B-2','B-3'], 'P1-1': ['A-0'], 'P1-2': ['A-2'], 'P1-4': ['A-3'],
+    'P1-5': ['A-4'], 'P1-6': ['A-1'], 'P1-7': ['A-6'], 'P1-8': ['A-7'], 'P1-9': ['C-0'],
+    'P1-10': ['C-1'], 'P1-11': ['C-2'], 'P1-12': ['C-3'], 'P1-13': ['C-4'], 'P1-14': ['A-5'],
+    'P1-15': ['A-8'], 'P1-16': ['A-9'], 'P1-17': ['E-0'], 'P1-18': ['E-1'], 'P1-19': ['E-2','E-3'],
+    'P2-0': ['D-0'], 'P2-1': ['D-2'], 'P2-2': ['D-3'], 'P2-3': ['D-11'], 'P2-4': ['D-12'],
+    'P2-6': ['D-1'], 'P2-7': ['D-4'], 'P2-8': ['D-5'], 'P2-9': ['D-7'], 'P2-11': ['D-6'],
+    'P2-12': ['D-8'], 'P2-13': ['D-9'], 'P2-14': ['D-10'],
+    'P3-0': ['F-1'], 'P3-1': ['F-0'], 'P3-2': ['F-2'], 'P3-3': ['F-3'], 'P3-4': ['F-4']
+  };
+  var V4_ROLLOUT_MAP = { 'P4-0': 0, 'P4-1': 1, 'P4-2': 2, 'P4-3': 4, 'P4-4': 5, 'P4-5': 6, 'P4-6': 3, 'P4-7': 7, 'P4-8': 9, 'P4-9': 8 };
+
+  function migratePhasesV4(phases, rollout) {
+    if (phases._v4) return phases;
+    var hasOld = Object.keys(phases).some(function (k) { return /^[A-F]-\d/.test(k); });
+    var np = {};
+    Object.keys(phases).forEach(function (k) { if (/^P\d-/.test(k)) np[k] = phases[k]; });
+    if (hasOld) {
+      Object.keys(V4_PHASE_MAP).forEach(function (nk) {
+        var olds = V4_PHASE_MAP[nk].map(function (ok) { return phases[ok]; }).filter(Boolean);
+        if (!olds.length) return;
+        var notes = olds.map(function (o) { return o.note || ''; }).filter(Boolean);
+        np[nk] = {
+          checked: V4_PHASE_MAP[nk].every(function (ok) { return phases[ok] && phases[ok].checked; }),
+          note: notes.join(' · '),
+          noteOpen: false
+        };
+      });
+    } else {
+      np = JSON.parse(JSON.stringify(DEFAULT_PHASES));
+    }
+    if (rollout) {
+      Object.keys(V4_ROLLOUT_MAP).forEach(function (nk) {
+        if (rollout[V4_ROLLOUT_MAP[nk]]) np[nk] = { checked: true, note: '', noteOpen: false };
+      });
+    }
+    np._v4 = true;
+    return np;
+  }
 
   var DEFAULT_TRACKER = {
     'Amanda-0': 2, 'Brian-0': 2, 'Mike-0': 2, 'Matisen-0': 2, 'Anne-0': 2, 'Paul-0': 2, 'Cameron-0': 2,
@@ -596,96 +635,106 @@
 
   var PHASES_SEED = [
     {
-      id: 'A', title: 'Signal collection', window: 'now → 7/15',
+      id: 'P1', title: '① Pre-QGR — signals + data', window: 'T-3 wks → T-2 days · constraints exercise ~2 wks out',
       items: [
+        { text: 'Flywheel/PACe constraints exercise with ALL leaders (Rob session) — 3 constraints/opportunities each, both lenses; ITP one-pagers; AAR homework assigned',
+          ctx: 'The standing ~2-wks-out step (replaces the top-3-issues ask — constraints ARE the issues). Ran 7/15.' },
         'Team adds biggest constraints/opportunities to Master Backlog + Mural',
-        { text: "Collect Amanda's next-quarter theme/dashboard/rewards ideas (Claims + Sales)",
-          ctx: 'Yes — this is idea-collection FROM Amanda. Her eNPS export + AAR carry most of it; anything extra → her Monday sync.' },
-        'QGR docs & folder access check',
-        { text: 'Collect eNPS survey results + slide content',
+        { text: 'QGR docs & Drive folder setup + access check (3-tier per the SOP pulse)',
+          url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12581466585', urlLabel: 'SOP',
+          ctx: 'Q3 built 7/20: Owners (never shared) · Roundtable (writer-shared at kickoff) · Materials (share at distribution). Blank toolkit copied into Owners.' },
+        { text: 'Collect AAR exports from all leaders (skinny 4-Q, COS-leads-with-its-read)',
+          url: 'https://einsteinmoving.monday.com/boards/1146915251/pulses/12578917480', urlLabel: 'AAR pulse',
+          ctx: 'Due 2:30 7/20 (Anne Tue AM). Albert compiles → Triage Room SELF column + digests + carry flags.' },
+        { text: 'Collect eNPS survey results + reviews (two-variant tool) + slide content',
           url: 'https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/', urlLabel: 'one-pager',
-          ctx: "Cameron's 52-response review DONE 7/20 → rollup on the Master Backlog + follow-ups pulse 12552505226. Leader exports due 2:30 today (Anne Tue AM)." },
-        { text: 'Review/update Master Backlog (dedupe, emoji statuses)',
+          ctx: "Cameron's 52-response review DONE 7/20 → rollup on the Master Backlog + follow-ups pulse 12552505226. Leader exports due 2:30 (Anne Tue AM)." },
+        { text: 'Review/update Master Backlog (consolidation, dedupe, evidence attach)',
           url: 'https://einsteinmoving.monday.com/boards/18408300070', urlLabel: 'Master Backlog',
-          ctx: 'Albert consolidation audit running 7/20: TL;DR master updates on every heavy pulse + dedupe/grouping report. Final pass after all AAR/eNPS exports land.' },
-        { text: 'People Analyzer — build the collect/display tool (Albert)',
-          ctx: 'Split 7/20 per Cameron: build the tool first so it is easy to run, collect, and display. Run + cascade = the last two items in this phase.' },
+          ctx: '7/20: 81 heavy pulses got TL;DR master summaries; 26 dupes closed; eNPS evidence attached. Final pass after all exports land.' },
+        { text: "Collect Amanda's next-quarter theme/dashboard/rewards ideas (Claims + Sales)",
+          ctx: 'Idea-collection FROM Amanda — her eNPS export + AAR carry most of it.' },
         'Q2 results snapshot (SG/G/R per rock off dashboard)',
         'QG success-rate tracker refresh (7-quarter parser)',
-        "People Analyzer — run for Cameron + Paul's directs (with the tool)",
-        'People Analyzer — cascade: each leader runs it for their team → movers'
-      ]
-    },
-    {
-      id: 'B', title: 'Rob pre-work workshop', window: '7/15 1–5pm',
-      items: [
-        'Cameron’s own 3 constraints entered in Mural',
-        'ITP one-pager sent to Rob (✅ done)',
-        'Flywheel + PACe review with team',
-        'AAR 6-questions homework assigned to leaders'
-      ]
-    },
-    {
-      id: 'C', title: 'Financial + data window', window: '7/16–7/19',
-      items: [
-        'Q3 reforecast lands (Ben model off first 2 wks July actuals + Matisen revenue reforecast)',
+        { text: 'Q3 reforecast lands (Ben model off first 2 wks July actuals + Matisen revenue reforecast)',
+          ctx: 'Expected ~Tue 7/21 with Ben (9–1 block).' },
         'Revenue targets drafted for next quarter',
-        'Sales + personnel budgets adjusted to new targets',
+        'Sales + personnel budgets adjusted to new targets (by EOM — not a QGR blocker)',
         'Financial analysis skill run on Q2 data',
-        'Marketing tab review'
+        'Marketing tab review',
+        { text: 'People Analyzer — build the collect/display tool (Albert)',
+          ctx: 'Split 7/20 per Cameron: tool first, then run, then cascade (next two items).' },
+        "People Analyzer — run for Cameron + Paul's directs (with the tool)",
+        'People Analyzer — cascade: each leader runs it for their team → movers',
+        'Matisen data day (~7/27–28): dashboards + Games scoring + branch data clean',
+        'Matisen data day: EMMA CSV feed verified end-to-end',
+        'Matisen data day: align his Q3 rocks (4-cap; 5→3 lesson) + package build gut-check'
       ]
     },
     {
-      id: 'D', title: 'Cameron + Paul prep days', window: '7/20–7/21, Ben joins 7/21 · order = the real Day-1 flow (reordered 7/20 per Cameron)',
+      id: 'P2', title: '② Cameron + Paul — owners’ days', window: '7/20–22, Ben Tue 9–1 · in attack order',
       items: [
         { text: 'Theme decision (Back to School training = leading candidate; Estimate Accuracy likely Q4)',
           url: 'qgr-triage-room.html', urlLabel: 'Triage Room',
           ctx: 'Decision surface = Triage Room Q3 view. Theme queue on the MB: 12556457451 Speed to Competence · 12556457452 Demand Pursuit · 12556457453 Estimate Accuracy (Q4).' },
-        { text: 'Rock candidates — red-pen the Albert first pass (70–80% right by design)',
-          url: 'rock-candidates-q3-DRAFT-2026-07-18.md', urlLabel: 'draft + eNPS addendum' },
         { text: '7 Strata / FACe review — ⭐ Paul title conversation',
           ctx: "The queued item: retire CFO/COO → CFAO or plain CFO (Rob 7/10 rec: Paul = CFO, drop COO — Mike is Head of Ops; org chart update = Anne). Same block: Mike's Dept-Head/Regional split ask (MB 12556464031) + Amanda's Calvin-role question." },
         'Personnel plans — Management Movement & Training Board (Daniel/N. Austin transition, Garland + Tampa new-manager dev)',
+        { text: 'PACe + Flywheel SELF-EVALUATION — Cameron + Paul grade every element, update the live artifacts',
+          url: 'https://einsteinadmin.github.io/einstein-flywheel/', urlLabel: 'Flywheel',
+          ctx: 'New standing step (7/20): the constraints exercise SEEDS from these but never evaluated us across them. Owner-pass = the strawman; leadership re-grades at QGR Day 1.' },
+        { text: 'SWT + OPSP left-page refresh — Cameron + Paul pass in the OPSP builder',
+          url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder',
+          ctx: 'Baseline = the Q2 26 Growth Toolkit workbook (in the kit). The room re-reads these aloud Day 1 (go-slow-to-go-fast).' },
+        { text: 'Curation receipt review — confirm/challenge every rock + rule on the 11 near-misses',
+          url: 'curation-receipt-2026-07-20.html', urlLabel: 'interactive receipt',
+          ctx: 'The shortlist trust check (20–30 min): audit the deltas, never the whole warehouse. Export decisions to Albert.' },
+        { text: 'Rock slate red-pen in the Triage Room (after the 2:30 export compile lands)',
+          url: 'qgr-triage-room.html', urlLabel: 'Triage Room',
+          ctx: 'Albert loads SELF grades + AAR digests + new candidates first. Export/E at EOD back to Albert.' },
         { text: 'Whiteboard map — major projects × cross-dept dependencies (the Matisen-bottleneck catcher)',
           url: 'qgr-triage-room.html', urlLabel: 'dependency board (23 rows)' },
         'Cameron’s own Q3 rocks finalized + pressure-tested',
+        { text: 'Review financial analysis + validate numbers (with Ben)',
+          ctx: 'Deliberately NOT first (Cameron 7/20) — Q3 reforecast lands ~Tue 7/21 with Ben (9–1 block).' },
+        { text: 'CASh / Power of One — cash-flow improvement pass (Paul + Ben)',
+          ctx: 'Worksheets are in the Growth Toolkit; Rob still owes his updated Power of One tools. Placeholder until fleshed out — but run SOMETHING Tue, don’t skip silently.' },
         { text: 'OPSP for owners',
           url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder (live)',
-          ctx: 'Builder covers OPSP + Vision Summary output. 7-Strata/FACe/PACe worksheets are NOT in it yet — work those on paper/whiteboard with Paul, then enter the results.' },
-        { text: 'Review financial analysis + validate numbers',
-          ctx: 'Deliberately NOT first (Cameron 7/20) — Q3 reforecast lands ~Tue 7/21 with Ben (9–1 block).' },
+          ctx: 'Builder covers OPSP + Vision Summary output. 7-Strata/FACe/PACe worksheets are NOT in it yet — work those on paper/whiteboard, then enter results.' },
         { text: 'Dinner/activity reservations',
           ctx: 'For QGR nights 7/29–30 — pick the spot + book this week.' },
         'Print praise for Roundtable',
-        { text: 'Connections Brief #2',
+        { text: 'Connections Brief #2 (Albert)',
           url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12447028023', urlLabel: 'pulse 12447028023',
-          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' },
-        { text: 'PACe + Flywheel SELF-EVALUATION — Cameron + Paul grade every element, update the live artifacts',
-          url: 'https://einsteinadmin.github.io/einstein-flywheel/', urlLabel: 'Flywheel',
-          ctx: 'New standing step (7/20 Scaling Up cross-check): the constraints exercise SEEDS from these but never evaluated us across them. Owner-pass here = the strawman; leadership re-grades at QGR Day 1. Push grades into the hosted Flywheel + PACe pages.' },
-        { text: 'SWT + OPSP left-page refresh — Cameron + Paul pass in the OPSP builder',
-          url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder',
-          ctx: 'Update Strengths/Weaknesses/Trends + the first 3 columns before the QGR; the room re-reads them aloud Day 1 (go-slow-to-go-fast).' }
+          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' }
       ]
     },
     {
-      id: 'E', title: 'Matisen data day', window: '~7/27–28',
+      id: 'P3', title: '③ Leadership QGR — readiness (the QGR itself runs in The Room tab)', window: '7/29–30, Rob 2 half-days',
       items: [
-        'Dashboards + Games scoring + branch data clean',
-        'First QGR CSV feed verified end-to-end (EMMA MCP)',
-        'Align Matisen’s Q3 rocks (watch scope: 5→3 lesson from Q2)',
-        'Quarterly package build gut-check'
-      ]
-    },
-    {
-      id: 'F', title: 'Roundtable QGR — readiness only (the QGR itself runs in The Room tab)', window: '7/29–30',
-      items: [
+        'Pre-reads out to leadership (walking pack v2 + eNPS one-pager) ≥2 days ahead',
         { text: 'Room readiness: packet built + materials shelf loaded + OPSP builder up on screen',
           ctx: 'The full Day 1/Day 2 agenda lives in The Room tab as a live checklist with per-block notes — no duplicate list here.' },
-        'Pre-reads out to leadership (walking pack v2 + eNPS one-pager) ≥2 days ahead',
         'Run Day 1 in The Room (live checklist + notes + decision log)',
         'Run Day 2 in The Room (live checklist + notes + decision log)',
         'Export Room notes + decision log to Albert at close of each day'
+      ]
+    },
+    {
+      id: 'P4', title: '④ Cascade — front line: managers, movers, CET', window: 'post-QGR → ~mid-Aug',
+      items: [
+        'Cascading Goals chart finalized + statuses set',
+        'Move selected pulses on the Master Backlog (triage verdicts written back)',
+        'OPSP page 1 finalized + published (builder)',
+        'Quarterly theme poster / rewards / dashboard produced (~$10–20 per FTE per quarter)',
+        { text: 'Manager presentation → regional distribution (town hall format)',
+          ctx: 'Celebrate first — "how did you do it?" round — THEN the theme reveal. 30–45 min.' },
+        'Vision Summary page for movers / CX / CET',
+        'Branch scorecards + QG packet remainder (qgr-packet-builder skill)',
+        'Pay-confirm conversations',
+        'Recognition budget (0.5–1% payroll) ideas',
+        'Debrief / retro — what to change in the SOP pulse for next quarter'
       ]
     }
   ];
@@ -872,6 +921,9 @@
     changelog: loadState(LS_KEYS.changelog, null), // [{date,text}] or null = use seed
     activeZone: loadState(LS_KEYS.activeZone, 'zone1')
   };
+
+  state.phases = migratePhasesV4(state.phases, state.rollout);
+  saveStateNow(LS_KEYS.phases, state.phases);
 
   if (state.agenda === null) {
     state.agenda = JSON.parse(JSON.stringify(AGENDA_SEED));
@@ -1450,6 +1502,7 @@
 
   function renderRolloutChecklist() {
     var wrap = document.getElementById('rolloutChecklist');
+    if (!wrap) return; // rollout section retired v3.0 — items live in Phase P4; state kept for import compat
     wrap.innerHTML = '';
     ROLLOUT_SEED.forEach(function (text, idx) {
       var checked = !!state.rollout[idx];
@@ -1556,7 +1609,7 @@
     var s = imported && imported.state ? imported.state : imported;
     if (!s) { toast('Import failed — no state found'); return; }
     state.gates = s.gates || {};
-    state.phases = s.phases || {};
+    state.phases = migratePhasesV4(s.phases || {}, s.rollout);
     state.tracker = s.tracker || {};
     state.aar = s.aar || {};
     state.agenda = s.agenda || JSON.parse(JSON.stringify(AGENDA_SEED));
