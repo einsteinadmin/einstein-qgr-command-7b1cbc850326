@@ -525,7 +525,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v2.0 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v2.1 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -631,7 +631,9 @@
         { text: 'Whiteboard map — major projects × cross-dept dependencies (the Matisen-bottleneck catcher)',
           url: 'qgr-triage-room.html', urlLabel: 'dependency board (23 rows)' },
         'Cameron’s own Q3 rocks finalized + pressure-tested',
-        'OPSP for owners',
+        { text: 'OPSP for owners',
+          url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder (live)',
+          ctx: 'Builder covers OPSP + Vision Summary output. 7-Strata/FACe/PACe worksheets are NOT in it yet — work those on paper/whiteboard with Paul, then enter the results.' },
         { text: 'Review financial analysis + validate numbers',
           ctx: 'Deliberately NOT first (Cameron 7/20) — Q3 reforecast lands ~Tue 7/21 with Ben (9–1 block).' },
         { text: 'Dinner/activity reservations',
@@ -744,7 +746,9 @@
     { icon: '📝', label: 'AAR pulse (leaders, 2:30)', sub: 'Sky Board 12578917480', url: 'https://einsteinmoving.monday.com/boards/1146915251/pulses/12578917480' },
     { icon: '🗳', label: 'eNPS review pulse (2:30)', sub: 'Sky Board 12578946632', url: 'https://einsteinmoving.monday.com/boards/1146915251/pulses/12578946632' },
     { icon: '📋', label: 'Master Backlog', sub: 'QGR Q3 Review view = lens-tagged items', url: 'https://einsteinmoving.monday.com/boards/18408300070' },
-    { icon: '🎒', label: 'Walking Pack v2', sub: 'the single best pre-read (Drive)', url: 'https://drive.google.com/file/d/14MzHdAqHXU4Z4xYuRk6i3dqsjL2D3ySv/view' }
+    { icon: '🎒', label: 'Walking Pack v2', sub: 'the single best pre-read (Drive)', url: 'https://drive.google.com/file/d/14MzHdAqHXU4Z4xYuRk6i3dqsjL2D3ySv/view' },
+    { icon: '🧾', label: 'OPSP + Vision Summary (live)', sub: 'the output builder — no 7-Strata/FACe/PACe worksheet yet; work those here, build the output there', url: 'https://goal-plan-access.replit.app/' },
+    { icon: '✏️', label: 'OPSP Builder — editor (Replit)', sub: "Cameron's edit surface for the builder itself", url: 'https://replit.com/t/einstein-moving-company/repls/Mike-OPSPVision-Summary' }
   ];
 
   var MATERIALS_SEED = [
