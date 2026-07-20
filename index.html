@@ -440,8 +440,9 @@
 
     <div class="section">
       <div class="section-eyebrow">The Room</div>
-      <div class="section-title">Agenda blocks</div>
-      <div class="section-desc">Editable — seeded from Phase F. Add or remove lines for either QGR day.</div>
+      <div class="section-title">Agenda — the live QGR checklist (7/29–30)</div>
+      <div class="section-desc">THIS is where the QGR itself runs — check blocks off as the room moves, ✎-note each one (decisions, quotes, parking-lot). Runway Phase F only tracks readiness; no more duplication. Notes ride the normal Export, or copy them alone here:</div>
+      <div style="margin-bottom:10px"><button class="btn" id="roomNotesBtn">⬇ Copy Room notes (markdown)</button></div>
       <div id="agendaWrap"></div>
     </div>
 
@@ -537,7 +538,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v2.4 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v2.5 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -666,18 +667,16 @@
       ]
     },
     {
-      id: 'F', title: 'Roundtable QGR', window: '7/29–30',
+      id: 'F', title: 'Roundtable QGR — readiness only (the QGR itself runs in The Room tab)', window: '7/29–30',
       items: [
-        '3 best things',
-        'Last-quarter major numbers review (new slide deck)',
-        'People Analyzers as a group',
-        'Finalize Q2 SG/G/R for all leadership + directs',
-        'Rob exercises',
-        'Cascading goals chart finalized',
-        'Revenue targets buy-in (NI bonus is company-wide)',
-        'Bonus Goals / Mid-Quarter Pivots section per leader (the Anne mechanic — Cameron sign-off, one-for-one displacement, documented why)',
-        'Quarterly theme locked + poster/rewards/dashboard',
-        'Manager presentation started'
+        { text: 'Room readiness: packet built + materials shelf loaded + OPSP builder up on screen',
+          ctx: 'The full Day 1/Day 2 agenda lives in The Room tab as a live checklist with per-block notes — no duplicate list here.' },
+        'Pre-reads out to leadership (walking pack v2 + eNPS one-pager) ≥2 days ahead',
+        { text: 'Top-3-issues ask sent to all six leaders (~7/25)',
+          ctx: 'Harnish prep step: "what 3 issues MUST this session address for it to be a success for you?" — compiled for the Day-1 open.' },
+        'Run Day 1 in The Room (live checklist + notes + decision log)',
+        'Run Day 2 in The Room (live checklist + notes + decision log)',
+        'Export Room notes + decision log to Albert at close of each day'
       ]
     }
   ];
@@ -1158,7 +1157,19 @@
      AGENDA (ZONE 2)
      ============================================================ */
 
+  // Agenda items are objects {text, checked, note} since v2.5 — normalize old string-form
+  // items (older exports / seeds) so import of any vintage keeps working.
+  function normalizeAgenda() {
+    ['day1', 'day2'].forEach(function (dayKey) {
+      if (!state.agenda || !state.agenda[dayKey]) return;
+      state.agenda[dayKey].items = state.agenda[dayKey].items.map(function (it) {
+        return (typeof it === 'string') ? { text: it, checked: false, note: '' } : it;
+      });
+    });
+  }
+
   function renderAgenda() {
+    normalizeAgenda();
     var wrap = document.getElementById('agendaWrap');
     wrap.innerHTML = '';
     ['day1', 'day2'].forEach(function (dayKey) {
@@ -1169,9 +1180,12 @@
       day.items.forEach(function (item, idx) {
         listHtml +=
           '<div class="agenda-row">' +
-            '<input type="text" data-day="' + dayKey + '" data-idx="' + idx + '" value="' + esc(item) + '">' +
+            '<div class="phase-item-check' + (item.checked ? ' checked' : '') + '" data-day="' + dayKey + '" data-idx="' + idx + '" style="flex-shrink:0">' + (item.checked ? '✓' : '') + '</div>' +
+            '<input type="text" data-day="' + dayKey + '" data-idx="' + idx + '" value="' + esc(item.text) + '"' + (item.checked ? ' style="text-decoration:line-through;opacity:.6"' : '') + '>' +
+            '<button class="agenda-note-toggle note-toggle" data-day="' + dayKey + '" data-idx="' + idx + '" style="flex-shrink:0">✎</button>' +
             '<button class="agenda-remove" data-day="' + dayKey + '" data-idx="' + idx + '">✕</button>' +
-          '</div>';
+          '</div>' +
+          '<textarea class="phase-item-note agenda-note" data-day="' + dayKey + '" data-idx="' + idx + '" placeholder="Room notes for this block…" style="display:' + ((item.note || item.noteOpen) ? 'block' : 'none') + '; margin:0 0 4px 30px; width:calc(100% - 30px);">' + esc(item.note || '') + '</textarea>';
       });
       dayBlock.innerHTML =
         '<div class="agenda-day-title">' + esc(day.label) + '</div>' +
@@ -1180,11 +1194,40 @@
       wrap.appendChild(dayBlock);
     });
 
+    wrap.querySelectorAll('.agenda-row .phase-item-check').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var d = el.getAttribute('data-day');
+        var idx = parseInt(el.getAttribute('data-idx'), 10);
+        state.agenda[d].items[idx].checked = !state.agenda[d].items[idx].checked;
+        saveStateNow(LS_KEYS.agenda, state.agenda);
+        renderAgenda();
+      });
+    });
+
+    wrap.querySelectorAll('.agenda-note-toggle').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var d = el.getAttribute('data-day');
+        var idx = parseInt(el.getAttribute('data-idx'), 10);
+        state.agenda[d].items[idx].noteOpen = !state.agenda[d].items[idx].noteOpen;
+        saveStateNow(LS_KEYS.agenda, state.agenda);
+        renderAgenda();
+      });
+    });
+
+    wrap.querySelectorAll('.agenda-note').forEach(function (el) {
+      el.addEventListener('input', function () {
+        var d = el.getAttribute('data-day');
+        var idx = parseInt(el.getAttribute('data-idx'), 10);
+        state.agenda[d].items[idx].note = el.value;
+        saveState(LS_KEYS.agenda, state.agenda);
+      });
+    });
+
     wrap.querySelectorAll('.agenda-list input[type="text"]').forEach(function (el) {
       el.addEventListener('input', function () {
         var d = el.getAttribute('data-day');
         var idx = parseInt(el.getAttribute('data-idx'), 10);
-        state.agenda[d].items[idx] = el.value;
+        state.agenda[d].items[idx].text = el.value;
         saveState(LS_KEYS.agenda, state.agenda);
       });
     });
@@ -1202,12 +1245,37 @@
     wrap.querySelectorAll('.agenda-add').forEach(function (el) {
       el.addEventListener('click', function () {
         var d = el.getAttribute('data-day');
-        state.agenda[d].items.push('');
+        state.agenda[d].items.push({ text: '', checked: false, note: '' });
         saveStateNow(LS_KEYS.agenda, state.agenda);
         renderAgenda();
       });
     });
   }
+
+  (function bindRoomNotesExport() {
+    var btn = document.getElementById('roomNotesBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      normalizeAgenda();
+      var lines = ['# QGR Room Notes — exported ' + new Date().toLocaleString(), ''];
+      ['day1', 'day2'].forEach(function (dayKey) {
+        var day = state.agenda[dayKey];
+        lines.push('## ' + day.label);
+        day.items.forEach(function (it) {
+          lines.push('- [' + (it.checked ? 'x' : ' ') + '] ' + it.text);
+          if (it.note) lines.push('  - NOTES: ' + it.note.replace(/\n/g, ' · '));
+        });
+        lines.push('');
+      });
+      var md = lines.join('\n');
+      if (navigator.clipboard) navigator.clipboard.writeText(md);
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([md], { type: 'text/markdown' }));
+      a.download = 'qgr-room-notes.md';
+      a.click();
+      toast('Room notes copied + downloaded');
+    });
+  })();
 
   /* ============================================================
      MATERIALS SHELF
