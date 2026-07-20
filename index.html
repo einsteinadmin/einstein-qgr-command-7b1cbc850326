@@ -543,7 +543,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.4 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.5 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -666,9 +666,13 @@
         'Financial analysis skill run on Q2 data',
         'Marketing tab review',
         { text: 'People Analyzer — build the collect/display tool (Albert)',
-          ctx: 'Split 7/20 per Cameron: tool first, then run, then cascade (next two items).' },
-        "People Analyzer — run for Cameron + Paul's directs (with the tool)",
-        'People Analyzer — cascade: each leader runs it for their team → movers',
+          url: 'http://localhost:8136/people-analyzer-leadership.html', urlLabel: 'open (local)',
+          ctx: '✅ BUILT + verified 7/20 (parallel session): full rubric (CHOICES + ITP H/H/S + GWC + criticals), 5 quarters history, Compare grid, export loop. Local-only, launch config :8136.' },
+        { text: "People Analyzer — run for Cameron + Paul's directs (with the tool)",
+          url: 'http://localhost:8136/people-analyzer-leadership.html', urlLabel: 'run it (local)',
+          ctx: 'Tue AM slot (around the Ben block). Pick the RIGHT QUARTER in the top-right dropdown (Q2 2026 holds the imported sheet draft). NOT a triage blocker — gates rock ASSIGNMENTS + the QGR group PA review.' },
+        { text: 'People Analyzer — cascade: each leader runs it for their team → movers',
+          ctx: 'After the Cam/Paul run proves the tool; share-variant for leaders is a later build (SELF lanes exist).' },
         { text: 'Customer feedback pull (GatherUp/NPS/reviews themes)',
           ctx: 'This cycle = GatherUp + review mining only; full customer Start/Stop/Keep wire-up deliberately deferred until regular customer outreach exists.' },
         'Branch scorecards refresh (when possible — feeds the QG packet)'
