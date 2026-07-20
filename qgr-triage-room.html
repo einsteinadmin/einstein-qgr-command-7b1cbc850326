@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>QGR Triage Room — Q3 2026</title>
+<style>
+@font-face{font-family:'Roboto';src:url('../QGR%20Packet/assets/fonts/Roboto-400.woff2') format('woff2');font-weight:400;font-display:swap;}
+@font-face{font-family:'Roboto';src:url('../QGR%20Packet/assets/fonts/Roboto-500.woff2') format('woff2');font-weight:500;font-display:swap;}
+@font-face{font-family:'Roboto';src:url('../QGR%20Packet/assets/fonts/Roboto-700.woff2') format('woff2');font-weight:700;font-display:swap;}
+@font-face{font-family:'Bebas Neue';src:url('../QGR%20Packet/assets/fonts/BebasNeue-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+:root{
+  --orange-50:#FEF6EC;--orange-100:#FDE3C2;--orange-500:#EF8B22;--orange-700:#D96B10;--orange-900:#CC5500;
+  --navy-50:#EEF1F4;--navy-100:#CDD5DA;--navy-200:#9AADB7;--navy-400:#507080;--navy-500:#27343D;--navy-700:#1A2329;
+  --blue-50:#EBF4FB;--blue-100:#C3DFEF;--blue-500:#0979C3;--blue-700:#065E9A;--blue-900:#023B63;
+  --grey-50:#F4F5F5;--grey-100:#E2E3E4;--grey-200:#C0C2C4;--grey-400:#787C7F;--grey-500:#53575A;--grey-700:#363839;
+  --green:#69995D;--sgreen:#2E7D32;--red:#CC0100;--yellow:#E0A100;
+  --sans:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --display:'Bebas Neue','Roboto Condensed',Impact,var(--sans);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--grey-50);color:var(--navy-500);font-size:14px;line-height:1.45;}
+button{font-family:var(--sans);cursor:pointer;}
+textarea,input,select{font-family:var(--sans);font-size:13px;color:var(--navy-500);}
+
+/* ---------- header ---------- */
+header{background:var(--navy-500);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(11,16,20,.25);}
+.hd-top{display:flex;align-items:center;gap:16px;padding:10px 20px 6px;flex-wrap:wrap;}
+.hd-title{font-family:var(--display);font-size:28px;letter-spacing:1px;line-height:1;}
+.hd-title em{color:var(--orange-500);font-style:normal;}
+.hd-sub{font-size:11.5px;color:var(--navy-200);}
+.hd-spacer{flex:1;}
+.hd-btn{background:var(--blue-500);color:#fff;border:0;border-radius:6px;padding:8px 14px;font-weight:700;font-size:13px;}
+.hd-btn:hover{background:var(--blue-700);}
+.hd-btn.ghost{background:transparent;border:1px solid var(--navy-400);color:var(--navy-200);font-weight:500;}
+.hd-btn.ghost:hover{border-color:#fff;color:#fff;}
+.tabs{display:flex;gap:4px;padding:0 20px;}
+.tab{background:transparent;border:0;color:var(--navy-200);font-family:var(--display);font-size:19px;letter-spacing:1px;padding:8px 18px 9px;border-bottom:3px solid transparent;}
+.tab:hover{color:#fff;}
+.tab.active{color:#fff;border-bottom-color:var(--orange-500);}
+.tab .cnt{font-family:var(--sans);font-size:11px;background:var(--navy-700);border-radius:9px;padding:1px 7px;margin-left:6px;vertical-align:2px;color:var(--navy-200);}
+
+main{max-width:1600px;margin:0 auto;padding:18px 20px 80px;}
+
+/* leader jump chips */
+.jumpbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.jump{background:#fff;border:1px solid var(--navy-100);border-radius:14px;padding:4px 12px;font-size:12px;font-weight:500;color:var(--navy-400);text-decoration:none;}
+.jump:hover{border-color:var(--blue-500);color:var(--blue-500);}
+
+/* ---------- leader sections ---------- */
+.leader-sec{margin-bottom:26px;}
+.leader-hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px;border-bottom:2px solid var(--navy-100);padding-bottom:6px;}
+.leader-name{font-family:var(--display);font-size:24px;letter-spacing:.5px;}
+.leader-role{font-size:12px;color:var(--grey-400);}
+.badge{display:inline-block;font-size:11px;font-weight:700;border-radius:4px;padding:2px 8px;letter-spacing:.3px;}
+.badge.warn{background:var(--red);color:#fff;}
+.badge.ok{background:var(--navy-50);color:var(--navy-400);}
+.badge.cap{background:var(--orange-100);color:var(--orange-900);}
+.badge.hardcap{background:var(--orange-900);color:#fff;}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px;}
+
+/* ---------- generic card ---------- */
+.card{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:12px 14px;position:relative;display:flex;flex-direction:column;gap:8px;}
+.card.diverge{border-color:var(--orange-500);box-shadow:0 0 0 2px var(--orange-100);}
+.card.killed{opacity:.55;background:var(--grey-50);}
+.card.deferred{opacity:.75;background:var(--grey-50);border-style:dashed;}
+.card-top{display:flex;align-items:flex-start;gap:8px;}
+.rockid{font-family:var(--display);font-size:17px;color:var(--navy-200);min-width:26px;line-height:1.2;}
+.rockname{font-weight:700;font-size:13.5px;flex:1;line-height:1.3;}
+.chips{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.chip{font-size:10.5px;font-weight:700;border-radius:4px;padding:2px 7px;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;}
+.chip.crit{background:var(--navy-500);color:var(--orange-500);}
+.chip.carry-carry{background:var(--blue-50);color:var(--blue-700);border:1px solid var(--blue-100);}
+.chip.carry-kill{background:#FBE9E9;color:var(--red);border:1px solid #F2C4C4;}
+.chip.carry-restructure{background:var(--orange-50);color:var(--orange-900);border:1px solid var(--orange-100);}
+.chip.carry-close{background:#EAF3E8;color:var(--sgreen);border:1px solid #CBE2C6;}
+.chip.carry-hold{background:var(--grey-100);color:var(--grey-500);}
+.chip.div{background:var(--orange-500);color:var(--navy-700);}
+.chip.promoted{background:var(--blue-500);color:#fff;}
+.chip.sgonly{background:var(--blue-50);color:var(--blue-700);}
+.dot{width:14px;height:14px;border-radius:50%;display:inline-block;flex:none;margin-top:2px;border:2px solid transparent;}
+.dot.supergreen{background:var(--sgreen);box-shadow:0 0 0 2px #fff inset;border-color:#9CCB94;}
+.dot.green{background:var(--green);}
+.dot.red{background:var(--red);}
+.dot.yellow{background:var(--yellow);}
+.dot.unknown{background:var(--grey-200);}
+
+.ctx{font-size:12px;color:var(--grey-500);}
+
+/* grade selectors */
+.graderow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.gradegrp{display:flex;align-items:center;gap:4px;}
+.gradelbl{font-size:10px;font-weight:700;color:var(--grey-400);letter-spacing:.6px;width:34px;}
+.gbtn{border:1px solid var(--grey-200);background:#fff;border-radius:5px;padding:3px 9px;font-size:11.5px;font-weight:700;color:var(--grey-400);}
+.gbtn:hover{border-color:var(--navy-400);color:var(--navy-500);}
+.gbtn.sel-SG{background:var(--sgreen);border-color:var(--sgreen);color:#fff;}
+.gbtn.sel-G{background:var(--green);border-color:var(--green);color:#fff;}
+.gbtn.sel-R{background:var(--red);border-color:var(--red);color:#fff;}
+
+textarea.notes{width:100%;border:1px solid var(--grey-100);border-radius:6px;padding:6px 8px;min-height:34px;resize:vertical;background:#fff;}
+textarea.notes:focus{outline:2px solid var(--blue-100);border-color:var(--blue-500);}
+textarea.notes::placeholder{color:var(--grey-400);}
+
+/* collapsibles */
+details.fold{border-top:1px dashed var(--grey-100);padding-top:6px;}
+details.fold summary{cursor:pointer;font-size:11.5px;font-weight:700;color:var(--blue-500);list-style:none;user-select:none;}
+details.fold summary::before{content:'▸ ';}
+details.fold[open] summary::before{content:'▾ ';}
+.fold-body{padding:8px 2px 2px;font-size:12.5px;color:var(--grey-700);display:flex;flex-direction:column;gap:6px;}
+.def{padding:6px 9px;border-radius:6px;font-size:12px;line-height:1.45;}
+.def b{font-size:10.5px;letter-spacing:.6px;display:block;margin-bottom:2px;}
+.def.green{background:#EFF6ED;border-left:3px solid var(--green);}
+.def.sg{background:#E9F2E8;border-left:3px solid var(--sgreen);}
+.def.why{background:var(--blue-50);border-left:3px solid var(--blue-500);}
+.def.theme{background:var(--orange-50);border-left:3px solid var(--orange-500);}
+.def.deps{background:var(--navy-50);border-left:3px solid var(--navy-400);}
+.aar-empty{color:var(--grey-400);font-style:italic;}
+
+/* triage buttons */
+.triage-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.tbtn{border:1px solid var(--grey-200);background:#fff;border-radius:5px;padding:4px 10px;font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--grey-500);}
+.tbtn:hover{border-color:var(--navy-400);color:var(--navy-500);}
+.tbtn.sel-accept{background:var(--green);border-color:var(--green);color:#fff;}
+.tbtn.sel-edit{background:var(--blue-500);border-color:var(--blue-500);color:#fff;}
+.tbtn.sel-kill{background:var(--red);border-color:var(--red);color:#fff;}
+.tbtn.sel-defer{background:var(--grey-500);border-color:var(--grey-500);color:#fff;}
+.tbtn.critbtn{margin-left:auto;}
+.tbtn.critbtn.on{background:var(--navy-500);border-color:var(--navy-500);color:var(--orange-500);}
+
+/* bench */
+.bench-wrap{margin-top:10px;}
+.bench-lbl{font-size:11px;font-weight:700;letter-spacing:.8px;color:var(--grey-400);margin-bottom:6px;text-transform:uppercase;}
+.bench-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;}
+.bench-card{background:var(--navy-50);border:1px dashed var(--navy-200);border-radius:8px;padding:10px 12px;font-size:12.5px;display:flex;flex-direction:column;gap:6px;}
+.bench-card .kind{font-size:10px;font-weight:700;letter-spacing:.6px;color:var(--navy-400);text-transform:uppercase;}
+.pbtn{align-self:flex-start;border:1px solid var(--blue-500);background:#fff;color:var(--blue-500);border-radius:5px;padding:3px 10px;font-size:11px;font-weight:700;}
+.pbtn:hover{background:var(--blue-500);color:#fff;}
+
+/* open questions strip */
+.oq-strip{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:12px 14px;margin-bottom:18px;}
+.oq-title{font-family:var(--display);font-size:19px;letter-spacing:.5px;margin-bottom:8px;}
+.oq-title span{color:var(--orange-700);}
+.oq-chips{display:flex;gap:6px;flex-wrap:wrap;}
+.oq-chip{border:1px solid var(--grey-200);background:var(--grey-50);border-radius:16px;padding:5px 13px;font-size:12px;font-weight:500;color:var(--navy-500);}
+.oq-chip:hover{border-color:var(--blue-500);}
+.oq-chip.open-sel{border-color:var(--blue-500);background:var(--blue-50);}
+.oq-chip.decided{background:#EAF3E8;border-color:var(--green);color:var(--sgreen);}
+.oq-chip.decided::before{content:'✓ ';font-weight:700;}
+.oq-detail{margin-top:10px;border-top:1px dashed var(--grey-100);padding-top:10px;display:flex;flex-direction:column;gap:8px;}
+.oq-q{font-size:13px;}
+.oq-actions{display:flex;gap:8px;align-items:center;}
+
+/* ---------- dependency board ---------- */
+.rulebanner{background:var(--navy-500);color:#fff;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13.5px;display:flex;gap:10px;align-items:baseline;}
+.rulebanner b{color:var(--orange-500);font-family:var(--display);font-size:18px;letter-spacing:.5px;white-space:nowrap;}
+.depcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px;align-items:start;}
+.depcol{background:#fff;border:1px solid var(--navy-100);border-radius:10px;overflow:hidden;}
+.depcol-hd{padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--grey-100);}
+.depcol-hd .nm{font-family:var(--display);font-size:20px;letter-spacing:.5px;flex:1;}
+.depcol-hd .risk{font-size:10.5px;font-weight:700;border-radius:4px;padding:2px 8px;letter-spacing:.4px;}
+.risk.hot{background:var(--red);color:#fff;}
+.risk.warm{background:var(--yellow);color:var(--navy-700);}
+.risk.fine{background:#EAF3E8;color:var(--sgreen);}
+.depcol.hotzone{border-color:var(--red);box-shadow:0 0 0 2px #F2C4C4;}
+.depcol.hotzone .depcol-hd{background:#FBE9E9;}
+.depcov{font-size:11px;color:var(--grey-400);font-weight:700;}
+.deprow{padding:9px 14px;border-bottom:1px solid var(--grey-50);display:flex;flex-direction:column;gap:4px;}
+.deprow:last-child{border-bottom:0;}
+.deprow.moot{opacity:.45;}
+.deprow-top{display:flex;align-items:baseline;gap:8px;}
+.dep-from{font-weight:700;font-size:12.5px;flex:1;}
+.dep-need{font-size:12px;color:var(--grey-500);}
+.dep-note{font-size:11.5px;color:var(--grey-400);}
+.pill{font-size:10px;font-weight:700;border-radius:4px;padding:2px 8px;letter-spacing:.5px;white-space:nowrap;}
+.pill.covered{background:#EAF3E8;color:var(--sgreen);border:1px solid #CBE2C6;}
+.pill.notcovered{background:var(--red);color:#fff;}
+.pill.stretch{background:var(--orange-100);color:var(--orange-900);}
+.pill.task{background:var(--navy-50);color:var(--navy-400);}
+.pill.vendor{background:var(--blue-50);color:var(--blue-700);}
+.pill.moot{background:var(--grey-100);color:var(--grey-400);}
+
+/* KPI strip */
+.kpis{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 10px;}
+.kpi{background:#fff;border:1px solid var(--navy-100);border-radius:8px;padding:7px 12px;font-size:12px;display:flex;gap:8px;align-items:center;}
+.kpi b{font-size:12.5px;}
+
+/* toast */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy-500);color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:99;}
+#toast.show{opacity:1;}
+.smallnote{font-size:11px;color:var(--grey-400);}
+#selftest-out{white-space:pre-wrap;font-family:monospace;font-size:11px;background:#fff;border:1px solid var(--grey-200);padding:10px;margin:10px 20px;display:none;}
+@media (max-width:1300px){ .cards{grid-template-columns:repeat(auto-fill,minmax(330px,1fr));} }
+</style>
+</head>
+<body>
+<header>
+  <div class="hd-top">
+    <div>
+      <div class="hd-title">QGR <em>Triage Room</em> — Q3 2026</div>
+      <div class="hd-sub">Cameron + Paul prep days 7/20–7/22 · QGR 7/29–30 · seed: rock-candidates draft 7/18 + goals dashboard 7/17 · <a href="index.html" style="color:inherit; font-weight:700;">← QGR HQ (the map)</a></div>
+    </div>
+    <div class="hd-spacer"></div>
+    <button class="hd-btn" id="btn-export" title="Keyboard: E">⬇ Export decision log</button>
+    <button class="hd-btn ghost" id="btn-reset">Reset all</button>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</header>
+<main id="main"></main>
+<pre id="selftest-out"></pre>
+<div id="toast"></div>
+
+<script>
+/* ============================================================
+   SEED DATA — parsed from rock-candidates-q3-DRAFT-2026-07-18.md
+   + goals-dashboard/dashboard-data.json (7/17 refresh).
+   Green / Super Green text = contract language, transcribed faithfully.
+   ============================================================ */
+const VERSION = "QGR Triage Room v1.0 · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17)";
+
+const LEADERS = [
+  {id:"mike",    name:"Mike Vandenbroader", role:"DFWT RM + Head of Ops", cap:5, hardCap:false, blurb:"Mike is the theme's engine. His Q2 training-app rock went Super Green (3 wks live across DFWT, zero bugs) — Q3 is the company-wide bet."},
+  {id:"anne",    name:"Anne Bosse",         role:"Dir. Employee Experience", cap:5, hardCap:false, blurb:""},
+  {id:"amanda",  name:"Amanda Ware",        role:"Dir. CX", cap:5, hardCap:false, blurb:""},
+  {id:"matisen", name:"Matisen Harper",     role:"Dir. IT", cap:4, hardCap:true, blurb:"Rob's overload watch is active and half the company's rocks want a piece of him. Everything below is already committed work — the discipline is what's NOT here."},
+  {id:"brian",   name:"Brian Herzig",       role:"CTXH RM + Culture", cap:5, hardCap:false, blurb:""},
+  {id:"paul",    name:"Paul Morin",         role:"CFO", cap:5, hardCap:false, blurb:""},
+  {id:"cameron", name:"Cameron Brown",      role:"CEO", cap:5, hardCap:false, blurb:""},
+  {id:"others",  name:"Others",             role:"Ben · Kickpoint · Austin L · Carly", cap:null, hardCap:false, blurb:"1–2 line suggestions from the draft — triage lightly; these cascade through their managers."}
+];
+const L = Object.fromEntries(LEADERS.map(l=>[l.id,l]));
+
+/* ---------- Q2 REVIEW seed (dashboard 7/17 + draft carry-over notes) ---------- */
+const Q2 = {
+  mike: [
+    {k:"mike-q2-0", name:"Personnel Mgmt — Manager Hiring + New Manager Development (Garland + Tampa)", crit:true, status:"green", carry:"carry", carryNote:"→ M2 (standing critical number; hold 106–111% through fall)", context:"7/16: region staffing 106–111% of quarter goal; Tampa >115%; FW intentionally holding (lead-locked). Khevan feedback convo landed well."},
+    {k:"mike-q2-1", name:"Einstein Games Season 4 Launch (DFWT)", crit:true, status:"supergreen", carry:"carry", carryNote:"→ M4 (S5 under the new philosophy + data-trust fixes)", context:"7/16: region avg 7.4 — green as a region; Dallas 5.6 dragging. Weekly AI worst-offender tracker live."},
+    {k:"mike-q2-2", name:"Fleet Safety Pt 2 — Resolidifying Habits, Training, Reweighting", crit:false, status:"red", carry:"restructure", carryNote:"→ M3. Honest flip to Red 7/16 (QTD 89 vs 90; McKinney ~70s; weekly numbers masked it). Build side done; Q3 = numbers side + Samsara single-point-of-failure fix.", context:"QTD company 89 vs 90. Recoverable: Dallas 93 / Garland 100 / Houston 99 last week; McKinney the drag. Chase list on unissued warnings."},
+    {k:"mike-q2-3", name:"Mover Training Handbook / Training Video Library", crit:false, status:"supergreen", carry:"carry", carryNote:"→ M1 (the company-wide bet; app IS the Back to School chassis)", context:"Open to ALL of DFWT, 3 wks, zero bugs. Train-the-trainer sim in build. Onboarding tests (90 Qs → 4 staged sections) going into the app."},
+    {k:"mike-q2-4", name:"Ideal Team Player Reading", crit:false, status:"supergreen", carry:"close", carryNote:"SG, done — book + one-pager + team survey (4.0/4.5/4.85)", context:"Red → Super Green. Genuine vulnerability moment about hating the read then owning Gerald's write-up."},
+    {k:"mike-q2-5", name:"Fleet Damage Tracking App — Beta (Bonus)", crit:false, status:"unknown", carry:"hold", carryNote:"Stays iced unless the training-app rollout is ahead of schedule by Sep (bonus candidate)", context:"On ice for Q2 (deprioritized behind the training app)."},
+    {k:"mike-q2-6", name:"Best of Stickers on Truck (Bonus)", crit:false, status:"yellow", carry:"kill", carryNote:"Off Mike's slate — with KP now", context:"Sticker direction session ran separately (pulse: Pick sticker direction A/B/C)."}
+  ],
+  anne: [
+    {k:"anne-q2-0", name:"Hire HR Generalist", crit:true, status:"supergreen", carry:"close", carryNote:"SG locked, done — Jalissa now load-bearing in A1", context:"Week 5+: Jalissa owns recruiting follow-up, Handshake outreach, interview-guide redraft, compliance checks. First recurring automation fired on time 7/17."},
+    {k:"anne-q2-1", name:"Hiring for Culture / Extended Trial Period + 100-Point Behavioral System", crit:true, status:"green", carry:"carry", carryNote:"→ A1 (HPE go-live Aug 1 — the make-it-real quarter). 100-pt system stays parked (mover-app contingent).", context:"HPE go-live locked for Aug 1 (trial days sunset). Rippling perf-module credits being repurposed with David. Mike's app carries the Extended Trial check-in cadence."},
+    {k:"anne-q2-2", name:"ClearCo Hiring Funnel Visualization", crit:false, status:"yellow", carry:"kill", carryNote:"Honestly yellow at 40%, blocked on Matisen creds + $423-vs-$2,400 CPH discrepancy — fold into Matisen's governance rock (T2) as a data-bus consumer, don't carry as Anne's rock.", context:"Rippling API access verified; CPH actuals delivered. Open: ClearCompany REST creds pending from Matisen; CPH discrepancy reconcile."},
+    {k:"anne-q2-3", name:"Mover Promotion Guidance Metrics", crit:false, status:"green", carry:"carry", carryNote:"→ A2 (first cohort live; execution not design)", context:"Hours floors re-based (LIT 455 / lead 910 / ML 1,820). Rippling hours-since-promotion pull PROVEN 7/17 — 3 movers already past floors. Cadence question open (biweekly vs quarterly)."},
+    {k:"anne-q2-4", name:"Einstein Onboarding Experience (CHOICES + Comp/Benefits + Perf Mgmt)", crit:false, status:"green", carry:"carry", carryNote:"→ A3 (90%-done rock carried to actually bank it: 2 videos + completion evidence)", context:"Live for every new hire from 7/1. Gaps: completion-integrity fix pending merge; Comp/Benefits + Perf Mgmt videos not recorded (mic bought)."},
+    {k:"anne-q2-5", name:"Ideal Team Player Reading (Bonus)", crit:false, status:"supergreen", carry:"close", carryNote:"SG, done 7/1", context:"Book read, 1-page H/H/S reflection done."}
+  ],
+  amanda: [
+    {k:"amanda-q2-0", name:"AI Call Grading + Regular Reporting (Conversions / Estimate Accuracy)", crit:true, status:"green", carry:"restructure", carryNote:"→ C1. Engine complete; the 7/15 admission: the gap is distribution + a coaching loop. $ Conversion RED — restructure, don't carry the number (19.9% vs 40% target aren't on the same basis; two definition changes, no clean bridge — Matisen 7/15). C2 replaces it with undistorted funnel metrics.", context:"Grading engine steady, rubric tweaks in. Weekly cadence at a standstill (sales class running). No reply from Matisen on the 7/3 EMMA integration ask. ⚠ Company # shows 46% within-20% accuracy vs 80% aspiration = RED stands."},
+    {k:"amanda-q2-1", name:"Replace Leadferno with Chatbot (80% deflection)", crit:true, status:"green", carry:"carry", carryNote:"→ C3 (finish line — launch first week of August)", context:"Matisen extracting Leadferno training data via Claude (started 7/13). Launch target holds."},
+    {k:"amanda-q2-2", name:"New Email Design + Copy Polish + Rollout (KP-owned)", crit:false, status:"green", carry:"kill", carryNote:"Off Amanda's slate — fully KP/Matisen-owned now (18 approved changes with KP)", context:"Fully in Matisen's hands; RFQ template should land before end of quarter, no hard date."},
+    {k:"amanda-q2-3", name:"CX Q2 Theme Rollout (First Class Precision)", crit:false, status:"green", carry:"close", carryNote:"Closes with the quarter; Q3 CX theming rides Back to School rather than a separate CX theme (theme-fatigue call — Open Question 1)", context:"Running strong. Nhel owns weekly announcements. ~4 weeks of competition left."},
+    {k:"amanda-q2-4", name:"Ideal Team Player Reading", crit:false, status:"green", carry:"close", carryNote:"Done — reflection rewritten 7/15, polished one-pager ready", context:"Reading confirmed 7/2; submission timing Amanda's call."}
+  ],
+  matisen: [
+    {k:"matisen-q2-0", name:"AI Wedge Audit + MVP Scoping", crit:true, status:"green", carry:"close", carryNote:"Done (~90%, SG track). Successor thinking lives in Cameron R2 + T2.", context:"Audit done; 3 builds validated + in build. EMMA read-only MCP pushed 2 days early. SG gate = additional-wedge sweep documented."},
+    {k:"matisen-q2-1", name:"Variable Pricing Full Rollout + Weekly Review Cadence + Pricing Strategy", crit:true, status:"green", carry:"close", carryNote:"Cadence live + Matisen-owned; the strategy work continues inside T1 (staffing-per-truck model). Comes OFF Cameron's slate too.", context:"On track for SG. Q3 manager view shipped end-to-end 7/17 (per-branch projections, FTE-budget block, TUR-at-plan, CSV export). Caveat: FTE inputs depend on Rippling hours (6/29 outage)."},
+    {k:"matisen-q2-2", name:"AI Call Grading + Claims AI Build #1", crit:false, status:"yellow", carry:"kill", carryNote:"KILL as a Matisen rock. Engine's built; distribution is Amanda's C1; Claims RAG already deprioritized. His EMMA-integration piece for Amanda gets triaged inside T2/T4, not a standalone rock.", context:"Yellow ~50%. Call grading rolling; reviewer-flow bottleneck on Nhel/Tet. Games automation substituted for Claims RAG."},
+    {k:"matisen-q2-3", name:"ClearCo + Rippling API → Anne's Hiring Funnel Dashboard (Wedge #2)", crit:false, status:"green", carry:"close", carryNote:"HR Command Center live → maintenance + T2 consumer", context:"All hiring funnels visualized, CPH thresholds + alerts, ~12-day avg time-to-hire. Not self-serve yet; ClearCo webhook pending."},
+    {k:"matisen-q2-4", name:"Production Line Cleanup — 8 Loose Threads", crit:false, status:"green", carry:"close", carryNote:"Finishes in Q2 or the remainder folds into T2's registry", context:"Green ~60% (SG track). Everything but Games has its own dashboard; scorecards shipped 7/3."},
+    {k:"matisen-q2-5", name:"Ideal Team Player Reading (Bonus)", crit:false, status:"supergreen", carry:"close", carryNote:"SG, done", context:"Fresh re-read + 1-page reflection."}
+  ],
+  brian: [
+    {k:"brian-q2-0", name:"Einstein Games Season 3 Launch (CTXH)", crit:true, status:"yellow", carry:"carry", carryNote:"→ B5 with the reframe (branch-level damages, coaching-tool framing). CTXH regional 6.6 vs the 7 bar is the coaching target.", context:"Playoffs: championship SA vs FW per Vera 7/15 (leadership call locked finals San Antonio vs Tampa). CTXH regional 6.6: NA 5.0 + HOU 6.2 below the 7 bar. Damage-data discrepancy: finish season as-is, reconcile after."},
+    {k:"brian-q2-1", name:"Hiring + Personnel Budgets + People Analyzer", crit:true, status:"green", carry:"carry", carryNote:"→ B1 (standing critical number; Leander = the Frank-vindication storyline)", context:"Q2-to-date: SAN 108%, SA 104%, HOU 103%, NA 102%, LEA 91.7% (only branch under 100%). Daniel B decision made for NA BM. Q1 hiring red fully recovered."},
+    {k:"brian-q2-2", name:"Scrum Accountability Pt 4 — Manager Certification", crit:false, status:"green", carry:"carry", carryNote:"→ B2 (Pt 5 + new-manager training board; Daniel = the live case study)", context:"Weekly scorecards across all 5 CTXH BMs. Board hygiene: LEA 100%, SAN 97%, HOU 97%, NA 92%, SA 83%. Training board + Jalissa beta this week."},
+    {k:"brian-q2-3", name:"Branch Visits / Audits", crit:false, status:"green", carry:"close", carryNote:"Green bar met (3 of 5 with audits); targeting 4 of 5", context:"SCTX Schedule Review biweekly."},
+    {k:"brian-q2-4", name:"Training Day Overhaul + Calendar Organization", crit:false, status:"yellow", carry:"restructure", carryNote:"→ B4. Trial-day elimination changes what TDs are FOR (pure training). Restructure around the theme: stations, LIT test-outs, hustle standard, Magic Moments, guest-trainer slots.", context:"TD app live for July/August (agenda, giveaways, meal planning, feedback link). Stations/quizzes/scorecard not yet added."},
+    {k:"brian-q2-5", name:"Ideal Team Player Reading", crit:false, status:"green", carry:"close", carryNote:"On track to finish by 7/31; reflection sent to Rob", context:"Page 165 of 218 at 7/15."}
+  ],
+  paul: [
+    {k:"paul-q2-0", name:"Annual Mover Comp Review", crit:true, status:"green", carry:"close", carryNote:"Lands green/SG, closes — promotion-framework execution is Anne's A2 now", context:"~85% done 6/16; mover comp cycle shipped (~$586K/yr added)."},
+    {k:"paul-q2-1", name:"N. Austin Office — Move-In", crit:true, status:"supergreen", carry:"close", carryNote:"SG, done — moved in June 15", context:""},
+    {k:"paul-q2-2", name:"Branch Visits", crit:false, status:"green", carry:"restructure", carryNote:"Fold into Cameron's travel-week pilot R5 (they travel together anyway — DFW 7/13–15 proved it)", context:"Leander visit + ride-along done; DFW trip 7/13–15 with Cameron."},
+    {k:"paul-q2-3", name:"Geographic Expansion — Deepen vs. Widen + Evaluate 5–7 Acquisitions", crit:false, status:"yellow", carry:"restructure", carryNote:"AAR call needed: kill, park, or restructure (→ P3 pipeline-reactive draft). 0 of 5 evaluated — the count-based version doesn't fit how the work arrives. (Open Question 3)", context:"M&A marketplace outreach made — they know Einstein is a buyer and will flag TX/FL opportunities. Pipeline signal, not a completed evaluation."},
+    {k:"paul-q2-4", name:"Money Collection Easy Wins", crit:false, status:"green", carry:"carry", carryNote:"→ P4, carry with honesty check — marked green on \"haven't started but confident\"; challenge that self-grade at AAR", context:"Small, real, all his."},
+    {k:"paul-q2-5", name:"Ideal Team Player Reading", crit:false, status:"green", carry:"close", carryNote:"On pace — book + reflection by EOQ", context:""}
+  ],
+  cameron: [
+    {k:"cameron-q2-0", name:"Scale AI COS Network + World Model", crit:true, status:"green", carry:"restructure", carryNote:"→ evolves into R1 (Cherny ladder 1→2; hours saved, not activity)", context:"All 7 COS live; status.json pushes + digest flow reliable. Reframed 6/30 from Dojo to world model."},
+    {k:"cameron-q2-1", name:"AI Wedge Audit + QG Support", crit:true, status:"green", carry:"restructure", carryNote:"→ complete; successor is R2 (governance replaces audit)", context:"Co-owned with Matisen. Quote Funnel locked w/ KP; call grading under Gary; wedges moving."},
+    {k:"cameron-q2-2", name:"Variable Pricing Full Rollout + Weekly Review Cadence", crit:false, status:"green", carry:"kill", carryNote:"Comes OFF Cameron's slate — cadence live + Matisen-owned (T1 continues the strategy work). The CEO-audit \"first to drop\" flag was right.", context:"Tuesday cadence locked; Paul's aggressive-summer directive standing; rollback trigger 2 wks <75%."},
+    {k:"cameron-q2-3", name:"Branch Visits + O3s", crit:false, status:"green", carry:"restructure", carryNote:"→ R5 (travel-week pilot per Rob: one dedicated week, ~5 profit-ranked branches)", context:"Q1'26 O3 rotation complete 5/29 (all 5 directs). Visits 1/3 + DFW trip."},
+    {k:"cameron-q2-4", name:"Oversee Website Redesign — Smart Move System Part 2", crit:false, status:"green", carry:"carry", carryNote:"→ R4 with honest scope — site LIVE in Q3 is not realistic; design done + dev contracted is the rock", context:"KP 13-wk design sprint off ~7/13 handoff lands late Oct. Money move: re-baseline ask (~$15–25K reduction), not a discount ask."},
+    {k:"cameron-q2-5", name:"Ideal Team Player Reading", crit:false, status:"supergreen", carry:"close", carryNote:"SG, done — execution rides the Q3 bonus (ITP 90-day plan)", context:"Workshop + one-pager delivered for Rob 7/10; 3 commitments live."}
+  ],
+  others: [
+    {k:"others-q2-0", name:"Ben — Prosper VCFO Integration (CRIT)", crit:true, status:"green", carry:"carry", carryNote:"→ clean-books quarter (D&A reconcile, reclasses, Sage automation, board package on the 15th)", context:"Branch P&L dashboard delivered; 5-day close targeted; ~$600K depreciation variance open (Bob reconciles 2025)."},
+    {k:"others-q2-1", name:"Kickpoint — Marketing ROAS Measurement (CRIT)", crit:true, status:"yellow", carry:"restructure", carryNote:"Recommend: moves under Amanda or waits for the data bus — decide at QGR, don't let it sit yellow another quarter", context:"Still waiting on BigQuery adjustments from Matisen. No live dashboard."},
+    {k:"others-q2-2", name:"Kickpoint — Website Redesign (CRIT)", crit:true, status:"green", carry:"carry", carryNote:"→ design sprint to completion on the re-baselined plan (their Q3 CRIT)", context:"Direction = hybrid; Cameron built the 5 key pages; 13-wk sprint running."},
+    {k:"others-q2-3", name:"Austin L — YouTube Training Course (CRIT)", crit:true, status:"yellow", carry:"restructure", carryNote:"→ publish the packing batch (2–4 promptly beats 7 never) + own the KP content pipeline (48-hr SLA) + NEW: training-app video content", context:"Honest downgrade 7/16: 0 live, 2 filmed, 2 wks left vs 7–10 target."},
+    {k:"others-q2-4", name:"Austin L — Crowdsource Content / Open the Bottleneck", crit:false, status:"red", carry:"restructure", carryNote:"Q3 fix = Austin owns the KP content pipeline directly (48-hr SLA, 10+ pieces/mo)", context:"Still RED — swag-drawing trial low engagement. Truck signs arrive 7/21."},
+    {k:"others-q2-5", name:"Carly — Maternity Leave Transition", crit:true, status:"green", carry:"close", carryNote:"Back from leave → Q3 = ramp-back rock first, then Magic Moments Phase 2 + ONE canonical MM counter", context:"Only active Q2 rock per 4/14; claims time-to-close held green under Amanda's maintenance."}
+  ]
+};
+
+/* ---------- Q3 TRIAGE seed (draft, transcribed faithfully) ---------- */
+const Q3 = {
+  mike: { rocks: [
+    {id:"M1", crit:true, name:"Mover Training App — Company-Wide Rollout + Driver-Training Port",
+      why:"The app IS the Back to School chassis. DFWT validated it; CTXH is waiting. Driver-training port was decided 7/3 — one platform for mover → driver → lead training.",
+      green:"App live at all 10 branches · onboarding tests (90 Qs, 4 staged sections) + train-the-trainer sim live · driver-training module ported to beta · DB scale-check with Gerald done BEFORE company-wide load.",
+      sg:"+ estimate-this-job feature live (feeds Q4) · in-app SOP wiki live both sides · who-was-your-trainer logging producing a top-trainer list.",
+      theme:"This is the theme.", deps:"Matisen (identity/EMMA consult, timestamps scoping), Brian (CTXH change-mgmt), Austin L (video content — slots built, zero content today)."},
+    {id:"M2", crit:true, name:"DFWT Staffing + New-Manager Development",
+      why:"Standing critical number. Region at 106–111% now — Q3 is hold-through-fall plus Daniel-era knock-ons (S. Austin coverage is Brian's, but McKinney/Dallas bench is Mike's).",
+      green:"All DFWT branches ≥100% staffing for the quarter · monthly People Analyzer · C-player action plans current.",
+      sg:"+ all managers B+ or better · zero lead-locked branches by EOQ.",
+      theme:"Staffed branches are the raw material speed-to-competence trains.", deps:"Anne (HPE Aug 1 changes the hiring funnel under him — first month will be bumpy)."},
+    {id:"M3", crit:false, name:"Fleet Safety Pt 3 — carry the RED, restructured",
+      why:"Honest flip to Red 7/16 (QTD 89 vs 90; McKinney ~70s the drag; weekly numbers masked it). AAR call: CARRY, restructured — the build side is done (common-mistakes module = last item); Q3 is the numbers side plus the single-point-of-failure fix Cameron already flagged: Samsara management is all Mike.",
+      green:"QTD company ≥90 · McKinney recovery plan executed · 100% of required unsafe-driver warnings issued within 1 week · a named Samsara delegate per region trained and running the weekly pull.",
+      sg:"QTD ≥92 · at-risk drivers <10% · delegation fully live (Mike out a week and nothing drops).",
+      theme:"", deps:"none new — this is deliberately self-contained."},
+    {id:"M4", crit:false, name:"Einstein Games S5 (DFWT) + Data-Trust Fixes",
+      why:"S4 finals close 7/21. Q3 season runs under the new philosophy (coaching tool, not performance grade; damages branch-level only) and the transitions decided 7/15: damages-per-Rippling-hour bonus basis holds through Q3, weekly snapshots get archived.",
+      green:"All 5 DFWT branches active weekly through week 8 · Verizon/Jamf device escalation closed · McKinney consolation call made.",
+      sg:"Season closes with zero manual reconciliation disputes (rides Matisen's automation rock).",
+      theme:"", deps:"Matisen (scoring automation + snapshot archiving — the likely \"blow-up\" if it slips)."}
+    ],
+    bench:[{id:"M-B1", kind:"bonus", name:"Fleet Damage Tracking App beta", detail:"Was on ice Q2 — only if the training app rollout is ahead of schedule by Sep."}],
+    carryNotes:"ITP → Super Green, done. Fleet Damage app bonus → stays iced unless bonus. Stickers bonus → with KP, off Mike's slate."
+  },
+  anne: { rocks: [
+    {id:"A1", crit:true, name:"Trial-Day Elimination → HPE Go-Live Aug 1",
+      why:"Locked 7/16. Go-live is day 1 of the quarter — this is the single biggest hiring-motion change of the year and it lands during peak season tail.",
+      green:"HPE live all branches by ~Aug 1 · Jalissa running culture-based virtual phone interviews · BMs trained on competency-based in-person interviewing (workshopped w/ Brian) · application tightening shipped (17K applicants).",
+      sg:"+ time-to-hire holds at or under the ~12-day Q2 average through the transition · zero branches revert to trial days.",
+      theme:"The front door of speed-to-competence — better selection = faster ramp.", deps:"Brian (BM interview workshop), Mike (app carries the Extended Trial check-in cadence)."},
+    {id:"A2", crit:true, name:"Mover Promotion Framework — First Cohort Live",
+      why:"Framework decided 7/2 and handed to Anne; Rippling hours-since-promotion pull proven 7/17 (3 movers already past floors). Q3 = execution, not design.",
+      green:"Eligibility runs live on the decided cadence (biweekly vs quarterly — see Open Question 4) · first cohort promoted under the framework · pay docs + app-first status delivery working · fail-forward block process live with the 100% audit.",
+      sg:"+ backtests #04 (fast-track thresholds) and #05 (weights) closed with Matisen · promotion-process video shipped.",
+      theme:"The ladder movers climb as they get competent — the theme's retention payoff.", deps:"Matisen (backtests, eligibility automation), Paul (comp sign-offs), Cameron/Paul (damages-out-of-formula confirm)."},
+    {id:"A3", crit:false, name:"Onboarding Experience — Close It Out (carry, finish line)",
+      why:"Green but with two known gaps: completion evidence (integrity fix pending merge) and the Comp/Benefits + Perf Mgmt videos (mic bought, not recorded). Carrying a 90%-done rock to actually bank it.",
+      green:"Both videos recorded + edited + in the flow · ≥75% completion in first 30 days, evidenced with the integrity fix live.",
+      sg:"≥90% completion · quiz bug dead · weekly Jalissa completion check running clean all quarter.",
+      theme:"", deps:"Austin L (video edit)."},
+    {id:"A4", crit:false, name:"eNPS Voluntary Transition + Engagement Follow-Through",
+      why:"7/17 survey was the LAST mandatory one (eNPS 81). Voluntary-going-forward means participation rate becomes its own signal, and DFW is the named follow-up zone. Q2's Q3-input decision — someone has to own the mechanics.",
+      green:"Voluntary survey policy documented + communicated · first voluntary cycle run · participation-rate baseline established · DFW follow-up actions closed.",
+      sg:"Participation ≥70% on the first voluntary run · eNPS holds 45+.",
+      theme:"", deps:"Cameron (leadership-scorecard gate on the review tool before wide share)."}
+    ],
+    bench:[{id:"A-S1", kind:"stretch", name:"Leadership succession framework v1 (with Cameron + Paul)", detail:"One page per Roundtable seat: ready-now / ready-in-12mo / gap. The third convergence needs a home; Anne's the natural author."}],
+    carryNotes:"HR Generalist → SG, done (Jalissa now load-bearing in A1). ClearCo funnel viz → honestly yellow at 40%, blocked on Matisen creds + a $423-vs-$2,400 CPH discrepancy — fold into Matisen's governance rock as a data-bus consumer, don't carry as Anne's rock. 100-pt system: stays parked (mover-app contingent, confirmed not-this-quarter 7/16)."
+  },
+  amanda: { rocks: [
+    {id:"C1", crit:true, name:"Call Grading at Volume — Distribution + Coaching Loop",
+      why:"Engine is complete; the 7/15 admission was that the gap is distribution and a coaching loop that changes behavior. Also the sales half of speed-to-competence.",
+      green:"≥50% of real sales calls auto-graded weekly (she's tracking this % already) · weekly coaching cadence live with Nhel/Tet + BM accountability · rubric-reweight scoped.",
+      sg:"≥80% graded · call grades linked to quoted-vs-actual in EMMA (the 7/3 ask to Matisen) · measurable conversion movement on coached reps.",
+      theme:"Speed-to-competence for sales staff.", deps:"Matisen (EMMA integration — currently unanswered; needs a triage call), Nhel/Tet (reviewer flow)."},
+    {id:"C2", crit:true, name:"Demand Pursuit Muscle — Speed-to-Lead SLA + Follow-Up Cadence",
+      why:"Convergence #2 (pulse 12556457452). Demand is follow-up-limited, not lead-limited; 5-min response ≈ 21× more likely to qualify; the ~$300K revenue-to-budget gap is substantially this.",
+      green:"Speed-to-lead SLA defined + instrumented + baselined · follow-up cadence (the 18 approved email changes + CRM auto-acknowledge) live · unpursued-pool size measured.",
+      sg:"≥X% of leads touched inside 5 min (set X off the baseline) · reserve-to-book above 73%.",
+      theme:"", deps:"Matisen/Fabian/Jeff (quote-funnel fields + EMMA API spec), KP (email sequence implementation)."},
+    {id:"C3", crit:false, name:"Chatbot Launch + Leadferno Sunset (carry, finish line)",
+      why:"Green and on track — launch target is first week of August. Carrying to land it.",
+      green:"Botpress live, deflecting, Leadferno sunset by ~mid-quarter.",
+      sg:"≥80% deflection sustained a full month.",
+      theme:"", deps:"Matisen (training-data extraction from Leadferno history — in flight)."},
+    {id:"C4", crit:false, name:"New-Rep Ramp — Sales Speed-to-Competence",
+      why:"Rob's constraint explicitly names training new SALES staff fast, not just field. Sales class Level 1 ran in Q2; Q3 makes ramp time a measured thing.",
+      green:"Time-to-first-quota (or equivalent ramp metric) defined + baselined per rep · sales class Level 2 curriculum locked · new-hire ramp plan standard.",
+      sg:"Newest cohort ramps measurably faster than the Q2 cohort.",
+      theme:"Direct.", deps:"Nhel (delivery), C1 (grading is the feedback loop)."}
+    ],
+    bench:[{id:"C-S1", kind:"stretch", name:"Quarterly sales-comp design (MB 12504319033)", detail:"Weighted sales component, threshold teeth. Prerequisite is the Amanda+Matisen quarterly-pace board, so this is design-only in Q3."}],
+    carryNotes:"$ Conversion RED — restructure, don't carry the number. Matisen proved 7/15 the 19.9% and the 40% target aren't on the same basis (two definition changes, no clean bridge). C2 replaces it with undistorted funnel metrics. Email redesign → fully KP/Matisen-owned now, off Amanda's slate. CX Q2 theme (First Class Precision) closes with the quarter; Q3 CX theming rides Back to School rather than a separate CX theme (theme-fatigue call — see Open Question 1)."
+  },
+  matisen: { rocks: [
+    {id:"T1", crit:true, name:"Staffing-per-Truck Forecast Model + TUR Definition Fix",
+      why:"The 7/17 TUR-definition gap (Mike: truck-on/off vs utilization %) means FTE targets are built on full-truck assumptions. ~4-wk build already scoped. Feeds QGR FTE targets + the $315K closed-truck recovery story.",
+      green:"Per-branch model live · TUR definitions locked and published (one definition everywhere) · FTE targets re-derived · forecaster sheet with the team.",
+      sg:"+ closed-truck recovery quantified and handed to Mike/Brian with a plan.",
+      theme:"", deps:"Rippling hours reliability (the 6/29 punch-clock outage caveat still applies)."},
+    {id:"T2", crit:true, name:"Central Data Bus + Tool Registry (AI/Tool Governance build)",
+      why:"Governance item 12556198241. Tools are multiplying (7 from Mike alone) with no organizing layer. Bus sequencing already adopted: EMMA sales → Rippling hours (CoS-MH1 handover) → Samsara.",
+      green:"EMMA feed canonical (weekly dated drops, never overwritten — already validating) · Rippling hours pipeline handed over · tool registry (\"mainframe\") v1 live with every deployed tool/dashboard indexed · duplicate per-COS source connections killed.",
+      sg:"+ Samsara third feed live · ClearCo/CPH discrepancy reconciled (Anne's consumer view) · branch scorecards rendering weekly off the bus.",
+      theme:"Indirect but load-bearing — the theme's scoreboard rides this.", deps:"Fabian, CoS-MH1, Cameron (governance cadence)."},
+    {id:"T3", crit:false, name:"Games Scoring Automation + Auditability",
+      why:"The Q2 damages discrepancy couldn't be root-caused because no weekly snapshots were archived. Automation is next quarter's likely \"blow-up\" — do it with a change-mgmt plan, not a flip.",
+      green:"Automated weekly attendance/damages pull with archived snapshots · damages-per-Rippling-hour basis implemented · parallel-run vs manual for 4 weeks before cutover.",
+      sg:"S5 closes with zero unexplained scoring disputes.",
+      theme:"", deps:"Mike/Brian (season ops)."},
+    {id:"T4", crit:false, name:"Quote-Funnel De-Mix — Ship the Fields",
+      why:"He owes Jeff the EMMA API key/value spec (flagged priority); Jeff's UI is done. Small rock, big unblock for Amanda's C2.",
+      green:"API spec delivered · new fields live and collecting · request-ID wiring in.",
+      sg:"First ~1,000-move analysis pass started.",
+      theme:"", deps:"Jeff, Fabian."}
+    ],
+    bench:[{id:"T-S1", kind:"stretch", name:"Mobile-app timestamp de-risk (the Q4 Estimate Accuracy gate)", detail:"A scoping memo with Mike, not a build. If this slips, Q4's theme slips; that's the whole ask."}],
+    carryNotes:"Call Grading + Claims AI (yellow, ~50%) — kill as a Matisen rock. Engine's built; distribution is Amanda's C1; Claims RAG was already deprioritized. His EMMA-integration piece for Amanda gets triaged inside T2/T4, not a standalone rock. Production Line Cleanup → finishes in Q2 or the remainder folds into T2's registry. HR Command Center → maintenance + T2 consumer. This is the 5→3 lesson applied: four rocks, all his own deliverables, zero \"supporting X's rock\" rocks."
+  },
+  brian: { rocks: [
+    {id:"B1", crit:true, name:"CTXH Staffing + Personnel Budget",
+      why:"Standing critical number. Q2 recovered strong (only Leander under 100% at 91.7%) — and Leander staffing is literally the Frank-vindication storyline (his Red TUR = closed trucks = staffing).",
+      green:"All 5 CTXH branches ≥100% for the quarter, Leander included.",
+      sg:"+ zero closed trucks in CTXH by EOQ.",
+      theme:"", deps:"Anne (HPE transition), M2 parallel."},
+    {id:"B2", crit:true, name:"Manager Speed-to-Competence — Certification Pt 5 + New-Manager Training Board",
+      why:"Scrum certification is green and rolling; the training board + new-manager-training beta (Jalissa test) is the natural next part. Daniel is a brand-new NA BM — he's the live case study. This is the theme applied one level up: managers who can train.",
+      green:"Training board live · Daniel onboarded through it with weekly scorecards · all 5 BMs certified on the grading cadence · OFT/training-day facilitation standard documented.",
+      sg:"+ new-manager curriculum merged with Anne's gate spec + Mike's 205 items (the curriculum merge meeting actually happens) · one internal candidate certified manager-ready.",
+      theme:"Direct.", deps:"Anne (curriculum merge), Mike (app parity for CTXH)."},
+    {id:"B3", crit:false, name:"Frank Williams 90-Day Reset",
+      why:"Mirror ran 7/17 and landed. The follow-up ~7/22–24 sets the QGR-aligned scorecard; Q3 IS the 90 days. This deserves rock-level visibility — it's also the test case for the whole coaching-first doctrine.",
+      green:"Weekly Brian coaching sessions logged all quarter (sub-items on 3940143545) · QGR-aligned scorecard live · day-60 Cameron/Brian judgment point held on time.",
+      sg:"Leander sales conversion visibly recovering toward the 82.8% prior-year line · Frank showing the watch-signal (unprompted owned failures, no \"but\").",
+      theme:"", deps:"Cameron (follow-up meeting, day-60 call)."},
+    {id:"B4", crit:false, name:"Training Days as the Theme Vehicle (restructured carry)",
+      why:"Q2's TD Overhaul sat yellow — and trial-day elimination changes what TDs are FOR (no more trial-day evaluation; pure training). Restructure around the theme: stations, LIT skill test-outs, hustle standard, Magic Moments, guest-trainer slots for top movers.",
+      green:"New TD format live (stations/quizzes/scorecards) across CTXH · monthly cadence held · feedback loop running (his TD app).",
+      sg:"+ format adopted by DFWT (cross-region parity) · top-trainer recognition running off app data.",
+      theme:"The theme's field ritual.", deps:"Mike (app who-was-your-trainer data), Anne (post-trial-day interview handout switch)."},
+    {id:"B5", crit:false, name:"Einstein Games S5 (CTXH) + Quarter-Close Comms",
+      why:"He owns quarter-close comms and the finals push now; Q3 runs the new philosophy (branch-level damages, coaching-tool framing). CTXH regional 6.6 vs the 7 bar is the coaching target.",
+      green:"All CTXH branches active weekly · regional average ≥7 · team messaging on the games-are-coaching reframe delivered.",
+      sg:"Regional ≥7.5 · NA (5.0 in Q2) above 7.",
+      theme:"", deps:"Matisen (T3 automation)."}
+    ],
+    bench:[{id:"B-S1", kind:"stretch", name:"S. Austin succession decision (Hector/Jesper/Jake Peterson)", detail:"Run through the applicant-scorecard tool — bench depth made real, feeds Anne's succession stretch."}],
+    carryNotes:"Games CTXH yellow → carried into B5 with the reframe. TD Overhaul yellow → restructured into B4. Hiring red (Q1) → fully recovered, closed. Written-warning question stays HELD at logged redirect — not a rock, a coaching-pulse watch."
+  },
+  paul: { rocks: [
+    {id:"P1", crit:true, name:"CFO Transition — Title, Seat, and Finance Ownership",
+      why:"Rob's rec (7/10, converging with the 7/9 CFAO read): Paul = CFO, drop COO. Q3 makes it real.",
+      green:"Title + Rippling org chart updated (Anne executes; Roundtable → Cameron, Paul = peer CFO w/ finance under him) · responsibilities doc written · communicated company-wide · leadership P&L line ownership mapped with Ben (role-tailored RM/BM reporting live).",
+      sg:"+ Q4/2027 budget process owned end-to-end under the new seat · Prosper cadence fully Paul-led with Cameron front-loaded-and-leaves.",
+      theme:"Succession convergence — role clarity at the top.", deps:"Anne (Rippling), Ben (reporting build)."},
+    {id:"P2", crit:true, name:"Mover PTO — From Signed-Off to Launch-Ready",
+      why:"Cameron signed off 7/17 on the Clark/Paul design (accrual at promotion, top-two rungs, 1,820-hr basis). Jan 1 2027 rollout means Q3 = the make-it-real quarter.",
+      green:"TX legal review complete · Ben's cost model validated (the ~$300K/yr termination-payout exposure quantified and accepted) · Rippling accrual config designed · rollout + comms plan approved by Cameron/Anne.",
+      sg:"+ Rippling config tested end-to-end · WIFM comms drafted and ready to fire in Q4.",
+      theme:"", deps:"Anne (framework + Rippling), Ben (cost model), Cameron (final comms approval)."},
+    {id:"P3", crit:false, name:"Geographic Expansion — restructured carry (needs the AAR conversation)",
+      why:"Q2 = at-risk/yellow, 0 of 5 evaluated. AAR call needed: kill, park, or restructure. Draft recommendation: restructure to pipeline-reactive — the M&A marketplace now knows Einstein is a buyer; stop chasing a count, evaluate what the pipeline surfaces.",
+      green:"(Restructured) Deepen-vs-widen stance DOCUMENTED (one page, the actual missing deliverable) · every marketplace-flagged TX/FL opportunity gets a 48-hr screen · Houston organic-vs-acquisition case study done.",
+      sg:"≥3 full evaluations + 1 financial model built with Ben.",
+      theme:"", deps:"Ben (models)."},
+    {id:"P4", crit:false, name:"Money Collection Easy Wins (carry with honesty check)",
+      why:"Marked green in Q2 on \"haven't started but confident\" — that's a self-grade to challenge at AAR. Small, real, all his.",
+      green:"Manual-vs-swipe cost quantified + shared · automated swipe-% reporting · invoice-late-email → Monday pulse automation live.",
+      sg:"+ monthly branch rankings + coaching process documented.",
+      theme:"", deps:"none."}
+    ],
+    bench:[{id:"P-S1", kind:"stretch", name:"Salaried comp model kickoff with Ben", detail:"Coordinate w/ Anne first — the #5 overlap from REMAINING-WORKSTREAMS. Design-only."}],
+    carryNotes:"Mover comp review → lands green/SG, closes (promotion framework execution is Anne's A2 now). N. Austin move-in → SG, done. Branch visits → fold into Cameron's travel-week pilot (they travel together anyway — DFW 7/13–15 proved it)."
+  },
+  cameron: { rocks: [
+    {id:"R1", crit:true, name:"COS Network Maturity — Ladder 1→2",
+      why:"All 7 COS live (Q2's Green banked). The Cherny adoption ladder is now the map: most directs sit at step 1 (ad-hoc use). The highest-leverage template work is 1→2 self-verification, and the metric is hours saved, not activity.",
+      green:"8/7 setup-audit findings turned into a per-leader adoption plan · every spoke at evidenced step 2 or with a concrete gap plan · /status + freshness fixes fully installed network-wide · Tier-2 layering started (Linda → recruiting is the first real job).",
+      sg:"+ hours-saved measured and reported per leader · 2+ leaders at step 3.",
+      theme:"", deps:"Every direct (adoption), template work (Albert)."},
+    {id:"R2", crit:true, name:"AI/Tool Governance — Stand Up the Workstream",
+      why:"Governance item 12556198241, Day-2 DECIDE row. Cameron's 3 goals: cross-pollination, central source of truth (w/ Matisen), standing tool registry. Cameron owns the governance cadence; Matisen builds (T2).",
+      green:"Workstream chartered at QGR · monthly Big Rocks review cadence running (measuring returns, not activity) · cross-pollination lane live (Mike's shareable tools → Brian/Vera) · registry adopted as the rule (new tools must register).",
+      sg:"+ first cross-report analysis produced off the registry · individual-mirror artifact (the Frank-doc pattern) prototyped as a quarterly standing view.",
+      theme:"", deps:"Matisen T2 (the build)."},
+    {id:"R3", crit:false, name:"Q3 Theme Stewardship — \"Back to School\" Launch + Scoreboard",
+      why:"Themes die of fatigue when they're launched and abandoned (Rob: ~10 in 2.5 yrs). If Q3 runs the theme, Cameron owns keeping it anchored to a critical number and visibly alive.",
+      green:"Theme decided + launched with WIFM comms in week 1 · one theme scoreboard metric picked (candidate: time-to-field-ready per new mover, off Mike's app data) · monthly theme check at the Roundtable.",
+      sg:"+ measurable movement on the scoreboard metric by EOQ.",
+      theme:"", deps:"Mike M1 (the data), Open Question 1 (whether it runs as a full theme at all)."},
+    {id:"R4", crit:false, name:"Website Redesign — Design Done, Dev Contracted",
+      why:"KP's 13-wk design sprint off the ~7/13 handoff lands late Oct — the site going LIVE in Q3 is not realistic; say so in the rock instead of pretending.",
+      green:"KP design sprint complete on the re-baselined plan (~$15–25K reduction negotiated as re-baseline, not discount) · dev scoped + contracted with a number · cut-list fully decided.",
+      sg:"+ dev started · launch date locked inside Q4.",
+      theme:"", deps:"KP/Laura (re-baseline), Emma (design)."},
+    {id:"R5", crit:false, name:"Travel Week Pilot + O3s (Branch Visits, restructured per Rob)",
+      why:"Rob's operating model: ONE dedicated travel week per quarter (Q3 avoids nothing — Aug/Sep/Oct all fine), ~5 profit-ranked branches, forego meetings that week.",
+      green:"One full travel week executed, ≥5 branches, meetings actually cancelled · quarterly O3 rotation with all 5 directs done.",
+      sg:"+ Paul joins for ≥2 stops (fold his old branch-visits rock in) · frontline findings land as Q4 inputs.",
+      theme:"", deps:"Calendar discipline only."}
+    ],
+    bench:[{id:"R-B1", kind:"bonus", name:"ITP 90-Day Plan Execution", detail:"The 3 commitments (poker-chip meter · Rob-owned 180 EQ survey · sit-in-the-seat-first), color-code self-checks ~8/15 + ~9/15, formal re-eval at Rob's October session. Already committed; bonus keeps it visible without inflating the rock count."}],
+    carryNotes:"COS/World Model → evolves into R1. AI Wedge Audit → complete; successor is R2 (governance replaces audit). Variable Pricing → cadence is live and Matisen-owned (T1 continues the strategy work); comes OFF Cameron's slate — the CEO-audit \"first to drop\" flag was right. Branch Visits → restructured into R5. Website → carried as R4 with honest scope. ITP → SG, done; execution rides the bonus."
+  },
+  others: { rocks: [
+    {id:"O-BEN1", crit:false, name:"Ben Young (Prosper VCFO) — Clean-Books Quarter + Reporting",
+      why:"Q3 = clean-books quarter.",
+      green:"D&A/depreciation reconciliation done (Bob) · payroll + misc reclasses closed · Sage automation live · monthly board package shipping on the 15th · role-tailored RM/BM P&L reporting (feeds P1) · PTO cost validation (feeds P2).",
+      sg:"Tampa GM-vs-NI overhead dig delivered (the analytical deliverable).",
+      theme:"", deps:"Paul (oversight), Matisen (Sage access)."},
+    {id:"O-KP1", crit:false, name:"Kickpoint — Design Sprint + RFQ Email + ROAS Decision",
+      why:"Website design sprint to completion on the re-baselined plan is their CRIT.",
+      green:"Design sprint complete on the re-baselined plan · RFQ email 18 approved changes implemented.",
+      sg:"ROAS dashboard unblocked — but recommend it moves under Amanda or waits for the data bus (decide at QGR, don't let it sit yellow another quarter).",
+      theme:"", deps:"Matisen (BigQuery), Ben (Prosper data)."},
+    {id:"O-AL1", crit:false, name:"Austin L — Content Pipeline + Training-App Video",
+      why:"His own stated fix, plus a theme rock hiding in plain sight: Mike's video slots are built with zero content.",
+      green:"Own the KP content pipeline directly (48-hr SLA, 10+ pieces/mo) · publish the packing batch (2–4 promptly beats 7 never).",
+      sg:"Training-app video content landing in Mike's built slots.",
+      theme:"Theme-adjacent: the app's video layer.", deps:"Mike M1 (slots), KP (pipeline)."},
+    {id:"O-CAR1", crit:false, name:"Carly — Ramp-Back + Magic Moments Phase 2",
+      why:"Back from leave.",
+      green:"Ramp-back rock first · then Magic Moments Phase 2 reactivation + ONE canonical MM counter (the dashboard still can't say what the number is).",
+      sg:"Claims time-to-close holding green — keep, don't rebuild.",
+      theme:"", deps:"Amanda (scope)."}
+    ],
+    bench:[],
+    carryNotes:"From the draft's \"Others on the dashboard\" section — 1–2 line suggestions, cascade through managers."
+  }
+};
+
+/* ---------- Open questions ---------- */
+const OPEN_QUESTIONS = [
+  {id:"oq1", short:"1 · Theme cadence", text:"Does \"Back to School\" run as a full company theme, or as Rob's simplified version — anchored to one critical number, lighter ceremony? (Theme fatigue is real: ~10 in 2.5 yrs. And does demand-pursuit get any theme airtime, or live purely as rocks?) The 7/19 theme deadline on the dashboard is today — it will slip to QGR; decide if that's fine."},
+  {id:"oq2", short:"2 · Games + damages, final form", text:"Confirm at QGR — damages branch-level only, out of individual performance bonus, damages-per-Rippling-hour basis holds through Q3, and the S5 scoring-automation cutover plan. This wording gates Mike M4, Brian B5, and Matisen T3 Green definitions."},
+  {id:"oq3", short:"3 · Paul's expansion rock", text:"Kill, park, or the pipeline-reactive restructure drafted in P3? Zero evaluations in Q2 says the count-based version doesn't fit how the work actually arrives."},
+  {id:"oq4", short:"4 · Promotion cadence", text:"Biweekly (the 7/3 lock) or quarterly (where the 7/17 Anne+Matisen session leaned)? Gates Anne A2's Green definition and the Rippling automation design."},
+  {id:"oq5", short:"5 · Replace the 40% Conversion $ KPI", text:"Matisen proved the old basis is unbridgeable. Cameron's personal KPI needs a new number (candidates: reserve-to-book %, speed-to-lead SLA attainment, or excl-EmmaLead conversion on the post-April definition) — pick one before the packet prints, or the KPI row is blank again."}
+];
+
+/* ---------- Dependency map ---------- */
+/* status kinds: coveredBy => live recompute; kind 'task'|'vendor' => soft rows */
+const DEP_COLS = [
+  {id:"matisen", name:"Matisen", risk:"hot",  read:"🔴 The bottleneck, again. Capped at 4 rocks — several of these DON'T fit. Everything not inside T1–T4 needs an explicit yes/no at QGR. Silence = it's not happening; make him say it out loud in the room."},
+  {id:"mike",    name:"Mike",    risk:"warm", read:"🟡 Second-heaviest, but they're all consumers of ONE deliverable (M1). If M1 ships, everything downstream feeds itself. Protect M1 from side-quests."},
+  {id:"anne",    name:"Anne",    risk:"warm", read:"🟡 Manageable — but note A1 (Aug 1) and P2 both hit her in month 1."},
+  {id:"ben",     name:"Ben",     risk:"fine", read:"🟢 Fine — it's what we pay Prosper for."}
+];
+const DEPS = [
+  // MATISEN
+  {id:"d1", on:"matisen", from:"Amanda C1", fromRock:"C1", need:"EMMA integration — link call grades to quoted-vs-actual", coveredBy:null,
+   note:"Unanswered since 7/3. Not named in T1–T4 — needs an explicit yes/no at QGR (triage into T2/T4 or it's a no)."},
+  {id:"d2", on:"matisen", from:"Amanda C2", fromRock:"C2", need:"Quote-funnel fields + EMMA API key/value spec for Jeff", coveredBy:"T4", note:"Jeff's UI is done; the spec is the unblock."},
+  {id:"d3", on:"matisen", from:"Amanda C3", fromRock:"C3", need:"Leadferno training-data extraction for Botpress", coveredBy:null, kind:"task",
+   note:"In flight since 7/13 (pre-QGR work, not a Q3 rock). Confirm it finishes before the Aug launch window."},
+  {id:"d4", on:"matisen", from:"Mike M4", fromRock:"M4", need:"Games scoring automation + weekly snapshot archiving", coveredBy:"T3", note:"The likely \"blow-up\" if it slips — parallel-run 4 wks before cutover."},
+  {id:"d5", on:"matisen", from:"Anne A2", fromRock:"A2", need:"Eligibility automation + backtests #04/#05", coveredBy:null, sgOnly:true,
+   note:"Hours pull proven 7/17, but automation + backtests are not named in T1–T4. Backtests gate A2's SUPER GREEN only."},
+  {id:"d6", on:"matisen", from:"Cameron R2", fromRock:"R2", need:"Data bus + tool registry build (Cameron governs, Matisen builds)", coveredBy:"T2", note:""},
+  {id:"d7", on:"matisen", from:"Kickpoint (ROAS)", fromRock:"O-KP1", need:"BigQuery adjustments for the ROAS dashboard", coveredBy:null,
+   note:"Not in T1–T4. Decide at QGR: move under Amanda, or wait for the data bus. Don't let it sit yellow another quarter."},
+  {id:"d8", on:"matisen", from:"Ben (Sage)", fromRock:"O-BEN1", need:"Sage access + automation support", coveredBy:null, kind:"task",
+   note:"Access-level support, not a build rock. Watch it doesn't creep."},
+  // MIKE
+  {id:"d9",  on:"mike", from:"Anne A1", fromRock:"A1", need:"App carries the Extended Trial check-in cadence (1wk/2wk/1mo/2mo)", coveredBy:"M1", note:""},
+  {id:"d10", on:"mike", from:"Brian B2", fromRock:"B2", need:"App parity for CTXH (manager training surface)", coveredBy:"M1", note:""},
+  {id:"d11", on:"mike", from:"Brian B4", fromRock:"B4", need:"Who-was-your-trainer data for TD recognition", coveredBy:"M1", sgOnly:true, note:"Trainer logging sits in M1's SUPER GREEN, not Green — B4's SG leans on M1's SG."},
+  {id:"d12", on:"mike", from:"Cameron R3", fromRock:"R3", need:"Theme scoreboard metric data (time-to-field-ready per new mover)", coveredBy:"M1", note:""},
+  {id:"d13", on:"mike", from:"Austin L", fromRock:"O-AL1", need:"Video slots to fill (slots built, zero content today)", coveredBy:"M1", note:"Two-way: M1's video layer needs Austin right back."},
+  {id:"d14", on:"mike", from:"Q4 Estimate-Accuracy gate", fromRock:null, need:"Mobile-app timestamps de-risked (with Matisen)", coveredBy:"T-S1",
+   note:"Lives as Matisen's STRETCH — a scoping memo, not a build. If this slips, Q4's theme slips."},
+  // ANNE
+  {id:"d15", on:"anne", from:"Paul P1", fromRock:"P1", need:"Rippling org chart + title update (Anne executes)", coveredBy:null, kind:"task", note:"Task-level, not rock-level. Low risk."},
+  {id:"d16", on:"anne", from:"Paul P2", fromRock:"P2", need:"PTO framework alignment + Rippling accrual config", coveredBy:null, kind:"task",
+   note:"⚠ A1 (Aug 1) and P2 both hit Anne in month 1 — sequence deliberately."},
+  {id:"d17", on:"anne", from:"Brian B1", fromRock:"B1", need:"HPE transition support (hiring funnel under the new motion)", coveredBy:"A1", note:""},
+  {id:"d18", on:"anne", from:"Brian B4", fromRock:"B4", need:"Post-trial-day interview handout switch", coveredBy:"A1", note:"PostTrialDay handout pair is ready for the switch."},
+  {id:"d19", on:"anne", from:"Mike M2", fromRock:"M2", need:"Hiring funnel under HPE (first month will be bumpy)", coveredBy:"A1", note:""},
+  // BEN
+  {id:"d20", on:"ben", from:"Paul P1", fromRock:"P1", need:"Role-tailored RM/BM P&L reporting build", coveredBy:"O-BEN1", note:""},
+  {id:"d21", on:"ben", from:"Paul P2", fromRock:"P2", need:"PTO cost model validated (~$300K/yr termination-payout exposure)", coveredBy:"O-BEN1", note:""},
+  {id:"d22", on:"ben", from:"Paul P3", fromRock:"P3", need:"Acquisition financial models on demand", coveredBy:null, kind:"vendor", note:"Engagement-scoped — Prosper delivers when the pipeline surfaces a real one."},
+  {id:"d23", on:"ben", from:"Kickpoint (ROAS)", fromRock:"O-KP1", need:"Prosper data feed for ROAS", coveredBy:null, kind:"vendor", note:"Engagement-scoped."}
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const LS_KEY = "qgr-triage-q3-state";
+let state = loadState();
+function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, view:"review"}; }
+function loadState(){
+  try{ const raw = localStorage.getItem(LS_KEY); if(raw){ const s = JSON.parse(raw); return Object.assign(blankState(), s); } }catch(e){}
+  return blankState();
+}
+let saveEnabled = true;
+function save(){ if(!saveEnabled) return; try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
+function q2s(k){ if(!state.q2[k]) state.q2[k] = {proj:null, self:null, notes:"", aar:""}; return state.q2[k]; }
+function q3s(id){ if(!state.q3[id]) state.q3[id] = {decision:null, editNotes:"", crit:null, promoted:false}; return state.q3[id]; }
+function oqs(id){ if(!state.oq[id]) state.oq[id] = {decided:false, answer:""}; return state.oq[id]; }
+
+/* rock lookup */
+const ROCK_INDEX = {};
+LEADERS.forEach(l=>{
+  const g = Q3[l.id]; if(!g) return;
+  g.rocks.forEach(r=>ROCK_INDEX[r.id] = {rock:r, leader:l.id, bench:false});
+  g.bench.forEach(b=>ROCK_INDEX[b.id] = {rock:b, leader:l.id, bench:true});
+});
+function isCrit(id){ const st = q3s(id); if(st.crit === null || st.crit === undefined) return !!ROCK_INDEX[id].rock.crit; return st.crit; }
+function rockLifecycle(id){ // active | killed | deferred | bench
+  const e = ROCK_INDEX[id]; if(!e) return "unknown";
+  const st = q3s(id);
+  if(e.bench && !st.promoted) return "bench";
+  if(st.decision === "kill") return "killed";
+  if(st.decision === "defer") return "deferred";
+  return "active";
+}
+function depStatus(d){
+  // dependent rock moot?
+  if(d.fromRock && ROCK_INDEX[d.fromRock]){
+    const lc = rockLifecycle(d.fromRock);
+    if(lc === "killed" || lc === "deferred") return {code:"moot", label:"MOOT — dependent rock "+lc};
+  }
+  if(!d.coveredBy){
+    if(d.kind === "task") return {code:"task", label:"TASK-LEVEL"};
+    if(d.kind === "vendor") return {code:"vendor", label:"VENDOR-SCOPED"};
+    return {code:"notcovered", label:"NOT COVERED"};
+  }
+  const lc = rockLifecycle(d.coveredBy);
+  if(lc === "killed" || lc === "deferred") return {code:"notcovered", label:"NOT COVERED — "+d.coveredBy+" "+lc};
+  if(lc === "bench") return {code:"stretch", label:"STRETCH ONLY — "+d.coveredBy+" not in slate"};
+  return {code:"covered", label:"COVERED · "+d.coveredBy};
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const VIEWS = [
+  {id:"review", label:"Q2 Review", hash:"#review"},
+  {id:"triage", label:"Q3 Triage", hash:"#triage"},
+  {id:"deps",   label:"Dependency Board", hash:"#deps"}
+];
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+function renderTabs(){
+  const q2count = Object.values(Q2).reduce((a,v)=>a+v.length,0);
+  const q3count = Object.values(Q3).reduce((a,v)=>a+v.rocks.length,0);
+  document.getElementById("tabs").innerHTML = VIEWS.map(v=>{
+    const cnt = v.id==="review"?q2count : v.id==="triage"?q3count : DEPS.length;
+    return `<button class="tab ${state.view===v.id?'active':''}" data-view="${v.id}">${v.label}<span class="cnt">${cnt}</span></button>`;
+  }).join("");
+  document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{ state.view=b.dataset.view; save(); location.hash=VIEWS.find(v=>v.id===state.view).hash; render(); });
+}
+
+const GRADE_LABEL = {SG:"Super Green", G:"Green", R:"Red"};
+function gradeBtns(cur, cls, key, field){
+  return `<span class="gradegrp">`+["SG","G","R"].map(g=>
+    `<button class="gbtn ${cur===g?('sel-'+g):''}" data-act="grade" data-key="${key}" data-field="${field}" data-g="${g}">${g}</button>`).join("")+`</span>`;
+}
+function statusDot(s){ return `<span class="dot ${s}" title="${s}"></span>`; }
+const CARRY_LABEL = {carry:"CARRY", kill:"KILL / OFF SLATE", restructure:"RESTRUCTURE", close:"CLOSE — DONE", hold:"HOLD / ICE"};
+
+function renderReview(){
+  let html = `<div class="kpis">
+    <div class="kpi">${statusDot("unknown")} <span>Cameron KPI · <b>TUR 65%</b> — no clean read (EMMA gap; T1 fixes the definition)</span></div>
+    <div class="kpi">${statusDot("red")} <span>Cameron KPI · <b>Conversion $ 40%</b> — basis unbridgeable (Open Question 5: pick the replacement)</span></div>
+    <div class="kpi">${statusDot("supergreen")} <span>Cameron KPI · <b>eNPS 45+</b> — 81 on 7/17 (last mandatory survey)</span></div>
+    <div class="kpi"><span class="smallnote">PROJ = Cameron+Paul's read · SELF = leader self-grade (arrives Monday from the sheet — editable here when it lands) · card highlights on divergence</span></div>
+  </div>
+  <div class="jumpbar">`+LEADERS.map(l=>`<a class="jump" href="#rev-${l.id}">${l.name.split(" ")[0]}</a>`).join("")+`</div>`;
+  LEADERS.forEach(l=>{
+    const rocks = Q2[l.id]||[];
+    html += `<section class="leader-sec" id="rev-${l.id}"><div class="leader-hd">
+      <span class="leader-name">${esc(l.name)}</span><span class="leader-role">${esc(l.role)}</span>
+      <span class="badge ok">${rocks.length} Q2 rocks</span></div><div class="cards">`;
+    rocks.forEach(r=>{
+      const st = q2s(r.k);
+      const div = st.proj && st.self && st.proj !== st.self;
+      html += `<div class="card ${div?'diverge':''}">
+        <div class="card-top">${statusDot(r.status)}<div class="rockname">${esc(r.name)}</div></div>
+        <div class="chips">
+          ${r.crit?'<span class="chip crit">CRIT</span>':''}
+          <span class="chip carry-${r.carry}" title="${esc(r.carryNote)}">${CARRY_LABEL[r.carry]}</span>
+          ${div?'<span class="chip div">⚠ DIVERGENCE</span>':''}
+        </div>
+        <div class="ctx">${esc(r.carryNote)}</div>
+        <div class="graderow">
+          <span class="gradelbl">PROJ</span>${gradeBtns(st.proj,"",r.k,"proj")}
+          <span class="gradelbl" style="margin-left:8px">SELF</span>${gradeBtns(st.self,"",r.k,"self")}
+        </div>
+        <textarea class="notes" data-act="q2note" data-key="${r.k}" placeholder="Notes for the room…">${esc(st.notes)}</textarea>
+        <details class="fold"><summary>Context + AAR digest</summary><div class="fold-body">
+          ${r.context?`<div class="ctx">${esc(r.context)}</div>`:""}
+          <textarea class="notes" data-act="q2aar" data-key="${r.k}" placeholder="AAR due Fri 7/24 — Albert pastes digests here">${esc(st.aar)}</textarea>
+        </div></details>
+      </div>`;
+    });
+    html += `</div></section>`;
+  });
+  return html;
+}
+
+function critCount(leaderId){
+  const g = Q3[leaderId]; let n=0;
+  g.rocks.forEach(r=>{ if(rockLifecycle(r.id)==="active" && isCrit(r.id)) n++; });
+  g.bench.forEach(b=>{ if(rockLifecycle(b.id)==="active" && isCrit(b.id)) n++; });
+  return n;
+}
+function activeCount(leaderId){
+  const g = Q3[leaderId]; let n=0;
+  g.rocks.forEach(r=>{ if(rockLifecycle(r.id)==="active") n++; });
+  g.bench.forEach(b=>{ if(rockLifecycle(b.id)==="active") n++; });
+  return n;
+}
+
+function slotCard(r, leaderId, promoted){
+  const st = q3s(r.id);
+  const lc = rockLifecycle(r.id);
+  const crit = isCrit(r.id);
+  const d = st.decision;
+  return `<div class="card ${lc==='killed'?'killed':''} ${lc==='deferred'?'deferred':''}">
+    <div class="card-top"><span class="rockid">${r.id}</span><div class="rockname">${esc(r.name)}</div></div>
+    <div class="chips">
+      ${crit?'<span class="chip crit">CRIT ⭐</span>':''}
+      ${promoted?'<span class="chip promoted">PROMOTED FROM BENCH</span>':''}
+      ${d?`<span class="chip carry-${d==='kill'?'kill':d==='defer'?'hold':d==='edit'?'restructure':'close'}">${d.toUpperCase()}${d==='accept'?'ED':d==='kill'?'ED':d==='edit'?' + NOTES':'RED'}</span>`:''}
+    </div>
+    <div class="triage-row">
+      ${["accept","edit","kill","defer"].map(a=>`<button class="tbtn ${d===a?('sel-'+a):''}" data-act="triage" data-id="${r.id}" data-d="${a}">${a.toUpperCase()}</button>`).join("")}
+      <button class="tbtn critbtn ${crit?'on':''}" data-act="crit" data-id="${r.id}" title="Toggle Critical Number">${crit?'★ CRIT':'☆ make CRIT'}</button>
+      ${promoted?`<button class="tbtn" data-act="demote" data-id="${r.id}">↩ BENCH</button>`:''}
+    </div>
+    ${d==='edit'?`<textarea class="notes" data-act="editnote" data-key="${r.id}" placeholder="What changes? (edit notes for the decision log)">${esc(st.editNotes)}</textarea>`:''}
+    <details class="fold"><summary>Full detail — why now · Green/SG · dependencies</summary><div class="fold-body">
+      ${r.why?`<div class="def why"><b>WHY NOW</b>${esc(r.why)}</div>`:''}
+      ${r.green?`<div class="def green"><b>GREEN</b>${esc(r.green)}</div>`:''}
+      ${r.sg?`<div class="def sg"><b>SUPER GREEN</b>${esc(r.sg)}</div>`:''}
+      ${r.theme?`<div class="def theme"><b>THEME TIE</b>${esc(r.theme)}</div>`:''}
+      ${r.deps?`<div class="def deps"><b>DEPENDENCIES</b>${esc(r.deps)}</div>`:''}
+    </div></details>
+  </div>`;
+}
+
+function renderTriage(){
+  // open questions strip
+  const selOq = state._oqSel;
+  let html = `<div class="oq-strip"><div class="oq-title">Open Questions <span>— 5 decisions the draft can't settle</span></div>
+    <div class="oq-chips">`+OPEN_QUESTIONS.map(q=>{
+      const s = oqs(q.id);
+      return `<button class="oq-chip ${s.decided?'decided':''} ${selOq===q.id?'open-sel':''}" data-act="oqsel" data-id="${q.id}">${esc(q.short)}</button>`;
+    }).join("")+`</div>`;
+  if(selOq){
+    const q = OPEN_QUESTIONS.find(x=>x.id===selOq); const s = oqs(selOq);
+    html += `<div class="oq-detail"><div class="oq-q">${esc(q.text)}</div>
+      <textarea class="notes" data-act="oqanswer" data-key="${q.id}" placeholder="One-line answer / decision…">${esc(s.answer)}</textarea>
+      <div class="oq-actions"><button class="tbtn ${s.decided?'sel-accept':''}" data-act="oqdecide" data-id="${q.id}">${s.decided?'✓ DECIDED — tap to reopen':'MARK DECIDED'}</button></div></div>`;
+  }
+  html += `</div><div class="jumpbar">`+LEADERS.map(l=>`<a class="jump" href="#tri-${l.id}">${l.name.split(" ")[0]}</a>`).join("")+`</div>`;
+
+  LEADERS.forEach(l=>{
+    const g = Q3[l.id]; if(!g) return;
+    const nActive = activeCount(l.id);
+    const nCrit = critCount(l.id);
+    const over = l.cap!==null && nActive > l.cap;
+    let capBadge = "";
+    if(l.cap!==null){
+      capBadge = over
+        ? `<span class="badge warn">${nActive}/${l.cap} ROCKS — ${l.hardCap?'OVER HARD CAP':'OVER CAP'}</span>`
+        : `<span class="badge ${l.hardCap?'hardcap':'cap'}">${nActive}/${l.cap} rocks${l.hardCap?' · HARD CAP':''}</span>`;
+    } else { capBadge = `<span class="badge ok">${nActive} suggestions</span>`; }
+    const critBadge = l.id==="others" ? "" :
+      (nCrit===2 ? `<span class="badge ok">CRIT 2/2 ✓</span>` : `<span class="badge warn">CRIT ${nCrit}/2 ⚠</span>`);
+    html += `<section class="leader-sec" id="tri-${l.id}"><div class="leader-hd">
+      <span class="leader-name">${esc(l.name)}</span><span class="leader-role">${esc(l.role)}</span>
+      ${capBadge}${critBadge}</div>`;
+    if(l.blurb) html += `<div class="ctx" style="margin:-4px 0 10px">${esc(l.blurb)}</div>`;
+    html += `<div class="cards">`;
+    g.rocks.forEach(r=>{ html += slotCard(r, l.id, false); });
+    // promoted bench items render as slot cards
+    g.bench.forEach(b=>{ if(q3s(b.id).promoted) html += slotCard(b, l.id, true); });
+    html += `</div>`;
+    const benched = g.bench.filter(b=>!q3s(b.id).promoted);
+    if(benched.length){
+      html += `<div class="bench-wrap"><div class="bench-lbl">Bench — alternates / stretch / bonus</div><div class="bench-cards">`;
+      benched.forEach(b=>{
+        html += `<div class="bench-card"><span class="kind">${b.kind}</span><b>${esc(b.id)} · ${esc(b.name)}</b><span>${esc(b.detail)}</span>
+          <button class="pbtn" data-act="promote" data-id="${b.id}">⬆ PROMOTE to slate</button></div>`;
+      });
+      html += `</div></div>`;
+    }
+    if(g.carryNotes) html += `<details class="fold" style="margin-top:8px"><summary>Q2 carry-over notes</summary><div class="fold-body"><div class="ctx">${esc(g.carryNotes)}</div></div></details>`;
+    html += `</section>`;
+  });
+  return html;
+}
+
+function renderDeps(){
+  let html = `<div class="rulebanner"><b>The structural rule</b><span>If it's not in the slate, dependent Greens can't assume it. Any rock that needs Matisen must name its Matisen deliverable IN the rock text — and Matisen's 4 rocks are the complete list of what he's building. Statuses below recompute live as triage decisions change.</span></div>
+  <div class="depcols">`;
+  DEP_COLS.forEach(c=>{
+    const rows = DEPS.filter(d=>d.on===c.id);
+    const covered = rows.filter(d=>depStatus(d).code==="covered").length;
+    const red = rows.filter(d=>depStatus(d).code==="notcovered").length;
+    html += `<div class="depcol ${c.risk==='hot'?'hotzone':''}">
+      <div class="depcol-hd"><span class="nm">${esc(c.name)}</span>
+        <span class="depcov">${covered}/${rows.length} covered${red?` · ${red} red`:''}</span>
+        <span class="risk ${c.risk}">${c.risk==='hot'?'RED ZONE':c.risk==='warm'?'WATCH':'FINE'}</span></div>
+      <div style="padding:8px 14px;border-bottom:1px solid var(--grey-50)"><span class="dep-note">${esc(c.read)}</span></div>`;
+    rows.forEach(d=>{
+      const s = depStatus(d);
+      html += `<div class="deprow ${s.code==='moot'?'moot':''}" data-dep="${d.id}">
+        <div class="deprow-top"><span class="dep-from">${esc(d.from)}</span><span class="pill ${s.code}">${esc(s.label)}${d.sgOnly?' · SG-ONLY':''}</span></div>
+        <div class="dep-need">needs: ${esc(d.need)}</div>
+        ${d.note?`<div class="dep-note">${esc(d.note)}</div>`:''}
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function render(){
+  renderTabs();
+  const m = document.getElementById("main");
+  if(state.view==="review") m.innerHTML = renderReview();
+  else if(state.view==="triage") m.innerHTML = renderTriage();
+  else m.innerHTML = renderDeps();
+}
+
+/* ============================================================
+   EVENTS (delegated)
+   ============================================================ */
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-act]"); if(!b) return;
+  const act = b.dataset.act;
+  if(act==="grade"){ const st=q2s(b.dataset.key); const f=b.dataset.field; st[f] = st[f]===b.dataset.g?null:b.dataset.g; save(); render(); }
+  else if(act==="triage"){ const st=q3s(b.dataset.id); st.decision = st.decision===b.dataset.d?null:b.dataset.d; save(); render(); }
+  else if(act==="crit"){ const st=q3s(b.dataset.id); st.crit = !isCrit(b.dataset.id); save(); render(); }
+  else if(act==="promote"){ q3s(b.dataset.id).promoted = true; save(); render(); }
+  else if(act==="demote"){ const st=q3s(b.dataset.id); st.promoted=false; st.decision=null; save(); render(); }
+  else if(act==="oqsel"){ state._oqSel = state._oqSel===b.dataset.id?null:b.dataset.id; render(); }
+  else if(act==="oqdecide"){ const s=oqs(b.dataset.id); s.decided=!s.decided; save(); render(); }
+});
+document.addEventListener("input", e=>{
+  const t = e.target; const act = t.dataset && t.dataset.act; if(!act) return;
+  if(act==="q2note") q2s(t.dataset.key).notes = t.value;
+  else if(act==="q2aar") q2s(t.dataset.key).aar = t.value;
+  else if(act==="editnote") q3s(t.dataset.key).editNotes = t.value;
+  else if(act==="oqanswer") oqs(t.dataset.key).answer = t.value;
+  save();
+});
+
+/* ============================================================
+   EXPORT
+   ============================================================ */
+function buildExport(){
+  const now = new Date();
+  const ts = now.toISOString().replace("T"," ").slice(0,16);
+  let md = `# QGR Triage Room — Q3 2026 Decision Log\n\n`;
+  md += `*${VERSION}*\n*Exported: ${ts} (local) — for Albert to ingest.*\n\n`;
+
+  // Open questions
+  md += `## Open Questions\n\n`;
+  OPEN_QUESTIONS.forEach(q=>{
+    const s = oqs(q.id);
+    md += `- **${q.short}** — ${s.decided?"✅ DECIDED":"⏳ open"}${s.answer?": "+s.answer:""}\n`;
+  });
+  md += `\n`;
+
+  LEADERS.forEach(l=>{
+    const g3 = Q3[l.id]; const g2 = Q2[l.id]||[];
+    md += `---\n\n## ${l.name} — ${l.role}\n\n`;
+
+    // Q3 slate
+    md += `### Q3 slate\n`;
+    const nActive = activeCount(l.id), nCrit = critCount(l.id);
+    if(l.cap!==null) md += `*Rocks: ${nActive}/${l.cap}${l.hardCap?" (HARD CAP)":""} · CRIT: ${nCrit}/2${l.id!=="others"&&nCrit!==2?" ⚠":""}*\n\n`;
+    const listRock = (r, benchPromoted)=>{
+      const st = q3s(r.id); const lc = rockLifecycle(r.id); const crit = isCrit(r.id);
+      let line = `- **${r.id} · ${r.name}**`;
+      if(crit) line += ` ⭐CRIT`;
+      if(benchPromoted) line += ` (PROMOTED from bench)`;
+      const dec = st.decision ? st.decision.toUpperCase() : "UNTOUCHED";
+      line += ` — ${dec}`;
+      if(st.crit!==null && st.crit!==undefined && st.crit !== !!ROCK_INDEX[r.id].rock.crit) line += st.crit?" (CRIT ADDED)":" (CRIT REMOVED)";
+      md += line + `\n`;
+      if(st.decision==="edit" && st.editNotes) md += `  - Edit notes: ${st.editNotes}\n`;
+    };
+    g3.rocks.forEach(r=>listRock(r,false));
+    g3.bench.forEach(b=>{ if(q3s(b.id).promoted) listRock(b,true); });
+    const stillBench = g3.bench.filter(b=>!q3s(b.id).promoted);
+    if(stillBench.length) md += stillBench.map(b=>`- _bench (${b.kind}): ${b.id} · ${b.name} — not promoted_`).join("\n")+"\n";
+    md += `\n`;
+
+    // Q2 review
+    if(g2.length){
+      md += `### Q2 review (projected grades)\n`;
+      g2.forEach(r=>{
+        const st = q2s(r.k);
+        let line = `- **${r.name}**${r.crit?" ⭐CRIT":""} — traj: ${r.status} · carry-call: ${CARRY_LABEL[r.carry]}`;
+        line += ` · PROJ: ${st.proj?GRADE_LABEL[st.proj]:"—"} · SELF: ${st.self?GRADE_LABEL[st.self]:"— (awaiting sheet)"}`;
+        if(st.proj && st.self && st.proj!==st.self) line += ` · ⚠ DIVERGENCE`;
+        md += line + `\n`;
+        if(st.notes) md += `  - Notes: ${st.notes}\n`;
+        if(st.aar) md += `  - AAR: ${st.aar}\n`;
+      });
+      md += `\n`;
+    }
+  });
+
+  // Dependency summary
+  md += `---\n\n## Dependency status (as triaged)\n\n`;
+  DEP_COLS.forEach(c=>{
+    const rows = DEPS.filter(d=>d.on===c.id);
+    const covered = rows.filter(d=>depStatus(d).code==="covered").length;
+    md += `### On ${c.name} — ${covered}/${rows.length} covered\n`;
+    rows.forEach(d=>{
+      const s = depStatus(d);
+      md += `- ${d.from} needs *${d.need}* → **${s.label}**${d.sgOnly?" (SG-only)":""}${d.note?" — "+d.note:""}\n`;
+    });
+    md += `\n`;
+  });
+  md += `\n> Structural rule: if it's not in the slate, dependent Greens can't assume it.\n`;
+  return md;
+}
+function doExport(){
+  const md = buildExport();
+  const stamp = new Date().toISOString().slice(0,10);
+  // clipboard
+  const done = ()=>toast("Decision log copied to clipboard + downloaded ✓");
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(md).then(done, done);
+  }
+  // download
+  const blob = new Blob([md], {type:"text/markdown"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `qgr-q3-decision-log-${stamp}.md`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  if(!(navigator.clipboard && navigator.clipboard.writeText)) toast("Decision log downloaded ✓ (clipboard unavailable)");
+}
+function toast(msg){
+  const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+document.getElementById("btn-export").onclick = doExport;
+document.getElementById("btn-reset").onclick = ()=>{
+  if(confirm("Reset ALL triage decisions, grades, notes, and open-question answers? This can't be undone.")){
+    localStorage.removeItem(LS_KEY); state = blankState(); render(); toast("Reset complete");
+  }
+};
+document.addEventListener("keydown", e=>{
+  if(e.target.matches("textarea,input,select")) return;
+  if(e.key==="e" || e.key==="E"){ e.preventDefault(); doExport(); }
+});
+
+/* hash routing */
+function applyHash(){
+  const h = location.hash;
+  const v = VIEWS.find(v=>v.hash===h);
+  if(v) state.view = v.id;
+}
+window.addEventListener("hashchange", ()=>{ applyHash(); render(); });
+
+/* ============================================================
+   SELF-TEST (#selftest) — headless verification hook, no state writes
+   ============================================================ */
+function runSelfTest(){
+  saveEnabled = false;
+  const out = [];
+  out.push("== QGR Triage Room self-test ==");
+  out.push("leaders: " + LEADERS.length + " (" + LEADERS.map(l=>l.id).join(",") + ")");
+  const q3counts = LEADERS.map(l=>l.id+":"+Q3[l.id].rocks.length+"+"+Q3[l.id].bench.length+"bench").join(" ");
+  out.push("q3 rocks: " + q3counts);
+  out.push("q3 slate total: " + Object.values(Q3).reduce((a,g)=>a+g.rocks.length,0) + " · bench: " + Object.values(Q3).reduce((a,g)=>a+g.bench.length,0));
+  out.push("q2 cards: " + Object.values(Q2).reduce((a,v)=>a+v.length,0));
+  out.push("deps: " + DEPS.length + " rows / " + DEP_COLS.length + " columns");
+  out.push("open questions: " + OPEN_QUESTIONS.length);
+  // baseline dep status for Amanda C2 (d2, covered by T4)
+  const d2 = DEPS.find(d=>d.id==="d2");
+  out.push("d2 (Amanda C2 ← T4) baseline: " + depStatus(d2).code + " [expect covered]");
+  // simulate KILL of T4
+  q3s("T4").decision = "kill";
+  out.push("after KILL T4: d2 = " + depStatus(d2).code + " [expect notcovered]");
+  q3s("T4").decision = null;
+  out.push("after restore: d2 = " + depStatus(d2).code + " [expect covered]");
+  // stretch promote test: d14 covered by bench T-S1
+  const d14 = DEPS.find(d=>d.id==="d14");
+  out.push("d14 (timestamps ← T-S1 bench) baseline: " + depStatus(d14).code + " [expect stretch]");
+  q3s("T-S1").promoted = true;
+  out.push("after PROMOTE T-S1: d14 = " + depStatus(d14).code + " [expect covered]");
+  q3s("T-S1").promoted = false;
+  // CRIT counters
+  out.push("crit counts baseline: " + LEADERS.filter(l=>l.id!=="others").map(l=>l.id+":"+critCount(l.id)).join(" ") + " [expect all 2]");
+  q3s("M3").crit = true;
+  out.push("after make-CRIT M3: mike=" + critCount("mike") + " [expect 3 → warns]");
+  q3s("M3").crit = null;
+  // export
+  const md = buildExport();
+  out.push("export length: " + md.length + " chars");
+  out.push("---- export first 40 lines ----");
+  out.push(md.split("\n").slice(0,40).join("\n"));
+  const pre = document.getElementById("selftest-out");
+  pre.style.display = "block";
+  pre.textContent = out.join("\n");
+  document.title = "SELFTEST-DONE";
+  saveEnabled = true;
+}
+
+/* boot */
+applyHash();
+render();
+if(location.hash === "#selftest") runSelfTest();
+</script>
+</body>
+</html>

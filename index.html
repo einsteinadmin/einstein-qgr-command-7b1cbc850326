@@ -246,6 +246,8 @@
 
   /* Materials shelf */
   .materials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .item-link { font-size: 0.78rem; font-weight: 700; white-space: nowrap; margin-left: 6px; }
+  .item-ctx { font-size: 0.76rem; color: #64748b; margin-top: 3px; line-height: 1.45; max-width: 640px; }
   .material-tile {
     display: flex; align-items: center; gap: 10px;
     border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
@@ -373,6 +375,13 @@
 <div class="wrap">
 
   <div class="zone active" id="zone1">
+
+    <div class="section">
+      <div class="section-eyebrow">Start here</div>
+      <div class="section-title">The kit — one front door</div>
+      <div class="section-desc">Every QGR prep tool, linked from here and linking back. HQ = the map (all quarter) · Runsheet = one day's script · Triage Room = the workbench where decisions actually get made.</div>
+      <div class="materials-grid" id="toolkitGrid"></div>
+    </div>
 
     <div class="section">
       <div class="section-eyebrow">Pre-QGR</div>
@@ -516,7 +525,32 @@
      SEED DATA
      ============================================================ */
 
-  var LS_PREFIX = 'qgrhq-q3-2026-';
+  var HQ_VERSION = 'v2.0 2026-07-20'; // bump on every deploy — live verification greps for this
+  var LS_PREFIX = 'qgrhq-q3-2026-v2-';
+  // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
+  // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
+  // items support links + context lines, toolkit strip added. Old v1 localStorage is
+  // intentionally abandoned — the export superseded it.
+
+  var DEFAULT_PHASES = {
+    'A-0': { checked: true,  note: '', noteOpen: false },
+    'A-3': { checked: true,  note: "Still getting individual leaders' exports but Cam/Paul side has been reviewed and updated.", noteOpen: false },
+    'A-4': { checked: true,  note: "Done once initially (7/16 reconciliation). Final dedupe + cleanup after all AARs/eNPS exports land — Albert's multi-agent consolidation audit launched 7/20.", noteOpen: false },
+    'A-6': { checked: false, note: 'Pending projected status today for everyone but Anne (hers Tue AM).', noteOpen: false },
+    'B-0': { checked: true,  note: '', noteOpen: false },
+    'B-1': { checked: true,  note: '', noteOpen: false },
+    'B-2': { checked: true,  note: '', noteOpen: false },
+    'B-3': { checked: true,  note: '', noteOpen: false },
+    'C-0': { checked: false, note: 'Pending. Should have it in the next day or two.', noteOpen: false },
+    'C-1': { checked: true,  note: 'Already done and confirmed with regionals and branches.', noteOpen: false },
+    'C-2': { checked: false, note: 'July targets already in place run higher than projected Aug revenue needs; Aug–Oct targets usually wait until closer to EOM. Handle by EOM — not a QGR blocker.', noteOpen: false },
+    'D-7': { checked: false, note: 'Deliberately moved later in the order per Cameron 7/20 — reforecast lands ~Tue 7/21 with Ben.', noteOpen: false }
+  };
+
+  var DEFAULT_TRACKER = {
+    'Amanda-0': 2, 'Brian-0': 2, 'Mike-0': 2, 'Matisen-0': 2, 'Anne-0': 2, 'Paul-0': 2, 'Cameron-0': 2,
+    'Amanda-1': 2, 'Brian-1': 2, 'Mike-1': 2, 'Matisen-1': 2, 'Anne-1': 2, 'Paul-1': 2, 'Cameron-1': 2
+  };
   var LS_KEYS = {
     gates: LS_PREFIX + 'gates',
     phases: LS_PREFIX + 'phases',
@@ -547,13 +581,21 @@
       id: 'A', title: 'Signal collection', window: 'now → 7/15',
       items: [
         'Team adds biggest constraints/opportunities to Master Backlog + Mural',
-        'Theme/dashboard/rewards ideas from Claims + Sales (Amanda)',
+        { text: "Collect Amanda's next-quarter theme/dashboard/rewards ideas (Claims + Sales)",
+          ctx: 'Yes — this is idea-collection FROM Amanda. Her eNPS export + AAR carry most of it; anything extra → her Monday sync.' },
         'QGR docs & folder access check',
-        'Collect eNPS survey results + slide content',
-        'Review/update Master Backlog (dedupe, emoji statuses)',
-        'People Analyzer — Roundtable + branches run in advance',
+        { text: 'Collect eNPS survey results + slide content',
+          url: 'https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/', urlLabel: 'one-pager',
+          ctx: "Cameron's 52-response review DONE 7/20 → rollup on the Master Backlog + follow-ups pulse 12552505226. Leader exports due 2:30 today (Anne Tue AM)." },
+        { text: 'Review/update Master Backlog (dedupe, emoji statuses)',
+          url: 'https://einsteinmoving.monday.com/boards/18408300070', urlLabel: 'Master Backlog',
+          ctx: 'Albert consolidation audit running 7/20: TL;DR master updates on every heavy pulse + dedupe/grouping report. Final pass after all AAR/eNPS exports land.' },
+        { text: 'People Analyzer — build the collect/display tool (Albert)',
+          ctx: 'Split 7/20 per Cameron: build the tool first so it is easy to run, collect, and display. Run + cascade = the last two items in this phase.' },
         'Q2 results snapshot (SG/G/R per rock off dashboard)',
-        'QG success-rate tracker refresh (7-quarter parser)'
+        'QG success-rate tracker refresh (7-quarter parser)',
+        "People Analyzer — run for Cameron + Paul's directs (with the tool)",
+        'People Analyzer — cascade: each leader runs it for their team → movers'
       ]
     },
     {
@@ -576,17 +618,28 @@
       ]
     },
     {
-      id: 'D', title: 'Cameron + Paul prep days', window: '7/20–7/21, Ben joins 7/21',
+      id: 'D', title: 'Cameron + Paul prep days', window: '7/20–7/21, Ben joins 7/21 · order = the real Day-1 flow (reordered 7/20 per Cameron)',
       items: [
-        'Review financial analysis + validate numbers',
-        'Rock candidates drafted for all leaders (Albert first pass, 70–80% right)',
+        { text: 'Theme decision (Back to School training = leading candidate; Estimate Accuracy likely Q4)',
+          url: 'qgr-triage-room.html', urlLabel: 'Triage Room',
+          ctx: 'Decision surface = Triage Room Q3 view. Theme queue on the MB: 12556457451 Speed to Competence · 12556457452 Demand Pursuit · 12556457453 Estimate Accuracy (Q4).' },
+        { text: 'Rock candidates — red-pen the Albert first pass (70–80% right by design)',
+          url: 'rock-candidates-q3-DRAFT-2026-07-18.md', urlLabel: 'draft + eNPS addendum' },
+        { text: '7 Strata / FACe review — ⭐ Paul title conversation',
+          ctx: "The queued item: retire CFO/COO → CFAO or plain CFO (Rob 7/10 rec: Paul = CFO, drop COO — Mike is Head of Ops; org chart update = Anne). Same block: Mike's Dept-Head/Regional split ask (MB 12556464031) + Amanda's Calvin-role question." },
+        'Personnel plans — Management Movement & Training Board (Daniel/N. Austin transition, Garland + Tampa new-manager dev)',
+        { text: 'Whiteboard map — major projects × cross-dept dependencies (the Matisen-bottleneck catcher)',
+          url: 'qgr-triage-room.html', urlLabel: 'dependency board (23 rows)' },
         'Cameron’s own Q3 rocks finalized + pressure-tested',
-        '7 Strata / FACe review (⭐ includes Paul title item — see meeting-prep queue)',
         'OPSP for owners',
-        'Theme decision (Back to School training theme = leading candidate; Estimate Accuracy likely Q4)',
-        'Dinner/activity reservations',
+        { text: 'Review financial analysis + validate numbers',
+          ctx: 'Deliberately NOT first (Cameron 7/20) — Q3 reforecast lands ~Tue 7/21 with Ben (9–1 block).' },
+        { text: 'Dinner/activity reservations',
+          ctx: 'For QGR nights 7/29–30 — pick the spot + book this week.' },
         'Print praise for Roundtable',
-        'Connections Brief #2 (pulse 12447028023, 7/27)'
+        { text: 'Connections Brief #2',
+          url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12447028023', urlLabel: 'pulse 12447028023',
+          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' }
       ]
     },
     {
@@ -682,6 +735,18 @@
     }
   };
 
+  var TOOLKIT_SEED = [
+    { icon: '🛠', label: 'QGR Triage Room', sub: 'the workbench — Q2 review · Q3 triage · dependencies', url: 'qgr-triage-room.html' },
+    { icon: '📅', label: 'Day-1 Runsheet (Mon 7/20)', sub: "today's script — detail view of Phase D", url: 'day1-runsheet-2026-07-20.html' },
+    { icon: '🪨', label: 'Q3 Rock Slate — first pass', sub: 'LOCAL FILE only (personnel detail) — red-pen draft + eNPS addendum', url: 'rock-candidates-q3-DRAFT-2026-07-18.md' },
+    { icon: '💬', label: 'eNPS Rollup (7/20)', sub: 'LOCAL FILE only (people-sensitive) — Lane A goal fuel · Lane B follow-ups', url: 'enps-rollup-2026-07-20.md' },
+    { icon: '📊', label: 'eNPS Q2 One-Pager', sub: 'the packet deep-dive', url: 'https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/' },
+    { icon: '📝', label: 'AAR pulse (leaders, 2:30)', sub: 'Sky Board 12578917480', url: 'https://einsteinmoving.monday.com/boards/1146915251/pulses/12578917480' },
+    { icon: '🗳', label: 'eNPS review pulse (2:30)', sub: 'Sky Board 12578946632', url: 'https://einsteinmoving.monday.com/boards/1146915251/pulses/12578946632' },
+    { icon: '📋', label: 'Master Backlog', sub: 'QGR Q3 Review view = lens-tagged items', url: 'https://einsteinmoving.monday.com/boards/18408300070' },
+    { icon: '🎒', label: 'Walking Pack v2', sub: 'the single best pre-read (Drive)', url: 'https://drive.google.com/file/d/14MzHdAqHXU4Z4xYuRk6i3dqsjL2D3ySv/view' }
+  ];
+
   var MATERIALS_SEED = [
     { icon: '📊', label: 'Goals Dashboard', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/goals-dashboard/' },
     { icon: '🌀', label: 'Flywheel', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-flywheel/' },
@@ -708,6 +773,11 @@
 
   var CHANGELOG_SEED = [
     { date: '7/9', text: 'HQ built.' },
+    { date: '7/20c', text: 'HQ v2 (Cameron\'s iteration pass, Day 1 mid-day): his export ingested as the running log — raw 7/20 notes: A-1 "Is this collecting ideas from Amanda about next quarter?" (answered inline) · A-3 "Still getting individual leader\'s exports but Cam/Paul has been reviewed and updated" · A-4 "done once initially; final dedupe after AARs/eNPS exports land" · A-5 "build a tool for this… two parts + cascade" (item SPLIT into build/run/cascade) · A-6 "pending projected status, everyone but Anne" · C-0 "next day or two" · C-2 "July targets higher than needed; Aug–Oct wait til EOM, not a QGR priority" · D-0 "not sure this can be placed first" (Phase D REORDERED to real Day-1 flow, fin-review moved to slot 8) · D-3/D-5/D-8 "need links/context" (items now support links + context lines — added throughout). NEW: toolkit strip at top = one front door (Triage Room · Runsheet · rock draft · eNPS rollup/one-pager · both 2:30 pulses · MB · walking pack); storage bumped to v2 with the export baked in as default state. Known want, post-QGR: multi-user save state (DB or shared-state page) — this cycle stays export/import w/ Albert as merge-master.' },
+    { date: '7/20b', text: 'eNPS morning wave: Cameron finished all 52 responses → raw export archived + two-lane rollup (enps-rollup-2026-07-20.md): Lane A = 12 themes → Master Backlog (9 evidence updates on existing items + 2 new eNPS-lens items: Five Bullet Friday monthly dispatch 12579685982 · Connection Cadence 12579679101) · Lane B = 14 people follow-ups → Cam\'s Board pulse 12552505226 (renamed; Lukas Konrad first, this week) + 3 O3 items queued. eNPS addendum appended to the rock draft (headline: manager-pipeline = biggest cluster, 7+ voices → strengthens Speed to Competence; pace-of-change 7 voices → argues smaller finalist slate; Mike role-split → 7-Strata block). ANNE OOO today → both her deadlines extended to Tue AM (replies posted on both pulses). Albert multi-agent MB consolidation + dedupe audit LAUNCHED (TL;DR master updates on heavy pulses + duplicate/grouping report).' },
+    { date: '7/20', text: 'Day 1 AM (mid-day session): leadership comms SHIPPED for the freed meeting block — AAR pulse 12578917480 (4-Q skinny AAR + COS prompt, canonical file aar-q2-skinny-prompt.md) + eNPS review pulse 12578946632 (REGIONAL tool attached w/ full instructions; Anne\'s FULL-ACCESS copy via private DM, export REROUTED to DM after Cameron caught the exposure risk). Both due 2:30 PM TODAY (AAR moved up from Fri; stale Slack announcement deleted by Cameron, corrected one posted). eNPS tool bottom-bar UX fixed all variants pre-share; variants RENAMED to access-level names (FULL-ACCESS-cam-paul-anne-ONLY / REGIONAL-safe-to-share). Sunday walk flop memory\'d (voice mode can\'t carry pasted context) — no pre-made decisions; all five Day-1 calls happen live w/ Paul. 2:30: Albert compiles both pulses + Anne\'s DM → follow-up list + Triage Room ingest.' },
+    { date: '7/18b', text: 'Sat evening build sprint, all three deliverables landed: (1) Walking pack v2 (45KB, same Drive link) — alternates bench per leader + appendices A–G (flywheel/PACe · Rob 7/15 outputs [only Cameron\'s constraints were ever captured locally — other 6 leaders marked ask-Albert] · Q2 carry map · seasonality · eNPS aggregates · dated financials · backlog finalists); eNPS trend figures corrected to workspace sources (manager/CET +81, mover Q1 +46 — old +39/+58 numbers unsourced). (2) QGR Triage Room SHIPPED (qgr-triage-room.html, local-only) — 3 views: Q2 review (48 cards, PROJ/SELF divergence, AAR slots for Fri 7/24 digests) · Q3 triage (34 rocks + 7 bench, accept/edit/kill/promote, CRIT 2/2 counters, Matisen 4-rock HARD CAP) · live dependency board (23 rows, kill-a-rock → dependents flip NOT COVERED); Markdown decision-log export; verified headless incl. dependency-flip probe. Sheet stays the collection surface this cycle; the Room is the review/decision surface for Mon–Wed + the QGR. (3) AAR two-tier ask redrafted (deep on 2 CRITs, slim elsewhere, PROJ grades, due Fri 7/24) — STAGED, awaiting Cameron send.' },
+    { date: '7/18', text: 'Pre-Paul-days pass (Sat): HQ cross-referenced against the master QGR prep pulse (5895410985, 58 sub-items) — 2 recurring items recovered into Phase D (personnel plans via Management Movement & Training Board · whiteboard cross-dept dependency map); Power of One stays parked (Rob still owes the tools). Constraint consolidation confirmed DONE 7/16 (533-item backlog reconciled; theme queue seeded: ⭐ Speed to Competence · ⭐ Demand Pursuit Muscle · Estimate Accuracy → Q4) — Monday = decide, not consolidate. Monday kit built: Day-1 runsheet + Q3 rock-slate first pass (rock-candidates-q3-DRAFT-2026-07-18.md) + AAR-request draft staged for Cameron approval. Calendar note: Mon fully open (QGR-only fortnight), Ben ad hoc + structured Tue 9–1.' },
     { date: '7/17', text: 'Cameron 7/14 Continuing-Education notes filed into the theme candidates (nothing lost before QGR): Speed-to-Competence item (12556457451) now carries the full Q3 training slate — enhanced training days w/ LIT skill test-outs, managers-more-onsite, every-lead CHOICES + key-skill recert, new lead tracks (advanced/hospitality/estimate/basic recert), Magic Moments moving-PEOPLE-not-things training, jogging-to-the-truck hustle standard, top-trainers highlighted/rewarded (guest-trainer slots idea). Estimate-Accuracy item (12556457453): onsite estimates earlier in mover development + estimate-to-actuals speed tracked per mover (trend-coached, not a games metric). App-side feedback already delivered to Mike/Matisen.' },
     { date: '7/17', text: 'eNPS deep-dive artifact SHIPPED for the packet: Manager & CET Q2 one-pager published to Pages (einstein-enps-q2-85ad152731ab) — v1.1 adds the two sections the Q1 deck had and the one-pager lacked: a Next Steps action slate (5 moves mapped to survey themes, QGR-finalize flags) + the last-mandatory-survey policy-change section (voluntary going forward, participation rate = new baseline signal). Decision: NO Replit slideshow this cycle — the one-pager IS the presentation, linked as a packet deep-dive. ⚠ Leadership-scorecard section = the gate-before-wide-share item. Also: Matisen building per-branch staffing-per-truck forecast model (~4 wks) off the TUR-definition gap (Mike: truck-on/off vs utilization %) — Q3/packet-relevant for FTE targets + closed-truck story; all-branch 18-mo revenue-vs-target lookback in flight (Leander first: 1-of-6 months on target).' },
     { date: '7/16', text: 'Three 1:1s digested (Austin L, Mike, Anne) — two QGR inputs landed. (1) DAMAGES REFRAME (Anne 1:1): damages = cost of doing business, branch-level — pause individual-accountability systems, baseline per branch/region over a quarter, drive the average down via monthly training themes + branch competition; NO pay-docking; promotion = keep-your-job threshold only; games keep damages at branch level. Finalizes at QGR — added to Day 2 agenda; alignment recap posted to Anne. (2) AI/TOOL GOVERNANCE named as a Q3 workstream candidate alongside speed-to-competence (Mike\'s dashboard sprawl + Matisen\'s 31 dashboards + Anne\'s single-source-of-truth worry, all same day): central data bus + EMMA toolkit + monthly Big Rocks review — Master Backlog item 12556198241 (Critical), Gerald tool-inventory ask + network setup audit both due ~8/7. Also: eNPS goes VOLUNTARY next survey (participation rate = new baseline metric — packet note for the engagement section); conversion-basis answer from Matisen (19.9% vs 40% NOT comparable, two definition changes — stop scoring Q2 against 40%, judge on undistorted metrics); Mike Fleet Safety honestly flipped to RED (QTD 89 vs 90); Mike ITP red→SUPER GREEN (book + survey done).' },
@@ -750,8 +820,8 @@
 
   var state = {
     gates: loadState(LS_KEYS.gates, {}),           // { gateId: 'upcoming'|'today'|'done'|'auto' }
-    phases: loadState(LS_KEYS.phases, {}),         // { 'A-0': {checked:bool, note:''}, ... }
-    tracker: loadState(LS_KEYS.tracker, {}),       // { 'Amanda-0': 0|1|2, ... }
+    phases: loadState(LS_KEYS.phases, JSON.parse(JSON.stringify(DEFAULT_PHASES))), // Cameron's 7/20 export = default
+    tracker: loadState(LS_KEYS.tracker, JSON.parse(JSON.stringify(DEFAULT_TRACKER))),
     aar: loadState(LS_KEYS.aar, {}),               // { 'r1-achieve': 'text', ... }
     agenda: loadState(LS_KEYS.agenda, null),       // { day1:{label,items:[]}, day2:{...} } or null = use seed
     decisions: loadState(LS_KEYS.decisions, []),   // [{id,text,owner,due,link,status}]
@@ -911,15 +981,20 @@
       wrap.appendChild(block);
 
       var itemsWrap = block.querySelector('#phase-items-' + phase.id);
-      phase.items.forEach(function (itemText, idx) {
+      phase.items.forEach(function (itemDef, idx) {
+        var it = (typeof itemDef === 'string') ? { text: itemDef } : itemDef;
         var k = phaseItemKey(phase.id, idx);
         var itemState = state.phases[k] || { checked: false, note: '', noteOpen: false };
+        var linkHtml = it.url
+          ? ' <a class="item-link" href="' + esc(it.url) + '" target="_blank" rel="noopener noreferrer">' + esc(it.urlLabel || 'open') + ' ↗</a>'
+          : '';
+        var ctxHtml = it.ctx ? '<div class="item-ctx">' + esc(it.ctx) + '</div>' : '';
         var row = document.createElement('div');
         row.className = 'phase-item-row';
         row.innerHTML =
           '<div class="phase-item-check' + (itemState.checked ? ' checked' : '') + '" data-key="' + k + '">' + (itemState.checked ? '✓' : '') + '</div>' +
           '<div class="phase-item-text-wrap">' +
-            '<div class="phase-item-text' + (itemState.checked ? ' checked-text' : '') + '">' + esc(itemText) + '</div>' +
+            '<div class="phase-item-text' + (itemState.checked ? ' checked-text' : '') + '">' + esc(it.text) + linkHtml + '</div>' + ctxHtml +
             '<button class="note-toggle" data-key="' + k + '">' + (itemState.note ? '✎ edit note' : '✎ add note') + '</button>' +
             '<textarea class="phase-item-note" data-key="' + k + '" placeholder="Note…" style="display:' + (itemState.noteOpen ? 'block' : 'none') + '">' + esc(itemState.note || '') + '</textarea>' +
           '</div>';
@@ -1111,6 +1186,28 @@
   /* ============================================================
      MATERIALS SHELF
      ============================================================ */
+
+  function renderTileGrid(elId, seed) {
+    var wrap = document.getElementById(elId);
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    seed.forEach(function (m) {
+      var a = document.createElement('a');
+      a.className = 'material-tile';
+      a.href = m.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.innerHTML =
+        '<div class="material-icon">' + m.icon + '</div>' +
+        '<div>' +
+          '<div class="material-label">' + esc(m.label) + '</div>' +
+          '<div class="material-sub">' + esc(m.sub) + '</div>' +
+        '</div>';
+      wrap.appendChild(a);
+    });
+  }
+
+  function renderToolkit() { renderTileGrid('toolkitGrid', TOOLKIT_SEED); }
 
   function renderMaterials() {
     var wrap = document.getElementById('materialsGrid');
@@ -1378,6 +1475,7 @@
     renderTracker();
     renderRockGrid();
     renderAgenda();
+    renderToolkit();
     renderMaterials();
     renderAllDecisionTables();
     renderRolloutChecklist();
@@ -1452,6 +1550,5 @@
   }
 })();
 </script>
-<!-- v-2026-07-17b-ce-notes -->
 </body>
 </html>
