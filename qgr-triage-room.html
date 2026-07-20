@@ -580,7 +580,7 @@ function loadState(){
 }
 let saveEnabled = true;
 function save(){ if(!saveEnabled) return; try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
-// SELF grades + AAR digests from the 7/20 export compile (5 of 7 in; Brian + Anne pending).
+// SELF grades + AAR digests from the 7/20 export compile (6 of 7 in — Brian's retrieved from cos-vera; Anne Tue AM).
 // Applied as DEFAULTS — anything already set by hand in this browser wins.
 const SELF_SEED = {
  "mike-q2-0":{g:"SG",a:"AAR 7/20: 107% regional avg (SG bar 105%), 4 of 5 branches ≥100%; McKinney 93% = the anchor. System: hiring dashboard + aim-high 110–120% rule. Carry: close McKinney's overstaffing gap."},
@@ -605,6 +605,12 @@ const SELF_SEED = {
  "paul-q2-3":{g:"R",a:"AAR 7/20: 5% complete, second consecutive dry quarter — prioritization, not bandwidth. Carry + ELEVATE; pipeline-reactive restructure on the table (P3 draft)."},
  "paul-q2-4":{g:"G",a:"AAR 7/20: rescued by a blocked 7/18–19 weekend; framework built across all 3 legs. Lesson: calendar-block automation work early. Close."},
  "paul-q2-5":{g:"G",a:"AAR 7/20: read early, reflection late; Hungry-improvement strategies now active. Close reading; carry strategies."},
+ "brian-q2-0":{g:"R",a:"AAR 7/20: honest R on a CRIT — CTXH regional ~6.6 vs the 7 bar (company 7.1 green; SA championship if numbers hold). Root gap: no weekly cadence turning branch data into named, delivered coaching at NA/HOU. Carry restructured → weekly management-accountability cadence rock (managers own the loop, Brian inspects it)."},
+ "brian-q2-1":{g:"G",a:"AAR 7/20: G* — eNPS done all teams (June not May), Daniel hired, 4/5 branches >100% FTE (LEA 91%, up from 84%). Big owning: the BM-hire scorecard process 'a failure' — rushed, not a fair lens for senior people (matches Frank/Khevan feedback). Q3: performance-mirror evals + demand-based staffing model (FTE/TUR/leads-to-run-trucks)."},
+ "brian-q2-2":{g:"G",a:"AAR 7/20: full certification system built (framework, module, board, glossary, HQ) — rollout itself lands early Q3 (certify every board in first 2 wks). Lesson: sequence build AND rollout inside one quarter."},
+ "brian-q2-3":{g:"G",a:"AAR 7/20: 3 of 5 branches w/ scorecard audits + huddle assessments — green bar met; S. Austin possibly Friday. Q3: protect travel in the schedule + share findings back with BMs."},
+ "brian-q2-4":{g:"R",a:"AAR 7/20: honest Y→R — calendar app live company-wide, but the stations overhaul (the core) never got built; the delegation to FMs was never sent. Lesson: an un-sent delegation = no progress. Carry restructured: FM-delegated stations overhaul, on their boards this week."},
+ "brian-q2-5":{g:"G",a:"AAR 7/20: book on pace, reflection to Rob early; group session flipped his low virtue Hunger→SMART (lacks courage for direct coaching convos — same mechanism behind the BM-process fallout + NA/HOU coaching gap). Carry: the direct-feedback growth thread."},
  "cameron-q2-0":{g:"G",a:"AAR 7/20: all 7 COS live but 2 of 7 fail 'reliably pushing status up'; Tier-2-class value shipped through leaders' COS. SG conditional on EMMA feed by EOQ. Carry restructured: Tier 3 pilot + continuing-ed/QC + data bus; metric = hard placement goals."},
  "cameron-q2-1":{g:"G",a:"AAR 7/20: 3 wedges validated + building; sweep never ran — every wedge routes through Matisen; scope drifted by absorption. Restructure → governance workstream + FDE question."},
  "cameron-q2-2":{g:"SG",a:"AAR 7/20: written SG met with margin. Wince: missing-contracts bug ran weeks undetected; conversion-by-price never landed. Close as rock → Tuesday cadence is operations."},
