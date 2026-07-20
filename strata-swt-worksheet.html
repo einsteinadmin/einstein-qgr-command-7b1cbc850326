@@ -38,6 +38,10 @@
   .acts { gap:8px; }
   .act.on-keep { background:var(--green); border-color:var(--green); color:#fff; }
   .act.on-cut { background:var(--red); border-color:var(--red); color:#fff; }
+  .notebtn { flex-shrink:0; border:1px solid var(--line); background:#faf8f4; border-radius:7px; font-size:.78rem; padding:7px 10px; cursor:pointer; }
+  .notebtn.has { background:#fdf3e7; border-color:var(--orange); color:var(--orange); font-weight:700; }
+  .rownote { flex-basis:100%; border:1px solid var(--line); border-radius:7px; padding:6px 9px; font-size:.78rem; font-family:inherit; background:#fffdf8; margin-left:0; resize:none; }
+  .stratum .rownote { width:100%; margin-top:6px; }
   .addbtn { font-size:.76rem; font-weight:700; color:var(--orange); background:none; border:1px dashed var(--orange); border-radius:8px; padding:5px 12px; cursor:pointer; margin:2px 0 10px; }
   .stratum { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 14px; }
   .stratum h3 { font-size:.88rem; margin-bottom:4px; }
@@ -182,8 +186,10 @@ function renderList(sec){
       '<div class="acts">'+
         '<button class="act'+(it.d==='keep'?' on-keep':'')+'" data-sec="'+sec+'" data-i="'+i+'" data-d="keep">✓</button>'+
         '<button class="act'+(it.d==='cut'?' on-cut':'')+'" data-sec="'+sec+'" data-i="'+i+'" data-d="cut">✕</button>'+
+        '<button class="notebtn'+(it.note?' has':'')+'" data-sec="'+sec+'" data-i="'+i+'" title="Comment — why kept/cut/added">✎</button>'+
       '</div>'+
-      (it.why ? '<div class="why">'+esc(it.why)+'</div>' : '');
+      (it.why ? '<div class="why">'+esc(it.why)+'</div>' : '')+
+      ((it.noteOpen || it.note) ? '<textarea class="rownote" data-sec="'+sec+'" data-i="'+i+'" rows="1" placeholder="Why — this exports to Albert…">'+esc(it.note||'')+'</textarea>' : '');
     wrap.appendChild(row);
   });
   var add = document.createElement('button');
@@ -198,12 +204,29 @@ function renderList(sec){
       state[el.dataset.sec][+el.dataset.i].t = el.value; autosize(el); save();
     });
   });
+  wrap.querySelectorAll('.notebtn').forEach(function(el){
+    el.addEventListener('click', function(){
+      var it = state[el.dataset.sec][+el.dataset.i];
+      it.noteOpen = !(it.noteOpen || it.note);
+      if (!it.noteOpen && !it.note) {} // closing an empty note
+      save(); renderList(el.dataset.sec);
+      if (it.noteOpen) { var ta = wrap.querySelector('.rownote[data-sec="'+el.dataset.sec+'"][data-i="'+el.dataset.i+'"]'); if (ta) ta.focus(); }
+    });
+  });
+  wrap.querySelectorAll('.rownote').forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){
+      state[el.dataset.sec][+el.dataset.i].note = el.value; autosize(el); save();
+    });
+  });
   wrap.querySelectorAll('.act').forEach(function(el){
     el.addEventListener('click', function(){
       var it = state[el.dataset.sec][+el.dataset.i];
       it.d = (it.d === el.dataset.d) ? null : el.dataset.d;
+      if (it.d === 'cut' && !it.note) it.noteOpen = true; // capture the why in the moment
       save(); renderList(el.dataset.sec); renderCounts();
-      toast(it.d ? (it.d==='keep'?'Kept':'Cut') + ' — saved' : 'Ruling cleared');
+      toast(it.d ? (it.d==='keep'?'Kept':'Cut — add the why ✎') + ' — saved'.replace(' — saved',' · saved') : 'Ruling cleared');
+      if (it.d === 'cut') { var ta = wrap.querySelector('.rownote[data-sec="'+el.dataset.sec+'"][data-i="'+el.dataset.i+'"]'); if (ta) ta.focus(); }
     });
   });
 }
@@ -216,12 +239,17 @@ function renderStrata(){
     box.className = 'stratum';
     box.innerHTML = '<h3>'+esc(s.name)+'</h3>'+
       '<textarea data-i="'+i+'" rows="2">'+esc(s.text)+'</textarea>'+
-      (s.flag ? '<div class="flag">'+esc(s.flag)+'</div>' : '');
+      (s.flag ? '<div class="flag">'+esc(s.flag)+'</div>' : '')+
+      '<textarea class="rownote" data-note-i="'+i+'" rows="1" placeholder="Notes / why changed — exports to Albert…">'+esc(s.note||'')+'</textarea>';
     wrap.appendChild(box);
   });
-  wrap.querySelectorAll('textarea').forEach(function(el){
+  wrap.querySelectorAll('textarea:not(.rownote)').forEach(function(el){
     autosize(el);
     el.addEventListener('input', function(){ state.strata[+el.dataset.i].text = el.value; autosize(el); save(); });
+  });
+  wrap.querySelectorAll('textarea.rownote').forEach(function(el){
+    autosize(el);
+    el.addEventListener('input', function(){ state.strata[+el.dataset.noteI].note = el.value; autosize(el); save(); });
   });
 }
 
@@ -251,11 +279,12 @@ document.getElementById('exportMd').addEventListener('click', function(){
     state[sec].forEach(function(it){
       if(it.d==='cut'){ L.push('- ~~'+it.t+'~~ [CUT]'); }
       else { L.push('- '+it.t+(it.o!=='april'?' ['+it.o.toUpperCase()+(it.d?'/'+it.d:'/UNRULED')+']':'')); }
+      if(it.note) L.push('  - WHY (Cameron/Paul): '+it.note.replace(/\n/g,' · '));
     });
     L.push('');
   });
   L.push('## 7 Strata');
-  state.strata.forEach(function(s){ L.push('### '+s.name); L.push(s.text); if(s.flag) L.push('_'+s.flag+'_'); L.push(''); });
+  state.strata.forEach(function(s){ L.push('### '+s.name); L.push(s.text); if(s.flag) L.push('_'+s.flag+'_'); if(s.note) L.push('WHY/NOTES (Cameron/Paul): '+s.note.replace(/\n/g,' · ')); L.push(''); });
   var md=L.join('\n');
   var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([md],{type:'text/markdown'})); a.download='swt-strata-'+state.quarter.replace(/\s/g,'')+'.md'; a.click();
   if(navigator.clipboard && navigator.clipboard.writeText){
