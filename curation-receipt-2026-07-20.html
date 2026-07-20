@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Curation Receipt · Q3 Shortlist Trust Check</title>
+<style>
+  :root { --navy:#1c2b4a; --orange:#e8762d; --bg:#f6f4ef; --card:#fff; --line:#e3ded4; --muted:#64748b; --green:#0d8a4f; --red:#c2372f; --amber:#b7791f; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--navy); padding:20px; max-width:1060px; margin:0 auto; }
+  h1 { font-size:1.35rem; } h1 em { color:var(--orange); font-style:normal; }
+  .sub { color:var(--muted); font-size:.85rem; margin:4px 0 14px; }
+  .bar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:16px; }
+  .btn { border:1px solid var(--line); background:var(--card); padding:7px 14px; border-radius:8px; font-weight:700; font-size:.82rem; cursor:pointer; }
+  .btn.primary { background:var(--orange); border-color:var(--orange); color:#fff; }
+  .prog { font-size:.8rem; color:var(--muted); margin-left:auto; }
+  details.method { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:16px; font-size:.85rem; line-height:1.55; }
+  details.method summary { font-weight:800; cursor:pointer; }
+  h2 { font-size:1rem; margin:20px 0 8px; border-bottom:2px solid var(--line); padding-bottom:4px; }
+  .leader { font-weight:800; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; color:var(--orange); margin:14px 0 6px; }
+  .row { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin-bottom:8px; }
+  .row.decided-confirm { border-left:4px solid var(--green); }
+  .row.decided-challenge { border-left:4px solid var(--red); }
+  .row.decided-promote { border-left:4px solid var(--green); }
+  .row.decided-keep { border-left:4px solid var(--amber); }
+  .row.decided-kill { border-left:4px solid var(--red); }
+  .row-top { display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; }
+  .rname { font-weight:800; font-size:.92rem; }
+  .crit { font-size:.68rem; font-weight:800; color:#fff; background:var(--navy); border-radius:4px; padding:1px 6px; }
+  .prov { font-size:.82rem; color:#3f4c66; margin-top:4px; line-height:1.5; }
+  .chips { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+  .chip { border:1px solid var(--line); background:#faf8f4; border-radius:999px; padding:4px 12px; font-size:.76rem; font-weight:700; cursor:pointer; }
+  .chip.on-confirm, .chip.on-promote { background:var(--green); border-color:var(--green); color:#fff; }
+  .chip.on-challenge, .chip.on-kill { background:var(--red); border-color:var(--red); color:#fff; }
+  .chip.on-keep { background:var(--amber); border-color:var(--amber); color:#fff; }
+  .note { width:100%; margin-top:8px; border:1px solid var(--line); border-radius:8px; padding:7px 9px; font-size:.8rem; font-family:inherit; min-height:34px; display:none; }
+  .note.show { display:block; }
+  .notebtn { font-size:.72rem; color:var(--muted); background:none; border:none; cursor:pointer; margin-top:6px; padding:0; font-weight:700; }
+  .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:var(--navy); color:#fff; padding:9px 18px; border-radius:8px; font-size:.82rem; opacity:0; transition:opacity .25s; pointer-events:none; }
+  .toast.show { opacity:1; }
+  .foot { color:var(--muted); font-size:.75rem; margin:24px 0 8px; }
+  a { color:var(--orange); }
+</style>
+</head>
+<body>
+<h1>Curation <em>Receipt</em> — Q3 shortlist trust check</h1>
+<div class="sub">Cameron + Paul · 7/20 · Confirm or challenge each rock's reason-for-existing, rule on the near-misses, then Export back to Albert. State saves in this browser. <a href="index.html">← QGR HQ</a></div>
+
+<div class="bar">
+  <button class="btn primary" id="exportBtn">⬇ Export decisions</button>
+  <button class="btn" id="resetBtn">Reset</button>
+  <span class="prog" id="prog"></span>
+</div>
+
+<details class="method">
+  <summary>The method — how the shortlist was curated (read once)</summary>
+  <p style="margin-top:8px">Weights in order: <b>(1) cross-leader convergence</b> at Rob's 7/15 constraint session (against BOTH lenses — Flywheel sub-wheels + PACe) · <b>(2) Rob's coaching reads</b> (speed-to-competence #1, Paul=CFO, travel week, theme fatigue) · <b>(3) Q2 carries</b> — every Red/Yellow got an explicit kill/carry/restructure call, nothing auto-carried · <b>(4) MB lens/priority flags</b> as tiebreaker only (the priority column is stale) · <b>(5) hard rules</b> — 2 CRITs per leader, Matisen hard-capped at 4, any rock leaning on Matisen must name its deliverable inside his T1–T4. It is judgment, 70–80% right by design. This sheet is the audit of that judgment: challenge the deltas, not the warehouse.</p>
+</details>
+
+<h2>Part 1 — Per-rock provenance (Confirm = the reason holds · Challenge = discuss at red-pen)</h2>
+<div id="rocks"></div>
+
+<h2>Part 2 — Near-misses (deliberately NOT shortlisted — rule on each)</h2>
+<div id="misses"></div>
+
+<div class="foot">Open questions (settle live, not here): theme cadence/format · Games+damages final wording · P3 kill/park/restructure · promotion cadence biweekly vs quarterly · Conversion $ KPI replacement. · LOCAL FILE — personnel detail, never hosted.</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+var LS='curation-receipt-2026-07-20-v1';
+
+var ROCKS=[
+ {l:'Mike',n:'M1 · Mover Training App — company-wide + driver port',c:1,p:'Theme engine. Q2 SG validation (3 wks DFWT, zero bugs) + 7/3 driver-port decision. 5 rocks lean on it.'},
+ {l:'Mike',n:'M2 · DFWT staffing + new-manager development',c:1,p:'Standing critical number; region 106–111% now; Daniel-era knock-ons.'},
+ {l:'Mike',n:'M3 · Fleet Safety Pt 3 (Red carry, restructured)',c:0,p:'Honest Red 7/16 (QTD 89 vs 90). Build done; Q3 = numbers + Samsara single-point-of-failure fix Cameron flagged.'},
+ {l:'Mike',n:'M4 · Games S5 DFWT + data-trust fixes',c:0,p:'7/15 leadership-call decisions (coaching-tool philosophy, snapshot archiving, Rippling-hour basis).'},
+ {l:'Anne',n:'A1 · Trial-day elimination → HPE go-live Aug 1',c:1,p:'Locked 7/16; biggest hiring-motion change of the year, lands day 1 of Q3.'},
+ {l:'Anne',n:'A2 · Mover promotion framework — first cohort live',c:1,p:'Framework decided 7/2; Rippling hours pull proven 7/17 (3 movers past floors). Execution quarter.'},
+ {l:'Anne',n:'A3 · Onboarding — close it out',c:0,p:'90%-done carry to actually bank it (2 videos + completion evidence).'},
+ {l:'Anne',n:'A4 · eNPS voluntary transition',c:0,p:'7/16 policy decision needs an owner; participation rate becomes the new signal.'},
+ {l:'Amanda',n:'C1 · Call grading at volume + coaching loop',c:1,p:'Wedge engine complete; 7/15 admission = distribution gap. Sales half of speed-to-competence.'},
+ {l:'Amanda',n:'C2 · Demand pursuit — speed-to-lead SLA + cadence',c:1,p:'Convergence #2 (Cam+Amanda+Matisen) + ~$300K budget gap + 21× 5-min stat. Replaces the broken 40% Conv$ number.'},
+ {l:'Amanda',n:'C3 · Chatbot launch + Leadferno sunset',c:0,p:'Green carry to land the ~Aug 1 launch.'},
+ {l:'Amanda',n:'C4 · New-rep ramp (sales speed-to-competence)',c:0,p:'Rob explicitly names training new SALES staff fast. Makes ramp time a measured thing.'},
+ {l:'Matisen',n:'T1 · Staffing-per-truck model + TUR definition fix',c:1,p:'7/17 TUR-definition gap; FTE targets built on full-truck assumptions; $315K closed-truck story. Build already scoped ~4 wks.'},
+ {l:'Matisen',n:'T2 · Central data bus + tool registry',c:1,p:'Governance item 12556198241 + Cameron’s 3 stated goals. The theme’s scoreboard rides this.'},
+ {l:'Matisen',n:'T3 · Games scoring automation + auditability',c:0,p:'Q2 discrepancy could not be root-caused (no snapshots archived). Next quarter’s likely blow-up — do it with change-mgmt.'},
+ {l:'Matisen',n:'T4 · Quote-funnel de-mix — ship the fields',c:0,p:'Owes Jeff the API spec (priority flag); Jeff’s UI done. Small rock, big unblock for C2.'},
+ {l:'Brian',n:'B1 · CTXH staffing + personnel budget',c:1,p:'Standing critical number; Leander (91.7%) = the Frank-vindication storyline.'},
+ {l:'Brian',n:'B2 · Manager speed-to-competence — cert Pt 5 + training board',c:1,p:'Theme one level up; Daniel = live case study; Jalissa beta running.'},
+ {l:'Brian',n:'B3 · Frank Williams 90-day reset',c:0,p:'Mirror ran 7/17 and landed; Q3 IS the 90 days; test case for coaching-first doctrine.'},
+ {l:'Brian',n:'B4 · Training Days as the theme vehicle',c:0,p:'Yellow carry restructured — trial-day elimination changes what TDs are FOR.'},
+ {l:'Brian',n:'B5 · Games S5 CTXH + quarter-close comms',c:0,p:'Owns quarter-close comms; CTXH 6.6 vs the 7 bar is the coaching target.'},
+ {l:'Paul',n:'P1 · CFO transition — title, seat, finance ownership',c:1,p:'Rob 7/10 rec converging with the 7/9 CFAO read. Succession convergence at the top.'},
+ {l:'Paul',n:'P2 · Mover PTO — signed-off → launch-ready',c:1,p:'Cameron sign-off 7/17; Jan 1 2027 rollout makes Q3 the make-it-real quarter.'},
+ {l:'Paul',n:'P3 · Geographic expansion (restructured to pipeline-reactive)',c:0,p:'0-of-5 evaluated says the count model is wrong; marketplace now knows Einstein is a buyer.'},
+ {l:'Paul',n:'P4 · Money collection easy wins (honesty-checked carry)',c:0,p:'Q2 green was “haven’t started but confident” — carried WITH the honesty check.'},
+ {l:'Cameron',n:'R1 · COS network maturity — ladder 1→2',c:1,p:'Q2 CRIT evolves. Metric = hard placement goals (per 7/20 AAR — supersedes hours-saved).'},
+ {l:'Cameron',n:'R2 · AI/tool governance workstream',c:1,p:'Day-2 DECIDE row; Cameron’s 3 goals (cross-pollination, central SOT, registry); Matisen T2 = the build.'},
+ {l:'Cameron',n:'R3 · Theme stewardship — launch + scoreboard',c:0,p:'Rob’s theme-fatigue warning: themes die when launched and abandoned. Someone owns keeping it alive.'},
+ {l:'Cameron',n:'R4 · Website — design done, dev contracted',c:0,p:'Honest scope: site-live in Q3 unrealistic (13-wk KP sprint). NOTE per 7/20 AAR: primarily KP’s goal now; Cameron optional oversight — challenge whether this stays on his slate at all.'},
+ {l:'Cameron',n:'R5 · Travel week pilot + O3s',c:0,p:'Rob’s model + the visits AAR (now RED) lesson: menu of visit types, one dedicated week, recency tracked.'}
+];
+
+var MISSES=[
+ {n:'⚠ Insurance ≈$903K/yr (MB 11748424546)',p:'Brief #1: UNOWNED Q3-rock candidate; audit re-flagged it 7/20. Biggest unowned number on the board. Promote = assign owner (Paul? Mike umbrella?).'},
+ {n:'Quarterly sales comp (12504319033)',p:'Currently stretch/design-only on Amanda’s slate. eNPS demand 4+ voices + Cameron: “this is the quarter for it.” Promote = real rock (Paul+Amanda), prerequisite quarterly-pace board.'},
+ {n:'Company wiki as its own QG',p:'Currently INSIDE T2 registry + Mike’s in-app wiki. Cameron: “needs to be a QG.” Promote = standalone rock with named owner.'},
+ {n:'Leadership succession framework',p:'Only a stretch (Anne). 3rd convergence + the biggest eNPS cluster argue for full-rock status.'},
+ {n:'Rippling AI eval (11835776502)',p:'Anne+Matisen Q3 candidate from June; didn’t survive Matisen’s 4-cap. Kill = confirm it dies this quarter.'},
+ {n:'COS consulting arm (12139057074)',p:'3-signals watch through Q3; deliberately not a rock.'},
+ {n:'Houston next branch / expansion pipeline',p:'Lives inside P3’s restructure, not standalone.'},
+ {n:'Fleet Damage app (Mike)',p:'Stays iced; bonus-only if M1 runs ahead of schedule.'},
+ {n:'Estimate Accuracy theme',p:'Deliberately Q4 (mover-app timestamp gate); only safe pieces ride Q3. Keep = re-confirm the gate.'},
+ {n:'eNPS/live-capture small items',p:'Five Bullet Friday · Connection Cadence · flex-day trial · office overlap days · branch-scorecard QGs · ITP-for-all + CE lane. Rule which become small QGs vs owner-routed tasks (ITP-for-all feels closest to rock-worthy per Cameron’s AAR).'},
+ {n:'Kickpoint ROAS/BigQuery',p:'Gated on Matisen 2 quarters running. Promote = move under Amanda or explicitly wait for the bus — anything but a third yellow quarter.'}
+];
+
+var state = {}; try { state = JSON.parse(localStorage.getItem(LS)||'{}'); } catch(e){}
+function save(){ localStorage.setItem(LS, JSON.stringify(state)); renderProg(); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+function rowHtml(kind,i,item){
+  var st = state[kind+i]||{};
+  var chips = kind==='r'
+    ? [['confirm','✓ Confirm'],['challenge','✗ Challenge']]
+    : [['promote','⬆ Promote'],['keep','⏸ Keep as-is'],['kill','✗ Kill']];
+  var cls = st.d ? ' decided-'+st.d : '';
+  return '<div class="row'+cls+'" id="'+kind+i+'">'+
+    '<div class="row-top"><span class="rname">'+esc(item.n)+'</span>'+(item.c?'<span class="crit">CRIT</span>':'')+'</div>'+
+    '<div class="prov">'+esc(item.p)+'</div>'+
+    '<div class="chips">'+chips.map(function(ch){ return '<button class="chip'+(st.d===ch[0]?' on-'+ch[0]:'')+'" data-k="'+kind+i+'" data-d="'+ch[0]+'">'+ch[1]+'</button>'; }).join('')+'</div>'+
+    '<button class="notebtn" data-n="'+kind+i+'">✎ '+(st.note?'edit note':'add note')+'</button>'+
+    '<textarea class="note'+(st.noteOpen?' show':'')+'" data-t="'+kind+i+'" placeholder="Why / what to discuss…">'+esc(st.note||'')+'</textarea>'+
+  '</div>';
+}
+
+function render(){
+  var byLeader={}; ROCKS.forEach(function(r,i){ (byLeader[r.l]=byLeader[r.l]||[]).push([r,i]); });
+  document.getElementById('rocks').innerHTML = Object.keys(byLeader).map(function(l){
+    return '<div class="leader">'+l+'</div>'+byLeader[l].map(function(pair){ return rowHtml('r',pair[1],pair[0]); }).join('');
+  }).join('');
+  document.getElementById('misses').innerHTML = MISSES.map(function(m,i){ return rowHtml('m',i,m); }).join('');
+  bind(); renderProg();
+}
+
+function bind(){
+  document.querySelectorAll('.chip').forEach(function(el){ el.onclick=function(){
+    var k=el.getAttribute('data-k'), d=el.getAttribute('data-d');
+    var st=state[k]||{}; st.d = (st.d===d)?null:d; state[k]=st; save(); render();
+  };});
+  document.querySelectorAll('.notebtn').forEach(function(el){ el.onclick=function(){
+    var k=el.getAttribute('data-n'); var st=state[k]||{}; st.noteOpen=!st.noteOpen; state[k]=st; save(); render();
+  };});
+  document.querySelectorAll('.note').forEach(function(el){ el.oninput=function(){
+    var k=el.getAttribute('data-t'); var st=state[k]||{}; st.note=el.value; state[k]=st; save();
+  };});
+}
+
+function renderProg(){
+  var total=ROCKS.length+MISSES.length, done=0;
+  ROCKS.forEach(function(_,i){ if((state['r'+i]||{}).d) done++; });
+  MISSES.forEach(function(_,i){ if((state['m'+i]||{}).d) done++; });
+  document.getElementById('prog').textContent = done+' / '+total+' ruled on';
+}
+
+document.getElementById('exportBtn').onclick=function(){
+  var lines=['# Curation Receipt — decisions export — '+new Date().toLocaleString(),''];
+  lines.push('## Rocks'); ROCKS.forEach(function(r,i){ var st=state['r'+i]||{};
+    lines.push('- ['+(st.d||'—')+'] '+r.n+(st.note?' — NOTE: '+st.note:'')); });
+  lines.push('','## Near-misses'); MISSES.forEach(function(m,i){ var st=state['m'+i]||{};
+    lines.push('- ['+(st.d||'—')+'] '+m.n+(st.note?' — NOTE: '+st.note:'')); });
+  var md=lines.join('\n');
+  navigator.clipboard.writeText(md).then(function(){ toast('Copied to clipboard — paste to Albert'); },function(){ toast('Copy failed — see download'); });
+  var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([md],{type:'text/markdown'})); a.download='curation-receipt-decisions-2026-07-20.md'; a.click();
+};
+document.getElementById('resetBtn').onclick=function(){ if(confirm('Clear all rulings + notes?')){ state={}; save(); render(); } };
+function toast(t){ var el=document.getElementById('toast'); el.textContent=t; el.classList.add('show'); setTimeout(function(){el.classList.remove('show');},2200); }
+
+render();
+})();
+</script>
+</body>
+</html>
