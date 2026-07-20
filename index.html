@@ -392,6 +392,11 @@
         (2) The <b>rock draft</b> is the shortlist: Albert curates the warehouse down to per-leader rock candidates. Curation weights, in order: cross-leader convergence at Rob's constraint session (Flywheel + PACe lenses) → Rob's coaching reads → Q2 carries (explicit kill/carry/restructure, nothing auto-carries) → MB lens/priority flags → hard rules (2 CRITs each, Matisen 4-cap, dependencies named). It is judgment, 70–80% right by design — which is why every pass ships with a <b>curation receipt</b> (per-rock provenance + the near-misses and why not) for the Cameron+Paul alignment pass: audit the deltas, never the whole warehouse.
         (3) The <b>Triage Room</b> is the showroom: cards seeded from the shortlist only; kill/edit/promote decisions happen there and export back to Albert.
         (4) <b>Write-back:</b> every decision lands back in the Master Backlog + cascading sheet — nothing stays decided only inside a tool. Feedback loop on this HQ itself: ✎-note anything, Export, hand Albert the JSON (or say it in chat) — folded in + redeployed same session, changelog records it.
+        <br><br><b>The three-session model (locked 7/20, Scaling Up cross-check):</b>
+        <b>Session 1 — Owners</b> (Cameron + Paul, + Ben for numbers): strategy + financials + cash — SWT/7-Strata/FACe refresh, PACe + Flywheel self-evaluation, left-page OPSP pass, reforecast, CASh/Power-of-One.
+        <b>Session 2 — Leadership QGR</b> (two half-days): AAR TL;DR round + praise, slow open (SWT + first 3 columns aloud), re-grade PACe/Flywheel as a group, rocks + theme locked, the PACe one-process pick, Rockefeller-Habits pick, everyone's column 7.
+        <b>Session 3 — Cascade</b>: town hall / manager presentation + vision summary down to branches.
+        Standing pre-work ~2 wks out = the Flywheel/PACe constraints exercise with all leaders (it replaces Harnish's top-3-issues ask — constraints ARE the issues). Customer-input wire-up beyond GatherUp = deliberately deferred until regular customer outreach exists.
       </div>
     </div>
 
@@ -538,7 +543,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v2.5 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v2.6 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -654,7 +659,13 @@
         'Print praise for Roundtable',
         { text: 'Connections Brief #2',
           url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12447028023', urlLabel: 'pulse 12447028023',
-          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' }
+          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' },
+        { text: 'PACe + Flywheel SELF-EVALUATION — Cameron + Paul grade every element, update the live artifacts',
+          url: 'https://einsteinadmin.github.io/einstein-flywheel/', urlLabel: 'Flywheel',
+          ctx: 'New standing step (7/20 Scaling Up cross-check): the constraints exercise SEEDS from these but never evaluated us across them. Owner-pass here = the strawman; leadership re-grades at QGR Day 1. Push grades into the hosted Flywheel + PACe pages.' },
+        { text: 'SWT + OPSP left-page refresh — Cameron + Paul pass in the OPSP builder',
+          url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder',
+          ctx: 'Update Strengths/Weaknesses/Trends + the first 3 columns before the QGR; the room re-reads them aloud Day 1 (go-slow-to-go-fast).' }
       ]
     },
     {
@@ -672,8 +683,6 @@
         { text: 'Room readiness: packet built + materials shelf loaded + OPSP builder up on screen',
           ctx: 'The full Day 1/Day 2 agenda lives in The Room tab as a live checklist with per-block notes — no duplicate list here.' },
         'Pre-reads out to leadership (walking pack v2 + eNPS one-pager) ≥2 days ahead',
-        { text: 'Top-3-issues ask sent to all six leaders (~7/25)',
-          ctx: 'Harnish prep step: "what 3 issues MUST this session address for it to be a success for you?" — compiled for the Day-1 open.' },
         'Run Day 1 in The Room (live checklist + notes + decision log)',
         'Run Day 2 in The Room (live checklist + notes + decision log)',
         'Export Room notes + decision log to Albert at close of each day'
@@ -728,9 +737,12 @@
       label: 'Wed 7/29',
       items: [
         '3 best things',
+        'AAR TL;DR round — 2 min per leader: colors, one win, one lesson · praise + recognize before moving forward',
+        'Slow open — re-read SWT + OPSP first 3 columns aloud, update live in the OPSP builder (go-slow-to-go-fast)',
         'Last-quarter major numbers review (new slide deck)',
         'People Analyzers as a group',
         'Finalize Q2 SG/G/R for all leadership + directs',
+        'PACe + Flywheel self-evaluation — leadership grades each element (Cam/Paul owner-pass = the strawman)',
         'Rob exercises'
       ]
     },
@@ -741,6 +753,9 @@
         'Revenue targets buy-in (NI bonus is company-wide)',
         'Bonus Goals / Mid-Quarter Pivots section per leader',
         'Quarterly theme locked + poster/rewards/dashboard',
+        'PACe decision — pick ONE process to redesign in Q3 supporting the critical number',
+        'Rockefeller Habits Checklist — pick 1–2 of the 10 habits to improve in Q3',
+        'CASh / Power of One — Paul + Ben block (placeholder until fleshed out)',
         'DECIDE: Damages reframe (Anne 7/16 plan — branch-level baseline, pause individual accountability, monthly training themes; bonus/games/promotion implications)',
         'DECIDE: AI/tool governance workstream — Q3 candidate (central data bus + EMMA toolkit + monthly Big Rocks review; Master Backlog 12556198241)',
         'Manager presentation started'
@@ -790,6 +805,7 @@
 
   var CHANGELOG_SEED = [
     { date: '7/9', text: 'HQ built.' },
+    { date: '7/20e', text: 'Scaling Up cross-check (Harnish "Preparing and Leading the Planning Process" vs our A–F machine) — verdict: no dramatic strategy departure; ours = his process with the middle third moved to owners+AI. Decisions encoded: top-3-issues ask SKIPPED (Flywheel/PACe constraints exercise is the standing replacement — make it the permanent ~2-wks-out step) · customer SSK input DEFERRED (GatherUp covers for now; wire in when regular customer outreach exists) · ADDED to Day 2: PACe one-process pick + Rockefeller Habits pick + CASh/Power-of-One placeholder (Paul/Ben) · ADDED to Day 1: AAR TL;DR round (praise + wins before moving forward) + slow open (SWT + first 3 OPSP columns aloud) + PACe/Flywheel self-evaluation re-grade · ADDED to Phase D: PACe+Flywheel SELF-EVAL (owners grade every element — new standing step; we seeded from these but never graded against them) + SWT/left-page refresh in the OPSP builder · three-session model documented in "How this machine works" (Owners → Leadership QGR → Cascade). Also v2.5: The Room = live QGR checklist w/ per-block notes + md export; Phase F readiness-only.' },
     { date: '7/20d', text: 'People Analyzer tool SHIPPED (Phase A "build the collect/display tool" item — Cameron\'s build/run/cascade split): people-analyzer-leadership.html in Supporting Projects/People Analyzer/, LOCAL-ONLY (leadership evals, never hosted), launch config people-analyzer :8136. Replaces the Roundtable Quarterly People Analyzer sheet: 5 quarters of history migrated (Q1 2025→Q1 2026 full detail + letter grades to Q4 2024, sheet scratchpad imported as Q2 draft), condensed rubric (7 CHOICES values +/±/− · NEW Ideal Team Player Humble/Hungry/Smart 1–5 · GWC · criticals w/ editable labels + actual-result fields + required-why enforcement · 38-item competency list demoted to standout/watch drawer) · Albert\'s take panel (collapsed, post-narrative to avoid anchoring) · SELF lanes w/ ≥2pt divergence markers (share-variant for leaders = later) · Trends/History/Export (JSON re-seed loop + Markdown decision log) · quarter rollover. Two-critic design audit run + applied (below-bar partial-data bug caught pre-session). Brian\'s BM scorecard mined: adopted side-by-side Compare calibration grid (click-to-cycle), raw-value+score capture, score anchors, reference-only rows (peer avg/team eNPS); skipped URL-state sharing + weights (comparability). Flag for Brian: his tool merges ITP into GWC — align mappings before BM-tier reuse. BETA = Q2 run w/ Cam+Paul; toolkit card added (localhost link, dead when hosted by design).' },
     { date: '7/20c', text: 'HQ v2 (Cameron\'s iteration pass, Day 1 mid-day): his export ingested as the running log — raw 7/20 notes: A-1 "Is this collecting ideas from Amanda about next quarter?" (answered inline) · A-3 "Still getting individual leader\'s exports but Cam/Paul has been reviewed and updated" · A-4 "done once initially; final dedupe after AARs/eNPS exports land" · A-5 "build a tool for this… two parts + cascade" (item SPLIT into build/run/cascade) · A-6 "pending projected status, everyone but Anne" · C-0 "next day or two" · C-2 "July targets higher than needed; Aug–Oct wait til EOM, not a QGR priority" · D-0 "not sure this can be placed first" (Phase D REORDERED to real Day-1 flow, fin-review moved to slot 8) · D-3/D-5/D-8 "need links/context" (items now support links + context lines — added throughout). NEW: toolkit strip at top = one front door (Triage Room · Runsheet · rock draft · eNPS rollup/one-pager · both 2:30 pulses · MB · walking pack); storage bumped to v2 with the export baked in as default state. Known want, post-QGR: multi-user save state (DB or shared-state page) — this cycle stays export/import w/ Albert as merge-master.' },
     { date: '7/20b', text: 'eNPS morning wave: Cameron finished all 52 responses → raw export archived + two-lane rollup (enps-rollup-2026-07-20.md): Lane A = 12 themes → Master Backlog (9 evidence updates on existing items + 2 new eNPS-lens items: Five Bullet Friday monthly dispatch 12579685982 · Connection Cadence 12579679101) · Lane B = 14 people follow-ups → Cam\'s Board pulse 12552505226 (renamed; Lukas Konrad first, this week) + 3 O3 items queued. eNPS addendum appended to the rock draft (headline: manager-pipeline = biggest cluster, 7+ voices → strengthens Speed to Competence; pace-of-change 7 voices → argues smaller finalist slate; Mike role-split → 7-Strata block). ANNE OOO today → both her deadlines extended to Tue AM (replies posted on both pulses). Albert multi-agent MB consolidation + dedupe audit LAUNCHED (TL;DR master updates on heavy pulses + duplicate/grouping report).' },
@@ -850,6 +866,26 @@
 
   if (state.agenda === null) {
     state.agenda = JSON.parse(JSON.stringify(AGENDA_SEED));
+  }
+  // One-time agenda refresh (7/20 Scaling Up cross-check): rebuild from the new seed,
+  // preserving checked/notes for items whose text matches and keeping user-added lines.
+  if (!state.agenda._su0720) {
+    ['day1', 'day2'].forEach(function (dayKey) {
+      var old = (state.agenda[dayKey] && state.agenda[dayKey].items) || [];
+      var rebuilt = AGENDA_SEED[dayKey].items.map(function (t) {
+        var prev = old.filter(function (it) { return ((typeof it === 'string') ? it : it.text) === t; })[0];
+        return (prev && typeof prev !== 'string') ? prev : { text: t, checked: false, note: '' };
+      });
+      var seedTexts = {};
+      AGENDA_SEED[dayKey].items.forEach(function (t) { seedTexts[t] = true; });
+      old.forEach(function (it) {
+        var t = (typeof it === 'string') ? it : it.text;
+        if (t && !seedTexts[t]) rebuilt.push((typeof it === 'string') ? { text: t, checked: false, note: '' } : it);
+      });
+      state.agenda[dayKey] = { label: AGENDA_SEED[dayKey].label, items: rebuilt };
+    });
+    state.agenda._su0720 = true;
+    saveStateNow(LS_KEYS.agenda, state.agenda);
   }
   if (state.changelog === null) {
     state.changelog = JSON.parse(JSON.stringify(CHANGELOG_SEED));
