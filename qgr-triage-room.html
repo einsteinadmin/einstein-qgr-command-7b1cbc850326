@@ -580,7 +580,39 @@ function loadState(){
 }
 let saveEnabled = true;
 function save(){ if(!saveEnabled) return; try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
-function q2s(k){ if(!state.q2[k]) state.q2[k] = {proj:null, self:null, notes:"", aar:""}; return state.q2[k]; }
+// SELF grades + AAR digests from the 7/20 export compile (5 of 7 in; Brian + Anne pending).
+// Applied as DEFAULTS — anything already set by hand in this browser wins.
+const SELF_SEED = {
+ "mike-q2-0":{g:"SG",a:"AAR 7/20: 107% regional avg (SG bar 105%), 4 of 5 branches ≥100%; McKinney 93% = the anchor. System: hiring dashboard + aim-high 110–120% rule. Carry: close McKinney's overstaffing gap."},
+ "mike-q2-1":{g:"G",a:"AAR 7/20: ⚠ METHODOLOGY FORK — weekly-average 8.16 = G vs pooled-quarter 7.60 = R, a full color on a CRIT. Grades G on the played-and-coached basis. Q3: lock ONE canonical method week 1 + dashboards from week 1. Carry."},
+ "mike-q2-2":{g:"R",a:"AAR 7/20: 89 vs 90 — 1-pt miss; risk mix clears (10.9% < 15%). Q3: offload weekly Samsara audit to an RO; standing chase list. Carry."},
+ "mike-q2-3":{g:"SG",a:"AAR 7/20: beta live multi-branch, 25 movers + 5 managers, ZERO bugs; scope grew to full 90-day system. Lesson to standardize: the live build HQ pattern. Restructure → company-wide rollout + adoption metric."},
+ "mike-q2-4":{g:"SG",a:"AAR 7/20: book + one-pager + leadership-reviewed 90-day plan. Q3: execute the plan; read rocks early, not at peak. Carry."},
+ "amanda-q2-0":{g:"R",a:"AAR 7/20: honest G→R flip. Audits ran but the coaching loop never existed — Nhel/Tet absorbed into front-line firefighting; accuracy 52% vs 54% red line. Q3 restructure: auto-deliver weekly results; Nhel/Tet narrowed to coaching + follow-up ONLY."},
+ "amanda-q2-1":{g:"G",a:"AAR 7/20: contract 6/29, kickoff 7/3, Aug production launch (past EOQ, short of SG). Real vendor bake-off; Matisen looped early. Carry."},
+ "amanda-q2-2":{g:"G",a:"AAR 7/20: her side done in May; rollout week of 7/20 (fleet-wide only — Houston pilot impossible). Lesson: never gate a bar on another team's queue. Carry design principles."},
+ "amanda-q2-3":{g:"SG",a:"AAR 7/20: 9 straight weekly cycles; gave CET a Games-class scoreboard (real morale gap closed). Restructure: keep format, new theme, closer to Games structure."},
+ "amanda-q2-4":{g:"SG",a:"AAR 7/20: done + submitted live at Rob's 7/15. Close; Nhel/Carly hold her accountable on personal-dev going forward."},
+ "matisen-q2-0":{g:"G",a:"AAR 7/20: audit by 5/30, 3 builds validated w/ one deliberate sub (Games in, Claims RAG paused) — but the sub was never re-scored and the 4+-wedge sweep is an unwritten doc. Lesson: every deliverable gets its own ship date. Close."},
+ "matisen-q2-1":{g:"SG",a:"AAR 7/20: G banked mid-quarter; SG cleared via 155,920-row spine + Q3 manager view live. Playbook: cadence-driven development. ⚠ Rippling hours caveat since 6/29. Carry: personnel leg + hiring budgets."},
+ "matisen-q2-2":{g:"R",a:"AAR 7/20: 0 of 3 written legs met (~50%). Gap was scheduling, not tech. Restructure: merge call grades INTO the sales dashboard."},
+ "matisen-q2-3":{g:"G",a:"AAR 7/20: dashboard live + owned (Linda/Anne); ClearCo leg lost weeks to a vendor rep who wasn't working it; Rippling key was self-serviceable all along. Lessons: verify vendor rep week 1; test whether a dependency is self-serviceable. Carry SG remainder."},
+ "matisen-q2-4":{g:"SG",a:"AAR 7/20: 7 of 8 live/landing; only Docs/Handbook rewire left. Lesson: 8 threads = 8 goals in a trenchcoat — cap count, ship-or-archive dates by wk 2. Close."},
+ "matisen-q2-5":{g:"SG",a:"AAR 7/20: read + reflection + 90-day Humble plan in motion. Lesson: calendar-block personal dev; G/SG date logic was inverted. Close."},
+ "paul-q2-0":{g:"R",a:"AAR 7/20: ⚠ THREE-WAY READ — Paul R vs Anne G vs dashboard G. Targets not set/communicated; promotions framework unfinished; Matisen data pull queued too late. Lesson: queue Matisen requests at quarter START. Carry (request already in)."},
+ "paul-q2-1":{g:"SG",a:"AAR 7/20: moved in 6/15 exactly at the SG bar. Playbook: dedicated multi-party project board + date-over-perfection. Close."},
+ "paul-q2-2":{g:"G",a:"AAR 7/20: self-acknowledged 'technically Yellow' — 2 of 3 visits, 1 of 2 ride-alongs, both lunches. Q3: simplify definition (2 full visits, no activity spec); sync with Brian/Mike branch trips. Close."},
+ "paul-q2-3":{g:"R",a:"AAR 7/20: 5% complete, second consecutive dry quarter — prioritization, not bandwidth. Carry + ELEVATE; pipeline-reactive restructure on the table (P3 draft)."},
+ "paul-q2-4":{g:"G",a:"AAR 7/20: rescued by a blocked 7/18–19 weekend; framework built across all 3 legs. Lesson: calendar-block automation work early. Close."},
+ "paul-q2-5":{g:"G",a:"AAR 7/20: read early, reflection late; Hungry-improvement strategies now active. Close reading; carry strategies."},
+ "cameron-q2-0":{g:"G",a:"AAR 7/20: all 7 COS live but 2 of 7 fail 'reliably pushing status up'; Tier-2-class value shipped through leaders' COS. SG conditional on EMMA feed by EOQ. Carry restructured: Tier 3 pilot + continuing-ed/QC + data bus; metric = hard placement goals."},
+ "cameron-q2-1":{g:"G",a:"AAR 7/20: 3 wedges validated + building; sweep never ran — every wedge routes through Matisen; scope drifted by absorption. Restructure → governance workstream + FDE question."},
+ "cameron-q2-2":{g:"SG",a:"AAR 7/20: written SG met with margin. Wince: missing-contracts bug ran weeks undetected; conversion-by-price never landed. Close as rock → Tuesday cadence is operations."},
+ "cameron-q2-3":{g:"R",a:"AAR 7/20: re-graded G→R same day — 2 of 3 visits, Friday work-from-branch NOT counted. O3 leg clean. Carry restructured: travel week + visit-type menu as first-class units."},
+ "cameron-q2-4":{g:"G",a:"AAR 7/20: G as-rescoped, rescope NAMED (SG dead once KP's 13-wk estimate landed). Strongest work in quarters; handed to KP 7/13. Restructure ownership → Kickpoint; Cameron optional oversight."},
+ "cameron-q2-5":{g:"SG",a:"AAR 7/20: done 6 wks early; 90-day plan live. Spawn: ITP-for-all-leaders as small Q3 QG + continuing-ed lane question. Close."}
+};
+function q2s(k){ if(!state.q2[k]) state.q2[k] = {proj:null, self:null, notes:"", aar:""}; const s = state.q2[k]; if(s.self == null && SELF_SEED[k]){ s.self = SELF_SEED[k].g; if(!s.aar) s.aar = SELF_SEED[k].a; } return s; }
 function q3s(id){ if(!state.q3[id]) state.q3[id] = {decision:null, editNotes:"", crit:null, promoted:false}; return state.q3[id]; }
 function oqs(id){ if(!state.oq[id]) state.oq[id] = {decided:false, answer:""}; return state.oq[id]; }
 
