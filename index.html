@@ -394,7 +394,7 @@
         (4) <b>Write-back:</b> every decision lands back in the Master Backlog + cascading sheet — nothing stays decided only inside a tool. Feedback loop on this HQ itself: ✎-note anything, Export, hand Albert the JSON (or say it in chat) — folded in + redeployed same session, changelog records it.
         <br><br><b>The four beats of every QGR cycle (locked 7/20 — the Runway phases mirror this):</b>
         <b>① Collect + review.</b> Starting ~3 weeks out, gather every input the quarter's decisions need: People Analyzers, leader AARs, eNPS and customer feedback, financial and marketing analysis, branch scorecards where the data allows — plus the strategy instruments themselves: the all-leader Flywheel/PACe constraints exercise (~2 weeks out; this is where the quarter's biggest issues surface), 7 Strata, SWT, and the CASh/Power-of-One cash review. Everything lands in the Master Backlog until it is genuinely complete.
-        <b>② Triage (Cameron + Paul).</b> Work the backlog down to a decision-ready slate: the quarter's theme and rocks at a high level, general goals sketched for every leader, and the QG packet mostly locked by end of quarter. Because triaging the raw backlog directly is too heavy, purpose-built tools carry it — the curated shortlist with its curation receipt, and the Triage Room where kill/edit/promote calls actually get made.
+        <b>② Inputs → warehouse → triage (Cameron + Paul).</b> First, every instrument that FEEDS the backlog runs: SWT refresh, 7 Strata + FACe, the PACe/Flywheel self-evaluation, CASh/Power-of-One (its 1%-moves become backlog candidates), and the OPSP left page. Then the explicit warehouse gate: fold all outputs in, declare the Master Backlog complete, regenerate the shortlist + curation receipt. Only then the decisions — receipt review, Triage Room red-pen, theme at a high level, leaders' general goals, packet mostly locked by EOQ. Purpose-built tools carry the weight because raw-backlog triage is too heavy: the shortlist + receipt + Triage Room.
         <b>③ Confirm (Matisen data day → readiness).</b> Before leadership walks in: dashboards, Games scoring, and branch data verified clean; a final gut check across goals, overlaps, and cross-leader dependencies; the QG packet finished and ready to present.
         <b>④ Decide + cascade (Leadership QGR).</b> The team reviews 7 Strata, SWT, People Analyzers, last quarter's results, and the packet together — then finalizes everything that was only sketched before: each leader's goals with exact Green/Super-Green definitions, their directs' goals with measurables, the theme with its mechanics and rewards, and the OPSP + Vision Summary. The output feeds straight into the following week's cascade: manager, mover, and CET presentations (Phase ④ on the Runway).
         Note the deliberate double-touch: owners <i>populate</i> the strategy artifacts in ①–②, leadership <i>reviews and finalizes</i> them in the room — same documents, two passes, not duplication. Customer-input beyond GatherUp is deliberately deferred until regular customer outreach exists.
@@ -543,7 +543,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.5 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.6 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -552,6 +552,7 @@
 
   var DEFAULT_PHASES = {
     '_v4': true,
+    '_v5': true,
     'P1-0': { checked: true,  note: '', noteOpen: false },
     'P1-1': { checked: true,  note: '', noteOpen: false },
     'P1-2': { checked: true,  note: 'Q3 3-tier built + Roundtable folder shared (writer, no Nhel) 7/20; blank toolkit copied into Owners.', noteOpen: false },
@@ -561,7 +562,7 @@
     'P1-9': { checked: false, note: 'Pending. Should have it in the next day or two.', noteOpen: false },
     'P1-10': { checked: true, note: 'Already done and confirmed with regionals and branches.', noteOpen: false },
     'P1-11': { checked: false, note: 'July targets already in place run higher than projected Aug revenue needs; Aug–Oct targets usually wait until closer to EOM. Handle by EOM — not a QGR blocker.', noteOpen: false },
-    'P2-9': { checked: false, note: 'Deliberately moved later in the order per Cameron 7/20 — reforecast lands ~Tue 7/21 with Ben.', noteOpen: false }
+    'P2-13': { checked: false, note: 'Deliberately moved later in the order per Cameron 7/20 — reforecast lands ~Tue 7/21 with Ben.', noteOpen: false }
   };
 
   // v3.0 migration: old A–F phase keys + the retired rollout checklist → the four-phase P keys.
@@ -679,44 +680,50 @@
       ]
     },
     {
-      id: 'P2', title: '② Cameron + Paul — strategy review + triage', window: '7/20–22, Ben Tue 9–1 · in attack order',
+      id: 'P2', title: '② Cameron + Paul — inputs → warehouse → triage', window: '7/20–22, Ben Tue 9–1 · backlog INPUTS first, then the warehouse gate, then decisions',
       items: [
-        { text: 'Theme decision (Back to School training = leading candidate; Estimate Accuracy likely Q4)',
-          url: 'qgr-triage-room.html', urlLabel: 'Triage Room',
-          ctx: 'Decision surface = Triage Room Q3 view. Theme queue on the MB: 12556457451 Speed to Competence · 12556457452 Demand Pursuit · 12556457453 Estimate Accuracy (Q4).' },
-        { text: '7 Strata / FACe review',
-          ctx: "Paul = CFO is LOCKED — execution only (org chart = Anne, then comms), no re-deliberation. Still open in this block: Mike's Dept-Head/Regional split ask (MB 12556464031) + Amanda's Calvin-role question." },
-        'Personnel plans — Management Movement & Training Board (Daniel/N. Austin transition, Garland + Tampa new-manager dev)',
-        { text: 'PACe + Flywheel SELF-EVALUATION — Cameron + Paul grade every element, update the live artifacts',
+        { text: 'SWT refresh — confirm/correct the Albert first-pass draft (Strengths / Weaknesses / Trends)',
+          url: 'swt-strata-refresh-2026-07-20.md', urlLabel: 'refresh draft (local)',
+          ctx: 'BACKLOG INPUT. April as-written vs proposed edits w/ sources — 3 strength upgrades, 2 new HUGE-candidate weaknesses, insurance/AI-fatigue trend changes. Survivors → OPSP builder + MB.' },
+        { text: '7 Strata + FACe review/refresh',
+          url: 'swt-strata-refresh-2026-07-20.md', urlLabel: 'refresh draft (local)',
+          ctx: "BACKLOG INPUT. Draft verdict: strata mostly STAND — flags: conv-rate KPI wording awaits the replacement decision · X-Factor vs COS-layer question. FACe: Paul=CFO locked (execution only); still open — Mike's role-split + Calvin." },
+        { text: 'PACe + Flywheel SELF-EVALUATION — grade every element, update the live artifacts',
           url: 'https://einsteinadmin.github.io/einstein-flywheel/', urlLabel: 'Flywheel',
-          ctx: 'New standing step (7/20 Scaling Up cross-check): the constraints exercise SEEDS from these but never evaluated us across them. Owner-pass = the strawman; leadership re-grades at QGR Day 1. Push the grades into the hosted Flywheel + PACe pages.' },
-        { text: 'SWT + OPSP left-page refresh — Cameron + Paul pass in the OPSP builder',
+          ctx: 'BACKLOG INPUT (7/20 standing step): the constraints exercise seeds FROM these; this grades us ACROSS them. Owner-pass = strawman; leadership re-grades Day 1. Push grades into the hosted pages.' },
+        { text: 'CASh / Power of One — cash-improvement pass (Paul + Ben, Tue)',
+          ctx: 'BACKLOG INPUT: each worthwhile 1% move (price/volume/COGS/overheads/debtor-stock-creditor days) lands as an MB candidate w/ owner. Worksheets = Growth Toolkit pp.12–13; run it even though Rob still owes his updated tools. Seeds in the refresh draft.' },
+        { text: 'OPSP left page entered in the builder (values/purpose/targets + refreshed SWT)',
           url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder',
-          ctx: 'Baseline = the Q2 26 Growth Toolkit workbook (in the kit). The room re-reads these aloud Day 1 (go-slow-to-go-fast).' },
+          ctx: 'BACKLOG INPUT closes here — the room re-reads this aloud Day 1 (go-slow-to-go-fast). Baseline: Q2 26 Growth Toolkit workbook (in the kit).' },
+        { text: '⚙ FINALIZE THE WAREHOUSE — fold all instrument outputs + straggler exports into the Master Backlog; Albert regenerates the shortlist + curation receipt',
+          url: 'https://einsteinmoving.monday.com/boards/18408300070', urlLabel: 'Master Backlog',
+          ctx: 'The gate between inputs and decisions: nothing gets triaged until the warehouse is declared complete. Albert runs this on your word once the five inputs above are done.' },
         { text: 'Curation receipt review — confirm/challenge every rock + rule on the 11 near-misses',
           url: 'curation-receipt-2026-07-20.html', urlLabel: 'interactive receipt',
           ctx: 'The shortlist trust check (20–30 min): audit the deltas, never the whole warehouse. Export decisions to Albert.' },
-        { text: 'Rock slate red-pen in the Triage Room (after the 2:30 export compile lands)',
+        { text: 'Rock slate red-pen in the Triage Room',
           url: 'qgr-triage-room.html', urlLabel: 'Triage Room',
-          ctx: '🟢 UNBLOCKED — compile landed 7/20: SELF grades + AAR digests + divergence highlights live in the Room (6 of 7). Red-pen against the draft + eNPS addendum. Export/E at EOD back to Albert.' },
+          ctx: '🟢 UNBLOCKED — compile landed 7/20: SELF grades + AAR digests + divergence highlights live (6 of 7). Export/E at EOD back to Albert.' },
+        { text: 'Theme decision at a high level (out of triage — Back to School leading; Estimate Accuracy likely Q4)',
+          ctx: 'Theme queue on the MB: 12556457451 Speed to Competence · 12556457452 Demand Pursuit · 12556457453 Estimate Accuracy (Q4). Leadership locks final theme + mechanics Day 2.' },
         { text: 'Whiteboard map — major projects × cross-dept dependencies (the Matisen-bottleneck catcher)',
           url: 'qgr-triage-room.html', urlLabel: 'dependency board (23 rows)' },
         'Cameron’s own Q3 rocks finalized + pressure-tested',
+        'Personnel plans — Management Movement & Training Board (Daniel/N. Austin transition, Garland + Tampa new-manager dev)',
+        { text: 'OPSP for owners — full draft (output, post-triage)',
+          url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder (live)',
+          ctx: 'Builder covers OPSP + Vision Summary output. 7-Strata/FACe/PACe worksheets are NOT in it yet — worksheets/whiteboard first, then enter results.' },
         { text: 'Review financial analysis + validate numbers (with Ben)',
           ctx: 'Deliberately NOT first (Cameron 7/20) — Q3 reforecast lands ~Tue 7/21 with Ben (9–1 block).' },
-        { text: 'CASh / Power of One — cash-flow improvement pass (Paul + Ben)',
-          ctx: 'Worksheets are in the Growth Toolkit; Rob still owes his updated Power of One tools. Placeholder until fleshed out — but run SOMETHING Tue, don’t skip silently.' },
-        { text: 'OPSP for owners',
-          url: 'https://goal-plan-access.replit.app/', urlLabel: 'OPSP builder (live)',
-          ctx: 'Builder covers OPSP + Vision Summary output. 7-Strata/FACe/PACe worksheets are NOT in it yet — work those on paper/whiteboard, then enter results.' },
+        { text: 'QG packet mostly locked by EOQ (qgr-packet-builder skill)',
+          ctx: 'General goals per leader + general theme established during these days; packet chassis fills as data lands.' },
         { text: 'Dinner/activity reservations',
           ctx: 'For QGR nights 7/29–30 — pick the spot + book this week.' },
         'Print praise for Roundtable',
         { text: 'Connections Brief #2 (Albert)',
           url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12447028023', urlLabel: 'pulse 12447028023',
-          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' },
-        { text: 'QG packet mostly locked by EOQ (qgr-packet-builder skill)',
-          ctx: 'General goals per leader + general theme established during these days; packet chassis fills as data lands.' }
+          ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' }
       ]
     },
     {
@@ -936,7 +943,26 @@
     activeZone: loadState(LS_KEYS.activeZone, 'zone1')
   };
 
+
+  // v3.6 (_v5): Phase ② re-sequenced — backlog inputs first, warehouse gate, then decisions.
+  function migratePhasesV5(phases) {
+    if (phases._v5) return phases;
+    // inverse map: newKey <- oldKey. Built explicitly to avoid collisions.
+    var NEW_FROM_OLD = { 'P2-0':'P2-4', 'P2-1':'P2-1', 'P2-2':'P2-3', 'P2-3':'P2-10',
+      'P2-6':'P2-5', 'P2-7':'P2-6', 'P2-8':'P2-0', 'P2-9':'P2-7', 'P2-10':'P2-8',
+      'P2-11':'P2-2', 'P2-12':'P2-11', 'P2-13':'P2-9', 'P2-14':'P2-15', 'P2-15':'P2-16', 'P2-16':'P2-13', 'P2-17':'P2-14' };
+    var np = {};
+    Object.keys(phases).forEach(function (k) { if (!/^P2-/.test(k)) np[k] = phases[k]; });
+    Object.keys(NEW_FROM_OLD).forEach(function (nk) {
+      var ok = NEW_FROM_OLD[nk];
+      if (phases[ok]) np[nk] = phases[ok];
+    });
+    np._v4 = true; np._v5 = true;
+    return np;
+  }
+
   state.phases = migratePhasesV4(state.phases, state.rollout);
+  state.phases = migratePhasesV5(state.phases);
   saveStateNow(LS_KEYS.phases, state.phases);
 
   if (state.agenda === null) {
@@ -1623,7 +1649,7 @@
     var s = imported && imported.state ? imported.state : imported;
     if (!s) { toast('Import failed — no state found'); return; }
     state.gates = s.gates || {};
-    state.phases = migratePhasesV4(s.phases || {}, s.rollout);
+    state.phases = migratePhasesV5(migratePhasesV4(s.phases || {}, s.rollout));
     state.tracker = s.tracker || {};
     state.aar = s.aar || {};
     state.agenda = s.agenda || JSON.parse(JSON.stringify(AGENDA_SEED));
