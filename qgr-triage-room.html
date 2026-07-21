@@ -182,6 +182,87 @@ details.fold[open] summary::before{content:'▾ ';}
 .pill.vendor{background:var(--blue-50);color:var(--blue-700);}
 .pill.moot{background:var(--grey-100);color:var(--grey-400);}
 
+/* ---------- receipt 7/20 ruling badges ---------- */
+.chip.receipt-confirmed{background:#EAF3E8;color:var(--sgreen);border:1px solid #CBE2C6;}
+.chip.receipt-challenged{background:#FBE9E9;color:var(--red);border:1px solid #F2C4C4;}
+.def.receipt-confirm{background:#EFF6ED;border-left:3px solid var(--sgreen);}
+.def.receipt-challenge{background:#FBE9E9;border-left:3px solid var(--red);}
+.def.receipt-confirm b,.def.receipt-challenge b{letter-spacing:.6px;}
+
+/* ---------- cross-cutting + flags panel ---------- */
+.receipt-panel{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:12px 14px;margin-bottom:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;}
+.receipt-col .oq-title{font-size:16px;margin-bottom:8px;}
+.receipt-list{display:flex;flex-direction:column;gap:6px;}
+.receipt-item{font-size:12.5px;line-height:1.4;padding:6px 9px;border-radius:6px;background:var(--grey-50);}
+.receipt-item b{color:var(--navy-500);}
+.flag-item{font-size:12.5px;line-height:1.4;padding:6px 9px;border-radius:6px;background:#FBE9E9;border-left:3px solid var(--red);}
+
+/* ---------- shortlist / overflow bands + owner + add-goal (7/20 add) ---------- */
+.band-hd{font-family:var(--display);font-size:16px;letter-spacing:.5px;color:var(--navy-400);margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--grey-100);}
+.band-hd.overflow{color:var(--grey-400);}
+.band-count{font-family:var(--sans);font-size:11px;color:var(--grey-400);margin-left:4px;}
+.overflow-band{opacity:.72;}
+.overflow-band .card{padding:9px 11px;gap:5px;}
+.overflow-band .rockname{font-size:12px;}
+.overflow-band .rockid{font-size:14px;}
+.chip.customadd{background:var(--navy-700);color:#fff;}
+.ownersel{border:1px solid var(--grey-200);background:#fff;border-radius:5px;padding:3px 6px;font-size:11px;font-weight:700;color:var(--navy-500);max-width:150px;}
+.ownersel:hover{border-color:var(--navy-400);}
+.addgoal-row{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;align-items:center;}
+.addgoal-row input{border:1px solid var(--grey-200);border-radius:6px;padding:5px 8px;font-size:12px;background:#fff;}
+.addgoal-row input.addgoal-title{flex:1;min-width:160px;}
+.addgoal-row input.addgoal-note{flex:2;min-width:200px;}
+
+/* ---------- MB candidate chips (7/20 round 3 add) ---------- */
+.chip.mbrank{background:var(--orange-100);color:var(--orange-900);}
+.chip.mbcand{background:var(--navy-50);color:var(--navy-400);text-decoration:none;border:1px solid var(--navy-100);}
+.chip.mbcand:hover{color:var(--blue-500);border-color:var(--blue-500);}
+.chip.mgronly{background:var(--navy-50);color:var(--navy-400);}
+
+/* ---------- MB pool / lane moves (round 4 add) ---------- */
+.poolpills{font-size:11px;color:var(--grey-400);margin:-2px 0 10px;display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.poolpill{background:var(--navy-50);color:var(--navy-400);border:1px solid var(--navy-100);border-radius:10px;padding:1px 8px;font-weight:700;}
+select.lanesel{border-color:var(--orange-500);}
+details.overflow-fold{border-top:0;padding-top:0;}
+.overflow-scroll{max-height:1400px;overflow-y:auto;padding-right:4px;}
+
+/* ---------- Q2 Disposition band (7/20 round 3 add) ---------- */
+details.q2disp-fold{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:10px 14px;margin-bottom:12px;}
+details.q2disp-fold summary{cursor:pointer;font-family:var(--display);font-size:15px;letter-spacing:.4px;color:var(--navy-400);list-style:none;user-select:none;}
+details.q2disp-fold summary::before{content:'▸ ';}
+details.q2disp-fold[open] summary::before{content:'▾ ';}
+.q2disp-row{padding:8px 2px;border-bottom:1px solid var(--grey-50);}
+.q2disp-row:last-child{border-bottom:0;}
+.q2disp-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;font-size:12.5px;}
+.dispbtn.sel-accept{background:var(--blue-500);border-color:var(--blue-500);color:#fff;}
+
+/* ---------- Whiteboard view (7/20 round 3 add) ---------- */
+.wb-grid{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:8px;}
+.wb-col{background:#fff;border:1px solid var(--navy-100);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;}
+.wb-col-hd{padding:8px 10px;border-bottom:1px solid var(--grey-100);display:flex;align-items:center;justify-content:space-between;gap:6px;background:var(--navy-50);}
+.wb-nm{font-family:var(--display);font-size:15px;letter-spacing:.4px;}
+.wb-rows{padding:6px;display:flex;flex-direction:column;gap:6px;flex:1;}
+.wb-card{background:var(--grey-50);border:1px solid var(--grey-100);border-radius:7px;padding:7px 8px;cursor:pointer;display:flex;flex-direction:column;gap:4px;}
+.wb-card:hover{border-color:var(--blue-500);}
+.wb-card.crit{border:2px solid var(--navy-500);box-shadow:0 0 0 1px var(--orange-500) inset;}
+.wb-card.mgr{margin-left:8px;border-style:dashed;}
+.wb-card-top{display:flex;align-items:center;justify-content:space-between;gap:4px;}
+.wb-id{font-family:var(--display);font-size:12px;color:var(--navy-200);}
+.wb-card-name{font-size:11.5px;font-weight:700;line-height:1.3;}
+.wb-card-meta{display:flex;gap:4px;flex-wrap:wrap;align-items:center;}
+.wb-dep{font-size:9.5px;font-weight:700;border-radius:3px;padding:1px 5px;background:var(--blue-50);color:var(--blue-700);}
+.wb-dep.feeds{background:#EAF3E8;color:var(--sgreen);}
+.card.flash{box-shadow:0 0 0 3px var(--orange-500) !important;}
+@media (max-width:1100px){ .wb-grid{grid-template-columns:repeat(4,1fr);} }
+@media (max-width:700px){ .wb-grid{grid-template-columns:repeat(2,1fr);} }
+@media print{
+  header, .tabs, .jumpbar, .addgoal-row, #toast, .hd-btn{display:none !important;}
+  @page{ size: landscape; margin: 10mm; }
+  .wb-grid{grid-template-columns:repeat(7,1fr);gap:4px;}
+  .wb-col{break-inside:avoid;}
+  body{background:#fff;}
+}
+
 /* KPI strip */
 .kpis{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 10px;}
 .kpi{background:#fff;border:1px solid var(--navy-100);border-radius:8px;padding:7px 12px;font-size:12px;display:flex;gap:8px;align-items:center;}
@@ -192,6 +273,18 @@ details.fold[open] summary::before{content:'▾ ';}
 #toast.show{opacity:1;}
 .smallnote{font-size:11px;color:var(--grey-400);}
 #selftest-out{white-space:pre-wrap;font-family:monospace;font-size:11px;background:#fff;border:1px solid var(--grey-200);padding:10px;margin:10px 20px;display:none;}
+.triage-row .gradelbl{flex:0 0 auto;width:auto;min-width:46px;}
+/* how-to overlay (7/21 design-audit add) */
+#howto-overlay{position:fixed;inset:0;background:rgba(15,25,45,.55);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto;}
+#howto-overlay.show{display:flex;}
+.howto-card{background:#fff;max-width:640px;width:100%;border-radius:10px;padding:26px 30px;box-shadow:0 12px 40px rgba(0,0,0,.25);font-size:13.5px;line-height:1.55;}
+.howto-card h2{margin:0 0 4px;font-size:19px;}
+.howto-card .howto-sub{color:var(--navy-200);font-size:12px;margin-bottom:14px;}
+.howto-card ol{margin:0 0 14px;padding-left:20px;}
+.howto-card li{margin-bottom:10px;}
+.howto-card li b{color:var(--navy-800, #1a2b4a);}
+.howto-tip{background:var(--grey-50,#f4f6f9);border-left:3px solid var(--orange,#f6821f);padding:8px 12px;font-size:12.5px;margin-bottom:14px;}
+.howto-close{display:inline-block;}
 @media (max-width:1300px){ .cards{grid-template-columns:repeat(auto-fill,minmax(330px,1fr));} }
 </style>
 </head>
@@ -203,8 +296,9 @@ details.fold[open] summary::before{content:'▾ ';}
       <div class="hd-sub">Cameron + Paul prep days 7/20–7/22 · QGR 7/29–30 · seed: rock-candidates draft 7/18 + goals dashboard 7/17 · <a href="index.html" style="color:inherit; font-weight:700;">← QGR HQ (the map)</a></div>
     </div>
     <div class="hd-spacer"></div>
+    <button class="hd-btn ghost" id="btn-howto" title="How this room works">? How to use</button>
     <button class="hd-btn" id="btn-export" title="Keyboard: E">⬇ Export decision log</button>
-    <button class="hd-btn ghost" id="btn-reset">Reset all</button>
+    <button class="hd-btn ghost" id="btn-reset" style="margin-left:18px;opacity:.65" title="Wipes every ruling, grade, and note — kept away from Export on purpose">Reset all</button>
   </div>
   <div class="tabs" id="tabs"></div>
 </header>
@@ -212,13 +306,29 @@ details.fold[open] summary::before{content:'▾ ';}
 <pre id="selftest-out"></pre>
 <div id="toast"></div>
 
+<div id="howto-overlay">
+  <div class="howto-card">
+    <h2>How this room works</h2>
+    <div class="howto-sub">Cameron + Paul's red-pen session · four tabs, in order · everything auto-saves as you click</div>
+    <ol>
+      <li><b>Q2 Review</b> — for each rock, click a <b>PROJ</b> grade (SG / G / R). SELF grades are pre-seeded from the leaders' own AARs; an orange <b>⚠ DIVERGENCE</b> border means your read disagrees with theirs — those are the ones to talk about. The notes box = notes for the room.</li>
+      <li><b>Q3 Triage</b> — the main event. Walk each leader top to bottom. Per card: pick a ruling — <b>ACCEPT / EDIT / KILL / DEFER</b> (EDIT opens a "what changes" box) — toggle <b>★ CRIT</b> (each leader needs exactly 2), and set the <b>Owner</b>. Second row = placement: keep it in the Q3 shortlist or park it in overflow; MB cards can also move to a different leader's lane. "+ Add a goal" at the lane bottom catches anything missing. Answer the 5 <b>Open Questions</b> chips up top as you go.</li>
+      <li><b>Dependency Board</b> — read-only check; statuses recompute live off your kills and defers. Anything <b>NOT COVERED</b> on Matisen needs an explicit yes/no before you leave.</li>
+      <li><b>Whiteboard</b> — the closing mirror: each leader's column should hold their slate + 2 CRITs. Click any card to jump back to it.</li>
+      <li><b>Export</b> (or press <b>E</b>) — copies + downloads the full decision log for Albert to write back to the Master Backlog.</li>
+    </ol>
+    <div class="howto-tip">Rulings on <b>overflow cards count too</b> — killing or editing something in the parking band is real work and lands in the export. And "Reset all" wipes everything; it lives apart from Export on purpose.</div>
+    <button class="hd-btn howto-close" id="btn-howto-close">Got it — into the room</button>
+  </div>
+</div>
+
 <script>
 /* ============================================================
    SEED DATA — parsed from rock-candidates-q3-DRAFT-2026-07-18.md
    + goals-dashboard/dashboard-data.json (7/17 refresh).
    Green / Super Green text = contract language, transcribed faithfully.
    ============================================================ */
-const VERSION = "QGR Triage Room v1.0 · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17)";
+const VERSION = "QGR Triage Room v1.0 · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21 (bench rulings now export)";
 
 const LEADERS = [
   {id:"mike",    name:"Mike Vandenbroader", role:"DFWT RM + Head of Ops", cap:5, hardCap:false, blurb:"Mike is the theme's engine. His Q2 training-app rock went Super Green (3 wks live across DFWT, zero bugs) — Q3 is the company-wide bet."},
@@ -300,6 +410,10 @@ const Q2 = {
   ]
 };
 
+/* lookup: Q2 rock key -> Q2 rock object (used by the Q2 Disposition band, round 3) */
+const Q2_INDEX = {};
+Object.values(Q2).forEach(list=>list.forEach(r=>Q2_INDEX[r.k]=r));
+
 /* ---------- Q3 TRIAGE seed (draft, transcribed faithfully) ---------- */
 const Q3 = {
   mike: { rocks: [
@@ -307,22 +421,26 @@ const Q3 = {
       why:"The app IS the Back to School chassis. DFWT validated it; CTXH is waiting. Driver-training port was decided 7/3 — one platform for mover → driver → lead training.",
       green:"App live at all 10 branches · onboarding tests (90 Qs, 4 staged sections) + train-the-trainer sim live · driver-training module ported to beta · DB scale-check with Gerald done BEFORE company-wide load.",
       sg:"+ estimate-this-job feature live (feeds Q4) · in-app SOP wiki live both sides · who-was-your-trainer logging producing a top-trainer list.",
-      theme:"This is the theme.", deps:"Matisen (identity/EMMA consult, timestamps scoping), Brian (CTXH change-mgmt), Austin L (video content — slots built, zero content today)."},
+      theme:"This is the theme.", deps:"Matisen (identity/EMMA consult, timestamps scoping), Brian (CTXH change-mgmt), Austin L (video content — slots built, zero content today).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"M2", crit:true, name:"DFWT Staffing + New-Manager Development",
       why:"Standing critical number. Region at 106–111% now — Q3 is hold-through-fall plus Daniel-era knock-ons (S. Austin coverage is Brian's, but McKinney/Dallas bench is Mike's).",
       green:"All DFWT branches ≥100% staffing for the quarter · monthly People Analyzer · C-player action plans current.",
       sg:"+ all managers B+ or better · zero lead-locked branches by EOQ.",
-      theme:"Staffed branches are the raw material speed-to-competence trains.", deps:"Anne (HPE Aug 1 changes the hiring funnel under him — first month will be bumpy)."},
+      theme:"Staffed branches are the raw material speed-to-competence trains.", deps:"Anne (HPE Aug 1 changes the hiring funnel under him — first month will be bumpy).",
+      receipt:{status:"challenged", note:"7/20 receipt: CHALLENGED — likely REPLACED by the forward-deployed-engineer model (Mike embedded onsite with his teams for longer stretches). May survive as a BONUS instead. New rock wording needed if this ships."}},
     {id:"M3", crit:false, name:"Fleet Safety Pt 3 — carry the RED, restructured",
       why:"Honest flip to Red 7/16 (QTD 89 vs 90; McKinney ~70s the drag; weekly numbers masked it). AAR call: CARRY, restructured — the build side is done (common-mistakes module = last item); Q3 is the numbers side plus the single-point-of-failure fix Cameron already flagged: Samsara management is all Mike.",
       green:"QTD company ≥90 · McKinney recovery plan executed · 100% of required unsafe-driver warnings issued within 1 week · a named Samsara delegate per region trained and running the weekly pull.",
       sg:"QTD ≥92 · at-risk drivers <10% · delegation fully live (Mike out a week and nothing drops).",
-      theme:"", deps:"none new — this is deliberately self-contained."},
+      theme:"", deps:"none new — this is deliberately self-contained.",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed — stays high priority but possibly MAINTENANCE-level, not a full QG. Insurance (~$903K near-miss) folds INTO this rock rather than standing alone."}},
     {id:"M4", crit:false, name:"Einstein Games S5 (DFWT) + Data-Trust Fixes",
       why:"S4 finals close 7/21. Q3 season runs under the new philosophy (coaching tool, not performance grade; damages branch-level only) and the transitions decided 7/15: damages-per-Rippling-hour bonus basis holds through Q3, weekly snapshots get archived.",
       green:"All 5 DFWT branches active weekly through week 8 · Verizon/Jamf device escalation closed · McKinney consolation call made.",
       sg:"Season closes with zero manual reconciliation disputes (rides Matisen's automation rock).",
-      theme:"", deps:"Matisen (scoring automation + snapshot archiving — the likely \"blow-up\" if it slips)."}
+      theme:"", deps:"Matisen (scoring automation + snapshot archiving — the likely \"blow-up\" if it slips).",
+      receipt:{status:"challenged", note:"7/20 receipt: CHALLENGED — killed. No S5 running now, and it's a Matisen thing anyway (T3 already covers the data-trust work)."}}
     ],
     bench:[{id:"M-B1", kind:"bonus", name:"Fleet Damage Tracking App beta", detail:"Was on ice Q2 — only if the training app rollout is ahead of schedule by Sep."}],
     carryNotes:"ITP → Super Green, done. Fleet Damage app bonus → stays iced unless bonus. Stickers bonus → with KP, off Mike's slate."
@@ -332,24 +450,31 @@ const Q3 = {
       why:"Locked 7/16. Go-live is day 1 of the quarter — this is the single biggest hiring-motion change of the year and it lands during peak season tail.",
       green:"HPE live all branches by ~Aug 1 · Jalissa running culture-based virtual phone interviews · BMs trained on competency-based in-person interviewing (workshopped w/ Brian) · application tightening shipped (17K applicants).",
       sg:"+ time-to-hire holds at or under the ~12-day Q2 average through the transition · zero branches revert to trial days.",
-      theme:"The front door of speed-to-competence — better selection = faster ramp.", deps:"Brian (BM interview workshop), Mike (app carries the Extended Trial check-in cadence)."},
+      theme:"The front door of speed-to-competence — better selection = faster ramp.", deps:"Brian (BM interview workshop), Mike (app carries the Extended Trial check-in cadence).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed — but it's a GOAL, not a critical number. Aug 1 is a target, not a bar."}},
     {id:"A2", crit:true, name:"Mover Promotion Framework — First Cohort Live",
       why:"Framework decided 7/2 and handed to Anne; Rippling hours-since-promotion pull proven 7/17 (3 movers already past floors). Q3 = execution, not design.",
       green:"Eligibility runs live on the decided cadence (biweekly vs quarterly — see Open Question 4) · first cohort promoted under the framework · pay docs + app-first status delivery working · fail-forward block process live with the 100% audit.",
       sg:"+ backtests #04 (fast-track thresholds) and #05 (weights) closed with Matisen · promotion-process video shipped.",
-      theme:"The ladder movers climb as they get competent — the theme's retention payoff.", deps:"Matisen (backtests, eligibility automation), Paul (comp sign-offs), Cameron/Paul (damages-out-of-formula confirm)."},
+      theme:"The ladder movers climb as they get competent — the theme's retention payoff.", deps:"Matisen (backtests, eligibility automation), Paul (comp sign-offs), Cameron/Paul (damages-out-of-formula confirm).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"A3", crit:false, name:"Onboarding Experience — Close It Out (carry, finish line)",
       why:"Green but with two known gaps: completion evidence (integrity fix pending merge) and the Comp/Benefits + Perf Mgmt videos (mic bought, not recorded). Carrying a 90%-done rock to actually bank it.",
       green:"Both videos recorded + edited + in the flow · ≥75% completion in first 30 days, evidenced with the integrity fix live.",
       sg:"≥90% completion · quiz bug dead · weekly Jalissa completion check running clean all quarter.",
-      theme:"", deps:"Austin L (video edit)."},
+      theme:"", deps:"Austin L (video edit).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"A4", crit:false, name:"eNPS Voluntary Transition + Engagement Follow-Through",
       why:"7/17 survey was the LAST mandatory one (eNPS 81). Voluntary-going-forward means participation rate becomes its own signal, and DFW is the named follow-up zone. Q2's Q3-input decision — someone has to own the mechanics.",
       green:"Voluntary survey policy documented + communicated · first voluntary cycle run · participation-rate baseline established · DFW follow-up actions closed.",
       sg:"Participation ≥70% on the first voluntary run · eNPS holds 45+.",
-      theme:"", deps:"Cameron (leadership-scorecard gate on the review tool before wide share)."}
+      theme:"", deps:"Cameron (leadership-scorecard gate on the review tool before wide share).",
+      receipt:{status:"challenged", note:"7/20 receipt: CHALLENGED — demoted. This is a TASK Anne owns, not a goal."}}
     ],
-    bench:[{id:"A-S1", kind:"stretch", name:"Leadership succession framework v1 (with Cameron + Paul)", detail:"One page per Roundtable seat: ready-now / ready-in-12mo / gap. The third convergence needs a home; Anne's the natural author."}],
+    bench:[
+      {id:"A-S1", kind:"stretch", name:"Leadership succession framework v1 (with Cameron + Paul)", detail:"One page per Roundtable seat: ready-now / ready-in-12mo / gap. The third convergence needs a home; Anne's the natural author. 7/20 receipt: PROMOTED — confirmed onto Anne's shortlist: source/evaluate/promote internal managers; develop FM/OPS/BM ladder readiness."},
+      {id:"A-S2", kind:"stretch", name:"eNPS Small-Items Bundle", detail:"7/20 receipt: PROMOTED as a bundle. Per-item homes (voluntary-survey mechanics, DFW follow-up items, etc.) get decided individually at triage — not one rock."}
+    ],
     carryNotes:"HR Generalist → SG, done (Jalissa now load-bearing in A1). ClearCo funnel viz → honestly yellow at 40%, blocked on Matisen creds + a $423-vs-$2,400 CPH discrepancy — fold into Matisen's governance rock as a data-bus consumer, don't carry as Anne's rock. 100-pt system: stays parked (mover-app contingent, confirmed not-this-quarter 7/16)."
   },
   amanda: { rocks: [
@@ -357,24 +482,28 @@ const Q3 = {
       why:"Engine is complete; the 7/15 admission was that the gap is distribution and a coaching loop that changes behavior. Also the sales half of speed-to-competence.",
       green:"≥50% of real sales calls auto-graded weekly (she's tracking this % already) · weekly coaching cadence live with Nhel/Tet + BM accountability · rubric-reweight scoped.",
       sg:"≥80% graded · call grades linked to quoted-vs-actual in EMMA (the 7/3 ask to Matisen) · measurable conversion movement on coached reps.",
-      theme:"Speed-to-competence for sales staff.", deps:"Matisen (EMMA integration — currently unanswered; needs a triage call), Nhel/Tet (reviewer flow)."},
+      theme:"Speed-to-competence for sales staff.", deps:"Matisen (EMMA integration — currently unanswered; needs a triage call), Nhel/Tet (reviewer flow).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"C2", crit:true, name:"Demand Pursuit Muscle — Speed-to-Lead SLA + Follow-Up Cadence",
       why:"Convergence #2 (pulse 12556457452). Demand is follow-up-limited, not lead-limited; 5-min response ≈ 21× more likely to qualify; the ~$300K revenue-to-budget gap is substantially this.",
       green:"Speed-to-lead SLA defined + instrumented + baselined · follow-up cadence (the 18 approved email changes + CRM auto-acknowledge) live · unpursued-pool size measured.",
       sg:"≥X% of leads touched inside 5 min (set X off the baseline) · reserve-to-book above 73%.",
-      theme:"", deps:"Matisen/Fabian/Jeff (quote-funnel fields + EMMA API spec), KP (email sequence implementation)."},
+      theme:"", deps:"Matisen/Fabian/Jeff (quote-funnel fields + EMMA API spec), KP (email sequence implementation).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"C3", crit:false, name:"Chatbot Launch + Leadferno Sunset (carry, finish line)",
       why:"Green and on track — launch target is first week of August. Carrying to land it.",
       green:"Botpress live, deflecting, Leadferno sunset by ~mid-quarter.",
       sg:"≥80% deflection sustained a full month.",
-      theme:"", deps:"Matisen (training-data extraction from Leadferno history — in flight)."},
+      theme:"", deps:"Matisen (training-data extraction from Leadferno history — in flight).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"C4", crit:false, name:"New-Rep Ramp — Sales Speed-to-Competence",
       why:"Rob's constraint explicitly names training new SALES staff fast, not just field. Sales class Level 1 ran in Q2; Q3 makes ramp time a measured thing.",
       green:"Time-to-first-quota (or equivalent ramp metric) defined + baselined per rep · sales class Level 2 curriculum locked · new-hire ramp plan standard.",
       sg:"Newest cohort ramps measurably faster than the Q2 cohort.",
-      theme:"Direct.", deps:"Nhel (delivery), C1 (grading is the feedback loop)."}
+      theme:"Direct.", deps:"Nhel (delivery), C1 (grading is the feedback loop).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}}
     ],
-    bench:[{id:"C-S1", kind:"stretch", name:"Quarterly sales-comp design (MB 12504319033)", detail:"Weighted sales component, threshold teeth. Prerequisite is the Amanda+Matisen quarterly-pace board, so this is design-only in Q3."}],
+    bench:[{id:"C-S1", kind:"stretch", name:"Quarterly sales-comp design (MB 12504319033)", detail:"Weighted sales component, threshold teeth. Prerequisite is the Amanda+Matisen quarterly-pace board, so this is design-only in Q3. 7/20 receipt: PROMOTED onto Amanda's shortlist."}],
     carryNotes:"$ Conversion RED — restructure, don't carry the number. Matisen proved 7/15 the 19.9% and the 40% target aren't on the same basis (two definition changes, no clean bridge). C2 replaces it with undistorted funnel metrics. Email redesign → fully KP/Matisen-owned now, off Amanda's slate. CX Q2 theme (First Class Precision) closes with the quarter; Q3 CX theming rides Back to School rather than a separate CX theme (theme-fatigue call — see Open Question 1)."
   },
   matisen: { rocks: [
@@ -382,24 +511,31 @@ const Q3 = {
       why:"The 7/17 TUR-definition gap (Mike: truck-on/off vs utilization %) means FTE targets are built on full-truck assumptions. ~4-wk build already scoped. Feeds QGR FTE targets + the $315K closed-truck recovery story.",
       green:"Per-branch model live · TUR definitions locked and published (one definition everywhere) · FTE targets re-derived · forecaster sheet with the team.",
       sg:"+ closed-truck recovery quantified and handed to Mike/Brian with a plan.",
-      theme:"", deps:"Rippling hours reliability (the 6/29 punch-clock outage caveat still applies)."},
+      theme:"", deps:"Rippling hours reliability (the 6/29 punch-clock outage caveat still applies).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed — but maybe a CADENCE thing, not a full rock; consider widening toward the sales+hiring bandwidth model + continued dashboard/analysis buildout."}},
     {id:"T2", crit:true, name:"Central Data Bus + Tool Registry (AI/Tool Governance build)",
       why:"Governance item 12556198241. Tools are multiplying (7 from Mike alone) with no organizing layer. Bus sequencing already adopted: EMMA sales → Rippling hours (CoS-MH1 handover) → Samsara.",
       green:"EMMA feed canonical (weekly dated drops, never overwritten — already validating) · Rippling hours pipeline handed over · tool registry (\"mainframe\") v1 live with every deployed tool/dashboard indexed · duplicate per-COS source connections killed.",
       sg:"+ Samsara third feed live · ClearCo/CPH discrepancy reconciled (Anne's consumer view) · branch scorecards rendering weekly off the bus.",
-      theme:"Indirect but load-bearing — the theme's scoreboard rides this.", deps:"Fabian, CoS-MH1, Cameron (governance cadence)."},
+      theme:"Indirect but load-bearing — the theme's scoreboard rides this.", deps:"Fabian, CoS-MH1, Cameron (governance cadence).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean. Note: the company-wiki near-miss folds INTO this rock's tool-registry build, not a standalone."}},
     {id:"T3", crit:false, name:"Games Scoring Automation + Auditability",
       why:"The Q2 damages discrepancy couldn't be root-caused because no weekly snapshots were archived. Automation is next quarter's likely \"blow-up\" — do it with a change-mgmt plan, not a flip.",
       green:"Automated weekly attendance/damages pull with archived snapshots · damages-per-Rippling-hour basis implemented · parallel-run vs manual for 4 weeks before cutover.",
       sg:"S5 closes with zero unexplained scoring disputes.",
-      theme:"", deps:"Mike/Brian (season ops)."},
+      theme:"", deps:"Mike/Brian (season ops).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"T4", crit:false, name:"Quote-Funnel De-Mix — Ship the Fields",
       why:"He owes Jeff the EMMA API key/value spec (flagged priority); Jeff's UI is done. Small rock, big unblock for Amanda's C2.",
       green:"API spec delivered · new fields live and collecting · request-ID wiring in.",
       sg:"First ~1,000-move analysis pass started.",
-      theme:"", deps:"Jeff, Fabian."}
+      theme:"", deps:"Jeff, Fabian.",
+      receipt:{status:"challenged", note:"7/20 receipt: CHALLENGED — REPLACED. Matisen's rock ships the MOBILE APP + associated lead triage + estimate-accuracy improvements (bigger scope than this). Plus he supports the network AI buildout."}}
     ],
-    bench:[{id:"T-S1", kind:"stretch", name:"Mobile-app timestamp de-risk (the Q4 Estimate Accuracy gate)", detail:"A scoping memo with Mike, not a build. If this slips, Q4's theme slips; that's the whole ask."}],
+    bench:[
+      {id:"T-S1", kind:"stretch", name:"Mobile-app timestamp de-risk (the Q4 Estimate Accuracy gate)", detail:"A scoping memo with Mike, not a build. If this slips, Q4's theme slips; that's the whole ask."},
+      {id:"T-S2", kind:"stretch", name:"Rippling AI Eval", detail:"7/20 receipt: PROMOTED to Matisen's shortlist. ⚠ OVER-CAP PRESSURE — Matisen is already at the hard cap (T1–T4, with T4 itself replaced by a bigger mobile-app scope) plus network-AI-buildout support. Rule in the Room: fold into T2? Make network-support a standing duty, not a rock?"}
+    ],
     carryNotes:"Call Grading + Claims AI (yellow, ~50%) — kill as a Matisen rock. Engine's built; distribution is Amanda's C1; Claims RAG was already deprioritized. His EMMA-integration piece for Amanda gets triaged inside T2/T4, not a standalone rock. Production Line Cleanup → finishes in Q2 or the remainder folds into T2's registry. HR Command Center → maintenance + T2 consumer. This is the 5→3 lesson applied: four rocks, all his own deliverables, zero \"supporting X's rock\" rocks."
   },
   brian: { rocks: [
@@ -407,27 +543,32 @@ const Q3 = {
       why:"Standing critical number. Q2 recovered strong (only Leander under 100% at 91.7%) — and Leander staffing is literally the Frank-vindication storyline (his Red TUR = closed trucks = staffing).",
       green:"All 5 CTXH branches ≥100% for the quarter, Leander included.",
       sg:"+ zero closed trucks in CTXH by EOQ.",
-      theme:"", deps:"Anne (HPE transition), M2 parallel."},
+      theme:"", deps:"Anne (HPE transition), M2 parallel.",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"B2", crit:true, name:"Manager Speed-to-Competence — Certification Pt 5 + New-Manager Training Board",
       why:"Scrum certification is green and rolling; the training board + new-manager-training beta (Jalissa test) is the natural next part. Daniel is a brand-new NA BM — he's the live case study. This is the theme applied one level up: managers who can train.",
       green:"Training board live · Daniel onboarded through it with weekly scorecards · all 5 BMs certified on the grading cadence · OFT/training-day facilitation standard documented.",
       sg:"+ new-manager curriculum merged with Anne's gate spec + Mike's 205 items (the curriculum merge meeting actually happens) · one internal candidate certified manager-ready.",
-      theme:"Direct.", deps:"Anne (curriculum merge), Mike (app parity for CTXH)."},
+      theme:"Direct.", deps:"Anne (curriculum merge), Mike (app parity for CTXH).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"B3", crit:false, name:"Frank Williams 90-Day Reset",
       why:"Mirror ran 7/17 and landed. The follow-up ~7/22–24 sets the QGR-aligned scorecard; Q3 IS the 90 days. This deserves rock-level visibility — it's also the test case for the whole coaching-first doctrine.",
       green:"Weekly Brian coaching sessions logged all quarter (sub-items on 3940143545) · QGR-aligned scorecard live · day-60 Cameron/Brian judgment point held on time.",
       sg:"Leander sales conversion visibly recovering toward the 82.8% prior-year line · Frank showing the watch-signal (unprompted owned failures, no \"but\").",
-      theme:"", deps:"Cameron (follow-up meeting, day-60 call)."},
+      theme:"", deps:"Cameron (follow-up meeting, day-60 call).",
+      receipt:{status:"challenged", note:"7/20 receipt: CHALLENGED — not a goal. This is management work that runs anyway."}},
     {id:"B4", crit:false, name:"Training Days as the Theme Vehicle (restructured carry)",
       why:"Q2's TD Overhaul sat yellow — and trial-day elimination changes what TDs are FOR (no more trial-day evaluation; pure training). Restructure around the theme: stations, LIT skill test-outs, hustle standard, Magic Moments, guest-trainer slots for top movers.",
       green:"New TD format live (stations/quizzes/scorecards) across CTXH · monthly cadence held · feedback loop running (his TD app).",
       sg:"+ format adopted by DFWT (cross-region parity) · top-trainer recognition running off app data.",
-      theme:"The theme's field ritual.", deps:"Mike (app who-was-your-trainer data), Anne (post-trial-day interview handout switch)."},
+      theme:"The theme's field ritual.", deps:"Mike (app who-was-your-trainer data), Anne (post-trial-day interview handout switch).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed — Brian works WITH Mike to make sure training days are actually being trained."}},
     {id:"B5", crit:false, name:"Einstein Games S5 (CTXH) + Quarter-Close Comms",
       why:"He owns quarter-close comms and the finals push now; Q3 runs the new philosophy (branch-level damages, coaching-tool framing). CTXH regional 6.6 vs the 7 bar is the coaching target.",
       green:"All CTXH branches active weekly · regional average ≥7 · team messaging on the games-are-coaching reframe delivered.",
       sg:"Regional ≥7.5 · NA (5.0 in Q2) above 7.",
-      theme:"", deps:"Matisen (T3 automation)."}
+      theme:"", deps:"Matisen (T3 automation).",
+      receipt:{status:"challenged", note:"7/20 receipt: CHALLENGED — not a goal."}}
     ],
     bench:[{id:"B-S1", kind:"stretch", name:"S. Austin succession decision (Hector/Jesper/Jake Peterson)", detail:"Run through the applicant-scorecard tool — bench depth made real, feeds Anne's succession stretch."}],
     carryNotes:"Games CTXH yellow → carried into B5 with the reframe. TD Overhaul yellow → restructured into B4. Hiring red (Q1) → fully recovered, closed. Written-warning question stays HELD at logged redirect — not a rock, a coaching-pulse watch."
@@ -437,22 +578,26 @@ const Q3 = {
       why:"Rob's rec (7/10, converging with the 7/9 CFAO read): Paul = CFO, drop COO. Q3 makes it real.",
       green:"Title + Rippling org chart updated (Anne executes; Roundtable → Cameron, Paul = peer CFO w/ finance under him) · responsibilities doc written · communicated company-wide · leadership P&L line ownership mapped with Ben (role-tailored RM/BM reporting live).",
       sg:"+ Q4/2027 budget process owned end-to-end under the new seat · Prosper cadence fully Paul-led with Cameron front-loaded-and-leaves.",
-      theme:"Succession convergence — role clarity at the top.", deps:"Anne (Rippling), Ben (reporting build)."},
+      theme:"Succession convergence — role clarity at the top.", deps:"Anne (Rippling), Ben (reporting build).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed + deliverables named — manager P&Ls restart · regular cash-cycle reporting · books closed within 10 days · Sage integration + MCP."}},
     {id:"P2", crit:true, name:"Mover PTO — From Signed-Off to Launch-Ready",
       why:"Cameron signed off 7/17 on the Clark/Paul design (accrual at promotion, top-two rungs, 1,820-hr basis). Jan 1 2027 rollout means Q3 = the make-it-real quarter.",
       green:"TX legal review complete · Ben's cost model validated (the ~$300K/yr termination-payout exposure quantified and accepted) · Rippling accrual config designed · rollout + comms plan approved by Cameron/Anne.",
       sg:"+ Rippling config tested end-to-end · WIFM comms drafted and ready to fire in Q4.",
-      theme:"", deps:"Anne (framework + Rippling), Ben (cost model), Cameron (final comms approval)."},
+      theme:"", deps:"Anne (framework + Rippling), Ben (cost model), Cameron (final comms approval).",
+      receipt:{status:"challenged", note:"7/20 receipt: CHALLENGED — moves OFF Paul. This is Anne/Jalissa's."}},
     {id:"P3", crit:false, name:"Geographic Expansion — restructured carry (needs the AAR conversation)",
       why:"Q2 = at-risk/yellow, 0 of 5 evaluated. AAR call needed: kill, park, or restructure. Draft recommendation: restructure to pipeline-reactive — the M&A marketplace now knows Einstein is a buyer; stop chasing a count, evaluate what the pipeline surfaces.",
       green:"(Restructured) Deepen-vs-widen stance DOCUMENTED (one page, the actual missing deliverable) · every marketplace-flagged TX/FL opportunity gets a 48-hr screen · Houston organic-vs-acquisition case study done.",
       sg:"≥3 full evaluations + 1 financial model built with Ben.",
-      theme:"", deps:"Ben (models)."},
+      theme:"", deps:"Ben (models).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed, reframed — M&A AND organic; could be a moving company OR adjacent (concierge, crate rentals). Houston/pipeline near-miss stays inside it."}},
     {id:"P4", crit:false, name:"Money Collection Easy Wins (carry with honesty check)",
       why:"Marked green in Q2 on \"haven't started but confident\" — that's a self-grade to challenge at AAR. Small, real, all his.",
       green:"Manual-vs-swipe cost quantified + shared · automated swipe-% reporting · invoice-late-email → Monday pulse automation live.",
       sg:"+ monthly branch rankings + coaching process documented.",
-      theme:"", deps:"none."}
+      theme:"", deps:"none.",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}}
     ],
     bench:[{id:"P-S1", kind:"stretch", name:"Salaried comp model kickoff with Ben", detail:"Coordinate w/ Anne first — the #5 overlap from REMAINING-WORKSTREAMS. Design-only."}],
     carryNotes:"Mover comp review → lands green/SG, closes (promotion framework execution is Anne's A2 now). N. Austin move-in → SG, done. Branch visits → fold into Cameron's travel-week pilot (they travel together anyway — DFW 7/13–15 proved it)."
@@ -462,7 +607,8 @@ const Q3 = {
       why:"All 7 COS live (Q2's Green banked). The Cherny adoption ladder is now the map: most directs sit at step 1 (ad-hoc use). The highest-leverage template work is 1→2 self-verification, and the metric is hours saved, not activity.",
       green:"8/7 setup-audit findings turned into a per-leader adoption plan · every spoke at evidenced step 2 or with a concrete gap plan · /status + freshness fixes fully installed network-wide · Tier-2 layering started (Linda → recruiting is the first real job).",
       sg:"+ hours-saved measured and reported per leader · 2+ leaders at step 3.",
-      theme:"", deps:"Every direct (adoption), template work (Albert)."},
+      theme:"", deps:"Every direct (adoption), template work (Albert).",
+      receipt:{status:"confirmed", note:"7/20 receipt: confirmed clean, no changes."}},
     {id:"R2", crit:true, name:"AI/Tool Governance — Stand Up the Workstream",
       why:"Governance item 12556198241, Day-2 DECIDE row. Cameron's 3 goals: cross-pollination, central source of truth (w/ Matisen), standing tool registry. Cameron owns the governance cadence; Matisen builds (T2).",
       green:"Workstream chartered at QGR · monthly Big Rocks review cadence running (measuring returns, not activity) · cross-pollination lane live (Mike's shareable tools → Brian/Vera) · registry adopted as the rule (new tools must register).",
@@ -484,7 +630,11 @@ const Q3 = {
       sg:"+ Paul joins for ≥2 stops (fold his old branch-visits rock in) · frontline findings land as Q4 inputs.",
       theme:"", deps:"Calendar discipline only."}
     ],
-    bench:[{id:"R-B1", kind:"bonus", name:"ITP 90-Day Plan Execution", detail:"The 3 commitments (poker-chip meter · Rob-owned 180 EQ survey · sit-in-the-seat-first), color-code self-checks ~8/15 + ~9/15, formal re-eval at Rob's October session. Already committed; bonus keeps it visible without inflating the rock count."}],
+    bench:[
+      {id:"R-B1", kind:"bonus", name:"ITP 90-Day Plan Execution", detail:"The 3 commitments (poker-chip meter · Rob-owned 180 EQ survey · sit-in-the-seat-first), color-code self-checks ~8/15 + ~9/15, formal re-eval at Rob's October session. Already committed; bonus keeps it visible without inflating the rock count."},
+      {id:"R-B2", kind:"stretch", name:"Manager Performance Visibility", detail:"7/20 receipt: PROMOTED — part of the COS/governance family (R1/R2): managers get AT LEAST a monthly branch-scorecard + individual-dashboard update."},
+      {id:"R-B3", kind:"stretch", name:"Estimate Accuracy — Q3 Theme OPTION", detail:"7/20 receipt: PROMOTED as a theme OPTION, not a decision — the Q3 CET theme (speed-to-competence lead candidate) still needs settling at QGR. Ties to R3."}
+    ],
     carryNotes:"COS/World Model → evolves into R1. AI Wedge Audit → complete; successor is R2 (governance replaces audit). Variable Pricing → cadence is live and Matisen-owned (T1 continues the strategy work); comes OFF Cameron's slate — the CEO-audit \"first to drop\" flag was right. Branch Visits → restructured into R5. Website → carried as R4 with honest scope. ITP → SG, done; execution rides the bonus."
   },
   others: { rocks: [
@@ -509,10 +659,146 @@ const Q3 = {
       sg:"Claims time-to-close holding green — keep, don't rebuild.",
       theme:"", deps:"Amanda (scope)."}
     ],
-    bench:[],
+    bench:[
+      {id:"O-B1", kind:"stretch", name:"Kickpoint ROAS/BigQuery Dashboard", detail:"7/20 receipt: PROMOTED — home TBD at triage (Amanda's slate vs Kickpoint's own goal vs wait for Matisen's data bus). No steer given; rule it in the Room."}
+    ],
     carryNotes:"From the draft's \"Others on the dashboard\" section — 1–2 line suggestions, cascade through managers."
   }
 };
+
+/* ============================================================
+   MB COVERAGE CANDIDATES — round 4 rewrite. Was a rigid department→lane map with
+   only 37 of the audit's 93 high-signal items surfaced; Cameron flagged that leaders
+   draw from MULTIPLE departments (Mike also pulls Operations+EE, Brian pulls EE,
+   sales/strategy/IT/data serve several leaders). Now:
+     - ALL 93 high-signal items from mb-coverage-audit-2026-07-20.md are cards.
+     - `homeLane` is just a BEST-GUESS starting lane — every MB card is movable via
+       the per-card lane selector (see moveMBCandidate() below); moves persist to
+       state.laneMove (additive key, LS_KEY untouched) and are re-applied at hydrate.
+     - `group` = the audit's department label, surfaced as a "Pool:" pill per lane
+       header so Cameron can see which departments are feeding each leader.
+     - The 10-12 ceiling from round 3 governed SHORTLIST size, not visible-candidate
+       count — overflow is now allowed to run deep; it renders scrollable+collapsible
+       so lanes don't become walls (see .overflow-band / details.fold in renderTriage).
+     - Items previously skipped as "duplicates" (e.g. Brian's Scrum Accountability
+       Pt 3 vs his B2 cert rock) are back in as cards, flagged in their `why` text,
+       since visibility no longer costs shortlist room.
+   Every card also carries a generic freshness disclaimer in the UI (round 4 FIX 2):
+   "MB item — freshness not owner-verified; leader sweep pending." One item has a
+   Cameron-confirmed stale correction: "Hire Tampa + Garland Ops Managers" — Tampa OM
+   is already hired, Garland OM isn't needed until FY27 busy season; demoted to the
+   bottom of Mike's pool with an explicit ⚠ STALE note (`stale`/`staleNote` fields).
+   ============================================================ */
+const MB_POOL = [
+  // ---- MIKE (home) — DFWT Region, Operations, Inbox, Strategy cross-pulls ----
+  {pulseId:"12556464031", name:"Mike Dept-Head/Regional Split — FDE Boots-on-Ground Weeks + Dept-Head QGs as Critical Number", why:"QGR-lens tagged, updated 7/17 — this is the FDE reframe named directly in the M2 receipt challenge.", group:"DFWT Region", homeLane:"mike", rank:1},
+  {pulseId:"11728854119", name:"Fort Worth Culture + eNPS Attention — eNPS 0, 3 Detractors (New Trouble Spot)", why:"QGR-lens tagged — new trouble spot, no current rock covers it.", group:"DFWT Region", homeLane:"mike", rank:2},
+  {pulseId:"11728336186", name:"DFWT Branch Audits — 3 of 5 Branches per Quarter", why:"priority:QG", group:"DFWT Region", homeLane:"mike", rank:3},
+  {pulseId:"11728336223", name:"Sell Remaining Trucks + Fund 2026 Fleet Purchases", why:"priority:QG", group:"Operations", homeLane:"mike", rank:4},
+  {pulseId:"11795960032", name:"Develop Company-Wide System for Sharing Fleet Issues + Solutions", why:"updated 7/13 — adjacent to M3 Fleet Safety.", group:"Operations", homeLane:"mike", rank:5},
+  {pulseId:"11733876632", name:"Mike — Einstein Games S4 Launch (DFWT)", why:"priority:QG, QGR-lens tagged — current S4 season closes 7/21; low forward relevance but useful history for T3's automation spec.", group:"DFWT Region", homeLane:"mike", rank:6},
+  {pulseId:"7736702682", name:"Inventory Tracking (Monthly Inventory Reset) — Automate Reporting", why:"updated 7/13", group:"Operations", homeLane:"mike", rank:7},
+  {pulseId:"10565606806", name:"Figure Out Acronym for Protecting an Item (Pre-Existing Damage, Lift, Wrap, etc)", why:"updated 7/13 — thin/minor.", group:"Operations", homeLane:"mike", rank:8},
+  {pulseId:"18365410882", name:"Revisit Automatic Slack Messages to Movers for Move Updates — Based on Tampa Success", why:"updated 7/13 — thin/minor.", group:"Operations", homeLane:"mike", rank:9},
+  {pulseId:"18034479046", name:"Deferring Until Mid Quarter to Assess Availability — Test Stretchy Pads?", why:"updated 7/13 — Inbox grab-bag, product test.", group:"Inbox", homeLane:"mike", rank:10},
+  {pulseId:"11728355498", name:"Evaluate 3-Person Minimum Crew Size for Summer Months", why:"priority:Super Critical — Strategy dept, cross-pulled to Mike (Ops/crew sizing call).", group:"Strategy", homeLane:"mike", rank:11},
+  {pulseId:"11728355485", name:"Hire Tampa + Garland Ops Managers", why:"priority:QG — staffing theme, adjacent to M2/B1.", group:"DFWT Region", homeLane:"mike", rank:20, stale:true, staleNote:"⚠ STALE per Cameron 7/20: Tampa hired ✓ · Garland → next busy season (FY27). Not a top candidate — demoted."},
+
+  // ---- ANNE (home) — Employee Experience / HR, the full dept (15 of 15) ----
+  {pulseId:"11728351027", name:"Launch Einstein U — Manager Ongoing Education + Recertification", why:"priority:Super Critical — direct resonance with the new cross-cutting directive (\"ongoing education\" module for managers).", group:"EE/HR", homeLane:"anne", rank:1},
+  {pulseId:"12443058880", name:"Weekly Employee Magic Moments — one Roundtable leader delivers a magic moment to an employee every week", why:"QGR-lens tagged, updated 7/3 — direct resonance with the new cross-cutting \"Magic Moments for employees\" directive.", group:"EE/HR", homeLane:"anne", rank:2},
+  {pulseId:"11728340047", name:"Develop Mover-to-Manager Pipeline", why:"priority:Super Critical, updated 7/17 — speed-to-competence + succession-framework resonance.", group:"EE/HR", homeLane:"anne", rank:3},
+  {pulseId:"11741530813", name:"Redesign eNPS Survey Cadence — Monthly Pulse + Quarterly Full Survey", why:"updated 7/17 — the per-item home the A4/A-S2 eNPS bundle notes said would get decided at triage.", group:"EE/HR", homeLane:"anne", rank:4},
+  {pulseId:"11733894186", name:"Anne — Hiring Targets 105% (Summer Peak)", why:"priority:QG — direct A1 theme tie.", group:"EE/HR", homeLane:"anne", rank:5},
+  {pulseId:"11728351015", name:"Implement Cohort Hiring — Biweekly Onboarding Classes for Busy Season", why:"updated 7/17 — onboarding / speed-to-competence theme.", group:"EE/HR", homeLane:"anne", rank:6},
+  {pulseId:"11728352496", name:"ClearCo ATS Rollout + Hiring Funnel Visibility", why:"priority:QG — carryNotes already route the ClearCo/CPH work into Matisen's T2 as a data-bus consumer; kept visible here in case that changes.", group:"EE/HR", homeLane:"anne", rank:7},
+  {pulseId:"11728362110", name:"Einstein U — Revamp New Hire Onboarding Program", why:"priority:QG — adjacent to A3.", group:"EE/HR", homeLane:"anne", rank:8},
+  {pulseId:"11733915856", name:"Anne — Workers Comp + Mover Safety Program", why:"priority:QG", group:"EE/HR", homeLane:"anne", rank:9},
+  {pulseId:"11728343164", name:"Implement WHO/Topgrading — Culture Interviews + Position Scorecards", why:"priority:Super Critical — complements A1's competency-based interviewing.", group:"EE/HR", homeLane:"anne", rank:10},
+  {pulseId:"11728351031", name:"Build Career Ladder + Progression Roadmap for CET", why:"priority:Super Critical — succession/A2 resonance.", group:"EE/HR", homeLane:"anne", rank:11},
+  {pulseId:"11728357308", name:"Drive Referral Hires — Employee + Past Employee Email Campaign", why:"priority:Super Critical", group:"EE/HR", homeLane:"anne", rank:12},
+  {pulseId:"11728350964", name:"Implement Weekly Start/Stop/Keep Conversations — Scaling Up Practice", why:"priority:Super Critical", group:"EE/HR", homeLane:"anne", rank:13},
+  {pulseId:"11728344145", name:"Hire HR Generalist for Recruiting Support", why:"priority:Super Critical — ⚠ likely stale/closed: Jalissa's already the load-bearing HR Generalist per the Q2 SG close-out (anne-q2-0).", group:"EE/HR", homeLane:"anne", rank:14},
+  {pulseId:"11728339915", name:"Evaluate Volunteer Hours as PTO Benefit — eNPS Suggestion", why:"QGR-lens tagged", group:"EE/HR", homeLane:"anne", rank:15},
+
+  // ---- AMANDA (home) — Sales + Damages/CS, the full pool (22) + 1 Strategy cross-pull ----
+  {pulseId:"11728346757", name:"CET Q2 Theme — Estimate Accuracy + Realization Rate", why:"priority:QG — strongest theme resonance (estimate accuracy ties directly to speed-to-competence).", group:"Sales", homeLane:"amanda", rank:1},
+    {pulseId:"11864128674", name:"Lead Treatment Framework — Triage Cohort A vs Cohort B vs directBook", why:"updated 7/17 — direct C2 (demand-pursuit) resonance.", group:"Sales", homeLane:"amanda", rank:2},
+    {pulseId:"11728352450", name:"Adjust Primary Sales Metrics — Conv $, Hours Booked, Packing Breakout", why:"priority:Super Critical — candidate to resolve Open Question 5 (replace the unbridgeable 40% Conversion $ KPI).", group:"Sales", homeLane:"amanda", rank:3},
+    {pulseId:"11728346788", name:"Magic Moments Toolkit — Draft + Pilot in 1 Market", why:"priority:Super Critical — resonates with the new cross-cutting Magic Moments directive.", group:"Damages/CS", homeLane:"amanda", rank:4},
+    {pulseId:"11728352451", name:"Create CET Training and Onboarding Materials for Future Hires", why:"priority:Super Critical — direct C4 (new-rep ramp) resonance.", group:"Damages/CS", homeLane:"amanda", rank:5},
+    {pulseId:"11728354415", name:"Damage Coaching Framework — Tracking, Leaderboards, Accountability", why:"priority:QG, updated 7/17 — cross-cutting with the Games/M3 damages-branch-level reframe.", group:"Damages/CS", homeLane:"amanda", rank:6},
+    {pulseId:"11728346835", name:"Sales Training — Rance, Cameron K, and 2 New CETs", why:"priority:QG — direct C4 (new-rep ramp) resonance.", group:"Sales", homeLane:"amanda", rank:7},
+    {pulseId:"11728333174", name:"Sales Coaching — Low Converter Retraining Program", why:"priority:QG — C1 coaching-loop adjacent.", group:"Sales", homeLane:"amanda", rank:8},
+    {pulseId:"11733919774", name:"Amanda — Centralized Sales Email Rollout (Houston Test First)", why:"priority:QG", group:"Sales", homeLane:"amanda", rank:9},
+    {pulseId:"11733924241", name:"Nhel — Manager Sales Accountability (Weekly RM Reporting)", why:"priority:QG — sub-leader item, owner pre-selected to Nhel.", group:"Sales", homeLane:"amanda", rank:10, ownerOverride:"nhel"},
+    {pulseId:"11728352427", name:"Automate SMS Move Reminder — Reduce Last-Minute Cancellations", why:"priority:Super Critical", group:"Sales", homeLane:"amanda", rank:11},
+    {pulseId:"11728360389", name:"Improve Estimate Accuracy — Sales Coaching + Dashboard Management", why:"priority:Super Critical — near-duplicate of the CET Q2 Theme Estimate Accuracy item above; kept visible, not shortlist-worthy twice.", group:"Sales", homeLane:"amanda", rank:12},
+    {pulseId:"11728354543", name:"Launch Sales Competitions — Small Bonus Incentives to Drive Engagement", why:"priority:Super Critical — thin.", group:"Sales", homeLane:"amanda", rank:13},
+    {pulseId:"11728336135", name:"Implement AI Surveying — Evaluate Yembo vs LiveSwitch Replacement", why:"priority:Super Critical — AI-wedge/governance adjacent.", group:"Sales", homeLane:"amanda", rank:14},
+    {pulseId:"11728354533", name:"Carly — Learn Rippling Payroll Processing", why:"priority:QG — sub-leader item, owner pre-selected to Carly.", group:"Damages/CS", homeLane:"amanda", rank:15, ownerOverride:"carly"},
+    {pulseId:"11728352516", name:"Develop CET Claims Metrics + Hire Fourth Claims Person", why:"priority:QG", group:"Damages/CS", homeLane:"amanda", rank:16},
+    {pulseId:"11733922589", name:"Carly — CX Q2 Theme Execution (Carly's Contribution)", why:"priority:QG — ⚠ likely stale: Q2-scoped theme closes with the quarter. Owner pre-selected to Carly.", group:"Damages/CS", homeLane:"amanda", rank:17, ownerOverride:"carly"},
+    {pulseId:"11741147228", name:"Amanda — Claims Team Oversight During Carly Leave", why:"priority:QG — ⚠ likely stale: Carly's back from leave (O-CAR1 ramp-back rock).", group:"Damages/CS", homeLane:"amanda", rank:18},
+    {pulseId:"11728354516", name:"Launch Customer Outreach Program — Stop/Start/Keep + Case Studies", why:"priority:Super Critical", group:"Damages/CS", homeLane:"amanda", rank:19},
+    {pulseId:"11728346786", name:"Send Pre-Move 'Help Us Prepare' Form — Unreasonable Hospitality", why:"priority:Super Critical", group:"Damages/CS", homeLane:"amanda", rank:20},
+    {pulseId:"11728355494", name:"Build Einstein Recommendations Packet — Partner Discounts by Market", why:"priority:Super Critical — thin.", group:"Damages/CS", homeLane:"amanda", rank:21},
+    {pulseId:"11728346780", name:"Follow Up with SafeHaven as Concierge Partner — Deferred to Service Launch", why:"priority:Super Critical — explicitly deferred already.", group:"Damages/CS", homeLane:"amanda", rank:22},
+    {pulseId:"11728355447", name:"Magic Moments — CX Theme Development + Management", why:"priority:Super Critical — Strategy dept, cross-pulled to Amanda (CX theme ownership).", group:"Strategy", homeLane:"amanda", rank:23},
+
+  // ---- MATISEN (home) — Data/RevOps + IT/Software, full pool (13) + 1 Strategy cross-pull ----
+    {pulseId:"11728346777", name:"Roll Out Mobile App Update — UX Improvements + First Feature", why:"priority:QG — direct match for the T4-replacement scope (mobile app + lead triage + estimate accuracy) named in the 7/20 receipt.", group:"IT/Software", homeLane:"matisen", rank:1},
+    {pulseId:"11864125339", name:"CRM Auto-Acknowledge Text/Email for New Lead Bucket — Sub-8hr Response", why:"updated 7/17 — resonates with Amanda's C2 (speed-to-lead) and the T4-replacement scope.", group:"Data/RevOps", homeLane:"matisen", rank:2},
+    {pulseId:"11733912621", name:"Matisen — C4/BPMN Architecture Maps (World Model Foundation)", why:"priority:QG — direct R1/R2/T2 governance resonance.", group:"IT/Software", homeLane:"matisen", rank:3},
+    {pulseId:"11733926383", name:"Matisen — EMMA API External Access (Unblocks AI COS + KPIs)", why:"priority:QG — direct T2 governance resonance.", group:"IT/Software", homeLane:"matisen", rank:4},
+    {pulseId:"11728355429", name:"Variable Pricing Phase 2 — Day-of-Week + Location Tuning", why:"priority:QG — T1 continuation.", group:"IT/Software", homeLane:"matisen", rank:5},
+    {pulseId:"11728394179", name:"Improve Damage Score Assignment — Individual Mover Attribution", why:"updated 7/17 — ⚠ CONFLICT FLAG: cuts against the Games/damages reframe (branch-level only, no individual drill-down, per Thread #13). Surface at triage before shortlisting.", group:"Data/RevOps", homeLane:"matisen", rank:6},
+    {pulseId:"11728346681", name:"MQL-to-Conversion Pipeline — CPA + Marketing ROI Visibility", why:"priority:Super Critical", group:"Data/RevOps", homeLane:"matisen", rank:7},
+    {pulseId:"11728346682", name:"Build AI-Based Enterprise Analytics — RAG on Einstein Data", why:"priority:Super Critical — governance/R2 adjacent.", group:"Data/RevOps", homeLane:"matisen", rank:8},
+    {pulseId:"11728346836", name:"EMMA V4 Quality of Life Sprints — 2 QOL Rounds", why:"priority:QG", group:"IT/Software", homeLane:"matisen", rank:9},
+    {pulseId:"11728355436", name:"Mover/Contract App Rollout — Intro Messaging + Review Capture", why:"priority:QG — cross-dep with Mike's M1.", group:"IT/Software", homeLane:"matisen", rank:10},
+    {pulseId:"11728346708", name:"Einstein Games S4 + Mover Metric Visibility", why:"priority:QG, QGR-lens tagged — T3 automation adjacent.", group:"IT/Software", homeLane:"matisen", rank:11},
+    {pulseId:"11728360381", name:"Rethink Capacity Management — Reserve Space for Profitable Jobs", why:"priority:Super Critical — thin.", group:"IT/Software", homeLane:"matisen", rank:12},
+    {pulseId:"11728355469", name:"Improve Cancellation Reason Tracking — EMMA UX + Portal Integration", why:"priority:Super Critical — thin.", group:"IT/Software", homeLane:"matisen", rank:13},
+    {pulseId:"11728362099", name:"Evaluate Portal-to-Portal Pricing — Post Variable Pricing Stabilization", why:"priority:Super Critical — Strategy dept, cross-pulled to Matisen (T1 pricing continuation).", group:"Strategy", homeLane:"matisen", rank:14},
+
+  // ---- BRIAN (home) — CTXH, full dept (6 of 6) ----
+    {pulseId:"11733923114", name:"Brian — Manager Development Pipeline (Mover→Lead→FM→OM→BM)", why:"updated 7/17 — direct B2 speed-to-competence resonance.", group:"CTXH", homeLane:"brian", rank:1},
+    {pulseId:"11728362071", name:"ATX Flex Manager + SA Ops Manager Development", why:"priority:Super Critical — feeds the B-S1 succession bench item.", group:"CTXH", homeLane:"brian", rank:2},
+    {pulseId:"11728362090", name:"CTXH Quarterly Theme Mgmt — Ensure All Managers Hit QGs", why:"priority:QG", group:"CTXH", homeLane:"brian", rank:3},
+    {pulseId:"11728362107", name:"Legends Part 2 — Update Template + Annual Book Format", why:"priority:QG", group:"CTXH", homeLane:"brian", rank:4},
+    {pulseId:"11728355560", name:"CTXH Branch Audits — 3 of 5 Branches per Quarter", why:"priority:QG", group:"CTXH", homeLane:"brian", rank:5},
+    {pulseId:"11728336199", name:"Scrum Accountability Part 3 — Huddle Grading + Value Tracking", why:"priority:QG — near-duplicate of B2's certification lane; kept visible, not shortlist-worthy twice.", group:"CTXH", homeLane:"brian", rank:6},
+
+  // ---- PAUL (home) — Finance + Physical Property, full pool (7) + 1 Strategy cross-pull ----
+    {pulseId:"11728362109", name:"Transition Payroll Management — Handoff", why:"updated 7/20 — most recent signal in Paul's department pool.", group:"Finance", homeLane:"paul", rank:1},
+    {pulseId:"11733922946", name:"Paul — 3 to 5 Year Capital Plan + Growth Financing (Rob Lynch Framework)", why:"priority:QG", group:"Finance", homeLane:"paul", rank:2},
+    {pulseId:"11728394236", name:"Improve BM Financial Accountability Meetings — Proactive Approach", why:"priority:Super Critical", group:"Finance", homeLane:"paul", rank:3},
+    {pulseId:"11728344054", name:"Build Monthly Financial Analysis + Revenue Forecasting Model", why:"priority:QG — feeds P1's reporting deliverables.", group:"Finance", homeLane:"paul", rank:4},
+    {pulseId:"11728344122", name:"N. Austin Buildout + Leander Lease Resolution", why:"priority:QG — Physical Property; residual thread off the Q2 N. Austin close-out.", group:"Physical Property", homeLane:"paul", rank:5},
+    {pulseId:"11728344052", name:"Prosper VCFO Onboarding + Finance Transition (Sage)", why:"priority:QG — near-duplicate of O-BEN1; kept visible for Paul-side oversight framing.", group:"Finance", homeLane:"paul", rank:6},
+    {pulseId:"11752733644", name:"Annual Mover Comp Review — Pay Structure + Promotion Paths", why:"priority:Super Critical — ⚠ likely stale/closed: this is the Q2 rock that already closed (paul-q2-0).", group:"Finance", homeLane:"paul", rank:7},
+    {pulseId:"11728336220", name:"Develop Exit Options — ESOP/Roll-Up Hybrid Executive Summary", why:"priority:Super Critical — Strategy dept, cross-pulled to Paul (ownership/finance).", group:"Strategy", homeLane:"paul", rank:8},
+
+  // ---- CAMERON (home) — Marketing + Content Creation (Austin L) + Culture, full pools + 4 Strategy + 1 Inbox cross-pulls ----
+    {pulseId:"11728346692", name:"Cameron — Film Core Values + Competitor Pricing Videos", why:"priority:QG", group:"Marketing", homeLane:"cameron", rank:1},
+    {pulseId:"11733929645", name:"Austin L — YouTube Training Course (16+ Videos, Red Q1 Carry)", why:"priority:QG — sub-leader item, owner pre-selected to Austin L.", group:"Content Creation", homeLane:"cameron", rank:2, ownerOverride:"austinl"},
+    {pulseId:"12412974378", name:"Origin-Story Brand Film (NEW) — ~60s Kindergarten-Founding-Story Film", why:"updated 6/30 — ties to Website Redesign R4 + the Brand Kit founding story.", group:"Content Creation", homeLane:"cameron", rank:3},
+    {pulseId:"11733942487", name:"Austin L — Price Comparison Video Final Version (All Cuts)", why:"priority:QG — sub-leader item, owner pre-selected to Austin L.", group:"Content Creation", homeLane:"cameron", rank:4, ownerOverride:"austinl"},
+    {pulseId:"11733926589", name:"Austin L — Einstein Games S4 Content (Promo + Matchups + Highlights)", why:"priority:QG — sub-leader item, owner pre-selected to Austin L; current-season content, low forward relevance.", group:"Content Creation", homeLane:"cameron", rank:5, ownerOverride:"austinl"},
+    {pulseId:"11733946162", name:"Austin L — Client Testimonial Videos (Red Q1 Carry)", why:"priority:QG — sub-leader item, owner pre-selected to Austin L.", group:"Content Creation", homeLane:"cameron", rank:6, ownerOverride:"austinl"},
+    {pulseId:"11733962557", name:"Austin L — Short Form / Social Media (Weekly Cadence)", why:"priority:QG — sub-leader item, owner pre-selected to Austin L.", group:"Content Creation", homeLane:"cameron", rank:7, ownerOverride:"austinl"},
+    {pulseId:"12412779445", name:"Performance Bonus and Performance Matrix Build Out", why:"updated 6/30 — Content Creation dept, sub-leader item, owner pre-selected to Austin L.", group:"Content Creation", homeLane:"cameron", rank:8, ownerOverride:"austinl"},
+    {pulseId:"11728343099", name:"Expand SAFE Community Outreach to Other Markets", why:"priority:Super Critical", group:"Culture", homeLane:"cameron", rank:9},
+    {pulseId:"11728355428", name:"Omni Channel Marketing — Reduce Dependency on Paid Digital", why:"priority:QG", group:"Marketing", homeLane:"cameron", rank:10},
+    {pulseId:"11728352445", name:"FUTURE QG IDEAS: 95/5, Damage Death Match, TUR, Rollouts, AI at Work Training, Billable Efficiency", why:"updated 7/20 — Inbox grab-bag.", group:"Inbox", homeLane:"cameron", rank:11},
+    {pulseId:"11728352426", name:"Build the Einstein Dojo + Scale AI COS to All Roundtable", why:"priority:QG — direct R1/R2 resonance.", group:"Strategy", homeLane:"cameron", rank:12},
+    {pulseId:"11733875812", name:"Cameron — QGR + Scaling Up Coach Integration (Rob Lynch)", why:"priority:QG", group:"Strategy", homeLane:"cameron", rank:13},
+    {pulseId:"11728355437", name:"Ongoing Education — Books, Seminars, Conferences, Courses", why:"priority:Super Critical — resonates with the new cross-cutting \"ongoing education\" directive.", group:"Strategy", homeLane:"cameron", rank:14},
+    {pulseId:"12047169287", name:"Refine Bandwidth Model to Better Understand Sales AND Hiring Budgets + How They Inform Manager Bandwidth", why:"QGR-lens tagged, updated 6/29", group:"Strategy", homeLane:"cameron", rank:15}
+];
+// leader ids the MB pool + lane selector can target — the 7 Roundtable lanes ("others" excluded, no lane selector for it)
+const LANE_LEADERS = LEADERS.filter(l=>l.id!=="others");
 
 /* ---------- Open questions ---------- */
 const OPEN_QUESTIONS = [
@@ -573,13 +859,50 @@ const DEPS = [
    ============================================================ */
 const LS_KEY = "qgr-triage-q3-state";
 let state = loadState();
-function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, view:"review"}; }
+function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, disp:{}, laneMove:{}, view:"review", customRocks:[]}; }
+
+// Fold open-state survives re-renders (in-memory only — resets on reload by design).
+// disp-* and ovf-* folds default CLOSED (truthy check) — 7/21 audit: open-by-default overflow buried the lanes.
+var foldOpen = {};
+document.addEventListener("toggle", function(e){
+  var d = e.target;
+  if (d && d.matches && d.matches("details[data-fold]")) foldOpen[d.dataset.fold] = d.open;
+}, true);
 function loadState(){
   try{ const raw = localStorage.getItem(LS_KEY); if(raw){ const s = JSON.parse(raw); return Object.assign(blankState(), s); } }catch(e){}
   return blankState();
 }
 let saveEnabled = true;
-function save(){ if(!saveEnabled) return; try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
+function save(){ if(!saveEnabled) return; try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){ if(!save._warned){ save._warned = true; toast("⚠ SAVE FAILED — decisions are NOT persisting (storage error). Export often."); } } }
+// Cameron-added custom goals (7/20 add) — persisted in state.customRocks, merged into the seed's
+// leader rock arrays at boot ONLY (never mutates the seed consts themselves), so old localStorage
+// state with no customRocks array just falls back to the blankState() default ([]) — lossless.
+function hydrateCustomRocks(){
+  (state.customRocks||[]).forEach(c=>{
+    const g = Q3[c.leaderId]; if(!g) return;
+    if(g.rocks.some(r=>r.id===c.id)) return;
+    g.rocks.push({id:c.id, crit:false, name:c.title, why:c.note||"", green:"", sg:"", theme:"", deps:"", custom:true});
+  });
+}
+hydrateCustomRocks();
+// MB coverage candidates (round 3 add, rewritten round 4 for cross-group pooling) —
+// additive-only bench cards from MB_POOL, hydrated into Q3[leader].bench at boot.
+// `homeLane` is only the starting guess: if Cameron has already moved a card in a
+// prior session, state.laneMove[id] (additive key) wins here so the move survives
+// reloads. Idempotent (checked by id) and never mutates the seed consts, same
+// safety pattern as hydrateCustomRocks — safe to re-run every load, no LS_KEY bump.
+function hydrateMBCandidates(){
+  MB_POOL.forEach((c,i)=>{
+    const id = "MB-"+c.pulseId;
+    const laneId = state.laneMove[id] || c.homeLane;
+    const g = Q3[laneId]; if(!g) return;
+    if(g.bench.some(b=>b.id===id)) return;
+    g.bench.push({id, kind:"mb", name:c.name, detail:c.why, pulseId:c.pulseId, mbRank:c.rank||(i+1),
+      group:c.group, homeLane:c.homeLane, ownerOverride:c.ownerOverride||null,
+      stale:!!c.stale, staleNote:c.staleNote||null});
+  });
+}
+hydrateMBCandidates();
 // SELF grades + AAR digests from the 7/20 export compile (6 of 7 in — Brian's retrieved from cos-vera; Anne Tue AM).
 // Applied as DEFAULTS — anything already set by hand in this browser wins.
 const SELF_SEED = {
@@ -619,8 +942,78 @@ const SELF_SEED = {
  "cameron-q2-5":{g:"SG",a:"AAR 7/20: done 6 wks early; 90-day plan live. Spawn: ITP-for-all-leaders as small Q3 QG + continuing-ed lane question. Close."}
 };
 function q2s(k){ if(!state.q2[k]) state.q2[k] = {proj:null, self:null, notes:"", aar:""}; const s = state.q2[k]; if(s.self == null && SELF_SEED[k]){ s.self = SELF_SEED[k].g; if(!s.aar) s.aar = SELF_SEED[k].a; } return s; }
-function q3s(id){ if(!state.q3[id]) state.q3[id] = {decision:null, editNotes:"", crit:null, promoted:false}; return state.q3[id]; }
+function q3s(id){ if(!state.q3[id]) state.q3[id] = {decision:null, editNotes:"", crit:null, promoted:false, owner:null, band:null}; return state.q3[id]; }
 function oqs(id){ if(!state.oq[id]) state.oq[id] = {decided:false, answer:""}; return state.oq[id]; }
+
+/* ============================================================
+   Q2 DISPOSITION (round 3 add) — mechanical ALBERT-REC derivation off the
+   already-curated Q2 `status` (PROJ grade) + `carry` (AAR carry-call) fields.
+   Never guesses past what the AAR carry-call already encodes: SG/G that
+   closes -> Done; anything that carries/restructures -> Extends (checked
+   against ROCK_INDEX when the grade was Red, so "extends" only fires if a
+   named Q3 rock actually exists); explicit cadence language -> Ongoing
+   cadence; Red with no matching successor -> Remainder; everything else
+   (e.g. carry:"hold") is left unset -> "⚠ Albert to confirm" in the UI.
+   ============================================================ */
+const DISP_OPTIONS = [
+  {code:"done",      label:"✅ Done — close it"},
+  {code:"remainder", label:"📋 Remainder → task"},
+  {code:"cadence",   label:"🔁 Ongoing cadence"},
+  {code:"extends",   label:"➡ Extends to Q3+"}
+];
+const DISP_LABEL = Object.fromEntries(DISP_OPTIONS.map(o=>[o.code,o.label]));
+function q2ArrowTarget(note){
+  const m = /→\s*([A-Z]{1,2}\d)/.exec(note||"");
+  return m ? m[1] : null;
+}
+function albertRecDisposition(r){
+  if(!r) return null;
+  if(r.carry==="kill") return "done";
+  const cadenceHint = /\bcadence\b/i.test((r.name||"")+" "+(r.carryNote||""));
+  if(cadenceHint && (r.carry==="close" || r.carry==="carry" || r.carry==="restructure")) return "cadence";
+  if(r.carry==="close") return "done";
+  if(r.carry==="carry" || r.carry==="restructure"){
+    if(r.status==="red"){
+      const tgt = q2ArrowTarget(r.carryNote);
+      return (tgt && ROCK_INDEX[tgt]) ? "extends" : "remainder";
+    }
+    return "extends";
+  }
+  if(r.status==="red") return "remainder";
+  return null; // carry:"hold" or anything ambiguous — do NOT guess
+}
+function dispState(k){
+  if(!state.disp[k]) state.disp[k] = {value:null, rec:false};
+  const s = state.disp[k];
+  if(s.value == null){
+    const rec = albertRecDisposition(Q2_INDEX[k]);
+    if(rec){ s.value = rec; s.rec = true; }
+  }
+  return s;
+}
+function projGradeLabel(status){
+  return status==="supergreen"?"SG":status==="green"?"G":status==="red"?"R":status==="yellow"?"Y":"?";
+}
+function dispRow(r){
+  const st = dispState(r.k);
+  const btns = DISP_OPTIONS.map(o=>`<button class="tbtn dispbtn ${st.value===o.code?'sel-accept':''}" data-act="disp" data-key="${r.k}" data-v="${o.code}">${o.label}</button>`).join("");
+  const tag = st.value
+    ? (st.rec ? `<span class="badge ok" title="Mechanically derived from the Q2 AAR carry-call — click a button to override">ALBERT-REC</span>` : `<span class="badge ok">SET</span>`)
+    : `<span class="badge warn">⚠ Albert to confirm</span>`;
+  return `<div class="q2disp-row">
+    <div class="q2disp-top">${statusDot(r.status)}<b>${esc(r.name)}</b>${r.crit?'<span class="chip crit">CRIT</span>':''}<span class="chip carry-${r.carry}">PROJ ${projGradeLabel(r.status)}</span>${tag}</div>
+    <div class="triage-row">${btns}</div>
+  </div>`;
+}
+function addCustomGoal(leaderId, title, note){
+  if(!title || !title.trim()) return;
+  const id = "CADD-"+leaderId+"-"+Date.now();
+  state.customRocks.push({id, leaderId, title:title.trim(), note:(note||"").trim(), createdAt:new Date().toISOString()});
+  const rockObj = {id, crit:false, name:title.trim(), why:(note||"").trim(), green:"", sg:"", theme:"", deps:"", custom:true};
+  Q3[leaderId].rocks.push(rockObj);
+  ROCK_INDEX[id] = {rock:rockObj, leader:leaderId, bench:false};
+  save(); render();
+}
 
 /* rock lookup */
 const ROCK_INDEX = {};
@@ -629,6 +1022,103 @@ LEADERS.forEach(l=>{
   g.rocks.forEach(r=>ROCK_INDEX[r.id] = {rock:r, leader:l.id, bench:false});
   g.bench.forEach(b=>ROCK_INDEX[b.id] = {rock:b, leader:l.id, bench:true});
 });
+/* ---------- MB candidate lane moves (round 4 add) ----------
+   Cross-group pooling: any MB-kind bench card can be relocated to any of the 7
+   Roundtable lanes. Moves persist to state.laneMove (additive key) and are
+   re-applied at the next hydrateMBCandidates() run, so a move survives reload
+   without touching LS_KEY. Only MB-kind cards are movable — core rocks and the
+   pre-existing bonus/stretch bench items stay put. */
+function moveMBCandidate(id, newLane){
+  const e = ROCK_INDEX[id]; if(!e || !e.rock || e.rock.kind!=="mb") return;
+  const oldLane = e.leader;
+  if(oldLane === newLane) return;
+  const oldG = Q3[oldLane], newG = Q3[newLane];
+  if(!oldG || !newG) return;
+  const idx = oldG.bench.findIndex(b=>b.id===id);
+  if(idx===-1) return;
+  const [item] = oldG.bench.splice(idx,1);
+  newG.bench.push(item);
+  ROCK_INDEX[id] = {rock:item, leader:newLane, bench:true};
+  state.laneMove[id] = newLane;
+  save(); render();
+}
+function laneSelect(id){
+  const e = ROCK_INDEX[id]; const cur = e ? e.leader : null;
+  const opts = LANE_LEADERS.map(l=>`<option value="${l.id}" ${cur===l.id?'selected':''}>${esc(l.name.split(" ")[0])}</option>`).join("");
+  return `<select class="ownersel lanesel" data-act="lane" data-id="${id}" title="Move this MB candidate to a different leader's lane">${opts}</select>`;
+}
+/* ---------- owner assignment (7/20 add) ---------- */
+const OWNERS = [
+  {id:"cameron",  name:"Cameron",  tier:"rt"},
+  {id:"mike",     name:"Mike",     tier:"rt"},
+  {id:"brian",    name:"Brian",    tier:"rt"},
+  {id:"amanda",   name:"Amanda",   tier:"rt"},
+  {id:"matisen",  name:"Matisen",  tier:"rt"},
+  {id:"anne",     name:"Anne",     tier:"rt"},
+  {id:"paul",     name:"Paul",     tier:"rt"},
+  {id:"nhel",      name:"Nhel",      tier:"mgr", under:"amanda"},
+  {id:"tet",       name:"Tet",       tier:"mgr", under:"amanda"},
+  {id:"carly",     name:"Carly",     tier:"mgr", under:"amanda"},
+  {id:"kickpoint", name:"Kickpoint", tier:"mgr", under:null},
+  {id:"fabian",    name:"Fabian",    tier:"mgr", under:"matisen"},
+  {id:"jalissa",   name:"Jalissa",   tier:"mgr", under:"anne"},
+  {id:"prosper",   name:"Prosper",   tier:"mgr", under:"paul"},
+  {id:"austinl",   name:"Austin L",  tier:"mgr", under:null}
+];
+const OWNER_INDEX = Object.fromEntries(OWNERS.map(o=>[o.id,o]));
+// rocks whose seed leader-lane ("others") isn't a real RT owner id — map explicitly
+const OWNER_DEFAULT_OVERRIDE = {"O-BEN1":"prosper","O-KP1":"kickpoint","O-AL1":"austinl","O-CAR1":"carly","O-B1":"kickpoint"};
+function defaultOwner(id){
+  if(OWNER_DEFAULT_OVERRIDE[id]) return OWNER_DEFAULT_OVERRIDE[id];
+  const e = ROCK_INDEX[id]; if(!e) return null;
+  if(e.rock.ownerOverride) return e.rock.ownerOverride; // MB candidates w/ a pre-selected sub-leader owner (round 3)
+  return OWNER_INDEX[e.leader] ? e.leader : null;
+}
+function ownerOf(id){ const st = q3s(id); return st.owner || defaultOwner(id); }
+function ownerSelect(id){
+  const cur = ownerOf(id);
+  const opt = o=>`<option value="${o.id}" ${cur===o.id?'selected':''}>${esc(o.name)}</option>`;
+  return `<select class="ownersel" data-act="owner" data-id="${id}" title="Assigned owner">
+    <optgroup label="Roundtable">${OWNERS.filter(o=>o.tier==="rt").map(opt).join("")}</optgroup>
+    <optgroup label="Manager tier">${OWNERS.filter(o=>o.tier==="mgr").map(opt).join("")}</optgroup>
+  </select>`;
+}
+function collectItemsByOwner(ownerId){
+  const out = [];
+  Object.keys(ROCK_INDEX).forEach(id=>{
+    const e = ROCK_INDEX[id];
+    if(e.bench && !q3s(id).promoted) return;
+    if(rockLifecycle(id)!=="active") return;
+    if(ownerOf(id)===ownerId) out.push(e.rock);
+  });
+  return out;
+}
+function ownerLoadFor(leaderId){
+  const rt = collectItemsByOwner(leaderId).length;
+  const mgrs = OWNERS.filter(o=>o.tier==="mgr" && o.under===leaderId);
+  const mgr = mgrs.reduce((a,m)=>a+collectItemsByOwner(m.id).length,0);
+  return {rt, mgr, total:rt+mgr};
+}
+
+/* ---------- shortlist / overflow bands (7/20 add) ---------- */
+// Purely a display-grouping layer on top of the existing accept/edit/kill/defer + promote/demote
+// mechanics — does NOT change rockLifecycle/activeCount/critCount (cap + CRIT math stay exactly
+// as before, so the self-test's cap/CRIT assertions and the dependency board are unaffected).
+function defaultBandFor(id){
+  const e = ROCK_INDEX[id]; if(!e) return "overflow";
+  if(e.bench && !q3s(id).promoted) return "overflow";
+  const r = e.rock;
+  if(r.receipt && r.receipt.status==="challenged") return "overflow";
+  return "shortlist";
+}
+function bandOf(id){ const st = q3s(id); return st.band || defaultBandFor(id); }
+function shortlistCount(leaderId){
+  const g = Q3[leaderId]; let n=0;
+  g.rocks.forEach(r=>{ if(rockLifecycle(r.id)==="active" && bandOf(r.id)==="shortlist") n++; });
+  g.bench.forEach(b=>{ if(rockLifecycle(b.id)==="active" && bandOf(b.id)==="shortlist") n++; });
+  return n;
+}
+
 function isCrit(id){ const st = q3s(id); if(st.crit === null || st.crit === undefined) return !!ROCK_INDEX[id].rock.crit; return st.crit; }
 function rockLifecycle(id){ // active | killed | deferred | bench
   const e = ROCK_INDEX[id]; if(!e) return "unknown";
@@ -659,17 +1149,21 @@ function depStatus(d){
    RENDER
    ============================================================ */
 const VIEWS = [
-  {id:"review", label:"Q2 Review", hash:"#review"},
-  {id:"triage", label:"Q3 Triage", hash:"#triage"},
-  {id:"deps",   label:"Dependency Board", hash:"#deps"}
+  {id:"review",     label:"Q2 Review", hash:"#review"},
+  {id:"triage",     label:"Q3 Triage", hash:"#triage"},
+  {id:"deps",       label:"Dependency Board", hash:"#deps"},
+  {id:"whiteboard", label:"Whiteboard", hash:"#whiteboard"}
 ];
+// the 7 Roundtable leaders the Whiteboard grids across — "others" isn't a real leader lane (round 3)
+const WHITEBOARD_LEADERS = LEADERS.filter(l=>l.id!=="others");
 function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
 function renderTabs(){
   const q2count = Object.values(Q2).reduce((a,v)=>a+v.length,0);
   const q3count = Object.values(Q3).reduce((a,v)=>a+v.rocks.length,0);
+  const wbcount = WHITEBOARD_LEADERS.reduce((a,l)=>a+shortlistCount(l.id),0);
   document.getElementById("tabs").innerHTML = VIEWS.map(v=>{
-    const cnt = v.id==="review"?q2count : v.id==="triage"?q3count : DEPS.length;
+    const cnt = v.id==="review"?q2count : v.id==="triage"?q3count : v.id==="whiteboard"?wbcount : DEPS.length;
     return `<button class="tab ${state.view===v.id?'active':''}" data-view="${v.id}">${v.label}<span class="cnt">${cnt}</span></button>`;
   }).join("");
   document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{ state.view=b.dataset.view; save(); location.hash=VIEWS.find(v=>v.id===state.view).hash; render(); });
@@ -688,7 +1182,7 @@ function renderReview(){
     <div class="kpi">${statusDot("unknown")} <span>Cameron KPI · <b>TUR 65%</b> — no clean read (EMMA gap; T1 fixes the definition)</span></div>
     <div class="kpi">${statusDot("red")} <span>Cameron KPI · <b>Conversion $ 40%</b> — basis unbridgeable (Open Question 5: pick the replacement)</span></div>
     <div class="kpi">${statusDot("supergreen")} <span>Cameron KPI · <b>eNPS 45+</b> — 81 on 7/17 (last mandatory survey)</span></div>
-    <div class="kpi"><span class="smallnote">PROJ = Cameron+Paul's read · SELF = leader self-grade (arrives Monday from the sheet — editable here when it lands) · card highlights on divergence</span></div>
+    <div class="kpi"><span class="smallnote">PROJ = Cameron+Paul's read · SELF = leader self-grade (pre-seeded from the AARs — editable live) · card highlights on divergence</span></div>
   </div>
   <div class="jumpbar">`+LEADERS.map(l=>`<a class="jump" href="#rev-${l.id}">${l.name.split(" ")[0]}</a>`).join("")+`</div>`;
   LEADERS.forEach(l=>{
@@ -714,7 +1208,7 @@ function renderReview(){
         <textarea class="notes" data-act="q2note" data-key="${r.k}" placeholder="Notes for the room…">${esc(st.notes)}</textarea>
         <details class="fold"><summary>Context + AAR digest</summary><div class="fold-body">
           ${r.context?`<div class="ctx">${esc(r.context)}</div>`:""}
-          <textarea class="notes" data-act="q2aar" data-key="${r.k}" placeholder="AAR due Fri 7/24 — Albert pastes digests here">${esc(st.aar)}</textarea>
+          <textarea class="notes" data-act="q2aar" data-key="${r.k}" placeholder="AAR digest — seeded where available; add live notes here">${esc(st.aar)}</textarea>
         </div></details>
       </div>`;
     });
@@ -736,24 +1230,44 @@ function activeCount(leaderId){
   return n;
 }
 
-function slotCard(r, leaderId, promoted){
+function slotCard(r, leaderId){
   const st = q3s(r.id);
+  const idxE = ROCK_INDEX[r.id];
+  const isBench = idxE.bench;
+  const promoted = isBench ? !!st.promoted : true;
   const lc = rockLifecycle(r.id);
   const crit = isCrit(r.id);
   const d = st.decision;
-  return `<div class="card ${lc==='killed'?'killed':''} ${lc==='deferred'?'deferred':''}">
-    <div class="card-top"><span class="rockid">${r.id}</span><div class="rockname">${esc(r.name)}</div></div>
+  const band = bandOf(r.id);
+  const receipt = r.receipt;
+  return `<div class="card ${lc==='killed'?'killed':''} ${lc==='deferred'?'deferred':''}" id="card-${esc(r.id)}">
+    <div class="card-top"><span class="rockid">${esc(r.id)}</span><div class="rockname">${esc(r.name)}</div></div>
     <div class="chips">
       ${crit?'<span class="chip crit">CRIT ⭐</span>':''}
-      ${promoted?'<span class="chip promoted">PROMOTED FROM BENCH</span>':''}
+      ${r.kind?`<span class="chip sgonly">${esc(String(r.kind).toUpperCase())}</span>`:''}
+      ${isBench && promoted?'<span class="chip promoted">PROMOTED FROM BENCH</span>':''}
+      ${r.custom?'<span class="chip customadd">CAMERON ADD</span>':''}
+      ${r.pulseId?`<span class="chip mbrank" title="Albert-priority rank — 1 = strongest candidate">MB #${esc(r.mbRank||'')}</span><a class="chip mbcand" href="https://einsteinmoving.monday.com/boards/18408300070/pulses/${esc(r.pulseId)}" target="_blank" rel="noopener" title="Open on Master Backlog">Pulse ${esc(r.pulseId)}</a>`:''}
+      ${receipt?`<span class="chip receipt-${receipt.status}">RECEIPT 7/20 · ${receipt.status.toUpperCase()}</span>`:''}
       ${d?`<span class="chip carry-${d==='kill'?'kill':d==='defer'?'hold':d==='edit'?'restructure':'close'}">${d.toUpperCase()}${d==='accept'?'ED':d==='kill'?'ED':d==='edit'?' + NOTES':'RED'}</span>`:''}
     </div>
+    ${receipt?`<div class="def receipt-${receipt.status==='confirmed'?'confirm':'challenge'}"><b>RECEIPT 7/20 — ${receipt.status.toUpperCase()}</b>${esc(receipt.note)}</div>`:''}
+    ${r.stale?`<div class="def receipt-challenge"><b>⚠ STALE</b>${esc(r.staleNote)}</div>`:''}
+    ${(!r.why && r.detail)?`<div class="ctx">${esc(r.detail)}</div>`:''}
+    ${r.kind==="mb"?`<div class="smallnote" title="MB item — freshness not owner-verified; leader sweep pending">⚠ freshness unverified — leader sweep pending</div>`:''}
     <div class="triage-row">
+      <span class="gradelbl" title="The verdict on this item">RULING</span>
       ${["accept","edit","kill","defer"].map(a=>`<button class="tbtn ${d===a?('sel-'+a):''}" data-act="triage" data-id="${r.id}" data-d="${a}">${a.toUpperCase()}</button>`).join("")}
       <button class="tbtn critbtn ${crit?'on':''}" data-act="crit" data-id="${r.id}" title="Toggle Critical Number">${crit?'★ CRIT':'☆ make CRIT'}</button>
-      ${promoted?`<button class="tbtn" data-act="demote" data-id="${r.id}">↩ BENCH</button>`:''}
     </div>
-    ${d==='edit'?`<textarea class="notes" data-act="editnote" data-key="${r.id}" placeholder="What changes? (edit notes for the decision log)">${esc(st.editNotes)}</textarea>`:''}
+    <div class="triage-row" style="margin-top:2px">
+      <span class="gradelbl" title="Where it lands + who carries it">SLATE</span>
+      ${ownerSelect(r.id)}
+      ${r.kind==="mb"?laneSelect(r.id):''}
+      <button class="tbtn" data-act="band" data-id="${r.id}" title="Move between shortlist / overflow bands">${band==='shortlist'?'↓ park in overflow':'↑ into Q3 shortlist'}</button>
+      ${isBench ? (promoted ? `<button class="tbtn" data-act="demote" data-id="${r.id}">↩ off slate</button>` : `<button class="pbtn" data-act="promote" data-id="${r.id}">⬆ promote to slate</button>`) : ''}
+    </div>
+    ${(d==='edit'||st.editNotes)?`<textarea class="notes" data-act="editnote" data-key="${r.id}" placeholder="What changes? (edit notes for the decision log)">${esc(st.editNotes)}</textarea>`:''}
     <details class="fold"><summary>Full detail — why now · Green/SG · dependencies</summary><div class="fold-body">
       ${r.why?`<div class="def why"><b>WHY NOW</b>${esc(r.why)}</div>`:''}
       ${r.green?`<div class="def green"><b>GREEN</b>${esc(r.green)}</div>`:''}
@@ -763,6 +1277,19 @@ function slotCard(r, leaderId, promoted){
     </div></details>
   </div>`;
 }
+
+const CROSS_CUTTING_DIRECTIVES = [
+  "ITP follow-up plan = a “bonus goal” for EVERY direct.",
+  "Every leader develops an “ongoing education” module for managers (shape TBD).",
+  "“Magic Moments for employees” goal — leaders recognize their directs, with a quota of some kind.",
+  "⭐ Goal coverage extends BEYOND the Roundtable: outline goals for Jalissa, Nhel, Tet, Carly, Kickpoint, Prosper, Fabian, Austin L — not just Cameron's directs."
+];
+const RECEIPT_FLAGS = [
+  "Matisen over-cap: T1+T2+T3, T4-replacement (mobile app/lead-triage/estimate-accuracy — bigger than the old T4), + Rippling AI eval promoted + network-AI-buildout support = 5–6 obligations vs the HARD CAP of 4. Rule in the Room.",
+  "Mike's slate reshaped light: M2 → forward-deployed-engineer reframe (challenged), M4 gone (challenged) — Mike is effectively M1 + M3(-maintenance?) + FDE. Deliberate?",
+  "Anne's slate grew: A1–A3 + succession framework + Mover PTO (from Paul, w/ Jalissa) − A4 (demoted to task). 2-CRIT rule needs re-checking.",
+  "Theme still open: Estimate Accuracy promoted only as a CET-theme OPTION — the Q3 theme call (speed-to-competence lead candidate) remains a QGR decision."
+];
 
 function renderTriage(){
   // open questions strip
@@ -778,7 +1305,20 @@ function renderTriage(){
       <textarea class="notes" data-act="oqanswer" data-key="${q.id}" placeholder="One-line answer / decision…">${esc(s.answer)}</textarea>
       <div class="oq-actions"><button class="tbtn ${s.decided?'sel-accept':''}" data-act="oqdecide" data-id="${q.id}">${s.decided?'✓ DECIDED — tap to reopen':'MARK DECIDED'}</button></div></div>`;
   }
-  html += `</div><div class="jumpbar">`+LEADERS.map(l=>`<a class="jump" href="#tri-${l.id}">${l.name.split(" ")[0]}</a>`).join("")+`</div>`;
+  html += `</div>`;
+
+  // 7/20 cross-cutting directives + flags panel (7/21 audit: folded — briefing material, was pushing lane 1 below the fold)
+  html += `<details class="fold" data-fold="directives" ${foldOpen["directives"] === true ? "open" : ""}><summary>Cross-cutting directives + ⚠ red-pen flags (7/20) — ${CROSS_CUTTING_DIRECTIVES.length + RECEIPT_FLAGS.length} items</summary>
+  <div class="receipt-panel">
+    <div class="receipt-col"><div class="oq-title">Cross-cutting directives <span>— 7/20</span></div>
+      <div class="receipt-list">`+CROSS_CUTTING_DIRECTIVES.map(t=>`<div class="receipt-item">${t.replace(/^([^ ]+)/,'<b>$1</b>')}</div>`).join("")+`</div>
+    </div>
+    <div class="receipt-col"><div class="oq-title">⚠ Flags for the red-pen session</div>
+      <div class="receipt-list">`+RECEIPT_FLAGS.map(t=>`<div class="flag-item">${esc(t)}</div>`).join("")+`</div>
+    </div>
+  </div></details>`;
+
+  html += `<div class="jumpbar">`+LEADERS.map(l=>`<a class="jump" href="#tri-${l.id}">${l.name.split(" ")[0]}</a>`).join("")+`</div>`;
 
   LEADERS.forEach(l=>{
     const g = Q3[l.id]; if(!g) return;
@@ -793,24 +1333,53 @@ function renderTriage(){
     } else { capBadge = `<span class="badge ok">${nActive} suggestions</span>`; }
     const critBadge = l.id==="others" ? "" :
       (nCrit===2 ? `<span class="badge ok">CRIT 2/2 ✓</span>` : `<span class="badge warn">CRIT ${nCrit}/2 ⚠</span>`);
+    let ownBadge = "";
+    if(OWNER_INDEX[l.id]){
+      const load = ownerLoadFor(l.id);
+      ownBadge = `<span class="badge ok" title="Items whose assigned owner rolls up to ${esc(l.name)} — Roundtable-tier + manager-tier">OWN ${load.rt}${load.mgr?`+${load.mgr}mgr`:''} = ${load.total}</span>`;
+    }
+    const nShort = shortlistCount(l.id);
+    const shortBadge = `<span class="badge ${l.cap!==null && nShort>l.cap?'warn':'ok'}">SHORTLIST ${nShort}${l.cap!==null?`/${l.cap}`:''}</span>`;
     html += `<section class="leader-sec" id="tri-${l.id}"><div class="leader-hd">
       <span class="leader-name">${esc(l.name)}</span><span class="leader-role">${esc(l.role)}</span>
-      ${capBadge}${critBadge}</div>`;
+      ${shortBadge}${capBadge}${critBadge}${ownBadge}</div>`;
     if(l.blurb) html += `<div class="ctx" style="margin:-4px 0 10px">${esc(l.blurb)}</div>`;
-    html += `<div class="cards">`;
-    g.rocks.forEach(r=>{ html += slotCard(r, l.id, false); });
-    // promoted bench items render as slot cards
-    g.bench.forEach(b=>{ if(q3s(b.id).promoted) html += slotCard(b, l.id, true); });
-    html += `</div>`;
-    const benched = g.bench.filter(b=>!q3s(b.id).promoted);
-    if(benched.length){
-      html += `<div class="bench-wrap"><div class="bench-lbl">Bench — alternates / stretch / bonus</div><div class="bench-cards">`;
-      benched.forEach(b=>{
-        html += `<div class="bench-card"><span class="kind">${b.kind}</span><b>${esc(b.id)} · ${esc(b.name)}</b><span>${esc(b.detail)}</span>
-          <button class="pbtn" data-act="promote" data-id="${b.id}">⬆ PROMOTE to slate</button></div>`;
-      });
-      html += `</div></div>`;
+
+    // pool pills (round 4 add) — which MB department groups are feeding this lane right now
+    const allItemsForPool = [...g.rocks, ...g.bench];
+    const mbGroups = Array.from(new Set(allItemsForPool.filter(it=>it.kind==="mb").map(it=>it.group))).sort();
+    if(mbGroups.length){
+      html += `<div class="poolpills" title="MB department groups currently feeding this lane — cards are movable, so this list changes as candidates get relocated">Pool: `+mbGroups.map(gr=>`<span class="poolpill">${esc(gr)}</span>`).join(" ")+`</div>`;
     }
+
+    // Q2 Disposition band (round 3 add) — collapsed by default, one row per existing Q2 rock
+    const q2rocks = Q2[l.id] || [];
+    if(q2rocks.length){
+      html += `<details class="q2disp-fold" data-fold="disp-${l.id}" ${foldOpen["disp-"+l.id] ? "open" : ""}><summary>Q2 Disposition — ${l.name.split(" ")[0]}'s ${q2rocks.length} existing Q2 rocks</summary>
+        <div class="fold-body">`+q2rocks.map(r=>dispRow(r)).join("")+`</div></details>`;
+    }
+
+    // classify every rock + bench item for this leader into shortlist / overflow bands
+    const allItems = [...g.rocks, ...g.bench];
+    const shortlistItems = allItems.filter(it=>bandOf(it.id)==="shortlist");
+    const overflowItems = allItems.filter(it=>bandOf(it.id)==="overflow");
+
+    html += `<div class="band-hd">Shortlist <span class="band-count">(${shortlistItems.length})</span></div>`;
+    html += `<div class="cards">`+shortlistItems.map(r=>slotCard(r, l.id)).join("")+`</div>`;
+
+    // Overflow (round 4: collapsible + scrollable — the candidate pool is deep now, ceiling
+    // was always on shortlist size, not visible-candidate count; this keeps lanes from
+    // becoming walls of cards).
+    html += `<details class="fold overflow-fold" data-fold="ovf-${l.id}" ${foldOpen["ovf-"+l.id] === true ? "open" : ""}><summary>Overflow / near-goals <span class="band-count">(${overflowItems.length})</span> — rulings here count in the export too</summary>
+      <div class="cards overflow-band overflow-scroll">`+(overflowItems.length ? overflowItems.map(r=>slotCard(r, l.id)).join("") : `<div class="ctx" style="padding:4px 2px">Nothing sitting in overflow.</div>`)+`</div></details>`;
+
+    // inline add-a-goal row
+    html += `<div class="addgoal-row">
+      <input type="text" class="addgoal-title" data-leader="${l.id}" placeholder="+ Add a goal…">
+      <input type="text" class="addgoal-note" data-leader="${l.id}" placeholder="optional note">
+      <button class="tbtn" data-act="addgoal" data-leader="${l.id}">ADD</button>
+    </div>`;
+
     if(g.carryNotes) html += `<details class="fold" style="margin-top:8px"><summary>Q2 carry-over notes</summary><div class="fold-body"><div class="ctx">${esc(g.carryNotes)}</div></div></details>`;
     html += `</section>`;
   });
@@ -843,11 +1412,94 @@ function renderDeps(){
   return html;
 }
 
+/* ============================================================
+   WHITEBOARD (round 3 add) — read-only grid mirror of the Q3 Triage state.
+   Rows = live shortlist band (shortlist + promoted bench + Cameron-adds),
+   columns = the 7 Roundtable leaders. Click a card to jump into Q3 Triage.
+   ============================================================ */
+function depsInvolving(rockId){
+  const out = [];
+  DEPS.forEach(d=>{
+    if(d.fromRock===rockId) out.push({dir:"needs", on:d.on, need:d.need});
+    if(d.coveredBy===rockId) out.push({dir:"feeds", from:d.from});
+  });
+  return out;
+}
+function wbShortlistItems(leaderId){
+  const g = Q3[leaderId]; if(!g) return [];
+  return [...g.rocks, ...g.bench].filter(it=>rockLifecycle(it.id)==="active" && bandOf(it.id)==="shortlist");
+}
+function renderWhiteboard(){
+  let html = `<div class="oq-strip"><div class="oq-title">Whiteboard <span>— read-only shortlist mirror, click a card to jump into Q3 Triage</span></div>
+    <div class="ctx">Columns = the 7 Roundtable leaders · rows = the live shortlist (shortlist band + promoted bench + Cameron-adds) · bold/bordered card = Critical Number · dashed/indented card = manager-tier owner · small chips = cross-leader dependencies from the Dependency Board.</div>
+    <div style="margin-top:10px"><button class="hd-btn" data-act="wbexport">⬇ Export whiteboard (md)</button></div>
+  </div><div class="wb-grid">`;
+  WHITEBOARD_LEADERS.forEach(l=>{
+    const items = wbShortlistItems(l.id);
+    const n = items.length;
+    const cntOk = n>=7 && n<=8;
+    html += `<div class="wb-col"><div class="wb-col-hd"><span class="wb-nm">${esc(l.name.split(" ")[0])}</span><span class="badge ${cntOk?'ok':'warn'}">${n} / 7–8</span></div><div class="wb-rows">`;
+    if(!items.length) html += `<div class="ctx" style="padding:6px 2px">Nothing on the shortlist.</div>`;
+    items.forEach(it=>{
+      const crit = isCrit(it.id);
+      const ownerId = ownerOf(it.id);
+      const ownerObj = OWNER_INDEX[ownerId];
+      const isMgr = !!(ownerObj && ownerObj.tier==="mgr");
+      const deps = depsInvolving(it.id);
+      const depMarks = deps.map(d=>d.dir==="needs"
+        ? `<span class="wb-dep needs" title="Needs ${esc(d.on)}: ${esc(d.need)}">→${esc(d.on)}</span>`
+        : `<span class="wb-dep feeds" title="Feeds ${esc(d.from)}">←${esc(d.from)}</span>`).join("");
+      html += `<div class="wb-card ${crit?'crit':''} ${isMgr?'mgr':''}" data-act="wbjump" data-id="${esc(it.id)}" data-leader="${l.id}" title="Click to jump to this card in Q3 Triage">
+        <div class="wb-card-top"><span class="wb-id">${esc(it.id)}</span>${crit?'<span class="chip crit">CRIT</span>':''}</div>
+        <div class="wb-card-name">${esc(it.name)}</div>
+        <div class="wb-card-meta">${ownerObj?`<span class="chip ${isMgr?'mgronly':'sgonly'}">${isMgr?'↳ ':''}${esc(ownerObj.name)}</span>`:''}${depMarks}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+function buildWhiteboardExport(){
+  const now = new Date();
+  const ts = now.toISOString().replace("T"," ").slice(0,16);
+  let md = `# QGR Whiteboard — Q3 2026 (live shortlist snapshot)\n\n*Exported: ${ts} (local) — read-only mirror of the Triage Room's shortlist bands.*\n\n`;
+  WHITEBOARD_LEADERS.forEach(l=>{
+    const items = wbShortlistItems(l.id);
+    md += `## ${l.name} — ${items.length} / 7–8 target\n\n`;
+    md += `| ID | Name | CRIT | Owner | Cross-deps |\n|---|---|---|---|---|\n`;
+    if(!items.length) md += `| — | _nothing on the shortlist_ | | | |\n`;
+    items.forEach(it=>{
+      const crit = isCrit(it.id) ? "⭐" : "";
+      const ownerObj = OWNER_INDEX[ownerOf(it.id)];
+      const ownerName = ownerObj ? (ownerObj.tier==="mgr" ? `↳ ${ownerObj.name}` : ownerObj.name) : "—";
+      const deps = depsInvolving(it.id).map(d=>d.dir==="needs"?`needs ${d.on}`:`feeds ${d.from}`).join("; ");
+      md += `| ${it.id} | ${it.name} | ${crit} | ${ownerName} | ${deps||"—"} |\n`;
+    });
+    md += `\n`;
+  });
+  return md;
+}
+function doWhiteboardExport(){
+  const md = buildWhiteboardExport();
+  const stamp = new Date().toISOString().slice(0,10);
+  const done = ()=>toast("Whiteboard exported ✓");
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(md).then(done, ()=>toast("Whiteboard downloaded ✓ (clipboard copy failed)")); }
+  const blob = new Blob([md], {type:"text/markdown"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `qgr-whiteboard-${stamp}.md`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  if(!(navigator.clipboard && navigator.clipboard.writeText)) toast("Whiteboard downloaded ✓ (clipboard unavailable)");
+}
+
 function render(){
   renderTabs();
   const m = document.getElementById("main");
   if(state.view==="review") m.innerHTML = renderReview();
   else if(state.view==="triage") m.innerHTML = renderTriage();
+  else if(state.view==="whiteboard") m.innerHTML = renderWhiteboard();
   else m.innerHTML = renderDeps();
 }
 
@@ -860,10 +1512,37 @@ document.addEventListener("click", e=>{
   if(act==="grade"){ const st=q2s(b.dataset.key); const f=b.dataset.field; st[f] = st[f]===b.dataset.g?null:b.dataset.g; save(); render(); }
   else if(act==="triage"){ const st=q3s(b.dataset.id); st.decision = st.decision===b.dataset.d?null:b.dataset.d; save(); render(); }
   else if(act==="crit"){ const st=q3s(b.dataset.id); st.crit = !isCrit(b.dataset.id); save(); render(); }
-  else if(act==="promote"){ q3s(b.dataset.id).promoted = true; save(); render(); }
-  else if(act==="demote"){ const st=q3s(b.dataset.id); st.promoted=false; st.decision=null; save(); render(); }
+  else if(act==="promote"){ const st=q3s(b.dataset.id); st.promoted = true; st.band = "shortlist"; save(); render(); }
+  else if(act==="demote"){ const st=q3s(b.dataset.id); st.promoted=false; st.decision=null; st.band="overflow"; save(); render(); }
+  else if(act==="band"){
+    const id = b.dataset.id; const st = q3s(id); const next = bandOf(id)==="shortlist" ? "overflow" : "shortlist";
+    st.band = next;
+    const e = ROCK_INDEX[id]; if(e && e.bench){ st.promoted = (next==="shortlist"); }
+    save(); render();
+  }
+  else if(act==="addgoal"){
+    const leaderId = b.dataset.leader;
+    const row = b.closest(".addgoal-row");
+    const titleEl = row.querySelector(".addgoal-title"); const noteEl = row.querySelector(".addgoal-note");
+    addCustomGoal(leaderId, titleEl.value, noteEl.value);
+  }
   else if(act==="oqsel"){ state._oqSel = state._oqSel===b.dataset.id?null:b.dataset.id; render(); }
   else if(act==="oqdecide"){ const s=oqs(b.dataset.id); s.decided=!s.decided; save(); render(); }
+  else if(act==="disp"){
+    const st = dispState(b.dataset.key); const v = b.dataset.v;
+    st.value = (st.value===v ? null : v); st.rec = false; // manual pick always wins; toggling off re-derives ALBERT-REC next render
+    save(); render();
+  }
+  else if(act==="wbexport"){ doWhiteboardExport(); }
+  else if(act==="wbjump"){
+    const id = b.dataset.id, leader = b.dataset.leader;
+    state.view = "triage"; save(); render();
+    location.hash = "#tri-"+leader;
+    setTimeout(()=>{
+      const el = document.getElementById("card-"+id);
+      if(el){ el.scrollIntoView({behavior:"smooth", block:"center"}); el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"), 1600); }
+    }, 60);
+  }
 });
 document.addEventListener("input", e=>{
   const t = e.target; const act = t.dataset && t.dataset.act; if(!act) return;
@@ -873,10 +1552,51 @@ document.addEventListener("input", e=>{
   else if(act==="oqanswer") oqs(t.dataset.key).answer = t.value;
   save();
 });
+document.addEventListener("change", e=>{
+  const t = e.target;
+  if(t.matches("select.lanesel")){ moveMBCandidate(t.dataset.id, t.value); }
+  else if(t.matches("select.ownersel")){ q3s(t.dataset.id).owner = t.value; save(); render(); }
+});
+document.addEventListener("keydown", e=>{
+  if(e.target.matches(".addgoal-title, .addgoal-note") && e.key==="Enter"){
+    e.preventDefault();
+    const row = e.target.closest(".addgoal-row");
+    const leaderId = row.querySelector(".addgoal-title").dataset.leader;
+    addCustomGoal(leaderId, row.querySelector(".addgoal-title").value, row.querySelector(".addgoal-note").value);
+  }
+});
 
 /* ============================================================
    EXPORT
    ============================================================ */
+function buildOwnershipBreakdown(){
+  let md = `---\n\n## Ownership breakdown (Q3 slate, by assigned owner)\n\n`;
+  md += `*Owner is assigned via the per-card selector (chip) — not a separate nested lane in the UI. This section is the export's grouping/nesting view: manager-tier owners roll up under the Roundtable leader they report to.*\n\n`;
+  const rtLeaders = OWNERS.filter(o=>o.tier==="rt");
+  rtLeaders.forEach(rt=>{
+    const ownItems = collectItemsByOwner(rt.id);
+    const mgrs = OWNERS.filter(o=>o.tier==="mgr" && o.under===rt.id);
+    const mgrItemsCount = mgrs.reduce((a,m)=>a+collectItemsByOwner(m.id).length,0);
+    md += `### ${rt.name} — ${ownItems.length} direct`+(mgrItemsCount?` + ${mgrItemsCount} via managers = ${ownItems.length+mgrItemsCount} total`:"")+`\n`;
+    ownItems.forEach(it=>{ md += `- ${it.id} · ${it.name}\n`; });
+    mgrs.forEach(m=>{
+      const items = collectItemsByOwner(m.id);
+      if(!items.length) return;
+      md += `  - **↳ ${m.name}**\n`;
+      items.forEach(it=>{ md += `    - ${it.id} · ${it.name}\n`; });
+    });
+    md += `\n`;
+  });
+  const standalone = OWNERS.filter(o=>o.tier==="mgr" && !o.under);
+  standalone.forEach(m=>{
+    const items = collectItemsByOwner(m.id);
+    if(!items.length) return;
+    md += `### ${m.name} (standalone — no single Roundtable leader)\n`;
+    items.forEach(it=>{ md += `- ${it.id} · ${it.name}\n`; });
+    md += `\n`;
+  });
+  return md;
+}
 function buildExport(){
   const now = new Date();
   const ts = now.toISOString().replace("T"," ").slice(0,16);
@@ -901,19 +1621,34 @@ function buildExport(){
     if(l.cap!==null) md += `*Rocks: ${nActive}/${l.cap}${l.hardCap?" (HARD CAP)":""} · CRIT: ${nCrit}/2${l.id!=="others"&&nCrit!==2?" ⚠":""}*\n\n`;
     const listRock = (r, benchPromoted)=>{
       const st = q3s(r.id); const lc = rockLifecycle(r.id); const crit = isCrit(r.id);
+      const ownerName = OWNER_INDEX[ownerOf(r.id)] ? OWNER_INDEX[ownerOf(r.id)].name : "unassigned";
       let line = `- **${r.id} · ${r.name}**`;
       if(crit) line += ` ⭐CRIT`;
       if(benchPromoted) line += ` (PROMOTED from bench)`;
+      if(r.custom) line += ` (CAMERON ADD)`;
       const dec = st.decision ? st.decision.toUpperCase() : "UNTOUCHED";
       line += ` — ${dec}`;
       if(st.crit!==null && st.crit!==undefined && st.crit !== !!ROCK_INDEX[r.id].rock.crit) line += st.crit?" (CRIT ADDED)":" (CRIT REMOVED)";
+      line += ` · Band: ${bandOf(r.id)==="shortlist"?"SHORTLIST":"OVERFLOW"} · Owner: ${ownerName}`;
+      if(r.receipt) line += ` · Receipt 7/20: ${r.receipt.status.toUpperCase()}`;
       md += line + `\n`;
-      if(st.decision==="edit" && st.editNotes) md += `  - Edit notes: ${st.editNotes}\n`;
+      if(r.receipt && r.receipt.note) md += `  - Receipt note: ${r.receipt.note}\n`;
+      if(st.editNotes) md += `  - Edit notes: ${st.editNotes}\n`;
     };
     g3.rocks.forEach(r=>listRock(r,false));
     g3.bench.forEach(b=>{ if(q3s(b.id).promoted) listRock(b,true); });
     const stillBench = g3.bench.filter(b=>!q3s(b.id).promoted);
-    if(stillBench.length) md += stillBench.map(b=>`- _bench (${b.kind}): ${b.id} · ${b.name} — not promoted_`).join("\n")+"\n";
+    if(stillBench.length) md += stillBench.map(b=>{
+      const st = q3s(b.id);
+      const ownerName = OWNER_INDEX[ownerOf(b.id)] ? OWNER_INDEX[ownerOf(b.id)].name : "unassigned";
+      // 7/21 audit fix: bench rulings used to be silently dropped from the export
+      let line = `- _bench (${b.kind}): ${b.id} · ${b.name} — not promoted`;
+      if(st.decision) line += ` · **${st.decision.toUpperCase()}**`;
+      if(st.crit) line += ` · CRIT-flagged`;
+      line += ` · Owner: ${ownerName}_`;
+      if(st.editNotes) line += `\n  - Notes: ${st.editNotes}`;
+      return line;
+    }).join("\n")+"\n";
     md += `\n`;
 
     // Q2 review
@@ -922,15 +1657,30 @@ function buildExport(){
       g2.forEach(r=>{
         const st = q2s(r.k);
         let line = `- **${r.name}**${r.crit?" ⭐CRIT":""} — traj: ${r.status} · carry-call: ${CARRY_LABEL[r.carry]}`;
-        line += ` · PROJ: ${st.proj?GRADE_LABEL[st.proj]:"—"} · SELF: ${st.self?GRADE_LABEL[st.self]:"— (awaiting sheet)"}`;
+        line += ` · PROJ: ${st.proj?GRADE_LABEL[st.proj]:"—"} · SELF: ${st.self?GRADE_LABEL[st.self]:"— (not seeded)"}`;
         if(st.proj && st.self && st.proj!==st.self) line += ` · ⚠ DIVERGENCE`;
         md += line + `\n`;
         if(st.notes) md += `  - Notes: ${st.notes}\n`;
         if(st.aar) md += `  - AAR: ${st.aar}\n`;
       });
       md += `\n`;
+
+      // Q2 Disposition (round 3 add)
+      md += `### Q2 Disposition\n`;
+      g2.forEach(r=>{
+        const st = dispState(r.k);
+        const label = st.value ? DISP_LABEL[st.value] : null;
+        let line = `- **${r.name}** — `;
+        line += label ? label : "⚠ NOT SET — Albert could not confidently recommend a disposition";
+        if(st.value && st.rec) line += " _(ALBERT-REC, unconfirmed by human)_";
+        md += line + `\n`;
+      });
+      md += `\n`;
     }
   });
+
+  // Ownership breakdown (7/20 add) — grouped by assigned owner, manager-tier nested under their RT leader
+  md += buildOwnershipBreakdown();
 
   // Dependency summary
   md += `---\n\n## Dependency status (as triaged)\n\n`;
@@ -953,7 +1703,7 @@ function doExport(){
   // clipboard
   const done = ()=>toast("Decision log copied to clipboard + downloaded ✓");
   if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(md).then(done, done);
+    navigator.clipboard.writeText(md).then(done, ()=>toast("Decision log downloaded ✓ (clipboard copy failed)"));
   }
   // download
   const blob = new Blob([md], {type:"text/markdown"});
@@ -971,13 +1721,30 @@ function toast(msg){
 document.getElementById("btn-export").onclick = doExport;
 document.getElementById("btn-reset").onclick = ()=>{
   if(confirm("Reset ALL triage decisions, grades, notes, and open-question answers? This can't be undone.")){
-    localStorage.removeItem(LS_KEY); state = blankState(); render(); toast("Reset complete");
+    localStorage.removeItem(LS_KEY);
+    // 7/21 audit fix: full reload — in-memory custom rocks / lane moves would otherwise survive the reset
+    location.reload();
   }
 };
 document.addEventListener("keydown", e=>{
   if(e.target.matches("textarea,input,select")) return;
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
   if(e.key==="e" || e.key==="E"){ e.preventDefault(); doExport(); }
 });
+// 7/21 audit adds: two-tab clobber warning + how-to overlay
+window.addEventListener("storage", e=>{
+  if(e.key === LS_KEY) toast("⚠ State changed in another tab — reload this one before continuing");
+});
+const HOWTO_KEY = "qgr-triage-howto-seen";
+function showHowto(){ document.getElementById("howto-overlay").classList.add("show"); }
+function hideHowto(){
+  document.getElementById("howto-overlay").classList.remove("show");
+  try{ localStorage.setItem(HOWTO_KEY, "1"); }catch(e){}
+}
+document.getElementById("btn-howto").onclick = showHowto;
+document.getElementById("btn-howto-close").onclick = hideHowto;
+document.getElementById("howto-overlay").addEventListener("click", e=>{ if(e.target.id==="howto-overlay") hideHowto(); });
+try{ if(!localStorage.getItem(HOWTO_KEY)) showHowto(); }catch(e){}
 
 /* hash routing */
 function applyHash(){
@@ -1020,6 +1787,45 @@ function runSelfTest(){
   q3s("M3").crit = true;
   out.push("after make-CRIT M3: mike=" + critCount("mike") + " [expect 3 → warns]");
   q3s("M3").crit = null;
+
+  // ---- round 3 checks: Q2 Disposition, Whiteboard ----
+  // ---- round 4 checks: MB pool size (93), cross-group pooling, lane moves, stale flag ----
+  out.push("MB_POOL total: " + MB_POOL.length + " [expect 93 — all high-signal audit items]");
+  const mbByGroup = {};
+  MB_POOL.forEach(c=>{ mbByGroup[c.group] = (mbByGroup[c.group]||0)+1; });
+  out.push("MB_POOL by department group: " + Object.keys(mbByGroup).sort().map(g=>g+":"+mbByGroup[g]).join(" "));
+  LEADERS.forEach(l=>{
+    if(!Q3[l.id]) return;
+    const total = Q3[l.id].rocks.length + Q3[l.id].bench.length;
+    const mbCount = Q3[l.id].bench.filter(b=>b.kind==="mb").length;
+    out.push("  " + l.id + ": rocks+bench total = " + total + " (mb-kind bench = " + mbCount + ")" + (l.id==="others"?" — no MB home-lane items":""));
+  });
+  // stale flag: Hire Tampa+Garland demoted + flagged
+  const staleCard = ROCK_INDEX["MB-11728355485"];
+  out.push("MB-11728355485 (Tampa+Garland) stale=" + (staleCard && staleCard.rock.stale) + " lane=" + (staleCard && staleCard.leader) + " [expect true / mike]");
+  // lane move round-trip (no state writes leak past this test — saveEnabled is false)
+  const beforeLane = ROCK_INDEX["MB-11728346681"].leader; // MQL-to-Conversion Pipeline, homeLane matisen
+  moveMBCandidate("MB-11728346681", "amanda");
+  out.push("moveMBCandidate MB-11728346681 " + beforeLane + "→amanda: now in Q3.amanda.bench = " + Q3.amanda.bench.some(b=>b.id==="MB-11728346681") + ", state.laneMove recorded = " + (state.laneMove["MB-11728346681"]==="amanda"));
+  moveMBCandidate("MB-11728346681", beforeLane); // move it back so the rest of the self-test sees the original seed shape
+  out.push("moved back: now in Q3." + beforeLane + ".bench = " + Q3[beforeLane].bench.some(b=>b.id==="MB-11728346681"));
+  // disposition mechanical derivation spot-checks
+  const dConfirmCount = Object.values(Q2).flat().filter(r=>!albertRecDisposition(r)).length;
+  out.push("Q2 dispositions flagged '⚠ Albert to confirm' (no mechanical rec): " + dConfirmCount + " of " + Object.values(Q2).flat().length);
+  out.push("  mike-q2-5 (Fleet Damage app, hold) rec = " + albertRecDisposition(Q2_INDEX["mike-q2-5"]) + " [expect null/confirm]");
+  out.push("  mike-q2-4 (ITP, close+SG) rec = " + albertRecDisposition(Q2_INDEX["mike-q2-4"]) + " [expect done]");
+  out.push("  mike-q2-2 (Fleet Safety, red+restructure→M3) rec = " + albertRecDisposition(Q2_INDEX["mike-q2-2"]) + " [expect extends]");
+  out.push("  cameron-q2-2 (VP, kill) rec = " + albertRecDisposition(Q2_INDEX["cameron-q2-2"]) + " [expect done]");
+  // disposition state round-trip (no state writes leak — saveEnabled is false during self-test)
+  const dSt = dispState("mike-q2-4");
+  out.push("dispState('mike-q2-4') prefilled = " + dSt.value + " / rec-flag=" + dSt.rec + " [expect done / true]");
+  // whiteboard
+  out.push("whiteboard leaders: " + WHITEBOARD_LEADERS.length + " [expect 7, no 'others']");
+  const wbCounts = WHITEBOARD_LEADERS.map(l=>l.id+":"+wbShortlistItems(l.id).length).join(" ");
+  out.push("whiteboard shortlist counts: " + wbCounts);
+  const wbMd = buildWhiteboardExport();
+  out.push("whiteboard export length: " + wbMd.length + " chars, sections: " + (wbMd.match(/^## /gm)||[]).length + " [expect 7]");
+
   // export
   const md = buildExport();
   out.push("export length: " + md.length + " chars");

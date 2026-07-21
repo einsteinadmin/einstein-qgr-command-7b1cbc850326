@@ -307,6 +307,76 @@
   .changelog-add { display: flex; gap: 8px; margin-top: 10px; }
   .changelog-add input { flex: 1; border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 0.82rem; }
 
+  /* ============ Q2 FINAL SCORECARD (added 7/21) ============ */
+  .scorecard-summary { display: flex; gap: 14px; flex-wrap: wrap; }
+  .scorecard-stat {
+    flex: 1; min-width: 170px; border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; background: var(--light); text-align: center;
+  }
+  .scorecard-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--navy); line-height: 1; }
+  .scorecard-stat .lbl { font-size: 0.72rem; color: var(--gray); margin-top: 4px; line-height: 1.3; }
+  .scorecard-band { font-size: 0.78rem; color: var(--teal); font-weight: 700; margin-top: 10px; }
+
+  .scorecard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-top: 18px; }
+  .scorecard-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: var(--white); }
+  .scorecard-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+  .scorecard-name { font-size: 1rem; font-weight: 700; color: var(--navy); }
+  .scorecard-role { font-size: 0.72rem; color: var(--gray); margin-top: 2px; }
+  .scorecard-pending-badge {
+    display: inline-block; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px; background: var(--orange-50); color: var(--orange-900);
+    border: 1px solid #F5D9B8; white-space: nowrap;
+  }
+
+  .scorecard-goal-row { display: flex; align-items: flex-start; gap: 8px; padding: 7px 0; border-bottom: 1px solid #F0EEE8; }
+  .scorecard-goal-row:last-of-type { border-bottom: none; }
+  .scorecard-crit { color: var(--orange-900); font-size: 0.85rem; margin-top: 1px; min-width: 14px; }
+  .scorecard-goal-text { flex: 1; font-size: 0.8rem; color: var(--ink); line-height: 1.35; }
+  .scorecard-chip-col { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+
+  .final-chip {
+    font-size: 0.58rem; font-weight: 800; letter-spacing: 0.3px; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; border: 1px dashed #C0C2C4; color: var(--gray);
+    background: transparent; white-space: nowrap;
+  }
+
+  .scorecard-aar { margin-top: 12px; }
+  .scorecard-aar summary { cursor: pointer; font-size: 0.76rem; font-weight: 700; color: var(--blue); list-style: none; }
+  .scorecard-aar summary::-webkit-details-marker { display: none; }
+  .scorecard-aar summary:before { content: '▸ '; }
+  .scorecard-aar[open] summary:before { content: '▾ '; }
+  .scorecard-aar-body { margin-top: 8px; font-size: 0.78rem; color: var(--ink); line-height: 1.5; }
+  .scorecard-aar-body h5 { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--navy); margin: 8px 0 3px; }
+  .scorecard-aar-body h5:first-child { margin-top: 0; }
+  .scorecard-aar-body ul { margin: 0 0 0 16px; padding: 0; }
+  .scorecard-aar-body li { margin-bottom: 2px; }
+
+  .scorecard-rail { display: flex; flex-direction: column; gap: 10px; }
+  .scorecard-lesson {
+    font-size: 0.82rem; color: var(--ink); padding: 10px 12px; background: var(--light);
+    border-radius: 8px; border-left: 3px solid var(--teal); line-height: 1.4;
+  }
+  .scorecard-flag {
+    font-size: 0.82rem; color: var(--ink); padding: 10px 12px; background: #FBEAEA;
+    border-radius: 8px; border-left: 3px solid var(--red); line-height: 1.4; margin-top: 4px;
+  }
+
+  .divergence-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .divergence-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--light); font-size: 0.8rem; line-height: 1.42; }
+  .divergence-card .dv-num { font-family: 'Bebas Neue', sans-serif; color: var(--orange-900); font-size: 1.05rem; margin-bottom: 4px; }
+
+  @media print {
+    .topbar, .tabs, .btn, .decision-form, .changelog-add, .agenda-add { display: none !important; }
+    .zone { display: block !important; }
+    .scorecard-aar:not([open]) summary ~ * { display: block !important; }
+    .section { break-inside: avoid; box-shadow: none; }
+    .scorecard-card { break-inside: avoid; }
+  }
+  @media (max-width: 640px) {
+    .scorecard-grid { grid-template-columns: 1fr; }
+    .scorecard-summary { flex-direction: column; }
+  }
+
   /* Modal */
   .modal-overlay {
     display: none; position: fixed; inset: 0; background: rgba(27,29,31,0.5);
@@ -495,6 +565,28 @@
 
   <div class="zone" id="zone3">
 
+    <div class="section" id="scorecardSection">
+      <div class="section-eyebrow">Aftermath</div>
+      <div class="section-title">Q2 2026 Final Scorecard</div>
+      <div class="section-desc">Self-graded walk-through of the whole quarter, leader by leader — built for presenting solo, with Paul, or to the Roundtable. Every FINAL chip is an intentional placeholder: final grades land after the Day 1 PROJ→FINAL sync (see <code>grade-sync-crosswalk.md</code>), not before.</div>
+      <div id="scorecardCompany"></div>
+      <div class="scorecard-grid" id="scorecardLeaders"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Aftermath</div>
+      <div class="section-title">Cross-team lessons</div>
+      <div class="section-desc">Patterns that showed up across more than one leader's AAR this quarter — direct input to Q3 rock design and the goal-hygiene gate.</div>
+      <div class="scorecard-rail" id="scorecardLessons"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-eyebrow">Aftermath</div>
+      <div class="section-title">Divergence conversations</div>
+      <div class="section-desc">Four grade disagreements that need a live conversation at QGR — this tool surfaces them, it doesn't resolve them.</div>
+      <div class="divergence-strip" id="scorecardDivergence"></div>
+    </div>
+
     <div class="section">
       <div class="section-eyebrow">Aftermath</div>
       <div class="section-title">Who-owns-what</div>
@@ -559,7 +651,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.17 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.18 2026-07-21'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -923,8 +1015,214 @@
     { date: '7/20h', text: 'WAREHOUSE GATE RUN (Cameron\'s call, ~5 PM): SWT/Strata FINAL + PACe Q2 self-eval + eNPS folded; Power of One deliberately skipped (Ben Tue 9–1 covers 1%-moves); trickle-in policy declared for Anne AAR/eNPS (Tue AM) + Ben candidates + Flywheel scores — fold as found. Warehouse DECLARED COMPLETE for triage. Fold deltas: no rocks added/killed · C1 + T2 provenance strengthened (call-side education split · single-person dependency HUGE) · near-miss #1 insurance updated (SWT ruling leans park-deliberately, owner still open) · NEW near-miss #12 manager-performance-visibility (PACe Box 11 G→Y — the only grade that moved; rule T2-fold vs B2-fold vs standalone QG). REFINE ruled: folded into Educate-Customers. Receipt REGENERATED (same link, now hosted with the HQ — broken relative link fixed) + worksheet export bug fixed (note handler was overwriting item labels). Live PACe updated to Q2 (Box 11 yellow, Q2 analysis card, Rob-exercise outcomes) then v4 SHIPPED: per-quarter grade history w/ trend chips + why-note popovers + C+P-vs-TEAM provenance + team-finalize button. Flywheel autosave+history build in flight (⚠ scores Cameron/Paul entered 7/20 likely lost — no autosave existed; re-enter after ship). NEXT: Cameron+Paul receipt review → Triage Room red-pen → Export to Albert.' },
     { date: '7/20j', text: 'AGENDA DRAFT v2 (Cameron\'s restructure feedback, evening): Day 1 = REVIEW+VALIDATE (AAR TL;DRs · packet walkthrough incl. financial+marketing analysis · eNPS · branch scorecards until everyone can read their own · Q2 grades finalized · People Analyzers group · Q3 goals w/ exact R/G/SG definitions TESTED against the team — the goal-hygiene gate) · Day 2 = DECIDE+CASCADE. Moved OUT of the QGR into owners\' phase: PACe one-process pick (Rob constraints session covers it) · CASh/Power-of-One (Cameron+Paul+Ben owners\' block; Day 2 = 5-min recap) · Rockefeller Habits pick → NEW MB pulse 12584731711. DECIDEs → RATIFY rows (decided in prep, team buys in, not reopened); damages RATIFY now names the two conflicting MB pulses to pause (11728394179 individual attribution + 11728354415 leaderboards). Agenda merge guard added so retired rows don\'t resurrect from saved browser state. Marked DRAFT — Cameron iterates before 7/29. CUT-LIST v2 build launched same evening: per-leader Q2-disposition band (every existing rock w/ Albert-rec: done/task/cadence/extends) + department candidate depth to 10-12 (ceiling not quota, from the MB coverage audit, cuts inline) + WHITEBOARD view (all leaders × goals × CRITs, one screen, print/export).' },
     { date: '7/20k', text: 'MB CURATION STACK BAKED INTO THE MACHINE (late evening): standing model = leadership curates facts (kit step 4, first live run Q4) → Albert curates structure (dupes · two-layer TL;DR+depth summaries [new standard after Cameron\'s depth feedback — originals never deleted, but thin recaps banned] · Flywheel Lens + PACe Lens dropdown columns on every active pulse · rollup views per component) → Cameron+Paul WALK the board regularly (recorded via PLAUD → transcript to Albert → corrections folded) → discussions run THROUGH lens views, never the raw list. Loop step 4 rewritten as the MB walk. Q3-cycle specifics: leader sweep SKIPPED for time (constraints already given; Cameron+Paul walk Tue covers it) · lens-sweep agent running (2 new dropdown columns + ~390 items tagged + per-component rollup + QGR-Lens-column bug diagnosis — the eNPS-on-null display defect) · 81 summary depth-upgrades queued behind it. Trust-boundary doctrine from tonight\'s Tampa-ops-manager catch: Albert = structure, owners = freshness, Cameron = exceptions.' },
-    { date: '7/20i', text: 'RECEIPT RULED + THE DECISION LOOP ENCODED (evening): Cameron+Paul ruled all 30 rocks + 12 near-misses (export → receipt-decisions-RAW + DIGESTED files). Headlines: 22 confirmed / 7 challenged — M2→forward-deployed-engineer reframe · M4/B3/B5 "not goals" · A4 demoted to task · T4 REPLACED (ship mobile app + lead triage + estimate accuracy; Matisen also supports network AI) · P2 PTO moves to Anne/Jalissa · insurance KILLED-standalone (folds into M3 fleet safety). Promotions: quarterly sales comp→Amanda · succession framework→Anne · Rippling AI→Matisen (⚠ over-cap 5-6 vs 4) · wiki→registry family · manager-performance-visibility→COS · estimate-accuracy as CET-theme OPTION. NEW cross-cutting directives: ITP follow-up = bonus goal for every direct · ongoing-education module per leader · Magic-Moments-for-employees · ⭐ goal coverage extends BELOW Roundtable (Jalissa/Nhel/Tet/Carly/KP/Prosper/Fabian/Austin L). SEQUENCING DECIDED: theme-first (working hypothesis = speed to competence) as the triage lens; team finalizes name/mechanics at QGR. Target: 7-8 goals/leader by end of day 2. IN FLIGHT: MB "Q3 Curation" column + coverage audit (killed items marked visible, NOT archived — Cameron eyeballs first, archive sweep after) · Triage Room rebuild (receipt badges + two-tier owner assignment + per-leader lanes w/ shortlist/overflow/Cameron-add bands). The full 5-step decision loop is now written into "How this machine works" ② — next quarter runs it without live invention. Tool polish shipped same evening: PACe v4.1 + Flywheel v3.1 (how-to sections, local-only-save warnings, trend fix, real exports).' }
+    { date: '7/20i', text: 'RECEIPT RULED + THE DECISION LOOP ENCODED (evening): Cameron+Paul ruled all 30 rocks + 12 near-misses (export → receipt-decisions-RAW + DIGESTED files). Headlines: 22 confirmed / 7 challenged — M2→forward-deployed-engineer reframe · M4/B3/B5 "not goals" · A4 demoted to task · T4 REPLACED (ship mobile app + lead triage + estimate accuracy; Matisen also supports network AI) · P2 PTO moves to Anne/Jalissa · insurance KILLED-standalone (folds into M3 fleet safety). Promotions: quarterly sales comp→Amanda · succession framework→Anne · Rippling AI→Matisen (⚠ over-cap 5-6 vs 4) · wiki→registry family · manager-performance-visibility→COS · estimate-accuracy as CET-theme OPTION. NEW cross-cutting directives: ITP follow-up = bonus goal for every direct · ongoing-education module per leader · Magic-Moments-for-employees · ⭐ goal coverage extends BELOW Roundtable (Jalissa/Nhel/Tet/Carly/KP/Prosper/Fabian/Austin L). SEQUENCING DECIDED: theme-first (working hypothesis = speed to competence) as the triage lens; team finalizes name/mechanics at QGR. Target: 7-8 goals/leader by end of day 2. IN FLIGHT: MB "Q3 Curation" column + coverage audit (killed items marked visible, NOT archived — Cameron eyeballs first, archive sweep after) · Triage Room rebuild (receipt badges + two-tier owner assignment + per-leader lanes w/ shortlist/overflow/Cameron-add bands). The full 5-step decision loop is now written into "How this machine works" ② — next quarter runs it without live invention. Tool polish shipped same evening: PACe v4.1 + Flywheel v3.1 (how-to sections, local-only-save warnings, trend fix, real exports).' },
+    { date: '7/21', text: 'Q2 Final Scorecard section added (AAR compile: 6/7 complete, Anne pending) + Ben data-request templates issued + Triage Room design-audit pass.' }
   ];
+
+  /* ============================================================
+     Q2 2026 FINAL SCORECARD — DATA (added 7/21; static, not localStorage-backed)
+     Source: aar-tracker-2026-q2-DRAFT.json (compiled from aar-compile-2026-07-20.md +
+     leader AAR posts + spoke status.json exports). Embedded as a JS const, not fetched,
+     because this page is served from GitHub Pages with no runtime JSON hosting.
+     final_grade is null-by-design on every goal until the Day 1 PROJ->FINAL sync
+     (grade-sync-crosswalk.md) — the FINAL chip renders as an empty outline until then.
+     ============================================================ */
+
+  var SCORECARD_DATA = {
+    company: {
+      headline_rate: '77.8%',
+      headline_note: '28 of 36 goals SG/G (6 of 7 leaders self-graded; Anne’s AAR still pending)',
+      q1_rate: '71%',
+      q1_note: 'Q1 reconciled (36/51)',
+      tally: '10 SG · 18 G · 8 R',
+      band_note: 'Both quarters land inside the healthy 70–80% band.'
+    },
+    cross_cutting_lessons: [
+      'The Matisen queue is THE dependency lesson of the quarter — Paul (comp historicals late), Amanda (emails in IT queue), Matisen himself (substitution never re-scored). Rule: name the Matisen deliverable in the rock text or it doesn’t exist.',
+      'Weekly dashboard cadences win — recurring review meeting + visible scoreboard beat one-off pushes everywhere tried (Mike hiring, fleet, Matisen VP cadence).',
+      'Time-block or lose it — Paul’s collections won by one blocked weekend; geo expansion lost to fires twice; Matisen: deadlines without calendar blocks lose to anything urgent.',
+      'Goal-definition hygiene — Mike’s scoring fork, Matisen’s date inversion, Amanda’s dependency-gated bar, Paul’s over-specified ride-along. Q3 rule: definitions gradable unambiguously by one person, dates + dependencies internally consistent.',
+      'Live build-HQ pattern (Mike) — maintained through the build, kept him on track, made the AAR trivial. Standardize on every multi-week project.'
+    ],
+    bottleneck_note: 'Q1 success 20% (1/5) vs peers 60–100%; Q2 recovered to ~67% self-graded, but 3 other leaders’ Q2 misses still route through his queue; eNPS capacity admission x4 anon. Q3 mitigation drafted: 3–4 rock cap + FDE/2nd-senior-dev question + dependency-board doctrine.',
+    divergences: [
+      { title: 'Paul — Mover Comp three-way read', detail: 'Paul self-graded R, Anne reads it G, the dashboard says G on the same CRIT. Root: the “targets set and communicated” leg unmet + a Matisen data dependency queued late. Gates Anne’s Q3 promotion-framework design.' },
+      { title: 'Mike — Games methodology fork', detail: 'Weekly-average scoring = 8.16 (SG); pooled-quarter scoring = 7.60 (R) — a full color swing on a Critical Number. Mike calls for locking one canonical method before Q3 scoring.' },
+      { title: 'Amanda — Call Grading G→R flip', detail: 'Honest down-flip on her own Critical Number: the grading engine ran all quarter, but the coaching loop never existed because Nhel/Tet were absorbed into front-line firefighting. Q3 restructure already designed.' },
+      { title: 'Cameron — Visits G→R flip', detail: 'Re-graded from G the same day — “grade the letter, not the technicality” became the house norm afterward. O3 leg was clean; the visit count (2 of a 3 bar) missed on an all-or-nothing definition.' }
+    ],
+    leaders: [
+      {
+        name: 'Amanda Ware', role: 'Director of CX (sales + claims)',
+        goals: [
+          { goal: 'AI Call Grading + Regular Reporting (Conversions/Estimate Accuracy)', critical_number: true, self_grade: 'R' },
+          { goal: 'Replace Leadferno with Chatbot (80% deflection)', critical_number: true, self_grade: 'G' },
+          { goal: 'New Email Design + Copy Polish + Rollout (KP)', critical_number: false, self_grade: 'G' },
+          { goal: 'CX Q2 Theme Rollout (First Class Precision)', critical_number: false, self_grade: 'SG' },
+          { goal: 'Ideal Team Player Reading', critical_number: false, self_grade: 'SG' }
+        ],
+        wins: ['Grading engine ran steady all quarter with rubric tweaks from Nhel/Tet', 'First Class Precision theme rollout strong enough to self-grade SG'],
+        losses: ['Call-grading coaching loop never materialized (CRIT R)', 'Emails stalled in the Matisen/IT queue'],
+        biggest_opportunity: 'Q3 restructure of Nhel/Tet to coaching + follow-up ONLY — direct input to C1/C4 rock design',
+        lessons: ['A measurable-impact bar gated on another team’s queue is not a self-gradable goal', 'Engine-running is not the goal; the human loop it feeds is']
+      },
+      {
+        name: 'Brian Herzig', role: 'CTXH Regional Manager + Culture Head',
+        goals: [
+          { goal: 'Einstein Games Season 3 Launch (CTXH)', critical_number: true, self_grade: 'R' },
+          { goal: 'Hiring + Personnel Budgets + People Analyzer', critical_number: true, self_grade: 'G*' },
+          { goal: 'Scrum Accountability Pt 4 — Manager Certification', critical_number: false, self_grade: 'G' },
+          { goal: 'Branch Visits / Audits', critical_number: false, self_grade: 'G' },
+          { goal: 'Training Day Overhaul + Calendar', critical_number: false, self_grade: 'R' },
+          { goal: 'Ideal Team Player Reading', critical_number: false, self_grade: 'G' }
+        ],
+        wins: ['LEA 91% up from 84%', 'Manager cert system fully built', 'Structured branch audits with findings'],
+        losses: ['Games S3 CTXH below bar at NA/HOU (CRIT R)', 'TD Overhaul stations core never built', 'BM-hire scorecard process owned as a failure'],
+        biggest_opportunity: 'Performance-mirror evals as the BM promotion lens (validates productizing the Frank-mirror pattern) + demand-based staffing model (pairs with Matisen’s TUR/FTE work)',
+        lessons: ['An un-sent delegation is no progress', 'Missing courage for direct coaching conversations is the common root of two separate misses', 'Data without a weekly delivered-coaching cadence doesn’t move scores']
+      },
+      {
+        name: 'Mike Vandenbroader', role: 'DFWT Regional Manager + Head of Operations',
+        goals: [
+          { goal: 'Personnel Mgmt — Manager Hiring + New Manager Development (Garland/Tampa)', critical_number: true, self_grade: 'SG' },
+          { goal: 'Einstein Games Season 4 Launch (DFWT)', critical_number: true, self_grade: 'G' },
+          { goal: 'Fleet Safety Pt 2', critical_number: false, self_grade: 'R' },
+          { goal: 'Mover Training Handbook / Training App', critical_number: false, self_grade: 'SG' },
+          { goal: 'Ideal Team Player Reading', critical_number: false, self_grade: 'SG' }
+        ],
+        wins: ['Training app: 3 weeks, all of DFWT, zero bugs', 'Staffing 106-111% with weekly dashboard + aim-high rule', 'Live build-HQ pattern'],
+        losses: ['Fleet safety 89 vs 90 — weekly reads masked the QTD miss'],
+        biggest_opportunity: 'Lock one canonical Games scoring method before Q3; training app -> company-wide chassis',
+        lessons: ['Weekly dashboard cadences win (hiring, fleet)', 'Read early, not at peak (time-block lesson)', 'Maintain a live HQ through the build — the AAR writes itself']
+      },
+      {
+        name: 'Matisen Harper', role: 'Director of IT',
+        goals: [
+          { goal: 'AI Wedge Audit + MVP Scoping', critical_number: true, self_grade: 'G' },
+          { goal: 'Variable Pricing Full Rollout + Weekly Review Cadence', critical_number: true, self_grade: 'SG' },
+          { goal: 'AI Call Grading + Claims RAG', critical_number: false, self_grade: 'R' },
+          { goal: 'ClearCo + Rippling API -> HR Dashboard', critical_number: false, self_grade: 'G' },
+          { goal: 'Production Line Cleanup — 8 Loose Threads', critical_number: false, self_grade: 'SG' },
+          { goal: 'Ideal Team Player Reading (Bonus)', critical_number: false, self_grade: 'SG' }
+        ],
+        wins: ['Variable Pricing live end-to-end with a standing weekly cadence', 'HR Command Center shipped', '7 of 8 production-line threads closed'],
+        losses: ['Call Grading + RAG R — scope drifted by absorption, substitution never re-scored'],
+        biggest_opportunity: 'The Matisen queue itself: THE dependency lesson of the quarter (cited independently by Paul, Amanda, and Matisen). Q3: cap at 3-4 rocks, name every dependency deliverable in rock text, FDE/2nd-senior-dev question attached.',
+        lessons: ['Give every deliverable its own ship date', 'Deadlines without calendar blocks lose to anything urgent', 'G-stricter-than-SG date inversion = goal-definition hygiene failure']
+      },
+      {
+        name: 'Anne Bosse', role: 'Director of Employee Experience (HR)',
+        pending_badge: 'AAR PENDING — grades inferred from 7/17 status',
+        goals: [
+          { goal: 'Hire HR Generalist', critical_number: true, self_grade: 'SG (inferred)' },
+          { goal: 'Hiring for Culture / Extended Trial Period + 100-Point Behavioral', critical_number: true, self_grade: 'G (inferred)' },
+          { goal: 'ClearCo Hiring Funnel Visualization', critical_number: false, self_grade: 'Y (inferred)' },
+          { goal: 'Mover Promotion Guidance Metrics', critical_number: false, self_grade: 'G (inferred)' },
+          { goal: 'Einstein Onboarding Experience', critical_number: false, self_grade: 'G (inferred)' },
+          { goal: 'Ideal Team Player Reading (Bonus)', critical_number: false, self_grade: 'SG (inferred)' }
+        ],
+        wins: ['Jalissa hire + ramp (SG locked)', 'Trial-day elimination go-live locked Aug 1'],
+        losses: [],
+        biggest_opportunity: 'TBD from real AAR — expected: recruiting Tier-2, promotion-framework Q3 design (gated by the Paul comp three-way)',
+        lessons: []
+      },
+      {
+        name: 'Paul Morin', role: 'CFO/COO, Co-Owner',
+        goals: [
+          { goal: 'Annual Mover Comp Review', critical_number: true, self_grade: 'R' },
+          { goal: 'N. Austin Office Move-In', critical_number: true, self_grade: 'SG' },
+          { goal: 'Branch Visits', critical_number: false, self_grade: 'G*' },
+          { goal: 'Geographic Expansion Strategy', critical_number: false, self_grade: 'R' },
+          { goal: 'Money Collection Process', critical_number: false, self_grade: 'G' },
+          { goal: 'Ideal Team Player Reading', critical_number: false, self_grade: 'G' }
+        ],
+        wins: ['N. Austin move-in SG', 'Collections rescued via time-blocking'],
+        losses: ['Mover Comp CRIT self-graded R', 'Geo expansion: two dry quarters'],
+        biggest_opportunity: 'Geo expansion needs elevation or explicit kill — two consecutive quarters of ~5% progress signals it never survives contact with operational fires',
+        lessons: ['Time-block or lose it (collections won by it, geo lost without it)', 'Dependencies queued late at Matisen = leg unmet on a CRIT', 'Over-specified goal legs (ride-along spec) get dropped, not done']
+      },
+      {
+        name: 'Cameron Brown', role: 'CEO, Co-Owner',
+        goals: [
+          { goal: 'Scale AI COS Network + World Model', critical_number: true, self_grade: 'G' },
+          { goal: 'AI Wedge Audit + QG Support', critical_number: true, self_grade: 'G' },
+          { goal: 'Variable Pricing Full Rollout + Weekly Cadence', critical_number: false, self_grade: 'SG' },
+          { goal: 'Branch Visits + O3s', critical_number: false, self_grade: 'R' },
+          { goal: 'Oversee Website Redesign — Smart Move Pt 2', critical_number: false, self_grade: 'G' },
+          { goal: 'Ideal Team Player Reading', critical_number: false, self_grade: 'SG' }
+        ],
+        wins: ['All 7 COS live on the pull model', 'VP rollout SG with reversible-bet design', 'Website direction + handoff at heavy personal investment', 'ITP front-loaded and finished'],
+        losses: ['Branch visits R (2 of 3)', 'Both CRIT SG gates missed (EMMA-feed timing, wedge sweep)'],
+        biggest_opportunity: 'Forward-deployed-engineer model — embedded capacity where the work is, instead of everything queueing behind one person; plus the travel-week visit model',
+        lessons: ['Grade the letter, not the technicality', 'Instrument before you accelerate', 'Re-scope out loud, not by drift', 'A wedge audit without a named builder is a wishlist', 'Front-load reading rocks into artifacts']
+      }
+    ]
+  };
+
+  function scGradeClass(g) {
+    var s = (g || '').toUpperCase();
+    if (s.indexOf('SG') === 0) return 'sg';
+    if (s.indexOf('Y') === 0) return 'y';
+    if (s.indexOf('R') === 0) return 'r';
+    if (s.indexOf('G') === 0) return 'g';
+    return 'g';
+  }
+
+  function scListBlock(title, arr) {
+    if (!arr || !arr.length) return '';
+    return '<h5>' + title + '</h5><ul>' + arr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+  }
+
+  function scRenderLeaderCard(l) {
+    var goalsHtml = l.goals.map(function (g) {
+      var cls = scGradeClass(g.self_grade);
+      return '<div class="scorecard-goal-row">' +
+        '<span class="scorecard-crit" title="Critical Number">' + (g.critical_number ? '⭐' : '') + '</span>' +
+        '<div class="scorecard-goal-text">' + esc(g.goal) + '</div>' +
+        '<div class="scorecard-chip-col">' +
+          '<span class="status-pill ' + cls + '" title="SELF grade">' + esc(g.self_grade) + '</span>' +
+          '<span class="final-chip">FINAL — pending Day 1</span>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    var aarHtml = '<details class="scorecard-aar"><summary>AAR stamp</summary><div class="scorecard-aar-body">' +
+      scListBlock('Wins', l.wins) +
+      scListBlock('Losses', l.losses) +
+      (l.biggest_opportunity ? '<h5>Biggest opportunity</h5><div>' + esc(l.biggest_opportunity) + '</div>' : '') +
+      scListBlock('Lessons', l.lessons) +
+      '</div></details>';
+
+    var badge = l.pending_badge ? '<span class="scorecard-pending-badge">' + esc(l.pending_badge) + '</span>' : '';
+
+    return '<div class="scorecard-card">' +
+      '<div class="scorecard-card-head"><div><div class="scorecard-name">' + esc(l.name) + '</div><div class="scorecard-role">' + esc(l.role) + '</div></div>' + badge + '</div>' +
+      goalsHtml + aarHtml +
+    '</div>';
+  }
+
+  function renderScorecard() {
+    var c = SCORECARD_DATA.company;
+    var companyHtml = '<div class="scorecard-summary">' +
+      '<div class="scorecard-stat"><div class="num">' + esc(c.headline_rate) + '</div><div class="lbl">' + esc(c.headline_note) + '</div></div>' +
+      '<div class="scorecard-stat"><div class="num">' + esc(c.q1_rate) + '</div><div class="lbl">' + esc(c.q1_note) + '</div></div>' +
+      '<div class="scorecard-stat"><div class="num">' + esc(c.tally) + '</div><div class="lbl">Self-grade split, 36 goals</div></div>' +
+    '</div>' +
+    '<div class="scorecard-band">' + esc(c.band_note) + '</div>';
+    document.getElementById('scorecardCompany').innerHTML = companyHtml;
+
+    document.getElementById('scorecardLeaders').innerHTML = SCORECARD_DATA.leaders.map(scRenderLeaderCard).join('');
+
+    var lessonsHtml = SCORECARD_DATA.cross_cutting_lessons.map(function (t) {
+      return '<div class="scorecard-lesson">' + esc(t) + '</div>';
+    }).join('');
+    lessonsHtml += '<div class="scorecard-flag"><b>Bottleneck flag — Matisen:</b> ' + esc(SCORECARD_DATA.bottleneck_note) + '</div>';
+    document.getElementById('scorecardLessons').innerHTML = lessonsHtml;
+
+    document.getElementById('scorecardDivergence').innerHTML = SCORECARD_DATA.divergences.map(function (d, i) {
+      return '<div class="divergence-card"><div class="dv-num">#' + (i + 1) + '</div><div><b>' + esc(d.title) + '</b><br>' + esc(d.detail) + '</div></div>';
+    }).join('');
+  }
 
   /* ============================================================
      STORAGE HELPERS
@@ -1785,6 +2083,7 @@
 
   function init() {
     renderAll();
+    renderScorecard();
     activateZone(state.activeZone || 'zone1');
 
     document.querySelectorAll('.tab-btn').forEach(function (btn) {
