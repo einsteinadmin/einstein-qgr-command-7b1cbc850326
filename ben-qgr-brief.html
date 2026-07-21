@@ -116,7 +116,7 @@ footer{max-width:1080px;margin:0 auto;padding:0 28px 40px;font-size:11.5px;color
 <div id="toast"></div>
 
 <script>
-const VERSION = "v1.1 · 2026-07-21"; // bump on every deploy — live verification greps for this
+const VERSION = "v1.2 · 2026-07-21"; // bump on every deploy — live verification greps for this; v1.2 = §5 packet-review questions added post-morning-session
 const LS_KEY = "ben-qgr-brief-q2-2026";
 
 const SECTIONS = [
@@ -169,7 +169,25 @@ const SECTIONS = [
     albert:"Two leaders independently asked for more financial line-of-sight this quarter — demand is real. The scope question (what BMs see vs. don't) matters as much as the date." },
   { id:"o2", q:"What does Ben need FROM us?",
     detail:"Open floor: access, context, decisions, introductions, cadence changes — what would make the finance seat stronger this quarter?",
-    albert:"" }
+    albert:"From the morning call: Ben asked for a weekly bookings feed (CSV/markdown fine — bookings, realization rate, pipeline) for the 13-week cash forecast, marketing-report access, and the dashboard index. The feed wiring is Albert's action." }
+]},
+{ id:"review", title:"5 · 2:30 — Packet review, remaining items", sub:"Added after the morning session — the short list left before the packet is fully locked",
+  qs:[
+  { id:"p1", q:"Tampa allocation — your words vs. your workbook.",
+    detail:"On the call: Tampa gets zero overhead allocation (negative, revenue-share pushes nothing down). Your v4 workbook's Allocated tab: Tampa receives ~$31K (controllable NOI $38,142 → allocated $7,238). The packet renders the workbook. Screen-share your live tab — which is current?",
+    albert:"Not cosmetic: it changes Tampa's branch NOI in the packet and the Tampa narrative (planned NI was −$35,678, so 'negative roughly on plan' either way)." },
+  { id:"p2", q:"Breakeven — land the final number.",
+    detail:"Standing basis $5.46M (OPSP/reforecast, includes distributions) · your Q2-actuals recalc ~$5.9M (excludes distributions) · deprecated $3.85M branch-level view. Send the with-distributions re-upload; team agrees the final figure.",
+    albert:"Cameron confirmed the upward direction is expected — mover comp moved earlier than the reforecast modeled. Packet shows all three, labeled, '⚠ under revision' until this lands." },
+  { id:"p3", q:"Sage-restated 2025 P&L by branch — hand over the zip.",
+    detail:"You produced a 2025 P&L-by-branch-by-month zip (new COA) mid-call. Our branch YoY currently sources the pre-restate reforecast workbook — we want to re-verify the splits (esp. N. Austin −10.9%) against the restate.",
+    albert:"Company totals tie to the penny already; this is belt-and-suspenders on the branch splits, and it retires the new-COA comparability caveat." },
+  { id:"p4", q:"Version names — close the v4.2 vs v3.42 confusion.",
+    detail:"The call attached 'v4.2' to the reforecast and 'v3.42' to the original budget; your workbook's SRC tab labels the $8.59M budget 'v4.2.' Paul confirming. Adopted convention: V<n> + YYYY-MM-DD, one 'Plan' per quarter.",
+    albert:"The packet's naming table carries the contested-tag flag until this is confirmed — then it locks and this confusion dies permanently." },
+  { id:"p5", q:"Marketing section — chase it this cycle or defer?",
+    detail:"The packet has no marketing data (no feed was ever queued). Q1's packet had funnel/ad-spend/ROI/seasonality. Options: quick KP/Matisen pull this week (58 ROAS dashboards now exist), or an honest deferred-to-Q3 stub.",
+    albert:"Pairs with your marketing-reports ask from question 3.3 — one combined ask to KP/Matisen could serve both." }
 ]}
 ];
 
