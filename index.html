@@ -421,7 +421,7 @@
   <div class="topbar-inner">
     <div class="brand-block">
       <div class="brand-title">QGR Command Center</div>
-      <div class="brand-sub">Q3 2026 Cycle</div>
+      <div class="brand-sub">Q3 2026 Cycle · <span id="hqVersionChip" title="Bumped on every deploy — if this doesn't match the changelog's latest entry, hard-refresh (Cmd+Shift+R)">…</span></div>
     </div>
     <div id="countdownChip" class="countdown-chip">— days to QGR</div>
     <div class="topbar-actions">
@@ -651,7 +651,8 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.18 2026-07-21'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.19 2026-07-21'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
