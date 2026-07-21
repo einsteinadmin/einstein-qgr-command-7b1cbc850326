@@ -365,6 +365,17 @@
   .divergence-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--light); font-size: 0.8rem; line-height: 1.42; }
   .divergence-card .dv-num { font-family: 'Bebas Neue', sans-serif; color: var(--orange-900); font-size: 1.05rem; margin-bottom: 4px; }
 
+  /* ============ PACKET DATA CHASE LIST (added 7/21) ============ */
+  .chase-new-chip {
+    display: inline-block; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 999px; background: var(--orange-50); color: var(--orange-900);
+    border: 1px solid #F5D9B8; vertical-align: middle; margin-left: 8px;
+  }
+  .chase-counter { font-size: 0.82rem; font-weight: 700; color: var(--teal); margin-bottom: 12px; }
+  table.chase-tbl td.chase-check-cell { width: 30px; }
+  table.chase-tbl tr.chase-row-done td { color: var(--gray); }
+  table.chase-tbl tr.chase-row-done td.chase-feed-cell { text-decoration: line-through; }
+
   @media print {
     .topbar, .tabs, .btn, .decision-form, .changelog-add, .agenda-add { display: none !important; }
     .zone { display: block !important; }
@@ -520,6 +531,16 @@
       </div>
     </div>
 
+    <div class="section" id="chase-list">
+      <div class="section-eyebrow">Runway</div>
+      <div class="section-title">Packet Data Chase List <span class="chase-new-chip">NEW Q2</span></div>
+      <div class="section-desc">every feed the packet needs — source · owner · due · status; check off as data lands.</div>
+      <div class="chase-counter" id="chaseCounter"></div>
+      <div class="tracker-table-wrap">
+        <table class="decision-tbl chase-tbl" id="chaseTable"></table>
+      </div>
+    </div>
+
     <div class="section">
       <div class="section-eyebrow">Runway</div>
       <div class="section-title">My rocks — AAR workspace</div>
@@ -652,7 +673,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.25 2026-07-21'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.26 2026-07-21'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -729,7 +750,8 @@
     decisions: LS_PREFIX + 'decisions',
     rollout: LS_PREFIX + 'rollout',
     changelog: LS_PREFIX + 'changelog',
-    activeZone: LS_PREFIX + 'activeZone'
+    activeZone: LS_PREFIX + 'activeZone',
+    chase: LS_PREFIX + 'chase'
   };
 
   var GATES_SEED = [
@@ -813,7 +835,8 @@
           ctx: 'BACKLOG INPUT closes here — the room re-reads this aloud Day 1 (go-slow-to-go-fast). Baseline: Q2 26 Growth Toolkit workbook (in the kit).' },
         { text: '⚙ FINALIZE THE WAREHOUSE — fold all instrument outputs + straggler exports into the Master Backlog; Albert regenerates the shortlist + curation receipt',
           url: 'https://einsteinmoving.monday.com/boards/18408300070', urlLabel: 'Master Backlog',
-          ctx: 'The gate between inputs and decisions: nothing gets triaged until the warehouse is declared complete. Albert runs this on your word once the five inputs above are done.' },
+          url2: '#chase-list', url2Label: 'Data Chase List',
+          ctx: 'The gate between inputs and decisions: nothing gets triaged until the warehouse is declared complete. Albert runs this on your word once the five inputs above are done. Track every feed the packet needs against the Packet Data Chase List.' },
         { text: 'Curation receipt review — confirm/challenge every rock + rule on the 11 near-misses',
           url: 'curation-receipt-2026-07-20.html', urlLabel: 'interactive receipt',
           ctx: 'The shortlist trust check (20–30 min): audit the deltas, never the whole warehouse. Export decisions to Albert.' },
@@ -960,6 +983,7 @@
 
   var TOOLKIT_SEED = [
     { icon: '📘', label: 'Master pulse + SOP (Monday)', sub: 'pulse 12581466585 — the reproducible QGR playbook: Drive 3-tier setup, three-session model, learnings ledger', url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12581466585' },
+    { icon: '📥', label: 'Packet Data Chase List', sub: 'every feed · source · owner · check off as data lands', url: '#chase-list' },
     { icon: '🛠', label: 'QGR Triage Room', sub: 'the workbench — Q2 review · Q3 triage · dependencies', url: 'qgr-triage-room.html' },
     { icon: '💼', label: 'Ben × Einstein — First QGR Working Brief', sub: 'live meeting tool (Ben-visible) — 13 questions · cash primer · notes + next-action export', url: 'ben-qgr-brief.html' },
     { icon: '💰', label: 'Power of One tool (Paul)', sub: 'quarterly calculator + workshop — 8 levers, Q2 FY2026 actuals pre-loaded; replaces CashFlowStory', url: 'https://paulm-emc.github.io/EMC-Power-of-One-Tool/' },
@@ -1009,6 +1033,29 @@
     'Recognition budget (0.5–1% payroll) ideas'
   ];
 
+  // Packet Data Chase List (added 7/21) — every feed the Q2 packet needs, reusable next quarter.
+  // "landed: true" seeds the row pre-checked by default (matches DEFAULT_PHASES/DEFAULT_TRACKER
+  // pattern — baked into the fallback state, not force-written to localStorage).
+  var CHASE_SEED = [
+    { id: 'ben-workbook', feed: 'Financial core (branch P&L, monthly, plan baselines)', source: 'Ben workbook v4 via Monday pulse 12410248205', owner: 'Ben', due: '✅ landed 7/21', status: 'CHECKED — extracted, validated, audit grade A, manifest v0.6.0', landed: true },
+    { id: 'moves', feed: 'Completed moves per branch', source: 'EMMA report-sale-data (Sales Dashboard convention)', owner: 'Matisen', due: '✅ landed 7/21', status: 'CHECKED — folded, Rev/Move $1,522; July re-cut ~Aug 1', landed: true },
+    { id: 'py-branch', feed: 'Q2 2025 revenue by branch', source: 'Q2 Reforecast wb v4 branch tabs', owner: 'Albert (self-served)', due: '✅ landed 7/21', status: 'CHECKED — ties company PY to $0.00; re-verify vs Ben’s Sage-restated 2025 zip when it lands', landed: true },
+    { id: 'tur', feed: 'TUR actuals by branch (basis named)', source: 'Matisen TUR model rev 46', owner: 'Matisen', due: 'Thu 7/23', status: 'asked 7/21 (DM)', landed: false },
+    { id: 'personnel', feed: 'Personnel budget attainment by branch', source: 'HR command center / Rippling (hours caveat)', owner: 'Matisen', due: 'Thu 7/23', status: 'asked 7/21 (DM)', landed: false },
+    { id: 'sales', feed: 'Conversion/sales both bases', source: 'EMMA — gated on backfill-complete confirm', owner: 'Matisen', due: 'Thu 7/23', status: 'asked 7/21; fallback = deliberate-omission + dual-basis dashboard numbers', landed: false },
+    { id: 'marketing', feed: 'Funnel, spend YoY, ROAS, seasonality', source: 'GA/Looker + ROAS dashboards', owner: 'KP (+Matisen)', due: 'Fri 7/24', status: 'asked 7/21 (KP ROAS goal pulse 12004397537); dual-purpose w/ Ben’s forecast report list', landed: false },
+    { id: 'nps', feed: 'GatherUp Q2 NPS export (Q1-consistent aggregation)', source: 'GatherUp', owner: 'Amanda', due: 'Thu 7/23', status: 'asked 7/21 (group DM)', landed: false },
+    { id: 'breakeven', feed: 'Cash breakeven final (with-distributions)', source: 'Ben re-uploaded estimated actuals', owner: 'Ben', due: 'this week', status: 'under revision — $5.46M standing vs ~$5.9M ex-distributions recalc', landed: false },
+    { id: 'sage-2025', feed: 'Sage-restated 2025 P&L by branch (zip)', source: 'Ben (produced mid-call 7/21)', owner: 'Ben', due: '2:30 review', status: 'in brief §5 — retires new-COA caveat', landed: false },
+    { id: 'market-bench', feed: 'Market benchmark for Lens 2 (market-adjusted lens)', source: 'Q1 appendix external-market recipe, rebuilt', owner: 'Albert', due: '7/22', status: 'Albert building tonight', landed: false },
+    { id: 'bookings-feed', feed: 'Weekly bookings feed (standing — Ben’s 13-wk cash forecast)', source: 'EMMA (mechanism TBD)', owner: 'Matisen + Albert', due: 'Q3 standing', status: 'spec question in Matisen DM; Q3-goal candidate', landed: false },
+    { id: 'eNPS', feed: 'Manager/CET + mover eNPS', source: 'Anne one-pager + review exports', owner: 'Anne', due: '✅ landed', status: 'CHECKED — folded 7/21', landed: true },
+    { id: 'self-grades', feed: 'Leader AARs / self-grades', source: 'Sky AAR pulse 12578917480', owner: 'all leaders', due: '✅ landed', status: 'CHECKED — 7/7 complete, scorecard 80.0%', landed: true },
+    { id: 'samsara', feed: 'Fleet safety events (roundtable packet)', source: 'Samsara APIs + Mike/Gerald DSS export', owner: 'Mike', due: 'pre-packet week', status: 'not yet asked — queue with packet week', landed: false }
+  ];
+  var DEFAULT_CHASE = {};
+  CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
+
   var CHANGELOG_SEED = [
     { date: '7/9', text: 'HQ built.' },
     { date: '7/20f', text: 'Master pulse REPLACED: 5895410985 (2024-era, 27 updates, 58 subitems) archived whole as the historical record → clean successor 12581466585 with two updates: the run-the-cycle brief + the full reproducible SOP (Drive 3-tier setup w/ permanent parent folder IDs + sharing protocol/timing, three-session model, leader task pattern [COS-leads-with-its-read AAR, two-variant eNPS tool], tooling reseed rules, learnings ledger). Weekly LOW 84 carried to successor pre-archive. Q3 Drive built: Owners folder (w/ fresh Cam\'s Q3 26 Growth Toolkit from the blank) · Roundtable folder SHARED (writer: Amanda/Matisen/Anne/regionalteam; Nhel off per 6/1) · Q3 2026 QGR Materials + shortcuts. Q2 26 Growth Toolkit workbook pulled local (Cams-Q2-26-Growth-Toolkit.pdf). Room agenda cross-referenced against the Q2 day-of template: added praise/legends Day-2 opener, OPSP p2+Vision finalize, slides divide-&-conquer + parallel O3s, closeout block, debrief + access cleanup, walk DPs.' },
@@ -1031,7 +1078,8 @@
     { date: '7/21', text: 'Q2 Final Scorecard section added (AAR compile: 6/7 complete, Anne pending) + Ben data-request templates issued + Triage Room design-audit pass.' },
     { date: '7/21b', text: 'DECISION LOOP RE-SEQUENCED (Cameron, mid-cycle learning): new order = ① Albert cleans warehouse after ALL inputs land → ② leadership audits + stamps their MB groups (Kit step 4 — ran LIVE this cycle 7/21, reversing the "skip until Q4" call; Sky pulse 12589574461, all 5 directs, emoji rock-votes) → ③ Cameron+Paul walk the warehouse through lenses → ④ THEN Triage Room populated from the walked board (post-walk artifact, two-tier shortlists) → ⑤ red-pen + write-back. Open design note: standalone pre-walk receipt-ruling session may fold into the walk (receipt becomes step-1 prep artifact) — confirm at Q3 learnings ledger. Also 7/21: Ben brief tool shipped + audited + deployed (ben-qgr-brief.html, toolkit-linked, on Ben\'s prep pulse) · HQ version chip added · SOP addenda #4-5 posted to master pulse.' },
     { date: '7/21c', text: 'DASHBOARD LAYER MAPPED + shelved: Matisen\'s hosted-pages hub discovered = status board of 58 pages across 4 sites (live health checks, freshness stamps, per-page refresh cadence, all "Generated by CoS-EMC-1"). Materials shelf +6 links: the hub · Q2 Sales Targets (booked, manager grain — 87% vs 89% expected as-of 7/21 AM) · Q2 Revenue Targets (realized — $7.22M/$8.80M = 82%, realization 92.65%, true disc 2.6%) · Q3 Revenue Manager View ($6.62M plan +7.9% YoY, FY26 outlook $26.0M) · Q3 TUR/Fleet Requirement (staffing-per-truck model SHIPPED, rev 46, truck-sale go/no-go flags) · Amanda\'s rep-grain Q2 pacing (numbers reconcile w/ Matisen\'s, 7/21 cross-check ✓). ⚠ Packet note: name the goal-scoring basis — sales 87% (booked) vs revenue 82% (realized) will read as a contradiction in the room if unlabeled. Cross-team backlog started: _shared/tool-library/network-tools-catalog.md (Matisen 58 pages + Mike\'s 7 tools via Gerald + Amanda; Gary/Brian inventories = open asks, post-QGR).' },
-    { date: '7/21d', text: 'Anne AAR + eNPS folded in — scorecard complete at 7/7 leaders, company 80.0% (13 SG/19 G/8 R of 40 — badge recomputed from goal rows 7/21; the compile-header 36/42 tally overcounted). Two live flags to Day-2: damages-in-promotion disagreement (Anne read damages-out as settled; Cam+Paul pushed back — unresolved) + branch trial-day early-sunset consistency audit. eNPS theme headline: career ceiling / role clarity → BM/Ops/FM delineation feeds succession rock.' }
+    { date: '7/21d', text: 'Anne AAR + eNPS folded in — scorecard complete at 7/7 leaders, company 80.0% (13 SG/19 G/8 R of 40 — badge recomputed from goal rows 7/21; the compile-header 36/42 tally overcounted). Two live flags to Day-2: damages-in-promotion disagreement (Anne read damages-out as settled; Cam+Paul pushed back — unresolved) + branch trial-day early-sunset consistency audit. eNPS theme headline: career ceiling / role clarity → BM/Ops/FM delineation feeds succession rock.' },
+    { date: '7/21e', text: 'Packet Data Chase List added (15 feeds w/ source/owner/status, check-off state) — linked from P2 finalize-warehouse + toolkit. 5 landed / 10 open at creation.' }
   ];
 
   /* ============================================================
@@ -1281,7 +1329,8 @@
     decisions: loadState(LS_KEYS.decisions, []),   // [{id,text,owner,due,link,status}]
     rollout: loadState(LS_KEYS.rollout, {}),       // { idx: bool }
     changelog: loadState(LS_KEYS.changelog, null), // [{date,text}] or null = use seed
-    activeZone: loadState(LS_KEYS.activeZone, 'zone1')
+    activeZone: loadState(LS_KEYS.activeZone, 'zone1'),
+    chase: loadState(LS_KEYS.chase, JSON.parse(JSON.stringify(DEFAULT_CHASE)))  // { feedId: bool }
   };
 
 
@@ -1378,6 +1427,12 @@
       if (!exists) state.changelog.push(seedEntry);
     });
   }
+
+  // Merge any new chase-list ids (future seed additions) into saved state without
+  // clobbering the user's existing checked/unchecked calls.
+  CHASE_SEED.forEach(function (it) {
+    if (!(it.id in state.chase)) state.chase[it.id] = !!it.landed;
+  });
 
   /* ============================================================
      UTIL
@@ -1941,6 +1996,53 @@
   }
 
   /* ============================================================
+     PACKET DATA CHASE LIST (added 7/21)
+     ============================================================ */
+
+  function chaseCount() {
+    var total = CHASE_SEED.length;
+    var done = CHASE_SEED.filter(function (it) { return !!state.chase[it.id]; }).length;
+    return { done: done, total: total };
+  }
+
+  function renderChaseCounter() {
+    var el = document.getElementById('chaseCounter');
+    if (!el) return;
+    var c = chaseCount();
+    el.textContent = c.done + ' of ' + c.total + ' landed';
+  }
+
+  function renderChaseList() {
+    var table = document.getElementById('chaseTable');
+    if (!table) return;
+    var html = '<thead><tr><th></th><th>Feed</th><th>Source</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead><tbody>';
+    CHASE_SEED.forEach(function (it) {
+      var checked = !!state.chase[it.id];
+      html +=
+        '<tr class="' + (checked ? 'chase-row-done' : '') + '">' +
+          '<td class="chase-check-cell"><div class="phase-item-check' + (checked ? ' checked' : '') + '" data-chase-id="' + esc(it.id) + '" style="cursor:pointer;">' + (checked ? '✓' : '') + '</div></td>' +
+          '<td class="chase-feed-cell" style="font-weight:700; color:var(--navy);">' + esc(it.feed) + '</td>' +
+          '<td>' + esc(it.source) + '</td>' +
+          '<td>' + esc(it.owner) + '</td>' +
+          '<td>' + esc(it.due) + '</td>' +
+          '<td>' + esc(it.status) + '</td>' +
+        '</tr>';
+    });
+    html += '</tbody>';
+    table.innerHTML = html;
+
+    table.querySelectorAll('[data-chase-id]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var id = el.getAttribute('data-chase-id');
+        state.chase[id] = !state.chase[id];
+        saveStateNow(LS_KEYS.chase, state.chase);
+        renderChaseList();
+        renderChaseCounter();
+      });
+    });
+  }
+
+  /* ============================================================
      CHANGELOG
      ============================================================ */
 
@@ -2002,7 +2104,8 @@
         decisions: state.decisions,
         rollout: state.rollout,
         changelog: state.changelog,
-        activeZone: state.activeZone
+        activeZone: state.activeZone,
+        chase: state.chase
       }
     };
   }
@@ -2037,6 +2140,7 @@
     state.rollout = s.rollout || {};
     state.changelog = s.changelog || JSON.parse(JSON.stringify(CHANGELOG_SEED));
     state.activeZone = s.activeZone || 'zone1';
+    state.chase = s.chase || JSON.parse(JSON.stringify(DEFAULT_CHASE));
 
     saveStateNow(LS_KEYS.gates, state.gates);
     saveStateNow(LS_KEYS.phases, state.phases);
@@ -2047,6 +2151,7 @@
     saveStateNow(LS_KEYS.rollout, state.rollout);
     saveStateNow(LS_KEYS.changelog, state.changelog);
     saveStateNow(LS_KEYS.activeZone, state.activeZone);
+    saveStateNow(LS_KEYS.chase, state.chase);
 
     renderAll();
     activateZone(state.activeZone);
@@ -2070,6 +2175,7 @@
     state.rollout = {};
     state.changelog = JSON.parse(JSON.stringify(CHANGELOG_SEED));
     state.activeZone = 'zone1';
+    state.chase = JSON.parse(JSON.stringify(DEFAULT_CHASE));
 
     renderAll();
     activateZone('zone1');
@@ -2092,13 +2198,22 @@
     renderMaterials();
     renderAllDecisionTables();
     renderRolloutChecklist();
+    renderChaseList();
+    renderChaseCounter();
     renderChangelog();
   }
 
   function init() {
     renderAll();
     renderScorecard();
-    activateZone(state.activeZone || 'zone1');
+
+    // Anchor links (e.g. toolkit card / P2 warehouse item → #chase-list) live inside zone1;
+    // force that tab active + scroll to the target so the link actually lands somewhere visible.
+    var hashTarget = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
+    activateZone(hashTarget ? 'zone1' : (state.activeZone || 'zone1'));
+    if (hashTarget) {
+      setTimeout(function () { hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+    }
 
     document.querySelectorAll('.tab-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
