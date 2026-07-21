@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Ben × Einstein — First QGR Working Brief</title>
+<style>
+:root{
+  --navy:#27343D; --navy-600:#3d4f5c; --navy-200:#7d8f9c;
+  --blue:#0979C3; --blue-50:#e8f3fb;
+  --orange:#EF8B22; --orange-900:#CC5500; --orange-50:#fdf1e3;
+  --green:#1e7d4f; --green-50:#e7f4ec;
+  --grey-50:#f4f6f8; --grey-100:#e9edf0; --grey-200:#d5dce1; --grey-400:#8fa0ab;
+  --red:#c0392b;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Roboto,-apple-system,"Segoe UI",sans-serif;color:var(--navy);background:#fbfcfd;font-size:15px;line-height:1.55;}
+header{background:var(--navy);color:#fff;padding:18px 28px;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.18);}
+.hd-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;max-width:1080px;margin:0 auto;}
+.hd-title{font-size:21px;font-weight:700;}
+.hd-title em{color:var(--orange);font-style:normal;}
+.hd-sub{font-size:12px;color:#b9c6cf;margin-top:2px;}
+.hd-spacer{flex:1;}
+.btn{background:var(--blue);color:#fff;border:none;border-radius:6px;padding:9px 16px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+.btn:hover{filter:brightness(1.08);}
+.btn.ghost{background:transparent;border:1px solid #5a6c78;color:#d7e0e6;}
+main{max-width:1080px;margin:0 auto;padding:22px 28px 80px;}
+.posture{background:var(--orange-50);border-left:4px solid var(--orange);padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:18px;font-size:14px;}
+.posture b{color:var(--orange-900);}
+.databanner{display:flex;gap:12px;align-items:center;background:var(--blue-50);border:1px solid #bcd9ee;border-radius:8px;padding:10px 16px;margin-bottom:22px;font-size:13.5px;flex-wrap:wrap;}
+.databanner a{color:var(--blue);font-weight:600;}
+.pill{background:var(--navy);color:#fff;font-size:11px;font-weight:700;letter-spacing:.5px;padding:3px 10px;border-radius:99px;white-space:nowrap;}
+details.primer{background:#fff;border:1px solid var(--grey-200);border-radius:10px;margin-bottom:26px;overflow:hidden;}
+details.primer summary{padding:14px 18px;font-weight:700;cursor:pointer;font-size:15px;background:var(--grey-50);list-style-position:inside;}
+.primer-body{padding:16px 18px;}
+.primer-body table{border-collapse:collapse;width:100%;margin:10px 0;font-size:13.5px;}
+.primer-body th,.primer-body td{border:1px solid var(--grey-200);padding:8px 10px;text-align:left;vertical-align:top;}
+.primer-body th{background:var(--grey-50);font-size:12px;letter-spacing:.4px;}
+.primer-body td b{color:var(--navy);}
+.moot{color:var(--navy-200);}
+.sec{margin:30px 0 8px;}
+.sec-title{font-size:17px;font-weight:700;border-bottom:2px solid var(--orange);display:inline-block;padding-bottom:3px;margin-bottom:4px;}
+.sec-sub{font-size:12.5px;color:var(--navy-200);margin-bottom:12px;}
+.qcard{background:#fff;border:1px solid var(--grey-200);border-radius:10px;padding:16px 18px;margin-bottom:14px;transition:border-color .15s;}
+.qcard.discussed{border-color:var(--green);background:linear-gradient(0deg,rgba(30,125,79,.03),rgba(30,125,79,.03)),#fff;}
+.q-top{display:flex;gap:10px;align-items:flex-start;}
+.q-num{background:var(--navy);color:#fff;font-weight:700;font-size:12px;border-radius:6px;padding:3px 8px;margin-top:2px;white-space:nowrap;}
+.q-text{font-weight:600;font-size:15px;flex:1;}
+.q-detail{font-size:13.5px;color:var(--navy-600);margin:8px 0 0 0;}
+.albert{margin-top:10px;background:var(--grey-50);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;padding:9px 12px;font-size:13px;color:var(--navy-600);}
+.albert .tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.8px;color:var(--blue);margin-bottom:2px;}
+.notes-row{margin-top:12px;}
+.notes-lbl{font-size:10.5px;font-weight:800;letter-spacing:.8px;color:var(--grey-400);margin-bottom:3px;}
+textarea.notes{width:100%;min-height:52px;border:1px solid var(--grey-200);border-radius:6px;padding:8px 10px;font-family:inherit;font-size:13.5px;color:var(--navy);resize:vertical;background:#fffdf7;}
+textarea.notes:focus{outline:2px solid var(--blue);border-color:var(--blue);}
+input.nextact{width:100%;border:1px solid var(--grey-200);border-radius:6px;padding:8px 10px;font-family:inherit;font-size:13.5px;color:var(--navy);background:#fff;}
+input.nextact:focus{outline:2px solid var(--blue);border-color:var(--blue);}
+.q-actions{display:flex;gap:8px;margin-top:10px;align-items:center;}
+.chipbtn{border:1px solid var(--grey-200);background:#fff;border-radius:99px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;color:var(--navy-600);font-family:inherit;}
+.chipbtn.on{background:var(--green-50);border-color:var(--green);color:var(--green);}
+.chipbtn.park{border-color:var(--grey-200);}
+.chipbtn.park.on{background:var(--orange-50);border-color:var(--orange-900);color:var(--orange-900);}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:11px 22px;border-radius:8px;font-size:13.5px;opacity:0;pointer-events:none;transition:all .25s;z-index:99;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.progress{background:#fbfcfd;padding:8px 0 10px;font-size:12.5px;color:var(--navy-200);display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.progress b{color:var(--navy);}
+.progress .jump{color:var(--blue);font-weight:600;text-decoration:none;font-size:12px;}
+.progress .jump:hover{text-decoration:underline;}
+.qcard.parked{border-color:var(--orange-900);background:linear-gradient(0deg,rgba(204,85,0,.03),rgba(204,85,0,.03)),#fff;}
+footer{max-width:1080px;margin:0 auto;padding:0 28px 40px;font-size:11.5px;color:var(--grey-400);}
+@media(max-width:640px){ main,header{padding-left:16px;padding-right:16px;} textarea.notes,input.nextact{font-size:16px;} }
+@media print{ header .btn,#toast,.q-actions{display:none!important;} .qcard{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="hd-row">
+    <div>
+      <div class="hd-title">Ben × Einstein — <em>First QGR Working Brief</em></div>
+      <div class="hd-sub">Q2 2026 review · QGR 7/29–30 · notes autosave in this browser · <span id="verchip"></span></div>
+    </div>
+    <div class="hd-spacer"></div>
+    <button class="btn" id="exportBtn" title="Copies + downloads a markdown recap of every note and next action">⬇ Export recap</button>
+  </div>
+</header>
+<main>
+  <div class="posture"><b>The posture:</b> this isn't an audit — it's handing Ben a clear seat at the QGR table. Ben owns the numbers arriving clean, reconciled, and on time; the room owns what we do about them. Work the questions in any order; mark each one discussed or parked, capture the next action, and export at the end.<br><span style="font-size:12.5px;color:var(--navy-600)"><b>ALBERT'S READ</b> blocks = prep commentary from Albert, Cameron's AI chief of staff — context, not positions. Notes save only in <i>your own</i> browser: each viewer has a private copy until they export.</span></div>
+
+  <div class="databanner">
+    <span class="pill">DATA REQUEST LIVE</span>
+    <span>The packet data ask (3 fill-in templates + 7 confirmations) is on its own pulse — <b>due Thu 7/23 EOD</b>.</span>
+    <a href="https://einsteinmoving.monday.com/boards/18408322348/pulses/12589256515" target="_blank" rel="noopener">Open the pulse ↗</a>
+  </div>
+
+  <details class="primer">
+    <summary>📗 Scaling Up "Cash" — the Einstein edition (2-minute primer)</summary>
+    <div class="primer-body">
+      <p><b>The core question:</b> how fast does a spent dollar come back as a collected dollar? Most companies wait 30–60 days on receivables. Einstein collects at move completion — <b>zero AR</b>. So of the classic "Power of One" seven levers, only four are live here:</p>
+      <table>
+        <tr><th>Lever</th><th>Einstein reality</th></tr>
+        <tr><td><b>Price +1%</b></td><td>This IS Variable Pricing. 1% on ~$24M ≈ <b>$240K straight to the bottom line</b>. Cleanest lever.</td></tr>
+        <tr><td><b>Volume +1%</b></td><td>Conversion + truck utilization — more moves through trucks already paid for ≈ nearly pure margin.</td></tr>
+        <tr><td><b>COGS −1%</b></td><td><b>= labor.</b> The dominant cost. Gross margin is a labor-utilization story: paid hours vs. billable contract hours.</td></tr>
+        <tr><td><b>Overhead −1%</b></td><td>Insurance, paid ads, branch overhead — Tampa is the live case study (high GM, negative NI).</td></tr>
+        <tr><td class="moot">AR days / Inventory days / AP days</td><td class="moot">Mostly moot — no receivables, no product inventory, small vendor terms. Don't spend analysis here.</td></tr>
+      </table>
+      <p>The one real "money in transit" lag we do have: <b>invoice closure speed</b> (mobile app fixes this) and the lead→booked cycle. And with no AR, a <b>13-week rolling cash forecast</b> here would be unusually accurate — bookings ≈ near-certain cash on known dates.</p>
+    </div>
+  </details>
+
+  <div class="progress" id="progress"></div>
+  <div id="sections"></div>
+</main>
+<footer>Internal working tool · obscure link, not indexed · notes live only in each viewer's browser until exported. <span id="verfoot"></span> · <a href="#" id="clearBtn" style="color:var(--grey-400)">clear my notes</a></footer>
+<div id="toast"></div>
+
+<script>
+const VERSION = "v1.1 · 2026-07-21"; // bump on every deploy — live verification greps for this
+const LS_KEY = "ben-qgr-brief-q2-2026";
+
+const SECTIONS = [
+{ id:"role", title:"1 · Role & rhythm", sub:"What the fractional CFO owns in Einstein's quarterly machine",
+  qs:[
+  { id:"r1", q:"What do you own in our quarterly rhythm?",
+    detail:"Working proposal: Ben delivers the validated financial section of the QGR packet every quarter — pre-reconciled, with source + as-of provenance, ~1 week before the QGR. What should sit with Prosper vs. Paul vs. accounting?",
+    albert:"The Q1 packet was hand-built by Cameron + Paul before Prosper. The win here is a standing handoff: every quarter, finance arrives packet-ready without a scramble week." },
+  { id:"r2", q:"Data delivery for 7/29–30 — templates workable? Thursday realistic?",
+    detail:"Three fill-in CSVs + 7 written confirmations, due Thu 7/23 EOD. Partial-but-labeled beats complete-but-late.",
+    albert:"Everything renders from a validated manifest, so blanks must stay blank (never zero) and every number carries final vs. preliminary. The templates bake that in — no format guesswork." },
+  { id:"r3", q:"Q3 reforecast — landed and final?",
+    detail:"The reforecast (not the annual budget) is THE baseline the packet compares against. Walk the assumptions: July actuals extrapolation + the revenue model.",
+    albert:"If the reforecast isn't final, the plan-attainment column of the packet is blocked — this is the single most time-sensitive confirm in the meeting." }
+]},
+{ id:"trust", title:"2 · Numbers & trust", sub:"June close confidence + the open reconciliations",
+  qs:[
+  { id:"t1", q:"Reconciliation status, item by item — which close before QGR?",
+    detail:"Depreciation ~$600K variance (2025 D&A reconciling) · payroll-processing reclass (allocate by mover headcount) · bank-charges correction (NI understated) · office-supplies policy · suspected Tampa travel/meals miscoding. And overall: confidence level on the June close (first full Sage month)?",
+    albert:"Each item needs one of two states by packet time: resolved in the data, or explicitly labeled. An unresolved miscode taints branch GM/NI silently — labeled beats hidden every time." },
+  { id:"t2", q:"EBITDA or NOI — which metric anchors the Q2 story?",
+    detail:"With D&A still reconciling, EBITDA has been the emphasized metric — but the packet's whole Q1 spine was NOI. Anchor on EBITDA, keep NOI with a caveat, or present both?",
+    albert:"This is a decision, not a detail — it changes the exec summary's headline number. My lean: both, EBITDA leading, with the D&A caveat printed right on the page." },
+  { id:"t3", q:"Decompose the −7%-to-budget gap.",
+    detail:"YTD +5% YoY but ~7% below budget, confirmed as revenue shortfall rather than one-offs. Break it down: volume vs. price vs. mix, by branch — so the QGR argues about the right lever.",
+    albert:"There's an internal revenue-forecast model running at ~3.9% error vs. company composite — worth cross-checking Ben's decomposition against it." },
+  { id:"t4", q:"Tampa: fix the books or fix the branch?",
+    detail:"Highest GM in the network (~58%) but negative NI. What did the COGS dig + travel/meals miscoding check find? Real overhead problem, or miscoded expense?",
+    albert:"The answer routes the QGR action completely differently — accounting cleanup vs. an overhead/scale conversation. Don't leave without a verdict or a date for one." },
+  { id:"t5", q:"New COA comparability — restate or caveat?",
+    detail:"Q2 is the first full Sage quarter on the new chart of accounts. Are Q2'25 and Q1'26 restated onto the new COA, or does every cross-period comparison carry a caveat?",
+    albert:"Every YoY claim in the packet crosses the QuickBooks→Sage boundary. One honest sentence about comparability up front beats a footnote war later." }
+]},
+{ id:"cash", title:"3 · Cash & Q3", sub:"Power of One, the cash forecast, and the fall shoulder",
+  qs:[
+  { id:"c1", q:"Will you quantify Power of One on our four live levers?",
+    detail:"Using June actuals: price +1%, volume +1%, labor −1%, overhead −1% — and explicitly skip AR/inventory days (moot with no receivables). Output = a ranked list of 1%-moves that feeds Q3 planning.",
+    albert:"The primer above has the shape. The ranked list is the deliverable — it feeds directly into our Q3 planning." },
+  { id:"c2", q:"13-week rolling cash forecast — does Prosper run one for us?",
+    detail:"If not: buildable off booking data (bookings ≈ near-certain cash on known move dates) + payroll timing. With no AR it should be unusually accurate — a real early-warning system.",
+    albert:"A cash-forecasting workstream already exists on the onboarding board (3–5yr + rolling 12-week models). This is the moment to give it a date." },
+  { id:"c3", q:"Model the fall shoulder — coast or cut?",
+    detail:"Summer is peak. What does the P&L look like at Sep/Oct volume? Ties to the pricing rollback trigger and when paused ad spend (DFW billboards, end-Aug) should resume — KPIs to be defined before it does.",
+    albert:"The billboards restart is a real budget decision hiding inside a marketing decision — the shoulder model is what makes it a numbers call instead of a vibes call." }
+]},
+{ id:"own", title:"4 · Ownership & cascade", sub:"Getting the numbers into the hands that move them",
+  qs:[
+  { id:"o1", q:"Branch-level P&L ownership — target date?",
+    detail:"Role-tailored Regional Manager / Branch Manager reporting is already in build. Can BMs see their own P&L lines by the start of Q3? What do they see, and what stays leadership-only?",
+    albert:"Two leaders independently asked for more financial line-of-sight this quarter — demand is real. The scope question (what BMs see vs. don't) matters as much as the date." },
+  { id:"o2", q:"What does Ben need FROM us?",
+    detail:"Open floor: access, context, decisions, introductions, cadence changes — what would make the finance seat stronger this quarter?",
+    albert:"" }
+]}
+];
+
+SECTIONS.forEach((s,si)=>s.qs.forEach((q,qi)=>{ q.num = (si+1)+"."+(qi+1); }));
+
+let state = load();
+function blank(){ return {notes:{}, acts:{}, disc:{}, park:{}}; }
+function load(){
+  try{
+    const r = localStorage.getItem(LS_KEY);
+    if(r){
+      const p = JSON.parse(r); const s = blank();
+      ["notes","acts","disc","park"].forEach(k=>{ if(p && typeof p[k]==="object" && p[k]!==null && !Array.isArray(p[k])) s[k] = p[k]; });
+      return s;
+    }
+  }catch(e){}
+  return blank();
+}
+let saveWarned = false;
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){ if(!saveWarned){ saveWarned=true; toast("⚠ Save failed — notes are NOT persisting. Export often."); } } }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+function render(){
+  const root = document.getElementById("sections");
+  root.innerHTML = SECTIONS.map(sec=>`
+    <div class="sec" id="sec-${sec.id}"><div class="sec-title">${esc(sec.title)}</div><div class="sec-sub">${esc(sec.sub)}</div></div>
+    ${sec.qs.map(q=>{
+      const disc = !!state.disc[q.id], park = !!state.park[q.id];
+      return `<div class="qcard ${disc?'discussed':''} ${park?'parked':''}" id="qc-${q.id}">
+        <div class="q-top"><span class="q-num">${q.num}</span><div class="q-text">${esc(q.q)}</div></div>
+        <div class="q-detail">${esc(q.detail)}</div>
+        ${q.albert?`<div class="albert"><span class="tag">ALBERT'S READ</span><br>${esc(q.albert)}</div>`:""}
+        <div class="notes-row"><div class="notes-lbl">NOTES</div>
+          <textarea class="notes" data-id="${q.id}" data-f="notes" aria-label="Notes for question ${q.num}" placeholder="Live notes…">${esc(state.notes[q.id])}</textarea></div>
+        <div class="notes-row"><div class="notes-lbl">NEXT ACTION (who · what · when)</div>
+          <input class="nextact" data-id="${q.id}" data-f="acts" aria-label="Next action for question ${q.num}" placeholder="e.g. Ben — reforecast final by Wed" value="${esc(state.acts[q.id])}"></div>
+        <div class="q-actions">
+          <button class="chipbtn ${disc?'on':''}" data-id="${q.id}" data-t="disc" aria-pressed="${disc}">${disc?'✓ discussed':'mark discussed'}</button>
+          <button class="chipbtn park ${park?'on':''}" data-id="${q.id}" data-t="park" aria-pressed="${park}">${park?'⏸ parked':'park for later'}</button>
+        </div>
+      </div>`;
+    }).join("")}
+  `).join("");
+  renderProgress();
+}
+function renderProgress(){
+  const all = SECTIONS.flatMap(s=>s.qs);
+  const d = all.filter(q=>state.disc[q.id]).length, p = all.filter(q=>state.park[q.id]).length;
+  const jumps = SECTIONS.map(s=>`<a class="jump" href="#sec-${s.id}">${esc(s.title.replace(/^\d+ · /,""))}</a>`).join("");
+  document.getElementById("progress").innerHTML = `<span><b>${d}</b> of ${all.length} discussed${p?` · <b>${p}</b> parked`:""} — untouched questions export as ⚠ open.</span>${jumps}`;
+}
+function syncCard(id){
+  const card = document.getElementById("qc-"+id); if(!card) return;
+  const disc = !!state.disc[id], park = !!state.park[id];
+  card.classList.toggle("discussed", disc); card.classList.toggle("parked", park);
+  const db = card.querySelector('.chipbtn[data-t="disc"]'), pb = card.querySelector('.chipbtn[data-t="park"]');
+  db.classList.toggle("on", disc); db.textContent = disc?'✓ discussed':'mark discussed'; db.setAttribute("aria-pressed", disc);
+  pb.classList.toggle("on", park); pb.textContent = park?'⏸ parked':'park for later'; pb.setAttribute("aria-pressed", park);
+}
+
+document.addEventListener("input", e=>{
+  const t = e.target; if(!t.dataset || !t.dataset.id) return;
+  state[t.dataset.f][t.dataset.id] = t.value; save(); renderProgress();
+});
+document.addEventListener("click", e=>{
+  const b = e.target.closest(".chipbtn"); if(!b) return;
+  const id = b.dataset.id, t = b.dataset.t;
+  state[t][id] = !state[t][id];
+  if(t==="disc" && state.disc[id]) state.park[id] = false;
+  if(t==="park" && state.park[id]) state.disc[id] = false;
+  // in-place sync only — a full render() here would drop textarea focus/caret mid-meeting
+  save(); syncCard(id); renderProgress();
+});
+
+function localStamp(withTime){
+  const d = new Date(), p = n=>String(n).padStart(2,"0");
+  const date = d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate());
+  return withTime ? date+" "+p(d.getHours())+":"+p(d.getMinutes()) : date;
+}
+function mdSafe(s){ return String(s).trim().replace(/\n/g, "\n  "); } // indent continuation lines so multi-line notes stay inside their list item
+function buildExport(){
+  let md = `# Ben × Einstein — First QGR Working Brief — RECAP\n\n*${VERSION} · exported ${localStamp(true)} (local) — for Albert to ingest (recap + next actions).*\n\n`;
+  const acts = [];
+  SECTIONS.forEach(sec=>{
+    md += `## ${sec.title}\n\n`;
+    sec.qs.forEach(q=>{
+      const st = state.disc[q.id] ? "✅ DISCUSSED" : state.park[q.id] ? "⏸ PARKED" : "⚠ OPEN — not covered";
+      md += `### ${q.num} · ${q.q}\n- Status: ${st}\n`;
+      if(state.notes[q.id]) md += `- Notes: ${mdSafe(state.notes[q.id])}\n`;
+      if(state.acts[q.id]){ md += `- **Next action:** ${mdSafe(state.acts[q.id])}\n`; acts.push(`- [${q.num}] ${mdSafe(state.acts[q.id])}`); }
+      md += `\n`;
+    });
+  });
+  md += `---\n\n## All next actions (rollup)\n\n${acts.length?acts.join("\n"):"_none captured_"}\n`;
+  return md;
+}
+function downloadRecap(md, suffix){
+  const fname = `ben-qgr-brief-recap-${localStamp(false)}${suffix||""}.md`;
+  const blob = new Blob([md], {type:"text/markdown"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = fname;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  return fname;
+}
+document.getElementById("exportBtn").onclick = ()=>{
+  const md = buildExport();
+  const fname = downloadRecap(md);
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(md).then(()=>toast(`Copied + downloaded ${fname} ✓`), ()=>toast(`Downloaded ${fname} ✓ (clipboard copy failed)`));
+  } else { toast(`Downloaded ${fname} ✓ (clipboard unavailable)`); }
+};
+document.getElementById("clearBtn").onclick = (e)=>{
+  e.preventDefault();
+  if(confirm("Clear all notes, next actions, and discussed/parked marks saved in THIS browser? A backup recap downloads first. (Other viewers' notes are unaffected.)")){
+    const hasContent = Object.keys(state.notes).some(k=>state.notes[k]) || Object.keys(state.acts).some(k=>state.acts[k]);
+    if(hasContent) downloadRecap(buildExport(), "-backup");
+    try{ localStorage.removeItem(LS_KEY); }catch(e2){}
+    state = blank(); render(); toast(hasContent ? "Cleared — backup recap downloaded" : "Cleared");
+  }
+};
+function toast(m){ const t = document.getElementById("toast"); t.textContent = m; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove("show"), 2600); }
+
+document.getElementById("verchip").textContent = VERSION;
+document.getElementById("verfoot").textContent = VERSION;
+render();
+</script>
+</body>
+</html>
