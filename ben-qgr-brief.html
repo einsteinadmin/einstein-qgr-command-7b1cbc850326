@@ -116,7 +116,7 @@ footer{max-width:1080px;margin:0 auto;padding:0 28px 40px;font-size:11.5px;color
 <div id="toast"></div>
 
 <script>
-const VERSION = "v1.2 · 2026-07-21"; // bump on every deploy — live verification greps for this; v1.2 = §5 packet-review questions added post-morning-session
+const VERSION = "v1.3 · 2026-07-21"; // bump on every deploy — live verification greps for this; v1.3 = p1 Tampa RESOLVED + p2 breakeven direction confirmed (Ben 7/21 PM)
 const LS_KEY = "ben-qgr-brief-q2-2026";
 
 const SECTIONS = [
@@ -173,12 +173,12 @@ const SECTIONS = [
 ]},
 { id:"review", title:"5 · 2:30 — Packet review, remaining items", sub:"Added after the morning session — the short list left before the packet is fully locked",
   qs:[
-  { id:"p1", q:"Tampa allocation — your words vs. your workbook.",
-    detail:"On the call: Tampa gets zero overhead allocation (negative, revenue-share pushes nothing down). Your v4 workbook's Allocated tab: Tampa receives ~$31K (controllable NOI $38,142 → allocated $7,238). The packet renders the workbook. Screen-share your live tab — which is current?",
-    albert:"Not cosmetic: it changes Tampa's branch NOI in the packet and the Tampa narrative (planned NI was −$35,678, so 'negative roughly on plan' either way)." },
-  { id:"p2", q:"Breakeven — land the final number.",
-    detail:"Standing basis $5.46M (OPSP/reforecast, includes distributions) · your Q2-actuals recalc ~$5.9M (excludes distributions) · deprecated $3.85M branch-level view. Send the with-distributions re-upload; team agrees the final figure.",
-    albert:"Cameron confirmed the upward direction is expected — mover comp moved earlier than the reforecast modeled. Packet shows all three, labeled, '⚠ under revision' until this lands." },
+  { id:"p1", q:"✅ RESOLVED (Ben, 7/21 PM) — Tampa allocation: workbook is right.",
+    detail:"Ben's async answer: the no-allocation rule only applies while a branch is negative at the CONTROLLABLE level. Tampa flipped positive (controllable NOI +$38,142), so the revenue-based allocation kicks in (~$31K) and Tampa lands at $7,238 after allocation. The call comment was a quarter-old mental model; nothing changed in a re-run. Packet keeps rendering the workbook numbers (already did). 2:30: quick screen-share of the tab to close it out — confirmation only, no decision left.",
+    albert:"Folded into manifest v0.7.2 (Tampa NOI note + allocation-ruling caveat now carry the exact mechanics). Nothing to re-render — the deck always showed $7,238." },
+  { id:"p2", q:"Breakeven — direction confirmed (Ben, 7/21 PM); final number still owed.",
+    detail:"Agreed: distributions stay IN; the with-distributions recalc becomes the standing number going forward. The ~$5.9M was ex-distributions only, so expect the final ABOVE that once quarterly tax + monthly owner distributions layer back in. Driver confirmed: mover comp change hit 6/1, earlier than the reforecast modeled — June mover comp 37.2% of revenue vs 35.0% budget (+2.2 pts), which is what moves breakeven off the $5.46M standing basis. Ben re-uploads as soon as it's done.",
+    albert:"Packet cash story updated with the direction + driver; stays '⚠ UNDER REVISION' with all three numbers labeled until the re-upload lands. Only open item at 2:30: rough ETA on the re-upload." },
   { id:"p3", q:"Sage-restated 2025 P&L by branch — hand over the zip.",
     detail:"You produced a 2025 P&L-by-branch-by-month zip (new COA) mid-call. Our branch YoY currently sources the pre-restate reforecast workbook — we want to re-verify the splits (esp. N. Austin −10.9%) against the restate.",
     albert:"Company totals tie to the penny already; this is belt-and-suspenders on the branch splits, and it retires the new-COA comparability caveat." },
