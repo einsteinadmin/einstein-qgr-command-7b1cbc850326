@@ -551,7 +551,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.14 2026-07-20'; // bump on every deploy — live verification greps for this
+  var HQ_VERSION = 'v3.15 2026-07-20'; // bump on every deploy — live verification greps for this
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -811,37 +811,41 @@
     { key: 'ssk', label: 'Start / stop / keep' }
   ];
 
+  // DRAFT v2 (7/20 PM, per Cameron's restructure — NOT final, iterate before 7/29):
+  // Day 1 = review + validate (AAR/packet/scorecards/goal definitions) · Day 2 = decide + cascade.
+  // Moved OUT of the QGR into the owners' phase: PACe one-process pick (runs via the Rob
+  // constraints session), CASh/Power-of-One (Cameron+Paul+Ben owners' block — Day 2 gets a recap
+  // only), Rockefeller Habits pick (now MB pulse 12584731711). DECIDEs became RATIFY rows:
+  // decided in owners' prep, presented for team buy-in — not reopened.
   var AGENDA_SEED = {
     day1: {
-      label: 'Wed 7/29',
+      label: 'Wed 7/29 — REVIEW + VALIDATE (draft v2)',
       items: [
         '3 best things',
         'AAR TL;DR round — 2 min per leader: colors, one win, one lesson · praise + recognize before moving forward',
         'Slow open — re-read SWT + OPSP first 3 columns aloud, update live in the OPSP builder (go-slow-to-go-fast)',
-        'Last-quarter major numbers review (new slide deck)',
-        'People Analyzers as a group',
+        'QGR packet walkthrough: financial analysis + marketing analysis',
+        'eNPS results — the one-pager + action slate (quick pass, deep-dive linked)',
+        'Branch scorecards — walk the team through them until everyone can read their own',
         'Finalize Q2 SG/G/R for all leadership + directs',
-        'PACe + Flywheel self-evaluation — leadership grades each element (Cam/Paul owner-pass = the strawman)',
-        'Rob exercises',
+        'People Analyzers as a group',
+        'Q3 goals outlined per leader — exact Red/Green/Super-Green definitions + how each is measured, TESTED and validated against the team (goal-hygiene gate: no unmeasurable bars leave the room)',
         'Lunch walk DP: comms + policy-rollout improvements (Q2 template ritual)',
         'OPSP page 2 + Vision Summary — finalize Roundtable draft in the builder'
       ]
     },
     day2: {
-      label: 'Thu 7/30',
+      label: 'Thu 7/30 — DECIDE + CASCADE (draft v2)',
       items: [
         'Praise handouts + Legends of the Quarter',
-        'Cascading goals chart finalized',
-        'Revenue targets buy-in (NI bonus is company-wide)',
-        'Bonus Goals / Mid-Quarter Pivots section per leader',
         'Quarterly theme locked + poster/rewards/dashboard',
-        'PACe decision — pick ONE process to redesign in Q3 supporting the critical number',
-        'Rockefeller Habits Checklist — pick 1–2 of the 10 habits to improve in Q3',
-        'CASh / Power of One — Paul + Ben block (placeholder until fleshed out)',
-        'DECIDE: Damages reframe (Anne 7/16 plan — branch-level baseline, pause individual accountability, monthly training themes; bonus/games/promotion implications)',
-        'DECIDE: AI/tool governance workstream — Q3 candidate (central data bus + EMMA toolkit + monthly Big Rocks review; Master Backlog 12556198241)',
-        'DECIDE: Goal coverage below the Roundtable (7/20 receipt directive) — who drafts goals for Jalissa/Nhel/Tet/Carly/KP/Prosper/Fabian/Austin L, and how they land on the cascading chart',
-        'DECIDE: Cross-cutting leader goals (7/20 receipt directives) — ITP follow-up as bonus goal for every direct · ongoing-education module per leader · Magic-Moments-for-employees recognition goal (quota + mechanics)',
+        'Cascading goals chart finalized (incl. below-Roundtable tier: Jalissa/Nhel/Tet/Carly/KP/Prosper/Fabian/Austin L)',
+        'Revenue targets buy-in (NI bonus is company-wide)',
+        'Bonus Goals / Mid-Quarter Pivots section per leader (incl. ITP follow-up bonus goals)',
+        'CASh / Power of One — RECAP of the Cameron+Paul+Ben owners’ session (5 min, decisions already made)',
+        'RATIFY: Damages reframe (decided in owners’ prep — branch-level baseline, pause individual accountability; incl. pausing the two conflicting MB items: individual damage attribution 11728394179 + damage leaderboards 11728354415)',
+        'RATIFY: AI/tool governance workstream (Master Backlog 12556198241)',
+        'RATIFY: Cross-cutting leader goals — ongoing-education module per leader · Magic-Moments-for-employees (quota + mechanics)',
         'Manager presentation started',
         'Divide & conquer presentation slides (Branch + Mover OPSPs) — parallel: quarterly O3s',
         'Remaining to-dos — Roundtable OPSPs → pulses + presentation ownership assigned',
@@ -909,6 +913,7 @@
     { date: '7/15', text: 'Rob Q3 pre-work session ran (1-5pm, full leadership). NEW CADENCE: the constraints pass runs ~2 wks before each quarter decision — nothing locked today, QGR 7/29-30 decides. Each leader brought 3 constraints + opportunities against both the Key Process to Making Money (PACe) and the Flywheel sub-wheels. STRONG CONVERGENCE → "speed to competence / build field-ready crews fast" named independently by Cameron, Mike, Brian + Anne = leading Q3 theme; heavy overlap too on demand-conversion / lead-triage (Cameron, Amanda, Matisen) and leadership succession (Cameron, Anne, Paul). Fresh number: estimate accuracy 46% within-20% vs 80% target (live dashboard due from Matisen 7/18). Ideal Team Player exercise ran — every leader has 3 commitments on their lowest virtue; verbal green/yellow/red color-code check-ins at the roundtable syncs nearest ~8/15 and ~9/15, formal re-evaluation at Rob October session. CAMERON OWES wk of 7/20: consolidate PACe + Flywheel inputs into the master backlog and distill to ~6-7 finalists, request after-action reviews on Q2 goals from all leaders, Cameron+Paul work session, Adam Boyd Tue 7/21 3pm (manager sales-target bandwidth + lead triage).' },
     { date: '7/20g', text: 'SWT + 7 Strata RULED (Cameron+Paul live session, ~3:53 PM export) — swt-strata-FINAL-2026-07-20.md is canonical (export had a bug: 4 item labels replaced by WHY notes; originals restored from seed). Proposals: KEEP insurance-costs-strengthened ("fix is in — 6 months done, 18 to go") · AI adoption fatigue · AI-search/LLM discovery · AI-as-operating-capability upgrade · weekly dashboard/cadence discipline · single-person tech dependency (HUGE, absorbs tech-bottlenecks line). CUT: proprietary-training-platform strength · mover-promo-KPIs (in motion) · goal-definition hygiene · comp-margin reword. April cuts: savvy competition · used-truck market · KPI-reporting weakness (became strength) · marketing-ROI weakness (mailers/billboards testing + ROAS sheet) · rollout-pace (dup of change velocity). Strata: COS/AI = ENABLER of the X-Factor, not a second X-Factor (April answer holds) · Sandbox KPI wording = still open (Open Question 5, "need to decide" into QGR). ⚠ ONE UNRULED: the REFINE web-vs-call customer-education split was MISSING from the export — needs Cameron verbal call.' },
     { date: '7/20h', text: 'WAREHOUSE GATE RUN (Cameron\'s call, ~5 PM): SWT/Strata FINAL + PACe Q2 self-eval + eNPS folded; Power of One deliberately skipped (Ben Tue 9–1 covers 1%-moves); trickle-in policy declared for Anne AAR/eNPS (Tue AM) + Ben candidates + Flywheel scores — fold as found. Warehouse DECLARED COMPLETE for triage. Fold deltas: no rocks added/killed · C1 + T2 provenance strengthened (call-side education split · single-person dependency HUGE) · near-miss #1 insurance updated (SWT ruling leans park-deliberately, owner still open) · NEW near-miss #12 manager-performance-visibility (PACe Box 11 G→Y — the only grade that moved; rule T2-fold vs B2-fold vs standalone QG). REFINE ruled: folded into Educate-Customers. Receipt REGENERATED (same link, now hosted with the HQ — broken relative link fixed) + worksheet export bug fixed (note handler was overwriting item labels). Live PACe updated to Q2 (Box 11 yellow, Q2 analysis card, Rob-exercise outcomes) then v4 SHIPPED: per-quarter grade history w/ trend chips + why-note popovers + C+P-vs-TEAM provenance + team-finalize button. Flywheel autosave+history build in flight (⚠ scores Cameron/Paul entered 7/20 likely lost — no autosave existed; re-enter after ship). NEXT: Cameron+Paul receipt review → Triage Room red-pen → Export to Albert.' },
+    { date: '7/20j', text: 'AGENDA DRAFT v2 (Cameron\'s restructure feedback, evening): Day 1 = REVIEW+VALIDATE (AAR TL;DRs · packet walkthrough incl. financial+marketing analysis · eNPS · branch scorecards until everyone can read their own · Q2 grades finalized · People Analyzers group · Q3 goals w/ exact R/G/SG definitions TESTED against the team — the goal-hygiene gate) · Day 2 = DECIDE+CASCADE. Moved OUT of the QGR into owners\' phase: PACe one-process pick (Rob constraints session covers it) · CASh/Power-of-One (Cameron+Paul+Ben owners\' block; Day 2 = 5-min recap) · Rockefeller Habits pick → NEW MB pulse 12584731711. DECIDEs → RATIFY rows (decided in prep, team buys in, not reopened); damages RATIFY now names the two conflicting MB pulses to pause (11728394179 individual attribution + 11728354415 leaderboards). Agenda merge guard added so retired rows don\'t resurrect from saved browser state. Marked DRAFT — Cameron iterates before 7/29. CUT-LIST v2 build launched same evening: per-leader Q2-disposition band (every existing rock w/ Albert-rec: done/task/cadence/extends) + department candidate depth to 10-12 (ceiling not quota, from the MB coverage audit, cuts inline) + WHITEBOARD view (all leaders × goals × CRITs, one screen, print/export).' },
     { date: '7/20i', text: 'RECEIPT RULED + THE DECISION LOOP ENCODED (evening): Cameron+Paul ruled all 30 rocks + 12 near-misses (export → receipt-decisions-RAW + DIGESTED files). Headlines: 22 confirmed / 7 challenged — M2→forward-deployed-engineer reframe · M4/B3/B5 "not goals" · A4 demoted to task · T4 REPLACED (ship mobile app + lead triage + estimate accuracy; Matisen also supports network AI) · P2 PTO moves to Anne/Jalissa · insurance KILLED-standalone (folds into M3 fleet safety). Promotions: quarterly sales comp→Amanda · succession framework→Anne · Rippling AI→Matisen (⚠ over-cap 5-6 vs 4) · wiki→registry family · manager-performance-visibility→COS · estimate-accuracy as CET-theme OPTION. NEW cross-cutting directives: ITP follow-up = bonus goal for every direct · ongoing-education module per leader · Magic-Moments-for-employees · ⭐ goal coverage extends BELOW Roundtable (Jalissa/Nhel/Tet/Carly/KP/Prosper/Fabian/Austin L). SEQUENCING DECIDED: theme-first (working hypothesis = speed to competence) as the triage lens; team finalizes name/mechanics at QGR. Target: 7-8 goals/leader by end of day 2. IN FLIGHT: MB "Q3 Curation" column + coverage audit (killed items marked visible, NOT archived — Cameron eyeballs first, archive sweep after) · Triage Room rebuild (receipt badges + two-tier owner assignment + per-leader lanes w/ shortlist/overflow/Cameron-add bands). The full 5-step decision loop is now written into "How this machine works" ② — next quarter runs it without live invention. Tool polish shipped same evening: PACe v4.1 + Flywheel v3.1 (how-to sections, local-only-save warnings, trend fix, real exports).' }
   ];
 
@@ -1002,6 +1007,44 @@
     });
     state.agenda._su0720 = true;
     state.agenda._su0720b = true; // 7/20 pm: Q2 day-of template cross-reference merged
+    saveStateNow(LS_KEYS.agenda, state.agenda);
+  }
+  // 7/20 evening (draft v2): Cameron's restructure — Day 1 = review/validate, Day 2 = decide/cascade.
+  // Rebuild from the v2 seed; RETIRED rows (moved to owners' phase / MB / reworded as RATIFY) must
+  // NOT be resurrected as user-adds by the generic merge above. Genuine user-added rows survive.
+  if (!state.agenda._su0720c) {
+    var RETIRED_0720C = [
+      'Last-quarter major numbers review (new slide deck)',
+      'PACe + Flywheel self-evaluation — leadership grades each element (Cam/Paul owner-pass = the strawman)',
+      'Rob exercises',
+      'PACe decision — pick ONE process to redesign in Q3 supporting the critical number',
+      'Rockefeller Habits Checklist — pick 1–2 of the 10 habits to improve in Q3',
+      'CASh / Power of One — Paul + Ben block (placeholder until fleshed out)',
+      'DECIDE: Damages reframe (Anne 7/16 plan — branch-level baseline, pause individual accountability, monthly training themes; bonus/games/promotion implications)',
+      'DECIDE: AI/tool governance workstream — Q3 candidate (central data bus + EMMA toolkit + monthly Big Rocks review; Master Backlog 12556198241)',
+      'DECIDE: Goal coverage below the Roundtable (7/20 receipt directive) — who drafts goals for Jalissa/Nhel/Tet/Carly/KP/Prosper/Fabian/Austin L, and how they land on the cascading chart',
+      'DECIDE: Cross-cutting leader goals (7/20 receipt directives) — ITP follow-up as bonus goal for every direct · ongoing-education module per leader · Magic-Moments-for-employees recognition goal (quota + mechanics)',
+      'Cascading goals chart finalized',
+      'Quarterly theme locked + poster/rewards/dashboard',
+      'Bonus Goals / Mid-Quarter Pivots section per leader'
+    ];
+    var retired0720c = {};
+    RETIRED_0720C.forEach(function (t) { retired0720c[t] = true; });
+    ['day1', 'day2'].forEach(function (dayKey) {
+      var old2 = (state.agenda[dayKey] && state.agenda[dayKey].items) || [];
+      var rebuilt2 = AGENDA_SEED[dayKey].items.map(function (t) {
+        var prev = old2.filter(function (it) { return ((typeof it === 'string') ? it : it.text) === t; })[0];
+        return (prev && typeof prev !== 'string') ? prev : { text: t, checked: false, note: '' };
+      });
+      var seedTexts2 = {};
+      ['day1', 'day2'].forEach(function (dk) { AGENDA_SEED[dk].items.forEach(function (t) { seedTexts2[t] = true; }); });
+      old2.forEach(function (it) {
+        var t = (typeof it === 'string') ? it : it.text;
+        if (t && !seedTexts2[t] && !retired0720c[t]) rebuilt2.push((typeof it === 'string') ? { text: t, checked: false, note: '' } : it);
+      });
+      state.agenda[dayKey] = { label: AGENDA_SEED[dayKey].label, items: rebuilt2 };
+    });
+    state.agenda._su0720c = true;
     saveStateNow(LS_KEYS.agenda, state.agenda);
   }
   if (state.changelog === null) {
