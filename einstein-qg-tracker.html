@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>QG Success Rate Tracker — Einstein Moving Company</title>
+<!-- qg-tracker hosted-sanitized 2026-07-22a — leader-facing copy; canonical (full candor) = Supporting Projects/Cascading Goals Tracker/ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1B365D;
+    --orange: #F26522;
+    --light-gray: #F5F5F5;
+    --white: #FFFFFF;
+    --text: #333333;
+    --success: #2E7D32;
+    --warning: #F9A825;
+    --danger: #C62828;
+    --medium-green: #4CAF50;
+    --yellow: #FFC107;
+    --heat-orange: #FF9800;
+    --heat-red: #F44336;
+    --heat-gray: #E0E0E0;
+    --radius: 8px;
+    --shadow: 0 2px 8px rgba(27, 54, 93, 0.10);
+    --shadow-lg: 0 4px 16px rgba(27, 54, 93, 0.14);
+  }
+
+  body {
+    font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--light-gray);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Layout ── */
+  .page { max-width: 1200px; margin: 0 auto; padding: 24px 20px 48px; }
+
+  /* ── Section 1: Header ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 32px 36px 28px;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-lg);
+  }
+  .header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .header .subtitle {
+    font-size: 0.95rem;
+    opacity: 0.75;
+    margin-bottom: 16px;
+  }
+  .header .target-band {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border-left: 3px solid var(--orange);
+    padding: 10px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+  .header .target-band strong { color: var(--orange); }
+
+  /* ── Section 2: Summary Cards ── */
+  .cards-section { margin-bottom: 32px; }
+  .cards-section h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cards-section h2 .legend-hint {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: #888;
+  }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid transparent;
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow-lg); }
+  .card.healthy { border-top-color: var(--success); }
+  .card.too-safe { border-top-color: var(--warning); }
+  .card.problem  { border-top-color: var(--danger); }
+
+  .card .name { font-size: 1rem; font-weight: 700; color: var(--navy); }
+  .card .title { font-size: 0.78rem; color: #888; margin-bottom: 10px; }
+  .card .big-number {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .card .big-number.healthy { color: var(--success); }
+  .card .big-number.too-safe { color: var(--warning); }
+  .card .big-number.problem  { color: var(--danger); }
+  .card .counts {
+    display: flex;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: #666;
+  }
+  .card .counts span { white-space: nowrap; }
+  .card .counts .sg { color: #1a6b1a; font-weight: 600; }
+  .card .counts .g  { color: var(--success); font-weight: 600; }
+  .card .counts .r  { color: var(--danger); font-weight: 600; }
+  .card .counts .ung { color: #999; font-weight: 600; }
+
+  .card .trend-arrow {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .card .trend-arrow.up   { color: var(--success); }
+  .card .trend-arrow.down { color: var(--danger); }
+  .card .trend-arrow.flat { color: #999; }
+
+  .card.team-wide {
+    background: var(--navy);
+    border-top-color: var(--orange);
+    grid-column: 1 / -1;
+  }
+  .card.team-wide .name { color: var(--white); }
+  .card.team-wide .title { color: rgba(255,255,255,0.65); }
+  .card.team-wide .big-number { color: var(--orange) !important; font-size: 2.4rem; }
+  .card.team-wide .counts .sg { color: #8BC34A; }
+  .card.team-wide .counts .g  { color: #66BB6A; }
+  .card.team-wide .counts .r  { color: #EF9A9A; }
+  .card.team-wide .counts .ung { color: rgba(255,255,255,0.5); }
+  .card.team-wide .trend-arrow { color: rgba(255,255,255,0.7); }
+
+  /* ── Section 3: Heat Map ── */
+  .heatmap-section { margin-bottom: 36px; }
+  .heatmap-section h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .heatmap-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 0.78rem;
+    color: #666;
+  }
+  .heatmap-legend .swatch {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  .heatmap-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+  .heatmap {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+    background: var(--white);
+  }
+  .heatmap th {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 10px 8px;
+    text-align: center;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .heatmap th:first-child {
+    text-align: left;
+    padding-left: 16px;
+    min-width: 140px;
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: var(--navy);
+  }
+  .heatmap th.trailing-th {
+    cursor: help;
+    position: relative;
+    overflow: visible;
+  }
+  .heatmap th.trailing-th .info-icon {
+    font-size: 0.78rem;
+    opacity: 0.7;
+    margin-left: 2px;
+  }
+  .heatmap th.trailing-th:hover .info-icon { opacity: 1; }
+  .heatmap th.trailing-th .header-tip {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 400;
+    line-height: 1.45;
+    padding: 8px 12px;
+    border-radius: 4px;
+    white-space: normal;
+    width: 260px;
+    text-align: left;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    pointer-events: none;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .heatmap th.trailing-th .header-tip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 18px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid var(--navy);
+  }
+  .heatmap th.trailing-th:hover .header-tip { display: block; }
+  .heatmap td {
+    text-align: center;
+    padding: 0;
+    font-size: 0.88rem;
+    font-weight: 700;
+    min-width: 72px;
+    height: 48px;
+    border: 2px solid var(--white);
+    transition: transform 0.15s;
+    cursor: default;
+    position: relative;
+  }
+  .heatmap td:first-child {
+    text-align: left;
+    padding: 10px 16px;
+    font-weight: 600;
+    color: var(--navy);
+    background: var(--white);
+    border: none;
+    min-width: 140px;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.04);
+  }
+  .heatmap td .sub { display: block; font-size: 0.7rem; font-weight: 400; color: #888; }
+  .heatmap td:not(:first-child):hover { transform: scale(1.06); z-index: 5; }
+  .heatmap td.target-zone {
+    outline: 2px dashed rgba(27, 54, 93, 0.35);
+    outline-offset: -3px;
+  }
+
+  /* Tooltip */
+  .heatmap td .tip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 400;
+    padding: 6px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .heatmap td:not(:first-child):hover .tip { display: block; }
+
+  /* Heat map row hover */
+  .heatmap tbody tr:hover td:first-child { background: #f0f4f8; }
+
+  /* Team-wide aggregate row */
+  .heatmap tr.team-row td {
+    border-top: 3px solid var(--navy);
+  }
+  .heatmap tr.team-row td:first-child {
+    font-weight: 800;
+    color: var(--navy);
+    font-size: 0.92rem;
+    border-top: 3px solid var(--navy);
+  }
+
+  /* ── Quarterly Focus ── */
+  .focus-section { margin-bottom: 36px; }
+  .focus-section h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .focus-section h2 .quarter-tag {
+    background: var(--orange);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+  .focus-section .focus-sub {
+    font-size: 0.82rem;
+    color: #888;
+    margin-bottom: 14px;
+  }
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 14px;
+  }
+  .focus-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px 20px;
+    border-top: 4px solid var(--navy);
+  }
+  .focus-card.wins { border-top-color: var(--success); }
+  .focus-card.trends { border-top-color: #5B7FA5; }
+  .focus-card.highlights { border-top-color: var(--orange); }
+  .focus-card.landmines { border-top-color: var(--danger); }
+  .focus-card.convo { border-top-color: #7B1FA2; }
+  .focus-card h3 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .focus-card h3 .icon {
+    font-size: 1rem;
+  }
+  .focus-card ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: #444;
+  }
+  .focus-card li { margin-bottom: 8px; }
+  .focus-card li:last-child { margin-bottom: 0; }
+  .focus-card li strong { color: var(--navy); }
+  .focus-card .leader-tag {
+    display: inline-block;
+    background: #f0f4f8;
+    color: var(--navy);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-right: 4px;
+  }
+  .focus-card .grade-pill {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 3px;
+    vertical-align: 1px;
+  }
+  .focus-card .grade-pill.sg { background: #2E7D32; color: white; }
+  .focus-card .grade-pill.g { background: #4CAF50; color: white; }
+  .focus-card .grade-pill.r { background: #F44336; color: white; }
+  .focus-card .grade-pill.ung { background: #BDBDBD; color: white; }
+  .focus-card .arrow { color: #888; margin: 0 3px; }
+
+  /* ── Section 4: Trend Chart ── */
+  .chart-section { margin-bottom: 32px; }
+  .chart-section h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .chart-wrap {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    position: relative;
+  }
+  .chart-wrap canvas { max-height: 380px; }
+
+  /* ── How to Read ── */
+  .how-to-read {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px 24px;
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.65;
+  }
+  .how-to-read h3 { font-size: 0.95rem; color: var(--navy); margin-bottom: 8px; }
+  .how-to-read ul { margin-left: 18px; }
+  .how-to-read li { margin-bottom: 4px; }
+  .how-to-read strong { color: var(--text); }
+
+  /* ── Filter Toggle ── */
+  .filter-toggle {
+    display: inline-flex;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #1B365D;
+    margin-bottom: 14px;
+  }
+  .filter-toggle button {
+    padding: 6px 16px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+    color: #1B365D;
+  }
+  .filter-toggle button.active {
+    background: #1B365D;
+    color: #F26522;
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: white; }
+    .page { padding: 0; max-width: none; }
+    .header { break-after: avoid; }
+    .cards-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .card { box-shadow: none; border: 1px solid #ddd; padding: 12px; }
+    .heatmap-wrap { box-shadow: none; border: 1px solid #ddd; overflow: visible; }
+    .heatmap { min-width: auto; font-size: 0.75rem; }
+    .heatmap td { min-width: 56px; height: 36px; }
+    .chart-section { break-before: page; }
+    .chart-wrap { box-shadow: none; border: 1px solid #ddd; }
+    .how-to-read { break-before: avoid; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px 20px; }
+    .header h1 { font-size: 1.3rem; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .page { padding: 12px 10px 32px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Section 1: Header -->
+  <div class="header">
+    <h1>Einstein Moving Company &mdash; QG Success Rate Tracker</h1>
+    <div class="subtitle">Q2 2024 &rarr; Q2 2026 &nbsp;|&nbsp; Updated 7/22/2026 (Q2 2026 = PROJ self-grades from the Q2 AAR cycle; FINAL lands at the QGR Day-1 grade sync 7/29. Two grade-sync items are staged for Day 1 — resolved in the room)</div>
+    <div class="target-band">
+      <strong>Target: ~75% success rate.</strong> Above 80% = goals aren't aggressive enough. Below 65% = scope or execution problem.
+    </div>
+  </div>
+
+  <!-- Section 2: Summary Cards -->
+  <div class="cards-section">
+    <h2>Roundtable Leaders <span class="legend-hint">Sorted by trailing success rate. Border color = health zone.</span></h2>
+    <div class="cards-grid" id="cardsGrid"></div>
+  </div>
+
+  <!-- Section 3: Heat Map -->
+  <div class="heatmap-section">
+    <h2>Quarterly Success Rate Heat Map</h2>
+    <div class="filter-toggle" id="filterToggle">
+      <button class="active" data-mode="all">All Rocks</button>
+      <button data-mode="critical">Critical Rocks Only</button>
+    </div>
+    <div class="heatmap-legend" id="heatLegend"></div>
+    <div class="heatmap-wrap">
+      <table class="heatmap" id="heatmap"></table>
+    </div>
+  </div>
+
+  <!-- Quarterly Focus -->
+  <div class="focus-section">
+    <h2>Quarterly Focus <span class="quarter-tag">Q2 2026</span></h2>
+    <div class="focus-sub">Wins, trends, highlights, landmines, and conversation points specific to this quarter. Refreshed each QGR. Q2 grades below are PROJ self-grades from the AAR cycle — FINAL lands at the QGR Day-1 grade sync 7/29.</div>
+    <div class="focus-grid">
+
+      <div class="focus-card wins">
+        <h3><span class="icon">🏆</span> Wins</h3>
+        <ul>
+          <li><strong>Company success rate 71% → 80%</strong> — the lesson loop is provably working: Q1 we named the mechanisms (dependency bottleneck, weekly cadences over one-off pushes), Q2 we executed them and the number moved.</li>
+          <li><span class="leader-tag">Matisen</span> <strong>Biggest turnaround on the board</strong> — Q1 20% (1/5) → Q2 5/6 green-plus self-graded, with a possible clean sweep pending grade sync. Variable Pricing live end-to-end with a standing weekly cadence <span class="grade-pill sg">SG</span>.</li>
+          <li><span class="leader-tag">Mike</span> <strong>Training app open to all of DFWT</strong> <span class="grade-pill sg">SG</span> — 3 weeks running, zero bugs; live build-HQ pattern worth standardizing.</li>
+          <li><span class="leader-tag">Anne</span> <strong>HR Generalist hired + fully ramped</strong> <span class="grade-pill sg">SG</span> — recruiting fully off Anne's plate inside one quarter.</li>
+          <li><span class="leader-tag">Paul</span> <strong>N. Austin office move-in</strong> <span class="grade-pill sg">SG</span> — moved in 6/15.</li>
+          <li><strong>TUR 76.2%</strong> — cleared both the 65% company KPI and the 73.0% as-set target.</li>
+        </ul>
+      </div>
+
+      <div class="focus-card trends">
+        <h3><span class="icon">📈</span> Trends</h3>
+        <ul>
+          <li><strong>80.0% sits at the top of the 70-80% target band</strong> (32 of 40 goals green-plus, PROJ self-grades) — a great quarter, and worth checking at QGR whether Q3 goals are aggressive enough.</li>
+          <li><strong>Manage the rate of change = the cross-cutting Q2 theme</strong> — for two years the risk was moving too slow; compounding delivery means the new risk is changing faster than the org can absorb. Q3 discipline: rock caps, cadence over pushes.</li>
+          <li><strong>Candor ran downhill</strong> — Cameron's public Branch Visits G→R correction set the norm; 5+ honest self-downgrades vs the dashboard followed, including two on Critical Numbers.</li>
+          <li><strong>Weekly dashboard cadences win</strong> — recurring review meeting + visible scoreboard beat one-off pushes everywhere tried (hiring, fleet, Variable Pricing).</li>
+          <li><strong>NPS 88.0 (n=1,025)</strong> vs the standing 90 target — strong, not yet at bar.</li>
+        </ul>
+      </div>
+
+      <div class="focus-card highlights">
+        <h3><span class="icon">⭐</span> Highlights</h3>
+        <ul>
+          <li><span class="leader-tag">Cameron</span> <strong>Branch Visits re-graded G→R same day</strong> — "grade the letter, not the technicality" is now the house norm.</li>
+          <li><span class="leader-tag">Amanda</span> <strong>Honest G→R flip on her own Critical Number</strong> (Call Grading coaching loop) — set the candor bar for the room, with the Q3 restructure fix already designed.</li>
+          <li><span class="leader-tag">Brian</span> <strong>Most self-critical AAR of the set</strong> — two voluntary down-flips including a Critical Number, each with the root cause named.</li>
+          <li><span class="leader-tag">Anne</span> <strong>Trial-day sunset launches company-wide start of Q3</strong> — plus CHOICES live in onboarding since 7/1.</li>
+          <li><strong>All 11 company lessons + flags reviewed by Cameron 7/22 — zero disputes</strong> on the rollup.</li>
+        </ul>
+      </div>
+
+      <div class="focus-card landmines">
+        <h3><span class="icon">⚠️</span> Landmines (grade divergences for Day-1 sync)</h3>
+        <ul>
+                    <li>Two PROJ grades carry Day-1 grade-sync flags — walked and resolved live in the room, not before.</li>
+                    <li><span class="leader-tag">Mike</span> <strong>Games methodology fork</strong> — weekly-average 8.16 = Green vs pooled-quarter 7.60 = Red, a full color swing on a Critical Number. Lock ONE canonical scoring method before Q3.</li>
+          <li><strong>Q2 rows are PROJ self-grades</strong> — FINAL grades land at the QGR Day-1 grade sync 7/29.</li>
+        </ul>
+      </div>
+
+      <div class="focus-card convo">
+        <h3><span class="icon">💬</span> Conversation Points (QGR 7/29-30)</h3>
+        <ul>
+          <li><strong>The dependency queue is THE lesson of the quarter</strong> — three leaders' misses routed through the same IT queue. Q3 rule: name the dependency deliverable in the rock text or it doesn't exist, and cap rock load on shared-dependency owners.</li>
+          <li><strong>Damages-in-promotion is a live unresolved disagreement</strong> — Anne read "damages out" as settled; Cameron and Paul want it in. Day-2 decide item.</li>
+          <li><strong>Trial-day consistency audit</strong> — some branches may have sunset trial days ahead of the HPE network being ready; audit before the Q3 company-wide launch.</li>
+          <li><strong>Goal-definition hygiene for Q3</strong> — definitions gradable unambiguously by one person, dates + dependencies internally consistent (the scoring fork, date inversion, and dependency-gated bars all trace here).</li>
+          <li><strong>Q3 goal-setting and remaining focus items land at QGR</strong> — this card refreshes after Day 2.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Section 4: Trend Chart -->
+  <div class="chart-section">
+    <h2>Success Rate Trends</h2>
+    <div class="chart-wrap">
+      <canvas id="trendChart"></canvas>
+    </div>
+  </div>
+
+  <!-- How to Read -->
+  <div class="how-to-read">
+    <h3>How to read this dashboard</h3>
+    <ul>
+      <li><strong>Success rate</strong> = (Super Green + Green) / (Super Green + Green + Red). Ungraded rocks are excluded from the denominator — they represent goals that weren't scored, not failures.</li>
+      <li><strong>Heat map colors:</strong> Dark green = 80%+ (may be too safe), medium green = 70-80% (target zone, dashed outline), yellow = 50-70%, orange = 30-50%, red = below 30%, gray = no graded data.</li>
+      <li><strong>Card borders:</strong> Green = healthy (65-80%), yellow = too safe (above 80%), red = problem (below 65%).</li>
+      <li><strong>Trailing success %</strong> = all-time across every quarter shown, weighted by rock count.</li>
+      <li><strong>Trend arrows</strong> compare the last two quarters with graded data.</li>
+      <li>Einstein quarters are offset: Q1 = Feb/Mar/Apr, Q2 = May/Jun/Jul, Q3 = Aug/Sep/Oct, Q4 = Nov/Dec/Jan.</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+// ── Data ──
+const leaders = [
+  { name: "Cameron", title: "CEO", rocks: [
+    {q: "Q2 2024", sg: 3, g: 2, r: 0, ung: 0},
+    {q: "Q3 2024", sg: 2, g: 3, r: 0, ung: 0},
+    {q: "Q4 2024", sg: 3, g: 0, r: 2, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 2, r: 2, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 3, r: 3, ung: 0},
+    {q: "Q3 2025", sg: 1, g: 3, r: 2, ung: 0},
+    {q: "Q4 2025", sg: 0, g: 5, r: 1, ung: 0},
+    {q: "Q1 2026", sg: 2, g: 4, r: 0, ung: 0, pending: true},
+    {q: "Q2 2026", sg: 2, g: 3, r: 1, ung: 0, pending: true},
+  ], criticalRocks: [
+    {q: "Q2 2024", sg: 2, g: 0, r: 0, ung: 0},
+    {q: "Q3 2024", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q4 2024", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q4 2025", sg: 0, g: 0, r: 0, ung: 2},
+    {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0, pending: true},
+    {q: "Q2 2026", sg: 0, g: 2, r: 0, ung: 0, pending: true},
+  ]},
+  { name: "Paul", title: "CFO/COO", rocks: [
+    {q: "Q2 2024", sg: 1, g: 0, r: 3, ung: 1},
+    {q: "Q3 2024", sg: 2, g: 1, r: 2, ung: 0},
+    {q: "Q4 2024", sg: 2, g: 1, r: 2, ung: 0},
+    {q: "Q1 2025", sg: 0, g: 3, r: 2, ung: 0},
+    {q: "Q2 2025", sg: 1, g: 2, r: 3, ung: 0},
+    {q: "Q3 2025", sg: 1, g: 3, r: 2, ung: 0},
+    {q: "Q4 2025", sg: 1, g: 2, r: 3, ung: 0},
+    {q: "Q1 2026", sg: 0, g: 3, r: 2, ung: 0, pending: true},
+    {q: "Q2 2026", sg: 1, g: 3, r: 2, ung: 0, pending: true},
+  ], criticalRocks: [
+    {q: "Q2 2024", sg: 0, g: 0, r: 1, ung: 1},
+    {q: "Q3 2024", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q4 2024", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q4 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0, pending: true},
+    {q: "Q2 2026", sg: 1, g: 0, r: 1, ung: 0, pending: true},
+  ]},
+  { name: "Amanda", title: "Dir. of CX", rocks: [
+    {q: "Q2 2024", sg: 3, g: 0, r: 2, ung: 0},
+    {q: "Q3 2024", sg: 3, g: 1, r: 1, ung: 0},
+    {q: "Q4 2024", sg: 2, g: 2, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 2, g: 1, r: 2, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 2, r: 3, ung: 0},
+    {q: "Q1 2026", sg: 1, g: 4, r: 0, ung: 0},
+    {q: "Q2 2026", sg: 2, g: 2, r: 1, ung: 0, pending: true},
+  ], criticalRocks: [
+    {q: "Q2 2024", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q3 2024", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q4 2024", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 0, r: 0, ung: 2},
+    {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0},
+    {q: "Q2 2026", sg: 0, g: 1, r: 1, ung: 0, pending: true},
+  ]},
+  { name: "Brian", title: "CTXH Regional Mgr", rocks: [
+    {q: "Q2 2024", sg: 3, g: 1, r: 1, ung: 0},
+    {q: "Q3 2024", sg: 1, g: 4, r: 0, ung: 0},
+    {q: "Q4 2024", sg: 1, g: 2, r: 2, ung: 0},
+    {q: "Q1 2025", sg: 2, g: 2, r: 1, ung: 0},
+    {q: "Q2 2025", sg: 1, g: 0, r: 3, ung: 1},
+    {q: "Q3 2025", sg: 2, g: 2, r: 1, ung: 0},
+    {q: "Q4 2025", sg: 0, g: 3, r: 1, ung: 0},
+    {q: "Q1 2026", sg: 0, g: 4, r: 1, ung: 0},
+    {q: "Q2 2026", sg: 0, g: 4, r: 2, ung: 0, pending: true},
+  ], criticalRocks: [
+    {q: "Q2 2024", sg: 2, g: 0, r: 0, ung: 0},
+    {q: "Q3 2024", sg: 0, g: 2, r: 0, ung: 0},
+    {q: "Q4 2024", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q2 2025", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q4 2025", sg: 0, g: 2, r: 0, ung: 0},
+    {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0},
+    {q: "Q2 2026", sg: 0, g: 1, r: 1, ung: 0, pending: true},
+  ]},
+  { name: "Mike", title: "DFWT Regional Mgr", rocks: [
+    {q: "Q2 2024", sg: 3, g: 2, r: 0, ung: 0},
+    {q: "Q3 2024", sg: 2, g: 3, r: 0, ung: 0},
+    {q: "Q4 2024", sg: 1, g: 3, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 0, r: 4, ung: 0},
+    {q: "Q2 2025", sg: 1, g: 3, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 3, g: 2, r: 0, ung: 0},
+    {q: "Q4 2025", sg: 2, g: 2, r: 1, ung: 0},
+    {q: "Q1 2026", sg: 0, g: 4, r: 1, ung: 0},
+    {q: "Q2 2026", sg: 3, g: 1, r: 1, ung: 0, pending: true},
+  ], criticalRocks: [
+    {q: "Q2 2024", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q3 2024", sg: 1, g: 0, r: 0, ung: 1},
+    {q: "Q4 2024", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 0, g: 0, r: 2, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 0, g: 1, r: 0, ung: 1},
+    {q: "Q4 2025", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0},
+    {q: "Q2 2026", sg: 1, g: 1, r: 0, ung: 0, pending: true},
+  ]},
+  { name: "Matisen", title: "Dir. of IT", rocks: [
+    {q: "Q2 2024", sg: 2, g: 2, r: 1, ung: 0},
+    {q: "Q3 2024", sg: 2, g: 2, r: 1, ung: 0},
+    {q: "Q4 2024", sg: 1, g: 3, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 1, r: 3, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 1, r: 4, ung: 0},
+    {q: "Q3 2025", sg: 0, g: 1, r: 4, ung: 0},
+    {q: "Q4 2025", sg: 1, g: 0, r: 4, ung: 0},
+    {q: "Q1 2026", sg: 2, g: 0, r: 3, ung: 0},
+    {q: "Q2 2026", sg: 3, g: 2, r: 1, ung: 0, pending: true},  // self-grades (PROJ)
+  ], criticalRocks: [
+    {q: "Q2 2024", sg: 0, g: 2, r: 0, ung: 0},
+    {q: "Q3 2024", sg: 1, g: 0, r: 0, ung: 1},
+    {q: "Q4 2024", sg: 0, g: 0, r: 0, ung: 2},
+    {q: "Q1 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 0, r: 2, ung: 0},
+    {q: "Q3 2025", sg: 0, g: 0, r: 0, ung: 2},
+    {q: "Q4 2025", sg: 0, g: 0, r: 2, ung: 0},
+    {q: "Q1 2026", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q2 2026", sg: 1, g: 1, r: 0, ung: 0, pending: true},
+  ]},
+  { name: "Anne", title: "Dir. of Employee Exp.", rocks: [
+    {q: "Q3 2024", sg: 3, g: 1, r: 1, ung: 0},
+    {q: "Q4 2024", sg: 2, g: 1, r: 2, ung: 0},
+    {q: "Q1 2025", sg: 0, g: 4, r: 1, ung: 0},
+    {q: "Q2 2025", sg: 1, g: 3, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 0, g: 2, r: 2, ung: 0},
+    {q: "Q4 2025", sg: 1, g: 2, r: 2, ung: 0},
+    {q: "Q1 2026", sg: 1, g: 2, r: 2, ung: 0},  // corrected 7/10/26: Bonus Goal SG displaced R Onboarding Video (5/12 displacement mechanic) — see QGR Packet audits/Q1-CORRECTIONS-LOG.md P0-6
+    {q: "Q2 2026", sg: 2, g: 4, r: 0, ung: 0, pending: true},  // self-grades (PROJ)
+  ], criticalRocks: [
+    {q: "Q3 2024", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q4 2024", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 0, g: 2, r: 0, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 0, g: 0, r: 0, ung: 2},
+    {q: "Q4 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0},
+    {q: "Q2 2026", sg: 1, g: 1, r: 0, ung: 0, pending: true},
+  ]},
+  { name: "Nhel", title: "Sales Team Lead", rocks: [
+    {q: "Q3 2024", sg: 1, g: 3, r: 0, ung: 0},
+    {q: "Q4 2024", sg: 2, g: 3, r: 0, ung: 0},
+    {q: "Q1 2025", sg: 2, g: 2, r: 1, ung: 0},
+    {q: "Q2 2025", sg: 1, g: 2, r: 2, ung: 0},
+    {q: "Q3 2025", sg: 1, g: 3, r: 1, ung: 0},
+    {q: "Q4 2025", sg: 4, g: 0, r: 2, ung: 0},
+    {q: "Q1 2026", sg: 1, g: 2, r: 2, ung: 0},
+  ], criticalRocks: [
+    {q: "Q3 2024", sg: 0, g: 1, r: 0, ung: 0},
+    {q: "Q4 2024", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 1, r: 0, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 1, g: 0, r: 0, ung: 1},
+    {q: "Q4 2025", sg: 1, g: 0, r: 1, ung: 1},
+    {q: "Q1 2026", sg: 0, g: 1, r: 1, ung: 0},
+  ]},
+  { name: "Carly", title: "Claims Mgr (CET)", rocks: [
+    {q: "Q1 2026", sg: 3, g: 1, r: 1, ung: 0},
+  ], criticalRocks: [
+    {q: "Q1 2026", sg: 0, g: 1, r: 1, ung: 0},
+  ]},
+  { name: "Fabian", title: "Software Developer", rocks: [
+    {q: "Q3 2024", sg: 1, g: 2, r: 2, ung: 0},
+    {q: "Q4 2024", sg: 0, g: 2, r: 3, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 1, r: 3, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 0, r: 4, ung: 0},
+    {q: "Q3 2025", sg: 0, g: 0, r: 0, ung: 1},
+    {q: "Q4 2025", sg: 2, g: 0, r: 2, ung: 0},
+    {q: "Q1 2026", sg: 2, g: 0, r: 3, ung: 0},
+  ], criticalRocks: [
+    {q: "Q3 2024", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q4 2024", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 1, g: 0, r: 1, ung: 0},
+    {q: "Q2 2025", sg: 0, g: 0, r: 2, ung: 0},
+    {q: "Q3 2025", sg: 0, g: 0, r: 0, ung: 2},
+    {q: "Q4 2025", sg: 2, g: 0, r: 0, ung: 0},
+    {q: "Q1 2026", sg: 2, g: 0, r: 0, ung: 0},
+  ]},
+  { name: "Controllers", title: "Joselle + Mike S", rocks: [
+    {q: "Q4 2024", sg: 0, g: 2, r: 1, ung: 0},
+    {q: "Q1 2025", sg: 0, g: 2, r: 2, ung: 0},
+    {q: "Q2 2025", sg: 1, g: 1, r: 2, ung: 0},
+    {q: "Q3 2025", sg: 1, g: 3, r: 1, ung: 0},
+    {q: "Q4 2025", sg: 0, g: 3, r: 3, ung: 0},
+    {q: "Q1 2026", sg: 0, g: 0, r: 0, ung: 6, finalCut: true},
+  ], criticalRocks: [
+    {q: "Q4 2024", sg: 0, g: 1, r: 0, ung: 0},
+    {q: "Q1 2025", sg: 0, g: 0, r: 1, ung: 1},
+    {q: "Q2 2025", sg: 0, g: 0, r: 1, ung: 0},
+    {q: "Q3 2025", sg: 0, g: 1, r: 1, ung: 0},
+    {q: "Q4 2025", sg: 0, g: 0, r: 1, ung: 1},
+    {q: "Q1 2026", sg: 0, g: 0, r: 0, ung: 1, finalCut: true},
+  ]},
+];
+
+// All quarters in order
+const allQuarters = ["Q2 2024","Q3 2024","Q4 2024","Q1 2025","Q2 2025","Q3 2025","Q4 2025","Q1 2026","Q2 2026"];
+
+// Roundtable members for summary cards
+const roundtable = ["Cameron","Paul","Amanda","Brian","Mike","Matisen","Anne","Nhel"];
+
+// Line colors per leader
+const lineColors = {
+  Cameron: "#1B365D",
+  Paul:    "#5B7FA5",
+  Amanda:  "#F26522",
+  Brian:   "#2E7D32",
+  Mike:    "#0288D1",
+  Matisen: "#7B1FA2",
+  Anne:    "#C2185B",
+  Nhel:    "#00796B",
+  Carly:   "#D81B60",
+  Fabian:  "#795548",
+  Controllers: "#9E9E9E",
+};
+
+// ── Helpers ──
+function successRate(rock) {
+  const graded = rock.sg + rock.g + rock.r;
+  if (graded === 0) return null;
+  return ((rock.sg + rock.g) / graded) * 100;
+}
+
+function trailingRate(rocks) {
+  let sg = 0, g = 0, r = 0;
+  rocks.forEach(rock => { sg += rock.sg; g += rock.g; r += rock.r; });
+  const graded = sg + g + r;
+  if (graded === 0) return null;
+  return ((sg + g) / graded) * 100;
+}
+
+function totals(rocks) {
+  let sg = 0, g = 0, r = 0, ung = 0;
+  rocks.forEach(rock => { sg += rock.sg; g += rock.g; r += rock.r; ung += rock.ung; });
+  return { sg, g, r, ung };
+}
+
+function healthZone(pct) {
+  if (pct === null) return "problem";
+  if (pct > 80) return "too-safe";
+  if (pct >= 65) return "healthy";
+  return "problem";
+}
+
+function heatColor(pct) {
+  if (pct === null) return { bg: "var(--heat-gray)", text: "#666" };
+  if (pct >= 80) return { bg: "#2E7D32", text: "#fff" };
+  if (pct >= 70) return { bg: "#4CAF50", text: "#fff" };
+  if (pct >= 50) return { bg: "#FFC107", text: "#333" };
+  if (pct >= 30) return { bg: "#FF9800", text: "#fff" };
+  return { bg: "#F44336", text: "#fff" };
+}
+
+function trendArrow(rocks) {
+  // Find last two quarters with graded data
+  const graded = rocks.filter(r => (r.sg + r.g + r.r) > 0);
+  if (graded.length < 2) return { arrow: "--", cls: "flat" };
+  const last = successRate(graded[graded.length - 1]);
+  const prev = successRate(graded[graded.length - 2]);
+  if (last === null || prev === null) return { arrow: "--", cls: "flat" };
+  const diff = last - prev;
+  if (diff > 5) return { arrow: "\u25B2", cls: "up" };
+  if (diff < -5) return { arrow: "\u25BC", cls: "down" };
+  return { arrow: "\u25C6", cls: "flat" };
+}
+
+// ── Filter State ──
+let showCriticalOnly = false;
+let chartInstance = null;
+
+// Helper: get the active rock data for a leader
+function getRocks(leader) {
+  return showCriticalOnly ? (leader.criticalRocks || []) : leader.rocks;
+}
+
+// ── Compute Team-Wide Aggregate ──
+function buildTeamWide() {
+  const teamRocks = allQuarters.map(q => {
+    let sg = 0, g = 0, r = 0, ung = 0;
+    leaders.forEach(leader => {
+      const rocks = getRocks(leader);
+      const rock = rocks.find(rx => rx.q === q);
+      if (rock) { sg += rock.sg; g += rock.g; r += rock.r; ung += rock.ung; }
+    });
+    return { q, sg, g, r, ung };
+  });
+  return { name: "Team Wide", title: "All Leadership", rocks: teamRocks };
+}
+
+// ── Build Cards ──
+function buildCards() {
+  const grid = document.getElementById("cardsGrid");
+  grid.innerHTML = "";
+
+  const teamWide = buildTeamWide();
+
+  // Team-wide card first
+  const twPct = trailingRate(teamWide.rocks);
+  const twT = totals(teamWide.rocks);
+  const twTrend = trendArrow(teamWide.rocks);
+  const twPctStr = twPct !== null ? Math.round(twPct) + "%" : "N/A";
+  const twCard = document.createElement("div");
+  twCard.className = "card team-wide";
+  twCard.innerHTML = `
+    <div class="trend-arrow ${twTrend.cls}">${twTrend.arrow}</div>
+    <div class="name">${teamWide.name}</div>
+    <div class="title">${teamWide.title} &mdash; ${twT.sg + twT.g + twT.r + twT.ung} total ${showCriticalOnly ? "critical " : ""}rocks across ${leaders.length} leaders</div>
+    <div class="big-number">${twPctStr}</div>
+    <div class="counts">
+      <span class="sg">SG ${twT.sg}</span>
+      <span class="g">G ${twT.g}</span>
+      <span class="r">R ${twT.r}</span>
+      ${twT.ung > 0 ? `<span class="ung">UNG ${twT.ung}</span>` : ""}
+    </div>
+  `;
+  grid.appendChild(twCard);
+
+  // Individual roundtable cards
+  const roundtableLeaders = leaders.filter(l => roundtable.includes(l.name));
+
+  // Sort by trailing rate descending
+  roundtableLeaders.sort((a, b) => {
+    const ra = trailingRate(getRocks(a));
+    const rb = trailingRate(getRocks(b));
+    if (ra === null && rb === null) return 0;
+    if (ra === null) return 1;
+    if (rb === null) return -1;
+    return rb - ra;
+  });
+
+  roundtableLeaders.forEach(leader => {
+    const rocks = getRocks(leader);
+    const pct = trailingRate(rocks);
+    const zone = healthZone(pct);
+    const t = totals(rocks);
+    const trend = trendArrow(rocks);
+    const pctStr = pct !== null ? Math.round(pct) + "%" : "N/A";
+
+    const card = document.createElement("div");
+    card.className = "card " + zone;
+    card.innerHTML = `
+      <div class="trend-arrow ${trend.cls}">${trend.arrow}</div>
+      <div class="name">${leader.name}</div>
+      <div class="title">${leader.title}</div>
+      <div class="big-number ${zone}">${pctStr}</div>
+      <div class="counts">
+        <span class="sg">SG ${t.sg}</span>
+        <span class="g">G ${t.g}</span>
+        <span class="r">R ${t.r}</span>
+        ${t.ung > 0 ? `<span class="ung">UNG ${t.ung}</span>` : ""}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ── Build Heat Map ──
+function buildHeatMap() {
+  const table = document.getElementById("heatmap");
+  const teamWide = buildTeamWide();
+
+  // Header
+  let thead = "<thead><tr><th>Leader</th>";
+  allQuarters.forEach(q => { thead += `<th>${q}</th>`; });
+  thead += `<th class="trailing-th">Trailing <span class="info-icon">ⓘ</span><span class="header-tip"><strong>All-time success rate</strong> across every quarter shown, weighted by rock count.<br><br>Formula: <em>(Super Green + Green) / (Super Green + Green + Red)</em><br><br>Ungraded rocks are excluded from the denominator.</span></th></tr></thead>`;
+
+  // Body
+  let tbody = "<tbody>";
+  leaders.forEach(leader => {
+    const rocks = getRocks(leader);
+    const rockMap = {};
+    rocks.forEach(r => { rockMap[r.q] = r; });
+
+    tbody += "<tr>";
+    tbody += `<td>${leader.name}<span class="sub">${leader.title}</span></td>`;
+
+    allQuarters.forEach(q => {
+      const rock = rockMap[q];
+      if (!rock) {
+        tbody += `<td style="background:var(--heat-gray);color:#999;">--<span class="tip">No data for ${q}</span></td>`;
+        return;
+      }
+      const pct = successRate(rock);
+      const hc = heatColor(pct);
+      const pctStr = pct !== null ? Math.round(pct) + "%" : "--";
+      const graded = rock.sg + rock.g + rock.r;
+      const total = graded + rock.ung;
+      const isTarget = pct !== null && pct >= 70 && pct < 80;
+      const tipText = pct !== null
+        ? `${q}: ${Math.round(pct)}% (${rock.sg} SG, ${rock.g} G, ${rock.r} R${rock.ung > 0 ? ", " + rock.ung + " UNG" : ""}) - ${graded} of ${total} graded`
+        : `${q}: No graded rocks (${rock.ung} ungraded)`;
+
+      tbody += `<td style="background:${hc.bg};color:${hc.text};" class="${isTarget ? "target-zone" : ""}">${pctStr}<span class="tip">${tipText}</span></td>`;
+    });
+
+    // Trailing column
+    const trail = trailingRate(rocks);
+    const thc = heatColor(trail);
+    const trailStr = trail !== null ? Math.round(trail) + "%" : "--";
+    const isTrailTarget = trail !== null && trail >= 70 && trail < 80;
+    tbody += `<td style="background:${thc.bg};color:${thc.text};font-weight:800;" class="${isTrailTarget ? "target-zone" : ""}">${trailStr}</td>`;
+
+    tbody += "</tr>";
+  });
+  // Team-wide aggregate row
+  const twRockMap = {};
+  teamWide.rocks.forEach(r => { twRockMap[r.q] = r; });
+  tbody += '<tr class="team-row">';
+  tbody += `<td>Team Wide<span class="sub">All Leadership</span></td>`;
+  allQuarters.forEach(q => {
+    const rock = twRockMap[q];
+    if (!rock) {
+      tbody += `<td style="background:var(--heat-gray);color:#999;">--</td>`;
+      return;
+    }
+    const pct = successRate(rock);
+    const hc = heatColor(pct);
+    const pctStr = pct !== null ? Math.round(pct) + "%" : "--";
+    const graded = rock.sg + rock.g + rock.r;
+    const total = graded + rock.ung;
+    const isTarget = pct !== null && pct >= 70 && pct < 80;
+    const tipText = pct !== null
+      ? `${q}: ${Math.round(pct)}% team-wide (${rock.sg} SG, ${rock.g} G, ${rock.r} R${rock.ung > 0 ? ", " + rock.ung + " UNG" : ""}) - ${graded} of ${total} graded`
+      : `${q}: No graded data`;
+    tbody += `<td style="background:${hc.bg};color:${hc.text};font-weight:800;" class="${isTarget ? "target-zone" : ""}">${pctStr}<span class="tip">${tipText}</span></td>`;
+  });
+  const twTrail = trailingRate(teamWide.rocks);
+  const twHc = heatColor(twTrail);
+  const twTrailStr = twTrail !== null ? Math.round(twTrail) + "%" : "--";
+  const twIsTarget = twTrail !== null && twTrail >= 70 && twTrail < 80;
+  tbody += `<td style="background:${twHc.bg};color:${twHc.text};font-weight:900;" class="${twIsTarget ? "target-zone" : ""}">${twTrailStr}</td>`;
+  tbody += "</tr>";
+
+  tbody += "</tbody>";
+
+  table.innerHTML = thead + tbody;
+
+  // Legend
+  const legend = document.getElementById("heatLegend");
+  const swatches = [
+    { color: "#2E7D32", label: "80%+ (too safe?)" },
+    { color: "#4CAF50", label: "70-80% (target)" },
+    { color: "#FFC107", label: "50-70% (watch)" },
+    { color: "#FF9800", label: "30-50% (concern)" },
+    { color: "#F44336", label: "<30% (problem)" },
+    { color: "#E0E0E0", label: "No graded data" },
+  ];
+  legend.innerHTML = swatches.map(s =>
+    `<span><span class="swatch" style="background:${s.color};"></span>${s.label}</span>`
+  ).join("") + '<span style="margin-left:8px;">Dashed outline = target zone (70-80%)</span>';
+}
+
+// ── Build Chart ──
+function buildChart() {
+  // Destroy existing chart instance if it exists
+  if (chartInstance) {
+    chartInstance.destroy();
+    chartInstance = null;
+  }
+
+  const ctx = document.getElementById("trendChart").getContext("2d");
+  const teamWide = buildTeamWide();
+
+  const datasets = leaders.map(leader => {
+    const rocks = getRocks(leader);
+    const rockMap = {};
+    rocks.forEach(r => { rockMap[r.q] = r; });
+
+    const data = allQuarters.map(q => {
+      const rock = rockMap[q];
+      if (!rock) return null;
+      const pct = successRate(rock);
+      return pct !== null ? Math.round(pct * 10) / 10 : null;
+    });
+
+    const isRoundtable = roundtable.includes(leader.name);
+    return {
+      label: leader.name,
+      data: data,
+      borderColor: lineColors[leader.name],
+      backgroundColor: lineColors[leader.name] + "22",
+      borderWidth: isRoundtable ? 2.5 : 1.5,
+      borderDash: isRoundtable ? [] : [5, 5],
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      tension: 0.3,
+      spanGaps: true,
+      hidden: !isRoundtable,
+    };
+  });
+
+  // Add Team Wide aggregate line
+  const twData = allQuarters.map(q => {
+    const rock = teamWide.rocks.find(r => r.q === q);
+    if (!rock) return null;
+    const pct = successRate(rock);
+    return pct !== null ? Math.round(pct * 10) / 10 : null;
+  });
+  datasets.unshift({
+    label: "Team Wide",
+    data: twData,
+    borderColor: "#F26522",
+    backgroundColor: "#F2652233",
+    borderWidth: 3.5,
+    borderDash: [10, 4],
+    pointRadius: 6,
+    pointHoverRadius: 8,
+    pointStyle: "rectRounded",
+    tension: 0.3,
+    spanGaps: true,
+    hidden: false,
+  });
+
+  chartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: allQuarters,
+      datasets: datasets,
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: 2.4,
+      interaction: {
+        mode: "index",
+        intersect: false,
+      },
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+            padding: 16,
+            font: { size: 12 },
+          },
+          onClick: function(e, legendItem, legend) {
+            const index = legendItem.datasetIndex;
+            const ci = legend.chart;
+            const meta = ci.getDatasetMeta(index);
+            meta.hidden = meta.hidden === null ? !ci.data.datasets[index].hidden : null;
+            ci.update();
+          }
+        },
+        annotation: undefined,
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 100,
+          ticks: {
+            callback: v => v + "%",
+            stepSize: 20,
+            font: { size: 12 },
+          },
+          grid: {
+            color: function(context) {
+              return context.tick.value === 75 ? "rgba(27, 54, 93, 0.4)" : "rgba(0,0,0,0.06)";
+            },
+            lineWidth: function(context) {
+              return context.tick.value === 75 ? 2 : 1;
+            },
+          },
+          title: {
+            display: true,
+            text: "Success Rate",
+            font: { size: 13, weight: "600" },
+            color: "#1B365D",
+          },
+        },
+        x: {
+          ticks: { font: { size: 12 } },
+          grid: { display: false },
+        },
+      },
+    },
+    plugins: [{
+      // Draw 75% target line with label
+      afterDraw: function(chart) {
+        const yScale = chart.scales.y;
+        const xScale = chart.scales.x;
+        const y = yScale.getPixelForValue(75);
+        const ctx = chart.ctx;
+
+        ctx.save();
+        ctx.setLineDash([8, 4]);
+        ctx.strokeStyle = "rgba(27, 54, 93, 0.45)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(xScale.left, y);
+        ctx.lineTo(xScale.right, y);
+        ctx.stroke();
+
+        ctx.setLineDash([]);
+        ctx.fillStyle = "rgba(27, 54, 93, 0.65)";
+        ctx.font = "600 11px sans-serif";
+        ctx.textAlign = "right";
+        ctx.fillText("75% Target", xScale.right - 4, y - 6);
+        ctx.restore();
+      }
+    }],
+  });
+}
+
+// ── Toggle Handler ──
+document.getElementById("filterToggle").addEventListener("click", function(e) {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  const mode = btn.dataset.mode;
+  const isCritical = mode === "critical";
+  if (isCritical === showCriticalOnly) return; // already active
+
+  showCriticalOnly = isCritical;
+
+  // Update toggle button styles
+  this.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  // Rebuild all sections
+  buildCards();
+  buildHeatMap();
+  buildChart();
+});
+
+// ── Init ──
+buildCards();
+buildHeatMap();
+buildChart();
+</script>
+
+</body>
+</html>
