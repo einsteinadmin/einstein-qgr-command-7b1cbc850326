@@ -221,6 +221,19 @@ details.fold[open] summary::before{content:'▾ ';}
 .ofield-secondary{opacity:.8;}
 .ofield-secondary .ofield-lbl{color:var(--grey-400);}
 
+/* ---------- person/department multi-select filter (v1.7 add) ---------- */
+.pf-panel{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:2px 14px 10px;margin-bottom:14px;}
+.pf-panel summary{padding:10px 0;}
+.pf-tree{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px 16px;margin:6px 0 10px;}
+.pf-dept{background:var(--grey-50);border:1px solid var(--grey-100);border-radius:8px;padding:8px 10px;}
+.pf-row{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;padding:2px 0;}
+.pf-dept-row{font-weight:700;color:var(--navy-500);margin-bottom:4px;padding-bottom:5px;border-bottom:1px dashed var(--grey-200);}
+.pf-people{display:flex;flex-direction:column;gap:1px;padding-left:4px;}
+.pf-person-row{color:var(--grey-500);font-weight:500;}
+.pf-check{width:14px;height:14px;accent-color:var(--blue-500);cursor:pointer;flex:none;}
+.pf-summary{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--grey-500);padding-top:8px;border-top:1px dashed var(--grey-100);flex-wrap:wrap;}
+.pf-summary b{color:var(--navy-500);}
+
 /* ---------- group-by-owner sub-view (7/22 round-2 add) ---------- */
 .groupby-row{display:flex;align-items:center;gap:10px;margin:0 0 12px;}
 .owner-subhd{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--navy-400);text-transform:uppercase;margin:12px 0 6px;padding:3px 0 3px 9px;border-left:3px solid var(--blue-500);}
@@ -334,7 +347,7 @@ details.overflow-fold{border-top:0;padding-top:0;}
     <div class="howto-sub">Cameron + Paul's red-pen session · four tabs, in order · everything auto-saves as you click</div>
     <ol>
       <li><b>Q2 Review</b> — for each rock, click a <b>PROJ</b> grade (SG / G / R). SELF grades are pre-seeded from the leaders' own AARs; an orange <b>⚠ DIVERGENCE</b> border means your read disagrees with theirs — those are the ones to talk about. The notes box = notes for the room.</li>
-      <li><b>Q3 Triage</b> — the main event. Walk each leader top to bottom. Per card: pick a ruling — <b>ACCEPT / EDIT / KILL / DEFER / ✓ DONE</b> (EDIT opens a "what changes" box; <b>✓ DONE</b> is for already-shipped work — the export sweeps it into a dedicated list for Albert to move to Completed on the Master Backlog) — toggle <b>★ CRIT</b> (each leader needs exactly 2). Second row = placement: <b>Leader / slate</b> shows which lane the card lives in (only MB-pool cards can move lanes); <b>Assign to (direct)</b> is the specific person carrying it — secondary, optional, defaults to the leader. Also here: keep it in the Q3 shortlist or park it in overflow. Use <b>☐ Group cards by owner</b> at the top of the tab to cluster a leader's cards by who actually owns them (e.g. Amanda vs Tet vs Nhel vs Carly) instead of one flat list. "+ Add a goal" at the lane bottom catches anything missing. Answer the 5 <b>Open Questions</b> chips up top as you go. Each card's Flywheel/PACe/priority lens tags are tucked under a <b>"Lens detail"</b> click-to-expand — the face stays clean, the data's one click away.</li>
+      <li><b>Q3 Triage</b> — the main event. Walk each leader top to bottom. Per card: pick a ruling — <b>ACCEPT / EDIT / KILL / DEFER / ✓ DONE</b> (EDIT opens a "what changes" box; <b>✓ DONE</b> is for already-shipped work — the export sweeps it into a dedicated list for Albert to move to Completed on the Master Backlog) — toggle <b>★ CRIT</b> (each leader needs exactly 2). Second row = placement: <b>Leader / slate</b> shows which lane the card lives in (only MB-pool cards can move lanes); <b>Assign to (direct)</b> is the specific person carrying it — secondary, optional, defaults to the leader. Also here: keep it in the Q3 shortlist or park it in overflow. Use the <b>👤 Filter by person / department</b> panel to drill into just the people you want — check a whole department (e.g. Customer Experience) to see everyone's cards, or check individuals (Amanda alone, or Amanda + Nhel) to narrow further; leaders with nothing left to show drop out of the view, and a live count tracks the current selection. Separately, <b>☐ Group cards by owner</b> clusters a leader's cards by who actually owns them (e.g. Amanda vs Tet vs Nhel vs Carly) instead of one flat list — the two work together. "+ Add a goal" at the lane bottom catches anything missing. Answer the 5 <b>Open Questions</b> chips up top as you go. Each card's Flywheel/PACe/priority lens tags are tucked under a <b>"Lens detail"</b> click-to-expand — the face stays clean, the data's one click away.</li>
       <li><b>Consolidate</b> — check the box on 2+ cards that are really the same thing, click <b>⛙ Consolidate</b> in the header, name the merged card. The originals collapse into one; the export notes exactly which cards got folded in.</li>
       <li><b>Dependency Board</b> — read-only check; statuses recompute live off your kills and defers. Anything <b>NOT COVERED</b> on Matisen needs an explicit yes/no before you leave.</li>
       <li><b>Whiteboard</b> — the closing mirror: each leader's column should hold their slate + 2 CRITs. Click any card to jump back to it.</li>
@@ -351,7 +364,7 @@ details.overflow-fold{border-top:0;padding-top:0;}
    + goals-dashboard/dashboard-data.json (7/17 refresh).
    Green / Super Green text = contract language, transcribed faithfully.
    ============================================================ */
-const VERSION = "QGR Triage Room v1.6 · Cameron's 2nd-pass walk — ✓ Done ruling (5th disposition, alongside ACCEPT/EDIT/KILL/DEFER; marks already-shipped work for sweep to Completed on the Master Backlog, export carries a dedicated pulse-ID list) · owner dropdowns labeled + disambiguated (\"Leader / slate\" = which lane the card sits in, movable only for MB pool cards; \"Assign to (direct)\" = the specific person carrying it, visually secondary/optional) · Group-by-owner toggle on Q3 Triage — clusters each leader's shortlist + overflow by effective owner (Amanda vs Tet vs Nhel vs Carly, etc.) instead of one flat list · v1.5 base: UX pass 7/22 (live walk-through w/ a leader) — semantic dedupe (3 cards merged, 4 flagged ⚠ possible dupe) · ⛙ Consolidate feature (check cards, merge live, export logs the fold) · Flywheel/PACe/priority tiles moved off the card face into a click-to-expand Lens detail · every card's Monday pulse link now renders consistently (NO PULSE badge instead of a dead link) · Q2 Disposition/carryover band removed — carry-over is now just part of triage curation, no separate treatment · v1.4 base: WALK COMPLETE 7/22 — all 15 MB groups walked; remaining 11 groups synced (+28 newly-qualifying QG/SC cards + 5 Kickpoint Q3 goals) · triage bar (SC+QG only) · v1.3 base: clean cards + 33 walk-new candidates + WALK-SYNC 7/22 ~1am (4 groups) · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21";
+const VERSION = "QGR Triage Room v1.7 · Person/department multi-select filter on Q3 Triage — checkable org-hierarchy tree (department → leader → direct reports, built off the existing OWNERS metadata, zero data duplication) lets Cameron drill into a whole department, one leader, or any combo of people (e.g. Amanda + Nhel) and see just their shortlist + overflow cards, with a live card count; complements (doesn't replace) the existing Group-by-owner toggle · Finance's manager-tier owner label \"Prosper\" renamed to \"Ben\" for the person-facing hierarchy (id unchanged, no state migration needed) · v1.6 base: Cameron's 2nd-pass walk — ✓ Done ruling (5th disposition, alongside ACCEPT/EDIT/KILL/DEFER; marks already-shipped work for sweep to Completed on the Master Backlog, export carries a dedicated pulse-ID list) · owner dropdowns labeled + disambiguated (\"Leader / slate\" = which lane the card sits in, movable only for MB pool cards; \"Assign to (direct)\" = the specific person carrying it, visually secondary/optional) · Group-by-owner toggle on Q3 Triage — clusters each leader's shortlist + overflow by effective owner (Amanda vs Tet vs Nhel vs Carly, etc.) instead of one flat list · v1.5 base: UX pass 7/22 (live walk-through w/ a leader) — semantic dedupe (3 cards merged, 4 flagged ⚠ possible dupe) · ⛙ Consolidate feature (check cards, merge live, export logs the fold) · Flywheel/PACe/priority tiles moved off the card face into a click-to-expand Lens detail · every card's Monday pulse link now renders consistently (NO PULSE badge instead of a dead link) · Q2 Disposition/carryover band removed — carry-over is now just part of triage curation, no separate treatment · v1.4 base: WALK COMPLETE 7/22 — all 15 MB groups walked; remaining 11 groups synced (+28 newly-qualifying QG/SC cards + 5 Kickpoint Q3 goals) · triage bar (SC+QG only) · v1.3 base: clean cards + 33 walk-new candidates + WALK-SYNC 7/22 ~1am (4 groups) · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21";
 
 const LEADERS = [
   {id:"mike",    name:"Mike Vandenbroader", role:"DFWT RM + Head of Ops", cap:5, hardCap:false, blurb:"Mike is the theme's engine. His Q2 training-app rock went Super Green (3 wks live across DFWT, zero bugs) — Q3 is the company-wide bet."},
@@ -970,7 +983,7 @@ const DEPS = [
    ============================================================ */
 const LS_KEY = "qgr-triage-q3-state";
 let state = loadState();
-function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, laneMove:{}, view:"review", customRocks:[], selected:{}, consolidations:[], consolidatedInto:{}, groupByOwner:false}; }
+function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, laneMove:{}, view:"review", customRocks:[], selected:{}, consolidations:[], consolidatedInto:{}, groupByOwner:false, personFilter:[]}; }
 
 // Fold open-state survives re-renders (in-memory only — resets on reload by design).
 // disp-* and ovf-* folds default CLOSED (truthy check) — 7/21 audit: open-by-default overflow buried the lanes.
@@ -1160,7 +1173,7 @@ const OWNERS = [
   {id:"kickpoint", name:"Kickpoint", tier:"mgr", under:null},
   {id:"fabian",    name:"Fabian",    tier:"mgr", under:"matisen"},
   {id:"jalissa",   name:"Jalissa",   tier:"mgr", under:"anne"},
-  {id:"prosper",   name:"Prosper",   tier:"mgr", under:"paul"},
+  {id:"prosper",   name:"Ben",   tier:"mgr", under:"paul"}, // Ben Young, Prosper VCFO — id kept as "prosper" so existing saved owner assignments don't break
   {id:"austinl",   name:"Austin L",  tier:"mgr", under:null}
 ];
 const OWNER_INDEX = Object.fromEntries(OWNERS.map(o=>[o.id,o]));
@@ -1196,6 +1209,98 @@ function ownerLoadFor(leaderId){
   const mgrs = OWNERS.filter(o=>o.tier==="mgr" && o.under===leaderId);
   const mgr = mgrs.reduce((a,m)=>a+collectItemsByOwner(m.id).length,0);
   return {rt, mgr, total:rt+mgr};
+}
+
+/* ---------- department/person multi-select filter (v1.7 add) ----------
+   Cameron's recurring top ask: "click into a department and see all the goals
+   there, then click into the particular leader... For CX I can select everyone
+   and see all their goals + backlogs, or click into Amanda and just see hers,
+   or Amanda + Nhel and see those two." Built entirely on top of the existing
+   OWNERS hierarchy (tier/under) above — no new ownership data, just a display
+   filter. state.personFilter is a flat array of owner ids; empty = no filter,
+   the default, show everything. Department checkboxes are a convenience that
+   (de)selects every person under that department in one click — the underlying
+   selection is always per-person, so "department minus one person" works too.
+   Lives on the Q3 Triage tab (where cards actually carry an owner) and complements
+   — doesn't replace — the existing Group-by-owner display toggle. */
+const DEPARTMENTS = [
+  {id:"cx",        name:"Customer Experience",      leaderId:"amanda"},
+  {id:"dfwt",      name:"DFWT / Operations",        leaderId:"mike"},
+  {id:"ctxh",      name:"CTXH",                     leaderId:"brian"},
+  {id:"it",        name:"IT / Software",            leaderId:"matisen"},
+  {id:"ee",        name:"Employee Experience / HR", leaderId:"anne"},
+  {id:"finance",   name:"Finance",                  leaderId:"paul"},
+  {id:"strategy",  name:"Strategy / CEO",           leaderId:"cameron"},
+  {id:"marketing", name:"Marketing",                leaderId:null, extra:["kickpoint"]},
+  {id:"content",   name:"Content",                  leaderId:null, extra:["austinl"]}
+];
+// dynamic: any owner whose `under` points at a department's leaderId is auto-included —
+// e.g. if a Mike or Brian BM ever gets its own owner row, it shows up here with no edit needed.
+function deptPeople(d){
+  const base = d.leaderId ? [d.leaderId, ...OWNERS.filter(o=>o.tier==="mgr" && o.under===d.leaderId).map(o=>o.id)] : [];
+  return Array.from(new Set([...base, ...(d.extra||[])]));
+}
+function deptCheckState(d){
+  const people = deptPeople(d);
+  const n = people.filter(p=>state.personFilter.includes(p)).length;
+  if(n===0) return "none";
+  if(n===people.length) return "all";
+  return "some";
+}
+function togglePersonFilter(pid){
+  const set = new Set(state.personFilter);
+  if(set.has(pid)) set.delete(pid); else set.add(pid);
+  state.personFilter = Array.from(set);
+}
+function toggleDeptFilter(deptId){
+  const d = DEPARTMENTS.find(x=>x.id===deptId); if(!d) return;
+  const people = deptPeople(d);
+  const allOn = people.every(p=>state.personFilter.includes(p));
+  const set = new Set(state.personFilter);
+  people.forEach(p=> allOn ? set.delete(p) : set.add(p));
+  state.personFilter = Array.from(set);
+}
+function clearPersonFilter(){ state.personFilter = []; }
+// every card currently sitting in a Triage shortlist/overflow band, across every leader —
+// the universe the person filter and its live count operate over.
+function allTriageBandItems(){
+  let out = [];
+  LEADERS.forEach(l=>{
+    const g = Q3[l.id]; if(!g) return;
+    out = out.concat([...g.rocks, ...g.bench].filter(it=>rockLifecycle(it.id)!=="consolidated"));
+  });
+  return out;
+}
+function countForOwners(ids){ return allTriageBandItems().filter(it=>ids.includes(ownerOf(it.id))).length; }
+function currentPersonFilterCount(){ return state.personFilter.length ? countForOwners(state.personFilter) : allTriageBandItems().length; }
+function renderPersonFilterPanel(){
+  const total = allTriageBandItems().length;
+  const cur = currentPersonFilterCount();
+  const on = state.personFilter.length>0;
+  const summary = on
+    ? `${cur} of ${total} cards — filtered to ${state.personFilter.length} ${state.personFilter.length===1?"person":"people"}`
+    : `showing all ${total} cards — no filter`;
+  const tree = DEPARTMENTS.map(d=>{
+    const people = deptPeople(d);
+    const ds = deptCheckState(d);
+    const rows = people.map(pid=>{
+      const p = OWNER_INDEX[pid]; if(!p) return "";
+      const checked = state.personFilter.includes(pid);
+      return `<label class="pf-row pf-person-row"><input type="checkbox" class="pf-check" data-act="pfperson" data-id="${pid}" ${checked?'checked':''}><span>${esc(p.name)}</span><span class="band-count">(${countForOwners([pid])})</span></label>`;
+    }).join("");
+    return `<div class="pf-dept">
+      <label class="pf-row pf-dept-row"><input type="checkbox" class="pf-check" data-act="pfdept" data-id="${d.id}" ${ds==="all"?'checked':''} ${ds==="some"?'data-indeterminate="1"':''}><span>${esc(d.name)}</span><span class="band-count">(${countForOwners(people)})</span></label>
+      <div class="pf-people">${rows}</div>
+    </div>`;
+  }).join("");
+  return `<details class="fold pf-panel" data-fold="personfilter" ${(foldOpen["personfilter"]===true || on) ? "open":""}>
+    <summary>👤 Filter by person / department <span class="band-count">— ${summary}</span></summary>
+    <div class="fold-body">
+      <div class="ctx" style="margin-bottom:6px">Check a department to grab everyone in it, or check individual people — e.g. Amanda + Nhel to see just those two. Counts = cards currently sitting in Q3 Triage (shortlist + overflow) for that person.</div>
+      <div class="pf-tree">${tree}</div>
+      <div class="pf-summary"><b>${cur} card${cur===1?"":"s"}</b> in the current selection${on?"":" (default — nothing filtered out)"}${on?`<button class="tbtn" data-act="pfclear">✕ Clear filter</button>`:""}</div>
+    </div>
+  </details>`;
 }
 
 /* ---------- shortlist / overflow bands (7/20 add) ---------- */
@@ -1528,6 +1633,8 @@ function renderTriage(){
 
   html += `<div class="jumpbar">`+LEADERS.map(l=>`<a class="jump" href="#tri-${l.id}">${l.name.split(" ")[0]}</a>`).join("")+`</div>`;
 
+  html += renderPersonFilterPanel();
+
   html += `<div class="groupby-row">
     <button class="tbtn groupbybtn ${state.groupByOwner?'on':''}" data-act="togglegroupby" title="Cluster each leader's shortlist + overflow by effective owner (Assign-to if set, else the leader) instead of one flat list">${state.groupByOwner?'☑':'☐'} Group cards by owner</button>
     <span class="smallnote">e.g. splits Amanda's slate into Amanda / Tet / Nhel / Carly clusters instead of one flat list.</span>
@@ -1535,6 +1642,25 @@ function renderTriage(){
 
   LEADERS.forEach(l=>{
     const g = Q3[l.id]; if(!g) return;
+
+    // classify every rock + bench item for this leader into shortlist / overflow bands
+    // (7/22: carryover goals no longer get separate Q2 Disposition treatment here — they're
+    // already on the backlog and just flow through the same triage curation as everything
+    // else. Consolidated-away cards are filtered out here too — they collapsed into a merged
+    // card elsewhere via the ⛙ Consolidate feature.)
+    const allItems = [...g.rocks, ...g.bench].filter(it=>rockLifecycle(it.id)!=="consolidated");
+    const shortlistItemsAll = allItems.filter(it=>bandOf(it.id)==="shortlist");
+    const overflowItemsAll = allItems.filter(it=>bandOf(it.id)==="overflow");
+
+    // v1.7 person/department filter — narrows both bands to cards whose effective owner
+    // (ownerOf: the per-card owner override if set, else the leader) is in the selection.
+    // Leaders left with nothing to show get skipped entirely — the "click into a department,
+    // see all the goals there" drill-down. Empty selection = no filter, everyone shows.
+    const pfOn = state.personFilter.length>0;
+    const shortlistItems = pfOn ? shortlistItemsAll.filter(it=>state.personFilter.includes(ownerOf(it.id))) : shortlistItemsAll;
+    const overflowItems = pfOn ? overflowItemsAll.filter(it=>state.personFilter.includes(ownerOf(it.id))) : overflowItemsAll;
+    if(pfOn && shortlistItems.length===0 && overflowItems.length===0) return;
+
     const nActive = activeCount(l.id);
     const nCrit = critCount(l.id);
     const over = l.cap!==null && nActive > l.cap;
@@ -1553,9 +1679,10 @@ function renderTriage(){
     }
     const nShort = shortlistCount(l.id);
     const shortBadge = `<span class="badge ${l.cap!==null && nShort>l.cap?'warn':'ok'}">SHORTLIST ${nShort}${l.cap!==null?`/${l.cap}`:''}</span>`;
+    const pfBadge = pfOn ? `<span class="badge ok" title="Person filter active — showing the subset of this leader's cards that match your selection">🔎 ${shortlistItems.length+overflowItems.length} of ${shortlistItemsAll.length+overflowItemsAll.length} shown</span>` : "";
     html += `<section class="leader-sec" id="tri-${l.id}"><div class="leader-hd">
       <span class="leader-name">${esc(l.name)}</span><span class="leader-role">${esc(l.role)}</span>
-      ${shortBadge}${capBadge}${critBadge}${ownBadge}</div>`;
+      ${shortBadge}${capBadge}${critBadge}${ownBadge}${pfBadge}</div>`;
     if(l.blurb) html += `<div class="ctx" style="margin:-4px 0 10px">${esc(l.blurb)}</div>`;
 
     // pool pills (round 4 add) — which MB department groups are feeding this lane right now
@@ -1564,15 +1691,6 @@ function renderTriage(){
     if(mbGroups.length){
       html += `<div class="poolpills" title="MB department groups currently feeding this lane — cards are movable, so this list changes as candidates get relocated">Pool: `+mbGroups.map(gr=>`<span class="poolpill">${esc(gr)}</span>`).join(" ")+`</div>`;
     }
-
-    // classify every rock + bench item for this leader into shortlist / overflow bands
-    // (7/22: carryover goals no longer get separate Q2 Disposition treatment here — they're
-    // already on the backlog and just flow through the same triage curation as everything
-    // else. Consolidated-away cards are filtered out here too — they collapsed into a merged
-    // card elsewhere via the ⛙ Consolidate feature.)
-    const allItems = [...g.rocks, ...g.bench].filter(it=>rockLifecycle(it.id)!=="consolidated");
-    const shortlistItems = allItems.filter(it=>bandOf(it.id)==="shortlist");
-    const overflowItems = allItems.filter(it=>bandOf(it.id)==="overflow");
 
     html += `<div class="band-hd">Shortlist <span class="band-count">(${shortlistItems.length})</span></div>`;
     html += renderCardBand(shortlistItems, l.id);
@@ -1704,6 +1822,11 @@ function doWhiteboardExport(){
   if(!(navigator.clipboard && navigator.clipboard.writeText)) toast("Whiteboard downloaded ✓ (clipboard unavailable)");
 }
 
+// checkbox.indeterminate is a JS-only property (no HTML attribute) — the dept
+// tri-state checkbox in the person filter panel needs this pass after every render.
+function applyIndeterminate(){
+  document.querySelectorAll('input.pf-check[data-indeterminate="1"]').forEach(el=>{ el.indeterminate = true; });
+}
 function render(){
   renderTabs();
   const m = document.getElementById("main");
@@ -1711,6 +1834,7 @@ function render(){
   else if(state.view==="triage") m.innerHTML = renderTriage();
   else if(state.view==="whiteboard") m.innerHTML = renderWhiteboard();
   else m.innerHTML = renderDeps();
+  applyIndeterminate();
   updateConsolidateBtn();
 }
 
@@ -1741,6 +1865,7 @@ document.addEventListener("click", e=>{
   else if(act==="oqdecide"){ const s=oqs(b.dataset.id); s.decided=!s.decided; save(); render(); }
   else if(act==="selcard"){ toggleCardSelect(b.dataset.id); }
   else if(act==="togglegroupby"){ state.groupByOwner = !state.groupByOwner; save(); render(); }
+  else if(act==="pfclear"){ clearPersonFilter(); save(); render(); }
   else if(act==="wbexport"){ doWhiteboardExport(); }
   else if(act==="wbjump"){
     const id = b.dataset.id, leader = b.dataset.leader;
@@ -1764,6 +1889,8 @@ document.addEventListener("change", e=>{
   const t = e.target;
   if(t.matches("select.lanesel")){ moveMBCandidate(t.dataset.id, t.value); }
   else if(t.matches("select.ownersel")){ q3s(t.dataset.id).owner = t.value; save(); render(); }
+  else if(t.matches('input.pf-check[data-act="pfperson"]')){ togglePersonFilter(t.dataset.id); save(); render(); }
+  else if(t.matches('input.pf-check[data-act="pfdept"]')){ toggleDeptFilter(t.dataset.id); save(); render(); }
 });
 document.addEventListener("keydown", e=>{
   if(e.target.matches(".addgoal-title, .addgoal-note") && e.key==="Enter"){
@@ -2126,6 +2253,26 @@ function runSelfTest(){
   q3s(doneTestId2).decision = doneTestPrevDecision2;
   q3s(doneTestId).decision = doneTestPrevDecision;
   out.push("after unwind, rockLifecycle(" + doneTestId + ") = " + rockLifecycle(doneTestId) + " [expect back to prior state]");
+  // ---- v1.7 checks: person/department multi-select filter ----
+  const pfBefore = state.personFilter.slice();
+  state.personFilter = [];
+  out.push("deptCheckState(cx) w/ empty filter: " + deptCheckState(DEPARTMENTS.find(d=>d.id==="cx")) + " [expect none]");
+  toggleDeptFilter("cx");
+  out.push("toggleDeptFilter(cx) selects: " + state.personFilter.slice().sort().join(",") + " [expect amanda,carly,nhel,tet]");
+  out.push("deptCheckState(cx) after select-all: " + deptCheckState(DEPARTMENTS.find(d=>d.id==="cx")) + " [expect all]");
+  togglePersonFilter("nhel");
+  out.push("deptCheckState(cx) after un-checking Nhel: " + deptCheckState(DEPARTMENTS.find(d=>d.id==="cx")) + " [expect some]");
+  togglePersonFilter("nhel");
+  toggleDeptFilter("cx");
+  out.push("toggleDeptFilter(cx) toggled back off: " + JSON.stringify(state.personFilter) + " [expect []]");
+  state.personFilter = ["amanda"];
+  const filteredTriageHtml = renderTriage();
+  out.push("renderTriage w/ personFilter=[amanda] omits Mike's section: " + !filteredTriageHtml.includes('id="tri-mike"') + " [expect true]");
+  out.push("renderTriage w/ personFilter=[amanda] keeps Amanda's section: " + filteredTriageHtml.includes('id="tri-amanda"') + " [expect true]");
+  out.push("countForOwners(['amanda']) w/ filter active: " + countForOwners(["amanda"]) + " vs total " + allTriageBandItems().length + " [expect fewer]");
+  state.personFilter = pfBefore;
+  out.push("personFilter restored after test: " + JSON.stringify(state.personFilter) + " [expect prior value]");
+
   const gboBefore = state.groupByOwner;
   state.groupByOwner = true;
   const groupedHtml = renderCardBand([Q3.amanda.rocks[0]], "amanda");
