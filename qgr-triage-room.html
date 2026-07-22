@@ -226,15 +226,13 @@ select.lanesel{border-color:var(--orange-500);}
 details.overflow-fold{border-top:0;padding-top:0;}
 .overflow-scroll{max-height:1400px;overflow-y:auto;padding-right:4px;}
 
-/* ---------- Q2 Disposition band (7/20 round 3 add) ---------- */
-details.q2disp-fold{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:10px 14px;margin-bottom:12px;}
-details.q2disp-fold summary{cursor:pointer;font-family:var(--display);font-size:15px;letter-spacing:.4px;color:var(--navy-400);list-style:none;user-select:none;}
-details.q2disp-fold summary::before{content:'▸ ';}
-details.q2disp-fold[open] summary::before{content:'▾ ';}
-.q2disp-row{padding:8px 2px;border-bottom:1px solid var(--grey-50);}
-.q2disp-row:last-child{border-bottom:0;}
-.q2disp-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;font-size:12.5px;}
-.dispbtn.sel-accept{background:var(--blue-500);border-color:var(--blue-500);color:#fff;}
+/* ---------- Consolidate (7/22 UX pass add) ---------- */
+.mergesel{width:15px;height:15px;accent-color:var(--blue-500);cursor:pointer;}
+.card.mergeselected{box-shadow:0 0 0 2px var(--blue-500);border-color:var(--blue-500);}
+#btn-consolidate:disabled{opacity:.45;cursor:default;}
+#btn-consolidate.armed{background:var(--blue-500);border-color:var(--blue-500);color:#fff;opacity:1;}
+.chip.dupewarn{background:#fff;color:#a33;border:1px solid #a33;}
+.chip.merged{background:#5a3d99;color:#fff;}
 
 /* ---------- Whiteboard view (7/20 round 3 add) ---------- */
 .wb-grid{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:8px;}
@@ -297,6 +295,7 @@ details.q2disp-fold[open] summary::before{content:'▾ ';}
     </div>
     <div class="hd-spacer"></div>
     <button class="hd-btn ghost" id="btn-howto" title="How this room works">? How to use</button>
+    <button class="hd-btn ghost" id="btn-consolidate" title="Check 2+ cards, then merge them into one" disabled>⛙ Consolidate</button>
     <button class="hd-btn" id="btn-export" title="Keyboard: E">⬇ Export decision log</button>
     <button class="hd-btn ghost" id="btn-reset" style="margin-left:18px;opacity:.65" title="Wipes every ruling, grade, and note — kept away from Export on purpose">Reset all</button>
   </div>
@@ -318,7 +317,8 @@ details.q2disp-fold[open] summary::before{content:'▾ ';}
     <div class="howto-sub">Cameron + Paul's red-pen session · four tabs, in order · everything auto-saves as you click</div>
     <ol>
       <li><b>Q2 Review</b> — for each rock, click a <b>PROJ</b> grade (SG / G / R). SELF grades are pre-seeded from the leaders' own AARs; an orange <b>⚠ DIVERGENCE</b> border means your read disagrees with theirs — those are the ones to talk about. The notes box = notes for the room.</li>
-      <li><b>Q3 Triage</b> — the main event. Walk each leader top to bottom. Per card: pick a ruling — <b>ACCEPT / EDIT / KILL / DEFER</b> (EDIT opens a "what changes" box) — toggle <b>★ CRIT</b> (each leader needs exactly 2), and set the <b>Owner</b>. Second row = placement: keep it in the Q3 shortlist or park it in overflow; MB cards can also move to a different leader's lane. "+ Add a goal" at the lane bottom catches anything missing. Answer the 5 <b>Open Questions</b> chips up top as you go.</li>
+      <li><b>Q3 Triage</b> — the main event. Walk each leader top to bottom. Per card: pick a ruling — <b>ACCEPT / EDIT / KILL / DEFER</b> (EDIT opens a "what changes" box) — toggle <b>★ CRIT</b> (each leader needs exactly 2), and set the <b>Owner</b>. Second row = placement: keep it in the Q3 shortlist or park it in overflow; MB cards can also move to a different leader's lane. "+ Add a goal" at the lane bottom catches anything missing. Answer the 5 <b>Open Questions</b> chips up top as you go. Each card's Flywheel/PACe/priority lens tags are tucked under a <b>"Lens detail"</b> click-to-expand — the face stays clean, the data's one click away.</li>
+      <li><b>Consolidate</b> — check the box on 2+ cards that are really the same thing, click <b>⛙ Consolidate</b> in the header, name the merged card. The originals collapse into one; the export notes exactly which cards got folded in.</li>
       <li><b>Dependency Board</b> — read-only check; statuses recompute live off your kills and defers. Anything <b>NOT COVERED</b> on Matisen needs an explicit yes/no before you leave.</li>
       <li><b>Whiteboard</b> — the closing mirror: each leader's column should hold their slate + 2 CRITs. Click any card to jump back to it.</li>
       <li><b>Export</b> (or press <b>E</b>) — copies + downloads the full decision log for Albert to write back to the Master Backlog.</li>
@@ -334,7 +334,7 @@ details.q2disp-fold[open] summary::before{content:'▾ ';}
    + goals-dashboard/dashboard-data.json (7/17 refresh).
    Green / Super Green text = contract language, transcribed faithfully.
    ============================================================ */
-const VERSION = "QGR Triage Room v1.4 · WALK COMPLETE 7/22 — all 15 MB groups walked; remaining 11 groups synced (+28 newly-qualifying QG/SC cards + 5 Kickpoint Q3 goals) · triage bar (SC+QG only) · v1.3 base: clean cards + 33 walk-new candidates + WALK-SYNC 7/22 ~1am (4 groups) · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21";
+const VERSION = "QGR Triage Room v1.5 · UX pass 7/22 (live walk-through w/ a leader) — semantic dedupe (3 cards merged, 4 flagged ⚠ possible dupe) · ⛙ Consolidate feature (check cards, merge live, export logs the fold) · Flywheel/PACe/priority tiles moved off the card face into a click-to-expand Lens detail · every card's Monday pulse link now renders consistently (NO PULSE badge instead of a dead link) · Q2 Disposition/carryover band removed — carry-over is now just part of triage curation, no separate treatment · v1.4 base: WALK COMPLETE 7/22 — all 15 MB groups walked; remaining 11 groups synced (+28 newly-qualifying QG/SC cards + 5 Kickpoint Q3 goals) · triage bar (SC+QG only) · v1.3 base: clean cards + 33 walk-new candidates + WALK-SYNC 7/22 ~1am (4 groups) · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21";
 
 const LEADERS = [
   {id:"mike",    name:"Mike Vandenbroader", role:"DFWT RM + Head of Ops", cap:5, hardCap:false, blurb:"Mike is the theme's engine. His Q2 training-app rock went Super Green (3 wks live across DFWT, zero bugs) — Q3 is the company-wide bet."},
@@ -415,10 +415,6 @@ const Q2 = {
     {k:"others-q2-5", name:"Carly — Maternity Leave Transition", crit:true, status:"green", carry:"close", carryNote:"Back from leave → Q3 = ramp-back rock first, then Magic Moments Phase 2 + ONE canonical MM counter", context:"Only active Q2 rock per 4/14; claims time-to-close held green under Amanda's maintenance."}
   ]
 };
-
-/* lookup: Q2 rock key -> Q2 rock object (used by the Q2 Disposition band, round 3) */
-const Q2_INDEX = {};
-Object.values(Q2).forEach(list=>list.forEach(r=>Q2_INDEX[r.k]=r));
 
 /* ---------- Q3 TRIAGE seed (draft, transcribed faithfully) ---------- */
 const Q3 = {
@@ -699,7 +695,7 @@ const MB_POOL = [
   // ---- 7/21-NIGHT WALK ADDITIONS — met the triage bar (QG / Super Critical) but were NOT previously in the room ----
   {pulseId:"11728355419", name:"Cameron — Branch Visits + Listen & Learns (2-3 Branches)", why:"priority:QG — met the triage bar on the 7/21-night walk; was NOT previously in the room", group:"Strategy", homeLane:"cameron", rank:900, walkNew:true},
   {pulseId:"11728344073", name:"Paul — Branch Visits + Listen & Learns (2-3 Branches)", why:"priority:QG — met the triage bar on the 7/21-night walk; was NOT previously in the room", group:"Strategy", homeLane:"cameron", rank:901, walkNew:true},
-  {pulseId:"11741160101", name:"Cameron/KP — Oversee Website Redesign (Smart Move System Rollout Part 2)", why:"priority:QG — met the triage bar on the 7/21-night walk; was NOT previously in the room", group:"Strategy", homeLane:"cameron", rank:902, walkNew:true},
+  {pulseId:"11741160101", name:"Cameron/KP — Oversee Website Redesign (Smart Move System Rollout Part 2)", why:"priority:QG — met the triage bar on the 7/21-night walk; was NOT previously in the room. Semantic-dedupe pass 7/22 (live walk-through w/ a leader): consolidated 2 near-duplicate cards into this one — same website-redesign workstream described 3 different ways.", group:"Strategy", homeLane:"cameron", rank:902, walkNew:true, mergedFrom:[{pulseId:"11728343126", name:"Website Redesign Phase 2"},{pulseId:"KP-GOAL-website", name:"KP Q3 Goal — Website Redesign"}]},
   {pulseId:"11748426767", name:"Pending M&A Research - Trial Non-Moving Revenue Line — $100K Revenue Target (2027)", why:"priority:QG — met the triage bar on the 7/21-night walk; was NOT previously in the room", group:"Strategy", homeLane:"cameron", rank:903, walkNew:true},
   {pulseId:"11748434053", name:"Define Geographic Strategy — Deepen Existing Markets vs. Expand to New (like opening a Houston Branch)", why:"priority:QG — met the triage bar on the 7/21-night walk; was NOT previously in the room", group:"Strategy", homeLane:"cameron", rank:904, walkNew:true},
   {pulseId:"11728355427", name:"Create Branch On-Site Audit Tool for Regional Managers", why:"priority:Super Critical — met the triage bar on the 7/21-night walk; was NOT previously in the room", group:"Strategy", homeLane:"cameron", rank:905, walkNew:true},
@@ -755,8 +751,7 @@ const MB_POOL = [
   {pulseId:"11752750983", name:"30-Minute Cultural Phone Interview Rollout", why:"priority:Super Critical (walk-complete 7/22) — HR, Owner=Anne. Ties to the A1 trial-day-elimination / Jalissa cultural-phone-interview work.", group:"EE/HR", homeLane:"anne", rank:957, walkNew:true},
   {pulseId:"11752777323", name:"🌺 100-Point Behavioral System — Anne's Q2 Rock 2 Companion", why:"priority:Super Critical (walk-complete 7/22) — HR, 🌺=Anne. Note: 100-pt system is parked (mover-app contingent) per Thread #7.", group:"EE/HR", homeLane:"anne", rank:958, walkNew:true},
   // CAMERON — Marketing + Content
-  {pulseId:"11728343126", name:"Website Redesign Phase 2", why:"priority:QG (walk-complete 7/22) — Marketing, Owner=Cameron. ⚠ NEAR-DUP of the existing Cameron/KP Website Redesign card (11741160101) + the KP 'Website Redesign' goal below — fold at triage.", group:"Marketing", homeLane:"cameron", rank:959, walkNew:true},
-  {pulseId:"11728346741", name:"Produce Consistent Short + Long-Form Video Content — Austin + KP owned", why:"priority:QG (walk-complete 7/22) — Marketing, directs col=Austin L. Home=Cameron, owner pre-set to Austin L. Overlaps KP 'Video Creation' goal below.", group:"Marketing", homeLane:"cameron", rank:960, walkNew:true, ownerOverride:"austinl"},
+  {pulseId:"11728346741", name:"Produce Consistent Short + Long-Form Video Content — Austin + KP owned", why:"priority:QG (walk-complete 7/22) — Marketing, directs col=Austin L. Home=Cameron, owner pre-set to Austin L. Semantic-dedupe pass 7/22: consolidated Kickpoint's 'KP Q3 Goal — Video Creation' proposal into this card — same content-production workstream.", group:"Marketing", homeLane:"cameron", rank:960, walkNew:true, ownerOverride:"austinl", mergedFrom:[{pulseId:"KP-GOAL-video", name:"KP Q3 Goal — Video Creation"}]},
   {pulseId:"11728394136", name:"Run LLM SEO Audit — AI Search Visibility by Market", why:"priority:Super Critical (walk-complete 7/22) — Marketing, Owner=Cameron. NOT previously in the room.", group:"Marketing", homeLane:"cameron", rank:961, walkNew:true},
   // BRIAN — CTXH + Culture (🌵)
   {pulseId:"11733927754", name:"🌵 Brian — Training Day Overhaul (Stations + Quizzes + Games Integration)", why:"priority:QG (walk-complete 7/22) — CTXH, 🌵=Brian. This is the B4 Training Day Overhaul rock's MB item.", group:"CTXH", homeLane:"brian", rank:962, walkNew:true},
@@ -765,14 +760,11 @@ const MB_POOL = [
   // MIKE — DFWT
   {pulseId:"11733914538", name:"Mike — Fleet Damage Tracking App (Replit Beta)", why:"priority:Super Critical (walk-complete 7/22) — DFWT, Owner=Mike. Note: = the Q2 bonus item (mike-q2-5), was iced behind the training app.", group:"DFWT Region", homeLane:"mike", rank:965, walkNew:true},
   // AMANDA — Sales (💕)
-  {pulseId:"12596528246", name:"💕 Extend New Email Design System to Full Email Suite — Shorter, Video-First, Fewer Words", why:"priority:QG (walk-complete 7/22) — Sales group, ⚠ VERIFY OWNER: no Owner set (created AFTER the 7/21 Sales walk per CLAUDE.md). Best-guess Amanda; heavily KP/Matisen-owned — overlaps KP 'Email Optimizations' goal below.", group:"Sales", homeLane:"amanda", rank:966, walkNew:true},
+  {pulseId:"12596528246", name:"💕 Extend New Email Design System to Full Email Suite — Shorter, Video-First, Fewer Words", why:"priority:QG (walk-complete 7/22) — Sales group, ⚠ VERIFY OWNER: no Owner set (created AFTER the 7/21 Sales walk per CLAUDE.md). Best-guess Amanda; heavily KP/Matisen-owned. Semantic-dedupe pass 7/22: consolidated Kickpoint's 'KP Q3 Goal — Email Optimizations' proposal into this card — same workstream.", group:"Sales", homeLane:"amanda", rank:966, walkNew:true, mergedFrom:[{pulseId:"KP-GOAL-email", name:"KP Q3 Goal — Email Optimizations"}]},
   {pulseId:"12601585701", name:"💕 Coordinate Jules doing training / ride-alongs with low-performer sales team members", why:"priority:Super Critical (walk-complete 7/22) — Sales group, ⚠ VERIFY OWNER: no Owner set, new item. Best-guess Amanda (sales coaching).", group:"Sales", homeLane:"amanda", rank:967, walkNew:true},
 
   // ---- KICKPOINT Q3 GOAL IDEAS (KP's own proposed Q3 goals — distinct provenance from the MB backlog; owner=Kickpoint, Marketing) ----
-  {pulseId:"KP-GOAL-website", name:"KP Q3 Goal — Website Redesign", why:"Kickpoint-proposed Q3 goal. ⚠ NEAR-DUP of the Cameron/KP Website Redesign card (11741160101) + Website Redesign Phase 2 (11728343126) — same workstream, KP's framing.", group:"Marketing", homeLane:"cameron", rank:970, walkNew:true, ownerOverride:"kickpoint"},
-  {pulseId:"KP-GOAL-video", name:"KP Q3 Goal — Video Creation", why:"Kickpoint-proposed Q3 goal. Overlaps 'Produce Consistent Short + Long-Form Video Content' (11728346741, Austin L). KP's content-production framing.", group:"Marketing", homeLane:"cameron", rank:971, walkNew:true, ownerOverride:"kickpoint"},
   {pulseId:"KP-GOAL-quoteform", name:"KP Q3 Goal — Quote Form", why:"Kickpoint-proposed Q3 goal. Ties to the Quote Funnel de-mix work (Thread #23) — Jeff's UI changes + EMMA fields. KP's framing.", group:"Marketing", homeLane:"cameron", rank:972, walkNew:true, ownerOverride:"kickpoint"},
-  {pulseId:"KP-GOAL-email", name:"KP Q3 Goal — Email Optimizations", why:"Kickpoint-proposed Q3 goal. Overlaps 'Extend New Email Design System to Full Email Suite' (12596528246). KP's framing.", group:"Marketing", homeLane:"cameron", rank:973, walkNew:true, ownerOverride:"kickpoint"},
   {pulseId:"KP-GOAL-taggateway", name:"KP Q3 Goal — Tag Gateway (Google feature — $2,500 setup, APPROVED)", why:"Kickpoint-proposed Q3 goal — NEW, no MB dup. Google Tag Gateway (server-side tagging); $2,500 setup, Cameron APPROVED.", group:"Marketing", homeLane:"cameron", rank:974, walkNew:true, ownerOverride:"kickpoint"},
 
   // ---- MIKE (home) — DFWT Region, Operations, Inbox, Strategy cross-pulls ----
@@ -792,7 +784,7 @@ const MB_POOL = [
   // ---- ANNE (home) — Employee Experience / HR, the full dept (15 of 15) ----
   {pulseId:"11728351027", name:"Launch Einstein U — Manager Ongoing Education + Recertification", why:"priority:Super Critical — direct resonance with the new cross-cutting directive (\"ongoing education\" module for managers).", group:"EE/HR", homeLane:"anne", rank:1},
   {pulseId:"12443058880", name:"Weekly Employee Magic Moments — one Roundtable leader delivers a magic moment to an employee every week", why:"QGR-lens tagged, updated 7/3 — direct resonance with the new cross-cutting \"Magic Moments for employees\" directive.", group:"EE/HR", homeLane:"anne", rank:2},
-  {pulseId:"11728340047", name:"Develop Mover-to-Manager Pipeline", why:"priority:Super Critical, updated 7/17 — speed-to-competence + succession-framework resonance.", group:"EE/HR", homeLane:"anne", rank:3},
+  {pulseId:"11728340047", name:"Develop Mover-to-Manager Pipeline", why:"priority:Super Critical, updated 7/17 — speed-to-competence + succession-framework resonance.", group:"EE/HR", homeLane:"anne", rank:3, possibleDupeOf:{pulseId:"11733923114", name:"Brian — Manager Development Pipeline (Mover→Lead→FM→OM→BM)", note:"Semantic-dedupe pass 7/22: same mover-to-manager pipeline concept as Brian's CTXH card (11733923114), described from the HR side. Different owners — flagged, not auto-merged. Use Consolidate if these should become one decision."}},
   {pulseId:"11741530813", name:"Redesign eNPS Survey Cadence — Monthly Pulse + Quarterly Full Survey", why:"updated 7/17 — the per-item home the A4/A-S2 eNPS bundle notes said would get decided at triage.", group:"EE/HR", homeLane:"anne", rank:4},
   {pulseId:"11733894186", name:"Anne — Hiring Targets 105% (Summer Peak)", why:"priority:QG — direct A1 theme tie.", group:"EE/HR", homeLane:"anne", rank:5},
   {pulseId:"11728351015", name:"Implement Cohort Hiring — Biweekly Onboarding Classes for Busy Season", why:"updated 7/17 — onboarding / speed-to-competence theme.", group:"EE/HR", homeLane:"anne", rank:6},
@@ -807,7 +799,7 @@ const MB_POOL = [
   {pulseId:"11728339915", name:"Evaluate Volunteer Hours as PTO Benefit — eNPS Suggestion", why:"QGR-lens tagged", group:"EE/HR", homeLane:"anne", rank:15},
 
   // ---- AMANDA (home) — Sales + Damages/CS, the full pool (22) + 1 Strategy cross-pull ----
-  {pulseId:"11728346757", name:"CET Q2 Theme — Estimate Accuracy + Realization Rate", why:"priority:QG — strongest theme resonance (estimate accuracy ties directly to speed-to-competence).", group:"Sales", homeLane:"amanda", rank:1},
+  {pulseId:"11728346757", name:"CET Q2 Theme — Estimate Accuracy + Realization Rate", why:"priority:QG — strongest theme resonance (estimate accuracy ties directly to speed-to-competence).", group:"Sales", homeLane:"amanda", rank:1, possibleDupeOf:{pulseId:"11728360389", name:"Improve Estimate Accuracy — Sales Coaching + Dashboard Management", note:"Semantic-dedupe pass 7/22: both cards are the same Estimate Accuracy workstream (Q2 theme close-out vs. Q3 coaching/dashboard build) — flagged, not auto-merged since scope may genuinely differ. Use Consolidate if these should become one decision."}},
     {pulseId:"11864128674", name:"Lead Treatment Framework — Triage Cohort A vs Cohort B vs directBook", why:"updated 7/17 — direct C2 (demand-pursuit) resonance.", group:"Sales", homeLane:"amanda", rank:2},
     {pulseId:"11728352450", name:"Adjust Primary Sales Metrics — Conv $, Hours Booked, Packing Breakout", why:"priority:Super Critical — candidate to resolve Open Question 5 (replace the unbridgeable 40% Conversion $ KPI).", group:"Sales", homeLane:"amanda", rank:3},
     {pulseId:"11728346788", name:"Magic Moments Toolkit — Draft + Pilot in 1 Market", why:"priority:Super Critical — resonates with the new cross-cutting Magic Moments directive.", group:"Damages/CS", homeLane:"amanda", rank:4},
@@ -818,7 +810,7 @@ const MB_POOL = [
     {pulseId:"11733919774", name:"Amanda — Centralized Sales Email Rollout (Houston Test First)", why:"priority:QG", group:"Sales", homeLane:"amanda", rank:9},
     {pulseId:"11733924241", name:"Nhel — Manager Sales Accountability (Weekly RM Reporting)", why:"priority:QG — sub-leader item, owner pre-selected to Nhel.", group:"Sales", homeLane:"amanda", rank:10, ownerOverride:"nhel"},
     {pulseId:"11728352427", name:"Automate SMS Move Reminder — Reduce Last-Minute Cancellations", why:"priority:Super Critical", group:"Sales", homeLane:"amanda", rank:11},
-    {pulseId:"11728360389", name:"Improve Estimate Accuracy — Sales Coaching + Dashboard Management", why:"priority:Super Critical — near-duplicate of the CET Q2 Theme Estimate Accuracy item above; kept visible, not shortlist-worthy twice.", group:"Sales", homeLane:"amanda", rank:12},
+    {pulseId:"11728360389", name:"Improve Estimate Accuracy — Sales Coaching + Dashboard Management", why:"priority:Super Critical — near-duplicate of the CET Q2 Theme Estimate Accuracy item above; kept visible, not shortlist-worthy twice.", group:"Sales", homeLane:"amanda", rank:12, possibleDupeOf:{pulseId:"11728346757", name:"CET Q2 Theme — Estimate Accuracy + Realization Rate", note:"Semantic-dedupe pass 7/22: both cards are the same Estimate Accuracy workstream — flagged, not auto-merged. Use Consolidate if these should become one decision."}},
     {pulseId:"11728354543", name:"Launch Sales Competitions — Small Bonus Incentives to Drive Engagement", why:"priority:Super Critical — thin.", group:"Sales", homeLane:"amanda", rank:13},
     {pulseId:"11728336135", name:"Implement AI Surveying — Evaluate Yembo vs LiveSwitch Replacement", why:"priority:Super Critical — AI-wedge/governance adjacent.", group:"Sales", homeLane:"amanda", rank:14},
     {pulseId:"11728354533", name:"Carly — Learn Rippling Payroll Processing", why:"priority:QG — sub-leader item, owner pre-selected to Carly.", group:"Damages/CS", homeLane:"amanda", rank:15, ownerOverride:"carly"},
@@ -848,7 +840,7 @@ const MB_POOL = [
     {pulseId:"11728362099", name:"Evaluate Portal-to-Portal Pricing — Post Variable Pricing Stabilization", why:"priority:Super Critical — Strategy dept, cross-pulled to Matisen (T1 pricing continuation).", group:"Strategy", homeLane:"matisen", rank:14},
 
   // ---- BRIAN (home) — CTXH, full dept (6 of 6) ----
-    {pulseId:"11733923114", name:"Brian — Manager Development Pipeline (Mover→Lead→FM→OM→BM)", why:"updated 7/17 — direct B2 speed-to-competence resonance.", group:"CTXH", homeLane:"brian", rank:1},
+    {pulseId:"11733923114", name:"Brian — Manager Development Pipeline (Mover→Lead→FM→OM→BM)", why:"updated 7/17 — direct B2 speed-to-competence resonance.", group:"CTXH", homeLane:"brian", rank:1, possibleDupeOf:{pulseId:"11728340047", name:"Develop Mover-to-Manager Pipeline", note:"Semantic-dedupe pass 7/22: same mover-to-manager pipeline concept as Anne's HR card (11728340047), described from the CTXH side. Different owners — flagged, not auto-merged. Use Consolidate if these should become one decision."}},
     {pulseId:"11728362071", name:"ATX Flex Manager + SA Ops Manager Development", why:"priority:Super Critical — feeds the B-S1 succession bench item.", group:"CTXH", homeLane:"brian", rank:2},
     {pulseId:"11728362090", name:"CTXH Quarterly Theme Mgmt — Ensure All Managers Hit QGs", why:"priority:QG", group:"CTXH", homeLane:"brian", rank:3},
     {pulseId:"11728362107", name:"Legends Part 2 — Update Template + Annual Book Format", why:"priority:QG", group:"CTXH", homeLane:"brian", rank:4},
@@ -959,7 +951,7 @@ const DEPS = [
    ============================================================ */
 const LS_KEY = "qgr-triage-q3-state";
 let state = loadState();
-function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, disp:{}, laneMove:{}, view:"review", customRocks:[]}; }
+function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, laneMove:{}, view:"review", customRocks:[], selected:{}, consolidations:[], consolidatedInto:{}}; }
 
 // Fold open-state survives re-renders (in-memory only — resets on reload by design).
 // disp-* and ovf-* folds default CLOSED (truthy check) — 7/21 audit: open-by-default overflow buried the lanes.
@@ -999,7 +991,8 @@ function hydrateMBCandidates(){
     if(g.bench.some(b=>b.id===id)) return;
     g.bench.push({id, kind:"mb", name:c.name, detail:c.why, pulseId:c.pulseId, mbRank:c.rank||(i+1), walkNew:c.walkNew||false,
       group:c.group, homeLane:c.homeLane, ownerOverride:c.ownerOverride||null,
-      stale:!!c.stale, staleNote:c.staleNote||null});
+      stale:!!c.stale, staleNote:c.staleNote||null,
+      mergedFrom:c.mergedFrom||null, possibleDupeOf:c.possibleDupeOf||null});
   });
 }
 hydrateMBCandidates();
@@ -1045,66 +1038,6 @@ function q2s(k){ if(!state.q2[k]) state.q2[k] = {proj:null, self:null, notes:"",
 function q3s(id){ if(!state.q3[id]) state.q3[id] = {decision:null, editNotes:"", crit:null, promoted:false, owner:null, band:null}; return state.q3[id]; }
 function oqs(id){ if(!state.oq[id]) state.oq[id] = {decided:false, answer:""}; return state.oq[id]; }
 
-/* ============================================================
-   Q2 DISPOSITION (round 3 add) — mechanical ALBERT-REC derivation off the
-   already-curated Q2 `status` (PROJ grade) + `carry` (AAR carry-call) fields.
-   Never guesses past what the AAR carry-call already encodes: SG/G that
-   closes -> Done; anything that carries/restructures -> Extends (checked
-   against ROCK_INDEX when the grade was Red, so "extends" only fires if a
-   named Q3 rock actually exists); explicit cadence language -> Ongoing
-   cadence; Red with no matching successor -> Remainder; everything else
-   (e.g. carry:"hold") is left unset -> "⚠ Albert to confirm" in the UI.
-   ============================================================ */
-const DISP_OPTIONS = [
-  {code:"done",      label:"✅ Done — close it"},
-  {code:"remainder", label:"📋 Remainder → task"},
-  {code:"cadence",   label:"🔁 Ongoing cadence"},
-  {code:"extends",   label:"➡ Extends to Q3+"}
-];
-const DISP_LABEL = Object.fromEntries(DISP_OPTIONS.map(o=>[o.code,o.label]));
-function q2ArrowTarget(note){
-  const m = /→\s*([A-Z]{1,2}\d)/.exec(note||"");
-  return m ? m[1] : null;
-}
-function albertRecDisposition(r){
-  if(!r) return null;
-  if(r.carry==="kill") return "done";
-  const cadenceHint = /\bcadence\b/i.test((r.name||"")+" "+(r.carryNote||""));
-  if(cadenceHint && (r.carry==="close" || r.carry==="carry" || r.carry==="restructure")) return "cadence";
-  if(r.carry==="close") return "done";
-  if(r.carry==="carry" || r.carry==="restructure"){
-    if(r.status==="red"){
-      const tgt = q2ArrowTarget(r.carryNote);
-      return (tgt && ROCK_INDEX[tgt]) ? "extends" : "remainder";
-    }
-    return "extends";
-  }
-  if(r.status==="red") return "remainder";
-  return null; // carry:"hold" or anything ambiguous — do NOT guess
-}
-function dispState(k){
-  if(!state.disp[k]) state.disp[k] = {value:null, rec:false};
-  const s = state.disp[k];
-  if(s.value == null){
-    const rec = albertRecDisposition(Q2_INDEX[k]);
-    if(rec){ s.value = rec; s.rec = true; }
-  }
-  return s;
-}
-function projGradeLabel(status){
-  return status==="supergreen"?"SG":status==="green"?"G":status==="red"?"R":status==="yellow"?"Y":"?";
-}
-function dispRow(r){
-  const st = dispState(r.k);
-  const btns = DISP_OPTIONS.map(o=>`<button class="tbtn dispbtn ${st.value===o.code?'sel-accept':''}" data-act="disp" data-key="${r.k}" data-v="${o.code}">${o.label}</button>`).join("");
-  const tag = st.value
-    ? (st.rec ? `<span class="badge ok" title="Mechanically derived from the Q2 AAR carry-call — click a button to override">ALBERT-REC</span>` : `<span class="badge ok">SET</span>`)
-    : `<span class="badge warn">⚠ Albert to confirm</span>`;
-  return `<div class="q2disp-row">
-    <div class="q2disp-top">${statusDot(r.status)}<b>${esc(r.name)}</b>${r.crit?'<span class="chip crit">CRIT</span>':''}<span class="chip carry-${r.carry}">PROJ ${projGradeLabel(r.status)}</span>${tag}</div>
-    <div class="triage-row">${btns}</div>
-  </div>`;
-}
 function addCustomGoal(leaderId, title, note){
   if(!title || !title.trim()) return;
   const id = "CADD-"+leaderId+"-"+Date.now();
@@ -1113,6 +1046,52 @@ function addCustomGoal(leaderId, title, note){
   Q3[leaderId].rocks.push(rockObj);
   ROCK_INDEX[id] = {rock:rockObj, leader:leaderId, bench:false};
   save(); render();
+}
+/* ---------- Consolidate (7/22 UX pass add) ----------
+   Multi-select cards (checkbox on each card, wired via data-act="selcard") →
+   ⛙ Consolidate button in the header → prompt for the merged name → the
+   selected cards collapse into one. Originals are NOT deleted (dependency
+   board / owner-load math still reference them safely) — they're marked
+   consolidated via state.consolidatedInto and rockLifecycle() reports them
+   as "consolidated" instead of "active", which drops them out of every
+   card list, count, and owner-load calc automatically. The new merged card
+   is a real card (pushed into the target leader's bench + ROCK_INDEX) that
+   carries a `mergedFrom` snapshot for the fold-out list + the export. */
+function selectedCardIds(){ return Object.keys(state.selected).filter(id=>state.selected[id]); }
+function toggleCardSelect(id){
+  if(state.selected[id]) delete state.selected[id]; else state.selected[id] = true;
+  save(); render();
+}
+function doConsolidate(){
+  const ids = selectedCardIds();
+  if(ids.length < 2){ toast("Check 2+ cards first, then Consolidate"); return; }
+  const entries = ids.map(id=>({id, e:ROCK_INDEX[id]})).filter(x=>x.e);
+  if(entries.length < 2){ toast("Selection error — try again"); return; }
+  const defaultName = entries[0].e.rock.name;
+  const name = prompt(`Name the merged card (folding in ${entries.length} cards):`, defaultName);
+  if(!name || !name.trim()) return;
+  const leaderId = entries[0].e.leader;
+  const members = entries.map(x=>({pulseId:x.e.rock.pulseId||null, name:x.e.rock.name}));
+  const consolId = "CONSOL-"+Date.now();
+  state.consolidations.push({id:consolId, name:name.trim(), leaderId, memberIds:entries.map(x=>x.id), members, createdAt:new Date().toISOString()});
+  entries.forEach(x=>{ state.consolidatedInto[x.id] = consolId; });
+  const rockObj = {id:consolId, kind:"consolidated", crit:false, name:name.trim(),
+    why:`Consolidated ${entries.length} cards into one decision on 7/22: `+members.map(m=>m.name).join(" · "),
+    green:"", sg:"", theme:"", deps:"", mergedFrom:members};
+  Q3[leaderId].bench.push(rockObj);
+  ROCK_INDEX[consolId] = {rock:rockObj, leader:leaderId, bench:true};
+  const cst = q3s(consolId); cst.promoted = true; cst.band = "shortlist";
+  state.selected = {};
+  save(); render();
+  toast(`Consolidated ${entries.length} cards into "${name.trim()}" ✓`);
+}
+function updateConsolidateBtn(){
+  const n = selectedCardIds().length;
+  const btn = document.getElementById("btn-consolidate");
+  if(!btn) return;
+  btn.textContent = n>=2 ? `⛙ Consolidate (${n})` : n===1 ? `⛙ Consolidate (1 — pick 1 more)` : `⛙ Consolidate`;
+  btn.disabled = n<2;
+  btn.classList.toggle("armed", n>=2);
 }
 
 /* rock lookup */
@@ -1220,7 +1199,8 @@ function shortlistCount(leaderId){
 }
 
 function isCrit(id){ const st = q3s(id); if(st.crit === null || st.crit === undefined) return !!ROCK_INDEX[id].rock.crit; return st.crit; }
-function rockLifecycle(id){ // active | killed | deferred | bench
+function rockLifecycle(id){ // active | killed | deferred | bench | consolidated
+  if(state.consolidatedInto[id]) return "consolidated"; // folded into another card via Consolidate — drops out of every count/list below
   const e = ROCK_INDEX[id]; if(!e) return "unknown";
   const st = q3s(id);
   if(e.bench && !st.promoted) return "bench";
@@ -1330,6 +1310,19 @@ function activeCount(leaderId){
   return n;
 }
 
+// 7/22 UX pass: single place that decides whether a card's name links out to its
+// Monday pulse. Real numeric pulseIds always link; the handful of non-Monday
+// pseudo-ids (e.g. Kickpoint's own "KP-GOAL-*" proposals) get a plain NO PULSE
+// badge instead of a dead link — every card handles its pulse status consistently.
+function pulseLink(pulseId, name){
+  if(pulseId && /^\d+$/.test(pulseId)){
+    return `<a href="https://einsteinmoving.monday.com/boards/18408300070/pulses/${esc(pulseId)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dotted var(--gray-400,#9aa1ad);" title="Open on the Master Backlog">${esc(name)}</a>`;
+  }
+  if(pulseId){
+    return `${esc(name)} <span class="chip mgronly" title="Not a real Monday pulse — internal id ${esc(pulseId)}">NO PULSE</span>`;
+  }
+  return esc(name);
+}
 function slotCard(r, leaderId){
   const st = q3s(r.id);
   const idxE = ROCK_INDEX[r.id];
@@ -1340,22 +1333,29 @@ function slotCard(r, leaderId){
   const d = st.decision;
   const band = bandOf(r.id);
   const receipt = r.receipt;
-  return `<div class="card ${lc==='killed'?'killed':''} ${lc==='deferred'?'deferred':''}" id="card-${esc(r.id)}">
-    <div class="card-top">${r.kind==="mb"?'':`<span class="rockid">${esc(r.id)}</span>`}<div class="rockname">${r.pulseId?`<a href="https://einsteinmoving.monday.com/boards/18408300070/pulses/${esc(r.pulseId)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dotted var(--gray-400,#9aa1ad);" title="Open on the Master Backlog">${esc(r.name)}</a>`:esc(r.name)}</div></div>
+  const checked = !!state.selected[r.id];
+  const lensAvailable = r.pulseId && WALK_SYNC[r.pulseId];
+  return `<div class="card ${lc==='killed'?'killed':''} ${lc==='deferred'?'deferred':''} ${checked?'mergeselected':''}" id="card-${esc(r.id)}">
+    <div class="card-top">
+      <input type="checkbox" class="mergesel" data-act="selcard" data-id="${esc(r.id)}" ${checked?'checked':''} title="Select for Consolidate">
+      ${r.kind==="mb"?'':`<span class="rockid">${esc(r.id)}</span>`}<div class="rockname">${pulseLink(r.pulseId, r.name)}</div></div>
     <div class="chips">
       ${crit?'<span class="chip crit">CRIT ⭐</span>':''}
-      ${(r.kind&&r.kind!=="mb")?`<span class="chip sgonly">${esc(String(r.kind).toUpperCase())}</span>`:''}
-      ${isBench && promoted?'<span class="chip promoted">PROMOTED FROM BENCH</span>':''}
-      ${r.custom?'<span class="chip customadd">CAMERON ADD</span>':''}
+      ${(r.kind&&r.kind!=="mb"&&r.kind!=="consolidated")?`<span class="chip sgonly">${esc(String(r.kind).toUpperCase())}</span>`:''}
+      ${isBench && promoted && r.kind!=="consolidated"?'<span class="chip promoted">PROMOTED FROM BENCH</span>':''}
+      ${r.custom && r.kind!=="consolidated"?'<span class="chip customadd">CAMERON ADD</span>':''}
       ${r.walkNew?'<span class="chip" style="background:#0d47a1;color:#fff;">NEW FROM MB WALK</span>':''}
       ${receipt?`<span class="chip receipt-${receipt.status}">RECEIPT 7/20 · ${receipt.status.toUpperCase()}</span>`:''}
-      ${r.pulseId?walkChips(r.pulseId):''}
+      ${r.mergedFrom&&r.mergedFrom.length?`<span class="chip merged" title="Folded into this card: ${esc(r.mergedFrom.map(m=>m.name).join(' · '))}">⛙ CONSOLIDATED (${r.mergedFrom.length})</span>`:''}
+      ${r.possibleDupeOf?`<span class="chip dupewarn" title="${esc(r.possibleDupeOf.note||('Possible duplicate of '+r.possibleDupeOf.name))}">⚠ possible dupe</span>`:''}
       ${d?`<span class="chip carry-${d==='kill'?'kill':d==='defer'?'hold':d==='edit'?'restructure':'close'}">${d.toUpperCase()}${d==='accept'?'ED':d==='kill'?'ED':d==='edit'?' + NOTES':'RED'}</span>`:''}
     </div>
     ${receipt?`<div class="def receipt-${receipt.status==='confirmed'?'confirm':'challenge'}"><b>RECEIPT 7/20 — ${receipt.status.toUpperCase()}</b>${esc(receipt.note)}</div>`:''}
     ${r.stale?`<div class="def receipt-challenge"><b>⚠ STALE</b>${esc(r.staleNote)}</div>`:''}
     ${(!r.why && r.detail)?`<div class="ctx">${esc(r.detail)}</div>`:''}
     ${r.kind==="mb"?(WALK_SYNC[r.pulseId]?`<div class="smallnote" style="color:var(--green,#2e7d32);">✓ lenses re-ruled on the 7/21-night Cameron+Paul walk — chips above are LIVE Monday values</div>`:`<div class="smallnote" title="MB item — freshness not owner-verified; leader sweep pending">⚠ freshness unverified — group not yet walked (resumes Wed)</div>`):''}
+    ${lensAvailable?`<details class="fold" data-fold="lens-${esc(r.id)}" ${foldOpen["lens-"+r.id]?"open":""}><summary>Lens detail — Flywheel · PACe · Priority</summary><div class="fold-body"><div class="chips">${walkChips(r.pulseId)}</div></div></details>`:''}
+    ${r.mergedFrom&&r.mergedFrom.length?`<details class="fold" data-fold="merged-${esc(r.id)}" ${foldOpen["merged-"+r.id]?"open":""}><summary>⛙ Consolidated from ${r.mergedFrom.length} card${r.mergedFrom.length>1?'s':''}</summary><div class="fold-body">${r.mergedFrom.map(m=>`<div class="ctx">• ${pulseLink(m.pulseId, m.name)}</div>`).join("")}</div></details>`:''}
     <div class="triage-row">
       <span class="gradelbl" title="The verdict on this item">RULING</span>
       ${["accept","edit","kill","defer"].map(a=>`<button class="tbtn ${d===a?('sel-'+a):''}" data-act="triage" data-id="${r.id}" data-d="${a}">${a.toUpperCase()}</button>`).join("")}
@@ -1390,6 +1390,22 @@ const RECEIPT_FLAGS = [
   "Mike's slate reshaped light: M2 → forward-deployed-engineer reframe (challenged), M4 gone (challenged) — Mike is effectively M1 + M3(-maintenance?) + FDE. Deliberate?",
   "Anne's slate grew: A1–A3 + succession framework + Mover PTO (from Paul, w/ Jalissa) − A4 (demoted to task). 2-CRIT rule needs re-checking.",
   "Theme still open: Estimate Accuracy promoted only as a CET-theme OPTION — the Q3 theme call (speed-to-competence lead candidate) remains a QGR decision."
+];
+// Semantic-dedupe pass, 7/22 UX pass — a live walk-through with a leader surfaced
+// same-thing-different-pulse-ID duplicates in the MB pool (already deduped by pulse
+// ID, but not by meaning). Confident matches were folded together directly in
+// MB_POOL (see each card's `mergedFrom`); anything less certain got a ⚠ possible
+// dupe chip instead of a forced merge. Logged here once so the export always
+// carries the full record even if a card's inline note gets edited later.
+const SEMANTIC_DEDUPE_LOG = [
+  {type:"merged", into:"11741160101", intoName:"Cameron/KP — Oversee Website Redesign (Smart Move System Rollout Part 2)",
+    from:["11728343126 · Website Redesign Phase 2","KP-GOAL-website · KP Q3 Goal — Website Redesign"]},
+  {type:"merged", into:"11728346741", intoName:"Produce Consistent Short + Long-Form Video Content — Austin + KP owned",
+    from:["KP-GOAL-video · KP Q3 Goal — Video Creation"]},
+  {type:"merged", into:"12596528246", intoName:"Extend New Email Design System to Full Email Suite",
+    from:["KP-GOAL-email · KP Q3 Goal — Email Optimizations"]},
+  {type:"flagged", a:"11728340047 · Develop Mover-to-Manager Pipeline (Anne/HR)", b:"11733923114 · Brian — Manager Development Pipeline (CTXH)"},
+  {type:"flagged", a:"11728346757 · CET Q2 Theme — Estimate Accuracy + Realization Rate", b:"11728360389 · Improve Estimate Accuracy — Sales Coaching + Dashboard Management"}
 ];
 
 function renderTriage(){
@@ -1453,15 +1469,12 @@ function renderTriage(){
       html += `<div class="poolpills" title="MB department groups currently feeding this lane — cards are movable, so this list changes as candidates get relocated">Pool: `+mbGroups.map(gr=>`<span class="poolpill">${esc(gr)}</span>`).join(" ")+`</div>`;
     }
 
-    // Q2 Disposition band (round 3 add) — collapsed by default, one row per existing Q2 rock
-    const q2rocks = Q2[l.id] || [];
-    if(q2rocks.length){
-      html += `<details class="q2disp-fold" data-fold="disp-${l.id}" ${foldOpen["disp-"+l.id] ? "open" : ""}><summary>Q2 Disposition — ${l.name.split(" ")[0]}'s ${q2rocks.length} existing Q2 rocks</summary>
-        <div class="fold-body">`+q2rocks.map(r=>dispRow(r)).join("")+`</div></details>`;
-    }
-
     // classify every rock + bench item for this leader into shortlist / overflow bands
-    const allItems = [...g.rocks, ...g.bench];
+    // (7/22: carryover goals no longer get separate Q2 Disposition treatment here — they're
+    // already on the backlog and just flow through the same triage curation as everything
+    // else. Consolidated-away cards are filtered out here too — they collapsed into a merged
+    // card elsewhere via the ⛙ Consolidate feature.)
+    const allItems = [...g.rocks, ...g.bench].filter(it=>rockLifecycle(it.id)!=="consolidated");
     const shortlistItems = allItems.filter(it=>bandOf(it.id)==="shortlist");
     const overflowItems = allItems.filter(it=>bandOf(it.id)==="overflow");
 
@@ -1602,6 +1615,7 @@ function render(){
   else if(state.view==="triage") m.innerHTML = renderTriage();
   else if(state.view==="whiteboard") m.innerHTML = renderWhiteboard();
   else m.innerHTML = renderDeps();
+  updateConsolidateBtn();
 }
 
 /* ============================================================
@@ -1629,11 +1643,7 @@ document.addEventListener("click", e=>{
   }
   else if(act==="oqsel"){ state._oqSel = state._oqSel===b.dataset.id?null:b.dataset.id; render(); }
   else if(act==="oqdecide"){ const s=oqs(b.dataset.id); s.decided=!s.decided; save(); render(); }
-  else if(act==="disp"){
-    const st = dispState(b.dataset.key); const v = b.dataset.v;
-    st.value = (st.value===v ? null : v); st.rec = false; // manual pick always wins; toggling off re-derives ALBERT-REC next render
-    save(); render();
-  }
+  else if(act==="selcard"){ toggleCardSelect(b.dataset.id); }
   else if(act==="wbexport"){ doWhiteboardExport(); }
   else if(act==="wbjump"){
     const id = b.dataset.id, leader = b.dataset.leader;
@@ -1727,6 +1737,7 @@ function buildExport(){
       if(crit) line += ` ⭐CRIT`;
       if(benchPromoted) line += ` (PROMOTED from bench)`;
       if(r.custom) line += ` (CAMERON ADD)`;
+      if(r.mergedFrom && r.mergedFrom.length) line += ` (⛙ CONSOLIDATED from ${r.mergedFrom.length} cards: ${r.mergedFrom.map(m=>m.name).join(" · ")})`;
       const dec = st.decision ? st.decision.toUpperCase() : "UNTOUCHED";
       line += ` — ${dec}`;
       if(st.crit!==null && st.crit!==undefined && st.crit !== !!ROCK_INDEX[r.id].rock.crit) line += st.crit?" (CRIT ADDED)":" (CRIT REMOVED)";
@@ -1736,9 +1747,9 @@ function buildExport(){
       if(r.receipt && r.receipt.note) md += `  - Receipt note: ${r.receipt.note}\n`;
       if(st.editNotes) md += `  - Edit notes: ${st.editNotes}\n`;
     };
-    g3.rocks.forEach(r=>listRock(r,false));
-    g3.bench.forEach(b=>{ if(q3s(b.id).promoted) listRock(b,true); });
-    const stillBench = g3.bench.filter(b=>!q3s(b.id).promoted);
+    g3.rocks.forEach(r=>{ if(rockLifecycle(r.id)!=="consolidated") listRock(r,false); });
+    g3.bench.forEach(b=>{ if(rockLifecycle(b.id)!=="consolidated" && q3s(b.id).promoted) listRock(b,true); });
+    const stillBench = g3.bench.filter(b=>rockLifecycle(b.id)!=="consolidated" && !q3s(b.id).promoted);
     if(stillBench.length) md += stillBench.map(b=>{
       const st = q3s(b.id);
       const ownerName = OWNER_INDEX[ownerOf(b.id)] ? OWNER_INDEX[ownerOf(b.id)].name : "unassigned";
@@ -1765,20 +1776,26 @@ function buildExport(){
         if(st.aar) md += `  - AAR: ${st.aar}\n`;
       });
       md += `\n`;
-
-      // Q2 Disposition (round 3 add)
-      md += `### Q2 Disposition\n`;
-      g2.forEach(r=>{
-        const st = dispState(r.k);
-        const label = st.value ? DISP_LABEL[st.value] : null;
-        let line = `- **${r.name}** — `;
-        line += label ? label : "⚠ NOT SET — Albert could not confidently recommend a disposition";
-        if(st.value && st.rec) line += " _(ALBERT-REC, unconfirmed by human)_";
-        md += line + `\n`;
-      });
-      md += `\n`;
     }
   });
+
+  // Semantic dedupe (7/22 UX pass — baked-in pre-pass, not editable live) + Consolidations
+  // (7/22 UX pass — Cameron's live merges via the ⛙ Consolidate feature, editable per session)
+  md += `---\n\n## Semantic Dedupe — 7/22 pass\n\n`;
+  md += `*Cards were already deduped by pulse ID; this pass caught same-thing-different-pulse-ID duplicates during a live walk-through.*\n\n`;
+  SEMANTIC_DEDUPE_LOG.forEach(x=>{
+    if(x.type==="merged") md += `- **MERGED** → **${x.intoName}** (${x.into}) ← folded in: ${x.from.join("; ")}\n`;
+    else md += `- **⚠ FLAGGED, not merged** — ${x.a} ⟷ ${x.b}\n`;
+  });
+  md += `\n`;
+  if(state.consolidations && state.consolidations.length){
+    md += `### Consolidations made this session\n\n`;
+    state.consolidations.forEach(c=>{
+      md += `- **${c.name}** (${c.id}) — merged ${c.memberIds.length} cards:\n`;
+      (c.members||[]).forEach(m=>{ md += `  - ${m.name}${m.pulseId?` (pulse ${m.pulseId})`:''}\n`; });
+    });
+    md += `\n`;
+  }
 
   // Ownership breakdown (7/20 add) — grouped by assigned owner, manager-tier nested under their RT leader
   md += buildOwnershipBreakdown();
@@ -1820,6 +1837,7 @@ function toast(msg){
   clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove("show"), 2600);
 }
 document.getElementById("btn-export").onclick = doExport;
+document.getElementById("btn-consolidate").onclick = doConsolidate;
 document.getElementById("btn-reset").onclick = ()=>{
   if(confirm("Reset ALL triage decisions, grades, notes, and open-question answers? This can't be undone.")){
     localStorage.removeItem(LS_KEY);
@@ -1889,9 +1907,9 @@ function runSelfTest(){
   out.push("after make-CRIT M3: mike=" + critCount("mike") + " [expect 3 → warns]");
   q3s("M3").crit = null;
 
-  // ---- round 3 checks: Q2 Disposition, Whiteboard ----
-  // ---- round 4 checks: MB pool size (93), cross-group pooling, lane moves, stale flag ----
-  out.push("MB_POOL total: " + MB_POOL.length + " [expect 159 — 126 v1.3 base + 28 walk-complete QG/SC + 5 KP goals]");
+  // ---- round 3 checks: Whiteboard ----
+  // ---- round 4 checks: MB pool size, cross-group pooling, lane moves, stale flag ----
+  out.push("MB_POOL total: " + MB_POOL.length + " [expect 155 — 159 v1.4 base minus 4 folded away by the 7/22 semantic-dedupe pass]");
   const mbByGroup = {};
   MB_POOL.forEach(c=>{ mbByGroup[c.group] = (mbByGroup[c.group]||0)+1; });
   out.push("MB_POOL by department group: " + Object.keys(mbByGroup).sort().map(g=>g+":"+mbByGroup[g]).join(" "));
@@ -1910,16 +1928,33 @@ function runSelfTest(){
   out.push("moveMBCandidate MB-11728346681 " + beforeLane + "→amanda: now in Q3.amanda.bench = " + Q3.amanda.bench.some(b=>b.id==="MB-11728346681") + ", state.laneMove recorded = " + (state.laneMove["MB-11728346681"]==="amanda"));
   moveMBCandidate("MB-11728346681", beforeLane); // move it back so the rest of the self-test sees the original seed shape
   out.push("moved back: now in Q3." + beforeLane + ".bench = " + Q3[beforeLane].bench.some(b=>b.id==="MB-11728346681"));
-  // disposition mechanical derivation spot-checks
-  const dConfirmCount = Object.values(Q2).flat().filter(r=>!albertRecDisposition(r)).length;
-  out.push("Q2 dispositions flagged '⚠ Albert to confirm' (no mechanical rec): " + dConfirmCount + " of " + Object.values(Q2).flat().length);
-  out.push("  mike-q2-5 (Fleet Damage app, hold) rec = " + albertRecDisposition(Q2_INDEX["mike-q2-5"]) + " [expect null/confirm]");
-  out.push("  mike-q2-4 (ITP, close+SG) rec = " + albertRecDisposition(Q2_INDEX["mike-q2-4"]) + " [expect done]");
-  out.push("  mike-q2-2 (Fleet Safety, red+restructure→M3) rec = " + albertRecDisposition(Q2_INDEX["mike-q2-2"]) + " [expect extends]");
-  out.push("  cameron-q2-2 (VP, kill) rec = " + albertRecDisposition(Q2_INDEX["cameron-q2-2"]) + " [expect done]");
-  // disposition state round-trip (no state writes leak — saveEnabled is false during self-test)
-  const dSt = dispState("mike-q2-4");
-  out.push("dispState('mike-q2-4') prefilled = " + dSt.value + " / rec-flag=" + dSt.rec + " [expect done / true]");
+  // ---- 7/22 UX pass checks: semantic dedupe, pulse-link consistency, Consolidate round-trip ----
+  const mergedCount = MB_POOL.filter(c=>c.mergedFrom && c.mergedFrom.length).length;
+  const dupeFlagCount = MB_POOL.filter(c=>c.possibleDupeOf).length;
+  out.push("semantic dedupe: " + mergedCount + " cards carry mergedFrom [expect 3], " + dupeFlagCount + " cards carry possibleDupeOf [expect 4]");
+  const fakePulseCount = MB_POOL.filter(c=>c.pulseId && !/^\d+$/.test(c.pulseId)).length;
+  out.push("non-numeric pulseIds still in MB_POOL: " + fakePulseCount + " [expect 2 — KP-GOAL-quoteform + KP-GOAL-taggateway, both render NO PULSE not a dead link]");
+  // Consolidate mechanics round-trip — exercises the same state writes doConsolidate() makes,
+  // without going through prompt() (self-test runs headless, no user to answer a dialog).
+  state.selected = {"M-B1":true, "M4":true};
+  out.push("selectedCardIds() with M-B1+M4 checked: " + selectedCardIds().join(",") + " [expect M-B1,M4]");
+  const critBeforeConsol = critCount("mike");
+  state.consolidations.push({id:"CONSOL-selftest", name:"Selftest Merged Card", leaderId:"mike", memberIds:["M-B1","M4"], members:[{pulseId:null,name:"Fleet Damage Tracking App beta"},{pulseId:null,name:"Einstein Games S5 (DFWT) + Data-Trust Fixes"}], createdAt:new Date().toISOString()});
+  state.consolidatedInto["M-B1"] = "CONSOL-selftest"; state.consolidatedInto["M4"] = "CONSOL-selftest";
+  out.push("rockLifecycle(M-B1) after consolidate = " + rockLifecycle("M-B1") + " [expect consolidated]");
+  Q3.mike.bench.push({id:"CONSOL-selftest", kind:"consolidated", crit:false, name:"Selftest Merged Card", why:"", green:"", sg:"", theme:"", deps:"", custom:true, mergedFrom:state.consolidations[0].members});
+  ROCK_INDEX["CONSOL-selftest"] = {rock:Q3.mike.bench[Q3.mike.bench.length-1], leader:"mike", bench:true};
+  q3s("CONSOL-selftest").promoted = true; q3s("CONSOL-selftest").band = "shortlist";
+  out.push("critCount(mike) unchanged by a non-crit consolidate: before=" + critBeforeConsol + " after=" + critCount("mike") + " [expect equal]");
+  const consolExportMd = buildExport();
+  out.push("export mentions the consolidation: " + consolExportMd.includes("Selftest Merged Card") + " [expect true]");
+  // unwind so the rest of self-test (and any later real render) sees the original seed shape
+  delete state.consolidatedInto["M-B1"]; delete state.consolidatedInto["M4"];
+  state.consolidations.pop();
+  Q3.mike.bench.pop(); delete ROCK_INDEX["CONSOL-selftest"];
+  state.selected = {};
+  out.push("rockLifecycle(M-B1) after unwind = " + rockLifecycle("M-B1") + " [expect bench]");
+  out.push("rockLifecycle(M4) after unwind = " + rockLifecycle("M4") + " [expect active]");
   // whiteboard
   out.push("whiteboard leaders: " + WHITEBOARD_LEADERS.length + " [expect 7, no 'others']");
   const wbCounts = WHITEBOARD_LEADERS.map(l=>l.id+":"+wbShortlistItems(l.id).length).join(" ");
