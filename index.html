@@ -460,7 +460,7 @@
     <div class="section">
       <div class="section-eyebrow">Start here</div>
       <div class="section-title">The kit — one front door</div>
-      <div class="section-desc">Every QGR prep tool, linked from here and linking back. HQ = the map (all quarter) · Runsheet = one day's script · Triage Room = the workbench where decisions actually get made.</div>
+      <div class="section-desc">Every QGR tool, linked from here and linking back — live decision tools first, then inputs, then reference. HQ = the map (all quarter) · Triage Room = the workbench · AAR Review Room = the mirror. <span style="color:#94a3b8;">(Swept 7/22: Walking Pack v2 + Day-1 Runsheet retired — built, never used; they live on in git/Drive.)</span></div>
       <div class="materials-grid" id="toolkitGrid"></div>
     </div>
 
@@ -468,12 +468,24 @@
       <div class="section-eyebrow">Start here</div>
       <div class="section-title">How this machine works</div>
       <div class="section-desc">
-        <div style="font-weight:800;">Warehouse → shortlist → showroom → write-back</div><div style="margin-top:6px;">
+        <!-- 7/22 readability rebuild (Cameron's sweep): flow strip + one-line beats visible; all prose folded into expandables. -->
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:10px;">
+          <span style="background:#1B3A5C; color:#fff; font-weight:800; font-size:0.78rem; padding:6px 12px; border-radius:999px;">📋 Warehouse</span><span style="color:#94a3b8; font-weight:900;">→</span>
+          <span style="background:#EF8B22; color:#fff; font-weight:800; font-size:0.78rem; padding:6px 12px; border-radius:999px;">🪨 Shortlist + receipt</span><span style="color:#94a3b8; font-weight:900;">→</span>
+          <span style="background:#0979C3; color:#fff; font-weight:800; font-size:0.78rem; padding:6px 12px; border-radius:999px;">🛠 Triage Room</span><span style="color:#94a3b8; font-weight:900;">→</span>
+          <span style="background:#0E8F84; color:#fff; font-weight:800; font-size:0.78rem; padding:6px 12px; border-radius:999px;">↩ Write-back</span>
+        </div>
+        <div style="font-size:0.84rem; color:#475569; margin-bottom:10px;">The Master Backlog holds everything (~500 items) · Albert curates it to per-leader rock candidates with a receipt · kill/edit/promote happens in the Triage Room · every decision lands back on the board. Nothing stays decided only inside a tool.</div>
+        <details style="margin-bottom:10px;"><summary style="cursor:pointer; font-weight:800;">The full loop — curation weights, receipt logic, feedback rules</summary>
+        <div style="margin-top:6px;">
         (1) The <b>Master Backlog</b> is the warehouse: every idea and project (~500 items), evidence attached as updates, deduped 7/20; the QGR-Lens tag surfaces items into its "QGR Q3 Review" view.
         </div><div style="margin-top:8px;">(2) The <b>rock draft</b> is the shortlist: Albert curates the warehouse down to per-leader rock candidates. Curation weights, in order: cross-leader convergence at Rob's constraint session (Flywheel + PACe lenses) → Rob's coaching reads → Q2 carries (explicit kill/carry/restructure, nothing auto-carries) → MB lens/priority flags → hard rules (2 CRITs each, Matisen 4-cap, dependencies named). It is judgment, 70–80% right by design — which is why every pass ships with a <b>curation receipt</b> (per-rock provenance + the near-misses and why not) for the Cameron+Paul alignment pass: audit the deltas, never the whole warehouse.
         </div><div style="margin-top:8px;">(3) The <b>Triage Room</b> is the showroom: cards seeded from the shortlist only; kill/edit/promote decisions happen there and export back to Albert.
         </div><div style="margin-top:8px;">(4) <b>Write-back:</b> every decision lands back in the Master Backlog + cascading sheet — nothing stays decided only inside a tool. Feedback loop on this HQ itself: ✎-note anything, Export, hand Albert the JSON (or say it in chat) — folded in + redeployed same session, changelog records it.</div>
-        <div style="margin-top:14px; font-weight:800;">The four beats of every QGR cycle <span style="font-weight:400; color:#64748b;">(locked 7/20 — the Runway phases mirror this)</span></div>
+        </details>
+        <div style="font-weight:800; margin-bottom:4px;">The four beats of every QGR cycle <span style="font-weight:400; color:#64748b;">(locked 7/20 — the Runway phases mirror this)</span></div>
+        <div style="font-size:0.84rem; color:#475569; margin-bottom:8px;"><b>① Collect</b> (~3 wks out: AARs · eNPS · financials · constraints exercise) → <b>② Cam + Paul decide</b> (instruments → warehouse gate → walk → triage) → <b>③ Confirm</b> (Matisen data day · packet ready) → <b>④ Decide + cascade</b> (the Roundtable QGR, then managers/movers/CET). Expand any beat for the full playbook.</div>
+        <details style="margin-bottom:8px;"><summary style="cursor:pointer; font-weight:800;">① Collect + review — inputs, the Leader Prep Kit, the curation stack</summary>
         <div style="margin-top:10px;"><b>① Collect + review.</b> Starting ~3 weeks out, gather every input the quarter's decisions need: People Analyzers, leader AARs, eNPS and customer feedback, financial and marketing analysis, branch scorecards where the data allows — plus the strategy instruments themselves: the all-leader Flywheel/PACe constraints exercise (~2 weeks out; this is where the quarter's biggest issues surface), 7 Strata, SWT, and the CASh/Power-of-One cash review. Everything lands in the Master Backlog until it is genuinely complete.
         <div style="margin-top:8px; padding:10px 12px; background:#eef4fb; border:1px solid #b9d2ee; border-radius:8px;"><b>📦 The Leader Prep Kit — ONE broadcast to every Roundtable leader ~3 wks out (added 7/20; stops the trickle):</b><br>
         <b>1.</b> Review your eNPS responses (your COS-assisted review tool; export back).<br>
@@ -483,7 +495,9 @@
         <b>5.</b> Large-department owners (Amanda, Mike, Brian, Matisen, Anne): propose your department's own quarterly sub-theme candidate.<br>
         <b>6.</b> Push a fresh /status so your COS row is current going into prep.</div>
         <div style="margin-top:8px; padding:10px 12px; background:#fdf6ec; border:1px solid #ecd3a8; border-radius:8px;"><b>🧭 The Master Backlog curation stack (standing model, settled 7/20 · re-sequenced 7/21):</b> <b>Albert curates the structure FIRST</b>, after every input lands — AARs, eNPS, Flywheel/PACe outputs folded in, then dedupe, two-layer TL;DR+depth summaries, Flywheel Lens + PACe Lens columns on every pulse, priority drafts, rollup views → <b>Leadership audits + stamps their groups</b> (the kit's step 4: reality-check, fix columns, emoji-vote their rock candidates — only owners can verify freshness) → <b>Cameron + Paul walk the warehouse</b> (recorded, ruling by exception, confirming priorities THROUGH lens views — "we're attacking Optimize Capacity, here's everything that serves it" — never by reading the raw list). The board is the warehouse; the lenses are how you shop it.</div>
-        </div><div style="margin-top:10px;"><b>② Inputs → warehouse → triage (Cameron + Paul).</b> First, every instrument that FEEDS the backlog runs: SWT refresh, 7 Strata + FACe, the PACe/Flywheel self-evaluation, CASh/Power-of-One (its 1%-moves become backlog candidates), and the OPSP left page. Then the explicit warehouse gate: fold all outputs in, declare the Master Backlog complete, regenerate the shortlist + curation receipt.
+        </div></details>
+        <details style="margin-bottom:8px;"><summary style="cursor:pointer; font-weight:800;">② Cameron + Paul — instruments, the warehouse gate, the decision loop</summary>
+        <div style="margin-top:10px;"><b>② Inputs → warehouse → triage (Cameron + Paul).</b> First, every instrument that FEEDS the backlog runs: SWT refresh, 7 Strata + FACe, the PACe/Flywheel self-evaluation, CASh/Power-of-One (its 1%-moves become backlog candidates), and the OPSP left page. Then the explicit warehouse gate: fold all outputs in, declare the Master Backlog complete, regenerate the shortlist + curation receipt.
         <div style="margin-top:8px; padding:10px 12px; background:#f0f7f2; border:1px solid #bfdcc9; border-radius:8px;"><b>The decision loop after the gate (proven live 7/20 · RE-SEQUENCED 7/21 — run it in this order):</b><br>
         <b>1.</b> <b>Albert cleans the warehouse</b> — only after ALL inputs are folded in (AARs, eNPS exports, Flywheel/PACe outputs, CASh 1%-moves): dedupe, two-layer summaries on every pulse, lens columns, priority drafts, curation receipt (per-rock provenance + near-misses), coverage audit ("what did curation never touch?").<br>
         <b>2.</b> <b>Leadership audits + stamps their groups</b> (Kit step 4, ~20–30 min each): reality-check every pulse, fix priority/lens/ownership columns, emoji-vote their own rock candidates. Only owners can verify freshness — no walk starts until the stamps are in.<br>
@@ -493,9 +507,13 @@
         <b>Sequencing rule:</b> lock the WORKING theme hypothesis before assigning goals (the theme is the triage lens) — but the theme's name/mechanics/rewards stay a team decision at the QGR. Target exiting this beat: <b>7–8 goals per leader</b>, manager tier sketched, refined down during ③–④.<br>
         <span style="color:#64748b;"><i>7/21 note: the Q3 cycle ran the OLD order (receipt ruled 7/20 before the leader stamps landed 7/21) — it worked, but the standalone pre-walk receipt-ruling session may not survive in this shape: under the new order the receipt becomes Albert's step-1 prep artifact for the walk, and rulings happen IN the walk + Triage Room. Confirm at the Q3 learnings ledger before the Q4 run.</i></span></div>
         Theme at a high level, leaders' general goals, packet mostly locked by EOQ. Purpose-built tools carry the weight because raw-backlog triage is too heavy: the shortlist + receipt + Triage Room.
-        </div><div style="margin-top:10px;"><b>③ Confirm (Matisen data day → readiness).</b> Before leadership walks in: dashboards, Games scoring, and branch data verified clean; a final gut check across goals, overlaps, and cross-leader dependencies; the QG packet finished and ready to present.
-        </div><div style="margin-top:10px;"><b>④ Decide + cascade (Leadership QGR).</b> The team reviews 7 Strata, SWT, People Analyzers, last quarter's results, and the packet together — then finalizes everything that was only sketched before: each leader's goals with exact Green/Super-Green definitions, their directs' goals with measurables, the theme with its mechanics and rewards, and the OPSP + Vision Summary. The output feeds straight into the following week's cascade: manager, mover, and CET presentations (Phase ④ on the Runway).
-        </div><div style="margin-top:10px; color:#64748b;">Note the deliberate double-touch: owners <i>populate</i> the strategy artifacts in ①–②, leadership <i>reviews and finalizes</i> them in the room — same documents, two passes, not duplication. Customer-input beyond GatherUp is deliberately deferred until regular customer outreach exists.</div>
+        </div></details>
+        <details style="margin-bottom:8px;"><summary style="cursor:pointer; font-weight:800;">③ Confirm — Matisen data day + readiness</summary>
+        <div style="margin-top:10px;"><b>③ Confirm (Matisen data day → readiness).</b> Before leadership walks in: dashboards, Games scoring, and branch data verified clean; a final gut check across goals, overlaps, and cross-leader dependencies; the QG packet finished and ready to present.
+        </div></details>
+        <details style="margin-bottom:8px;"><summary style="cursor:pointer; font-weight:800;">④ Decide + cascade — the Roundtable QGR and the front line</summary>
+        <div style="margin-top:10px;"><b>④ Decide + cascade (Leadership QGR).</b> The team reviews 7 Strata, SWT, People Analyzers, last quarter's results, and the packet together — then finalizes everything that was only sketched before: each leader's goals with exact Green/Super-Green definitions, their directs' goals with measurables, the theme with its mechanics and rewards, and the OPSP + Vision Summary. The output feeds straight into the following week's cascade: manager, mover, and CET presentations (Phase ④ on the Runway).
+        </div><div style="margin-top:10px; color:#64748b;">Note the deliberate double-touch: owners <i>populate</i> the strategy artifacts in ①–②, leadership <i>reviews and finalizes</i> them in the room — same documents, two passes, not duplication. Customer-input beyond GatherUp is deliberately deferred until regular customer outreach exists.</div></details>
       </div>
     </div>
 
@@ -632,6 +650,22 @@
     </div>
 
     <div class="section">
+      <div class="section-eyebrow">For the room</div>
+      <div class="section-title">📣 Q2 headlines — Cameron, from the 7/22 AAR review</div>
+      <div class="section-desc">The two statements to discuss with the team when the AARs come up (also baked into the AAR Review Room's company panel).</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px;">
+        <div style="background:#FEF6EC; border:1px solid #F5D9B8; border-radius:12px; padding:14px 16px;">
+          <div style="font-weight:900; color:#1B3A5C; margin-bottom:6px;">① The lesson loop is now provable</div>
+          <div style="font-size:0.84rem; color:#2A2A2A;">Q1 we <b>named</b> the mechanisms (the Matisen bottleneck, dependency-aware QG allocation, weekly cadences over one-off pushes). Q2 we <b>executed</b> them — and the numbers moved: company goal success <b>71% → 80%</b>, Matisen <b>20% → ~67%+</b> (possible clean sweep pending grade-sync). What we write in THIS review becomes next quarter's results.</div>
+        </div>
+        <div style="background:#EBF4FB; border:1px solid #B9D2EE; border-radius:12px; padding:14px 16px;">
+          <div style="font-weight:900; color:#1B3A5C; margin-bottom:6px;">② Manage the rate of change</div>
+          <div style="font-size:0.84rem; color:#2A2A2A;">For two years the risk was moving too slow. The COS layer flipped it — compounding delivery ("the next dashboard is easier") means the new risk is <b>changing faster than the org can absorb</b>. Q3 discipline: rock caps, weekend sprints only as necessary, cadence over pushes — govern the pace so the team can keep pace.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
       <div class="section-eyebrow">Aftermath</div>
       <div class="section-title">Cross-team lessons</div>
       <div class="section-desc">Patterns that showed up across more than one leader's AAR this quarter — direct input to Q3 rock design and the goal-hygiene gate.</div>
@@ -641,7 +675,7 @@
     <div class="section">
       <div class="section-eyebrow">Aftermath</div>
       <div class="section-title">Divergence conversations</div>
-      <div class="section-desc">Four grade disagreements that need a live conversation at QGR — this tool surfaces them, it doesn't resolve them.</div>
+      <div class="section-desc">Grade disagreements that need a live conversation at QGR — this tool surfaces them, it doesn't resolve them. Now six: the original four plus Cameron's 7/22 review adds (Anne Mover Promotion G→R · Matisen Call Grading R→G, an upgrade).</div>
       <div class="divergence-strip" id="scorecardDivergence"></div>
     </div>
 
@@ -709,7 +743,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.35 2026-07-22'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.36 2026-07-22'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -815,10 +849,10 @@
           ctx: 'Q3 built 7/20: Owners (never shared) · Roundtable (writer-shared at kickoff) · Materials (share at distribution). Blank toolkit copied into Owners.' },
         { text: 'Collect AAR exports from all leaders (skinny 4-Q, COS-leads-with-its-read)',
           url: 'https://einsteinmoving.monday.com/boards/1146915251/pulses/12578917480', urlLabel: 'AAR pulse',
-          ctx: '✅ 6 of 7 COMPILED 7/20 (Brian retrieved from repo): SELF grades + digests live in Triage Room + goals dashboard (34 goals stamped AAR-PROJ). Anne folds in Tue AM via the same pipe. Compile: aar-compile-2026-07-20.md.' },
+          ctx: '✅ 7 of 7 COMPLETE 7/21 — scorecard 80.0% (13 SG/19 G/8 R of 40). Cameron reviewed all 7 in the AAR Review Room 7/22 (2 grade disputes staged for grade-sync). Compile: aar-compile-2026-07-20.md.' },
         { text: 'Collect eNPS survey results + reviews (two-variant tool) + slide content',
           url: 'https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/', urlLabel: 'one-pager',
-          ctx: "Cameron + Matisen + Amanda + Mike merged into the rollup 7/20 (Lane A → MB evidence · Lane B → follow-ups pulse). Outstanding: Brian (pinged on the pulse) + Anne (Tue AM, via DM)." },
+          ctx: "✅ ALL 7 merged into the rollup by 7/21 (Lane A → MB evidence · Lane B → follow-ups pulse); one-pager published." },
         { text: 'Review/update Master Backlog (consolidation, dedupe, evidence attach)',
           url: 'https://einsteinmoving.monday.com/boards/18408300070', urlLabel: 'Master Backlog',
           ctx: '✅ 7/20: 81 master summaries + 26 dupes closed + eNPS/AAR evidence attached. Remaining: fold Brian/Anne exports + write back triage verdicts (Phase ④).' },
@@ -829,7 +863,7 @@
           ctx: '✅ Effectively done 7/20 — the dashboard now carries all 34 AAR self-grades as (PROJ); FINAL at QGR.' },
         'QG success-rate tracker refresh (7-quarter parser)',
         { text: 'Q3 reforecast lands (Ben model off first 2 wks July actuals + Matisen revenue reforecast)',
-          ctx: 'Expected ~Tue 7/21 with Ben (9–1 block).' },
+          ctx: '✅ Landed 7/21: Ben H2 reforecast posted (pulse 12255099906) + Matisen Q3 plan $6.62M +7.9% YoY live on hosted pages.' },
         'Revenue targets drafted for next quarter',
         'Sales + personnel budgets adjusted to new targets (by EOM — not a QGR blocker)',
         'Financial analysis skill run on Q2 data',
@@ -878,7 +912,7 @@
           ctx: 'The shortlist trust check (20–30 min): audit the deltas, never the whole warehouse. Export decisions to Albert.' },
         { text: 'Rock slate red-pen in the Triage Room',
           url: 'qgr-triage-room.html', urlLabel: 'Triage Room',
-          ctx: '🟢 UNBLOCKED — compile landed 7/20: SELF grades + AAR digests + divergence highlights live (6 of 7). Export/E at EOD back to Albert.' },
+          ctx: 'IN FLIGHT — 4 groups walked 7/21 (strategy/sales/damages/ops), Triage Room v1.3 synced w/ triage bar (QG + Super Critical only). Wed: walk the remaining 11 groups → red-pen → Export.' },
         { text: 'Theme decision at a high level (out of triage — Back to School leading; Estimate Accuracy likely Q4)',
           ctx: 'Theme queue on the MB: 12556457451 Speed to Competence · 12556457452 Demand Pursuit · 12556457453 Estimate Accuracy (Q4). Leadership locks final theme + mechanics Day 2.' },
         { text: 'Whiteboard map — major projects × cross-dept dependencies (the Matisen-bottleneck catcher)',
@@ -909,7 +943,8 @@
         { text: 'Matisen data day: goals/overlaps/dependencies FINAL GUT CHECK + align his Q3 rocks (4-cap)',
           ctx: 'The last look before leadership walks in — every rock leaning on Matisen must name its deliverable in his slate.' },
         'QG packet READY to go',
-        'Pre-reads out to leadership (walking pack v2 + eNPS one-pager) ≥2 days ahead',
+        { text: 'Pre-reads out to leadership (eNPS one-pager + gated deck link) ≥2 days ahead',
+          ctx: 'Walking Pack v2 retired 7/22 (built, never used) — the pre-read is now the eNPS one-pager + whatever Cameron gates from the deck.' },
         { text: 'Room readiness: packet built + materials shelf loaded + OPSP builder up on screen',
           ctx: 'The full Day 1/Day 2 agenda lives in The Room tab as a live checklist with per-block notes — no duplicate list here.' },
         'Run Day 1 in The Room (live checklist + notes + decision log)',
@@ -1020,30 +1055,34 @@
     }
   };
 
+  // Kit cleaned 7/22 (Cameron's sweep): dead tools removed (Walking Pack v2, Day-1 Runsheet —
+  // built, never used; both live on in git/Drive), the room's working tools promoted to the
+  // front door. Order = live decision tools first, then inputs, then reference.
   var TOOLKIT_SEED = [
-    { icon: '📘', label: 'Master pulse + SOP (Monday)', sub: 'pulse 12581466585 — the reproducible QGR playbook: Drive 3-tier setup, three-session model, learnings ledger', url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12581466585' },
+    { icon: '🛠', label: 'QGR Triage Room', sub: 'the workbench — walked-group sync · triage bar (QG + Super Critical only) · per-leader lanes · dependencies', url: 'qgr-triage-room.html' },
+    { icon: '🪞', label: 'AAR Review Room', sub: "all 7 full write-ups — Cameron's 7/22 review BAKED IN (42 highlights + notes + Q2 headlines); loads reviewed everywhere", url: 'aar-review.html' },
+    { icon: '📈', label: 'Q2 Financial Analysis Deck (LIVE)', sub: 'LOCAL FILE (sensitive — Cameron gates before wide share) — manifest v0.8.x, §6.1a refereed findings', url: '../QGR Packet/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html' },
     { icon: '📥', label: 'Packet Data Chase List', sub: 'every feed · source · owner · check off as data lands', url: '#chase-list' },
-    { icon: '🛠', label: 'QGR Triage Room', sub: 'the workbench — Q2 review · Q3 triage · dependencies', url: 'qgr-triage-room.html' },
-    { icon: '💼', label: 'Ben × Einstein — First QGR Working Brief', sub: 'live meeting tool (Ben-visible) — 13 questions · cash primer · notes + next-action export', url: 'ben-qgr-brief.html' },
-    { icon: '💰', label: 'Power of One tool (Paul)', sub: 'quarterly calculator + workshop — 8 levers, Q2 FY2026 actuals pre-loaded; replaces CashFlowStory', url: 'https://paulm-emc.github.io/EMC-Power-of-One-Tool-70c5c4bdaade/' },
-    { icon: '📅', label: 'Day-1 Runsheet (Mon 7/20)', sub: "today's script — detail view of Phase ②", url: 'day1-runsheet-2026-07-20.html' },
-    { icon: '🧮', label: 'People Analyzer — Leadership (BETA)', sub: 'LOCAL ONLY (leadership evals, never hosted) — opens via localhost:8136 on Cam\'s machines; Q2 run w/ Paul = the trial', url: 'http://localhost:8136/people-analyzer-leadership.html' },
-    { icon: '🪨', label: 'Q3 Rock Slate — first pass', sub: 'LOCAL FILE only (personnel detail) — red-pen draft + eNPS addendum', url: 'rock-candidates-q3-DRAFT-2026-07-18.md' },
+    { icon: '📋', label: 'Master Backlog', sub: 'the warehouse — "🚶 Q3 Walk (Cam+Paul)" view = the walk surface; 4 groups walked, 11 to go', url: 'https://einsteinmoving.monday.com/boards/18408300070' },
+    { icon: '🧮', label: 'People Analyzer — Leadership', sub: 'LOCAL ONLY (never hosted) — launch people-analyzer :8136; active quarter = Q3 2026', url: 'http://localhost:8136/people-analyzer-leadership.html' },
+    { icon: '📝', label: 'Manager AAR Tool (v1)', sub: 'LOCAL ONLY — the AAR exercise pushed down to all 31 BM/Ops/FM seats; validate w/ Paul → Day-1 demo', url: 'http://localhost:8136/aar-manager-tool/manager-qgr-hub.html' },
+    { icon: '💼', label: 'Ben × Einstein — QGR Working Brief', sub: 'live meeting tool (Ben-visible) — 13 questions · cash primer · notes + next-action export', url: 'ben-qgr-brief.html' },
+    { icon: '💰', label: 'Power of One tool (Paul)', sub: 'quarterly calculator + workshop — 8 levers, Q2 FY2026 actuals pre-loaded', url: 'https://paulm-emc.github.io/EMC-Power-of-One-Tool-70c5c4bdaade/' },
+    { icon: '🗺', label: 'SWT + 7 Strata Worksheet', sub: 'RULED 7/20 (canonical export: swt-strata-FINAL-2026-07-20.md) — survivors feed the OPSP builder', url: 'strata-swt-worksheet.html' },
+    { icon: '🧾', label: 'OPSP + Vision Summary (live)', sub: 'the output builder — worksheets first, enter results here', url: 'https://goal-plan-access.replit.app/' },
+    { icon: '📊', label: 'Goals Dashboard', sub: 'all 40 Q2 goals w/ AAR self-grades (PROJ) — FINAL at QGR', url: 'https://einsteinadmin.github.io/goals-dashboard/' },
     { icon: '💬', label: 'eNPS Rollup (7/20)', sub: 'LOCAL FILE only (people-sensitive) — Lane A goal fuel · Lane B follow-ups', url: 'enps-rollup-2026-07-20.md' },
-    { icon: '📊', label: 'eNPS Q2 One-Pager', sub: 'the packet deep-dive', url: 'https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/' },
-    { icon: '📝', label: 'AAR pulse (leaders, 2:30)', sub: 'Sky Board 12578917480', url: 'https://einsteinmoving.monday.com/boards/1146915251/pulses/12578917480' },
-    { icon: '🗳', label: 'eNPS review pulse (2:30)', sub: 'Sky Board 12578946632', url: 'https://einsteinmoving.monday.com/boards/1146915251/pulses/12578946632' },
-    { icon: '📋', label: 'Master Backlog', sub: 'QGR Q3 Review view = lens-tagged items', url: 'https://einsteinmoving.monday.com/boards/18408300070' },
-    { icon: '🧾', label: 'Curation Receipt (7/20) — interactive', sub: 'Confirm/challenge each rock + rule on 11 near-misses → export to Albert (hosted with the HQ 7/20; regenerates at the warehouse gate, same link)', url: 'curation-receipt-2026-07-20.html' },
-    { icon: '🗺', label: 'SWT + 7 Strata Worksheet', sub: 'the Growth Toolkit pages, in-tool — pre-seeded w/ April + proposals; export md/JSON; Albert re-seeds quarterly', url: 'strata-swt-worksheet.html' },
-    { icon: '📕', label: "Cam's Q2 26 Growth Toolkit", sub: 'the April workbook — OPSP · 7 Strata · SWT as-written (Drive); the baseline for the left-page refresh', url: 'https://drive.google.com/file/d/1zyBbTy2R3kdrMXbAIssvK6NECZu5B_us/view' },
-    { icon: '🎒', label: 'Walking Pack v2', sub: 'the single best pre-read (Drive)', url: 'https://drive.google.com/file/d/14MzHdAqHXU4Z4xYuRk6i3dqsjL2D3ySv/view' },
-    { icon: '🧾', label: 'OPSP + Vision Summary (live)', sub: 'the output builder — no 7-Strata/FACe/PACe worksheet yet; work those here, build the output there', url: 'https://goal-plan-access.replit.app/' },
+    { icon: '📊', label: 'eNPS Q2 One-Pager', sub: 'the packet deep-dive (hosted)', url: 'https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/' },
+    { icon: '🪨', label: 'Q3 Rock Slate — first pass', sub: 'LOCAL FILE only (personnel detail) — superseded in part by the walked Triage Room; still the eNPS-addendum home', url: 'rock-candidates-q3-DRAFT-2026-07-18.md' },
+    { icon: '🧾', label: 'Curation Receipt — RULED ✓ 7/20', sub: 'decision record: 22 confirm / 7 challenge + 12 near-misses (digest: receipt-decisions-DIGESTED-2026-07-20.md)', url: 'curation-receipt-2026-07-20.html' },
+    { icon: '📕', label: "Cam's Q2 26 Growth Toolkit", sub: 'the April workbook (Drive) — baseline for the left-page refresh', url: 'https://drive.google.com/file/d/1zyBbTy2R3kdrMXbAIssvK6NECZu5B_us/view' },
+    { icon: '📘', label: 'Master pulse + SOP (Monday)', sub: 'pulse 12581466585 — pointer + weekly LOW; the SOP master copy is the Runbook below', url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12581466585' },
     { icon: '✏️', label: 'OPSP Builder — editor (Replit)', sub: "Cameron's edit surface for the builder itself", url: 'https://replit.com/t/einstein-moving-company/repls/Mike-OPSPVision-Summary' }
   ];
 
   var MATERIALS_SEED = [
-    { icon: '🪞', label: 'AAR Review Room (all 7 full write-ups)', sub: 'this repo · highlight + note + export', url: 'aar-review.html' },
+    { icon: '🪞', label: 'AAR Review Room (all 7 full write-ups)', sub: "this repo · Cameron's 7/22 review baked in + Q2 headlines", url: 'aar-review.html' },
+    { icon: '📈', label: 'Q2 Financial Analysis Deck (LIVE)', sub: 'local file (sensitive — Cameron gates before wide share)', url: '../QGR Packet/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html' },
     { icon: '📊', label: 'Goals Dashboard', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/goals-dashboard/' },
     { icon: '🌀', label: 'Flywheel', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-flywheel/' },
     { icon: '🧭', label: 'PACe', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-pace/' },
@@ -1080,18 +1119,18 @@
     { id: 'ben-workbook', feed: 'Financial core (branch P&L, monthly, plan baselines)', source: 'Ben workbook v4 via Monday pulse 12410248205', owner: 'Ben', due: '✅ landed 7/21', status: 'CHECKED — extracted, validated, audit grade A, manifest v0.6.0', landed: true },
     { id: 'moves', feed: 'Completed moves per branch', source: 'EMMA report-sale-data (Sales Dashboard convention)', owner: 'Matisen', due: '✅ landed 7/21', status: 'CHECKED — folded, Rev/Move $1,522; July re-cut ~Aug 1', landed: true },
     { id: 'py-branch', feed: 'Q2 2025 revenue by branch', source: 'Q2 Reforecast wb v4 branch tabs', owner: 'Albert (self-served)', due: '✅ landed 7/21', status: 'CHECKED — ties company PY to $0.00; re-verify vs Ben’s Sage-restated 2025 zip when it lands', landed: true },
-    { id: 'tur', feed: 'TUR actuals by branch (basis named)', source: 'Matisen TUR model rev 46', owner: 'Matisen', due: 'Thu 7/23', status: 'asked 7/21 (DM)', landed: false },
-    { id: 'personnel', feed: 'Personnel budget attainment by branch', source: 'HR command center / Rippling (hours caveat)', owner: 'Matisen', due: 'Thu 7/23', status: 'asked 7/21 (DM)', landed: false },
-    { id: 'sales', feed: 'Conversion/sales both bases', source: 'EMMA — gated on backfill-complete confirm', owner: 'Matisen', due: 'Thu 7/23', status: 'asked 7/21; fallback = deliberate-omission + dual-basis dashboard numbers', landed: false },
+    { id: 'tur', feed: 'TUR actuals by branch (basis named)', source: 'Matisen TUR model rev 46', owner: 'Matisen', due: '✅ landed 7/21', status: 'CHECKED — v8 3-view folded, manifest v0.8.0; company 76.2% clears 65 KPI + 73.0 as-set. Target ruling validates w/ Matisen+Paul 7/22', landed: true },
+    { id: 'personnel', feed: 'Personnel budget attainment by branch', source: 'FTE Budget Tracker + Forecaster (validated feed)', owner: 'Matisen', due: '✅ landed 7/21', status: 'CHECKED — folded v0.8.0; day-wtd 101.1% (May under → Jul 107.8 = deliberate staff-up, SG per locked rubric)', landed: true },
+    { id: 'sales', feed: 'Conversion/sales both bases', source: 'EMMA (validated feed)', owner: 'Matisen', due: '✅ landed 7/21', status: 'CHECKED — folded v0.8.0 w/ Garland/McKinney July quote anomalies PULLED per Cameron ruling; canonical conv $ + branch chart in §3', landed: true },
     { id: 'marketing', feed: 'Funnel, spend YoY, ROAS, seasonality', source: 'GA/Looker + ROAS dashboards', owner: 'KP (+Matisen)', due: 'Fri 7/24', status: 'asked 7/21 (KP ROAS goal pulse 12004397537); dual-purpose w/ Ben’s forecast report list', landed: false },
-    { id: 'nps', feed: 'GatherUp Q2 NPS export (Q1-consistent aggregation)', source: 'GatherUp', owner: 'Amanda', due: 'Thu 7/23', status: 'asked 7/21 (group DM)', landed: false },
-    { id: 'breakeven', feed: 'Cash breakeven final (with-distributions)', source: 'Ben re-uploaded estimated actuals', owner: 'Ben', due: 'this week', status: 'under revision — $5.46M standing vs ~$5.9M ex-distributions recalc', landed: false },
+    { id: 'nps', feed: 'GatherUp Q2 NPS export (Q1-consistent aggregation)', source: 'GatherUp', owner: 'Amanda', due: '✅ landed 7/21', status: 'CHECKED — folded v0.8.0; pooled 88.0 (n=1,025) vs standing 90 target, seasonal caveat', landed: true },
+    { id: 'breakeven', feed: 'Cash breakeven final (with-distributions)', source: 'Ben re-uploaded estimated actuals', owner: 'Ben', due: 'this week', status: 'H2 reforecast posted 7/21 (pulse 12255099906) — final breakeven w/ July close', landed: false },
     { id: 'sage-2025', feed: 'Sage-restated 2025 P&L by branch (zip)', source: 'Ben (produced mid-call 7/21)', owner: 'Ben', due: '2:30 review', status: 'in brief §5 — retires new-COA caveat', landed: false },
     { id: 'market-bench', feed: 'Market benchmark for Lens 2 (market-adjusted lens)', source: 'Q1 recipe re-run 7/21 (Redfin/HAR/SABOR/MetroTex/FL Realtors/Freddie PMMS, DFW added)', owner: 'Albert', due: '7/22', status: 'LANDED 7/21 — manifest v0.7.3, Lens 2 = B (draft); Jul market data ~mid-Aug', landed: true },
-    { id: 'bookings-feed', feed: 'Weekly bookings feed (standing — Ben’s 13-wk cash forecast)', source: 'EMMA (mechanism TBD)', owner: 'Matisen + Albert', due: 'Q3 standing', status: 'spec question in Matisen DM; Q3-goal candidate', landed: false },
+    { id: 'bookings-feed', feed: 'Weekly bookings feed (standing — Ben’s 13-wk cash forecast)', source: 'EMMA (mechanism TBD)', owner: 'Matisen + Albert', due: 'Q3 standing', status: 'first CSV in hand (Downloads) — post to Ben\'s pulse w/ shape-check = the owed handoff; then wire the standing feed', landed: false },
     { id: 'eNPS', feed: 'Manager/CET + mover eNPS', source: 'Anne one-pager + review exports', owner: 'Anne', due: '✅ landed', status: 'CHECKED — folded 7/21', landed: true },
     { id: 'self-grades', feed: 'Leader AARs / self-grades', source: 'Sky AAR pulse 12578917480', owner: 'all leaders', due: '✅ landed', status: 'CHECKED — 7/7 complete, scorecard 80.0%', landed: true },
-    { id: 'samsara', feed: 'Fleet safety events (roundtable packet)', source: 'Samsara APIs + Mike/Gerald DSS export', owner: 'Mike', due: 'pre-packet week', status: 'not yet asked — queue with packet week', landed: false }
+    { id: 'samsara', feed: 'Fleet safety events (roundtable packet)', source: 'Samsara master-org API pull (single-basis, branch-comparable)', owner: 'Matisen/Albert', due: '✅ landed 7/21', status: 'CHECKED — folded v0.8.0; per-10K-mi in §1.6.2 (McKinney outlier 61.6)', landed: true }
   ];
   var DEFAULT_CHASE = {};
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
@@ -1121,8 +1160,9 @@
     { date: '7/21i', text: 'Q3 ROCK DRAFT STAGED on governance pulse 12556198241: "One Truth — the Einstein Data Bus" (owner Matisen; Aug reconcile/certify → Sep kill parallel pulls per Gerald sequencing → Oct views layer w/ branch scorecards + individual mirror; Green = canonical EMMA+Rippling feeds + 100% tools registered + weekly auto-refresh scorecards). Simplification: EMMA-toolkit prong collapses — Matisen\'s hub IS the front door. Big Rocks review = Cameron cadence, outside the rock. Feeds the Day-2 governance decision brief.' },
     { date: '7/21d', text: 'Anne AAR + eNPS folded in — scorecard complete at 7/7 leaders, company 80.0% (13 SG/19 G/8 R of 40 — badge recomputed from goal rows 7/21; the compile-header 36/42 tally overcounted). Two live flags to Day-2: damages-in-promotion disagreement (Anne read damages-out as settled; Cam+Paul pushed back — unresolved) + branch trial-day early-sunset consistency audit. eNPS theme headline: career ceiling / role clarity → BM/Ops/FM delineation feeds succession rock.' },
     { date: '7/21e', text: 'Packet Data Chase List added (15 feeds w/ source/owner/status, check-off state) — linked from P2 finalize-warehouse + toolkit. 5 landed / 10 open at creation.' },
+    { date: '7/22d', text: '🧹 STEADY-STATE SWEEP (Cameron\'s cleanup ask, overnight): ① AAR REVIEW BAKED IN — aar-review.html now ships w/ Cameron\'s full 7/22 review as embedded seed (7/7 reviewed, 42 highlights + notes, Anne flag, legend ⭐s, company rollup ✓s) — loads reviewed in ANY browser; local edits still win; ↺ Cameron 7/22 button restores; build_aar_review.py injects the seed on every rebuild (cameron-review-seed-2026-07-22.json). ② Q2 HEADLINES shipped both places: Review Room company panel + HQ scorecard zone (lesson-loop-provable 71%→80% · manage-the-rate-of-change). Divergence strip 4→6 (Anne MoverPromo G→R · Matisen CallGrading R→G upgrade). ③ KIT CLEANED: Walking Pack v2 + Day-1 Runsheet retired (built, never used); Triage Room + AAR Review Room + LIVE deck + Manager AAR tool + Goals Dashboard promoted to the front door; stale 2:30 pulses dropped; receipt marked RULED. ④ How-the-Machine-Works rebuilt for readability: flow strip + one-line beats visible, all prose in expandables. ⑤ CHECKLIST TRUED UP: 11 done items checked via _v6 migration (safe on existing browser states — only checks, never unchecks), AAR tracker column 7/7 ✅, chase list 5→10 landed (TUR/personnel/sales/NPS/Samsara CHECKED; open: marketing Fri, breakeven, Sage zip, bookings handoff, market data mid-Aug).' },
     { date: '7/22c', text: '🪞 CAMERON\'S AAR REVIEW COMPLETE (Review Room export 1:29 AM, all 7 leaders reviewed): 6/7 tracker-match ✓, Anne FLAGGED — Mover Promotion Guidance self-G should be R (Paul\'s shared-goal side already R; confirm w/ Paul). Second dispute the other direction: Matisen Call Grading self-R → Cameron reads G (weekly audits ran since 6/11; he wasn\'t clued in on Amanda\'s AI-grading progress; SG case if Games automation ships). Net rollup = wash, 32/40 = 80.0% holds. ⭐ Legend wins flagged: Cameron COS Network + Website · Paul NA Office Move-In · Amanda CX Theme · Brian Scrum Pt4 Cert · Matisen Variable Pricing · Anne HR Generalist (+ narrative legend: trust built = people reach out to Anne when frustrated). Full fold ledger (Paul items, live-room items, O3 follow-ups) = aar-review-rundown-cameron-2026-07-22.md; disputes appended to tracker JSON for the PROJ→FINAL grade-sync pass. Amanda email-suite carry got its missing MB pulse (12596528246, QG priority, Sales group — needs lens validation on the Wed walk resume).' },
-    { date: '7/22b', text: 'Late-night round 2 (Cameron rulings): ① TRIAGE BAR set — only Super Critical + QG priority items triage further (48 of 114 walked qualify; 66 marked below-bar-skip on cards). Triage Room v1.2: +33 walk-new candidates injected into lanes (bar-qualifying pulses that were never in the room), NEW-FROM-WALK chips, bar chips, banner rule. ② cv-tag redesign SHIPPED: default view shows a tiny ⓘ dot per sourced figure (hover/click = source popover); full letter codes now live only in Audit view. ③ Ben pulse REPLIED (update 5393967399): his which-branches-give-up-5-trucks question answered from Matisen's Q3 TUR ladder (NA 1-2 + SA 1-2 + Dallas safe-in-Aug; NA 3rd Sep+; SA 3rd Oct; Garland ⛔ all Q3) + his H2-reforecast context folded into deck §1.2/§1.10/§6.3 (H2 −$1.68M kept OUT of the Q2 deck by design). ④ Anne Slack DRAFTED (7-block pay-period sparkline data ask) — awaiting Cameron send approval.' },
+    { date: '7/22b', text: 'Late-night round 2 (Cameron rulings): ① TRIAGE BAR set — only Super Critical + QG priority items triage further (48 of 114 walked qualify; 66 marked below-bar-skip on cards). Triage Room v1.2: +33 walk-new candidates injected into lanes (bar-qualifying pulses that were never in the room), NEW-FROM-WALK chips, bar chips, banner rule. ② cv-tag redesign SHIPPED: default view shows a tiny ⓘ dot per sourced figure (hover/click = source popover); full letter codes now live only in Audit view. ③ Ben pulse REPLIED (update 5393967399): his which-branches-give-up-5-trucks question answered from Matisen\'s Q3 TUR ladder (NA 1-2 + SA 1-2 + Dallas safe-in-Aug; NA 3rd Sep+; SA 3rd Oct; Garland ⛔ all Q3) + his H2-reforecast context folded into deck §1.2/§1.10/§6.3 (H2 −$1.68M kept OUT of the Q2 deck by design). ④ Sparkline block-data follow-up = CAMERON→MATISEN direct (no Albert message — corrected from the drafted Anne ask).' },
     { date: '7/22a', text: '🌙 OVERNIGHT QUEUE RAN (Albert, ~1-2am): ① NPS target = 90 STANDING per Cameron (manifest 0.8.2; deck graded vs 90, hedging removed, −1.0→−2.0 gap typo fixed; packet-builder hard gate added). ② TRIAGE ROOM v1.1 WALK-SYNC: 114 pulses live-pulled from the 4 MB groups Cameron+Paul walked tonight (Strategy/Sales/Damages/Operations) — fresh priority/FW/PACe/curation chips on matched cards, walked✓/resumes-Wed banner; 11 groups pending tomorrow. ③ ALL 7 DEFERRED VISUALS BUILT into the live deck: NOI/truck bar w/ $26.4K plan line (Tampa $2.3K red vs S.Austin $24.6K) · §1.4 miss-share twin bars · safety per-10K bar (McKinney outlier) · 5b eNPS 5-cycle sparkline · §1.11 rank grid w/ divergence highlights · headline-1 sorted YoY bars · 11 plain-English impact lines in the caveat legend. Browser-verified, zero console errors. Held for Cameron: cv-tag glyph redesign + personnel sparkline restore.' },
     { date: '7/21n', text: '🔵 LIVE SWAP + AUDIT SWEEP (late night 2): v2 deck swapped to the live filename (v1 archived). Manager names fixed (Garland Jack Davis · Tampa Steven Anderson — manifest 0.8.1). Cameron fixes applied: waterfall driver tables rebuilt as Q1-parity placeholders w/ named gates · §1.4 math-basis/cross-foot + methodology callout + TUR yardstick collapsed. Then the PAID AUDIT SWEEP (7-agent workflow): Q1↔Q2 inventories → parity diff (11 gaps) → 4 new-Ops-Mgr-lens critics (73 findings). Applied: all parity skeletons (3.3/3.4/3.5/5.3/5.1-history/3.2-YoY/cross-validations ✅-list) + every HIGH clarity fix + most MEDIUMs — plain-English TL;DRs on every major section, exec attainment bars, lens cards cut to one sentence, caveats/§2 collapsed, $361+moves-def dedup, stale future-tense text synced to landed state, §6.2 flag codes linked to §6.1a. Browser-verified: 1 intentional scroll, sections unique, zero console errors.' },
     { date: '7/21m', text: '🪞 AAR REVIEW ROOM SHIPPED (aar-review.html, linked from the scorecard + materials shelf): all 7 leaders\' FULL AAR write-ups (6 pulled verbatim from Sky pulse 12578917480 incl. Anne\'s 7/21 post + Cameron\'s Visits G→R correction reply; Brian\'s retrieved from cos-vera — it was never on the pulse, only his timing reply was) + per-leader grade board (PROJ→SELF flip arrows, carry calls, CRIT tags) + Albert\'s tracker digest. Review workflow modeled on the eNPS tool: cycle leader-by-leader, select-to-highlight w/ notes, ⭐ legend-curation flags per goal, per-goal + overall notes, tracker match/flag verdict, mark-reviewed progress, company-rollup tab (40-goal tally 13/19/8 = 80%, cross-cutting lessons + bottleneck flags each w/ agree/flag+note), markdown rundown export + JSON. Autosaves under the qgrhq-q3-2026-v2- prefix. Re-runnable build: build_aar_review.py (tracker JSON + aar-fulltext/*.md → page). Browser-verified. HQ v3.31.' },
@@ -1164,7 +1204,9 @@
       { title: 'Paul — Mover Comp three-way read', detail: 'Paul self-graded R, Anne reads it G, the dashboard says G on the same CRIT. Root: the “targets set and communicated” leg unmet + a Matisen data dependency queued late. Gates Anne’s Q3 promotion-framework design.' },
       { title: 'Mike — Games methodology fork', detail: 'Weekly-average scoring = 8.16 (SG); pooled-quarter scoring = 7.60 (R) — a full color swing on a Critical Number. Mike calls for locking one canonical method before Q3 scoring.' },
       { title: 'Amanda — Call Grading G→R flip', detail: 'Honest down-flip on her own Critical Number: the grading engine ran all quarter, but the coaching loop never existed because Nhel/Tet were absorbed into front-line firefighting. Q3 restructure already designed.' },
-      { title: 'Cameron — Visits G→R flip', detail: 'Re-graded from G the same day — “grade the letter, not the technicality” became the house norm afterward. O3 leg was clean; the visit count (2 of a 3 bar) missed on an all-or-nothing definition.' }
+      { title: 'Cameron — Visits G→R flip', detail: 'Re-graded from G the same day — “grade the letter, not the technicality” became the house norm afterward. O3 leg was clean; the visit count (2 of a 3 bar) missed on an all-or-nothing definition.' },
+      { title: 'Anne — Mover Promotion G→R (Cameron review 7/22)', detail: 'Anne self-graded G; Cameron + Paul read R — Paul already graded his side of the same shared goal R (“no solid answer from them on a shared goal”). Confirm w/ Paul, then flip at grade-sync. Shared-goal consistency is the principle.' },
+      { title: 'Matisen — Call Grading R→G (Cameron review 7/22, an UPGRADE)', detail: 'Matisen self-graded R; Cameron reads G — weekly call audits ran since 6/11 (one broken week), and Matisen wasn’t clued in on Amanda’s AI-grading progress. SG case if Games automation ships. Deliver as the candor counter-example: honesty ran so deep someone under-graded himself.' }
     ],
     leaders: [
       {
@@ -1405,7 +1447,46 @@
 
   state.phases = migratePhasesV4(state.phases, state.rollout);
   state.phases = migratePhasesV5(state.phases);
+
+  // v3.36 (_v6) steady-state sweep 7/22: push confirmed completions into EXISTING saved states
+  // (only ever sets checked=true / adds a note where none exists — never unchecks, never
+  // overwrites a hand note). Fresh states get the same via the notes below + seed defaults.
+  if (!state.phases._v6) {
+    var V6_DONE = {
+      'P1-3':  'AARs 7/7 complete; Cameron reviewed all 7 in the Review Room 7/22.',
+      'P1-4':  'All 7 eNPS merged by 7/21.',
+      'P1-7':  'Scorecard complete 7/21 — 80.0% (13/19/8 of 40).',
+      'P1-9':  'Landed 7/21 (Ben H2 reforecast + Matisen Q3 plan).',
+      'P1-12': 'Deck LIVE 7/21 — manifest v0.8.x, §6.1a refereed findings, audited.',
+      'P1-17': 'GatherUp folded into the manifest 7/21 (§5).',
+      'P2-0':  'SWT ruled 7/20 (swt-strata-FINAL).',
+      'P2-2':  'PACe graded 7/20 (v4.1) + Flywheel v3.1.',
+      'P2-4':  'Ben block ran Tue 7/21 (9–1).',
+      'P2-5':  'Warehouse gate ran 7/20; receipt regenerated.',
+      'P2-6':  'Receipt ruled 7/20 — 22 confirm / 7 challenge (digest file).'
+    };
+    Object.keys(V6_DONE).forEach(function (k) {
+      var p = state.phases[k] || { checked: false, note: '', noteOpen: false };
+      p.checked = true;
+      if (!p.note) p.note = V6_DONE[k];
+      state.phases[k] = p;
+    });
+    state.phases._v6 = true;
+  }
   saveStateNow(LS_KEYS.phases, state.phases);
+
+  // tracker sweep 7/22: AAR column complete for all 7 (only fills, never downgrades)
+  TRACKER_LEADERS.forEach(function (ld) {
+    if (!state.tracker[ld + '-2']) state.tracker[ld + '-2'] = 2;
+  });
+  saveStateNow(LS_KEYS.tracker, state.tracker);
+
+  // chase sweep 7/22: newly-landed feeds check off in existing states too
+  if (!state.chase._v2) {
+    CHASE_SEED.forEach(function (it) { if (it.landed) state.chase[it.id] = true; });
+    state.chase._v2 = true;
+    saveStateNow(LS_KEYS.chase, state.chase);
+  }
 
   if (state.agenda === null) {
     state.agenda = JSON.parse(JSON.stringify(AGENDA_SEED));
