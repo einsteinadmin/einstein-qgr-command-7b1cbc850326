@@ -1385,7 +1385,7 @@
     <!-- CHART 1: Monthly NOI Trajectory -->
     <div class="chart-wrap">
       <div class="chart-title">Monthly NOI Trajectory &mdash; May / June / July (flash)</div>
-      <div class="chart-sub">Monthly NOI target vs actual, in dollars on one axis; the navy line is the actual month-to-month trajectory. <strong>We missed target every month, but the gap narrowed:</strong> May $378K / $607K (62.3%) &rarr; June $474K / $764K (62.0%) &rarr; July $555K / $772K (71.9% flash). Quarter <strong>$1.41M actual vs $2.14M target (65.7%, &minus;$736K)</strong>. Targets are the reforecast budget<sup class="cv-tag" data-prov="co.monthly_pl._target_source" title="Q2 Reforecast v4 (4/29/26), per-branch tabs cols BU/BV/BW, basis NetOrdinaryIncome minus 88888 overhead allocation (88888-netted, pre-depreciation) — quarter sum ties to the $2,143,519 plan">[R]</sup>; note the target itself ramps with the season (May is the low bar), so this isn&#39;t a flat line.</div>
+      <div class="chart-sub">Monthly NOI target vs actual, in dollars on one axis. <strong>We missed target every month, but the gap narrowed:</strong> May $378K / $607K (62.3%) &rarr; June $474K / $764K (62.0%) &rarr; July $555K / $772K (71.9% flash). Quarter <strong>$1.41M actual vs $2.14M target (65.7%, &minus;$736K)</strong>. Targets are the reforecast budget<sup class="cv-tag" data-prov="co.monthly_pl._target_source" title="Q2 Reforecast v4 (4/29/26), per-branch tabs cols BU/BV/BW, basis NetOrdinaryIncome minus 88888 overhead allocation (88888-netted, pre-depreciation) — quarter sum ties to the $2,143,519 plan">[R]</sup>; note the target itself ramps with the season (May is the low bar), so this isn&#39;t a flat line.</div>
       <div class="chart-canvas-wrap"><canvas id="chartNOITrajectory"></canvas></div>
     </div>
 
@@ -3132,18 +3132,6 @@ Chart.defaults.borderColor = '#dde3e8';
           backgroundColor: ['#2e7d32', '#2e7d32', '#66bb6a'],
           borderRadius: 3,
           order: 2,
-        },
-        {
-          label: 'Actual trajectory',
-          data: ACT,
-          type: 'line',
-          borderColor: BRAND.navy,
-          backgroundColor: BRAND.navy,
-          borderWidth: 3,
-          pointRadius: 5,
-          pointBackgroundColor: BRAND.navy,
-          tension: 0.2,
-          order: 1,
         }
       ]
     },
@@ -3157,7 +3145,6 @@ Chart.defaults.borderColor = '#dde3e8';
             label: function(ctx) {
               var i = ctx.dataIndex, pct = (ACT[i] / TGT[i] * 100).toFixed(1);
               if (ctx.dataset.label.indexOf('Target') !== -1) return 'Target: $' + ctx.parsed.y.toLocaleString();
-              if (ctx.dataset.label.indexOf('trajectory') !== -1) return 'Attainment: ' + pct + '%';
               return 'Actual: $' + ctx.parsed.y.toLocaleString() + ' (' + pct + '% of target)';
             }
           }
