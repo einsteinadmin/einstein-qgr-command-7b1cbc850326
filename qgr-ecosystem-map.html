@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Einstein QGR Ecosystem Map</title>
-<!-- qgr-ecosystem-map v1.0 2026-07-22 -->
+<!-- qgr-ecosystem-map v1.1 2026-07-23 -->
 <!--
   QGR ECOSYSTEM MAP — v1.0
   =========================
@@ -119,6 +119,8 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
   .flowcol{min-width:140px}
   * {-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+.n-upd{font-size:10px;font-weight:700;color:#507080;background:#EEF1F4;border-radius:999px;padding:1px 8px;margin-left:6px;white-space:nowrap;vertical-align:middle}
+.snapshot-band{background:#FEF6EC;border:1px solid #FDE3C2;border-radius:12px;padding:12px 18px;font-size:13px;color:#27343D;margin-bottom:18px}
 </style>
 </head>
 <body>
@@ -132,6 +134,8 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
 </div>
 
 <main>
+<div class="snapshot-band"><b>⏱ Snapshot verified 7/23/2026 ~1:30 AM.</b> This map is a point-in-time drawing — the tools on it change daily during prep. The live list with last-updated stamps = the <b>Ecosystem band on the QGR Command HQ</b>. Per-box "upd" chips below = when that tool last materially changed.</div>
+
 
   <div class="intro">
     <p><b>What this is:</b> every QGR-adjacent tool built this cycle lives somewhere in one of three lanes below. <b>Lane 1</b> is the data spine — the one manifest everything else reads from. <b>Lane 2</b> is what that manifest renders into (decks, packets, scorecards, trackers). <b>Lane 3</b> is the people loops — the tools leaders and managers actually touch before the room. One hub (the QGR Command HQ) sits above all three as the front door. Read top to bottom, left to right, following the arrows.</p>
@@ -151,7 +155,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
     <div>
       <h2>🏛 QGR Command HQ — the front door</h2>
       <p>Cameron's one link into everything below. The Leader Workshop Hub (Lane 3) is its leader-facing mirror — same brand tokens, same <code>qgrhq-q3-2026-v2-</code> localStorage prefix, not a fork.</p>
-      <div class="hh-path">canonical: QGR Prep HQ/index.html &nbsp;→&nbsp; hosted: einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326</div>
+      <div class="hh-path">canonical: QGR Prep HQ/index.html &nbsp;→&nbsp; hosted: einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326<span class="n-upd">upd 7/23 · v3.43</span></div>
     </div>
     <div class="downarrow">⬇ feeds into every lane below ⬇</div>
   </div>
@@ -166,7 +170,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
       <div class="flowrow">
         <div class="flowcol wide">
           <div class="node loop">
-            <div class="n-title">📥 Leader feeds</div>
+            <div class="n-title">📥 Leader feeds<span class="n-upd">upd 7/23 · Mike dismissals in</span></div>
             <div class="n-note">Matisen (IT/pricing/games) · Mike (ops/DFWT) · Amanda (CX/sales) · Anne (EE/hiring) — CSVs + direct data drops</div>
             <div class="n-path">Monday pulse 12594117701 (feed thread)</div>
           </div>
@@ -174,7 +178,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
         <div class="arrow">➜</div>
         <div class="flowcol wide">
           <div class="node manifest">
-            <div class="n-title">⚙️ fold_feeds_v080.py <span class="chip canon">canon</span></div>
+            <div class="n-title">⚙️ fold_feeds_v080.py <span class="chip canon">canon</span><span class="n-upd">upd 7/22</span></div>
             <div class="n-note">Re-runnable fold script + validators normalize every feed into the manifest schema.</div>
             <div class="n-path">QGR Packet/q2-data/fold_feeds_v080.py<br>QGR Packet/q2-data/validate_manifest.py, validate_intake.py<br>QGR Packet/normalize_intake_header.py</div>
           </div>
@@ -182,12 +186,12 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
         <div class="arrow">➜</div>
         <div class="flowcol wide">
           <div class="node spine">
-            <div class="n-title">📊 THE MANIFEST</div>
+            <div class="n-title">📊 THE MANIFEST<span class="n-upd">upd 7/23 · v0.8.3</span></div>
             <div class="n-note">branch-metrics-q2-26.json — v0.8.2, validator-clean. Every deck, packet, scorecard, and tracker below reads THIS file. One spine, many faces.</div>
             <div class="n-path">QGR Packet/q2-data/branch-metrics-q2-26.json</div>
           </div>
           <div class="node manifest">
-            <div class="n-title">🔑 metric-registry.json</div>
+            <div class="n-title">🔑 metric-registry.json<span class="n-upd">upd 7/22</span></div>
             <div class="n-note">Stable metric IDs + basis_version — the cross-quarter trend architecture. Lets Q3/Q4 manifests compare apples to apples against Q2.</div>
             <div class="n-path">QGR Packet/metric-registry.json</div>
           </div>
@@ -207,35 +211,35 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
         <div class="arrow" style="padding-top:0">⬅</div>
         <div class="flowcol wide">
           <div class="node artifact">
-            <div class="n-title">① Financial Analysis Deck <span class="badge local-sens">local · sensitive</span></div>
+            <div class="n-title">① Financial Analysis Deck <span class="badge local-sens">local · sensitive</span><span class="n-upd">upd 7/22 · v0.8.2</span></div>
             <div class="n-note">21+ sections, §6.1a adversarially-refereed findings, full TUR/NPS/personnel analysis. Cloudflare gate planned at qgr.einsteinmoving.com.</div>
             <div class="n-path">QGR Packet/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html</div>
           </div>
         </div>
         <div class="flowcol wide">
           <div class="node artifact">
-            <div class="n-title">② Distributed Roundtable Packet <span class="badge local-ruling">local · until ruling</span></div>
+            <div class="n-title">② Distributed Roundtable Packet <span class="badge local-ruling">local · until ruling</span><span class="n-upd">upd 7/23 · dismissal tables</span></div>
             <div class="n-note">21 sections — the shareable version of the deck's story, gated on a who-sees-what pass before it leaves local.</div>
             <div class="n-path">QGR Packet/q2-2026-roundtable-packet.html</div>
           </div>
         </div>
         <div class="flowcol wide">
           <div class="node artifact">
-            <div class="n-title">③ 10 Branch Scorecards <span class="badge local-ruling">local · until ruling</span></div>
+            <div class="n-title">③ 10 Branch Scorecards <span class="badge local-ruling">local · until ruling</span><span class="n-upd">upd 7/22</span></div>
             <div class="n-note">N. Austin · S. Austin · Leander · San Antonio · Houston · Dallas · Fort Worth · Garland · McKinney · Tampa. Linked from the packet.</div>
             <div class="n-path">QGR Packet/branch-scorecard-{branch}-q2.html</div>
           </div>
         </div>
         <div class="flowcol wide">
           <div class="node artifact">
-            <div class="n-title">④ QG Success Tracker</div>
+            <div class="n-title">④ QG Success Tracker<span class="n-upd">upd 7/22 · Q2 rows</span></div>
             <div class="n-note">Per-leader SG/G/R rows off the AAR JSON — 80.0% verified. <span class="dot canon"></span> canonical keeps full candor; <span class="dot copy"></span> hosted copy runs through the sanitize script every redeploy.</div>
             <div class="n-path">canon: Cascading Goals Tracker/einstein-qg-tracker.html<br>sanitize: Cascading Goals Tracker/sanitize_for_hosting.py<br>hosted copy: on the QGR Command repo</div>
           </div>
         </div>
         <div class="flowcol wide">
           <div class="node artifact">
-            <div class="n-title">⑤ Goals Dashboard <span class="badge hosted">hosted</span></div>
+            <div class="n-title">⑤ Goals Dashboard <span class="badge hosted">hosted</span><span class="n-upd">upd 7/21 · PROJ grades</span></div>
             <div class="n-note">Live status source of truth for the quarter's rocks, independent refresh cadence.</div>
             <div class="n-path">einsteinadmin.github.io/goals-dashboard</div>
           </div>
@@ -254,7 +258,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
       <div class="flowrow">
         <div class="flowcol wide">
           <div class="node hub">
-            <div class="n-title">① Leader Workshop Hub <span class="badge hosted">hosted</span></div>
+            <div class="n-title">① Leader Workshop Hub <span class="badge hosted">hosted</span><span class="n-upd">upd 7/22 · v1.4</span></div>
             <div class="n-note">Ballot (6 debates) + CHOICES self-eval + celebrations + action items + goal pre-work → JSON exports → Cameron aggregates pre-room. Export-and-return, anti-anchoring by design.</div>
             <div class="n-path">canon: QGR Prep HQ/qgr-workshop-hub.html<br>hosted: einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b</div>
           </div>
@@ -262,7 +266,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
         <div class="arrow">➜</div>
         <div class="flowcol wide">
           <div class="node hub">
-            <div class="n-title">② Manager AAR Hub <span class="badge hosted">hosted</span></div>
+            <div class="n-title">② Manager AAR Hub <span class="badge hosted">hosted</span><span class="n-upd">upd 7/22 · v1.3</span></div>
             <div class="n-note">31 BM/Ops/FM seats, 4-question AAR + CHOICES → JSON to regional/Cameron. <code>results.html</code> is the live room view — drag exports in.</div>
             <div class="n-path">canon: People Analyzer/aar-manager-tool/manager-qgr-hub.html<br>room view: People Analyzer/aar-manager-tool/results.html<br>hosted: einsteinadmin.github.io/einstein-mgr-aar-476141c7097f</div>
           </div>
@@ -270,7 +274,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
         <div class="arrow">➜</div>
         <div class="flowcol wide">
           <div class="node loop">
-            <div class="n-title">③ AAR Review Room</div>
+            <div class="n-title">③ AAR Review Room<span class="n-upd">upd 7/22 · review baked in</span></div>
             <div class="n-note">All 7 leaders' full AAR write-ups + Cameron's review, now baked into the page (highlights, notes, ⭐ legend flags).</div>
             <div class="n-path">canon: QGR Prep HQ/aar-review.html<br>hosted copy: on the QGR Command repo</div>
           </div>
@@ -279,7 +283,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
       <div class="flowrow" style="margin-top:8px">
         <div class="flowcol wide">
           <div class="node loop">
-            <div class="n-title">④ Triage Room</div>
+            <div class="n-title">④ Triage Room<span class="n-upd">upd 7/23 · v1.8 bars+funnel</span></div>
             <div class="n-note">Master Backlog QG / Super-Critical pulses ONLY (backlog-only hard rule — never synthesized cards) → Cameron+Paul walk → red-pen → write-back to Monday.</div>
             <div class="n-path">canon: QGR Prep HQ/qgr-triage-room.html<br>hosted copy: on the QGR Command repo</div>
           </div>
@@ -287,8 +291,8 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
         <div class="arrow">➜</div>
         <div class="flowcol wide">
           <div class="node loop">
-            <div class="n-title">⑤ People Analyzer <span class="badge local-sens">local · sensitive</span></div>
-            <div class="n-note">Leadership evals — LOCAL-ONLY, never hosted. Directs variant IN BUILD this week (Cameron ruling 7/22): leaders eval their own directs, private-until-export → aggregate gut-check view for the room.</div>
+            <div class="n-title">⑤ People Analyzer <span class="badge local-sens">local · sensitive</span><span class="n-upd">upd 7/23 · directs BUILT</span></div>
+            <div class="n-note">Leadership evals — LOCAL-ONLY, never hosted. Directs variant BUILT 7/23 (directs-tier/pa-directs.html + results room view) — leaders eval their own directs, private-until-export → aggregate gut-check view. Hosting/link-up pending.</div>
             <div class="n-path">People Analyzer/people-analyzer-leadership.html</div>
           </div>
         </div>
@@ -303,7 +307,7 @@ main{max-width:1180px;margin:0 auto;padding:22px 22px 60px}
     </div>
   </div>
 
-  <div class="footer-note">Einstein QGR Ecosystem Map v1.0 · 2026-07-22 · local reference, not for distribution · source of truth for paths = this session's read of the filesystem</div>
+  <div class="footer-note">Einstein QGR Ecosystem Map v1.1 · 2026-07-23 · local reference, not for distribution · source of truth for paths = this session's read of the filesystem</div>
 
 </main>
 

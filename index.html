@@ -258,6 +258,12 @@
   .material-label { font-size: 0.82rem; font-weight: 700; color: var(--navy); }
   .material-sub { font-size: 0.68rem; color: var(--gray); }
 
+  /* Ecosystem band (v3.43) */
+  .eco-lane-head { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #64748b; margin: 14px 0 8px; }
+  .eco-lane-head:first-child { margin-top: 0; }
+  .eco-upd { font-size: 0.6rem; font-weight: 700; color: #507080; background: #EEF1F4; border-radius: 999px; padding: 1px 7px; margin-top: 4px; display: inline-block; white-space: nowrap; }
+  .eco-map-tile { border-color: #EF8B22 !important; }
+
   /* Toolkit hide/notes (v3.41) */
   .tk-tile { position: relative; flex-direction: column; align-items: stretch; padding: 0; }
   .tk-link { display: flex; align-items: center; gap: 10px; padding: 12px 34px 12px 14px; text-decoration: none; color: var(--ink); border-radius: 10px; }
@@ -471,6 +477,13 @@
 <div class="wrap">
 
   <div class="zone active" id="zone1">
+
+    <div class="section" id="ecosystemSection">
+      <div class="section-eyebrow">The machine</div>
+      <div class="section-title">Ecosystem — the map + every tool on it</div>
+      <div class="section-desc">How the whole QGR machine fits together, and each tool with when it last materially changed. The map is a snapshot; these stamps update at every deploy. <span style="color:#94a3b8;">(Built 7/23 per Cameron — the machine grew faster than any one person's mental model.)</span></div>
+      <div id="ecoGrid"></div>
+    </div>
 
     <div class="section">
       <div class="section-eyebrow">Start here</div>
@@ -758,7 +771,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.42 2026-07-23'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.43 2026-07-23'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1141,6 +1154,8 @@
   // "landed: true" seeds the row pre-checked by default (matches DEFAULT_PHASES/DEFAULT_TRACKER
   // pattern — baked into the fallback state, not force-written to localStorage).
   var CHASE_SEED = [
+    { id: 'per-rep-targets', feed: 'Per-rep sales-target attainment by month (each sales-contributing person vs their individual quarterly target)', source: 'EMMA export or Matisen pull — Q1 branch scorecards HAD this per manager per month, so the pull exists; find WHEN it was pulled (looks like right before the following quarter opened) and re-run that recipe', owner: 'Matisen (Cameron requesting)', due: 'chase now; data only trues up at quarter close (~8/1)', status: 'OPEN 7/23 — Q2 EMMA feed does not carry the per-rep attainment field that Q1 had. Cameron: "I think I can get it, but ultimately we are going to have to wait till the numbers true up at the end of the quarter."', landed: false },
+    { id: 'sales-target-composite-input', feed: '⚠ COMPOSITE INPUT — decide how sales-target attainment gets tracked as a graded metric', source: 'Branch scorecard composite: TUR 20 / Sales Target 10 / NPS 15 / eNPS 15 / Recognition 10 / DSS 15 / Personnel-Budget 15', owner: 'CAMERON — his call, not a data pull', due: 'before the Q3 scorecards are built', status: 'OPEN 7/23 — sales_target_attainment is empty at branch level in Q1 AND Q2, so it never worked. Not a missing feed: attainment has THREE live revenue reads (95.46% projected full-quarter · 87% booked-to-date vs the $8.93M sales target · 82% realized-to-date) and nobody has ruled which one defines the graded number. Albert recommendation: booked vs sales target, since that is what a BM actually controls. If it already lives somewhere in the packet we catch it there; if not it needs a home.', landed: false },
     { id: 'ben-workbook', feed: 'Financial core (branch P&L, monthly, plan baselines)', source: 'Ben workbook v4 via Monday pulse 12410248205', owner: 'Ben', due: '✅ landed 7/21', status: 'CHECKED — extracted, validated, audit grade A, manifest v0.6.0', landed: true },
     { id: 'moves', feed: 'Completed moves per branch', source: 'EMMA report-sale-data (Sales Dashboard convention)', owner: 'Matisen', due: '✅ landed 7/21', status: 'CHECKED — folded, Rev/Move $1,522; July re-cut ~Aug 1', landed: true },
     { id: 'py-branch', feed: 'Q2 2025 revenue by branch', source: 'Q2 Reforecast wb v4 branch tabs', owner: 'Albert (self-served)', due: '✅ landed 7/21', status: 'CHECKED — ties company PY to $0.00; re-verify vs Ben’s Sage-restated 2025 zip when it lands', landed: true },
@@ -1188,6 +1203,7 @@
     { date: '7/21i', text: 'Q3 ROCK DRAFT STAGED on governance pulse 12556198241: "One Truth — the Einstein Data Bus" (owner Matisen; Aug reconcile/certify → Sep kill parallel pulls per Gerald sequencing → Oct views layer w/ branch scorecards + individual mirror; Green = canonical EMMA+Rippling feeds + 100% tools registered + weekly auto-refresh scorecards). Simplification: EMMA-toolkit prong collapses — Matisen\'s hub IS the front door. Big Rocks review = Cameron cadence, outside the rock. Feeds the Day-2 governance decision brief.' },
     { date: '7/21d', text: 'Anne AAR + eNPS folded in — scorecard complete at 7/7 leaders, company 80.0% (13 SG/19 G/8 R of 40 — badge recomputed from goal rows 7/21; the compile-header 36/42 tally overcounted). Two live flags to Day-2: damages-in-promotion disagreement (Anne read damages-out as settled; Cam+Paul pushed back — unresolved) + branch trial-day early-sunset consistency audit. eNPS theme headline: career ceiling / role clarity → BM/Ops/FM delineation feeds succession rock.' },
     { date: '7/21e', text: 'Packet Data Chase List added (15 feeds w/ source/owner/status, check-off state) — linked from P2 finalize-warehouse + toolkit. 5 landed / 10 open at creation.' },
+    { date: '7/23b·W', text: '🗺 ECOSYSTEM BAND + TIMESTAMPS (Cameron: "the map may already be stale" — he was right, the machine outgrew it in 3 hours): ① NEW top section above the toolkit — the Ecosystem band: the map + every tool on it, grouped by lane (data spine · artifacts · people loops), each tile with an "upd" last-materially-changed stamp (stamps update at every deploy — the band is the LIVE view, the map is the snapshot). Includes the NEW PA-Directs (built 7/23 by the eval session, hosting pending). ② Map v1.1: snapshot-verified banner + per-node upd chips + PA-directs node updated to BUILT. HQ v3.43.' },
     { date: '7/23a·W', text: '🛠 HQ TOOLKIT: HIDE + NOTES (Cameron ask, post-midnight): every toolkit tile now has hover controls — ✕ hides it (collapses to an "N hidden — show" pill, ↩ restore anytime) + 📝 opens a per-tool note; "Copy toolkit notes → Albert" exports hidden-list + all notes as markdown for the paste-back loop. State = qgrhq-q3-2026-v2-toolkit-hidden/-notes (browser-local; hidden means Cameron-curated-away, not deleted — the seed stays intact for reseeding). Plus: 🗺 QGR ECOSYSTEM MAP promoted to the front door + materials shelf and MIRRORED to this repo (qgr-ecosystem-map.html — was local-only; leadership-audience-safe: paths + obscure URLs only, all 4 hosted URLs curl-verified, PA-directs line updated to the in-build ruling). HQ v3.41.' },
     { date: '7/22h·W', text: '🗳 WORKSHOP HUB v1.4 (Cameron\'s dinner directives; leaders get the link Day 4): ① LEANS HIDDEN BY DEFAULT — every lean now sits behind a "🔒 Show how leadership is currently leaning" think-first reveal (Cameron: "I don\'t want them to think about it without seeing that first" inverted to think-first-then-peek). ② +2 BALLOT QUESTIONS (slate now 6): conversion-rate-$ standard (options Raise/Hold-40%/Reshape/Undecided) + COS-system→BMs (Pilot-now/After-Q3/Not-yet/Undecided) — both deliberately NO-LEAN ("leadership hasn\'t written a lean here yet — bring your own number"); Cameron redlines leans onto them at the cut-list pass if wanted. ③ GOAL PRE-WORK SCAFFOLD (his primary ask): theme-direction banner (speed-to-competence for everyone, "Back to School" working name, locks-or-gets-beaten in the room) + what-would-you-own + 3 draft-goal slots w/ working Green/SuperGreen definitions; don\'t-over-invest framing kept. ④ ACTION ITEMS TILE → REAL per-leader data-collection checklists (DRAFT badge — Cameron confirms; seeded from the chase list + thread asks: Paul breakeven/Sage/row-6 · Matisen DreamTeam/games/row-6 · Mike Dallas-14 + Samsara✓landed · Amanda CX-data confirm · Anne org-chart reconcile · _all: /status refresh + praise close-out). Export schema → einstein-qgr-ballot/v3 (adds actionItems + prework; v1/v2 exports still parse). v1.4 curl-verified live. NOTE for the planning session: Mike\'s Samsara dismissal CSVs are in ~/Downloads (dismissal_rate/_types_by_branch_May1-Jul17), read + sanity-checked (company 20.7% — Mike\'s prose said 20.38%, CSV governs; Leander 42.1% outlier; 35 untagged events) — fold is packet-lane work, not hub-lane.' },
     { date: '7/22g', text: '🗳 WORKSHOP HUB v1.3 (Cameron\'s 4 asks) + QG TRACKER Q2 UPDATE: ① CHOICES self-eval BUILT INTO the hub (leaders don\'t live in the Manager AAR tool — decision: build in, not link out; same 1–5 anchors + note gate, rides in the export). ② Celebrations & prizes section (theme celebration/prize ideas, exported — "celebration engine, not just a scoreboard"). ③ People Analyzer–for-directs tile stubbed COMING (recommended shape: sibling leader tool, private-until-export → Cameron aggregates a gut-check view; where-it-lives decision open). ④ QG tile → QG Success Tracker (background agent added Q2 2026 rows to the canonical tracker — per-leader SG/G/R from the AAR JSON, sums verified 13/19/8=80.0%, PROJ pending Day-1 sync; Quarterly Focus refreshed to Q2). ⚠ PRIVACY CATCH: agent\'s scan flagged the staged disputes (Anne G→R · Matisen R→G) + Paul/Anne Mover-Comp three-way read as pre-room leaks → hosted copy SANITIZED (dispute names + three-way stripped, generic "grade-sync items staged" kept; canonical keeps full candor; resanitize on every redeploy — mgr-aar pattern). Tracker now served from this repo (einstein-qg-tracker.html). ⑤ Financial tile = FIN_PACKET_URL plumbing — one-line swap when Cameron\'s Cloudflare gate goes up (Q1 pattern). Export schema → einstein-qgr-ballot/v2 (ballot + choices + celebrations). Hub v1.3 + HQ v3.38 deployed; ballot JSON schema aggregator note: v1 exports (ballot-only) still valid.' },
@@ -2045,6 +2061,61 @@
     });
   }
 
+  // Ecosystem band — the map + its tools with last-updated stamps (Cameron ask 7/23).
+  // Update the `upd` stamps whenever a tool materially changes; the band is the LIVE view, the map is the snapshot.
+  var ECO_SEED = [
+    { lane: '🗺 The map', items: [
+      { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'the one-page drawing of everything below — snapshot; these stamps are the live view', url: 'qgr-ecosystem-map.html', upd: '7/23 · v1.1 stamps' }
+    ]},
+    { lane: '1 · Data spine', items: [
+      { icon: '📊', label: 'Manifest + metric registry', sub: 'branch-metrics-q2-26.json v0.8.3 — the one spine every artifact reads · registry = cross-quarter trend IDs', url: '#chase-list', upd: '7/23 · dismissals folded' },
+      { icon: '📥', label: 'Packet Data Chase List', sub: 'every feed · source · owner · landed-state', url: '#chase-list', upd: '7/23' }
+    ]},
+    { lane: '2 · Artifacts', items: [
+      { icon: '📈', label: 'Financial Analysis Deck', sub: 'LOCAL · sensitive — Cloudflare gate planned', url: '../QGR Packet/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html', upd: '7/22 · v0.8.2' },
+      { icon: '📖', label: 'Roundtable Packet (distributed)', sub: 'LOCAL until who-sees-what — 21 sections + dismissal tables', url: '../QGR Packet/q2-2026-roundtable-packet.html', upd: '7/23 · dismissal tables' },
+      { icon: '🏬', label: '10 Branch Scorecards', sub: 'LOCAL until who-sees-what — linked from the packet', url: '../QGR Packet/branch-scorecard-naustin-q2.html', upd: '7/22' },
+      { icon: '📉', label: 'QG Success Tracker', sub: 'hosted (sanitized copy) — Q2 rows in, PROJ until Day-1 sync', url: 'einstein-qg-tracker.html', upd: '7/22 · Q2 rows' },
+      { icon: '📊', label: 'Goals Dashboard', sub: 'hosted — all 40 goals w/ self-grades', url: 'https://einsteinadmin.github.io/goals-dashboard/', upd: '7/21 · PROJ grades' }
+    ]},
+    { lane: '3 · People loops', items: [
+      { icon: '🗳', label: 'Leader Workshop Hub', sub: 'hosted — ballot + CHOICES + celebrations + action items + pre-work', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/', upd: '7/22 · v1.4' },
+      { icon: '📝', label: 'Manager AAR Hub', sub: 'hosted — 31 seats, 4-question AAR + CHOICES', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/', upd: '7/22 · v1.3' },
+      { icon: '📽', label: 'AAR Live Results (room view)', sub: 'ships empty — drag manager exports in at the QGR', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html', upd: '7/22' },
+      { icon: '🪞', label: 'AAR Review Room', sub: "all 7 leader write-ups + Cameron's review baked in", url: 'aar-review.html', upd: '7/22 · review baked in' },
+      { icon: '🛠', label: 'Triage Room', sub: 'bar view + department funnel — the Cameron+Paul workbench', url: 'qgr-triage-room.html', upd: '7/23 · v1.8 bars+funnel' },
+      { icon: '🧮', label: 'People Analyzer — Leadership', sub: 'LOCAL ONLY, never hosted — launch people-analyzer :8136', url: 'http://localhost:8136/people-analyzer-leadership.html', upd: '7/22 · UX pass' },
+      { icon: '🧮', label: 'People Analyzer — Directs (NEW)', sub: 'leaders eval their own directs + results room view — hosting/link-up pending', url: 'http://localhost:8136/directs-tier/pa-directs.html', upd: '7/23 · BUILT' }
+    ]}
+  ];
+  function renderEcosystem() {
+    var wrap = document.getElementById('ecoGrid');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    ECO_SEED.forEach(function (lane) {
+      var h = document.createElement('div');
+      h.className = 'eco-lane-head';
+      h.textContent = lane.lane;
+      wrap.appendChild(h);
+      var grid = document.createElement('div');
+      grid.className = 'materials-grid';
+      lane.items.forEach(function (m) {
+        var a = document.createElement('a');
+        a.className = 'material-tile' + (m.label === 'QGR Ecosystem Map' ? ' eco-map-tile' : '');
+        a.href = m.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.innerHTML =
+          '<div class="material-icon">' + m.icon + '</div>' +
+          '<div><div class="material-label">' + esc(m.label) + '</div>' +
+          '<div class="material-sub">' + esc(m.sub) + '</div>' +
+          '<span class="eco-upd">upd ' + esc(m.upd) + '</span></div>';
+        grid.appendChild(a);
+      });
+      wrap.appendChild(grid);
+    });
+  }
+
   // Toolkit with per-tile hide (x) + notes that export back to Albert (Cameron ask 7/22 late)
   var TK_LS = { hidden: LS_PREFIX + 'toolkit-hidden', notes: LS_PREFIX + 'toolkit-notes' };
   function tkGet(k){ try { return JSON.parse(localStorage.getItem(k)) || {}; } catch (e) { return {}; } }
@@ -2448,6 +2519,7 @@
     renderTracker();
     renderRockGrid();
     renderAgenda();
+    renderEcosystem();
     renderToolkit();
     renderMaterials();
     renderAllDecisionTables();
