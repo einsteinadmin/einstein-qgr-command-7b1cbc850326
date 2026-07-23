@@ -506,7 +506,7 @@
 
   <!-- Section 2: Summary Cards -->
   <div class="cards-section">
-    <h2>Roundtable Leaders <span class="legend-hint">Sorted by trailing success rate. Border color = health zone.</span></h2>
+    <h2>Roundtable Leaders <span class="legend-hint">Headline = current quarter's success rate (all-time running average below it). Sorted by current quarter. Border color = health zone.</span></h2>
     <div class="cards-grid" id="cardsGrid"></div>
   </div>
 
@@ -851,6 +851,17 @@ function totals(rocks) {
   return { sg, g, r, ung };
 }
 
+// Latest quarter with graded data — the HEADLINE number (Cameron 7/23: the card's big number
+// is the most recent quarter's success rate; the all-time running average is a small sub-line).
+function latestGraded(rocks) {
+  const graded = rocks.filter(r => (r.sg + r.g + r.r) > 0);
+  return graded.length ? graded[graded.length - 1] : null;
+}
+function fmtPct(p) {
+  if (p === null) return "N/A";
+  return Math.abs(p - Math.round(p)) < 0.05 ? Math.round(p) + "%" : p.toFixed(1) + "%";
+}
+
 function healthZone(pct) {
   if (pct === null) return "problem";
   if (pct > 80) return "too-safe";
@@ -910,34 +921,37 @@ function buildCards() {
 
   const teamWide = buildTeamWide();
 
-  // Team-wide card first
-  const twPct = trailingRate(teamWide.rocks);
+  // Team-wide card first — headline = MOST RECENT quarter (Cameron 7/23); all-time = sub-line
+  const twLatest = latestGraded(teamWide.rocks);
+  const twPct = twLatest ? successRate(twLatest) : null;
+  const twAll = trailingRate(teamWide.rocks);
   const twT = totals(teamWide.rocks);
   const twTrend = trendArrow(teamWide.rocks);
-  const twPctStr = twPct !== null ? Math.round(twPct) + "%" : "N/A";
   const twCard = document.createElement("div");
   twCard.className = "card team-wide";
   twCard.innerHTML = `
     <div class="trend-arrow ${twTrend.cls}">${twTrend.arrow}</div>
     <div class="name">${teamWide.name}</div>
-    <div class="title">${teamWide.title} &mdash; ${twT.sg + twT.g + twT.r + twT.ung} total ${showCriticalOnly ? "critical " : ""}rocks across ${leaders.length} leaders</div>
-    <div class="big-number">${twPctStr}</div>
+    <div class="title">${teamWide.title} &mdash; ${twLatest ? twLatest.q : ""}${twLatest && twLatest.pending ? " (PROJ)" : ""} ${showCriticalOnly ? "critical " : ""}rocks</div>
+    <div class="big-number">${fmtPct(twPct)}</div>
     <div class="counts">
-      <span class="sg">SG ${twT.sg}</span>
-      <span class="g">G ${twT.g}</span>
-      <span class="r">R ${twT.r}</span>
-      ${twT.ung > 0 ? `<span class="ung">UNG ${twT.ung}</span>` : ""}
+      ${twLatest ? `<span class="sg">SG ${twLatest.sg}</span>
+      <span class="g">G ${twLatest.g}</span>
+      <span class="r">R ${twLatest.r}</span>
+      ${twLatest.ung > 0 ? `<span class="ung">UNG ${twLatest.ung}</span>` : ""}` : ""}
     </div>
+    <div class="counts" style="margin-top:4px;opacity:0.75;">All-time: ${twAll !== null ? Math.round(twAll) + "%" : "N/A"} across ${twT.sg + twT.g + twT.r + twT.ung} rocks / ${leaders.length} leaders</div>
   `;
   grid.appendChild(twCard);
 
   // Individual roundtable cards
   const roundtableLeaders = leaders.filter(l => roundtable.includes(l.name));
 
-  // Sort by trailing rate descending
+  // Sort by CURRENT-quarter rate descending (headline basis, Cameron 7/23)
+  const latestPctOf = l => { const lg = latestGraded(getRocks(l)); return lg ? successRate(lg) : null; };
   roundtableLeaders.sort((a, b) => {
-    const ra = trailingRate(getRocks(a));
-    const rb = trailingRate(getRocks(b));
+    const ra = latestPctOf(a);
+    const rb = latestPctOf(b);
     if (ra === null && rb === null) return 0;
     if (ra === null) return 1;
     if (rb === null) return -1;
@@ -946,25 +960,27 @@ function buildCards() {
 
   roundtableLeaders.forEach(leader => {
     const rocks = getRocks(leader);
-    const pct = trailingRate(rocks);
+    const latest = latestGraded(rocks);
+    const pct = latest ? successRate(latest) : null;
+    const allPct = trailingRate(rocks);
     const zone = healthZone(pct);
     const t = totals(rocks);
     const trend = trendArrow(rocks);
-    const pctStr = pct !== null ? Math.round(pct) + "%" : "N/A";
 
     const card = document.createElement("div");
     card.className = "card " + zone;
     card.innerHTML = `
       <div class="trend-arrow ${trend.cls}">${trend.arrow}</div>
       <div class="name">${leader.name}</div>
-      <div class="title">${leader.title}</div>
-      <div class="big-number ${zone}">${pctStr}</div>
+      <div class="title">${leader.title}${latest ? ` &mdash; ${latest.q}${latest.pending ? " (PROJ)" : ""}` : ""}</div>
+      <div class="big-number ${zone}">${fmtPct(pct)}</div>
       <div class="counts">
-        <span class="sg">SG ${t.sg}</span>
-        <span class="g">G ${t.g}</span>
-        <span class="r">R ${t.r}</span>
-        ${t.ung > 0 ? `<span class="ung">UNG ${t.ung}</span>` : ""}
+        ${latest ? `<span class="sg">SG ${latest.sg}</span>
+        <span class="g">G ${latest.g}</span>
+        <span class="r">R ${latest.r}</span>
+        ${latest.ung > 0 ? `<span class="ung">UNG ${latest.ung}</span>` : ""}` : ""}
       </div>
+      <div class="counts" style="margin-top:4px;opacity:0.7;">All-time: ${allPct !== null ? Math.round(allPct) + "%" : "N/A"} (${t.sg + t.g + t.r + t.ung} rocks)</div>
     `;
     grid.appendChild(card);
   });
