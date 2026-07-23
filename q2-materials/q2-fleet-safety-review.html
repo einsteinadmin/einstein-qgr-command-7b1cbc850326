@@ -382,5 +382,119 @@ const tb=document.getElementById('branchTable');
    `<tr><td>${b[0]}</td><td>${b[1].toLocaleString()}</td><td>${b[3].toLocaleString()}</td><td class="${cls}">${pct>=0?'+':''}${pct.toFixed(0)}%</td></tr>`);
 });
 </script>
+
+<!-- ===== PACKET APPENDIX — detail moved from roundtable-packet Component 4B, 7/23 (Cameron: packet keeps 2-3 visuals; full detail lives here) ===== -->
+<section style="max-width:1080px;margin:30px auto;padding:0 20px;">
+<h2 style="color:#1B3A5C;">Appendix &mdash; Dismissal &amp; Behavior Detail (from the roundtable packet)</h2>
+<p style="font-size:13px;color:#555;">Moved from packet Component 4B on 7/23 &mdash; the packet keeps the headline stats, the branch scorecard, dismissal rates, and the exposure chart; the full analytical detail lives here.</p>
+<h4>What Gets Dismissed — Company Mix</h4>
+        <div class="table-scroll">
+        <table>
+          <thead><tr><th>Behavior</th><th>Dismissals</th><th>Share of all dismissals</th></tr></thead>
+          <tbody>
+            <tr><td>Rolling Stop</td><td>53</td><td>28.3%</td></tr>
+            <tr><td>Inattentive Driving</td><td>43</td><td>23.0%</td></tr>
+            <tr><td>Following Distance</td><td>32</td><td>17.1%</td></tr>
+            <tr><td>Harsh Brake</td><td>14</td><td>7.5%</td></tr>
+            <tr><td>Obstructed Camera</td><td>13</td><td>7.0%</td></tr>
+            <tr><td>Severe Speeding</td><td>11</td><td>5.9%</td></tr>
+            <tr><td>No Seat Belt</td><td>8</td><td>4.3%</td></tr>
+            <tr><td>Harsh Turn</td><td>6</td><td>3.2%</td></tr>
+            <tr><td>Mobile Usage</td><td>6</td><td>3.2%</td></tr>
+            <tr><td>Crash</td><td>1</td><td>0.5%</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="font-size:12px;color:var(--gray-600);"><em>Rolling Stop and Inattentive Driving together account for 51% of every dismissal in the network — the same two behaviors Q1 flagged as "stricter standard, not regression." That pattern is consistent with the detector being tuned tight on those two, which is worth confirming before anyone reads a branch's dismissal rate as leniency.</em></p>
+
+        <div class="callout warn">
+          <strong>⚠ Data-integrity flags on this table — read before quoting it.</strong>
+          <ol style="margin:6px 0 0 18px;font-size:12.5px;">
+            <li><strong>✅ RESOLVED 2026-07-23 — the denominators now match.</strong> This component previously mixed two bases: dismissals on Mike's 902 reviewed events, events/miles on Matisen's API feed (1,031). Cameron ruled Mike's review definitive, so the whole component now runs on the <strong>single 902 review basis</strong> and the dismissal rates share a denominator with the events table above. Matisen's 1,031 API count is not gone — it lives in the Financial Deck's monthly exposure table, explicitly relabelled as <em>all detected telemetry events</em>, because it is the only source with month-by-month granularity. The two are different measures and are no longer presented as the same one. <strong>Still never chart the 902 and the 1,031 against each other.</strong></li>
+            <li><strong>35 events carry no branch tag</strong> (8 dismissed, 22.9%). They sit inside the company total but no branch row, so the branch rows sum to 867 reviewed / 179 dismissed rather than the company figure. Tagging-hygiene gap owned by Mike and Matisen — flagged here, deliberately not allocated.</li>
+            <li><strong>Company dismissal rate reads 20.7%, not the 20.4% on Mike's summary page.</strong> His review page states 20.4%; his underlying dismissal CSV computes 187 ÷ 902 = 20.7%. Per the standing rule that the attached file governs over the covering message, the CSV figure ships — it is also the only one the per-branch rows sum to. Same pull, 0.3-point difference, no material change to the story.</li>
+          </ol>
+        </div>
+
+        <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content">Manifest v0.8.3 <code>_fleet_dismissal_q2_26</code> + per-branch <code>safety_dismissal_rate</code> / <code>safety_events_reviewed</code> / <code>safety_events_dismissed</code> · Mike Vandenbroader manual Samsara pull, master org 7005377, window 2026-05-01..2026-07-17, files <code>dismissal_rate_by_branch</code> + <code>dismissal_types_by_branch</code> · <strong>CSV governs over the covering message</strong>, which stated 20.38% company — the file computes 187/902 = 20.7% · Caveats: <code>samsara_dismissal_basis_gap</code>, <code>samsara_untagged_events</code>, <code>july_preliminary_flash_estimate</code>, <code>samsara_master_org_basis</code></div></details>
+
+        
+<h4>8-Behavior Validation — Q4 → Q1 → Q2 View</h4>
+        <span class="status-ribbon preliminary" style="position:static;display:inline-block;margin-bottom:8px;">✅ LANDED 2026-07-23 · Mike's Q2 Fleet Safety Review</span>
+        <p style="font-size:12.5px;">This table was an open placeholder for most of the quarter. Mike's 7/23 review closes it. <strong>The shape of the story is in the last two rows:</strong> the coachable behaviors we have been drilling all fell hard, and the two that rose are the two whose detection standard we deliberately tightened. Rolling Stop and Inattentive Driving alone account for <strong>180 of the 230-event increase (78%)</strong>.</p>
+        <div class="table-scroll">
+        <table>
+          <thead><tr><th>Behavior</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Δ Q1→Q2</th><th>Protocol Read</th></tr></thead>
+          <tbody>
+            <tr><td>Following Distance</td><td>464</td><td>291</td><td>134</td><td><strong style="color:var(--green);">−157 (−54%)</strong></td><td>🏆 Biggest win of the quarter — Q1's universal soft spot, more than halved</td></tr>
+            <tr><td>No Seat Belt</td><td>60</td><td>18</td><td>8</td><td><strong style="color:var(--green);">−10 (−56%)</strong></td><td>🏆 Sustained win — down 87% from Q4</td></tr>
+            <tr><td>Mobile Usage</td><td>99</td><td>33</td><td>43</td><td style="color:var(--amber);">+10 (+30%)</td><td>Slight rise off a small base; still −57% vs Q4</td></tr>
+            <tr><td>Camera Obstruction</td><td>54</td><td>7</td><td>8</td><td>+1</td><td>🏆 Sustained win — flat at a low base</td></tr>
+            <tr><td>Harsh Turn</td><td>17</td><td>8</td><td>17</td><td style="color:var(--amber);">+9</td><td>Volume-driven, small base — fuller and newer fleet</td></tr>
+            <tr><td>Harsh Brake</td><td>40</td><td>21</td><td>35</td><td style="color:var(--amber);">+14 (+67%)</td><td>Volume-driven — fuller and newer fleet</td></tr>
+            <tr><td>Inattentive Driving</td><td>200</td><td>224</td><td>276</td><td style="color:var(--amber);">+52 (+23%)</td><td>⚠️ Standard tightened — not a regression</td></tr>
+            <tr><td>Rolling Stop</td><td>25</td><td>59</td><td>187</td><td style="color:var(--red);">+128 (+217%)</td><td>⚠️ Standard tightened twice — not a regression</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="font-size:12px;color:var(--gray-600);"><em><strong>⚠ These 8 do not sum to 902.</strong> They total 708 for Q2 — they are the top coachable categories, not an exhaustive partition of every event type (Severe Speeding, Crash and others sit outside the 8). Do not present the 8 as adding up to the company total.</em></p>
+
+        
+<h4>Dismissal Integrity Audit — We Checked Whether the Dismissals Hold Up</h4>
+        <span class="status-ribbon preliminary" style="position:static;display:inline-block;margin-bottom:8px;">✅ NEW 2026-07-23 · Mike's alert-by-alert Samsara re-review</span>
+        <p style="font-size:12.5px;">A falling dismissal rate only counts for something if the alerts we <em>do</em> wave off actually deserve it. Mike went back through the top dismissals at every branch in Samsara, confirmed whether each call was legitimate, and summarised the why. <strong>The large majority hold up</strong> — landing in three defensible buckets: early or completed rolling stops, following distance that self-corrected, and system or hardware faults. <strong>Rolling Stop was the near-universal pattern, present at 6 of the 7 branches reviewed</strong> (Dallas the lone exception), with the same reason everywhere: the driver did come to a full stop but a touch early or just past the sign, or the camera false-flagged off a different sign.</p>
+        <div class="table-scroll">
+        <table>
+          <thead><tr><th>Branch</th><th>What's being dismissed</th><th>Verdict</th></tr></thead>
+          <tbody>
+            <tr><td>McKinney</td><td style="font-size:12px;">Following Distance (driver created space after the lead vehicle slowed); Rolling Stop</td><td><strong style="color:var(--green);">Legit</strong></td></tr>
+            <tr><td>Leander</td><td style="font-size:12px;">Rolling Stop</td><td><strong style="color:var(--green);">Legit</strong></td></tr>
+            <tr><td>Houston</td><td style="font-size:12px;">Rolling Stop</td><td><strong style="color:var(--green);">Legit</strong></td></tr>
+            <tr><td>South Austin</td><td style="font-size:12px;">Rolling Stop; Severe Speeding (GPS placed the truck on a service road vs the highway / speedometer faults)</td><td><strong style="color:var(--green);">Legit</strong> · system fault</td></tr>
+            <tr><td>North Austin</td><td style="font-size:12px;">Inattentive — mostly one driver's gaze pattern rather than real distraction, plus iPad-looking; Rolling Stop</td><td><strong style="color:var(--amber);">iPad ones now count</strong></td></tr>
+            <tr><td>Dallas</td><td style="font-size:12px;">Inattentive — iPad / dash looking; Following Distance (space self-corrected)</td><td><strong style="color:var(--amber);">iPad ones now count</strong></td></tr>
+            <tr><td>San Antonio</td><td style="font-size:12px;">Rolling Stop; Obstructed Camera (broken visor blocking the lens)</td><td><strong style="color:var(--amber);">Needs equipment fix</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="callout" style="border-left-color:var(--green);">
+          <strong>✓ Gap closed this week — iPad-looking Inattentive alerts now count.</strong> Going forward these are <strong>no longer dismissible</strong>. That lands directly on <strong>North Austin and Dallas</strong>, the two branches whose Inattentive dismissals were softest. It was the one genuinely soft category the audit found, and it is now closed by policy.
+        </div>
+        <div class="callout warn">
+          <strong>→ San Antonio: enforcement, not dismissal.</strong> Their Obstructed Camera dismissals trace to a <strong>broken visor</strong> blocking the lens. The fix is enforcing the rule that a truck with a known equipment issue <strong>doesn't run until it's repaired</strong> — not dismissing the alerts it throws. Owner: Mike / San Antonio.
+        </div>
+
+        
+<h4>Events Retained for Coaching</h4>
+        <span class="status-ribbon preliminary" style="position:static;display:inline-block;margin-bottom:8px;">Derived — replaces the Q1 coaching-volume pull (retired 2026-07-23)</span>
+        <p style="font-size:12.5px;"><strong>Cameron's call, 7/23: coaching volume is retired as a standing packet metric.</strong> It existed in Q1 to prove a thesis — "we're dismissing less because we're coaching more" — and that thesis is now proven by two quarters of movement. From here the same story is carried by a number we already have, with no extra pull from Mike: <strong>events retained</strong> = total events minus dismissals. That is the volume of real, kept, coachable material the branches have to work with.</p>
+        <div class="table-scroll">
+        <table>
+          <thead><tr><th>Quarter</th><th>Events</th><th>Dismissed</th><th>Retained</th><th>Retention Rate</th></tr></thead>
+          <tbody>
+            <tr><td>Q4 '25</td><td>1,056</td><td>509 (48.2%)</td><td>547</td><td>51.8%</td></tr>
+            <tr><td>Q1 '26</td><td>672</td><td>243 (36.2%)</td><td>429</td><td>63.8%</td></tr>
+            <tr style="background:var(--orange-bg);font-weight:700;"><td>Q2 '26</td><td>902</td><td>187 (20.7%)</td><td><strong>715</strong></td><td><strong style="color:var(--green);">79.3%</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="font-size:12.5px;"><strong>Read:</strong> we now keep and act on <strong>79.3%</strong> of everything the cameras catch, up from barely half two quarters ago. Retained volume rose from 429 to 715 events even as the standard tightened — so there is materially more to coach against, not less.</p>
+        <div class="callout warn">
+          <strong>⚠ Say "retained," not "coached."</strong> Events minus dismissals is the <em>ceiling</em> on coaching, not a count of coaching conversations. A retained event may have been coached, may still be sitting unreviewed, or may have been closed without a conversation — Samsara's <code>coachingState</code> is the only field that separates those, and we are deliberately no longer pulling it. Do not state or imply that 715 coaching conversations happened. Also note the Q4 and Q1 dismissal rates come from each quarter's own reported basis, so the trend is directionally sound but the denominators are not guaranteed identical across all three quarters.
+        </div>
+
+        
+<h4>Branch Dismissal Rates · Top Dismissed Behaviors</h4>
+        <div class="placeholder-note" style="border-left-color:var(--green);">
+          <strong>✅ LANDED 2026-07-22 — see the two tables above.</strong> Mike delivered the dismissal deep-dive; both of these placeholders are now live data (<em>Dismissal Rates by Branch</em> and <em>What Gets Dismissed — Company Mix</em>, earlier in this component).
+          <br><br>
+          <strong>QoQ read — now on one basis.</strong> Q1's company dismissal rate was 36.2%, itself −12 pts from Q4's 48.2%. Q2 computes to <strong>20.7%</strong> on Mike's reviewed-event base (187 ÷ 902), which is the basis the whole component now runs on per Cameron's 7/23 ruling. That is roughly <strong>16 points below Q1 and 28 below Q4</strong> — a two-quarter trend of reviewing more and waving off less, and the integrity audit above says the calls that remain largely hold up.
+          <br><br>
+          <strong>Q1 finding worth re-checking:</strong> Following Distance was Q1's universal soft spot — 6 of 10 branches dismissed 40%+ of those events. In Q2 it is the #3 dismissed behavior company-wide (32 of 187, 17%), concentrated in McKinney (12) and Dallas (8).
+        </div>
+
+        <div class="comp-meta">
+          
+</section>
 </body>
 </html>
