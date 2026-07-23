@@ -2881,41 +2881,47 @@
             <p class="comp-num">Component 4B · Standing Component (Not Theme-Tied)</p>
             <h3 class="comp-title">Fleet Safety Deep Dive</h3>
           </div>
-          <span class="badge amber">89.3 avg · 11.9% at-risk · 20.7% dismissed</span>
+          <span class="badge amber">89.0 avg · 10.9% at-risk · 20.7% dismissed</span>
         </div>
         <p class="comp-summary">
-          <strong>This is a permanent, always-visible component — decoupled from the quarterly theme.</strong> Last quarter's Driver's Ed theme surfaced the fleet-safety deep dive; the theme rotates (Q2 = Einstein Games, see Component 4), but the underlying Samsara data is continuous, so it stands on its own from here forward. Company driver safety score <strong>89.3</strong> (preliminary), at-risk <strong>11.9%</strong>, <strong>1,031</strong> safety events across <strong>319,204</strong> miles (32.3 events / 10K miles). McKinney is the clear outlier (61.6/10K, worst by a wide margin), Dallas 2nd-worst (43.2/10K) — both already flagged in the Financial Deck's cross-branch findings.
+          <strong>This is a permanent, always-visible component — decoupled from the quarterly theme.</strong> Last quarter's Driver's Ed theme surfaced the fleet-safety deep dive; the theme rotates (Q2 = Einstein Games, see Component 4), but the underlying Samsara data is continuous, so it stands on its own from here forward. Company driver safety score <strong>89.0</strong> (up from 80.2 in Q1), at-risk <strong>10.9%</strong> (down from 19.8% — the high-risk driver pool nearly halved), <strong>902</strong> safety events across <strong>290,151</strong> miles (31.1 events / 10K miles). Raw events rose from Q1's 672 — but the fleet ran <strong>23.5% more miles</strong> and two detection standards were tightened mid-quarter; hold those at Q1's level and Q2 lands at 722 events, a <strong>13% lower per-mile rate than Q1</strong>. McKinney remains the clear outlier (62.1/10K), Dallas 2nd-worst (39.5/10K).
         </p>
 
+        <div class="callout" style="border-left-color:var(--green);">
+          <strong>✅ Single-basis as of 2026-07-23 — Cameron's ruling.</strong> Mike's Q2 Fleet Safety Review (his alert-by-alert re-review in Samsara) is <strong>definitive</strong> for this component. Every number below — score, at-risk, events, miles, dismissals — now sits on <strong>one denominator</strong> (his 902 reviewed-event basis). The prior split, where events came from Matisen's API feed (1,031) and dismissals from Mike's export (902), is retired. Matisen's API count survives only in the Financial Deck's monthly exposure table, relabelled there as <em>all detected telemetry events</em> — a different measure, no longer presented as the same one.
+        </div>
+
         <div class="comp-stat-row four">
-          <div class="mini-stat amber"><div class="ms-label">Driver Safety Score</div><div class="ms-value">89.3</div><div class="ms-sub">Company avg · preliminary</div></div>
-          <div class="mini-stat amber"><div class="ms-label">At-Risk %</div><div class="ms-value">11.9%</div><div class="ms-sub">Company avg · preliminary</div></div>
-          <div class="mini-stat"><div class="ms-label">Safety Events (Q2)</div><div class="ms-value">1,031</div><div class="ms-sub">Across 319,204 miles driven</div></div>
+          <div class="mini-stat amber"><div class="ms-label">Driver Safety Score</div><div class="ms-value">89.0</div><div class="ms-sub">Company · ▲ +8.8 pts vs Q1</div></div>
+          <div class="mini-stat amber"><div class="ms-label">At-Risk %</div><div class="ms-value">10.9%</div><div class="ms-sub">Company · ▼ from 19.8% in Q1</div></div>
+          <div class="mini-stat"><div class="ms-label">Safety Events (Q2)</div><div class="ms-value">902</div><div class="ms-sub">Across 290,151 miles · 8,432 hrs</div></div>
           <div class="mini-stat"><div class="ms-label">Insurance Claims</div><div class="ms-value">NOT_CALCULABLE</div><div class="ms-sub">Pending — not yet in the manifest this cycle</div></div>
         </div>
 
-        <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content">Manifest v0.8.3 <code>driver_safety_score</code> / <code>driver_safety_atrisk_pct</code> / <code>safety_events_q2</code> / <code>miles_driven</code>, company + per-branch · Basis: Samsara master org · Caveats: <code>july_preliminary_flash_estimate</code>, <code>samsara_master_org_basis</code>, <code>july_partial_windows_q2_feeds</code> · Insurance claims count/cost: status <code>pending</code>, not sourced this cycle — render NOT_CALCULABLE, never 0 or Q1's carried figure</div></details>
+        <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content">Manifest v0.9.6 <code>_fleet_safety_review_q2_26</code> (company score / at-risk / events / miles / behaviors / integrity audit) + <code>_fleet_dismissal_q2_26</code> (per-branch dismissals) + per-branch <code>driver_safety_score</code> / <code>driver_safety_atrisk_pct</code> · Basis: Samsara master org 7005377, <strong>review basis (902)</strong>, window 2026-05-01..2026-07-17 · Source: Mike Vandenbroader, Q2 2026 Fleet Safety Review delivered 2026-07-23 — company score/at-risk supersede his 2026-07-22 branch CSV (89.3 / 11.9%), which remains the only per-branch score source · Caveats: <code>july_preliminary_flash_estimate</code>, <code>samsara_master_org_basis</code>, <code>samsara_untagged_events</code> · Insurance claims count/cost: status <code>pending</code>, not sourced this cycle — render NOT_CALCULABLE, never 0 or Q1's carried figure</div></details>
 
         <h4>Branch Safety Scorecard — Live</h4>
         <div class="table-scroll">
         <table>
           <thead><tr><th>Branch</th><th>Safety Score</th><th>At-Risk %</th><th>Events (Q2)</th><th>Miles Driven</th><th>Events / 10K mi</th></tr></thead>
           <tbody>
-            <tr><td>North Austin</td><td>88</td><td><strong style="color:var(--amber);">15.4%</strong></td><td>169</td><td>48,292</td><td>35.0</td></tr>
-            <tr><td>South Austin</td><td>90</td><td><strong style="color:var(--green);">6.7%</strong></td><td>94</td><td>37,927</td><td>24.8</td></tr>
-            <tr><td>Leander</td><td>96</td><td><strong style="color:var(--green);">0.0%</strong></td><td>55</td><td>25,197</td><td>21.8</td></tr>
-            <tr><td>San Antonio</td><td>93</td><td><strong style="color:var(--green);">0.0%</strong></td><td>102</td><td>37,309</td><td>27.3</td></tr>
-            <tr><td>Houston</td><td>90</td><td><strong style="color:var(--green);">11.8%</strong></td><td>95</td><td>40,403</td><td>23.5</td></tr>
-            <tr><td>Dallas</td><td>85</td><td><strong style="color:var(--amber);">18.8%</strong></td><td>286</td><td>66,277</td><td>43.2</td></tr>
-            <tr><td>Fort Worth</td><td>98</td><td><strong style="color:var(--green);">10.0%</strong></td><td>24</td><td>18,030</td><td>13.3</td></tr>
-            <tr><td>Garland</td><td>89</td><td><strong style="color:var(--amber);">14.3%</strong></td><td>55</td><td>15,852</td><td>34.7</td></tr>
-            <tr><td>McKinney</td><td>82</td><td><strong style="color:var(--red);">23.1%</strong></td><td>138</td><td>22,388</td><td>61.6</td></tr>
-            <tr><td>Tampa</td><td>93</td><td><strong style="color:var(--red);">20.0%</strong></td><td>13</td><td>7,529</td><td>17.3</td></tr>
-            <tr style="background:var(--orange-bg);font-weight:700;"><td>Company</td><td>89.3</td><td>11.9%</td><td>1,031</td><td>319,204</td><td>32.3</td></tr>
+            <tr><td>McKinney</td><td>82</td><td><strong style="color:var(--red);">23.1%</strong></td><td>122</td><td>19,641</td><td><strong style="color:var(--red);">62.1</strong></td></tr>
+            <tr><td>Dallas</td><td>85</td><td><strong style="color:var(--amber);">18.8%</strong></td><td>235</td><td>59,479</td><td><strong style="color:var(--amber);">39.5</strong></td></tr>
+            <tr><td>North Austin</td><td>88</td><td><strong style="color:var(--amber);">15.4%</strong></td><td>145</td><td>44,346</td><td>32.7</td></tr>
+            <tr><td>Garland</td><td>89</td><td><strong style="color:var(--amber);">14.3%</strong></td><td>41</td><td>15,149</td><td>27.1</td></tr>
+            <tr><td>Houston</td><td>90</td><td><strong style="color:var(--green);">11.8%</strong></td><td>90</td><td>35,187</td><td>25.6</td></tr>
+            <tr><td>San Antonio</td><td>93</td><td><strong style="color:var(--green);">0.0%</strong></td><td>81</td><td>33,950</td><td>23.9</td></tr>
+            <tr><td>South Austin</td><td>90</td><td><strong style="color:var(--green);">6.7%</strong></td><td>86</td><td>36,533</td><td>23.5</td></tr>
+            <tr><td>Tampa</td><td>93</td><td><strong style="color:var(--red);">20.0%</strong></td><td>12</td><td>5,317</td><td>22.6</td></tr>
+            <tr><td>Leander</td><td>96</td><td><strong style="color:var(--green);">0.0%</strong></td><td>38</td><td>23,856</td><td>15.9</td></tr>
+            <tr><td>Fort Worth</td><td>98</td><td><strong style="color:var(--green);">10.0%</strong></td><td>17</td><td>16,693</td><td><strong style="color:var(--green);">10.2</strong></td></tr>
+            <tr style="color:var(--gray-600);font-style:italic;"><td>(untagged)</td><td>—</td><td>—</td><td>35</td><td>—</td><td>—</td></tr>
+            <tr style="background:var(--orange-bg);font-weight:700;"><td>Company</td><td>89.0</td><td>10.9%</td><td>902</td><td>290,151</td><td>31.1</td></tr>
           </tbody>
         </table>
         </div>
-        <p style="font-size:12px;color:var(--gray-600);"><em>McKinney and Dallas are the two branches carrying the network's worst per-mile safety-event rates this quarter — both already named in the Financial Deck's cross-branch findings (McKinney as a multi-signal watch cluster, Dallas as growth-running-hot with trailing safety).</em></p>
+        <p style="font-size:12px;color:var(--gray-600);"><em><strong>Sorted worst to best on events per 10K miles</strong> — the only fair comparison, since a 15-truck branch will always out-count a 3-truck branch on raw events. <strong>McKinney (62.1) and Dallas (39.5)</strong> carry the network's worst per-mile rates, both already named in the Financial Deck's cross-branch findings (McKinney as a multi-signal watch cluster, Dallas as growth-running-hot with trailing safety). Fort Worth (10.2) and Leander (15.9) run cleanest.</em></p>
+        <p style="font-size:12px;color:var(--gray-600);"><em><strong>Reading the columns:</strong> Score and At-Risk % are per-branch figures from Mike's 7/22 branch pull — his 7/23 refinement moved the <em>company</em> score to 89.0 / 10.9% but did not restate per branch, so the branch at-risk column still sums to the older 11.9% (22 of 185 drivers). Events and Miles are Mike's review basis; the 10 branch rows sum to 867 reviewed events, and the company row is 902 because <strong>35 events carry no branch tag</strong> (tagging-hygiene gap owned by Mike + Matisen — flagged, deliberately not allocated).</em></p>
 
 
         <h4>Dismissal Rates by Branch — How Much of the Event Volume Gets Reviewed Away</h4>
@@ -2963,34 +2969,59 @@
         <p style="font-size:12px;color:var(--gray-600);"><em>Rolling Stop and Inattentive Driving together account for 51% of every dismissal in the network — the same two behaviors Q1 flagged as "stricter standard, not regression." That pattern is consistent with the detector being tuned tight on those two, which is worth confirming before anyone reads a branch's dismissal rate as leniency.</em></p>
 
         <div class="callout warn">
-          <strong>⚠ Two data-integrity flags on this table — read before quoting it.</strong>
+          <strong>⚠ Data-integrity flags on this table — read before quoting it.</strong>
           <ol style="margin:6px 0 0 18px;font-size:12.5px;">
-            <li><strong>The denominators do not match the events table above.</strong> Mike's dismissal export totals 902 reviewed events company-wide; Matisen's Samsara API feed totals 1,031 over the identical window and the same master org. Every branch is lower in Mike's pull, so this is a consistent basis difference, not noise — the leading (still <em>unverified</em>) explanation is that Mike's export counts only events that entered the review queue. <strong>Never put the two denominators in the same chart</strong> until Mike confirms the export's event-type filter.</li>
-            <li><strong>35 events carry no branch tag</strong> (8 dismissed, 22.9%). They sit inside the company total but no branch row, so the branch rows sum to 902 reviewed / 187 dismissed rather than the company figure. Tagging-hygiene gap owned by Mike and Matisen — flagged here, deliberately not allocated.</li>
+            <li><strong>✅ RESOLVED 2026-07-23 — the denominators now match.</strong> This component previously mixed two bases: dismissals on Mike's 902 reviewed events, events/miles on Matisen's API feed (1,031). Cameron ruled Mike's review definitive, so the whole component now runs on the <strong>single 902 review basis</strong> and the dismissal rates share a denominator with the events table above. Matisen's 1,031 API count is not gone — it lives in the Financial Deck's monthly exposure table, explicitly relabelled as <em>all detected telemetry events</em>, because it is the only source with month-by-month granularity. The two are different measures and are no longer presented as the same one. <strong>Still never chart the 902 and the 1,031 against each other.</strong></li>
+            <li><strong>35 events carry no branch tag</strong> (8 dismissed, 22.9%). They sit inside the company total but no branch row, so the branch rows sum to 867 reviewed / 179 dismissed rather than the company figure. Tagging-hygiene gap owned by Mike and Matisen — flagged here, deliberately not allocated.</li>
+            <li><strong>Company dismissal rate reads 20.7%, not the 20.4% on Mike's summary page.</strong> His review page states 20.4%; his underlying dismissal CSV computes 187 ÷ 902 = 20.7%. Per the standing rule that the attached file governs over the covering message, the CSV figure ships — it is also the only one the per-branch rows sum to. Same pull, 0.3-point difference, no material change to the story.</li>
           </ol>
         </div>
 
         <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content">Manifest v0.8.3 <code>_fleet_dismissal_q2_26</code> + per-branch <code>safety_dismissal_rate</code> / <code>safety_events_reviewed</code> / <code>safety_events_dismissed</code> · Mike Vandenbroader manual Samsara pull, master org 7005377, window 2026-05-01..2026-07-17, files <code>dismissal_rate_by_branch</code> + <code>dismissal_types_by_branch</code> · <strong>CSV governs over the covering message</strong>, which stated 20.38% company — the file computes 187/902 = 20.7% · Caveats: <code>samsara_dismissal_basis_gap</code>, <code>samsara_untagged_events</code>, <code>july_preliminary_flash_estimate</code>, <code>samsara_master_org_basis</code></div></details>
 
-        <h4>8-Behavior Validation — Q1 → Q2 QoQ View</h4>
-        <span class="status-ribbon awaiting-data" style="position:static;display:inline-block;margin-bottom:8px;">Awaiting Mike's Q2 Samsara Deep-Dive Feed</span>
-        <p style="font-size:12.5px;">Q1 numbers below are the packet's own historical record (carried from the Q1 build, Samsara pull 2/1–4/19). The Q2 column completes once Mike's recurring Samsara behavior/coaching feed is wired — the QoQ comparison is the whole point of this table, so it stays visibly incomplete rather than guessing a Q2 number.</p>
+        <h4>8-Behavior Validation — Q4 → Q1 → Q2 View</h4>
+        <span class="status-ribbon preliminary" style="position:static;display:inline-block;margin-bottom:8px;">✅ LANDED 2026-07-23 · Mike's Q2 Fleet Safety Review</span>
+        <p style="font-size:12.5px;">This table was an open placeholder for most of the quarter. Mike's 7/23 review closes it. <strong>The shape of the story is in the last two rows:</strong> the coachable behaviors we have been drilling all fell hard, and the two that rose are the two whose detection standard we deliberately tightened. Rolling Stop and Inattentive Driving alone account for <strong>180 of the 230-event increase (78%)</strong>.</p>
         <div class="table-scroll">
         <table>
-          <thead><tr><th>Behavior</th><th>Q1'26 (packet record)</th><th>Q2'26</th><th>Δ</th><th>Protocol Read</th></tr></thead>
+          <thead><tr><th>Behavior</th><th>Q4'25</th><th>Q1'26</th><th>Q2'26</th><th>Δ Q1→Q2</th><th>Protocol Read</th></tr></thead>
           <tbody>
-            <tr><td>Mobile Usage</td><td>33</td><td class="gh-nodata" style="text-align:center;">awaiting feed</td><td>—</td><td>Q1: 🏆 Aligned — headline win (−66.7% vs Q4'25)</td></tr>
-            <tr><td>No Seat Belt</td><td>18</td><td class="gh-nodata" style="text-align:center;">awaiting feed</td><td>—</td><td>Q1: 🏆 Aligned — headline win</td></tr>
-            <tr><td>Camera Obstruction</td><td>7</td><td class="gh-nodata" style="text-align:center;">awaiting feed</td><td>—</td><td>Q1: 🏆 Aligned — big win</td></tr>
-            <tr><td>Harsh Turn</td><td>8</td><td class="gh-nodata" style="text-align:center;">awaiting feed</td><td>—</td><td>Q1: 🏆 Aligned</td></tr>
-            <tr><td>Harsh Brake</td><td>21</td><td class="gh-nodata" style="text-align:center;">awaiting feed</td><td>—</td><td>Q1: 🏆 Aligned</td></tr>
-            <tr><td>Following Distance</td><td>291</td><td class="gh-nodata" style="text-align:center;">awaiting feed</td><td>—</td><td>Q1: 🏆 Aligned (universal soft spot)</td></tr>
-            <tr><td>Inattentive Driving</td><td>224</td><td class="gh-nodata" style="text-align:center;">awaiting feed</td><td>—</td><td>Q1: ⚠️ Stricter standard, not regression</td></tr>
-            <tr><td>Rolling Stop</td><td>59</td><td class="gh-nodata" style="text-align:center;">awaiting feed</td><td>—</td><td>Q1: ⚠️ Stricter standard, not regression</td></tr>
+            <tr><td>Following Distance</td><td>464</td><td>291</td><td>134</td><td><strong style="color:var(--green);">−157 (−54%)</strong></td><td>🏆 Biggest win of the quarter — Q1's universal soft spot, more than halved</td></tr>
+            <tr><td>No Seat Belt</td><td>60</td><td>18</td><td>8</td><td><strong style="color:var(--green);">−10 (−56%)</strong></td><td>🏆 Sustained win — down 87% from Q4</td></tr>
+            <tr><td>Mobile Usage</td><td>99</td><td>33</td><td>43</td><td style="color:var(--amber);">+10 (+30%)</td><td>Slight rise off a small base; still −57% vs Q4</td></tr>
+            <tr><td>Camera Obstruction</td><td>54</td><td>7</td><td>8</td><td>+1</td><td>🏆 Sustained win — flat at a low base</td></tr>
+            <tr><td>Harsh Turn</td><td>17</td><td>8</td><td>17</td><td style="color:var(--amber);">+9</td><td>Volume-driven, small base — fuller and newer fleet</td></tr>
+            <tr><td>Harsh Brake</td><td>40</td><td>21</td><td>35</td><td style="color:var(--amber);">+14 (+67%)</td><td>Volume-driven — fuller and newer fleet</td></tr>
+            <tr><td>Inattentive Driving</td><td>200</td><td>224</td><td>276</td><td style="color:var(--amber);">+52 (+23%)</td><td>⚠️ Standard tightened — not a regression</td></tr>
+            <tr><td>Rolling Stop</td><td>25</td><td>59</td><td>187</td><td style="color:var(--red);">+128 (+217%)</td><td>⚠️ Standard tightened twice — not a regression</td></tr>
           </tbody>
         </table>
         </div>
-        <div class="placeholder-note">Awaiting Mike's Q2 Samsara deep-dive feed for the behavior-level breakdown. <!-- WIRED: once the feed lands, transcribe into the manifest under a new _fleet_safety_deep_dive block (source/method/pulled_at/status), then fill the "Q2'26" + "Δ" columns above from that block only. --></div>
+        <p style="font-size:12px;color:var(--gray-600);"><em><strong>⚠ These 8 do not sum to 902.</strong> They total 708 for Q2 — they are the top coachable categories, not an exhaustive partition of every event type (Severe Speeding, Crash and others sit outside the 8). Do not present the 8 as adding up to the company total.</em></p>
+
+        <h4>Dismissal Integrity Audit — We Checked Whether the Dismissals Hold Up</h4>
+        <span class="status-ribbon preliminary" style="position:static;display:inline-block;margin-bottom:8px;">✅ NEW 2026-07-23 · Mike's alert-by-alert Samsara re-review</span>
+        <p style="font-size:12.5px;">A falling dismissal rate only counts for something if the alerts we <em>do</em> wave off actually deserve it. Mike went back through the top dismissals at every branch in Samsara, confirmed whether each call was legitimate, and summarised the why. <strong>The large majority hold up</strong> — landing in three defensible buckets: early or completed rolling stops, following distance that self-corrected, and system or hardware faults. <strong>Rolling Stop was the near-universal pattern, present at 6 of the 7 branches reviewed</strong> (Dallas the lone exception), with the same reason everywhere: the driver did come to a full stop but a touch early or just past the sign, or the camera false-flagged off a different sign.</p>
+        <div class="table-scroll">
+        <table>
+          <thead><tr><th>Branch</th><th>What's being dismissed</th><th>Verdict</th></tr></thead>
+          <tbody>
+            <tr><td>McKinney</td><td style="font-size:12px;">Following Distance (driver created space after the lead vehicle slowed); Rolling Stop</td><td><strong style="color:var(--green);">Legit</strong></td></tr>
+            <tr><td>Leander</td><td style="font-size:12px;">Rolling Stop</td><td><strong style="color:var(--green);">Legit</strong></td></tr>
+            <tr><td>Houston</td><td style="font-size:12px;">Rolling Stop</td><td><strong style="color:var(--green);">Legit</strong></td></tr>
+            <tr><td>South Austin</td><td style="font-size:12px;">Rolling Stop; Severe Speeding (GPS placed the truck on a service road vs the highway / speedometer faults)</td><td><strong style="color:var(--green);">Legit</strong> · system fault</td></tr>
+            <tr><td>North Austin</td><td style="font-size:12px;">Inattentive — mostly one driver's gaze pattern rather than real distraction, plus iPad-looking; Rolling Stop</td><td><strong style="color:var(--amber);">iPad ones now count</strong></td></tr>
+            <tr><td>Dallas</td><td style="font-size:12px;">Inattentive — iPad / dash looking; Following Distance (space self-corrected)</td><td><strong style="color:var(--amber);">iPad ones now count</strong></td></tr>
+            <tr><td>San Antonio</td><td style="font-size:12px;">Rolling Stop; Obstructed Camera (broken visor blocking the lens)</td><td><strong style="color:var(--amber);">Needs equipment fix</strong></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="callout" style="border-left-color:var(--green);">
+          <strong>✓ Gap closed this week — iPad-looking Inattentive alerts now count.</strong> Going forward these are <strong>no longer dismissible</strong>. That lands directly on <strong>North Austin and Dallas</strong>, the two branches whose Inattentive dismissals were softest. It was the one genuinely soft category the audit found, and it is now closed by policy.
+        </div>
+        <div class="callout warn">
+          <strong>→ San Antonio: enforcement, not dismissal.</strong> Their Obstructed Camera dismissals trace to a <strong>broken visor</strong> blocking the lens. The fix is enforcing the rule that a truck with a known equipment issue <strong>doesn't run until it's repaired</strong> — not dismissing the alerts it throws. Owner: Mike / San Antonio.
+        </div>
 
         <h4>Coaching Volume vs Raw Events</h4>
         <div class="placeholder-note">
@@ -3001,14 +3032,14 @@
         <div class="placeholder-note" style="border-left-color:var(--green);">
           <strong>✅ LANDED 2026-07-22 — see the two tables above.</strong> Mike delivered the dismissal deep-dive; both of these placeholders are now live data (<em>Dismissal Rates by Branch</em> and <em>What Gets Dismissed — Company Mix</em>, earlier in this component).
           <br><br>
-          <strong>QoQ read, stated carefully.</strong> Q1's company dismissal rate was 36.2% (itself −12 pts from Q4's 48.2%). Q2 computes to <strong>20.7%</strong> on Mike's reviewed-event base (187 ÷ 902), or <strong>18.1%</strong> if you use the API's full event count as the denominator (187 ÷ 1,031). The two bases disagree — but the direction does not: on <em>either</em> denominator Q2 is roughly 15–18 points below Q1, so "dismissing less" holds up regardless of which basis the room prefers. Do not quote a precise QoQ delta until Mike confirms which denominator matches Q1's.
+          <strong>QoQ read — now on one basis.</strong> Q1's company dismissal rate was 36.2%, itself −12 pts from Q4's 48.2%. Q2 computes to <strong>20.7%</strong> on Mike's reviewed-event base (187 ÷ 902), which is the basis the whole component now runs on per Cameron's 7/23 ruling. That is roughly <strong>16 points below Q1 and 28 below Q4</strong> — a two-quarter trend of reviewing more and waving off less, and the integrity audit above says the calls that remain largely hold up.
           <br><br>
           <strong>Q1 finding worth re-checking:</strong> Following Distance was Q1's universal soft spot — 6 of 10 branches dismissed 40%+ of those events. In Q2 it is the #3 dismissed behavior company-wide (32 of 187, 17%), concentrated in McKinney (12) and Dallas (8).
         </div>
 
         <div class="comp-meta">
-          <span class="meta-source">Source: Manifest v0.8.3 (live tiles + <code>_fleet_dismissal_q2_26</code>) · Driver's Ed Dashboard 18397855324 · Owners: Mike (Samsara behavior/coaching) · Anne (HR dismissals) · <strong>Outstanding from Mike: 8-behavior Q2 counts + coaching volume (2 of 4 deep-dive asks still open)</strong></span>
-          <span class="open-link disabled-link">Behavior + coaching detail still pending</span>
+          <span class="meta-source">Source: Manifest v0.9.6 (<code>_fleet_safety_review_q2_26</code> + <code>_fleet_dismissal_q2_26</code> + live tiles) · Mike's Q2 2026 Fleet Safety Review, 2026-07-23 — <strong>definitive basis per Cameron's ruling</strong> · Driver's Ed Dashboard 18397855324 · Owners: Mike (Samsara behavior/coaching) · Anne (HR dismissals) · <strong>Outstanding from Mike: coaching volume only — the 8-behavior Q2 counts landed 7/23 (3 of 4 deep-dive asks now closed)</strong></span>
+          <span class="open-link disabled-link">Coaching-volume detail still pending</span>
         </div>
       </div>
 
@@ -4054,8 +4085,8 @@
     </section>
 
     <div class="footer">
-      <strong>Einstein Q2 FY'26 Roundtable QGR Packet · v2.0.2</strong><br>
-      Prepared by Albert (Cameron's AI Chief of Staff) · 2026-07-22 · Rendered from <code>branch-metrics-q2-26.json</code> v0.8.2 · 2026-07-22<br>
+      <strong>Einstein Q2 FY'26 Roundtable QGR Packet · v2.1.0</strong><br>
+      Prepared by Albert (Cameron's AI Chief of Staff) · 2026-07-23 · Rendered from <code>branch-metrics-q2-26.json</code> v0.9.6 · 2026-07-23<br>
       For internal Roundtable use · Do not distribute outside leadership without Cameron's approval
     </div>
 
