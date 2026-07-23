@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Einstein Q2'26 QGR — Presentation Edition</title>
 <script src="../assets/chart.umd.min.js"></script> <!-- locally vendored Chart.js v4 (no CDN dependency) -->
@@ -1085,8 +1085,8 @@
       <h1>Einstein Moving Company &mdash; Q2'26 Quarterly Growth Review</h1>
       <p class="subtitle meta-row">
         <strong>Quarter:</strong> Q2 FY26 (May 1 &ndash; Jul 31, 2026) &middot;
-        <strong>Analysis Date:</strong> July 21, 2026 &middot;
-        <strong>Rendered from:</strong> branch-metrics-q2-26.json v0.8.0 &middot;
+        <strong>Analysis Date:</strong> July 21, 2026 (Marketing + funnel added 7/23) &middot;
+        <strong>Rendered from:</strong> branch-metrics-q2-26.json v0.9.5 &middot;
         <strong>Source:</strong> Sage Intacct via Ben Young workbook v4 (Monday asset 3122213413, posted 7/20) &middot; May+Jun Sage actuals / Jul flash estimate
         <span class="prelim-chip">PRELIMINARY</span>
       </p>
@@ -1114,7 +1114,7 @@
         <div class="stat-tile red">
           <div class="stat-label">Allocated NOI <span class="prelim-chip">PRELIMINARY</span></div>
           <div class="stat-value">$1.41M<sup class="cv-tag" data-prov="co.noi_q2_26" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate">[AF]</sup></div>
-          <div class="stat-delta neg">65.66%<sup class="cv-tag" data-prov="co.noi_to_plan" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate; booked_vs_realized_basis">[ABF]</sup> of $2,143,519 plan</div>
+          <div class="stat-delta neg">65.66%<sup class="cv-tag" data-prov="co.noi_to_plan" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate; booked_vs_realized_basis">[ABF]</sup> of $2.14M plan &middot; &minus;$736K gap</div>
         </div>
         <div class="stat-tile red">
           <div class="stat-label">NOI Margin <span class="prelim-chip">PRELIMINARY</span></div>
@@ -1122,9 +1122,9 @@
           <div class="stat-delta">Implied plan margin 24.35% <span class="cv-tag" data-prov="derived" title="Derived: noi_plan $2,143,519 &divide; Q2 reforecast revenue $8,803,757">[derived]</span></div>
         </div>
         <div class="stat-tile">
-          <div class="stat-label">Avg Booked Ticket <span class="prelim-chip">PRELIMINARY</span></div>
+          <div class="stat-label">Avg Booked Ticket <span class="cv-tag" data-prov="note" title="No target set for avg booked ticket yet — so it's neither good nor bad, just tracked. We rank branches and watch the company average quarter-over-quarter until a target is established. Methodology to confirm with Matisen: does a multi-day job count as one booking or one per day?">[no target]</span></div>
           <div class="stat-value">$1,591 <span class="cv-tag" data-prov="derived" title="Derived: &Sigma; booked_revenue $7,167,617 &divide; &Sigma; bookings_count 4,504 (manifest v0.8.0, quoted-$ basis); july_partial_windows_q2_feeds; emma_missing_contracts_enum_bug">[derived]</span></div>
-          <div class="stat-delta">Booked+Serviced, quoted-$ basis &middot; window 5/1&ndash;7/16</div>
+          <div class="stat-delta">No target yet &mdash; tracked baseline (branch ranking in &sect;3). Quoted-$ &middot; 5/1&ndash;7/16</div>
         </div>
         <div class="stat-tile red">
           <div class="stat-label">NPS <span class="prelim-chip">PRELIMINARY</span></div>
@@ -1136,15 +1136,15 @@
           <div class="stat-value">76.2%<sup class="cv-tag" data-prov="co.tur_actual" title="rippling_punch_clock_outage_2026_06_29; tur_nps_workbook_rows_invalid; july_partial_windows_q2_feeds; dallas_july_trucks_14_vs_15">[RTJD]</sup></div>
           <div class="stat-delta pos">vs 65% KPI line &middot; target-as-set 73.0% (yardstick caveat &mdash; &sect;1.6)</div>
         </div>
-        <div class="stat-tile red">
-          <div class="stat-label">NOI vs Target <span class="prelim-chip">PRELIMINARY</span></div>
-          <div class="stat-value">65.66%<sup class="cv-tag" data-prov="co.noi_to_plan" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate; booked_vs_realized_basis">[ABF]</sup></div>
-          <div class="stat-delta neg">&minus;$735,984 gap <span class="cv-tag" data-prov="derived" title="Derived: noi_q2_26 $1,407,534.97 &minus; noi_plan $2,143,519.00">[derived]</span></div>
+        <div class="stat-tile">
+          <div class="stat-label">Quote&rarr;Book Conversion <span class="new-badge">NEW Q2</span></div>
+          <div class="stat-value">18.2%<sup class="cv-tag" data-prov="_web_funnel_q2_26.funnel_stages_apples.quote_to_book_pct" title="Same-universe quote-to-book, EMMA web funnel (§2). Goal was +2 pts. Raw pooled CRM conversion looks down but that's top-of-funnel dilution, not close-rate.">[wf]</sup></div>
+          <div class="stat-delta" style="color:var(--green);">+2.0 pts YoY &middot; same-universe (&sect;2)</div>
         </div>
         <div class="stat-tile">
           <div class="stat-label">Lead Volume <span class="prelim-chip">PRELIMINARY</span></div>
-          <div class="stat-value">18,846 <span class="cv-tag" data-prov="derived" title="Derived: &Sigma; branches[*].leads_count (manifest v0.8.0); july_partial_windows_q2_feeds; sales_july_quote_anomalies_pulled; quote_form_downtime_2026_07_06">[derived]</span></div>
-          <div class="stat-delta">all CRM leads created 5/1&ndash;7/16 &middot; SQL universe 17,686</div>
+          <div class="stat-value">19,064 <sup class="cv-tag" data-prov="_web_funnel_q2_26.crm_baseline_matched_ytd.leads_created" title="Of-record company leads (crm-baseline-q2-yoy-2026-07-23.csv, matched May1&ndash;Jul17 both years); leads_pull_basis_gap &mdash; per-branch leads_count sum = 18,846, a different pull; july_partial_windows_q2_feeds">[Lgj]</sup></div>
+          <div class="stat-delta" style="color:var(--green);">+97.4% YoY <span class="cv-tag" data-prov="_web_funnel_q2_26" title="Q2'25 9,658 &rarr; Q2'26 19,064. LARGELY lead recapture from the new variable form (contact captured at step 1 — we keep the ~62% we used to leak), not a demand doubling. form_capture_definitional; §2.">[fc]</span></div>
         </div>
       </div>
       <p style="font-size:11px;color:var(--gray-600);margin:0 0 4px 0;">Tile rule: populated tiles are colored by the actual vs target (red = below plan); PENDING tiles name the owner and the missing feed rather than showing a false zero. Sourced figures carry a tiny &#9432; dot &mdash; hover or click it for the source and caveats; toggle Audit view (top right) to see the full letter codes inline.</p>
@@ -1233,9 +1233,9 @@
       <!-- Headlines -->
       <h3 id="headlines">Top 3 Headlines <span class="prelim-chip">DRAFT FOR CAMERON&#39;S REVIEW</span></h3>
       <ol class="headline-list">
-        <li><strong>Revenue grew +9.9% YoY<sup class="cv-tag" data-prov="caveat" title="All branch figures preliminary (July flash); per manifest revenue_yoy_pct ranking, synced v0.8.0">[F]</sup> &mdash; but the flagship shrank.</strong> Growth was carried by the mid-pack; North Austin declined and Leander ran flat.<br><svg viewBox="0 0 680 234" width="100%" style="max-width:100%;height:auto;font-family:'Roboto',Arial,sans-serif;margin-top:6px;"><rect x="240.0" y="8" width="360.0" height="16" fill="var(--green)" rx="2"/><text x="606.0" y="16" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+38.3%</text><text x="232" y="16" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Garland</text><rect x="240.0" y="30" width="268.4" height="16" fill="var(--green)" rx="2"/><text x="514.4" y="38" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+28.6%</text><text x="232" y="38" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Fort Worth</text><rect x="240.0" y="52" width="232.0" height="16" fill="var(--green)" rx="2"/><text x="478.0" y="60" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+24.7%</text><text x="232" y="60" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Tampa</text><rect x="240.0" y="74" width="230.5" height="16" fill="var(--green)" rx="2"/><text x="476.5" y="82" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+24.5%</text><text x="232" y="82" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">South Austin</text><rect x="240.0" y="96" width="192.0" height="16" fill="var(--green)" rx="2"/><text x="438.0" y="104" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+20.4%</text><text x="232" y="104" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Dallas</text><rect x="240.0" y="118" width="179.8" height="16" fill="var(--green)" rx="2"/><text x="425.8" y="126" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+19.1%</text><text x="232" y="126" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">McKinney</text><rect x="240.0" y="140" width="39.5" height="16" fill="var(--green)" rx="2"/><text x="285.5" y="148" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+4.2%</text><text x="232" y="148" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">San Antonio</text><rect x="240.0" y="162" width="32.6" height="16" fill="var(--green)" rx="2"/><text x="278.6" y="170" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+3.5%</text><text x="232" y="170" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Houston</text><rect x="229.9" y="184" width="10.1" height="16" fill="var(--red)" rx="2"/><text x="223.9" y="192" font-size="10.5" fill="var(--gray-700)" text-anchor="end" dominant-baseline="middle" font-weight="700">&minus;1.1%</text><text x="232" y="192" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Leander</text><rect x="137.6" y="206" width="102.4" height="16" fill="var(--red)" rx="2"/><text x="131.6" y="214" font-size="10.5" fill="var(--gray-700)" text-anchor="end" dominant-baseline="middle" font-weight="700">&minus;10.9%</text><text x="232" y="214" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">North Austin</text><line x1="240.0" y1="4" x2="240.0" y2="228" stroke="var(--gray-300)" stroke-width="1"/></svg></li>
+        <li><strong>Revenue grew +9.9% YoY<sup class="cv-tag" data-prov="caveat" title="All branch figures preliminary (July flash); per manifest revenue_yoy_pct ranking, synced v0.8.0">[F]</sup> &mdash; but the flagship shrank.</strong> Growth was carried by the mid-pack; North Austin declined and Leander ran flat.<br><svg viewBox="0 0 680 234" width="100%" style="max-width:100%;height:auto;font-family:'Roboto',Arial,sans-serif;margin-top:6px;"><rect x="240.0" y="8" width="360.0" height="16" fill="var(--green)" rx="2"/><text x="606.0" y="16" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+38.3%</text><text x="232" y="16" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Garland</text><rect x="240.0" y="30" width="268.4" height="16" fill="var(--green)" rx="2"/><text x="514.4" y="38" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+28.6%</text><text x="232" y="38" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Fort Worth</text><rect x="240.0" y="52" width="232.0" height="16" fill="var(--green)" rx="2"/><text x="478.0" y="60" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+24.7%</text><text x="232" y="60" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Tampa</text><rect x="240.0" y="74" width="230.5" height="16" fill="var(--green)" rx="2"/><text x="476.5" y="82" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+24.5%</text><text x="232" y="82" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">South Austin</text><rect x="240.0" y="96" width="192.0" height="16" fill="var(--green)" rx="2"/><text x="438.0" y="104" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+20.4%</text><text x="232" y="104" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Dallas</text><rect x="240.0" y="118" width="179.8" height="16" fill="var(--green)" rx="2"/><text x="425.8" y="126" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+19.1%</text><text x="232" y="126" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">McKinney</text><rect x="240.0" y="140" width="39.5" height="16" fill="var(--green)" rx="2"/><text x="285.5" y="148" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+4.2%</text><text x="232" y="148" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">San Antonio</text><rect x="240.0" y="162" width="32.6" height="16" fill="var(--green)" rx="2"/><text x="278.6" y="170" font-size="10.5" fill="var(--gray-700)" text-anchor="start" dominant-baseline="middle" font-weight="700">+3.5%</text><text x="232" y="170" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Houston</text><rect x="229.9" y="184" width="10.1" height="16" fill="var(--red)" rx="2"/><text x="181" y="192" font-size="10.5" fill="var(--red)" text-anchor="end" dominant-baseline="middle" font-weight="700">&minus;1.1%</text><text x="232" y="192" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">Leander</text><rect x="137.6" y="206" width="102.4" height="16" fill="var(--red)" rx="2"/><text x="131.6" y="214" font-size="10.5" fill="var(--gray-700)" text-anchor="end" dominant-baseline="middle" font-weight="700">&minus;10.9%</text><text x="232" y="214" font-size="11" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">North Austin</text><line x1="240.0" y1="4" x2="240.0" y2="228" stroke="var(--gray-300)" stroke-width="1"/></svg></li>
         <li><strong>NOI attainment 65.66%<sup class="cv-tag" data-prov="co.noi_to_plan" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate; booked_vs_realized_basis">[ABF]</sup> vs the reforecast &mdash; a margin story as much as a revenue story.</strong> Revenue reached 95.5% of plan (<span class="cv-tag" data-prov="derived" title="Derived: revenue_q2_26 $8,403,646.06 &divide; Q2 reforecast revenue $8,803,757 &mdash; a plain actual&divide;plan ratio, distinct from the booked/realized bases in &sect;1.9">[derived]</span>) while NOI margin ran 16.75%<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.noi_margin_pct" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate; booked_vs_realized_basis; may_branch_gap_361">[ABFG]</sup> vs the ~24.35% implied by plan (<span class="cv-tag" data-prov="derived" title="Derived: plan NOI $2,143,519 &divide; Q2 reforecast revenue $8,803,757">[derived]</span>).</li>
-        <li><strong>The cash machine held &mdash; Q2 revenue covered our cash breakeven about 1.5&times; over, and the quarter self-funded a $2.3M fleet expansion.</strong> June cash $1.74M, operating cash flow +$983K, healthy short-term cushion (current ratio 3.0x) <span class="cv-tag" data-prov="derived" title="Breakeven $5,461,288/qtr (reforecast model, ruled 7/21, under revision — final expected above ~$5.9M); coverage = $8,403,646 / $5,461,288 = 1.54x. Cash-story figures per SS1.10, not manifest rows.">[derived]</span>. Detail in &sect;1.10.</li>
+        <li><strong>The cash machine held &mdash; Q2 revenue covered our cash breakeven about 1.5&times; over, and the quarter funded a 17-truck fleet build (4 net-new + 13 replacements) &mdash; mostly bank-financed, not cash out the door.</strong> June cash $1.74M, operating cash flow +$983K, healthy short-term cushion (current ratio 3.0x) <span class="cv-tag" data-prov="derived" title="Breakeven $5,461,288/qtr (reforecast model, ruled 7/21, under revision — final expected above ~$5.9M); coverage = $8,403,646 / $5,461,288 = 1.54x. Cash-story figures per SS1.10, not manifest rows.">[derived]</span>. Detail in &sect;1.10.</li>
       </ol>
 
       <!-- Priorities -->
@@ -1244,7 +1244,7 @@
       <table class="priority-table">
         <thead><tr><th>#</th><th>Priority</th><th>Owner</th><th>Urgency</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td>Close July (~early Aug) and re-render this packet flash&rarr;final &mdash; remaining gates: Q2&#39;25 same-basis sales baseline (YoY columns), cohort-cut ruling, Ben&#39;s cost-line decomposition, July market data (~mid-Aug). Rankings re-sync before any superlative ships as final.</td><td>Ben Young / Matisen / Albert</td><td>~Early Aug</td><td>Zero PRELIMINARY chips; validators exit 0 on the close manifest</td></tr>
+          <tr><td>1</td><td>Close July (~early Aug) and re-render this packet flash&rarr;final &mdash; remaining gates: Q2&#39;25 same-basis sales baseline (YoY columns), cohort-cut ruling, Ben&#39;s cost-line decomposition, July market data (~mid-Aug). Rankings re-sync before any superlative ships as final.</td><td>Ben Young / Matisen / Albert</td><td>~Early Aug</td><td>Every July-estimate label clears and the flash numbers become final</td></tr>
           <tr><td>2</td><td>NOI margin decomposition with Ben on the allocated basis &mdash; name the three biggest cost deltas vs plan before the QGR narrative hardens.</td><td>Cameron + Ben Young</td><td>Before QGR 7/29</td></tr>
           <tr><td>3</td><td>North Austin turnaround plan &mdash; revenue &minus;10.90% YoY, GM% (46.99%) below the 10-branch average (~48.1%), mid-BM-transition (Daniel incoming); pairs with the July softness flag.</td><td>Brian Herzig + Daniel</td><td>QGR 7/29&ndash;30</td></tr>
         </tbody>
@@ -1286,8 +1286,8 @@
           <thead><tr><th>Source</th><th>Coverage</th><th>Gap/Caveat</th><th>Impact</th></tr></thead>
           <tbody>
             <tr><td>P&amp;L (Sage Intacct via Ben Young workbook v4)</td><td>May&ndash;Jul 2026</td><td>May = Actual &middot; Jun = Actual (incl. 2 management adjustments, RESOLVED 7/21) &middot; Jul = flash ESTIMATE (3-layer methodology, snapshotted 7/15)</td><td>Every Q2 QTD figure containing July is status=preliminary until July closes (~early Aug)</td></tr>
-            <tr><td>CRM (EMMA)</td><td>&mdash;</td><td>&#39;Emma lead&#39; enum bug silently dropped contracts; Fabian&#39;s fix deployed 7/2, backfill completion unconfirmed</td><td>Sales/conversion metrics NOT rendered this cycle &mdash; see &sect;3 and &sect;8</td></tr>
-            <tr><td>Marketing</td><td>&mdash;</td><td>No manifest feed queued for Q2</td><td>Marketing metrics NOT rendered &mdash; open question for Cameron (&sect;2, &sect;8)</td></tr>
+            <tr><td>CRM (EMMA)</td><td>May&ndash;Jul 2026</td><td>&#39;Emma lead&#39; enum bug dropped some contracts; Fabian&#39;s fix 7/2, backfill through 7/20 (93 June contracts residual)</td><td>Sales landed &sect;3 (7/21); conversion + web funnel landed &sect;2 (7/23)</td></tr>
+            <tr><td>Marketing (KP + GA4)</td><td>May&ndash;Jul 2026</td><td>ROAS held &mdash; GL is a mixed account + Matisen ROAS retool; denominator ruling pending</td><td>Funnel + spend + cost-per-lead rendered &sect;2 (7/23); ROAS pending</td></tr>
             <tr><td>NPS (GatherUp)</td><td>&mdash;</td><td>Pull pending; Ben-workbook NPS rows are target-copies, not actuals</td><td>NPS NOT rendered this cycle (&sect;5, &sect;8)</td></tr>
             <tr><td>TUR / hours (Rippling &middot; Matisen model)</td><td>&mdash;</td><td>Rippling punch-clock outage from 6/29 (hours approximated); TUR source = Matisen Q3 TUR model rev 46, not yet in manifest</td><td>TUR + personnel-budget metrics NOT rendered this cycle (&sect;1.6, &sect;8)</td></tr>
             <tr><td>Q2&#39;25 P&amp;L comparison</td><td>Full quarter (closed)</td><td>N/A &mdash; final baseline from reforecast workbook branch tabs</td><td>Full YoY revenue comparison available (branch + company)</td></tr>
@@ -1304,7 +1304,7 @@
 <tr><td>[B]</td><td><span style="display:block;font-weight:700;margin-bottom:2px;">&ldquo;How much of plan did we hit?&rdquo; has three answers depending on basis &mdash; every render names which one it uses.</span><strong>name the attainment basis + completion status</strong><br>THREE live revenue reads: <strong>95.46% PROJECTED full-quarter</strong> (est. actuals $8,403,646.06 incl. July flash vs $8,803,757 reforecast &mdash; the deck&#39;s primary attainment number) &middot; <strong>87% BOOKED-to-date</strong> vs the $8.93M sales target (as of 7/21) &middot; <strong>82% REALIZED-to-date</strong> (~$7.22M billed through 7/21 vs the $8.80M reforecast &mdash; climbs as July bills; never present as the projected result). Realization bridge 92.65%. Every render names basis AND projected-vs-to-date.</td><td>active — labeling rule</td></tr>
 <tr><td>[G]</td><td><span style="display:block;font-weight:700;margin-bottom:2px;">Branch rows add to $361 less than the company total (a documented May quirk) &mdash; immaterial, but cross-foots mention it.</span><strong>May branch/company $361 gap</strong><br>Branch revenue rows sum to $8,403,285.06 — $361 under the fully-loaded company Sage total of $8,403,646.06. Gap is entirely in May (branch deep-dive total 2,509,367.26 vs Sage company 2,509,728.26). Immaterial but real; company row carries the fully-loaded figure.</td><td>open — immaterial, documented</td></tr>
 <tr><td>[H]</td><td><span style="display:block;font-weight:700;margin-bottom:2px;">Hours-based numbers after 6/29 are approximations (punch-clock outage), not measurements.</span><strong>hours approximated (Rippling outage)</strong><br>Rippling punch-clock outage starting 6/29 (no ETA at seed time) corrupts labor-hours data. Hours-backfill skill (launched 7/2) APPROXIMATES hours on affected moves. Any hours-denominated number covering late June / July is an approximation, not a measurement.</td><td>active — hours-backfill approximation in use</td></tr>
-<tr><td>[E]</td><td><span style="display:block;font-weight:700;margin-bottom:2px;">Some contracts went missing in a sync bug; revenue was restored, but June is marginally understated (93 contracts).</span><strong>EMMA backfill caveat</strong><br>VP added an 'Emma lead' enum absent on EMMA V3 → API errors silently dropped contracts. Root-caused; Fabian deployed the fix 2026-07-02; backfill in progress. Any EMMA pull must postdate the completed backfill or carry this caveat. Confirm affected date range at the Matisen handshake (see EMMA-FIRST-FEED-CONTRACT.md).</td><td>fix deployed 2026-07-02 — backfill completion unconfirmed</td></tr>
+<tr><td>[E]</td><td><span style="display:block;font-weight:700;margin-bottom:2px;">A CRM sync bug dropped some contracts &mdash; this affects EMMA lead / conversion COUNTS, not the revenue number. Revenue is sourced from Sage/Prosper financials, not EMMA, so the $ figures are unaffected. ~93 June contracts remain missing from the CRM counts.</span><strong>EMMA backfill caveat (CRM counts only)</strong><br>VP added an 'Emma lead' enum absent on EMMA V3 → API errors silently dropped contracts. Root-caused; Fabian deployed the fix 2026-07-02; backfill in progress. Any EMMA pull must postdate the completed backfill or carry this caveat. Confirm affected date range at the Matisen handshake (see EMMA-FIRST-FEED-CONTRACT.md).</td><td>fix deployed 2026-07-02 — backfill completion unconfirmed</td></tr>
 <tr><td>[Q]</td><td><span style="display:block;font-weight:700;margin-bottom:2px;">The quote form was down ~3 hours on 7/6 &mdash; a small dent in July lead counts.</span><strong>quote form downtime 7/6</strong><br>Quote form down ~3 hours Monday 2026-07-06 (Google Maps API key cutover missed; Kickpoint cut the old key). Small dent in lead counts — affects lead-volume comparisons for the week of 7/6.</td><td>closed — one-time gap</td></tr>
 <tr><td>[T]</td><td><span style="display:block;font-weight:700;margin-bottom:2px;">The TUR/NPS rows in Ben&#39;s workbook are copied targets, not actuals &mdash; this deck never uses them.</span><strong>workbook TUR/NPS rows = targets, not actuals</strong><br>The TUR and NPS rows in Ben's workbook ('Q2 2026 Fin. Actuals (Est)' rows 9, 18-19) are carried over from the targets tab unchanged (green-linked, sheet note A42) — they are TARGETS copied forward, NOT Q2 actuals. Never quote them as actuals. TUR actuals source = Matisen's Q3 TUR page rev 46.</td><td>active — do not source TUR/NPS from Ben workbook</td></tr>
 <tr><td>[M]</td><td><span style="display:block;font-weight:700;margin-bottom:2px;">How we count a &ldquo;move&rdquo; and estimate July &mdash; one canonical definition, in the Methodology callout.</span><strong>moves definition + July estimate (7/21)</strong><br>Moves definition (Cameron 7/21, label verbatim in the packet): "completed = serviced &amp; billed &mdash; EMMA sales record with actual revenue &gt; 0, bucketed by expected-service-date month, active records only. Same convention as the Sales Dashboard, so it lines up 1:1 with the revenue period for Rev/Move &mdash; a move counts in the month it ran and billed, not when it was booked or closed." July methodology (label on July + Q2-total values): "July = ESTIMATE: 1,196 actuals through 7/20 + 748 projected 7/21&ndash;31 (jobs on the books &times; last-July's ~82% show rate + still-to-book per last year's late-July booking velocity, scaled per branch YoY) &mdash; lands July at +14% YoY vs +12% YoY month-to-date. Re-cut with final actuals ~Aug 1."</td><td>Moves definition + July estimate methodology &mdash; carried VERBATIM in the Methodology Change Callout below (one canonical copy).</td></tr>
@@ -1385,23 +1385,23 @@
     <!-- CHART 1: Monthly NOI Trajectory -->
     <div class="chart-wrap">
       <div class="chart-title">Monthly NOI Trajectory &mdash; May / June / July (flash)</div>
-      <div class="chart-sub">May and June are Sage actuals; July is a flash estimate (hatched context in the table below). Implied plan margin 24.35% (dashed line) &mdash; derived: noi_plan &divide; Q2 reforecast revenue. Margin climbed each month (15.08% &rarr; 16.54% &rarr; 18.33% est.) but stayed below the implied plan line all quarter.</div>
+      <div class="chart-sub">Monthly NOI target vs actual, in dollars on one axis; the navy line is the actual month-to-month trajectory. <strong>We missed target every month, but the gap narrowed:</strong> May $378K / $607K (62.3%) &rarr; June $474K / $764K (62.0%) &rarr; July $555K / $772K (71.9% flash). Quarter <strong>$1.41M actual vs $2.14M target (65.7%, &minus;$736K)</strong>. Targets are the reforecast budget<sup class="cv-tag" data-prov="co.monthly_pl._target_source" title="Q2 Reforecast v4 (4/29/26), per-branch tabs cols BU/BV/BW, basis NetOrdinaryIncome minus 88888 overhead allocation (88888-netted, pre-depreciation) — quarter sum ties to the $2,143,519 plan">[R]</sup>; note the target itself ramps with the season (May is the low bar), so this isn&#39;t a flat line.</div>
       <div class="chart-canvas-wrap"><canvas id="chartNOITrajectory"></canvas></div>
     </div>
 
-    <details class="explainer"><summary>Source &amp; basis (monthly P&amp;L)</summary><div class="expl-body"><p style="font-size:12.5px;color:var(--gray-600);">Company-level monthly P&amp;L from manifest <code>company.monthly_pl</code> (v0.8.0) &mdash; source: Sage Intacct via Ben Young workbook v4, &#39;Q2 &amp; YTD Estimated Actuals&#39; cols B/C/D/E, via the intake-validated ben-extract CSV. NOI = &#39;Operating Income (pre-depreciation)&#39; (row 33 basis, per the CSV header) &mdash; basis confirmed consistent with the quarterly allocated-NOI basis (ruled 7/21).</p><p>Plain: source = Sage actuals via Ben&#39;s workbook; NOI = operating income before depreciation.</p></div></details>
+    <details class="explainer"><summary>Source &amp; basis (monthly P&amp;L + targets) &mdash; target/actual basis reconciled</summary><div class="expl-body"><p style="font-size:12.5px;color:var(--gray-600);"><strong>Actuals:</strong> company monthly P&amp;L from manifest <code>company.monthly_pl</code> &mdash; Sage Intacct via Ben Young workbook v4, &#39;Q2 &amp; YTD Estimated Actuals&#39;. NOI = &#39;Operating Income (pre-depreciation)&#39; (row 33), fully-allocated. <strong>Targets:</strong> Paul&#39;s Q2 Reforecast v4 (4/29/26), per-branch tabs, monthly Budget cols BU/BV/BW; NOI target = Net Ordinary Income &minus; 88888 overhead allocation, summed across all 10 branches.</p><p style="font-size:12.5px;"><strong>Basis check (resolved):</strong> target and actual are the <strong>same basis &mdash; pre-depreciation, fully-allocated (88888-netted) operating income.</strong> The monthly targets sum to <strong>$2,143,519 to the penny</strong>, matching the quarter <code>noi_plan</code> already in the packet (which came independently from Ben&#39;s &#39;SRC Q2 Fin Targets&#39; rollup) &mdash; two representations of the same reforecast. This is the same target/actual pairing ruled valid 7/21 for the 65.66% quarter attainment; the monthly split only decomposes it. Note it&#39;s a plan (reforecast) vs actual (Sage) comparison, as attainment always is.</p></div></details>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>Month</th><th>Revenue</th><th>NOI</th><th>NOI Margin</th><th>Net Income</th><th>Status</th></tr></thead>
+      <thead><tr><th>Month</th><th>Revenue</th><th>NOI (actual)</th><th>NOI Target</th><th>Attain.</th><th>NOI Margin</th><th>Net Income</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>May 2026</td><td>$2,509,728.26</td><td>$378,352.65</td><td>15.08%</td><td>$364,998.09</td><td><strong>FINAL</strong> &mdash; Sage actual (Mo 1)</td></tr>
-        <tr><td>June 2026</td><td>$2,863,214.49</td><td>$473,697.86</td><td>16.54%</td><td>$587,841.74</td><td><strong>FINAL</strong> &mdash; Sage actual <span class="cv-tag" data-prov="caveat" title="FINAL &mdash; Sage actual (Mo 2), incl. 2 management adjustments booked in report, still pending in Sage GL (ADJ-1 BotPress prepaid deferral, ADJ-2 Rippling reclass) &mdash; RESOLVED per Ben/Cameron 7/21 (live); report artifacts predate the fix">[i]</span></td></tr>
-        <tr><td>July 2026 <span class="prelim-chip">PRELIMINARY</span></td><td>$3,030,703.31<sup class="cv-tag" data-prov="co.monthly.2026-07.revenue" title="july_preliminary_flash_estimate">[F]</sup></td><td>$555,484.46<sup class="cv-tag" data-prov="co.monthly.2026-07.einstein_noi" title="july_preliminary_flash_estimate">[F]</sup></td><td>18.33%<sup class="cv-tag" data-prov="co.monthly.2026-07.noi_margin_pct" title="july_preliminary_flash_estimate">[F]</sup></td><td>$669,628.34<sup class="cv-tag" data-prov="co.monthly.2026-07.net_income" title="july_preliminary_flash_estimate">[F]</sup></td><td><span class="prelim-chip">PRELIMINARY</span> flash estimate: revenue = sync-adjusted 3-layer forecast; COGS at June %-of-rev; OpEx/Other rolled forward from June</td></tr>
-        <tr style="font-weight:800;"><td>Q2 Total <span class="prelim-chip">PRELIMINARY</span></td><td>$8,403,646.06<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.revenue" title="july_preliminary_flash_estimate">[F]</sup></td><td>$1,407,534.97<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.einstein_noi" title="july_preliminary_flash_estimate">[F]</sup></td><td>16.75%<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.noi_margin_pct" title="july_preliminary_flash_estimate">[F]</sup></td><td>$1,622,468.17<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.net_income" title="july_preliminary_flash_estimate">[F]</sup></td><td><span class="prelim-chip">PRELIMINARY</span> &mdash; contains July estimate</td></tr>
+        <tr><td>May 2026</td><td>$2,509,728.26</td><td>$378,352.65</td><td>$607,191</td><td style="color:var(--red);font-weight:700;">62.3%</td><td>15.08%</td><td>$364,998.09</td><td><strong>FINAL</strong> &mdash; Sage actual (Mo 1)</td></tr>
+        <tr><td>June 2026</td><td>$2,863,214.49</td><td>$473,697.86</td><td>$764,251</td><td style="color:var(--red);font-weight:700;">62.0%</td><td>16.54%</td><td>$587,841.74</td><td><strong>FINAL</strong> &mdash; Sage actual <span class="cv-tag" data-prov="caveat" title="FINAL &mdash; Sage actual (Mo 2), incl. 2 management adjustments booked in report, still pending in Sage GL (ADJ-1 BotPress prepaid deferral, ADJ-2 Rippling reclass) &mdash; RESOLVED per Ben/Cameron 7/21 (live); report artifacts predate the fix">[i]</span></td></tr>
+        <tr><td>July 2026 <span class="prelim-chip">PRELIMINARY</span></td><td>$3,030,703.31<sup class="cv-tag" data-prov="co.monthly.2026-07.revenue" title="july_preliminary_flash_estimate">[F]</sup></td><td>$555,484.46<sup class="cv-tag" data-prov="co.monthly.2026-07.einstein_noi" title="july_preliminary_flash_estimate">[F]</sup></td><td>$772,078</td><td style="color:var(--orange-dark);font-weight:700;">71.9%</td><td>18.33%<sup class="cv-tag" data-prov="co.monthly.2026-07.noi_margin_pct" title="july_preliminary_flash_estimate">[F]</sup></td><td>$669,628.34<sup class="cv-tag" data-prov="co.monthly.2026-07.net_income" title="july_preliminary_flash_estimate">[F]</sup></td><td><span class="prelim-chip">PRELIMINARY</span> flash estimate: revenue = sync-adjusted 3-layer forecast; COGS at June %-of-rev; OpEx/Other rolled forward from June</td></tr>
+        <tr style="font-weight:800;"><td>Q2 Total <span class="prelim-chip">PRELIMINARY</span></td><td>$8,403,646.06<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.revenue" title="july_preliminary_flash_estimate">[F]</sup></td><td>$1,407,534.97<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.einstein_noi" title="july_preliminary_flash_estimate">[F]</sup></td><td>$2,143,519</td><td style="color:var(--red);font-weight:700;">65.7%</td><td>16.75%<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.noi_margin_pct" title="july_preliminary_flash_estimate">[F]</sup></td><td>$1,622,468.17<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.net_income" title="july_preliminary_flash_estimate">[F]</sup></td><td><span class="prelim-chip">PRELIMINARY</span> &mdash; contains July estimate</td></tr>
       </tbody>
     </table>
     </div>
-    <p>July&#39;s flash margin (18.33%) is the strongest month of the quarter but still sits below the 24.35% implied plan margin. Every Q2-total figure contains the July estimate and re-renders at close (~early August).</p>
+    <p>Every month came in under its NOI budget, but <strong>July closed the most ground</strong> &mdash; 71.9% of target vs ~62% in May and June. The profit ramp is real, just running behind plan. Margin says the same thing (15.08% &rarr; 16.54% &rarr; 18.33% est., still under the 24.35% plan margin). Every Q2-total figure contains the July estimate and re-renders at close (~early August).</p>
 
     <div class="review-note" data-section="sec-monthly">
       <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
@@ -1413,22 +1413,7 @@
 
     <h3>1.1 Revenue Gap Waterfall</h3>
     <blockquote><em>Plain English: the plan expected $8.80M; the quarter is landing at $8.40M &mdash; a $400K (4.5%) gap, even though revenue GREW +9.9% vs last year. The chart shows the gap; the driver table below it shows the &ldquo;why&rdquo; rows &mdash; several are placeholders by design until their data source lands.</em></blockquote>
-    <p><strong>Target Revenue (Q2 reforecast):</strong> $8,803,757 &middot; <strong>Actual:</strong> $8,403,646.06<sup class="cv-tag" data-prov="co.revenue_q2_26" title="july_preliminary_flash_estimate; may_branch_gap_361; booked_vs_realized_basis">[BFG]</sup> &middot; <strong>Total Gap:</strong> &minus;$400,110.94 (&minus;4.5%) <span class="cv-tag" data-prov="derived" title="Derived: revenue_q2_26 &minus; revenue_plan; gap % = gap &divide; plan">[derived]</span></p>
-    <div class="chart-wrap">
-      <div class="chart-title">Q2 Revenue &mdash; Plan vs Actual</div>
-      <div class="chart-sub">Plan (Q2 reforecast) $8,803,757 &rarr; Actual $8,403,646.06<sup class="cv-tag" data-prov="co.revenue_q2_26" title="july_preliminary_flash_estimate; may_branch_gap_361; booked_vs_realized_basis">[BFG]</sup> &mdash; gap &minus;$400,110.94.</div>
-<svg viewBox="0 0 680 210" width="100%" style="max-width:100%;height:auto;font-family:Roboto,Arial,sans-serif;">
-<line x1="30" y1="170" x2="650" y2="170" stroke="var(--gray-300)" stroke-width="1"/>
-<rect x="148.6" y="20.0" width="110" height="150.0" fill="var(--navy)" rx="3"/>
-<rect x="421.4" y="26.8" width="110" height="143.2" fill="var(--red)" rx="3"/>
-<text x="203.6" y="12.0" font-size="12" text-anchor="middle" fill="var(--gray-800)" font-weight="800">$8,803,757</text>
-<text x="476.4" y="18.8" font-size="12" text-anchor="middle" fill="var(--gray-800)" font-weight="800">$8,403,646</text>
-<text x="203.6" y="188.0" font-size="11.5" text-anchor="middle" fill="var(--navy)" font-weight="700">Q2 Plan (reforecast)</text>
-<text x="476.4" y="188.0" font-size="11.5" text-anchor="middle" fill="var(--navy)" font-weight="700">Q2 Actual (QTD)</text>
-<line x1="264.6" y1="20.0" x2="415.4" y2="20.0" stroke="var(--orange-dark)" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="340.0" y="28.0" font-size="11.5" text-anchor="middle" fill="var(--orange-dark)" font-weight="800">Gap: -$400,111</text>
-</svg>
-    </div>
+    <p><strong>Target Revenue (Q2 reforecast):</strong> $8,803,757 &middot; <strong>Actual:</strong> $8,403,646.06<sup class="cv-tag" data-prov="co.revenue_q2_26" title="july_preliminary_flash_estimate; may_branch_gap_361; booked_vs_realized_basis">[BFG]</sup> &middot; <strong>Total Gap:</strong> <strong style="color:var(--red);">&minus;$400,110.94 (&minus;4.5%)</strong> <span class="cv-tag" data-prov="derived" title="Derived: revenue_q2_26 &minus; revenue_plan; gap % = gap &divide; plan">[derived]</span></p>
     <p style="font-size:12px;color:var(--gray-600);">Bars = each branch&#39;s actual minus its plan <span class="cv-tag" data-prov="derived" title="manifest v0.8.0 carries branch-level revenue_plan (Q2 reforecast / Cascading Team Goals, 7/21 ruling) — TRUE plan-vs-actual deltas, replacing the earlier YoY-basis workaround">[derived]</span>.</p>
     <div class="chart-wrap">
       <div class="chart-title">Branch Revenue Plan-vs-Actual Variance ($) <span class="new-badge">NEW Q2</span></div>
@@ -1464,25 +1449,25 @@
 <text x="253.3" y="229.0" font-size="11" fill="var(--gray-700)" text-anchor="end" dominant-baseline="middle" font-weight="700">-$144,340</text>
 <text x="142" y="255.0" font-size="11.5" fill="var(--gray-800)" text-anchor="end" dominant-baseline="middle">North Austin</text>
 <rect x="163.2" y="245.0" width="206.8" height="20" fill="var(--red)" rx="2"/>
-<text x="157.2" y="255.0" font-size="11" fill="var(--gray-700)" text-anchor="end" dominant-baseline="middle" font-weight="700">-$269,596</text>
+<text x="364" y="255.0" font-size="11" fill="#fff" text-anchor="end" dominant-baseline="middle" font-weight="700">-$269,596</text>
 </svg>
     </div>
     <p style="font-size:12.5px;"><strong>Takeaway:</strong> South Austin, Garland, and Dallas beat plan; North Austin, San Antonio, and McKinney together miss by more than the entire company gap <span class="cv-tag" data-prov="derived" title="Above plan: S. Austin +$123,887 (109.7%), Garland +$62,279 (121.9%), Dallas +$57,018 (103.9%). Below: N. Austin -$269,596 (84.4%), San Antonio -$144,340 (85.8%), McKinney -$98,593 (86.3%). Rest: FW -$3,244, Tampa -$27,932, Leander -$28,226, Houston -$71,725.">[derived]</span>.</p>
     
-    <h4>Driver decomposition &mdash; Q1-template table <span class="prelim-chip">PLACEHOLDERS BY DESIGN</span></h4>
-    <p style="font-size:12px;color:var(--gray-600);">Q1&#39;s waterfall carried a driver-by-driver &ldquo;why&rdquo; table (lead volume, booked growth, ticket, conversion, cohort effects, service timing). The Q2 rows exist below ON PURPOSE with their gates named &mdash; empty because the inputs haven&#39;t landed, not because the section is broken. Each populates at its gate; the structure is ready.</p>
+    <h4>Driver decomposition &mdash; Q1-template table <span class="new-badge">LANDED 7/23</span></h4>
+    <p style="font-size:12px;color:var(--gray-600);">Matisen&#39;s Q2&#39;25&harr;Q2&#39;26 CRM baseline landed 7/23<sup class="cv-tag" data-prov="_web_funnel_q2_26" title="crm-baseline-q2-yoy-2026-07-23.csv + cohort-cut-conversion-q2-2026-07-23.csv, pulse 12594117701; matched May1-Jul17 both years">[wf]</sup>, so the demand drivers now read. Important framing: these are <strong>YoY drivers of the result</strong> (the quarter GREW), <strong>not literal slices of the &minus;$400K plan gap</strong>. The gap-vs-plan is explained by the branch concentration above (three branches carry more than the whole company gap) plus the margin/cost side (&sect;1.2) &mdash; the demand side was a tailwind, not the miss.</p>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>Driver</th><th>Direction</th><th>Impact $</th><th>% of Gap</th><th>Gate / owner</th></tr></thead>
+      <thead><tr><th>Driver (YoY)</th><th>Direction</th><th>Magnitude</th><th>Read on the gap</th><th>Source / status</th></tr></thead>
       <tbody>
-        <tr><td>Lead volume YoY (Q2&#39;26 leads = 18,846, known)</td><td><span class="ncalc">PENDING</span></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>needs the Q2&#39;25 CRM baseline pull &mdash; Matisen</td></tr>
-        <tr><td>Booked + Serviced $ growth YoY</td><td><span class="ncalc">PENDING</span></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>same Q2&#39;25 baseline pull &mdash; Matisen</td></tr>
-        <tr><td>Avg booked ticket YoY (Q2&#39;26 = $1,591, known)</td><td><span class="ncalc">PENDING</span></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>same Q2&#39;25 baseline pull &mdash; Matisen</td></tr>
-        <tr><td>Conversion vs the plan&#39;s assumed rate</td><td><span class="ncalc">PENDING</span></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>needs the reforecast&#39;s conversion assumption named; NOT graded vs 40% by ruling</td></tr>
-        <tr><td>Marketing / lead-gen contribution (spend, channel mix)</td><td><span class="ncalc">PENDING</span></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>Marketing feed not yet queued &mdash; Cameron decides; KP spend lands Fri (&sect;2)</td></tr>
-        <tr><td>Mid-quarter funnel/definition-change cohort effects</td><td><span class="ncalc">PENDING</span></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>post-backfill cohort cut (&sect;3.5)</td></tr>
-        <tr><td>Service timing (booked moves completing after the cut)</td><td>Neutral</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>resolves at July close (~Aug 1)</td></tr>
-        <tr><td><strong>Total explained</strong></td><td></td><td><strong>&minus;$400,110.94 target</strong></td><td><strong>~100% target</strong></td><td>table completes when the gates above land</td></tr>
+        <tr><td>Lead volume YoY (of-record 19,064)</td><td style="color:var(--green);font-weight:700;">&uarr; strong</td><td>+97.4% (9,658 &rarr; 19,064)</td><td>Largely <strong>lead recapture</strong> from the new variable form (contact captured at step 1)<sup class="cv-tag" data-prov="_web_funnel_q2_26" title="form_capture_definitional">[fc]</sup> &mdash; we now keep the ~62% we used to leak. Read as recapture, not a demand doubling; not a gap component.</td><td>LANDED &mdash; CRM baseline (Matisen)</td></tr>
+        <tr><td>Booked + Serviced $ growth YoY</td><td style="color:var(--green);font-weight:700;">&uarr;</td><td>+8.6% ($6.70M &rarr; $7.28M)</td><td>Revenue grew; the reforecast plan simply assumed faster.</td><td>LANDED &mdash; CRM baseline</td></tr>
+        <tr><td>Avg booked ticket YoY ($1,592)</td><td style="color:var(--green);font-weight:700;">&uarr;</td><td>+2.8% ($1,548 &rarr; $1,592)</td><td>Pricing/mix tailwind on the ticket.</td><td>LANDED &mdash; CRM baseline</td></tr>
+        <tr><td>Same-universe conversion (quote&rarr;book)</td><td style="color:var(--green);font-weight:700;">&uarr;</td><td>+2.0 pts (16.2% &rarr; 18.2%)</td><td>Improved &mdash; goal was +2%. The raw pooled CRM $-conversion <em>looks</em> down &minus;21.5 pts, but that is top-of-funnel dilution, not close-rate (cohort cut below).</td><td>LANDED &mdash; web funnel (&sect;2)</td></tr>
+        <tr><td>Marketing / lead-gen contribution</td><td>context</td><td>$175K digital spend; $8.42 blended cost-per-lead</td><td>Channel/branch spend + KP commentary in &sect;2. ROAS <span class="ncalc">PENDING</span> (mixed GL account + Matisen retool).</td><td>LANDED (spend) &mdash; &sect;2</td></tr>
+        <tr><td>Mid-quarter funnel / definition-change cohort effects</td><td>artifact</td><td>&minus;21.5 pt raw drop &rarr; timing +5.7 / new-form +6.4 / &minus;10 residual = dilution</td><td>Explains why raw CRM conversion fell while real conversion rose. Not a performance decline.</td><td>LANDED &mdash; cohort cut (&sect;3.5)</td></tr>
+        <tr><td>Service timing (booked moves completing after the cut)</td><td>Neutral</td><td><span class="ncalc">PENDING</span></td><td>Resolves at July close (~Aug 1).</td><td>resolves at close</td></tr>
+        <tr><td><strong>Net read</strong></td><td></td><td colspan="2"><strong>Demand side was a tailwind (leads +97%, revenue +8.6%, conversion +2 pts). The &minus;$400K plan gap lives in branch concentration (above) + margin/cost (&sect;1.2), not in demand.</strong></td><td>&mdash;</td></tr>
       </tbody>
     </table>
     </div>
@@ -1804,12 +1789,7 @@
     <h3>1.5 Year-over-Year Revenue Performance</h3>
     <blockquote><em>Company revenue grew ~10% over last year &mdash; five branches grew 20%+ (four of them DFW-region), while North Austin shrank 11%.</em> <span class="cv-tag" data-prov="co.revenue_yoy_pct" title="All 10 branches from manifest revenue_yoy_pct, sorted descending. Company +9.9% is revenue-weighted (branch figures do not simple-average to it). Q2'25 denominator = closed baseline; every Q2'26 numerator contains the July flash. july_preliminary_flash_estimate">[F]</span></blockquote>
 
-    <!-- CHART 3: YoY Revenue by Branch -->
-    <div class="chart-wrap">
-      <div class="chart-title">YoY Revenue Growth by Branch <span class="prelim-chip">PRELIMINARY</span></div>
-      <div class="chart-sub">Garland +38.3% (highest this quarter, preliminary) to North Austin &minus;10.9% (lowest this quarter, preliminary), per the manifest revenue_yoy_pct ranking. Company line at +9.9%.</div>
-      <div class="chart-canvas-wrap tall"><canvas id="chartYoYRevenue"></canvas></div>
-    </div>
+    <!-- CHART 3 (YoY Revenue by Branch) removed 7/23 per Paul review #17 — it duplicated the Top-3-Headlines YoY chart; the detailed table below is the authoritative YoY view. -->
 
     <div class="table-scroll">
     <table>
@@ -2346,81 +2326,119 @@
     <hr>
 
     <!-- SECTION 2 — MARKETING -->
-    <h2 id="sec-marketing">Section 2 &middot; Marketing Performance <span class="new-badge">FEED PENDING</span></h2>
+    <h2 id="sec-marketing">Section 2 &middot; Marketing Performance <span class="new-badge">LANDED 7/23</span></h2>
     <div class="method-callout">
-      <h3>&#9888;&#65039; Deliberately omitted this cycle &mdash; Marketing</h3>
-      <p><strong>No manifest fields exist for Marketing this quarter</strong> &mdash; this isn&#39;t a backfill-in-progress gap, it&#39;s a feed that was never queued for Q2. <strong>Open question for Cameron:</strong> should a Marketing feed (spend, lead volume, ROI) be added to the Q2 manifest before the QGR, or does Marketing sit out this quarter&#39;s financial deck entirely? The Q1 table structures below stay in place so a queued feed drops straight in.</p>
+      <h3>&#9989; Landed 7/23 &mdash; funnel (Matisen) + spend &amp; commentary (KP / Brittany)</h3>
+      <p>Two feeds closed this section: <strong>Matisen&#39;s EMMA web-demand funnel + GA4 engagement</strong><sup class="cv-tag" data-prov="_web_funnel_q2_26" title="crm-baseline + funnel-conversion + cohort-cut CSVs + in-house GA4 pull; pulse 12594117701, 7/23">[wf]</sup> and <strong>Kick Point&#39;s channel/branch ad spend + market commentary</strong><sup class="cv-tag" data-prov="_marketing_q2_26" title="Brittany Zerr spend + Elizabeth Linder commentary, Kick Point pulse 12600893748, 7/23">[mk]</sup>. Headline: the new quote form roughly <strong>doubled leads (+97% YoY)</strong> while <strong>same-universe conversion still rose +2 pts</strong> &mdash; growth without buying it with a lower close-rate. <strong>ROAS is deliberately held this cycle</strong> (<span class="ncalc">PENDING</span>): the accounting &ldquo;Advertisement&rdquo; GL is a mixed account (media + recruiting + CSR + salaries) and Matisen&#39;s ROAS feed is still being retooled &mdash; a single ROAS % waits on a denominator ruling. Spend, channel mix, and cost-per-lead render now.</p>
     </div>
 
-    <details class="explainer"><summary>Q1 template structures &mdash; preserved; render if a Marketing feed is queued (2.1 Traffic &amp; Funnel &middot; 2.2 Ad Spend YoY &middot; 2.3 ROI &middot; 2.4 Annual Budget)</summary><div class="expl-body">
-<h3>2.1 Traffic &amp; Funnel Overview</h3>
+    <h3>2.1 Traffic &amp; Funnel Overview <span class="prelim-chip">EMMA + GA4</span></h3>
+    <blockquote><em>Plain English: fewer people visited the site (&minus;8% traffic), but a far larger share of them started a quote, every quote-starter now becomes a contactable lead, and slightly more of them booked. The form redesign did the heavy lifting.</em></blockquote>
     <div class="table-scroll">
     <table>
-      <thead><tr><th>Metric</th><th>Q2'26</th><th>YoY Change</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Metric</th><th>Q2'25</th><th>Q2'26</th><th>YoY</th><th>Basis / note</th></tr></thead>
       <tbody>
-        <tr><td>Total Sessions</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td rowspan="7" style="vertical-align:middle;">No Q2 Marketing feed queued (Looker Studio / KickPoint). Values populate if/when Cameron queues the feed.</td></tr>
-        <tr><td>Organic Search</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td>Paid Search</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td>Direct</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td><strong>Quote Page Engagement %</strong></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td><strong>Quote Form Fill %</strong></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td><strong>Quote-to-Book %</strong></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
+        <tr><td>Website sessions</td><td>52,879</td><td>48,683</td><td style="color:var(--red);font-weight:700;">&minus;7.9%</td><td>GA4 total sessions &mdash; traffic down, yet leads up</td></tr>
+        <tr><td><strong>Quote page engagement %</strong><sup class="cv-tag" data-prov="_web_funnel_q2_26.engagement_ga4.quote_engagement_pct" title="estimate-receivers / total website sessions (GA4, Q1-comparable large denominator); engagement_basis_ga4_vs_q1">[e]</sup></td><td>12.9%</td><td>28.5%</td><td style="color:var(--green);font-weight:700;">+15.6 pts</td><td>the starred metric &mdash; now closed via in-house GA4 (2.2&times; the share of sessions starting a quote)</td></tr>
+        <tr><td>Estimate-received volume (apples universe)</td><td>6,834</td><td>13,860</td><td style="color:var(--green);font-weight:700;">+102.8%</td><td>the comparable funnel roughly doubled</td></tr>
+        <tr><td><strong>Quote form-fill %</strong> (estimate &rarr; contact info)</td><td>37.7%</td><td>100.0%<sup class="cv-tag" data-prov="_web_funnel_q2_26.funnel_stages_apples.form_fill_pct" title="form_capture_definitional &mdash; 100% is BY DESIGN: the new variable form captures contact at the first step, so every estimate-receiver is now a contactable lead. NOT 'we convert everyone.'">[fc]</sup></td><td style="color:var(--green);font-weight:700;">+62.3 pts*</td><td>*definitional &mdash; new variable form captures contact AT step 1 (see callout below)</td></tr>
+        <tr><td><strong>Quote-to-book %</strong> (same universe)</td><td>16.2%</td><td>18.2%</td><td style="color:var(--green);font-weight:700;">+2.0 pts</td><td>headline conversion &mdash; goal was +2%; incl July-MTD 16.0&rarr;18.6 (+2.6)</td></tr>
+        <tr><td>GA4 engaged-session rate</td><td>65.9%</td><td>73.7%</td><td style="color:var(--green);font-weight:700;">+7.8 pts</td><td>GA4 native quality signal</td></tr>
       </tbody>
     </table>
     </div>
-
-    <h3>2.2 Digital Ad Spend &mdash; YoY</h3>
-    <div class="table-scroll">
-    <table>
-      <thead><tr><th>Channel</th><th>Q2'26</th><th>Q2'25</th><th>YoY $</th><th>YoY %</th></tr></thead>
-      <tbody>
-        <tr><td>Google Search</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Microsoft/Bing</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Meta/Facebook</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Google Other</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>KickPoint Agency Fee</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td><strong>Total</strong></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-      </tbody>
-    </table>
+    <div class="warn-callout" style="font-size:12px;">
+      <strong>Read the &ldquo;100%&rdquo; and the &ldquo;+97% leads&rdquo; correctly &mdash; both are mostly the form, not a step-change in performance.</strong><sup class="cv-tag" data-prov="_web_funnel_q2_26" title="form_capture_definitional">[fc]</sup> Last quarter&#39;s <em>variable</em> quote-form redesign captures contact info at the <strong>first step</strong> (at/before the estimate) instead of after it. So (1) form-fill of <strong>100% is by design</strong> &mdash; every estimate-receiver is now a contactable lead, it is not &ldquo;we suddenly convert everyone&rdquo;; and (2) the <strong>+97% lead growth is largely recapture</strong> &mdash; under the old form ~62% of estimate-receivers left no contact info and were lost; we now keep them. That&#39;s &ldquo;we stopped leaking leads,&rdquo; not a doubling of demand. The genuinely credit-worthy movement is the <strong>same-universe quote-to-book conversion (+2.0 pts)</strong> and <strong>quote engagement (12.9% &rarr; 28.5%)</strong> &mdash; those are real, not definitional.
     </div>
-
-    <h3>2.3 Marketing ROI</h3>
-    <!-- CHART 4: Marketing Efficiency — slot preserved, feed pending -->
-    <div class="chart-wrap">
-      <div class="chart-title">Marketing Efficiency &mdash; Spend vs Revenue Generated</div>
-      <div class="chart-sub">Chart slot preserved from the Q1 template; renders when a Q2 Marketing feed is queued.</div>
-      <div class="chart-pending">&#9203; PENDING &mdash; no Q2 Marketing feed queued.<br>Open question for Cameron: queue the feed pre-QGR, or Marketing sits out this quarter&#39;s deck.</div>
-    </div>
-    <div class="table-scroll">
-    <table>
-      <thead><tr><th>Metric</th><th>Q2'26</th><th>Q2'25</th><th>YoY</th></tr></thead>
-      <tbody>
-        <tr><td>Total Spend</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Quoted Revenue Generated</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Quoted Rev per $ Spent</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Booked+Serviced $ Generated</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td></tr>
-        <tr><td>Booked+Serviced per $ Spent</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>&mdash;</td></tr>
-      </tbody>
-    </table>
-    </div>
-
-    <h3>2.4 Annual Marketing Budget &mdash; Seasonality-Weighted</h3>
-    <blockquote><em>Q1&#39;s methodology note stands: a flat annual/4 implied budget is methodologically wrong (seasonal PPC weighting). This table re-renders with the annual budget + KickPoint monthly seasonality plan if the Marketing feed is queued.</em></blockquote>
-    <div class="table-scroll">
-    <table>
-      <thead><tr><th>Category</th><th>Annual Budget</th><th>% of Total</th></tr></thead>
-      <tbody>
-        <tr><td>PPC Spend &amp; Management</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td>KickPoint fees (SEO, Social, PM)</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td>Mailers</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td>Billboards</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td>Other</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-        <tr><td><strong>Total</strong></td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td></tr>
-      </tbody>
-    </table>
-    </div>
-
+    <details class="explainer"><summary>Why the raw CRM conversion &ldquo;looks&rdquo; down &minus;21 pts (and why that&#39;s misleading)</summary><div class="expl-body">
+      <p>A naive pooled read of CRM $-conversion fell 41.5% &rarr; 20.0% (&minus;21.5 pts). That is <strong>not a close-rate decline</strong> &mdash; it decomposes into artifacts:</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Cut</th><th>'25</th><th>'26</th><th>&Delta;</th><th>Reads as</th></tr></thead>
+        <tbody>
+          <tr><td>Raw (all SQL)</td><td>41.5%</td><td>20.0%</td><td>&minus;21.5</td><td>headline drop &mdash; never cite alone</td></tr>
+          <tr><td>+ resolved-only (drop open quotes)</td><td>41.5%</td><td>25.7%</td><td>+5.7 vs raw</td><td>timing artifact</td></tr>
+          <tr><td>+ exclude new autobooking-form cohort</td><td>41.5%</td><td>26.5%</td><td>+6.4 vs raw</td><td>definition change (~0% by construction)</td></tr>
+          <tr><td><strong>Apples-to-apples web funnel</strong></td><td>16.0%</td><td>18.6%</td><td style="color:var(--green);">+2.6</td><td><strong>REAL movement UP</strong></td></tr>
+          <tr><td>Bot / autobooking path</td><td>57.0%</td><td>72.2%</td><td style="color:var(--green);">+15.1</td><td>real improvement</td></tr>
+          <tr><td>Human team path</td><td>39.3%</td><td>23.5%</td><td>&minus;15.8</td><td>dilution from 4,325 unassigned/unworked new-form leads &mdash; not a selling problem</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:11.5px;color:var(--gray-600);">Source: cohort-cut-conversion-q2-2026-07-23.csv (Matisen). The &minus;10 pt residual after removing timing + definition artifacts is top-of-funnel dilution &mdash; the new form floods the denominator with low-intent leads &mdash; not a decline in close rate.</p>
     </div></details>
+
+    <h3>2.2 Digital Ad Spend &mdash; by Channel <span class="prelim-chip">KP / Brittany</span></h3>
+    <blockquote><em>KP-reported platform spend, May 1&ndash;Jul 17. This is the digital slice; total company advertising (incl. billboards, Yelp, print, agency) sits in the GL context under 2.4.</em></blockquote>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Channel</th><th>Q2'26 spend</th><th>Split</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Google Ads</td><td>$139,121</td><td>79.5%</td><td>by branch (2.3); N&amp;S Austin share one campaign</td></tr>
+        <tr><td>Microsoft / Bing</td><td>$23,875</td><td>13.6%</td><td>by branch (2.3)</td></tr>
+        <tr><td>Meta / Facebook<sup class="cv-tag" data-prov="_marketing_q2_26.digital_spend_brittany.meta_regional" title="meta_not_branch_split — regional campaigns only">[m]</sup></td><td>$11,569</td><td>6.6%</td><td>REGIONAL only &mdash; TX $7,687 / FL $3,882 (not branch-split)</td></tr>
+        <tr><td>Social-post engagement (Meta)</td><td>$495</td><td>0.3%</td><td>boosting organic reach</td></tr>
+        <tr><td><strong>Total digital (KP-reported)</strong></td><td><strong>$175,060</strong></td><td><strong>100%</strong></td><td>subset of the GL account (2.4) &mdash; not additive to it</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:11.5px;color:var(--gray-600);">YoY channel split <span class="ncalc">PENDING</span> &mdash; Brittany&#39;s feed is '26-only; the '25 channel breakdown isn&#39;t in this pull (the GL carries '25 totals on a different basis &mdash; not mixed here per the one-basis rule).</p>
+
+    <h3>2.3 Spend by Branch &amp; Cost-per-Lead <span class="new-badge">NEW Q2</span></h3>
+    <blockquote><em>Google + Microsoft spend per branch, divided by that branch&#39;s leads. Read it comparatively, not as a hard cost-per-sale &mdash; the caveat below matters.</em></blockquote>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Branch</th><th>Google + MS spend</th><th>Leads</th><th>Cost / lead</th></tr></thead>
+      <tbody>
+        <tr><td>Austin (N + S)<sup class="cv-tag" data-prov="_marketing_q2_26.cost_per_lead_branch.austin_combined" title="austin_google_combined — N&S Austin share one Google campaign, cannot split">[a]</sup></td><td>$29,086</td><td>5,628</td><td style="color:var(--green);font-weight:700;">$5.17</td></tr>
+        <tr><td>Houston</td><td>$20,075</td><td>2,789</td><td style="color:var(--green);font-weight:700;">$7.20</td></tr>
+        <tr><td>Dallas</td><td>$20,276</td><td>2,812</td><td style="color:var(--green);font-weight:700;">$7.21</td></tr>
+        <tr><td>McKinney</td><td>$15,489</td><td>1,775</td><td>$8.73</td></tr>
+        <tr><td>San Antonio</td><td>$20,119</td><td>2,089</td><td>$9.63</td></tr>
+        <tr><td>Leander</td><td>$14,279</td><td>1,138</td><td style="color:var(--orange-dark);">$12.55</td></tr>
+        <tr><td>Fort Worth</td><td>$13,558</td><td>1,071</td><td style="color:var(--orange-dark);">$12.66</td></tr>
+        <tr><td>Garland</td><td>$12,838</td><td>917</td><td style="color:var(--orange-dark);">$14.00</td></tr>
+        <tr><td>Tampa<sup class="cv-tag" data-prov="_marketing_q2_26.kp_commentary.market_context_tampa" title="FL market cooled into buyer-friendly territory 2026 — demand headwind">[t]</sup></td><td>$13,028</td><td>627</td><td style="color:var(--red);font-weight:700;">$20.78</td></tr>
+        <tr><td><strong>Branch total</strong></td><td><strong>$158,748</strong></td><td><strong>18,846</strong></td><td><strong>$8.42</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:11.5px;color:var(--gray-600);"><strong>Read at your own risk:</strong> cost-per-lead here = ad spend &divide; <em>all</em> leads (which include organic + direct + AIO/LLM-referred, a real driver this quarter per KP) &mdash; so it&#39;s a <strong>blended spend-per-lead, not a pure paid cost-per-acquisition</strong><sup class="cv-tag" data-prov="_marketing_q2_26.cost_per_lead_branch" title="cpl_blended_leads">[b]</sup>. A branch with strong organic looks &ldquo;cheaper.&rdquo; Regional Google ($4,249) + Meta ($12,064) are excluded (not branch-split). Leads use the per-branch pull (18,846); the company of-record total is 19,064<sup class="cv-tag" data-prov="_marketing_q2_26" title="leads_pull_basis_gap — two pulls, 1.1% apart; never charted together">[g]</sup>. <strong>Tampa&#39;s $20.78 is the clear outlier</strong> &mdash; and KP&#39;s market read (below) ties it to a genuinely soft Florida market, not a spend problem.</p>
+
+    <h3>2.4 Marketing ROI / ROAS <span class="prelim-chip">ROAS PENDING</span></h3>
+    <div class="chart-wrap">
+      <div class="chart-title">Marketing Efficiency &mdash; ROAS held this cycle</div>
+      <div class="chart-pending">&#9203; ROAS PENDING &mdash; on purpose.<br>The clean denominator isn&#39;t settled yet (see below), and Matisen&#39;s ROAS feed is being retooled. A single ROAS % waits on Cameron&#39;s denominator ruling.</div>
+    </div>
+    <p><strong>What we know about total spend (context, not a ROAS denominator):</strong> the accounting &ldquo;Advertisement&rdquo; GL<sup class="cv-tag" data-prov="_marketing_q2_26.gl_total_account_context" title="EMC Advertisement ledger 05.25-07.26.xlsx (Prosper); marketing_gl_scope">[gl]</sup> totals <strong>$359,813</strong> for Q2'26 (May&ndash;Jul). But that account is a mixed bag, so it isn&#39;t a clean ROAS input as-is:</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>In the GL &ldquo;Advertisement&rdquo; account</th><th>Q2'26</th><th>Cameron&#39;s lean (7/23) &mdash; in the denominator?</th></tr></thead>
+      <tbody>
+        <tr><td>Google + Microsoft &mdash; GL-posted<sup class="cv-tag" data-prov="_marketing_q2_26.gl_total_account_context" title="GL Source Ledger, Google+Microsoft net debits May-Jul'26 = $147,446. Lower than Brittany's platform-reported $162,996 (§2.2) because July branch lines are mostly unposted (posting lag) — same money, different timing.">[gl]</sup></td><td>~$147K</td><td style="color:var(--green);">yes &mdash; the GL-posted view of Brittany&#39;s $162,996 (§2.2); gap = July posting lag</td></tr>
+        <tr><td>Yelp</td><td>~$44K</td><td style="color:var(--green);">yes (paid directory)</td></tr>
+        <tr><td>KickPoint agency retainer</td><td>~$33K</td><td style="color:var(--green);">yes (agency)</td></tr>
+        <tr><td>Lamar (billboards)</td><td>$22.5K</td><td style="color:var(--green);">yes (offline &mdash; the piece Paul flagged)</td></tr>
+        <tr><td>Meta / Facebook + print (Chronicles, Precision)</td><td>~$17K</td><td style="color:var(--green);">yes</td></tr>
+        <tr><td>Indeed</td><td>~$10K</td><td style="color:var(--red);font-weight:700;">OUT &mdash; recruiting, not marketing</td></tr>
+        <tr><td>Eden Reforestation, Wonders &amp; Worries</td><td>~$11K</td><td style="color:var(--orange-dark);">likely in &mdash; marketing-dept spend (his call)</td></tr>
+        <tr><td>Marketing dept salaries + payroll accruals</td><td>~$16K</td><td style="color:var(--orange-dark);">likely in &mdash; marketing-dept spend (his call)</td></tr>
+        <tr><td>Review-cash / prizes / gifts / supplies</td><td>~$3K</td><td style="color:var(--orange-dark);">likely in &mdash; marketing-dept spend (his call)</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:12px;"><strong>Two things this settles:</strong> (1) Brittany&#39;s digital PPC is a <em>subset</em> of the GL, not additive &mdash; the GL already contains Google/MS/Meta, so total spend &ne; GL + Brittany. (2) ~$170K of the $360K sits in non-branch-attributable &ldquo;Overhead_TX,&rdquo; and July branch lines are still mostly $0 (posting lag). <strong>Cameron&#39;s lean (7/23):</strong> the eventual denominator strips only what genuinely isn&#39;t marketing/advertising (e.g. Indeed recruiting) &mdash; most of the rest is marketing-department spend and stays in. <strong>Not finalized here on purpose:</strong> the ROAS number waits on Matisen&#39;s forthcoming return-on-ad-spend tool, which reconciles this denominator against the lead/revenue side.</p>
+
+    <h3>2.5 KP Commentary &amp; Market Context <span class="prelim-chip">Kick Point</span></h3>
+    <blockquote><em>The story only KP can tell &mdash; why the numbers read the way they do. Verbatim-sourced from Elizabeth Linder + Brittany Zerr.</em></blockquote>
+    <div class="lens-card" style="margin-bottom:10px;">
+      <p style="margin:0 0 6px 0;"><strong>Why conversion climbed (Elizabeth Linder):</strong> the conversion win ties to Einstein&#39;s <strong>maintained authority, reputation, and visibility</strong> plus the new quote form &mdash; more leads generated <em>and</em> booked, feeding the serviced/booked-hours KPIs. Branded impressions rose this quarter (mostly seasonality). <strong>Direct sessions are up 18% YoY</strong> &mdash; a mix of authority/reputation, early offline-campaign brand awareness (&ldquo;too soon to feel super confident on direct impact, but an impact for sure&rdquo;), and rising visibility across Google&#39;s AIOs and other LLMs on &ldquo;mover + city&rdquo; queries.</p>
+    </div>
+    <div class="lens-card" style="margin-bottom:10px;">
+      <p style="margin:0 0 6px 0;"><strong>Texas market (Brittany Zerr):</strong> housing stayed <strong>steady</strong> through Q2 &mdash; statewide median flat YoY (~$340K), closed sales +4.5%, ~65-day time-on-market, 5.4-month inventory (near balanced), the four biggest metros each within 1.5%. <strong>Einstein&#39;s TX lead volume grew faster than the market&#39;s transaction growth</strong> &mdash; campaign performance <em>adding</em> to the tailwind, not just riding it.</p>
+    </div>
+    <div class="lens-card">
+      <p style="margin:0 0 6px 0;"><strong>Tampa / Florida (Brittany Zerr):</strong> a different story &mdash; the market <strong>cooled into buyer-friendly territory in 2026</strong>: values down mid-single-digits YoY, inventory up, homes sitting longer. That&#39;s a <strong>genuine demand headwind on the Florida side</strong> &mdash; the clearest external reason Tampa ran softer than the Texas branches, and a market-level condition, not a campaign one. (Ties directly to Tampa&#39;s high cost-per-lead in 2.3.)</p>
+    </div>
+    <p style="font-size:11px;color:var(--gray-600);margin-top:8px;">Ads context (Brittany): Apr&ndash;May Meta ramping on new $5K/mo budget; May ad-group consolidation across most branches; Jun 2 email link-tap moved to a secondary conversion; Jun 9 LeadFerno removed from site; June seasonal TX/FL heat Meta ads enabled. Source: Kick Point pulse 12600893748 (Elizabeth reply 7/22, Brittany reply 7/23).</p>
 
     <hr>
 
@@ -2451,6 +2469,28 @@
       </tbody>
     </table>
     </div>
+
+    <h4>Avg Booked Ticket by Branch &mdash; ranked <span class="prelim-chip">no target &middot; tracking baseline</span></h4>
+    <blockquote><em>No target is set for average ticket yet, so this isn&#39;t graded &mdash; we rank the markets and watch the company average ($1,591) quarter over quarter until a target exists. Higher isn&#39;t automatically &ldquo;better&rdquo; (it partly reflects market and job mix); it&#39;s a baseline to trend.</em></blockquote>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Rank</th><th>Branch</th><th>Avg booked ticket</th><th>Bookings (n)</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Leander</td><td style="color:var(--green);font-weight:700;">$1,763</td><td>320</td></tr>
+        <tr><td>2</td><td>Houston</td><td style="color:var(--green);font-weight:700;">$1,747</td><td>418</td></tr>
+        <tr><td>3</td><td>Garland</td><td>$1,695</td><td>179</td></tr>
+        <tr><td>4</td><td>Dallas</td><td>$1,628</td><td>828</td></tr>
+        <tr><td>5</td><td>San Antonio</td><td>$1,609</td><td>445</td></tr>
+        <tr><td>6</td><td>South Austin</td><td>$1,605</td><td>725</td></tr>
+        <tr><td>7</td><td>Fort Worth</td><td>$1,538</td><td>204</td></tr>
+        <tr><td>8</td><td>North Austin</td><td>$1,498</td><td>862</td></tr>
+        <tr><td>9</td><td>McKinney</td><td style="color:var(--orange-dark);">$1,432</td><td>354</td></tr>
+        <tr><td>10</td><td>Tampa</td><td style="color:var(--red);font-weight:700;">$1,360</td><td>169</td></tr>
+        <tr style="font-weight:800;"><td>&mdash;</td><td>Company</td><td>$1,591</td><td>4,504</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:11px;color:var(--gray-600);">Derived: <code>branches[*].booked_revenue &divide; bookings_count</code> (quoted-$ basis). <strong>Methodology to confirm with Matisen:</strong> does a multi-day job count as one booking or one per day? &mdash; it changes the denominator. Quoted-$ basis, window 5/1&ndash;7/16 (July partial).</p>
 
     <details class="explainer">
       <summary>Why this quarter isn&#39;t graded against the 40% conversion target</summary>
@@ -2792,7 +2832,7 @@
       <li><strong>The margin, not the top line, carries the NOI miss.</strong> Revenue reached 95.46% of the reforecast (realized basis)<span class="cv-tag" data-prov="derived" title="Derived: revenue_q2_26 &divide; revenue_plan (manifest v0.8.0)">[derived]</span>, but allocated NOI attained 65.66%<sup class="cv-tag" data-prov="co.noi_to_plan" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate; booked_vs_realized_basis">[ABF]</sup> &mdash; 86.76% of the NOI gap is margin/cost variance, not revenue shortfall (&sect;1.2), and the specific cost lines are NOT sourced yet (Priority #2 with Ben).</li>
       <li><strong>Every month was NOI-positive and the margin improved monthly</strong> (15.08% &rarr; 16.54% &rarr; 18.33% flash) &mdash; no Q1-style February cliff. The gap vs the 24.35% implied plan margin is spread across the quarter (&sect;1.0).</li>
       <li><strong>Growth concentrated in the mid-pack; the flagship shrank.</strong> Garland +38.32%, Fort Worth +28.57%, Tampa +24.70%, South Austin +24.54%, Dallas +20.44% vs North Austin &minus;10.90% and Leander &minus;1.08% (&sect;1.5). Regionally: DFWT grew +23.34% YoY, CTXH +3.04%; CTXH holds 62.23% of revenue and the higher margin (18.48% vs 13.89%) (&sect;1.4).</li>
-      <li><strong>The cash position absorbed a $2.3M fleet expansion</strong> &mdash; June cash $1,736,931, operating cash flow +$983,080, current ratio 3.0x; the cash-breakeven figure itself is UNDER REVISION (three labeled numbers in &sect;1.10).</li>
+      <li><strong>The cash position comfortably carried a 17-truck fleet build</strong> (4 net-new + 13 replacements, ~$2.3M, mostly bank-financed) &mdash; June cash $1,736,931, operating cash flow +$983,080, current ratio 3.0x; the cash-breakeven figure itself is UNDER REVISION (three labeled numbers in &sect;1.10).</li>
       <li><strong>People signal (new this cycle): manager/CET eNPS +81</strong><sup class="cv-tag" data-prov="enps.co.enps" title="enps_population_change_q2">[N]</sup> on 52 responses, 100% participation, method-consistent trend +63 &rarr; +81 across five cycles &mdash; population labeled per the standing caveat (NOT the mover survey; mover last read +46 in Q1) (&sect;5b).</li>
     </ol>
     <h3 id="findings">6.1a Cross-Variable Findings &mdash; Adversarially Refereed <span class="new-badge">NEW 7/21</span> <span class="prelim-chip">PRELIMINARY &mdash; JULY PARTIAL</span></h3>
@@ -2835,7 +2875,7 @@
     <table>
       <thead><tr><th>#</th><th>Recommendation</th><th>Owner</th><th>Timeline</th><th>Success Metric</th></tr></thead>
       <tbody>
-        <tr><td>1</td><td>Close July (~early Aug) and re-render this packet flash&rarr;final &mdash; every PRELIMINARY chip resolves; rankings re-sync before any superlative ships as final.</td><td>Ben Young / Albert</td><td>~Early Aug</td><td>Zero PRELIMINARY chips; validators exit 0 on the close manifest</td></tr>
+        <tr><td>1</td><td>Close July (~early Aug) and re-render this packet flash&rarr;final &mdash; every PRELIMINARY chip resolves; rankings re-sync before any superlative ships as final.</td><td>Ben Young / Albert</td><td>~Early Aug</td><td>Every July-estimate label clears and the flash numbers become final</td></tr>
         <tr><td>2</td><td>NOI margin decomposition with Ben on the allocated basis &mdash; name the three biggest cost deltas vs plan behind the &minus;$638,566 margin/cost remainder (&sect;1.2) &mdash; Ben&#39;s July-close line-by-line OpEx rebuild (7/21 H2-reforecast method callout; each 1% on his blunt 1.24&times; factor &asymp; $44K of H2 NI) is this exact workstream.</td><td>Cameron + Ben Young</td><td>Before QGR 7/29</td><td>Remainder sourced to specific cost lines before the QGR narrative hardens</td></tr>
         <tr><td>3</td><td>North Austin turnaround plan &mdash; revenue &minus;10.90% YoY, largest below-plan revenue variance (&minus;$269,596), GM% (46.99%) below the 10-branch average (~48.1%), mid-BM-transition (Daniel incoming).</td><td>Brian Herzig + Daniel</td><td>QGR 7/29&ndash;30</td><td>Plan on paper at QGR; branch back above plan by Q3 mid-quarter read</td></tr>
       </tbody>
@@ -2849,7 +2889,7 @@
       <tbody>
         <tr><td>1</td><td>Complete the EMMA backfill and land the sales/conversion feed (post-backfill pull only, per the feed contract).</td><td>Matisen Harper</td><td>Pre-QGR if possible</td><td>Confirm the affected date range; then &sect;3 renders</td></tr>
         <tr><td>2</td><td>Land hours-backfill + personnel-budget feed; re-run the dual-gate availability test from Q1.</td><td>Anne Bosse + Matisen Harper</td><td>Post-Rippling recovery</td><td>Whether any branch is availability-constrained going into Q3</td></tr>
-        <tr><td>3</td><td>Decide: queue a Q2 Marketing feed pre-QGR, or Marketing sits out this quarter&#39;s deck.</td><td>Cameron</td><td>Before QGR 7/29</td><td>&mdash;</td></tr>
+        <tr><td>3</td><td>Rule the ROAS denominator (paid customer-acquisition media only, or the full GL account) so the &sect;2 ROAS % can render.</td><td>Cameron + Paul</td><td>Before QGR 7/29</td><td>&mdash;</td></tr>
         <tr><td>4</td><td>Decide: retire quarterly pricing-elasticity analysis to the weekly Variable Pricing cadence, or queue a Q2 feed.</td><td>Cameron</td><td>Before QGR 7/29</td><td>&mdash;</td></tr>
         <tr><td>5</td><td>Validate the TUR target rulings &mdash; Forecaster row-6 with Matisen+Paul, Dallas 14-truck with Mike (both 7/22); tur_target rows move preliminary&rarr;final on confirm.</td><td>Cameron + Matisen + Mike</td><td>7/22</td><td>Both rulings confirmed</td></tr>
         <tr><td>6</td><td>Reconcile the cash-breakeven number with Ben &mdash; his re-uploaded actuals owe the with-distributions company figure (expect &gt; $5.9M); team agrees the final number then (&sect;1.10).</td><td>Cameron + Paul + Ben Young</td><td>With Ben&#39;s re-upload</td><td>One standing breakeven figure, labeled basis</td></tr>
@@ -2879,20 +2919,22 @@
         <tr><td>Customer NPS</td><td>&#9989; Landed 7/21</td><td>&sect;5</td></tr>
         <tr><td>Fleet Safety</td><td>&#9989; Landed 7/21</td><td>&sect;1.6.2</td></tr>
         <tr><td>Moves / Unit Economics</td><td>&#9989; Landed 7/21 AM</td><td>&sect;1.7</td></tr>
-        <tr><td>Marketing</td><td>&#9203; No feed queued</td><td>&sect;2 &mdash; open question for Cameron (KP spend lands Fri)</td></tr>
+        <tr><td>Marketing</td><td>&#9989; Landed 7/23</td><td>&sect;2 &mdash; funnel (Matisen) + spend/commentary (KP). ROAS held pending denominator ruling.</td></tr>
         <tr><td>Pricing / Elasticity</td><td>&#9203; Decision pending</td><td>&sect;4 &mdash; retire to weekly cadence, or queue a feed</td></tr>
       </tbody>
     </table>
     </div>
 
     <div class="method-callout">
-      <h3>&#9888;&#65039; Deliberately omitted this cycle &mdash; Marketing</h3>
-      <p><strong>No manifest fields exist for Marketing this quarter</strong> &mdash; unlike the other four stubs, this isn&#39;t a backfill-in-progress gap, it&#39;s a feed that was never queued for Q2. <strong>Open question for Cameron:</strong> should a Marketing feed (spend, lead volume, ROI) be added to the Q2 manifest before the QGR, or does Marketing sit out this quarter&#39;s financial deck entirely?</p>
+      <h3>&#9989; Landed 7/23 &mdash; Marketing (one metric still held: ROAS)</h3>
+      <p>Marketing is now rendered in &sect;2: the EMMA web funnel + GA4 engagement (Matisen) and channel/branch ad spend + market commentary (KP/Brittany). The single held metric is <strong>ROAS</strong> &mdash; on purpose: the accounting &ldquo;Advertisement&rdquo; GL is a mixed account (media + Indeed recruiting + Eden/CSR + marketing salaries), Brittany&#39;s PPC is a subset of it (not additive), and Matisen&#39;s ROAS feed is still being retooled. <strong>The ROAS denominator decision is Cameron + Paul&#39;s to rule.</strong></p>
       <div class="table-scroll">
       <table>
         <thead><tr><th>Metric</th><th>Value</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>Digital ad spend / lead volume / ROI</td><td><span class="ncalc">NOT CALCULABLE</span></td><td>no feed queued &mdash; open question for Cameron</td></tr>
+          <tr><td>Digital ad spend (KP-reported)</td><td>$175,060</td><td>&#9989; landed &mdash; &sect;2.2</td></tr>
+          <tr><td>Cost-per-lead (blended, by branch)</td><td>$8.42 company</td><td>&#9989; landed &mdash; &sect;2.3</td></tr>
+          <tr><td>ROAS</td><td><span class="ncalc">PENDING</span></td><td>held &mdash; denominator ruling (Cameron/Paul) + Matisen retool</td></tr>
         </tbody>
       </table>
       </div>
@@ -2939,7 +2981,7 @@
         <table>
           <thead><tr><th>File / Feed</th><th>Purpose</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td>branch-metrics-q2-26.json v0.8.0 (manifest)</td><td>Sole numeric source for every rendered figure (cash-story + basis-prose exceptions noted below)</td><td>&#9989; validator exit 0</td></tr>
+            <tr><td>branch-metrics-q2-26.json v0.9.5 (manifest)</td><td>Sole numeric source for every rendered figure (cash-story + basis-prose exceptions noted below). v0.9.5 added _web_funnel_q2_26 + _marketing_q2_26 (Section 2, landed 7/23).</td><td>&#9989; json parse clean</td></tr>
             <tr><td>Ben Young workbook v4 (Monday asset 3122213413, posted 7/20)</td><td>Sage Intacct P&amp;L &mdash; company monthly + branch revenue/NOI, via intake-validated ben-extract CSVs</td><td>&#9989; May/Jun actuals &middot; Jul flash estimate</td></tr>
             <tr><td>Q2 REFORECAST Fiscal 2026 v4 (04.29.2026).xlsx</td><td>Q2&#39;25 prior-year branch revenue baseline (row 21) + debt-service schedule</td><td>&#9989; closed baseline, penny-tied</td></tr>
             <tr><td>Matisen completed-moves feed (EMMA prod, pulled 7/21 11:38 CDT)</td><td>Moves counts (&sect;1.7) &mdash; definition ruled by Cameron 7/21</td><td>&#9989; intake-validated exit 0 &middot; July component = estimate</td></tr>
@@ -2965,7 +3007,7 @@
 
         <h4>Build Notes</h4>
         <ul>
-          <li>Every number in this presentation traces to <code>q2-data/branch-metrics-q2-26.json</code> v0.8.0, except the cash-story figures (&sect;1.10) and the revenue-reforecast/booked/realized figures (&sect;1.9), which are quoted verbatim from manifest prose (source notes and the <code>booked_vs_realized_basis</code> caveat) rather than standalone numeric fields, and the two "[derived]" implied-target figures in the Executive Summary (NOI margin target, NOI/truck target) which are computed here from two manifest-sourced numbers with the math shown inline.</li>
+          <li>Every number in this presentation traces to <code>q2-data/branch-metrics-q2-26.json</code> v0.9.5, except the cash-story figures (&sect;1.10) and the revenue-reforecast/booked/realized figures (&sect;1.9), which are quoted verbatim from manifest prose (source notes and the <code>booked_vs_realized_basis</code> caveat) rather than standalone numeric fields, and the two "[derived]" implied-target figures in the Executive Summary (NOI margin target, NOI/truck target) which are computed here from two manifest-sourced numbers with the math shown inline.</li>
           <li>Monthly trajectory (&sect;1), branch GM% (&sect;1.3a), branch YoY (&sect;1.3a), and branch revenue plan / attainment (&sect;1.3a Rev Plan + Rev Attain % columns, &sect;1.1 plan-vs-actual decomposition) now render from manifest v0.8.0 (company.monthly_pl, branches[*].gross_margin_pct, branches[*].revenue_yoy_pct, branches[*].revenue_plan). Moves + Rev/Move (&sect;1.3a) and the &sect;1.7 unit-economics section now render from manifest v0.8.0 (branches[*].moves_q2_26, company moves_q2_26 + monthly split &mdash; Matisen 7/21 feed, intake-validated). Company GM% and TUR/NPS (&sect;1.6) remain NOT CALCULABLE per BUILD-RULES.md rule 2 &mdash; no manifest source row exists for them yet.</li>
           <li>No superlative language ("best/worst/highest/lowest ever," etc.) appears anywhere in this presentation beyond the ranked, preliminary "leads/trails this quarter" statements in &sect;1.11, each traced to <code>_rankings_q2_26</code>.</li>
         </ul>
@@ -3004,7 +3046,7 @@
     </details>
 
     <p style="text-align:center;color:var(--gray-400);font-size:11px;margin-top:32px;font-style:italic;">
-      rendered from branch-metrics-q2-26.json v0.8.0 &middot; 2026-07-21 &middot; template-true rebuild (Q1 skeleton) v2 &middot; July figures preliminary (flash estimate) &middot; charts via locally-vendored Chart.js (print stylesheet hides interactive charts; data preserved in tables)
+      rendered from branch-metrics-q2-26.json v0.9.5 &middot; 2026-07-21 (marketing + funnel added 7/23) &middot; template-true rebuild (Q1 skeleton) v2 &middot; July figures preliminary (flash estimate) &middot; charts via locally-vendored Chart.js (print stylesheet hides interactive charts; data preserved in tables)
     </p>
 
   </main>
@@ -3030,85 +3072,71 @@ Chart.defaults.color = '#1a1a1a';
 Chart.defaults.borderColor = '#dde3e8';
 
 // Chart 1: Monthly NOI Trajectory — Q2 FY26 (May/Jun actuals, July flash estimate)
-// Data: manifest v0.8.0 company.monthly_pl. Implied plan margin 24.35% = noi_plan / reforecast revenue.
-new Chart(document.getElementById('chartNOITrajectory'), {
-  type: 'bar',
-  data: {
-    labels: ['May (Actual)', 'June (Actual)', 'July (Flash Estimate)'],
-    datasets: [
-      {
-        label: 'Allocated NOI $',
-        data: [378352.65, 473697.86, 555484.46],
-        backgroundColor: ['#2e7d32', '#2e7d32', '#66bb6a'],
-        borderRadius: 4,
-        yAxisID: 'y',
-      },
-      {
-        label: 'NOI Margin %',
-        data: [15.08, 16.54, 18.33],
-        type: 'line',
-        borderColor: BRAND.orange,
-        backgroundColor: BRAND.orange,
-        borderWidth: 3,
-        pointRadius: 5,
-        pointBackgroundColor: BRAND.orange,
-        tension: 0.2,
-        yAxisID: 'y1',
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'bottom' },
-      tooltip: {
-        callbacks: {
-          label: function(ctx) {
-            if (ctx.dataset.label.indexOf('NOI $') !== -1) return 'NOI: $' + ctx.parsed.y.toLocaleString();
-            return 'Margin: ' + ctx.parsed.y + '%';
+// Data: manifest v0.9.5 company.monthly_pl. Monthly NOI targets from Paul's Q2 Reforecast v4 (4/29/26),
+// per-branch tabs cols BU/BV/BW, basis NetOrdinaryIncome - 88888 (88888-netted, pre-dep); quarter sum ties $2,143,519.
+(function(){
+  var ACT = [378352.65, 473697.86, 555484.46];
+  var TGT = [607190.89, 764250.71, 772077.56];
+  new Chart(document.getElementById('chartNOITrajectory'), {
+    type: 'bar',
+    data: {
+      labels: ['May', 'June', 'July (Flash Est.)'],
+      datasets: [
+        {
+          label: 'NOI Target (reforecast)',
+          data: TGT,
+          backgroundColor: '#9e9e9e',
+          borderRadius: 3,
+          order: 3,
+        },
+        {
+          label: 'Actual NOI',
+          data: ACT,
+          backgroundColor: ['#2e7d32', '#2e7d32', '#66bb6a'],
+          borderRadius: 3,
+          order: 2,
+        },
+        {
+          label: 'Actual trajectory',
+          data: ACT,
+          type: 'line',
+          borderColor: BRAND.navy,
+          backgroundColor: BRAND.navy,
+          borderWidth: 3,
+          pointRadius: 5,
+          pointBackgroundColor: BRAND.navy,
+          tension: 0.2,
+          order: 1,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var i = ctx.dataIndex, pct = (ACT[i] / TGT[i] * 100).toFixed(1);
+              if (ctx.dataset.label.indexOf('Target') !== -1) return 'Target: $' + ctx.parsed.y.toLocaleString();
+              if (ctx.dataset.label.indexOf('trajectory') !== -1) return 'Attainment: ' + pct + '%';
+              return 'Actual: $' + ctx.parsed.y.toLocaleString() + ' (' + pct + '% of target)';
+            }
           }
         }
-      }
-    },
-    scales: {
-      y: {
-        position: 'left',
-        title: { display: true, text: 'Allocated NOI $' },
-        ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' }
       },
-      y1: {
-        position: 'right',
-        grid: { drawOnChartArea: false },
-        title: { display: true, text: 'NOI Margin %' },
-        ticks: { callback: v => v + '%' },
-        suggestedMin: 0,
-        suggestedMax: 28,
+      scales: {
+        y: {
+          position: 'left',
+          title: { display: true, text: 'NOI $ (monthly)' },
+          ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' },
+          suggestedMin: 0,
+        }
       }
     }
-  },
-  plugins: [{
-    id: 'targetLine',
-    afterDraw: function(chart) {
-      const yScale = chart.scales.y1;
-      const targetY = yScale.getPixelForValue(24.35);
-      const ctx = chart.ctx;
-      ctx.save();
-      ctx.strokeStyle = BRAND.navy;
-      ctx.setLineDash([6, 4]);
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(chart.chartArea.left, targetY);
-      ctx.lineTo(chart.chartArea.right, targetY);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle = BRAND.navy;
-      ctx.font = 'bold 11px Roboto';
-      ctx.fillText('Implied plan margin 24.35% (derived)', chart.chartArea.right - 210, targetY - 5);
-      ctx.restore();
-    }
-  }]
-});
+  });
+})();
 
 // Chart 2: Branch NOI Variance vs Plan (allocated basis, ruled 7/21) — sorted worst to best
 // Data: manifest v0.8.0 branches[*].noi_q2_26 − noi_plan. CTXH orange / DFWT navy (region tag only).
@@ -3170,38 +3198,7 @@ const yoyData = [
   { branch: 'Leander', yoy: -1.08 },
   { branch: 'North Austin', yoy: -10.90 },
 ];
-new Chart(document.getElementById('chartYoYRevenue'), {
-  type: 'bar',
-  data: {
-    labels: yoyData.map(d => d.branch),
-    datasets: [{
-      label: 'YoY Revenue Growth (%)',
-      data: yoyData.map(d => d.yoy),
-      backgroundColor: yoyData.map(d => {
-        if (d.branch === 'Company') return BRAND.navy;
-        return d.yoy >= 0 ? BRAND.green : BRAND.red;
-      }),
-      borderRadius: 3,
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: { label: ctx => ctx.parsed.x.toFixed(1) + '%' }
-      }
-    },
-    scales: {
-      x: {
-        ticks: { callback: v => v + '%' },
-        title: { display: true, text: 'YoY Revenue Change' }
-      }
-    }
-  }
-});
+// Chart 3 (chartYoYRevenue) removed 7/23 per Paul review #17 — duplicated the Top-3-Headlines YoY chart; the §1.5 table is the authoritative view. yoyData retained above (harmless, unused).
 
 // Charts 4 (Marketing ROI), 5 (Cohort), 6 (Conv by Branch), 7 (Elasticity), 8 (NPS by Branch):
 // slots preserved in the body as explicit PENDING cards (no canvas). Their Chart() calls return
@@ -3290,7 +3287,7 @@ new Chart(document.getElementById('chartYoYRevenue'), {
 (function() {
   var STORAGE_KEY = 'q2-findeck-v2-review-notes-v1';
   var DECK_TITLE = "Einstein Q2'26 QGR — Presentation Edition (template-true rebuild)";
-  var FOOTER_STAMP = 'rendered from branch-metrics-q2-26.json v0.8.0 · template-true rebuild (Q1 skeleton) v2 · July figures preliminary (flash estimate)';
+  var FOOTER_STAMP = 'rendered from branch-metrics-q2-26.json v0.9.5 · template-true rebuild (Q1 skeleton) v2 · July figures preliminary (flash estimate)';
   var SECTION_TITLES = {
     'exec-summary': 'Executive Summary',
     'caveats': 'Data Caveats & Legend',
