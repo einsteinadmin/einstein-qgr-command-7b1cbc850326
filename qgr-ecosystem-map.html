@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Einstein QGR Ecosystem Map</title>
-<!-- qgr-ecosystem-map v2.0 2026-07-23 -->
+<!-- qgr-ecosystem-map v2.1 2026-07-23 -->
 <!--
   QGR ECOSYSTEM MAP — v2.0 (redesign: simplify + live links + data-driven)
   ========================================================================
@@ -82,6 +82,24 @@ body.show-paths .node .n-path{display:block}
 .pathtoggle{background:none;border:1px solid var(--grey-200);border-radius:999px;font-size:10.5px;font-weight:700;color:var(--grey-400);padding:3px 11px;cursor:pointer}
 .pathtoggle:hover{border-color:var(--navy-400);color:var(--navy-500)}
 
+/* Lane 3 — people LOOPS (flows, not a shelf) */
+.loop{border:1px solid var(--grey-200);border-radius:var(--radius-sm);background:#fff;padding:12px 14px;margin-bottom:10px}
+.loop-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.loop-head .l-label{font-weight:700;color:var(--navy-500);font-size:13.5px}
+.loop-head .l-who{font-size:10px;font-weight:700;background:var(--navy-50);color:var(--navy-400);border-radius:999px;padding:2px 9px;text-transform:uppercase;letter-spacing:.03em}
+.steps{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap}
+.step{border:1px solid var(--grey-200);border-radius:var(--radius-sm);padding:7px 10px;background:var(--grey-50);font-size:11.5px;max-width:200px;display:block;text-decoration:none;color:inherit}
+a.step:hover{border-color:var(--blue-500);background:var(--blue-50);text-decoration:none}
+.step .s-name{font-weight:700;color:var(--navy-500);font-size:12px}
+.step .s-note{color:var(--grey-500);font-size:10.5px;margin-top:2px;line-height:1.4}
+.step .s-meta{margin-top:4px;display:flex;gap:4px;flex-wrap:wrap}
+.step.act{background:#fff;border-style:dashed;max-width:170px}
+.step.act .s-name{color:var(--grey-500);font-weight:400;font-size:11px}
+.sarr{display:flex;align-items:center;color:var(--orange-500);font-weight:700;font-size:15px;flex:0 0 auto}
+.converge{background:var(--navy-500);color:#fff;border-radius:var(--radius-sm);padding:13px 18px;margin-top:4px}
+.converge .c-title{font-weight:700;font-size:13.5px}
+.converge .c-note{font-size:11.5px;color:var(--navy-100);margin-top:3px;line-height:1.5}
+.converge b{color:var(--orange-200)}
 .footer-note{font-size:11px;color:var(--grey-400);text-align:center;margin-top:16px}
 
 @media print{
@@ -96,7 +114,7 @@ body.show-paths .node .n-path{display:block}
 <body>
 <header id="appHeader">
   <div><span class="bebas">EINSTEIN QGR ECOSYSTEM</span><span class="tag">how the machine fits together · Q3 2026 cycle</span></div>
-  <div class="verified">Map <b>v2.0</b> · verified <b id="verifiedStamp">—</b><br>point-in-time snapshot — live stamps on the HQ Ecosystem band</div>
+  <div class="verified">Map <b>v2.1</b> · verified <b id="verifiedStamp">—</b><br>point-in-time snapshot — live stamps on the HQ Ecosystem band</div>
 </header>
 <main>
 
@@ -130,13 +148,13 @@ body.show-paths .node .n-path{display:block}
    localhost URL for tools served elsewhere. null = no link in
    that context.
    ============================================================ */
-const VERIFIED = "7/23/2026 · 2:15 AM";
+const VERIFIED = "7/23/2026 · 2:45 AM";
 const HQ_HOSTED = "https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/";
 
 const LANES = [
   { num: "1", title: "Data spine", flow: "leader feeds → fold + validate → THE MANIFEST → everything downstream reads it" },
   { num: "2", title: "Artifacts — what the manifest renders into", flow: "build doctrine: Fable architects → Sonnet manufactures → Fable writes the analysis" },
-  { num: "3", title: "People loops — what happens before the room", flow: "every loop ends the same way: export → Cameron aggregates pre-room (no backend yet — by design, for now)" }
+  { num: "3", title: "People loops — three loops, one convergence", flow: "leaders · managers · Cameron+Paul run in parallel — every loop ends as an export on Cameron's desk" }
 ];
 
 const NODES = [
@@ -179,38 +197,76 @@ const NODES = [
     urlHosted:"https://einsteinadmin.github.io/goals-dashboard/", urlLocal:"https://einsteinadmin.github.io/goals-dashboard/" },
 
   // Lane 3 — people loops
-  { lane:"3", icon:"🗳", name:"Leader Workshop Hub", status:"hosted", upd:"7/22 · v1.4",
+  { lane:"3", icon:"🗳", id:"hub", name:"Leader Workshop Hub", status:"hosted", upd:"7/22 · v1.4",
     note:"The Roundtable's prep page: ballot + CHOICES + celebrations + action items + goal pre-work → one JSON export to Cameron.",
     path:"canon: QGR Prep HQ/qgr-workshop-hub.html",
     urlHosted:"https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/",
     urlLocal:"https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/" },
-  { lane:"3", icon:"📝", name:"Manager AAR Hub", status:"hosted", upd:"7/22 · v1.3",
+  { lane:"3", icon:"📝", id:"mgr", name:"Manager AAR Hub", status:"hosted", upd:"7/22 · v1.3",
     note:"31 BM/Ops/FM seats — 4-question AAR + CHOICES, answers live in each manager's browser until export.",
     path:"canon: People Analyzer/aar-manager-tool/",
     urlHosted:"https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/",
     urlLocal:"https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/" },
-  { lane:"3", icon:"📽", name:"AAR Live Results (room view)", status:"hosted", upd:"7/22",
+  { lane:"3", icon:"📽", id:"results", name:"AAR Live Results (room view)", status:"hosted", upd:"7/22",
     note:"Ships empty — drag the collected manager exports in live at the QGR.",
     path:"…/results.html",
     urlHosted:"https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html",
     urlLocal:"https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html" },
-  { lane:"3", icon:"🪞", name:"AAR Review Room", status:"hosted", upd:"7/22 · review baked in",
+  { lane:"3", icon:"🪞", id:"review", name:"AAR Review Room", status:"hosted", upd:"7/22 · review baked in",
     note:"All 7 leader write-ups + Cameron's full review baked into the page.",
     path:"canon: QGR Prep HQ/aar-review.html",
     urlHosted:"aar-review.html", urlLocal:"aar-review.html" },
-  { lane:"3", icon:"🛠", name:"Triage Room", status:"hosted", upd:"7/23 · v1.8 bars+funnel",
+  { lane:"3", icon:"🛠", id:"triage", name:"Triage Room", status:"hosted", upd:"7/23 · v1.8 bars+funnel",
     note:"Master-Backlog QG/Super-Critical pulses only → Cameron+Paul walk → red-pen → write-back to Monday.",
     path:"canon: QGR Prep HQ/qgr-triage-room.html",
     urlHosted:"qgr-triage-room.html", urlLocal:"qgr-triage-room.html" },
-  { lane:"3", icon:"🧮", name:"People Analyzer — Leadership", status:"sens", upd:"7/22 · UX pass",
+  { lane:"3", icon:"🧮", id:"pal", name:"People Analyzer — Leadership", status:"sens", upd:"7/22 · UX pass",
     note:"Cameron's leadership evals. LOCAL ONLY, never hosted.",
     path:"People Analyzer/people-analyzer-leadership.html (launch people-analyzer :8136)",
     urlHosted:null, urlLocal:"http://localhost:8136/people-analyzer-leadership.html" },
-  { lane:"3", icon:"🧮", name:"People Analyzer — Directs", status:"local", upd:"7/23 · BUILT",
+  { lane:"3", icon:"🧮", id:"pad", name:"People Analyzer — Directs", status:"local", upd:"7/23 · BUILT",
     note:"NEW: leaders eval their own directs, private-until-export → aggregate gut-check view. Hosting/link-up pending.",
     path:"People Analyzer/directs-tier/pa-directs.html + results.html",
     urlHosted:null, urlLocal:"http://localhost:8136/directs-tier/pa-directs.html" }
 ];
+
+
+/* Lane 3 is FLOWS, not a shelf. Steps reference NODES by id (tool cards,
+   clickable) or are plain actions. Keep in sync with reality, not hope. */
+const LOOPS = [
+  { label: "Loop A — the leaders", who: "7 Roundtable", steps: [
+    { act: "Q2 AARs already written + self-graded (fed the tracker + dashboard, Lane 2)" },
+    { ref: "review", note: "Cameron reviewed all 7 — highlights + 2 staged grade disputes baked in" },
+    { ref: "hub", note: "each leader now: ballot + CHOICES + celebrations + action items + goal pre-work" },
+    { act: "exports ONE JSON → Cameron" },
+    { act: "ballot aggregator (spec'd) → Day-2 room reveal" }
+  ]},
+  { label: "Loop A½ — the leaders on their directs", who: "7 leaders · NEW", steps: [
+    { ref: "pad", note: "each leader runs the analyzer on their OWN directs, private until export" },
+    { act: "exports → Cameron" },
+    { act: "aggregate gut-check view → the room compares reads" }
+  ]},
+  { label: "Loop B — the managers", who: "31 BM/Ops/FM", steps: [
+    { ref: "mgr", note: "4-question AAR + CHOICES (Claude interview prompt sharpens drafts)" },
+    { act: "exports JSON → regional / Cameron (staged locally)" },
+    { ref: "results", note: "Day 1: drag all exports in — replaces an hour of serial presenting. CHOICES stays Cameron-only" },
+    { act: "per-goal grades seed the QG success-rate baseline (Lane 2 tracker)" }
+  ]},
+  { label: "Loop C — Cameron + Paul", who: "the triage lane", steps: [
+    { act: "Master Backlog QG / Super-Critical pulses in" },
+    { ref: "triage", note: "walk → red-pen → per-leader shortlists (bar view + department funnel)" },
+    { act: "write-back to Monday" },
+    { act: "survivors = the Q3 goal slate → feeds the hub's goal pre-work + Day-2 goal setting" }
+  ]},
+  { label: "Cameron's private prep", who: "Cameron only", steps: [
+    { ref: "pal", note: "leadership evals — after the AAR fold + manifest, so criticals/QG autopopulate" },
+    { act: "informs grade-sync calls + O3 agendas — never leaves his machine" }
+  ]}
+];
+const CONVERGE = {
+  title: "⇣ Everything lands on Cameron's desk before 7/29 — the deliberate manual seam",
+  note: "Day 1 — review the quarter: grade sync resolves the staged disputes · manager AARs on the Live Results screen · packet + deck walkthrough. Day 2 — decide Q3: ballot room-reveal · theme lock · goals set from the triage survivors. (A Replit backend later removes the manual seam; for now one pair of hands aggregating is a feature, not a bug.)"
+};
 
 /* ============ Render ============ */
 const ON_PAGES = /github\.io$/.test(location.hostname);
@@ -227,6 +283,38 @@ LANES.forEach(l => {
   lane.className = "lane";
   lane.innerHTML = '<div class="lane-head"><h2><span class="lane-num">'+l.num+'</span>'+esc(l.title)+'</h2><span class="lane-flow">'+esc(l.flow)+'</span></div>';
   const body = document.createElement("div");
+  if (l.num === "3") {
+    body.style.padding = "16px 20px";
+    LOOPS.forEach(lp => {
+      const box = document.createElement("div");
+      box.className = "loop";
+      let inner = '<div class="loop-head"><span class="l-label">' + esc(lp.label) + '</span><span class="l-who">' + esc(lp.who) + '</span></div><div class="steps">';
+      lp.steps.forEach((s, i) => {
+        if (i) inner += '<div class="sarr">→</div>';
+        if (s.ref) {
+          const n = NODES.find(x => x.id === s.ref);
+          const url = ON_PAGES ? n.urlHosted : n.urlLocal;
+          inner += '<' + (url ? 'a href="' + url + '" target="_blank" rel="noopener noreferrer"' : 'div') + ' class="step">' +
+            '<div class="s-name">' + n.icon + ' ' + esc(n.name) + '</div>' +
+            '<div class="s-note">' + esc(s.note || n.note) + '</div>' +
+            '<div class="s-meta">' + STATUS_CHIP[n.status] + '<span class="chip upd">upd ' + esc(n.upd) + '</span></div>' +
+            '</' + (url ? 'a' : 'div') + '>';
+        } else {
+          inner += '<div class="step act"><div class="s-name">' + esc(s.act) + '</div></div>';
+        }
+      });
+      inner += '</div>';
+      box.innerHTML = inner;
+      body.appendChild(box);
+    });
+    const cv = document.createElement("div");
+    cv.className = "converge";
+    cv.innerHTML = '<div class="c-title">' + CONVERGE.title + '</div><div class="c-note">' + CONVERGE.note + '</div>';
+    body.appendChild(cv);
+    lane.appendChild(body);
+    lanesEl.appendChild(lane);
+    return;
+  }
   body.className = "lane-body";
   NODES.filter(n => n.lane === l.num).forEach(n => {
     const url = ON_PAGES ? n.urlHosted : n.urlLocal;
@@ -255,7 +343,7 @@ document.getElementById("pathToggle").addEventListener("click", () => {
   document.getElementById("pathToggle").textContent = document.body.classList.contains("show-paths") ? "hide file paths" : "show file paths";
 });
 document.getElementById("footNote").textContent =
-  "Einstein QGR Ecosystem Map v2.0 · verified " + VERIFIED + " · " + NODES.length + " tools · a new tool = one entry in this file's NODES array + a stamp on the HQ Ecosystem band (standing rule) · leadership reference";
+  "Einstein QGR Ecosystem Map v2.1 · verified " + VERIFIED + " · " + NODES.length + " tools · a new tool = one entry in this file's NODES array + a stamp on the HQ Ecosystem band (standing rule) · leadership reference";
 </script>
 </body>
 </html>
