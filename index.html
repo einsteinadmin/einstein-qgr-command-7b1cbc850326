@@ -177,6 +177,15 @@
   .progress-bar-pct { font-size: 0.7rem; color: var(--gray); font-weight: 700; min-width: 32px; text-align: right; }
   .phase-caret { font-size: 0.8rem; color: var(--gray); transition: transform 0.15s ease; }
   .phase-block.open .phase-caret { transform: rotate(90deg); }
+  /* ⚡ non-recurring tile (v3.47) — visually distinct from the recurring SOP template above it */
+  .phase-extras { margin: 14px 0 2px 0; border: 1px dashed var(--orange-900, #B85C00); border-radius: 10px;
+                  background: #FFFBF5; padding: 10px 14px 6px; }
+  .phase-extras-hd { display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+                     font-size: 0.78rem; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+                     color: var(--orange-900, #B85C00); margin-bottom: 2px; }
+  .phase-extras-hd .x-count { margin-left: auto; text-transform: none; letter-spacing: 0; font-weight: 600; opacity: .75; }
+  .phase-extras-sub { font-size: 0.76rem; color: #6b7280; margin: 0 0 8px; line-height: 1.45; }
+  .phase-extras .phase-item-row { padding-left: 0; }
   .phase-items { display: none; padding: 6px 16px 16px 54px; }
   .phase-block.open .phase-items { display: block; }
   .phase-item-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #F0EEE8; }
@@ -771,7 +780,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.46 2026-07-23'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.47 2026-07-23'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -907,12 +916,6 @@
     {
       id: 'P2', title: '② Cameron + Paul — inputs → warehouse → triage', window: '7/20–24 · backlog INPUTS first, then the warehouse gate, then decisions · ⚠ 2 DECISIONS OWED BY CAMERON sit at the top of this list',
       items: [
-        { text: '⚖️ DECISION OWED — COVER GRADE: is B− right, or is the NOI miss being read wrong?',
-          url: 'q2-materials/q2-2026-roundtable-packet.html', urlLabel: 'the packet cover',
-          ctx: 'HELD AS DRAFT at Cameron\'s call 7/23. His own framing: this was likely a RECORD revenue quarter — 100% to personal goal, fastest scale-up we\'ve ever done, +9.87% YoY vs Q1\'s +6.9%. The grade currently reads the NOI miss (65.66% of plan) as the whole story. The question that settles it: was the miss BAD FINANCIAL PLANNING (truck purchases not accounted for) or a DELIBERATE mid-quarter call to invest in movers and take the margin hit? Only one of those should drag the grade. Answerable from the personnel + OpEx lines — Albert can take it apart on your word. Paul has the deck and this exact question in his DM.' },
-        { text: '⚖️ DECISION OWED — eNPS OFF-SURVEY TREATMENT: how do branch scorecards grade a quarter with no mover survey?',
-          url: 'q2-materials/branch-scorecard-naustin-q2.html', urlLabel: 'sample scorecard (composite offline)',
-          ctx: 'BLOCKING: all 10 branch composites are OFFLINE this quarter — 3 of 7 inputs missing (mover eNPS 15% · recognition 10% · sales target 10%, the last of which is now RULED). Three options: (A) carry Q1 forward with a stale badge — but two quarters then show identical people-scores, so Q3\'s "change" is really a 6-month delta mislabeled; (B) leave it N/A — honest, but no letter grade for any branch in a grading quarter; (C) reweight to the live inputs — restores a grade but quietly makes it ops-and-finance-only (the 25% measuring how movers FEEL disappears, TUR jumps 20%→31%). ⭐ ALBERT REC: C, but labeled honestly — call it a "Q2 Operating Composite (4 inputs)", NOT the branch grade, and restate Q1 on the same 4 metrics (one script run, Q1 has full data) so the trend is real. The 7-metric letter stays "not run this quarter" and returns in Q3. UNDERNEATH IT: if mover eNPS is 15% of every branch grade AND one of your 3 personal KPIs, skipping the survey silently downgrades the grading system — quarterly vs formally semi-annual is a Q3 decision.' },
         { text: 'SWT refresh — rule on the pre-seeded worksheet (Strengths / Weaknesses / Trends)',
           url: 'strata-swt-worksheet.html', urlLabel: 'open the worksheet',
           ctx: 'BACKLOG INPUT. April as-written vs proposed edits w/ sources — 3 strength upgrades, 2 new HUGE-candidate weaknesses, insurance/AI-fatigue trend changes. Survivors → OPSP builder + MB.' },
@@ -960,12 +963,25 @@
         { text: 'Connections Brief #2 (Albert)',
           url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12447028023', urlLabel: 'pulse 12447028023',
           ctx: 'Due 7/27 — report DIFFS since Brief #1, not a re-inventory.' },
-        { text: '📦 BUILD OUT THE DISTRIBUTION TOOLS — everything leader-facing that must ship before 7/29',
-          url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/', urlLabel: 'Workshop Hub (live)',
-          ctx: 'The Day-5 build block. ① SEND LEADERS THE WORKSHOP HUB LINK — gated on Cameron confirming the per-leader action-item checklists (seeded DRAFT) + optional leans on the 2 no-lean ballot questions (conversion-$ standard, COS→BMs). ② Manager-AAR rollout message — HELD until Cameron tests the paste-back loop himself + final-states the tool. ③ Ballot aggregator — spec\'d (room-reveal mode), Sonnet builds when ballots start returning. ④ Dojo who-sees-what ruling (v1.2 built, LOCAL). ⑤ results.html — strip the per-manager CHOICES chips before the room (Cameron: self-evals visible to him/rollup ONLY).' },
         { text: '🪞 Manager AAR tool — validate w/ Paul + leadership this week, then demo at QGR Day 1',
           url: 'http://localhost:8136/aar-manager-tool/manager-qgr-hub.html', urlLabel: 'open the tool (local — launch people-analyzer :8136)',
           ctx: 'NEW 7/21: the Roundtable exercise pushed down to every manager — each BM/Ops/FM opens their own page w/ Q2 goals preloaded verbatim from the cascading sheet, 4-question AAR per goal, CHOICES 1–5 on the leadership anchors, position KPIs (honest blanks), constraint/opportunity for the room. Local-only like the leadership analyzer; two-critic design audit + adversarial data audit applied; names ruled 7/21 (Dagel · Lukas · Vaughan), vacant seats confirmed. TO VALIDATE: ① the exercise itself w/ Paul (walk one page as a manager) ② who-sees-what w/ Mike+Brian (regional visibility vs the ambush fear — eval = O3 agenda) ③ the Day-1 demo moment ("this is MY page") + which managers run it live post-QGR.' }
+      ],
+      // ⚡ NON-RECURRING TILE (Cameron 7/23): `items` above is the REUSABLE SOP template that carries
+      // quarter to quarter; `extras` is this-quarter-only — open decisions, one-off questions, ad-hoc
+      // to-dos. Separate key namespace (P2x-N) so adding/removing one NEVER re-points a saved checkbox
+      // on the template, and separate progress count so the template's completion % stays comparable
+      // across quarters. At quarter reset: keep `items`, clear `extras`.
+      extras: [
+        { text: '⚖️ DECISION OWED — COVER GRADE: is B− right, or is the NOI miss being read wrong?',
+          url: 'q2-materials/q2-2026-roundtable-packet.html', urlLabel: 'the packet cover',
+          ctx: 'HELD AS DRAFT at Cameron\'s call 7/23. His own framing: this was likely a RECORD revenue quarter — 100% to personal goal, fastest scale-up we\'ve ever done, +9.87% YoY vs Q1\'s +6.9%. The grade currently reads the NOI miss (65.66% of plan) as the whole story. The question that settles it: was the miss BAD FINANCIAL PLANNING (truck purchases not accounted for) or a DELIBERATE mid-quarter call to invest in movers and take the margin hit? Only one of those should drag the grade. Answerable from the personnel + OpEx lines — Albert can take it apart on your word. Paul has the deck and this exact question in his DM.' },
+        { text: '⚖️ DECISION OWED — eNPS OFF-SURVEY TREATMENT: how do branch scorecards grade a quarter with no mover survey?',
+          url: 'q2-materials/branch-scorecard-naustin-q2.html', urlLabel: 'sample scorecard (composite offline)',
+          ctx: 'BLOCKING: all 10 branch composites are OFFLINE this quarter — 3 of 7 inputs missing (mover eNPS 15% · recognition 10% · sales target 10%, the last of which is now RULED). Three options: (A) carry Q1 forward with a stale badge — but two quarters then show identical people-scores, so Q3\'s "change" is really a 6-month delta mislabeled; (B) leave it N/A — honest, but no letter grade for any branch in a grading quarter; (C) reweight to the live inputs — restores a grade but quietly makes it ops-and-finance-only (the 25% measuring how movers FEEL disappears, TUR jumps 20%→31%). ⭐ ALBERT REC: C, but labeled honestly — call it a "Q2 Operating Composite (4 inputs)", NOT the branch grade, and restate Q1 on the same 4 metrics (one script run, Q1 has full data) so the trend is real. The 7-metric letter stays "not run this quarter" and returns in Q3. UNDERNEATH IT: if mover eNPS is 15% of every branch grade AND one of your 3 personal KPIs, skipping the survey silently downgrades the grading system — quarterly vs formally semi-annual is a Q3 decision.' },
+        { text: '📦 BUILD OUT THE DISTRIBUTION TOOLS — everything leader-facing that must ship before 7/29',
+          url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/', urlLabel: 'Workshop Hub (live)',
+          ctx: 'The Day-5 build block. ① SEND LEADERS THE WORKSHOP HUB LINK — gated on Cameron confirming the per-leader action-item checklists (seeded DRAFT) + optional leans on the 2 no-lean ballot questions (conversion-$ standard, COS→BMs). ② Manager-AAR rollout message — HELD until Cameron tests the paste-back loop himself + final-states the tool. ③ Ballot aggregator — spec\'d (room-reveal mode), Sonnet builds when ballots start returning. ④ Dojo who-sees-what ruling (v1.2 built, LOCAL). ⑤ results.html — strip the per-manager CHOICES chips before the room (Cameron: self-evals visible to him/rollup ONLY).' }
       ]
     },
     {
@@ -1798,6 +1814,45 @@
           '</div>';
         itemsWrap.appendChild(row);
       });
+
+      // ⚡ NON-RECURRING TILE — rendered BELOW the recurring template, own key namespace (P{id}x-N),
+      // own progress count. Adding/removing an extra can never re-point a saved checkbox on the template.
+      if (phase.extras && phase.extras.length) {
+        var xDone = 0;
+        phase.extras.forEach(function (_, xi) {
+          var xk = phase.id + 'x-' + xi;
+          if (state.phases[xk] && state.phases[xk].checked) xDone++;
+        });
+        var xWrap = document.createElement('div');
+        xWrap.className = 'phase-extras';
+        xWrap.innerHTML =
+          '<div class="phase-extras-hd">⚡ This quarter only — open questions &amp; one-offs' +
+            '<span class="x-count">' + xDone + ' / ' + phase.extras.length + '</span></div>' +
+          '<div class="phase-extras-sub">Not part of the recurring SOP above — decisions owed, ad-hoc to-dos, questions that came up this cycle. ' +
+            'Cleared at quarter reset while the template carries forward, and kept out of the phase progress bar so the SOP\'s completion stays comparable across quarters.</div>';
+        itemsWrap.appendChild(xWrap);
+
+        phase.extras.forEach(function (itemDef, xi) {
+          var it = (typeof itemDef === 'string') ? { text: itemDef } : itemDef;
+          var k = phase.id + 'x-' + xi;
+          var itemState = state.phases[k] || { checked: false, note: '', noteOpen: false };
+          var linkHtml = it.url
+            ? ' <a class="item-link" href="' + esc(it.url) + '" target="_blank" rel="noopener noreferrer">' + esc(it.urlLabel || 'open') + ' ↗</a>'
+            : '';
+          if (it.url2) linkHtml += ' <a class="item-link" href="' + esc(it.url2) + '" target="_blank" rel="noopener noreferrer">' + esc(it.url2Label || 'open') + ' ↗</a>';
+          var ctxHtml = it.ctx ? '<div class="item-ctx">' + esc(it.ctx) + '</div>' : '';
+          var row = document.createElement('div');
+          row.className = 'phase-item-row';
+          row.innerHTML =
+            '<div class="phase-item-check' + (itemState.checked ? ' checked' : '') + '" data-key="' + k + '">' + (itemState.checked ? '✓' : '') + '</div>' +
+            '<div class="phase-item-text-wrap">' +
+              '<div class="phase-item-text' + (itemState.checked ? ' checked-text' : '') + '">' + esc(it.text) + linkHtml + '</div>' + ctxHtml +
+              '<button class="note-toggle" data-key="' + k + '">' + (itemState.note ? '✎ edit note' : '✎ add note') + '</button>' +
+              '<textarea class="phase-item-note" data-key="' + k + '" placeholder="Note…" style="display:' + (itemState.noteOpen ? 'block' : 'none') + '">' + esc(itemState.note || '') + '</textarea>' +
+            '</div>';
+          xWrap.appendChild(row);
+        });
+      }
 
       block.querySelector('.phase-head').addEventListener('click', function () {
         phaseOpenState[phase.id] = !phaseOpenState[phase.id];
