@@ -234,6 +234,37 @@ details.fold[open] summary::before{content:'▾ ';}
 .pf-summary{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--grey-500);padding-top:8px;border-top:1px dashed var(--grey-100);flex-wrap:wrap;}
 .pf-summary b{color:var(--navy-500);}
 
+/* ---------- v1.8 BAR RESKIN (7/23) ----------
+   Cameron's ask before the Paul walk: "tiles become horizontal bars — goal name +
+   Critical badge + link to the pulse, click to expand for the deeper context."
+   Bars are full-width single rows (never a card grid), so a leader's whole slate
+   reads as a scannable list instead of a wall of tiles. Expanding a bar renders
+   the exact same card body as before — nothing was removed, just deferred. */
+.cards.barmode{display:block;}
+.cards.barmode .card{padding:0;gap:0;border-radius:8px;margin-bottom:5px;}
+.bar-hd{display:flex;align-items:center;gap:9px;padding:8px 11px;cursor:pointer;min-height:36px;}
+.bar-hd:hover{background:var(--navy-50);}
+.card.baropen > .bar-hd{background:var(--navy-50);border-bottom:1px solid var(--navy-100);border-radius:8px 8px 0 0;}
+.bar-caret{font-size:10px;color:var(--grey-400);width:11px;flex:none;transition:transform .12s;}
+.card.baropen .bar-caret{transform:rotate(90deg);}
+.bar-name{font-weight:700;font-size:13px;line-height:1.3;flex:1;min-width:0;}
+.cards.barmode .bar-name .rockid{font-size:14px;margin-right:5px;}
+.bar-meta{display:flex;align-items:center;gap:5px;flex:none;}
+.bar-body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:8px;}
+.bar-crit{background:var(--navy-500);color:var(--orange-500);font-size:10px;font-weight:700;border-radius:4px;padding:2px 6px;letter-spacing:.4px;flex:none;}
+.bar-ruling{font-size:10px;font-weight:700;border-radius:4px;padding:2px 7px;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;}
+.bar-owner{font-size:10.5px;color:var(--grey-400);font-weight:700;white-space:nowrap;}
+.bar-warn{font-size:11px;color:var(--orange-900);flex:none;}
+/* department-funnelled Q3 Triage (v1.8) — department → leader → their goals, one screen */
+.dept-sec{background:#fff;border:1px solid var(--navy-100);border-radius:10px;padding:10px 14px 12px;margin-bottom:12px;}
+.dept-hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:7px;border-bottom:2px solid var(--navy-100);margin-bottom:8px;}
+.dept-name{font-family:var(--display);font-size:20px;letter-spacing:.5px;color:var(--navy-500);}
+.person-hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:11px 0 5px;padding:3px 0 3px 9px;border-left:3px solid var(--blue-500);}
+.person-name{font-size:13px;font-weight:700;color:var(--navy-500);letter-spacing:.2px;}
+.person-role{font-size:11px;color:var(--grey-400);}
+.viewmode-row{display:flex;align-items:center;gap:8px;margin:0 0 12px;flex-wrap:wrap;}
+.vm-btn.on{background:var(--navy-500);border-color:var(--navy-500);color:#fff;}
+
 /* ---------- group-by-owner sub-view (7/22 round-2 add) ---------- */
 .groupby-row{display:flex;align-items:center;gap:10px;margin:0 0 12px;}
 .owner-subhd{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--navy-400);text-transform:uppercase;margin:12px 0 6px;padding:3px 0 3px 9px;border-left:3px solid var(--blue-500);}
@@ -347,7 +378,7 @@ details.overflow-fold{border-top:0;padding-top:0;}
     <div class="howto-sub">Cameron + Paul's red-pen session · four tabs, in order · everything auto-saves as you click</div>
     <ol>
       <li><b>Q2 Review</b> — for each rock, click a <b>PROJ</b> grade (SG / G / R). SELF grades are pre-seeded from the leaders' own AARs; an orange <b>⚠ DIVERGENCE</b> border means your read disagrees with theirs — those are the ones to talk about. The notes box = notes for the room.</li>
-      <li><b>Q3 Triage</b> — the main event. Walk each leader top to bottom. Per card: pick a ruling — <b>ACCEPT / EDIT / KILL / DEFER / ✓ DONE</b> (EDIT opens a "what changes" box; <b>✓ DONE</b> is for already-shipped work — the export sweeps it into a dedicated list for Albert to move to Completed on the Master Backlog) — toggle <b>★ CRIT</b> (each leader needs exactly 2). Second row = placement: <b>Leader / slate</b> shows which lane the card lives in (only MB-pool cards can move lanes); <b>Assign to (direct)</b> is the specific person carrying it — secondary, optional, defaults to the leader. Also here: keep it in the Q3 shortlist or park it in overflow. Use the <b>👤 Filter by person / department</b> panel to drill into just the people you want — check a whole department (e.g. Customer Experience) to see everyone's cards, or check individuals (Amanda alone, or Amanda + Nhel) to narrow further; leaders with nothing left to show drop out of the view, and a live count tracks the current selection. Separately, <b>☐ Group cards by owner</b> clusters a leader's cards by who actually owns them (e.g. Amanda vs Tet vs Nhel vs Carly) instead of one flat list — the two work together. "+ Add a goal" at the lane bottom catches anything missing. Answer the 5 <b>Open Questions</b> chips up top as you go. Each card's Flywheel/PACe/priority lens tags are tucked under a <b>"Lens detail"</b> click-to-expand — the face stays clean, the data's one click away.</li>
+      <li><b>Q3 Triage</b> — the main event. <b>The room opens grouped by department</b>: each department, then every person under it (the leader first, then their directs), then that person's goals listed underneath them. Cards sort by <i>effective owner</i>, so something assigned to Nhel sits under Customer Experience › Nhel instead of buried in Amanda's lane. Each goal is a <b>horizontal bar</b> — name + ★ CRIT + a live link to its Monday pulse + its current ruling + who owns it. <b>Click any bar to expand it</b> for the full detail and every control (⤢ Expand all / ⤡ Collapse all do the whole room; <b>☑ Compact bars</b> switches back to the old tiles; <b>👤 By leader lane</b> switches back to one lane per Roundtable leader, which is where the "+ Add a goal" row and the pool pills live). Now the per-card mechanics — walk each person top to bottom. Per card: pick a ruling — <b>ACCEPT / EDIT / KILL / DEFER / ✓ DONE</b> (EDIT opens a "what changes" box; <b>✓ DONE</b> is for already-shipped work — the export sweeps it into a dedicated list for Albert to move to Completed on the Master Backlog) — toggle <b>★ CRIT</b> (each leader needs exactly 2). Second row = placement: <b>Leader / slate</b> shows which lane the card lives in (only MB-pool cards can move lanes); <b>Assign to (direct)</b> is the specific person carrying it — secondary, optional, defaults to the leader. Also here: keep it in the Q3 shortlist or park it in overflow. Use the <b>👤 Filter by person / department</b> panel to drill into just the people you want — check a whole department (e.g. Customer Experience) to see everyone's cards, or check individuals (Amanda alone, or Amanda + Nhel) to narrow further; leaders with nothing left to show drop out of the view, and a live count tracks the current selection. Separately, <b>☐ Group cards by owner</b> clusters a leader's cards by who actually owns them (e.g. Amanda vs Tet vs Nhel vs Carly) instead of one flat list — the two work together. "+ Add a goal" at the lane bottom catches anything missing. Answer the 5 <b>Open Questions</b> chips up top as you go. Each card's Flywheel/PACe/priority lens tags are tucked under a <b>"Lens detail"</b> click-to-expand — the face stays clean, the data's one click away.</li>
       <li><b>Consolidate</b> — check the box on 2+ cards that are really the same thing, click <b>⛙ Consolidate</b> in the header, name the merged card. The originals collapse into one; the export notes exactly which cards got folded in.</li>
       <li><b>Dependency Board</b> — read-only check; statuses recompute live off your kills and defers. Anything <b>NOT COVERED</b> on Matisen needs an explicit yes/no before you leave.</li>
       <li><b>Whiteboard</b> — the closing mirror: each leader's column should hold their slate + 2 CRITs. Click any card to jump back to it.</li>
@@ -364,7 +395,7 @@ details.overflow-fold{border-top:0;padding-top:0;}
    + goals-dashboard/dashboard-data.json (7/17 refresh).
    Green / Super Green text = contract language, transcribed faithfully.
    ============================================================ */
-const VERSION = "QGR Triage Room v1.7 · Person/department multi-select filter on Q3 Triage — checkable org-hierarchy tree (department → leader → direct reports, built off the existing OWNERS metadata, zero data duplication) lets Cameron drill into a whole department, one leader, or any combo of people (e.g. Amanda + Nhel) and see just their shortlist + overflow cards, with a live card count; complements (doesn't replace) the existing Group-by-owner toggle · Finance's manager-tier owner label \"Prosper\" renamed to \"Ben\" for the person-facing hierarchy (id unchanged, no state migration needed) · v1.6 base: Cameron's 2nd-pass walk — ✓ Done ruling (5th disposition, alongside ACCEPT/EDIT/KILL/DEFER; marks already-shipped work for sweep to Completed on the Master Backlog, export carries a dedicated pulse-ID list) · owner dropdowns labeled + disambiguated (\"Leader / slate\" = which lane the card sits in, movable only for MB pool cards; \"Assign to (direct)\" = the specific person carrying it, visually secondary/optional) · Group-by-owner toggle on Q3 Triage — clusters each leader's shortlist + overflow by effective owner (Amanda vs Tet vs Nhel vs Carly, etc.) instead of one flat list · v1.5 base: UX pass 7/22 (live walk-through w/ a leader) — semantic dedupe (3 cards merged, 4 flagged ⚠ possible dupe) · ⛙ Consolidate feature (check cards, merge live, export logs the fold) · Flywheel/PACe/priority tiles moved off the card face into a click-to-expand Lens detail · every card's Monday pulse link now renders consistently (NO PULSE badge instead of a dead link) · Q2 Disposition/carryover band removed — carry-over is now just part of triage curation, no separate treatment · v1.4 base: WALK COMPLETE 7/22 — all 15 MB groups walked; remaining 11 groups synced (+28 newly-qualifying QG/SC cards + 5 Kickpoint Q3 goals) · triage bar (SC+QG only) · v1.3 base: clean cards + 33 walk-new candidates + WALK-SYNC 7/22 ~1am (4 groups) · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21";
+const VERSION = "QGR Triage Room v1.8 · BAR RESKIN + department funnelling (7/23, pre-Paul-walk) — cards render as full-width horizontal BARS (goal name + CRIT badge + live Monday pulse link + current ruling + assigned owner) that expand on click into the full card body; nothing removed, the whole tile interior is just deferred until you open it (Expand all / Collapse all + a Compact-bars off-switch back to the old tiles) · Q3 Triage now defaults to a DEPARTMENT funnel: department → each person under it (leader first, then their directs) → that person's goals broken out individually, grouped by EFFECTIVE owner so a card assigned to Nhel sits under Customer Experience › Nhel rather than buried in Amanda's lane; per-department card/shortlist/CRIT/ruled counts, per-person cap + CRIT badges, overflow collapsed per person, and an Unmapped catch-all so no card can silently vanish · By-leader-lane view kept one click away (carries the add-a-goal row + pool pills) · QGR Triage Room v1.7 · Person/department multi-select filter on Q3 Triage — checkable org-hierarchy tree (department → leader → direct reports, built off the existing OWNERS metadata, zero data duplication) lets Cameron drill into a whole department, one leader, or any combo of people (e.g. Amanda + Nhel) and see just their shortlist + overflow cards, with a live card count; complements (doesn't replace) the existing Group-by-owner toggle · Finance's manager-tier owner label \"Prosper\" renamed to \"Ben\" for the person-facing hierarchy (id unchanged, no state migration needed) · v1.6 base: Cameron's 2nd-pass walk — ✓ Done ruling (5th disposition, alongside ACCEPT/EDIT/KILL/DEFER; marks already-shipped work for sweep to Completed on the Master Backlog, export carries a dedicated pulse-ID list) · owner dropdowns labeled + disambiguated (\"Leader / slate\" = which lane the card sits in, movable only for MB pool cards; \"Assign to (direct)\" = the specific person carrying it, visually secondary/optional) · Group-by-owner toggle on Q3 Triage — clusters each leader's shortlist + overflow by effective owner (Amanda vs Tet vs Nhel vs Carly, etc.) instead of one flat list · v1.5 base: UX pass 7/22 (live walk-through w/ a leader) — semantic dedupe (3 cards merged, 4 flagged ⚠ possible dupe) · ⛙ Consolidate feature (check cards, merge live, export logs the fold) · Flywheel/PACe/priority tiles moved off the card face into a click-to-expand Lens detail · every card's Monday pulse link now renders consistently (NO PULSE badge instead of a dead link) · Q2 Disposition/carryover band removed — carry-over is now just part of triage curation, no separate treatment · v1.4 base: WALK COMPLETE 7/22 — all 15 MB groups walked; remaining 11 groups synced (+28 newly-qualifying QG/SC cards + 5 Kickpoint Q3 goals) · triage bar (SC+QG only) · v1.3 base: clean cards + 33 walk-new candidates + WALK-SYNC 7/22 ~1am (4 groups) · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21";
 
 const LEADERS = [
   {id:"mike",    name:"Mike Vandenbroader", role:"DFWT RM + Head of Ops", cap:5, hardCap:false, blurb:"Mike is the theme's engine. His Q2 training-app rock went Super Green (3 wks live across DFWT, zero bugs) — Q3 is the company-wide bet."},
@@ -983,7 +1014,7 @@ const DEPS = [
    ============================================================ */
 const LS_KEY = "qgr-triage-q3-state";
 let state = loadState();
-function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, laneMove:{}, view:"review", customRocks:[], selected:{}, consolidations:[], consolidatedInto:{}, groupByOwner:false, personFilter:[]}; }
+function blankState(){ return {version:1, q2:{}, q3:{}, oq:{}, laneMove:{}, view:"review", customRocks:[], selected:{}, consolidations:[], consolidatedInto:{}, groupByOwner:false, personFilter:[], compactBars:true, expanded:{}, triageGroup:"dept"}; }
 
 // Fold open-state survives re-renders (in-memory only — resets on reload by design).
 // disp-* and ovf-* folds default CLOSED (truthy check) — 7/21 audit: open-by-default overflow buried the lanes.
@@ -1498,10 +1529,53 @@ function slotCard(r, leaderId){
   const receipt = r.receipt;
   const checked = !!state.selected[r.id];
   const lensAvailable = r.pulseId && WALK_SYNC[r.pulseId];
+
+  /* ---- v1.8 bar mode (7/23) ----
+     Compact horizontal bar = goal name + CRIT badge + pulse link + current ruling,
+     click to expand the full card body below it. Everything under `body` is byte-for-byte
+     the pre-v1.8 card content — bar mode only decides WHEN it renders, never WHETHER
+     the controls exist, so rulings/owners/consolidate all behave identically. */
+  const open = cardExpanded(r.id);
+  const dchip = d && dispositionChip(d);
+  const ownName = (o=>o?o.name:null)(OWNER_INDEX[ownerOf(r.id)||""]);
+  const flagCount = (r.possibleDupeOf?1:0) + (r.stale?1:0);
+  if(state.compactBars){
+    return `<div class="card ${lc==='killed'?'killed':''} ${lc==='deferred'?'deferred':''} ${lc==='done'?'done':''} ${checked?'mergeselected':''} ${open?'baropen':''}" id="card-${esc(r.id)}">
+      <div class="bar-hd">
+        <input type="checkbox" class="mergesel" data-act="selcard" data-id="${esc(r.id)}" ${checked?'checked':''} title="Select for Consolidate">
+        <span class="bar-caret" data-act="cardexp" data-id="${esc(r.id)}">▶</span>
+        <div class="bar-name" data-act="cardexp" data-id="${esc(r.id)}">${r.kind==="mb"?'':`<span class="rockid">${esc(r.id)}</span>`}${pulseLink(r.pulseId, r.name)}</div>
+        <div class="bar-meta">
+          ${flagCount?`<span class="bar-warn" title="${esc([r.possibleDupeOf?'possible duplicate':'', r.stale?'stale':''].filter(Boolean).join(' · '))}">⚠</span>`:''}
+          ${r.mergedFrom&&r.mergedFrom.length?`<span class="chip merged" title="Folded into this card: ${esc(r.mergedFrom.map(m=>m.name).join(' · '))}">⛙ ${r.mergedFrom.length}</span>`:''}
+          ${crit?'<span class="bar-crit">CRIT ★</span>':''}
+          ${dchip?`<span class="bar-ruling chip carry-${dchip.cls}">${dchip.label}</span>`:'<span class="bar-ruling chip mgronly">no ruling</span>'}
+          ${ownName?`<span class="bar-owner">${esc(ownName)}</span>`:''}
+        </div>
+      </div>
+      ${open?`<div class="bar-body">${slotCardBody(r, leaderId)}</div>`:''}
+    </div>`;
+  }
   return `<div class="card ${lc==='killed'?'killed':''} ${lc==='deferred'?'deferred':''} ${lc==='done'?'done':''} ${checked?'mergeselected':''}" id="card-${esc(r.id)}">
     <div class="card-top">
       <input type="checkbox" class="mergesel" data-act="selcard" data-id="${esc(r.id)}" ${checked?'checked':''} title="Select for Consolidate">
       ${r.kind==="mb"?'':`<span class="rockid">${esc(r.id)}</span>`}<div class="rockname">${pulseLink(r.pulseId, r.name)}</div></div>
+    ${slotCardBody(r, leaderId)}
+  </div>`;
+}
+// The card interior, shared by both tile mode and expanded bar mode (v1.8 extraction —
+// identical markup to the pre-v1.8 card body, just lifted into its own function).
+function slotCardBody(r, leaderId){
+  const st = q3s(r.id);
+  const idxE = ROCK_INDEX[r.id];
+  const isBench = idxE.bench;
+  const promoted = isBench ? !!st.promoted : true;
+  const crit = isCrit(r.id);
+  const d = st.decision;
+  const band = bandOf(r.id);
+  const receipt = r.receipt;
+  const lensAvailable = r.pulseId && WALK_SYNC[r.pulseId];
+  return `
     <div class="chips">
       ${crit?'<span class="chip crit">CRIT ⭐</span>':''}
       ${(r.kind&&r.kind!=="mb"&&r.kind!=="consolidated")?`<span class="chip sgonly">${esc(String(r.kind).toUpperCase())}</span>`:''}
@@ -1544,8 +1618,12 @@ function slotCard(r, leaderId){
       ${r.sg?`<div class="def sg"><b>SUPER GREEN</b>${esc(r.sg)}</div>`:''}
       ${r.theme?`<div class="def theme"><b>THEME TIE</b>${esc(r.theme)}</div>`:''}
       ${r.deps?`<div class="def deps"><b>DEPENDENCIES</b>${esc(r.deps)}</div>`:''}
-    </div></details>
-  </div>`;
+    </div></details>`;
+}
+function cardExpanded(id){ return !state.compactBars || !!(state.expanded||{})[id]; }
+function toggleCardExpand(id){
+  state.expanded = state.expanded || {};
+  if(state.expanded[id]) delete state.expanded[id]; else state.expanded[id] = true;
 }
 
 const CROSS_CUTTING_DIRECTIVES = [
@@ -1585,7 +1663,7 @@ const SEMANTIC_DEDUPE_LOG = [
    shortlist splits into Amanda / Tet / Nhel / Carly clusters. The leader themself
    sorts first, then their manager-tier directs alphabetically, then anyone else. */
 function renderCardBand(items, leaderId, extraCls){
-  extraCls = extraCls ? " " + extraCls : "";
+  extraCls = (extraCls ? " " + extraCls : "") + (state.compactBars ? " barmode" : "");
   if(!items.length) return `<div class="cards${extraCls}"></div>`;
   if(!state.groupByOwner) return `<div class="cards${extraCls}">`+items.map(r=>slotCard(r, leaderId)).join("")+`</div>`;
   const grouped = {};
@@ -1604,6 +1682,100 @@ function renderCardBand(items, leaderId, extraCls){
     return `<div class="owner-subhd">${esc(ownerName)} <span class="band-count">(${grouped[k].length})</span></div><div class="cards${extraCls}">`+grouped[k].map(r=>slotCard(r, leaderId)).join("")+`</div>`;
   }).join("");
 }
+/* ---------- v1.8 department-funnelled Q3 Triage (7/23) ----------
+   Cameron: "fix the department funneling — show the department, then each leader with
+   their goals broken out individually underneath them, all fitting on one screen."
+   This is a DISPLAY re-grouping only: the same band items, the same slotCards, the same
+   rulings. Cards are grouped by their EFFECTIVE owner (ownerOf) and rolled up into the
+   DEPARTMENTS hierarchy already used by the person filter — so a card assigned to Nhel
+   shows under Customer Experience › Nhel, not buried in Amanda's flat lane. Each card
+   still carries its lane id so the "Leader / slate" control keeps working unchanged. */
+function allTriageBandItemsWithLane(){
+  let out = [];
+  LEADERS.forEach(l=>{
+    const g = Q3[l.id]; if(!g) return;
+    [...g.rocks, ...g.bench].forEach(it=>{
+      if(rockLifecycle(it.id)==="consolidated") return;
+      if(ROCK_INDEX[it.id] && ROCK_INDEX[it.id].bench && !q3s(it.id).promoted && bandOf(it.id)==="shortlist") { /* keep — bandOf governs display */ }
+      out.push({item:it, lane:l.id});
+    });
+  });
+  return out;
+}
+function renderTriageByDept(){
+  const pfOn = state.personFilter.length>0;
+  const all = allTriageBandItemsWithLane().filter(x=> pfOn ? state.personFilter.includes(ownerOf(x.item.id)) : true);
+  const byOwner = {};
+  all.forEach(x=>{ const o = ownerOf(x.item.id) || "unassigned"; (byOwner[o] = byOwner[o] || []).push(x); });
+
+  const placed = new Set();
+  let html = "";
+  DEPARTMENTS.forEach(dep=>{
+    const people = deptPeople(dep).filter(pid=>(byOwner[pid]||[]).length);
+    if(!people.length) return;
+    people.forEach(p=>placed.add(p));
+    const depItems = people.reduce((a,p)=>a.concat(byOwner[p]),[]);
+    const nShort = depItems.filter(x=>bandOf(x.item.id)==="shortlist").length;
+    const nCrit  = depItems.filter(x=>isCrit(x.item.id)).length;
+    const nRuled = depItems.filter(x=>q3s(x.item.id).decision).length;
+    html += `<section class="dept-sec" id="dept-${dep.id}">
+      <div class="dept-hd">
+        <span class="dept-name">${esc(dep.name)}</span>
+        <span class="badge ok">${depItems.length} card${depItems.length===1?'':'s'}</span>
+        <span class="badge ${nShort>4?'warn':'cap'}">SHORTLIST ${nShort}</span>
+        <span class="badge ok">CRIT ${nCrit}</span>
+        <span class="badge ok" title="Cards with a ruling recorded">RULED ${nRuled}/${depItems.length}</span>
+      </div>`;
+    people.forEach(pid=>{
+      html += renderPersonBlock(pid, byOwner[pid], dep.leaderId===pid);
+    });
+    html += `</section>`;
+  });
+
+  // anyone not claimed by a department (defensive — e.g. a new owner id added to OWNERS
+  // but not yet mapped into DEPARTMENTS). Never silently drop a card.
+  const orphanIds = Object.keys(byOwner).filter(o=>!placed.has(o));
+  if(orphanIds.length){
+    const orphanItems = orphanIds.reduce((a,o)=>a.concat(byOwner[o]),[]);
+    html += `<section class="dept-sec" id="dept-unmapped">
+      <div class="dept-hd"><span class="dept-name">Unmapped</span>
+      <span class="badge warn">${orphanItems.length} card${orphanItems.length===1?'':'s'} — owner not in any department</span></div>`;
+    orphanIds.forEach(o=>{ html += renderPersonBlock(o, byOwner[o], false); });
+    html += `</section>`;
+  }
+  if(!html) html = `<div class="ctx" style="padding:14px">No cards match the current person/department filter.</div>`;
+  return html;
+}
+function renderPersonBlock(pid, entries, isLeader){
+  const p = OWNER_INDEX[pid];
+  const name = p ? p.name : (pid==="unassigned" ? "Unassigned" : pid);
+  const role = p && p.tier==="rt" ? "Roundtable" : (p && p.under && OWNER_INDEX[p.under] ? "reports to "+OWNER_INDEX[p.under].name : "");
+  const shortEntries = entries.filter(x=>bandOf(x.item.id)==="shortlist");
+  const ovfEntries   = entries.filter(x=>bandOf(x.item.id)!=="shortlist");
+  const nCrit = entries.filter(x=>isCrit(x.item.id)).length;
+  const leaderRec = LEADER_INDEX[pid];
+  const cap = leaderRec && leaderRec.cap!==null && leaderRec.cap!==undefined ? leaderRec.cap : null;
+  const capBadge = cap!==null
+    ? `<span class="badge ${shortEntries.length>cap?'warn':'cap'}">${shortEntries.length}/${cap} shortlist${leaderRec.hardCap?' · HARD CAP':''}</span>`
+    : `<span class="badge ok">${shortEntries.length} shortlist</span>`;
+  const critBadge = isLeader ? `<span class="badge ${nCrit===2?'ok':'warn'}">CRIT ${nCrit}/2</span>` : (nCrit?`<span class="badge ok">CRIT ${nCrit}</span>`:"");
+  let h = `<div class="person-hd" id="tri-${esc(pid)}">
+    <span class="person-name">${esc(name)}</span>
+    ${role?`<span class="person-role">${esc(role)}</span>`:''}
+    ${capBadge}${critBadge}
+    <span class="band-count">${entries.length} total</span>
+  </div>`;
+  h += shortEntries.length
+    ? shortEntries.map(x=>`<div class="cards${state.compactBars?' barmode':''}">${slotCard(x.item, x.lane)}</div>`).join("")
+    : `<div class="ctx" style="padding:2px 0 4px;font-size:12px">Nothing on the shortlist.</div>`;
+  if(ovfEntries.length){
+    h += `<details class="fold" data-fold="dovf-${esc(pid)}" ${foldOpen["dovf-"+pid]===true?"open":""}>
+      <summary>Overflow / near-goals <span class="band-count">(${ovfEntries.length})</span> — rulings here count in the export too</summary>
+      <div class="fold-body overflow-band">`+ovfEntries.map(x=>`<div class="cards${state.compactBars?' barmode':''}">${slotCard(x.item, x.lane)}</div>`).join("")+`</div></details>`;
+  }
+  return h;
+}
+
 function renderTriage(){
   // open questions strip
   const selOq = state._oqSel;
@@ -1631,9 +1803,27 @@ function renderTriage(){
     </div>
   </div></details>`;
 
-  html += `<div class="jumpbar">`+LEADERS.map(l=>`<a class="jump" href="#tri-${l.id}">${l.name.split(" ")[0]}</a>`).join("")+`</div>`;
+  const byDept = state.triageGroup !== "leader";
+
+  html += `<div class="jumpbar">`+(byDept
+    ? DEPARTMENTS.map(d=>`<a class="jump" href="#dept-${d.id}">${esc(d.name.split(" / ")[0])}</a>`).join("")
+    : LEADERS.map(l=>`<a class="jump" href="#tri-${l.id}">${l.name.split(" ")[0]}</a>`).join(""))+`</div>`;
 
   html += renderPersonFilterPanel();
+
+  // v1.8 display controls — how the room is organised + how dense the cards are.
+  html += `<div class="viewmode-row">
+    <span class="gradelbl">VIEW</span>
+    <button class="tbtn vm-btn ${byDept?'on':''}" data-act="triagegroup" data-v="dept" title="Department → leader → their goals. The walk-through view.">🏢 By department</button>
+    <button class="tbtn vm-btn ${byDept?'':'on'}" data-act="triagegroup" data-v="leader" title="One lane per Roundtable leader, with the shortlist/overflow bands and the add-a-goal row.">👤 By leader lane</button>
+    <button class="tbtn ${state.compactBars?'on':''}" data-act="togglecompact" title="Horizontal bars (goal name + CRIT + pulse link) that expand on click, instead of full tiles">${state.compactBars?'☑':'☐'} Compact bars</button>
+    ${state.compactBars?`<button class="tbtn" data-act="expandall">⤢ Expand all</button><button class="tbtn" data-act="collapseall">⤡ Collapse all</button>`:''}
+  </div>`;
+
+  if(byDept){
+    html += `<div class="smallnote" style="margin:-6px 0 12px">Grouped by <b>effective owner</b> — a card assigned to a direct (Nhel, Tet, Fabian…) sits under that person, not their leader's lane. Rulings, CRIT, slate and Assign-to all work exactly as they do in lane view. Switch to <b>By leader lane</b> for the add-a-goal row and the pool pills.</div>`;
+    return html + renderTriageByDept();
+  }
 
   html += `<div class="groupby-row">
     <button class="tbtn groupbybtn ${state.groupByOwner?'on':''}" data-act="togglegroupby" title="Cluster each leader's shortlist + overflow by effective owner (Assign-to if set, else the leader) instead of one flat list">${state.groupByOwner?'☑':'☐'} Group cards by owner</button>
@@ -1865,11 +2055,23 @@ document.addEventListener("click", e=>{
   else if(act==="oqdecide"){ const s=oqs(b.dataset.id); s.decided=!s.decided; save(); render(); }
   else if(act==="selcard"){ toggleCardSelect(b.dataset.id); }
   else if(act==="togglegroupby"){ state.groupByOwner = !state.groupByOwner; save(); render(); }
+  // ---- v1.8 bar/department controls ----
+  else if(act==="cardexp"){ toggleCardExpand(b.dataset.id); save(); render(); }
+  else if(act==="togglecompact"){ state.compactBars = !state.compactBars; save(); render(); }
+  else if(act==="triagegroup"){ state.triageGroup = b.dataset.v; save(); render(); }
+  else if(act==="expandall"){
+    state.expanded = {};
+    allTriageBandItemsWithLane().forEach(x=>{ state.expanded[x.item.id] = true; });
+    save(); render();
+  }
+  else if(act==="collapseall"){ state.expanded = {}; save(); render(); }
   else if(act==="pfclear"){ clearPersonFilter(); save(); render(); }
   else if(act==="wbexport"){ doWhiteboardExport(); }
   else if(act==="wbjump"){
     const id = b.dataset.id, leader = b.dataset.leader;
-    state.view = "triage"; save(); render();
+    state.view = "triage";
+    state.expanded = state.expanded || {}; state.expanded[id] = true; // v1.8: land on an OPEN card, not a collapsed bar
+    save(); render();
     location.hash = "#tri-"+leader;
     setTimeout(()=>{
       const el = document.getElementById("card-"+id);
