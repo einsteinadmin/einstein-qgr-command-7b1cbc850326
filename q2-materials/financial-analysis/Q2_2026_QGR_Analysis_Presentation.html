@@ -1086,7 +1086,7 @@
       <p class="subtitle meta-row">
         <strong>Quarter:</strong> Q2 FY26 (May 1 &ndash; Jul 31, 2026) &middot;
         <strong>Analysis Date:</strong> July 21, 2026 (Marketing + funnel added 7/23) &middot;
-        <strong>Rendered from:</strong> branch-metrics-q2-26.json v0.9.5 &middot;
+        <strong>Rendered from:</strong> branch-metrics-q2-26.json v0.9.6 &middot;
         <strong>Source:</strong> Sage Intacct via Ben Young workbook v4 (Monday asset 3122213413, posted 7/20) &middot; May+Jun Sage actuals / Jul flash estimate
         <span class="prelim-chip">PRELIMINARY</span>
       </p>
@@ -1152,7 +1152,7 @@
       <!-- Three-lens -->
       <h3 id="three-lens" style="margin-top:22px;">Three-Lens Performance Assessment</h3>
       <p class="prelim-chip" style="display:inline-block;">DRAFT &mdash; PENDING CAMERON REVIEW + JULY CLOSE</p>
-      <p style="font-size:13px;color:var(--gray-600);margin:0 0 12px 0;"><strong>What this means (draft):</strong> <em>&ldquo;We missed our own plan more than Q1 did &mdash; but the market didn&#39;t cause it: our five metros ran only flat-to-modestly-up while we grew +9.9%, so the NOI miss reads as margin/cost execution (mover comp timing), not demand. The trend signal (revenue YoY) stays healthy.&rdquo;</em></p>
+      <p style="font-size:13px;color:var(--gray-600);margin:0 0 12px 0;"><strong>What this means (draft):</strong> <em>&ldquo;We missed our own plan more than Q1 did &mdash; but the market didn&#39;t cause it: our five metros ran only flat-to-modestly-up while we grew +9.9%, so the NOI miss reads as mostly margin/cost execution (~74%; mover comp timing) with revenue shortfall carrying ~26% (&sect;1.2, corrected basis). The trend signal (revenue YoY) stays healthy.&rdquo;</em></p>
       <div class="lens-row">
         <div class="lens-card" style="border-top-color:#cc7700;">
           <div class="lens-grade" style="background:#cc7700;">D</div>
@@ -1164,13 +1164,13 @@
           <div class="lens-name">Lens 2 &middot; Market-Adjusted</div>
           <div class="lens-rationale">Our markets grew roughly 2&ndash;5%; Einstein grew <strong>+9.9%</strong> &mdash; about 4&ndash;8 points ahead of the market<sup class="cv-tag" data-prov="caveat" title="Metro detail: TX +0.7% May, DFW +7-8%, SA +5/+15%, Austin +0.6% Jun, Houston mixed, FL +4.1% Q2; rates -22 to -37 bps YoY (validated). May+Jun coverage only; market_benchmark_coverage_q2">[K]</sup> (same bar Q1&#39;s B cleared). Full metro-by-metro table in the Lens 2 backup below.</div>
         </div>
-        <div class="lens-card" style="border-top-color:var(--green);">
-          <div class="lens-grade" style="background:var(--green);">B</div>
-          <div class="lens-name">Lens 3 &middot; Historical Trend</div>
-          <div class="lens-rationale">We grew +9.9% on ourselves (Q1&#39;s +6.9% graded B)<sup class="cv-tag" data-prov="caveat" title="Revenue-only read: no Q2 2025 NOI in the manifest, so NOI/margin YoY are NOT CALCULABLE — single-metric lens this quarter; july_preliminary_flash_estimate">[F]</sup> &mdash; but this is a revenue-only read this quarter (no prior-year profit number to compare).</div>
+        <div class="lens-card" style="border-top-color:var(--orange);">
+          <div class="lens-grade" style="background:var(--orange);">?</div>
+          <div class="lens-name">Lens 3 &middot; Historical Trend <span class="new-badge">NOW PROFIT-COMPLETE</span></div>
+          <div class="lens-rationale">Revenue grew <strong>+9.9%</strong> on ourselves (Q1&#39;s +6.9% graded B) &mdash; but with Ben&#39;s restated 2025 baseline now confirmed<sup class="cv-tag" data-prov="_py_2025_restated" title="Ben's SRC Actuals PnL restated monthlies, CONFIRMED by Ben 7/23 as the completed 2025 baseline; Q2'25 revenue ties the manifest prior-year figure exactly; july_preliminary_flash_estimate on the '26 side">[PY F]</sup>, the profit side reads the other way: <strong>Q2&#39;25 NOI was $1.75M at 22.9% margin; Q2&#39;26 is landing ~$1.41M at 16.75% &mdash; NOI down ~$342K YoY</strong>. Record revenue quarter, not a record profit quarter. <strong>Grade OPEN for Cameron</strong> &mdash; the old B was revenue-only; a profit-complete lens has to weigh both.</div>
         </div>
       </div>
-      <div class="progression">Progression: D &rarr; B &rarr; B (indicative, DRAFT)</div>
+      <div class="progression">Progression: D &rarr; B &rarr; ? (Lens 3 grade OPEN &mdash; profit-complete basis landed 7/23, Cameron rules)</div>
       
 
       <details class="explainer">
@@ -1397,6 +1397,7 @@
         <tr><td>May 2026</td><td>$2,509,728.26</td><td>$378,352.65</td><td>$607,191</td><td style="color:var(--red);font-weight:700;">62.3%</td><td>15.08%</td><td>$364,998.09</td><td><strong>FINAL</strong> &mdash; Sage actual (Mo 1)</td></tr>
         <tr><td>June 2026</td><td>$2,863,214.49</td><td>$473,697.86</td><td>$764,251</td><td style="color:var(--red);font-weight:700;">62.0%</td><td>16.54%</td><td>$587,841.74</td><td><strong>FINAL</strong> &mdash; Sage actual <span class="cv-tag" data-prov="caveat" title="FINAL &mdash; Sage actual (Mo 2), incl. 2 management adjustments booked in report, still pending in Sage GL (ADJ-1 BotPress prepaid deferral, ADJ-2 Rippling reclass) &mdash; RESOLVED per Ben/Cameron 7/21 (live); report artifacts predate the fix">[i]</span></td></tr>
         <tr><td>July 2026 <span class="prelim-chip">PRELIMINARY</span></td><td>$3,030,703.31<sup class="cv-tag" data-prov="co.monthly.2026-07.revenue" title="july_preliminary_flash_estimate">[F]</sup></td><td>$555,484.46<sup class="cv-tag" data-prov="co.monthly.2026-07.einstein_noi" title="july_preliminary_flash_estimate">[F]</sup></td><td>$772,078</td><td style="color:var(--orange-dark);font-weight:700;">71.9%</td><td>18.33%<sup class="cv-tag" data-prov="co.monthly.2026-07.noi_margin_pct" title="july_preliminary_flash_estimate">[F]</sup></td><td>$669,628.34<sup class="cv-tag" data-prov="co.monthly.2026-07.net_income" title="july_preliminary_flash_estimate">[F]</sup></td><td><span class="prelim-chip">PRELIMINARY</span> flash estimate: revenue = sync-adjusted 3-layer forecast; COGS at June %-of-rev; OpEx/Other rolled forward from June</td></tr>
+        <tr style="color:var(--gray-600);font-size:11.5px;"><td>Q2 2025 (prior yr, restated)<sup class="cv-tag" data-prov="_py_2025_restated" title="Ben's restated 2025 monthlies (SRC Actuals PnL), confirmed by Ben 7/23. Monthly NOI: May $470,537 (19.15%) · Jun $651,838 (25.35%) · Jul $626,711 (23.92%).">[PY]</sup></td><td>$7,648,537</td><td>$1,749,087</td><td>&mdash;</td><td>&mdash;</td><td>22.87%</td><td>&mdash;</td><td>reference &mdash; NOI YoY &minus;$342K on revenue +9.9%</td></tr>
         <tr style="font-weight:800;"><td>Q2 Total <span class="prelim-chip">PRELIMINARY</span></td><td>$8,403,646.06<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.revenue" title="july_preliminary_flash_estimate">[F]</sup></td><td>$1,407,534.97<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.einstein_noi" title="july_preliminary_flash_estimate">[F]</sup></td><td>$2,143,519</td><td style="color:var(--red);font-weight:700;">65.7%</td><td>16.75%<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.noi_margin_pct" title="july_preliminary_flash_estimate">[F]</sup></td><td>$1,622,468.17<sup class="cv-tag" data-prov="co.monthly.Q2_TOTAL.net_income" title="july_preliminary_flash_estimate">[F]</sup></td><td><span class="prelim-chip">PRELIMINARY</span> &mdash; contains July estimate</td></tr>
       </tbody>
     </table>
@@ -1483,23 +1484,23 @@
     </details>
 
     <h3>1.2 NOI Gap Waterfall</h3>
-    <blockquote><em>Plain English: profit (NOI) came in $736K under plan. Only ~13% of that is because revenue fell short &mdash; ~87% is costs taking a bigger bite of each dollar than the plan assumed. WHICH costs is the open question (Ben decomposition, Priority #2); the rows are staged below.</em></blockquote>
+    <blockquote><em>Plain English: profit (NOI) came in $736K under plan. About <strong>26%</strong> of that is because revenue fell short &mdash; the other <strong>~74%</strong> is costs taking a bigger bite of each dollar than the plan assumed. WHICH costs is the open question (Ben decomposition, Priority #2); the rows are staged below. <span style="font-size:11px;color:var(--gray-600);">(Corrected 7/23 per Paul&#39;s review: the revenue effect now flows through at each branch&#39;s gross margin &mdash; the rate a lost dollar of revenue actually costs us once fixed overhead is covered &mdash; instead of the blended 24.35% plan margin, which understated the revenue share by about half.)</span></em></blockquote>
     <p><strong>Target NOI (Q2 reforecast, allocated basis):</strong> $2,143,519.00 (24.35% implied margin) &middot; <strong>Actual:</strong> $1,407,534.97<sup class="cv-tag" data-prov="co.noi_q2_26" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate">[AF]</sup> (16.75%) &middot; <strong>Total Gap:</strong> &minus;$735,984.03 (&minus;34.3%) <span class="cv-tag" data-prov="derived" title="Derived: noi_q2_26 &minus; noi_plan; gap % = gap &divide; plan">[derived]</span></p>
     <div class="chart-wrap">
       <div class="chart-title">Q2 NOI Waterfall &mdash; Plan to Actual</div>
-      <div class="chart-sub">Plan $2,143,519.00 &rarr; Actual $1,407,534.97<sup class="cv-tag" data-prov="co.noi_q2_26" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate">[AF]</sup> &mdash; gap &minus;$735,984.03, split into a revenue-shortfall effect and a margin/cost-variance remainder.</div>
+      <div class="chart-sub">Plan $2,143,519.00 &rarr; Actual $1,407,534.97<sup class="cv-tag" data-prov="co.noi_q2_26" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate">[AF]</sup> &mdash; gap &minus;$735,984.03, split into a revenue-shortfall effect (at contribution-margin flow-through) and a margin/cost-variance remainder. Corrected 7/23 (Paul review): rev effect = &Sigma; branch GM% &times; branch &Delta;rev.</div>
 <svg viewBox="0 0 680 240" width="100%" style="max-width:100%;height:auto;font-family:'Roboto',Arial,sans-serif;">
 <line x1="20" y1="200.0" x2="660" y2="200.0" stroke="var(--gray-300)" stroke-width="1"/>
 <rect x="56.0" y="24.0" width="88.0" height="176.0" fill="var(--navy)" rx="2"/>
 <text x="100.0" y="18.0" font-size="10.5" text-anchor="middle" fill="var(--gray-800)" font-weight="700">$2,143,519</text>
 <text x="100.0" y="216.0" font-size="10.5" text-anchor="middle" fill="var(--navy)" font-weight="700">Q2 Plan NOI</text>
 <line x1="144.0" y1="24.0" x2="216.0" y2="24.0" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="3 2"/>
-<rect x="216.0" y="24.0" width="88.0" height="8.0" fill="var(--red)" rx="2"/>
-<text x="260.0" y="18.0" font-size="10.5" text-anchor="middle" fill="var(--gray-800)" font-weight="700">-$97,418</text>
+<rect x="216.0" y="24.0" width="88.0" height="15.8" fill="var(--red)" rx="2"/>
+<text x="260.0" y="18.0" font-size="10.5" text-anchor="middle" fill="var(--gray-800)" font-weight="700">-$191,896</text>
 <text x="260.0" y="216.0" font-size="10.5" text-anchor="middle" fill="var(--navy)" font-weight="700">Revenue-shortfall effect</text>
-<line x1="304.0" y1="32.0" x2="376.0" y2="32.0" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="3 2"/>
-<rect x="376.0" y="32.0" width="88.0" height="52.4" fill="var(--red)" rx="2"/>
-<text x="420.0" y="26.0" font-size="10.5" text-anchor="middle" fill="var(--gray-800)" font-weight="700">-$638,566</text>
+<line x1="304.0" y1="39.8" x2="376.0" y2="39.8" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="376.0" y="39.8" width="88.0" height="44.6" fill="var(--red)" rx="2"/>
+<text x="420.0" y="33.8" font-size="10.5" text-anchor="middle" fill="var(--gray-800)" font-weight="700">-$544,088</text>
 <text x="420.0" y="216.0" font-size="10.5" text-anchor="middle" fill="var(--navy)" font-weight="700">Margin/cost variance</text>
 <line x1="464.0" y1="84.4" x2="536.0" y2="84.4" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="3 2"/>
 <rect x="536.0" y="84.4" width="88.0" height="115.6" fill="var(--navy)" rx="2"/>
@@ -1511,8 +1512,8 @@
     <table>
       <thead><tr><th>Component</th><th>$ Effect</th><th>% of Gap</th></tr></thead>
       <tbody>
-        <tr><td>Revenue-shortfall effect <span class="cv-tag" data-prov="derived" title="Derived: plan NOI margin (24.35%) &times; revenue miss (-$400,110.94)">[derived]</span></td><td>&minus;$97,418.11</td><td>13.24%</td></tr>
-        <tr><td>Margin/cost variance &mdash; decomposition with Ben pending</td><td>&minus;$638,565.92</td><td>86.76%</td></tr>
+        <tr><td>Revenue-shortfall effect <span class="cv-tag" data-prov="derived" title="CORRECTED 7/23 (Paul review): &Sigma; branch GM% &times; branch revenue variance (contribution-margin flow-through) = -$191,895.89. NA -269,596&times;46.99% = -126,683 · SA(S.Austin) +123,887&times;48.56% = +60,159 · Leander -28,226&times;51.15% = -14,438 · San Antonio -144,340&times;46.62% = -67,291 · Houston -71,725&times;50.38% = -36,135 · Dallas +57,018&times;45.26% = +25,806 · FW -3,244&times;42.55% = -1,380 · Garland +62,279&times;49.32% = +30,716 · McKinney -98,593&times;48.94% = -48,251 · Tampa -27,932&times;51.55% = -14,399. Branch variances sum -$400,471.94 (the documented $361 may_branch_gap_361 vs the -$400,110.94 company gap). The PRIOR method (24.35% blended plan NOI margin &times; company rev miss = -$97,418 / 13.2%) understated the revenue share ~2x: with cash breakeven covered ~1.5x, fixed overhead was absorbed, so a revenue swing at the margin flows through at ~gross margin, not the blended NOI margin.">[derived]</span></td><td>&minus;$191,895.89</td><td>26.07%</td></tr>
+        <tr><td>Margin/cost variance &mdash; decomposition with Ben pending <span class="cv-tag" data-prov="derived" title="Remainder: -735,984.03 - (-191,895.89) = -544,088.14. Line-level draft decomposition (May+June, pre-Ben-validation) lives in q2-data/noi-miss-decomposition-2026-07-23.md — on Ben's board for validation.">[derived]</span></td><td>&minus;$544,088.14</td><td>73.93%</td></tr>
         <tr><td style="padding-left:24px;">&#8627; Operating-expense overrun vs plan, by cost line (Q1&#39;s largest driver)</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>Ben&#39;s NOI-margin decomposition on the allocated basis (Priority #2, before QGR 7/29). Leading suspect CONFIRMED in Ben&#39;s 7/21 H2-reforecast note: mover comp 37.2% of revenue vs 35.0% budget (+2.2 pts, hourly &mdash; holds steady). His line-by-line OpEx rebuild lands with the July close (fixed adds as dollars, variable at run rates, one-times stripped).</td></tr>
         <tr><td style="padding-left:24px;">&#8627; Overhead / truck-count effect vs plan (Q1 carried this row)</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>same Ben decomposition; fleet grew ~$2.3M in Q2 (&sect;1.10)</td></tr>
         <tr><td style="padding-left:24px;">&#8627; Branch-level NOI concentration (per-branch variances already rendered in &sect;1.3)</td><td><span class="ncalc">PENDING</span></td><td>&mdash;</td><td>folds in WITH the cost-line split to avoid double-counting the remainder</td></tr>
@@ -1520,13 +1521,13 @@
       </tbody>
     </table>
     </div>
-    <p style="font-size:12.5px;">The large majority of the NOI miss (86.76%, <span class="ncalc">NOT sourced to specific cost lines yet</span>) is margin/cost variance, not the revenue shortfall itself &mdash; consistent with Priority #2 above (NOI margin decomposition with Ben).</p>
+    <p style="font-size:12.5px;">The majority of the NOI miss (<strong>73.93%</strong>, <span class="ncalc">NOT sourced to specific cost lines yet</span>) is margin/cost variance; the revenue shortfall carries <strong>26.07%</strong> at contribution-margin flow-through (corrected 7/23 per Paul&#39;s review &mdash; the earlier 13%/87% split used the blended plan margin and understated the revenue share ~2x). Consistent with Priority #2 above (NOI margin decomposition with Ben); a line-level DRAFT decomposition is on Ben&#39;s board for validation.</p>
 
     <details class="explainer">
-      <summary>What &ldquo;86.76% margin/cost variance&rdquo; actually means</summary>
+      <summary>What &ldquo;73.93% margin/cost variance&rdquo; actually means (corrected basis)</summary>
       <div class="expl-body">
         <p>The plan implied costs at <strong>~75.65%</strong> of revenue (the inverse of the 24.35% implied plan margin). What actually happened was costs at <strong>~83.25%</strong> of revenue &mdash; the margin ran 16.75% instead of 24.35%.</p>
-        <p><strong>Only 13.24% of the NOI miss came from the revenue shortfall. 86.76% came from margin/cost running above what the plan implied.</strong> Same shape as Q1&#39;s miss (85% cost-side then) &mdash; but the Q2 decomposition stops at the &ldquo;remainder&rdquo; line on purpose: which specific cost lines drove it is <span class="ncalc">NOT sourced yet</span>. That's Priority #2 &mdash; the NOI margin decomposition with Ben on the allocated basis, before the QGR narrative hardens.</p>
+        <p><strong>About 26% of the NOI miss came from the revenue shortfall; ~74% came from margin/cost running above what the plan implied.</strong> (Corrected 7/23: a lost revenue dollar costs us its <em>gross margin</em> &mdash; roughly 47&ndash;51 cents by branch &mdash; not the blended 24.35% plan margin, because this quarter&#39;s revenue already covered fixed overhead ~1.5&times;. The earlier 13%/87% split used the blended margin and gave revenue about half its true share.) Still majority cost-side &mdash; and which specific cost lines drove it is <span class="ncalc">NOT sourced yet</span>: that's Priority #2, the NOI margin decomposition with Ben on the allocated basis, before the QGR narrative hardens. A line-level DRAFT (May+June, every tie exact) is on Ben&#39;s board.</p>
         <p>One structural difference from Q1 worth naming: Q1&#39;s cost-side miss was concentrated in a slow-season month (February). Q2 has no equivalent loss month &mdash; every month was NOI-positive and the margin improved monthly (15.08% &rarr; 16.54% &rarr; 18.33% est.) &mdash; so the Q2 gap is a spread-out margin-vs-plan story, not a single-month cliff. The month-by-month facts are in &sect;1.0&#39;s trajectory table; the why waits for Ben&#39;s decomposition.</p>
       </div>
     </details>
@@ -2832,7 +2833,7 @@
     <h3>6.1 The Complete Story <span class="prelim-chip">DRAFT &mdash; FACTS ONLY, PENDING FEEDS + JULY CLOSE</span></h3>
     <p><strong>The short version: revenue grew almost 10% and every month was profitable, but we made about two-thirds of the profit we planned &mdash; and the miss is in costs, not sales.</strong> <span class="cv-tag" data-prov="caveat" title="Three-Lens draft grades: D (vs own plan) -> B (vs market) -> B (vs last year) — see the Three-Lens section. After the 7/21 five-feed fold (manifest v0.8.0) this section runs on financial facts, moves, manager/CET eNPS, TUR (3-view), personnel, sales components, customer NPS, and fleet safety; only marketing and pricing-elasticity remain feed-pending.">[i]</span> What the data supports today:</p>
     <ol>
-      <li><strong>The margin, not the top line, carries the NOI miss.</strong> Revenue reached 95.46% of the reforecast (realized basis)<span class="cv-tag" data-prov="derived" title="Derived: revenue_q2_26 &divide; revenue_plan (manifest v0.8.0)">[derived]</span>, but allocated NOI attained 65.66%<sup class="cv-tag" data-prov="co.noi_to_plan" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate; booked_vs_realized_basis">[ABF]</sup> &mdash; 86.76% of the NOI gap is margin/cost variance, not revenue shortfall (&sect;1.2), and the specific cost lines are NOT sourced yet (Priority #2 with Ben).</li>
+      <li><strong>The margin, not the top line, carries the NOI miss.</strong> Revenue reached 95.46% of the reforecast (realized basis)<span class="cv-tag" data-prov="derived" title="Derived: revenue_q2_26 &divide; revenue_plan (manifest v0.8.0)">[derived]</span>, but allocated NOI attained 65.66%<sup class="cv-tag" data-prov="co.noi_to_plan" title="noi_allocation_ruling_2026_07_21; july_preliminary_flash_estimate; booked_vs_realized_basis">[ABF]</sup> &mdash; ~74% of the NOI gap is margin/cost variance vs ~26% revenue shortfall at contribution-margin flow-through (&sect;1.2, corrected 7/23), and the specific cost lines are NOT sourced yet (Priority #2 with Ben; line-level draft on his board).</li>
       <li><strong>Every month was NOI-positive and the margin improved monthly</strong> (15.08% &rarr; 16.54% &rarr; 18.33% flash) &mdash; no Q1-style February cliff. The gap vs the 24.35% implied plan margin is spread across the quarter (&sect;1.0).</li>
       <li><strong>Growth concentrated in the mid-pack; the flagship shrank.</strong> Garland +38.32%, Fort Worth +28.57%, Tampa +24.70%, South Austin +24.54%, Dallas +20.44% vs North Austin &minus;10.90% and Leander &minus;1.08% (&sect;1.5). Regionally: DFWT grew +23.34% YoY, CTXH +3.04%; CTXH holds 62.23% of revenue and the higher margin (18.48% vs 13.89%) (&sect;1.4).</li>
       <li><strong>The cash position comfortably carried a 17-truck fleet build</strong> (4 net-new + 13 replacements, ~$2.3M, mostly bank-financed) &mdash; June cash $1,736,931, operating cash flow +$983,080, current ratio 3.0x; the cash-breakeven figure itself is UNDER REVISION (three labeled numbers in &sect;1.10).</li>
@@ -2850,7 +2851,7 @@
       <li><strong>Meta &mdash; the yardstick error explains the RANKING SCRAMBLE of the TUR &ldquo;miss&rdquo; pattern, not every gap (HIGH, contingent on the 7/22 target validation).</strong> San Antonio ran 77.3/77.5/76.3 near-flat while its targets swung to a corrected 101.3% of fleet (June). Corrected-vs-as-set gaps diverge 8&ndash;13 pts for S.&thinsp;Austin/Dallas/FW &mdash; who looked like missers vs beaters was largely the yardstick. But N.&thinsp;Austin (&minus;9.6) and Tampa (&minus;11.1) miss on the corrected yardstick too &mdash; those gaps are real. Q3: one-measured-rate method only; never cascade the as-set view.</li>
     </ol>
 
-    <h3>6.2 Cross-Metric Correlation &mdash; Including Availability <span class="prelim-chip">PRELIMINARY &mdash; DATA IN, ANALYSIS PENDING</span></h3>
+    <h3>6.2 Cross-Metric Correlation &mdash; Including Availability <span class="new-badge">ANALYSIS LANDED 7/23</span> <span class="prelim-chip">DRAFT &mdash; PENDING CAMERON REVIEW</span></h3>
     <div class="table-scroll">
     <table>
       <thead><tr><th>Branch</th><th>Conv $ (Q2)</th><th>NPS (pooled)</th><th>TUR vs corrected target</th><th>Root Cause Flag</th></tr></thead>
@@ -2871,6 +2872,39 @@
     <p style="font-size:11.5px;color:var(--gray-600);">Elasticity: no Q2 feed (weekly Variable Pricing cadence covers it live &mdash; &sect;4). NPS column is a level, not a trend &mdash; the trend view returns when Q1 branch baselines land (&sect;5.3). All data columns render from manifest v0.8.0 (conv/NPS/TUR per their section caveats; elasticity has no Q2 feed). Root-Cause flags = the &sect;6.1a findings, each of which survived an independent adversarial refute pass (full record: <code>q2-data/integrated-analysis-2026-07-21-FINAL.md</code>). &ldquo;No flag&rdquo; is a finding too &mdash; absence of a story, stated.</p>
     <p style="font-size:12px;color:var(--gray-600);">Q1&#39;s Triple-Threat scan (pricing at ceiling + conversion drop + NPS decline) re-runs here once the pricing, sales, and NPS feeds land. Until then no branch is flagged &mdash; absence of data is not absence of risk, and vice versa.</p>
 
+    <h4>What actually drove the revenue miss &mdash; the cross-metric verdict <span class="new-badge">NEW 7/23</span> <span class="prelim-chip">DRAFT &mdash; PENDING CAMERON REVIEW</span></h4>
+    <blockquote><em>Plain English: we tested the obvious suspects for the revenue miss &mdash; not enough people, not enough leads, weaker closing &mdash; against the actual numbers, branch by branch and month by month. Here&#39;s what held up and what didn&#39;t.</em></blockquote>
+
+    <p><strong>First, WHEN the miss happened &mdash; it was mostly a May story:</strong></p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th></th><th>May</th><th>June</th><th>July (flash)</th></tr></thead>
+      <tbody>
+        <tr><td>Revenue vs monthly target<sup class="cv-tag" data-prov="derived" title="company.monthly_pl revenue ÷ reforecast monthly revenue targets (branch tabs BU/BV; July = quarter plan minus May+Jun)">[derived]</sup></td><td style="color:var(--red);font-weight:700;">88.4%</td><td style="color:var(--orange-dark);font-weight:700;">95.4%</td><td style="color:var(--green);font-weight:700;">102.3%</td></tr>
+        <tr><td>Staffing vs budget (personnel)</td><td>95.1%</td><td>102.9%</td><td>107.8%</td></tr>
+        <tr><td>Truck utilization (TUR)</td><td>75.4%</td><td>79.2%</td><td>74.1%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:12.5px;">Revenue attainment climbed every month and finished <em>above</em> target in July. The quarter&#39;s revenue gap is concentrated in May &mdash; and the quarter recovered as it went.</p>
+
+    <p><strong>The suspect-by-suspect verdict:</strong></p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>&ldquo;Did we miss revenue because of&hellip;&rdquo;</th><th>Verdict</th><th>The evidence, in plain terms</th></tr></thead>
+      <tbody>
+        <tr><td><strong>&hellip;not enough people / crew availability?</strong></td><td style="color:var(--green);font-weight:800;">NO</td><td>If crews were the limit, our trucks would have been running full while work went unserved. They weren&#39;t: utilization peaked at <strong>79%</strong> and branch-level staffing shows <strong>no correlation with plan attainment (&minus;0.13)</strong>. There was slack capacity all quarter &mdash; we had the people and trucks to serve more work than we booked.<sup class="cv-tag" data-prov="derived" title="Pearson correlation across 10 branches, revenue-plan-attainment vs personnel_budget_pct = -0.13 (effectively none); company TUR by month 75.4/79.2/74.1 — never near ceiling. Manifest v0.9.6.">[derived]</sup></td></tr>
+        <tr><td><strong>&hellip;not enough leads?</strong></td><td style="color:var(--green);font-weight:800;">NO</td><td>Leads were abundant everywhere &mdash; company +97% YoY (&sect;2) &mdash; and branch lead-flow shows <strong>zero correlation with plan attainment (+0.01)</strong>. The branches that missed had just as many leads per truck as the ones that beat plan.</td></tr>
+        <tr><td><strong>&hellip;weaker conversion (booking the work)?</strong></td><td style="color:var(--orange-dark);font-weight:800;">PARTLY</td><td>Moderate correlation (<strong>+0.42</strong>). The low-conversion cluster &mdash; Houston 12.2%, Fort Worth 14.5%, McKinney 14.5% &mdash; sits mostly in the below-plan half, while the plan-beaters (Dallas 29.8%, S.&nbsp;Austin 28.9%) close far more of what they quote. Not the whole story, but a real lever.</td></tr>
+        <tr><td><strong>&hellip;a few specific branches?</strong></td><td style="color:var(--red);font-weight:800;">YES &mdash; mostly this</td><td>Three branches carry more than the entire company gap: <strong>North Austin &minus;$270K</strong> (BM transition quarter; utilization only 66.8% &mdash; trucks sat), <strong>San Antonio &minus;$144K</strong> (the branch whose targets were built on the broken rate math &mdash; &sect;1.6 diagnostic), <strong>McKinney &minus;$99K</strong> (lowest conversion + the Verizon/Jamf device outage quarter). Plan-attainment correlates strongly with utilization (<strong>+0.70</strong>): where we missed, trucks ran emptier &mdash; a demand/booking shortfall, not a capacity one.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="info-callout" style="font-size:12.5px;">
+      <strong>What this means for an ops manager:</strong> the constraint this quarter was <em>booking work</em>, not <em>serving work</em>. We had trucks, crews, and a flood of leads &mdash; the misses came where leads didn&#39;t turn into booked jobs (conversion) and in three branches with specific, named local stories. That points the Q3 conversation at demand-conversion &mdash; working the newly-captured leads (4,325 arrived unassigned/unworked, &sect;3.5) and the low-conversion branches &mdash; rather than at hiring or fleet. It also squares with the cost side: we <em>paid</em> for the full crew build (&sect;1.2) while booking less than planned &mdash; the deliberate-investment story, with the bill showing up as margin.
+    </div>
+    <p style="font-size:11px;color:var(--gray-600);">Method: Pearson correlations across the 10 branches, revenue-plan-attainment vs each candidate driver (manifest v0.9.6 fields); monthly rhythm from company.monthly_pl vs the reforecast monthly targets. Correlations on n=10 are directional, not proof &mdash; read them WITH the named branch contexts, not instead of them. Seasonality caveat applies to all QoQ/monthly reads<sup class="cv-tag" data-prov="caveat" title="Moving is seasonal; monthly ramps are partly the calendar. july_preliminary_flash_estimate on July figures.">[F]</sup>.</p>
+
     <h3>6.3 Recommendations by Confidence Level <span class="prelim-chip">DRAFT FOR CAMERON&#39;S REVIEW</span></h3>
 
     <h4>High Confidence &mdash; Act Now</h4>
@@ -2879,7 +2913,7 @@
       <thead><tr><th>#</th><th>Recommendation</th><th>Owner</th><th>Timeline</th><th>Success Metric</th></tr></thead>
       <tbody>
         <tr><td>1</td><td>Close July (~early Aug) and re-render this packet flash&rarr;final &mdash; every PRELIMINARY chip resolves; rankings re-sync before any superlative ships as final.</td><td>Ben Young / Albert</td><td>~Early Aug</td><td>Every July-estimate label clears and the flash numbers become final</td></tr>
-        <tr><td>2</td><td>NOI margin decomposition with Ben on the allocated basis &mdash; name the three biggest cost deltas vs plan behind the &minus;$638,566 margin/cost remainder (&sect;1.2) &mdash; Ben&#39;s July-close line-by-line OpEx rebuild (7/21 H2-reforecast method callout; each 1% on his blunt 1.24&times; factor &asymp; $44K of H2 NI) is this exact workstream.</td><td>Cameron + Ben Young</td><td>Before QGR 7/29</td><td>Remainder sourced to specific cost lines before the QGR narrative hardens</td></tr>
+        <tr><td>2</td><td>NOI margin decomposition with Ben on the allocated basis &mdash; name the three biggest cost deltas vs plan behind the &minus;$544,088 margin/cost remainder (&sect;1.2, corrected basis) &mdash; Ben&#39;s July-close line-by-line OpEx rebuild (7/21 H2-reforecast method callout; each 1% on his blunt 1.24&times; factor &asymp; $44K of H2 NI) is this exact workstream.</td><td>Cameron + Ben Young</td><td>Before QGR 7/29</td><td>Remainder sourced to specific cost lines before the QGR narrative hardens</td></tr>
         <tr><td>3</td><td>North Austin turnaround plan &mdash; revenue &minus;10.90% YoY, largest below-plan revenue variance (&minus;$269,596), GM% (46.99%) below the 10-branch average (~48.1%), mid-BM-transition (Daniel incoming).</td><td>Brian Herzig + Daniel</td><td>QGR 7/29&ndash;30</td><td>Plan on paper at QGR; branch back above plan by Q3 mid-quarter read</td></tr>
       </tbody>
     </table>
@@ -2984,7 +3018,7 @@
         <table>
           <thead><tr><th>File / Feed</th><th>Purpose</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td>branch-metrics-q2-26.json v0.9.5 (manifest)</td><td>Sole numeric source for every rendered figure (cash-story + basis-prose exceptions noted below). v0.9.5 added _web_funnel_q2_26 + _marketing_q2_26 (Section 2, landed 7/23).</td><td>&#9989; json parse clean</td></tr>
+            <tr><td>branch-metrics-q2-26.json v0.9.6 (manifest)</td><td>Sole numeric source for every rendered figure (cash-story + basis-prose exceptions noted below). v0.9.6 added _web_funnel_q2_26 + _marketing_q2_26 (Section 2, landed 7/23).</td><td>&#9989; json parse clean</td></tr>
             <tr><td>Ben Young workbook v4 (Monday asset 3122213413, posted 7/20)</td><td>Sage Intacct P&amp;L &mdash; company monthly + branch revenue/NOI, via intake-validated ben-extract CSVs</td><td>&#9989; May/Jun actuals &middot; Jul flash estimate</td></tr>
             <tr><td>Q2 REFORECAST Fiscal 2026 v4 (04.29.2026).xlsx</td><td>Q2&#39;25 prior-year branch revenue baseline (row 21) + debt-service schedule</td><td>&#9989; closed baseline, penny-tied</td></tr>
             <tr><td>Matisen completed-moves feed (EMMA prod, pulled 7/21 11:38 CDT)</td><td>Moves counts (&sect;1.7) &mdash; definition ruled by Cameron 7/21</td><td>&#9989; intake-validated exit 0 &middot; July component = estimate</td></tr>
@@ -3010,7 +3044,7 @@
 
         <h4>Build Notes</h4>
         <ul>
-          <li>Every number in this presentation traces to <code>q2-data/branch-metrics-q2-26.json</code> v0.9.5, except the cash-story figures (&sect;1.10) and the revenue-reforecast/booked/realized figures (&sect;1.9), which are quoted verbatim from manifest prose (source notes and the <code>booked_vs_realized_basis</code> caveat) rather than standalone numeric fields, and the two "[derived]" implied-target figures in the Executive Summary (NOI margin target, NOI/truck target) which are computed here from two manifest-sourced numbers with the math shown inline.</li>
+          <li>Every number in this presentation traces to <code>q2-data/branch-metrics-q2-26.json</code> v0.9.6, except the cash-story figures (&sect;1.10) and the revenue-reforecast/booked/realized figures (&sect;1.9), which are quoted verbatim from manifest prose (source notes and the <code>booked_vs_realized_basis</code> caveat) rather than standalone numeric fields, and the two "[derived]" implied-target figures in the Executive Summary (NOI margin target, NOI/truck target) which are computed here from two manifest-sourced numbers with the math shown inline.</li>
           <li>Monthly trajectory (&sect;1), branch GM% (&sect;1.3a), branch YoY (&sect;1.3a), and branch revenue plan / attainment (&sect;1.3a Rev Plan + Rev Attain % columns, &sect;1.1 plan-vs-actual decomposition) now render from manifest v0.8.0 (company.monthly_pl, branches[*].gross_margin_pct, branches[*].revenue_yoy_pct, branches[*].revenue_plan). Moves + Rev/Move (&sect;1.3a) and the &sect;1.7 unit-economics section now render from manifest v0.8.0 (branches[*].moves_q2_26, company moves_q2_26 + monthly split &mdash; Matisen 7/21 feed, intake-validated). Company GM% and TUR/NPS (&sect;1.6) remain NOT CALCULABLE per BUILD-RULES.md rule 2 &mdash; no manifest source row exists for them yet.</li>
           <li>No superlative language ("best/worst/highest/lowest ever," etc.) appears anywhere in this presentation beyond the ranked, preliminary "leads/trails this quarter" statements in &sect;1.11, each traced to <code>_rankings_q2_26</code>.</li>
         </ul>
@@ -3036,7 +3070,7 @@
           <li>Regional roll-up NOI ties to the penny ($966,677.42 + $440,857.55 = $1,407,534.97): &#9989; Pass</li>
           <li>Regional revenue ties within the documented $361 May gap: &#9989; Pass (documented, immaterial)</li>
           <li>Branch NOI-to-plan variances sum to the company NOI gap (&minus;$735,984.03): &#9989; Pass ($0.00)</li>
-          <li>NOI waterfall components sum to the exact gap ($97,418.11 + $638,565.92): &#9989; Pass</li>
+          <li>NOI waterfall components sum to the exact gap ($191,895.89 + $544,088.14 = $735,984.03): &#9989; Pass (re-based 7/23, contribution-margin flow-through)</li>
           <li>Branch revenue plan-vs-actual deltas reconcile to the company plan gap after the $361 add-back: &#9989; Pass ($0.00)</li>
           <li>Branch revenue_plan values sum to the company plan $8,803,757.00: &#9989; Pass ($0.00)</li>
           <li>PY branch revenue sums to the company PY total: &#9989; Pass ($0.00, per _audit_log v0.3.0)</li>
@@ -3049,7 +3083,7 @@
     </details>
 
     <p style="text-align:center;color:var(--gray-400);font-size:11px;margin-top:32px;font-style:italic;">
-      rendered from branch-metrics-q2-26.json v0.9.5 &middot; 2026-07-21 (marketing + funnel added 7/23) &middot; template-true rebuild (Q1 skeleton) v2 &middot; July figures preliminary (flash estimate) &middot; charts via locally-vendored Chart.js (print stylesheet hides interactive charts; data preserved in tables)
+      rendered from branch-metrics-q2-26.json v0.9.6 &middot; 2026-07-21 (marketing + funnel added 7/23) &middot; template-true rebuild (Q1 skeleton) v2 &middot; July figures preliminary (flash estimate) &middot; charts via locally-vendored Chart.js (print stylesheet hides interactive charts; data preserved in tables)
     </p>
 
   </main>
@@ -3075,7 +3109,7 @@ Chart.defaults.color = '#1a1a1a';
 Chart.defaults.borderColor = '#dde3e8';
 
 // Chart 1: Monthly NOI Trajectory — Q2 FY26 (May/Jun actuals, July flash estimate)
-// Data: manifest v0.9.5 company.monthly_pl. Monthly NOI targets from Paul's Q2 Reforecast v4 (4/29/26),
+// Data: manifest v0.9.6 company.monthly_pl. Monthly NOI targets from Paul's Q2 Reforecast v4 (4/29/26),
 // per-branch tabs cols BU/BV/BW, basis NetOrdinaryIncome - 88888 (88888-netted, pre-dep); quarter sum ties $2,143,519.
 (function(){
   var ACT = [378352.65, 473697.86, 555484.46];
@@ -3290,7 +3324,7 @@ const yoyData = [
 (function() {
   var STORAGE_KEY = 'q2-findeck-v2-review-notes-v1';
   var DECK_TITLE = "Einstein Q2'26 QGR — Presentation Edition (template-true rebuild)";
-  var FOOTER_STAMP = 'rendered from branch-metrics-q2-26.json v0.9.5 · template-true rebuild (Q1 skeleton) v2 · July figures preliminary (flash estimate)';
+  var FOOTER_STAMP = 'rendered from branch-metrics-q2-26.json v0.9.6 · template-true rebuild (Q1 skeleton) v2 · July figures preliminary (flash estimate)';
   var SECTION_TITLES = {
     'exec-summary': 'Executive Summary',
     'caveats': 'Data Caveats & Legend',
