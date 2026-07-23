@@ -321,6 +321,15 @@ details.overflow-fold{border-top:0;padding-top:0;}
 .wb-dep{font-size:9.5px;font-weight:700;border-radius:3px;padding:1px 5px;background:var(--blue-50);color:var(--blue-700);}
 .wb-dep.feeds{background:#EAF3E8;color:var(--sgreen);}
 .wb-dep.more{background:var(--grey-100);color:var(--grey-500);cursor:help;}
+/* v1.8.2 whiteboard owner sub-headings — the department funnel inside each leader column */
+.wb-owner-hd{display:flex;align-items:center;gap:5px;font-size:9.5px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;color:var(--navy-400);padding:4px 2px 2px;margin-top:2px;
+  border-bottom:1px dashed var(--grey-200);}
+.wb-owner-hd:first-child{margin-top:0;}
+.wb-owner-hd.direct{color:var(--grey-500);padding-left:5px;}
+.wb-owner-n{margin-left:auto;font-weight:500;color:var(--grey-400);text-transform:none;letter-spacing:0;}
+.wb-owner-hd.empty{opacity:.5;}
+.wb-empty{font-size:9.5px;color:var(--grey-400);font-style:italic;padding:1px 2px 3px 7px;}
 .wb-card-meta{max-height:32px;overflow:hidden;}
 .card.flash{box-shadow:0 0 0 3px var(--orange-500) !important;}
 @media (max-width:1100px){ .wb-grid{grid-template-columns:repeat(4,1fr);} }
@@ -406,7 +415,7 @@ details.overflow-fold{border-top:0;padding-top:0;}
    + goals-dashboard/dashboard-data.json (7/17 refresh).
    Green / Super Green text = contract language, transcribed faithfully.
    ============================================================ */
-const VERSION = "QGR Triage Room v1.8.1 · Cameron’s 7/23 verdict on v1.8: TILES RESTORED as the default (he tried the bar reskin and preferred the tiles; bars stay available behind a “Compact bars” toggle, but the room opens on tiles again) · DEPARTMENT FUNNEL KEPT as the default view — the half he explicitly liked: department → each person under it (leader first, then directs) → that person’s goals broken out individually by effective owner, with By-leader-lane one click away · WHITEBOARD TILES SLIMMED (his actual ask): id + ★CRIT sit INLINE with the goal name instead of stacking their own row, and the meta row is omitted when there’s no manager-tier owner and no dependency chips — most cards go three rows → one · v1.8 base: bar rendering, department funnel, per-dept counts, Unmapped catch-all · QGR Triage Room v1.8 · BAR RESKIN + department funnelling (7/23, pre-Paul-walk) — cards render as full-width horizontal BARS (goal name + CRIT badge + live Monday pulse link + current ruling + assigned owner) that expand on click into the full card body; nothing removed, the whole tile interior is just deferred until you open it (Expand all / Collapse all + a Compact-bars off-switch back to the old tiles) · Q3 Triage now defaults to a DEPARTMENT funnel: department → each person under it (leader first, then their directs) → that person's goals broken out individually, grouped by EFFECTIVE owner so a card assigned to Nhel sits under Customer Experience › Nhel rather than buried in Amanda's lane; per-department card/shortlist/CRIT/ruled counts, per-person cap + CRIT badges, overflow collapsed per person, and an Unmapped catch-all so no card can silently vanish · By-leader-lane view kept one click away (carries the add-a-goal row + pool pills) · QGR Triage Room v1.7 · Person/department multi-select filter on Q3 Triage — checkable org-hierarchy tree (department → leader → direct reports, built off the existing OWNERS metadata, zero data duplication) lets Cameron drill into a whole department, one leader, or any combo of people (e.g. Amanda + Nhel) and see just their shortlist + overflow cards, with a live card count; complements (doesn't replace) the existing Group-by-owner toggle · Finance's manager-tier owner label \"Prosper\" renamed to \"Ben\" for the person-facing hierarchy (id unchanged, no state migration needed) · v1.6 base: Cameron's 2nd-pass walk — ✓ Done ruling (5th disposition, alongside ACCEPT/EDIT/KILL/DEFER; marks already-shipped work for sweep to Completed on the Master Backlog, export carries a dedicated pulse-ID list) · owner dropdowns labeled + disambiguated (\"Leader / slate\" = which lane the card sits in, movable only for MB pool cards; \"Assign to (direct)\" = the specific person carrying it, visually secondary/optional) · Group-by-owner toggle on Q3 Triage — clusters each leader's shortlist + overflow by effective owner (Amanda vs Tet vs Nhel vs Carly, etc.) instead of one flat list · v1.5 base: UX pass 7/22 (live walk-through w/ a leader) — semantic dedupe (3 cards merged, 4 flagged ⚠ possible dupe) · ⛙ Consolidate feature (check cards, merge live, export logs the fold) · Flywheel/PACe/priority tiles moved off the card face into a click-to-expand Lens detail · every card's Monday pulse link now renders consistently (NO PULSE badge instead of a dead link) · Q2 Disposition/carryover band removed — carry-over is now just part of triage curation, no separate treatment · v1.4 base: WALK COMPLETE 7/22 — all 15 MB groups walked; remaining 11 groups synced (+28 newly-qualifying QG/SC cards + 5 Kickpoint Q3 goals) · triage bar (SC+QG only) · v1.3 base: clean cards + 33 walk-new candidates + WALK-SYNC 7/22 ~1am (4 groups) · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21";
+const VERSION = "QGR Triage Room v1.8.2 · Two fixes off Cameron’s 7/23 walk-through: ① DEPARTMENT-VIEW TILES NOW FILL THE SCREEN — each person’s cards were being wrapped in their OWN grid container (one .cards div per card), which made every card a single-column grid and stacked them one-per-row down the left edge; leader-lane view was always right because it wraps the whole band once via renderCardBand. Now department view uses ONE grid per band, so tiles flow 3–5 across exactly like lane view (verified: identical grid-template-columns in both views). ② WHITEBOARD GAINS THE SAME DEPARTMENT FUNNEL — each leader column now breaks out by EFFECTIVE owner with sub-headings: the leader’s own cards first, then every one of their directs (Amanda → Nhel → Tet → Carly; Anne → Jalissa; Matisen → Fabian; Paul → Ben), INCLUDING directs currently holding nothing (shown as “nothing assigned” — an empty direct is information, not noise). Columns whose leader has no manager-tier directs stay clean and headerless. The per-card owner chip is dropped when headings are shown (the heading says it) — which also removes the last thing forcing a second row on those tiles. · v1.8 base: bar rendering, department funnel, per-dept counts, Unmapped catch-all · QGR Triage Room v1.8 · BAR RESKIN + department funnelling (7/23, pre-Paul-walk) — cards render as full-width horizontal BARS (goal name + CRIT badge + live Monday pulse link + current ruling + assigned owner) that expand on click into the full card body; nothing removed, the whole tile interior is just deferred until you open it (Expand all / Collapse all + a Compact-bars off-switch back to the old tiles) · Q3 Triage now defaults to a DEPARTMENT funnel: department → each person under it (leader first, then their directs) → that person's goals broken out individually, grouped by EFFECTIVE owner so a card assigned to Nhel sits under Customer Experience › Nhel rather than buried in Amanda's lane; per-department card/shortlist/CRIT/ruled counts, per-person cap + CRIT badges, overflow collapsed per person, and an Unmapped catch-all so no card can silently vanish · By-leader-lane view kept one click away (carries the add-a-goal row + pool pills) · QGR Triage Room v1.7 · Person/department multi-select filter on Q3 Triage — checkable org-hierarchy tree (department → leader → direct reports, built off the existing OWNERS metadata, zero data duplication) lets Cameron drill into a whole department, one leader, or any combo of people (e.g. Amanda + Nhel) and see just their shortlist + overflow cards, with a live card count; complements (doesn't replace) the existing Group-by-owner toggle · Finance's manager-tier owner label \"Prosper\" renamed to \"Ben\" for the person-facing hierarchy (id unchanged, no state migration needed) · v1.6 base: Cameron's 2nd-pass walk — ✓ Done ruling (5th disposition, alongside ACCEPT/EDIT/KILL/DEFER; marks already-shipped work for sweep to Completed on the Master Backlog, export carries a dedicated pulse-ID list) · owner dropdowns labeled + disambiguated (\"Leader / slate\" = which lane the card sits in, movable only for MB pool cards; \"Assign to (direct)\" = the specific person carrying it, visually secondary/optional) · Group-by-owner toggle on Q3 Triage — clusters each leader's shortlist + overflow by effective owner (Amanda vs Tet vs Nhel vs Carly, etc.) instead of one flat list · v1.5 base: UX pass 7/22 (live walk-through w/ a leader) — semantic dedupe (3 cards merged, 4 flagged ⚠ possible dupe) · ⛙ Consolidate feature (check cards, merge live, export logs the fold) · Flywheel/PACe/priority tiles moved off the card face into a click-to-expand Lens detail · every card's Monday pulse link now renders consistently (NO PULSE badge instead of a dead link) · Q2 Disposition/carryover band removed — carry-over is now just part of triage curation, no separate treatment · v1.4 base: WALK COMPLETE 7/22 — all 15 MB groups walked; remaining 11 groups synced (+28 newly-qualifying QG/SC cards + 5 Kickpoint Q3 goals) · triage bar (SC+QG only) · v1.3 base: clean cards + 33 walk-new candidates + WALK-SYNC 7/22 ~1am (4 groups) · seeded 2026-07-19 from rock-candidates-q3-DRAFT-2026-07-18.md + dashboard-data.json (7/17) · design-audit pass 7/21";
 
 const LEADERS = [
   {id:"mike",    name:"Mike Vandenbroader", role:"DFWT RM + Head of Ops", cap:5, hardCap:false, blurb:"Mike is the theme's engine. His Q2 training-app rock went Super Green (3 wks live across DFWT, zero bugs) — Q3 is the company-wide bet."},
@@ -1781,13 +1790,18 @@ function renderPersonBlock(pid, entries, isLeader){
     ${capBadge}${critBadge}
     <span class="band-count">${entries.length} total</span>
   </div>`;
+  // ONE grid container per band, not one per card (v1.8.2 fix — Cameron 7/23: wrapping every card in
+  // its own .cards div made each one a single-column grid, so tiles stacked one-per-row down the left
+  // instead of flowing 4-5 across. The leader-lane view was always right because it calls renderCardBand,
+  // which wraps the whole band once.)
+  const gridCls = "cards" + (state.compactBars ? " barmode" : "");
   h += shortEntries.length
-    ? shortEntries.map(x=>`<div class="cards${state.compactBars?' barmode':''}">${slotCard(x.item, x.lane)}</div>`).join("")
+    ? `<div class="${gridCls}">`+shortEntries.map(x=>slotCard(x.item, x.lane)).join("")+`</div>`
     : `<div class="ctx" style="padding:2px 0 4px;font-size:12px">Nothing on the shortlist.</div>`;
   if(ovfEntries.length){
     h += `<details class="fold" data-fold="dovf-${esc(pid)}" ${foldOpen["dovf-"+pid]===true?"open":""}>
       <summary>Overflow / near-goals <span class="band-count">(${ovfEntries.length})</span> — rulings here count in the export too</summary>
-      <div class="fold-body overflow-band">`+ovfEntries.map(x=>`<div class="cards${state.compactBars?' barmode':''}">${slotCard(x.item, x.lane)}</div>`).join("")+`</div></details>`;
+      <div class="fold-body"><div class="${gridCls} overflow-band">`+ovfEntries.map(x=>slotCard(x.item, x.lane)).join("")+`</div></div></details>`;
   }
   return h;
 }
@@ -1974,7 +1988,36 @@ function renderWhiteboard(){
     const cntOk = n>=7 && n<=8;
     html += `<div class="wb-col"><div class="wb-col-hd"><span class="wb-nm">${esc(l.name.split(" ")[0])}</span><span class="badge ${cntOk?'ok':'warn'}">${n} / 7–8</span></div><div class="wb-rows">`;
     if(!items.length) html += `<div class="ctx" style="padding:6px 2px">Nothing on the shortlist.</div>`;
-    items.forEach(it=>{
+
+    /* ---- v1.8.2: department funnel inside each column (Cameron 7/23) ----
+       Same treatment Q3 Triage got. A column used to be one flat pile under the leader's name even
+       when half the cards actually belong to their directs. Now the column breaks out by EFFECTIVE
+       owner — the leader's own cards first, then each direct (Nhel, Tet, Carly, Fabian, Jalissa, Ben,
+       …) under their own sub-heading — so the whiteboard shows WHO carries what, not just which
+       department it landed in. Sub-headings only appear when a column actually has more than one
+       owner; a single-owner column stays clean and headerless. */
+    const grouped = {};
+    items.forEach(it=>{ const oid = ownerOf(it.id) || "_unassigned"; (grouped[oid] = grouped[oid] || []).push(it); });
+    const mgrIds = OWNERS.filter(o=>o.tier==="mgr" && o.under===l.id).map(o=>o.id);
+    // Show the leader FIRST, then every one of their directs — even the ones currently holding nothing.
+    // That's the point: the whiteboard should show who carries what across the whole department, and an
+    // empty direct is information (nothing delegated to them yet), not noise to hide. Anyone else who
+    // ends up owning a card in this lane gets appended after.
+    const orderPref = [l.id, ...mgrIds];
+    const extras = Object.keys(grouped).filter(k=>orderPref.indexOf(k)===-1).sort();
+    const ownerKeys = [...orderPref, ...extras];
+    const showOwnerHeads = ownerKeys.length > 1;
+
+    ownerKeys.forEach(oid=>{
+    const bucket = grouped[oid] || [];
+    if(showOwnerHeads){
+      const oo = OWNER_INDEX[oid];
+      const oname = oo ? oo.name : (oid==="_unassigned" ? "Unassigned" : oid);
+      const isSelf = oid === l.id;
+      html += `<div class="wb-owner-hd ${isSelf?'self':'direct'} ${bucket.length?'':'empty'}" title="${isSelf?esc(oname)+"'s own cards":esc(oname)+' — direct report'}">${isSelf?'':'↳ '}${esc(oname)}<span class="wb-owner-n">${bucket.length}</span></div>`;
+      if(!bucket.length) html += `<div class="wb-empty">nothing assigned</div>`;
+    }
+    bucket.forEach(it=>{
       const crit = isCrit(it.id);
       const ownerId = ownerOf(it.id);
       const ownerObj = OWNER_INDEX[ownerId];
@@ -1991,12 +2034,16 @@ function renderWhiteboard(){
         + (depAll.length>DEP_CAP ? `<span class="wb-dep more" title="${esc(depAll.slice(DEP_CAP).map(x=>x.label).join(' · '))}">+${depAll.length-DEP_CAP}</span>` : "");
       // v1.8.1 slim tile: id + ★CRIT sit INLINE with the name (one line, not three), and the meta
       // row is omitted entirely when there's no manager-tier owner and no dependency chips.
-      const showMeta = isMgr || !!depMarks;
+      // v1.8.2: when the column already carries owner sub-headings, drop the per-card owner chip —
+      // the heading above it says the same thing, and the chip was the main thing forcing a 2nd row.
+      const showOwnerChip = isMgr && !showOwnerHeads;
+      const showMeta = showOwnerChip || !!depMarks;
       html += `<div class="wb-card ${crit?'crit':''} ${isMgr?'mgr':''}" data-act="wbjump" data-id="${esc(it.id)}" data-leader="${l.id}" title="${crit?'★ Critical Number · ':''}${ownerObj?esc(ownerObj.name)+' · ':''}Click to jump to this card in Q3 Triage">
         <div class="wb-card-name"><span class="wb-id">${esc(it.id)}</span>${crit?'<span class="wb-crit" title="Critical Number">★</span>':''}${esc(it.name)}</div>
-        ${showMeta?`<div class="wb-card-meta">${isMgr&&ownerObj?`<span class="chip mgronly">↳ ${esc(ownerObj.name)}</span>`:''}${depMarks}</div>`:''}
+        ${showMeta?`<div class="wb-card-meta">${showOwnerChip&&ownerObj?`<span class="chip mgronly">↳ ${esc(ownerObj.name)}</span>`:''}${depMarks}</div>`:''}
       </div>`;
-    });
+    });   // bucket.forEach
+    });   // ownerKeys.forEach
     html += `</div></div>`;
   });
   html += `</div>`;
