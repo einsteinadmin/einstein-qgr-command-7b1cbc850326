@@ -258,6 +258,21 @@
   .material-label { font-size: 0.82rem; font-weight: 700; color: var(--navy); }
   .material-sub { font-size: 0.68rem; color: var(--gray); }
 
+  /* Toolkit hide/notes (v3.41) */
+  .tk-tile { position: relative; flex-direction: column; align-items: stretch; padding: 0; }
+  .tk-link { display: flex; align-items: center; gap: 10px; padding: 12px 34px 12px 14px; text-decoration: none; color: var(--ink); border-radius: 10px; }
+  .tk-link:hover { text-decoration: none; }
+  .tk-controls { position: absolute; top: 6px; right: 6px; display: flex; gap: 3px; opacity: 0; transition: opacity .15s; }
+  .tk-tile:hover .tk-controls { opacity: 1; }
+  .tk-btn { border: 1px solid var(--line); background: #fff; border-radius: 6px; font-size: 0.7rem; padding: 2px 6px; cursor: pointer; color: #64748b; }
+  .tk-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .tk-hiddentile { opacity: .55; border-style: dashed; }
+  .tk-note { margin: 0 10px 10px; border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; font: inherit; font-size: 0.72rem; resize: vertical; min-height: 44px; }
+  .tk-notepeek { font-size: 0.66rem; color: #92600a; background: #FEF6EC; border-radius: 5px; padding: 2px 7px; margin-top: 4px; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tk-foot { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+  .tk-pill { border: 1px solid var(--line); background: #fff; border-radius: 999px; font-size: 0.7rem; font-weight: 700; padding: 5px 12px; cursor: pointer; color: #64748b; }
+  .tk-pill:hover { border-color: var(--blue); color: var(--blue); }
+
   /* Agenda */
   .agenda-day { margin-bottom: 18px; }
   .agenda-day-title { font-size: 0.92rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
@@ -743,7 +758,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.41 2026-07-23'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.42 2026-07-23'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1064,6 +1079,7 @@
   // front door. Order = live decision tools first, then inputs, then reference.
   var TOOLKIT_SEED = [
     { icon: '🛠', label: 'QGR Triage Room', sub: 'the workbench — walked-group sync · triage bar (QG + Super Critical only) · per-leader lanes · dependencies', url: 'qgr-triage-room.html' },
+    { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'how every tool connects — data spine → artifacts → people loops; the get-your-head-around-it one-pager', url: 'qgr-ecosystem-map.html' },
     { icon: '🗳', label: 'QGR Workshop Hub (leader link)', sub: 'send THIS to the Roundtable — debate ballot (4 redlined leans) + prep tiles; ballots export-and-return to Cameron, nobody sees anybody else\'s pre-room', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/' },
     { icon: '🪞', label: 'Manager AAR Hub (team link)', sub: 'every BM/Ops/FM does the Roundtable exercise on their own page — send THIS link Monday; answers stay in their browser until export', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/' },
     { icon: '📽', label: 'QGR Live Results (manager AARs)', sub: 'the room view — ships EMPTY, drag the collected aar-*.json files in live · rollup + per-manager detail + arrow-key flow', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html' },
@@ -1088,6 +1104,7 @@
   ];
 
   var MATERIALS_SEED = [
+    { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'the one-pager of how the whole QGR machine fits together', url: 'qgr-ecosystem-map.html' },
     { icon: '🗳', label: 'QGR Workshop Hub (leader-facing)', sub: 'debate ballot + prep tiles — the leader mirror of this HQ (hosted, obscure+noindex)', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/' },
     { icon: '🪞', label: 'AAR Review Room (all 7 full write-ups)', sub: "this repo · Cameron's 7/22 review baked in + Q2 headlines", url: 'aar-review.html' },
     { icon: '📈', label: 'Q2 Financial Analysis Deck (LIVE)', sub: 'local file (sensitive — Cameron gates before wide share)', url: '../QGR Packet/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html' },
@@ -1171,6 +1188,7 @@
     { date: '7/21i', text: 'Q3 ROCK DRAFT STAGED on governance pulse 12556198241: "One Truth — the Einstein Data Bus" (owner Matisen; Aug reconcile/certify → Sep kill parallel pulls per Gerald sequencing → Oct views layer w/ branch scorecards + individual mirror; Green = canonical EMMA+Rippling feeds + 100% tools registered + weekly auto-refresh scorecards). Simplification: EMMA-toolkit prong collapses — Matisen\'s hub IS the front door. Big Rocks review = Cameron cadence, outside the rock. Feeds the Day-2 governance decision brief.' },
     { date: '7/21d', text: 'Anne AAR + eNPS folded in — scorecard complete at 7/7 leaders, company 80.0% (13 SG/19 G/8 R of 40 — badge recomputed from goal rows 7/21; the compile-header 36/42 tally overcounted). Two live flags to Day-2: damages-in-promotion disagreement (Anne read damages-out as settled; Cam+Paul pushed back — unresolved) + branch trial-day early-sunset consistency audit. eNPS theme headline: career ceiling / role clarity → BM/Ops/FM delineation feeds succession rock.' },
     { date: '7/21e', text: 'Packet Data Chase List added (15 feeds w/ source/owner/status, check-off state) — linked from P2 finalize-warehouse + toolkit. 5 landed / 10 open at creation.' },
+    { date: '7/23a·W', text: '🛠 HQ TOOLKIT: HIDE + NOTES (Cameron ask, post-midnight): every toolkit tile now has hover controls — ✕ hides it (collapses to an "N hidden — show" pill, ↩ restore anytime) + 📝 opens a per-tool note; "Copy toolkit notes → Albert" exports hidden-list + all notes as markdown for the paste-back loop. State = qgrhq-q3-2026-v2-toolkit-hidden/-notes (browser-local; hidden means Cameron-curated-away, not deleted — the seed stays intact for reseeding). Plus: 🗺 QGR ECOSYSTEM MAP promoted to the front door + materials shelf and MIRRORED to this repo (qgr-ecosystem-map.html — was local-only; leadership-audience-safe: paths + obscure URLs only, all 4 hosted URLs curl-verified, PA-directs line updated to the in-build ruling). HQ v3.41.' },
     { date: '7/22h·W', text: '🗳 WORKSHOP HUB v1.4 (Cameron\'s dinner directives; leaders get the link Day 4): ① LEANS HIDDEN BY DEFAULT — every lean now sits behind a "🔒 Show how leadership is currently leaning" think-first reveal (Cameron: "I don\'t want them to think about it without seeing that first" inverted to think-first-then-peek). ② +2 BALLOT QUESTIONS (slate now 6): conversion-rate-$ standard (options Raise/Hold-40%/Reshape/Undecided) + COS-system→BMs (Pilot-now/After-Q3/Not-yet/Undecided) — both deliberately NO-LEAN ("leadership hasn\'t written a lean here yet — bring your own number"); Cameron redlines leans onto them at the cut-list pass if wanted. ③ GOAL PRE-WORK SCAFFOLD (his primary ask): theme-direction banner (speed-to-competence for everyone, "Back to School" working name, locks-or-gets-beaten in the room) + what-would-you-own + 3 draft-goal slots w/ working Green/SuperGreen definitions; don\'t-over-invest framing kept. ④ ACTION ITEMS TILE → REAL per-leader data-collection checklists (DRAFT badge — Cameron confirms; seeded from the chase list + thread asks: Paul breakeven/Sage/row-6 · Matisen DreamTeam/games/row-6 · Mike Dallas-14 + Samsara✓landed · Amanda CX-data confirm · Anne org-chart reconcile · _all: /status refresh + praise close-out). Export schema → einstein-qgr-ballot/v3 (adds actionItems + prework; v1/v2 exports still parse). v1.4 curl-verified live. NOTE for the planning session: Mike\'s Samsara dismissal CSVs are in ~/Downloads (dismissal_rate/_types_by_branch_May1-Jul17), read + sanity-checked (company 20.7% — Mike\'s prose said 20.38%, CSV governs; Leander 42.1% outlier; 35 untagged events) — fold is packet-lane work, not hub-lane.' },
     { date: '7/22g', text: '🗳 WORKSHOP HUB v1.3 (Cameron\'s 4 asks) + QG TRACKER Q2 UPDATE: ① CHOICES self-eval BUILT INTO the hub (leaders don\'t live in the Manager AAR tool — decision: build in, not link out; same 1–5 anchors + note gate, rides in the export). ② Celebrations & prizes section (theme celebration/prize ideas, exported — "celebration engine, not just a scoreboard"). ③ People Analyzer–for-directs tile stubbed COMING (recommended shape: sibling leader tool, private-until-export → Cameron aggregates a gut-check view; where-it-lives decision open). ④ QG tile → QG Success Tracker (background agent added Q2 2026 rows to the canonical tracker — per-leader SG/G/R from the AAR JSON, sums verified 13/19/8=80.0%, PROJ pending Day-1 sync; Quarterly Focus refreshed to Q2). ⚠ PRIVACY CATCH: agent\'s scan flagged the staged disputes (Anne G→R · Matisen R→G) + Paul/Anne Mover-Comp three-way read as pre-room leaks → hosted copy SANITIZED (dispute names + three-way stripped, generic "grade-sync items staged" kept; canonical keeps full candor; resanitize on every redeploy — mgr-aar pattern). Tracker now served from this repo (einstein-qg-tracker.html). ⑤ Financial tile = FIN_PACKET_URL plumbing — one-line swap when Cameron\'s Cloudflare gate goes up (Q1 pattern). Export schema → einstein-qgr-ballot/v2 (ballot + choices + celebrations). Hub v1.3 + HQ v3.38 deployed; ballot JSON schema aggregator note: v1 exports (ballot-only) still valid.' },
     { date: '7/22f', text: '🗳 WORKSHOP HUB REDLINED + HOSTED (Cameron\'s go): leans folded from his voice-note redline — ① damages now presented as a GENUINE LEADERSHIP SPLIT (Anne: remove from promotions/bonus entirely · Cameron+Paul: quarterly-level individual/crew trends are a real signal for both — the debate asks bonus? individual tracking? right form?) ② Q3 theme broadened to speed-to-competence FOR EVERYONE (movers+managers+CX; ongoing training/training days/certifications; every leader owns a piece — training app, Brian\'s Scrum cert, call grading all feed it; debate adds "what would YOU own?") ③ sales comp reframed around the real problem (managers have nothing directly driving sales) w/ alternatives on the ballot — flex days conditioned on sales attainment may make a pay component unnecessary. Seed md synced. DEPLOYED: einstein-qgr-workshop-e84484dcfd5b (obscure+noindex, registry row added, v1.2 curl-verified live). Self-Eval tile now links the HOSTED Manager AAR hub (was "Cameron sends the link" — registry cross-check caught it). HQ front door + materials shelf carry the leader link; HQ v3.37.' },
@@ -2027,7 +2045,90 @@
     });
   }
 
-  function renderToolkit() { renderTileGrid('toolkitGrid', TOOLKIT_SEED); }
+  // Toolkit with per-tile hide (x) + notes that export back to Albert (Cameron ask 7/22 late)
+  var TK_LS = { hidden: LS_PREFIX + 'toolkit-hidden', notes: LS_PREFIX + 'toolkit-notes' };
+  function tkGet(k){ try { return JSON.parse(localStorage.getItem(k)) || {}; } catch (e) { return {}; } }
+  function tkSet(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+  var tkShowHidden = false;
+  var tkOpenNotes = {};
+  function renderToolkit() {
+    var wrap = document.getElementById('toolkitGrid');
+    if (!wrap) return;
+    var hidden = tkGet(TK_LS.hidden), notes = tkGet(TK_LS.notes);
+    wrap.innerHTML = '';
+    var hiddenCount = 0;
+    TOOLKIT_SEED.forEach(function (m) {
+      var isHidden = !!hidden[m.label];
+      if (isHidden) { hiddenCount++; if (!tkShowHidden) return; }
+      var tile = document.createElement('div');
+      tile.className = 'material-tile tk-tile' + (isHidden ? ' tk-hiddentile' : '');
+      tile.innerHTML =
+        '<a class="tk-link" href="' + m.url + '" target="_blank" rel="noopener noreferrer">' +
+          '<div class="material-icon">' + m.icon + '</div>' +
+          '<div><div class="material-label">' + esc(m.label) + '</div>' +
+          '<div class="material-sub">' + esc(m.sub) + '</div>' +
+          (notes[m.label] && !tkOpenNotes[m.label] ? '<div class="tk-notepeek">\ud83d\udcdd ' + esc(notes[m.label]) + '</div>' : '') +
+          '</div></a>' +
+        '<div class="tk-controls">' +
+          (isHidden
+            ? '<button class="tk-btn" data-tkrestore="' + esc(m.label) + '" title="Restore to toolkit">\u21a9 restore</button>'
+            : '<button class="tk-btn" data-tknote="' + esc(m.label) + '" title="Add a note (exports back to Albert)">\ud83d\udcdd</button>' +
+              '<button class="tk-btn" data-tkhide="' + esc(m.label) + '" title="Hide from toolkit (restore anytime)">\u2715</button>') +
+        '</div>' +
+        (tkOpenNotes[m.label] ? '<textarea class="tk-note" data-tknotefield="' + esc(m.label) + '" placeholder="Note for Albert \u2014 why hidden, what to change, what to add\u2026">' + esc(notes[m.label] || '') + '</textarea>' : '');
+      wrap.appendChild(tile);
+    });
+    var foot = document.createElement('div');
+    foot.className = 'tk-foot';
+    foot.innerHTML =
+      (hiddenCount ? '<button class="tk-pill" id="tkToggleHidden">' + (tkShowHidden ? 'Collapse hidden (' + hiddenCount + ')' : hiddenCount + ' hidden \u2014 show') + '</button>' : '') +
+      '<button class="tk-pill" id="tkExportNotes">Copy toolkit notes \u2192 Albert</button>';
+    wrap.appendChild(foot);
+
+    wrap.querySelectorAll('[data-tkhide]').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var h = tkGet(TK_LS.hidden); h[b.dataset.tkhide] = true; tkSet(TK_LS.hidden, h);
+        renderToolkit();
+      });
+    });
+    wrap.querySelectorAll('[data-tkrestore]').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var h = tkGet(TK_LS.hidden); delete h[b.dataset.tkrestore]; tkSet(TK_LS.hidden, h);
+        renderToolkit();
+      });
+    });
+    wrap.querySelectorAll('[data-tknote]').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        tkOpenNotes[b.dataset.tknote] = !tkOpenNotes[b.dataset.tknote];
+        renderToolkit();
+        var ta = wrap.querySelector('[data-tknotefield="' + b.dataset.tknote.replace(/"/g, '\\"') + '"]');
+        if (ta) ta.focus();
+      });
+    });
+    wrap.querySelectorAll('[data-tknotefield]').forEach(function (ta) {
+      ta.addEventListener('input', function () {
+        var n = tkGet(TK_LS.notes);
+        if (ta.value.trim()) n[ta.dataset.tknotefield] = ta.value; else delete n[ta.dataset.tknotefield];
+        tkSet(TK_LS.notes, n);
+      });
+      ta.addEventListener('click', function (e) { e.stopPropagation(); });
+    });
+    var tog = document.getElementById('tkToggleHidden');
+    if (tog) tog.addEventListener('click', function () { tkShowHidden = !tkShowHidden; renderToolkit(); });
+    var exp = document.getElementById('tkExportNotes');
+    if (exp) exp.addEventListener('click', function () {
+      var h = tkGet(TK_LS.hidden), n = tkGet(TK_LS.notes);
+      var md = '# Toolkit notes \u2014 Cameron \u2192 Albert \u2014 ' + new Date().toISOString().slice(0, 10) + '\n\n';
+      md += '## Hidden tools\n' + (Object.keys(h).length ? Object.keys(h).map(function (k) { return '- ' + k; }).join('\n') : '- (none)') + '\n\n';
+      md += '## Notes\n' + (Object.keys(n).length ? Object.keys(n).map(function (k) { return '- **' + k + '**: ' + n[k]; }).join('\n') : '- (none)') + '\n';
+      var doneLabel = function () { exp.textContent = 'Copied \u2713'; setTimeout(function () { exp.textContent = 'Copy toolkit notes \u2192 Albert'; }, 1800); };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(md).then(doneLabel); }
+      else { var ta = document.createElement('textarea'); ta.value = md; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); doneLabel(); } catch (e) {} document.body.removeChild(ta); }
+    });
+  }
 
   function renderMaterials() {
     var wrap = document.getElementById('materialsGrid');
