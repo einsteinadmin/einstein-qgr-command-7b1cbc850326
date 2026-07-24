@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Einstein Moving — Q2 2026: How We Did</title>
+<style>
+  /* ══ Local fonts — bundled from the Einstein Brand Kit, same block as the packet/scorecards ══ */
+  @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/Roboto-400.woff2') format('woff2'); }
+  @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/Roboto-500.woff2') format('woff2'); }
+  @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/Roboto-700.woff2') format('woff2'); }
+  @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 900; font-display: swap; src: url('assets/fonts/Roboto-900.woff2') format('woff2'); }
+  :root {
+    /* ══ Einstein Brand Kit tokens — same block as the packet/deck/scorecards ══ */
+    --ein-orange-50:  #FEF6EC;
+    --ein-orange-100: #FDE3C2;
+    --ein-orange-500: #EF8B22;
+    --ein-orange-700: #D96B10;
+    --ein-orange-900: #CC5500;
+    --ein-navy-50:  #EEF1F4;
+    --ein-navy-100: #CDD5DA;
+    --ein-navy-400: #507080;
+    --ein-navy-500: #27343D;
+    --ein-navy-700: #1A2329;
+    --ein-blue-50:  #EBF4FB;
+    --ein-blue-500: #0979C3;
+    --ein-blue-700: #065E9A;
+    --ein-grey-50:  #F4F5F5;
+    --ein-grey-500: #53575A;
+    --ein-grey-700: #363839;
+    --ein-grey-900: #191A1B;
+    --navy: var(--ein-navy-500);
+    --navy-light: #3B4A55;
+    --navy-2: #46586B;
+    --orange: var(--ein-orange-500);
+    --orange-dark: #B85C00;
+    --orange-bg: var(--ein-orange-50);
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+    --red: #CC0100;
+    --red-light: #ffebee;
+    --amber: #ef6c00;
+    --amber-bg: #fff3e0;
+    --blue: var(--ein-blue-500);
+    --blue-bg: var(--ein-blue-50);
+    --gray-50: #F6F6F6;
+    --gray-100: #f0f2f5;
+    --gray-200: #dde3e8;
+    --gray-300: #c8d0d8;
+    --gray-400: #b0bec5;
+    --gray-600: var(--ein-grey-500);
+    --gray-700: var(--ein-grey-700);
+    --gray-800: var(--ein-grey-900);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    margin: 0; padding: 0;
+    color: var(--gray-800);
+    background: var(--gray-50);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 20px 16px 80px; }
+  @media (min-width: 640px) { .wrap { padding: 32px 24px 90px; } }
+
+  /* Header */
+  .page-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 26px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 18px rgba(39,52,61,0.15);
+  }
+  .page-eyebrow {
+    color: var(--orange);
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+  }
+  .page-header h1 {
+    font-size: 24px;
+    font-weight: 900;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+  }
+  @media (min-width: 640px) { .page-header h1 { font-size: 28px; } }
+  .page-header .estimate-note {
+    color: rgba(255,255,255,0.9);
+    font-size: 13.5px;
+    margin: 0;
+    background: rgba(255,255,255,0.1);
+    border-left: 3px solid var(--orange);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    display: inline-block;
+  }
+
+  h2.section-title {
+    color: var(--navy);
+    font-size: 18px;
+    font-weight: 800;
+    margin: 30px 0 4px 0;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--navy);
+  }
+  h2.section-title .sec-eyebrow {
+    display: block;
+    color: var(--orange-dark);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  p { margin: 6px 0 10px 0; }
+  ul { margin: 6px 0 10px 0; padding-left: 20px; }
+  li { margin: 4px 0; }
+  strong { color: var(--gray-800); font-weight: 700; }
+
+  /* Card = one component */
+  .card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-top: 5px solid var(--navy);
+    border-radius: 10px;
+    padding: 20px 20px 18px;
+    margin: 16px 0;
+    box-shadow: 0 2px 8px rgba(39,52,61,0.05);
+  }
+  .card.hero-card-flavor { border-top-color: var(--orange); }
+  .card.green { border-top-color: var(--green); }
+  .card.amber { border-top-color: var(--amber); }
+  .card.placeholder { border-top-color: var(--gray-400); background: var(--gray-50); }
+  .card h3.card-title {
+    color: var(--navy);
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 2px 0;
+    line-height: 1.25;
+  }
+  .card .card-num {
+    color: var(--orange-dark);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+
+  /* What / So What / Now What blocks */
+  .wsw {
+    margin: 12px 0;
+    padding: 12px 14px;
+    border-radius: 6px;
+    background: var(--gray-50);
+    border-left: 4px solid var(--orange);
+  }
+  .wsw.sowhat { border-left-color: var(--blue); }
+  .wsw.nowwhat { border-left-color: var(--green); }
+  .wsw .wsw-label {
+    display: block;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+    color: var(--orange-dark);
+    margin-bottom: 4px;
+  }
+  .wsw.sowhat .wsw-label { color: var(--blue-700, var(--blue)); }
+  .wsw.nowwhat .wsw-label { color: var(--green); }
+  .wsw p:last-child { margin-bottom: 0; }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 11px;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .badge.green { background: var(--green-light); color: var(--green); }
+  .badge.red { background: var(--red-light); color: var(--red); }
+  .badge.amber { background: var(--amber-bg); color: var(--amber); }
+  .badge.gray { background: var(--gray-100); color: var(--gray-600); }
+  .badge.navy { background: var(--navy); color: white; }
+
+  /* Mini stats */
+  .mini-stat-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 8px;
+    margin: 10px 0;
+  }
+  @media (min-width: 520px) { .mini-stat-row.three { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+  .mini-stat {
+    background: var(--gray-50);
+    padding: 10px 12px;
+    border-radius: 6px;
+    border-left: 3px solid var(--orange);
+    min-width: 0;
+  }
+  .mini-stat.green { border-left-color: var(--green); }
+  .mini-stat.red { border-left-color: var(--red); }
+  .mini-stat.amber { border-left-color: var(--amber); }
+  .mini-stat .ms-label {
+    color: var(--gray-600);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .mini-stat .ms-value {
+    color: var(--navy);
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-top: 3px;
+  }
+  .mini-stat .ms-sub {
+    color: var(--gray-600);
+    font-size: 11px;
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+
+  /* Bar chart (revenue YoY, no $ axis) */
+
+  .yoy-bars { margin: 12px 0; }
+  .yoy-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; font-size: 12.5px; }
+  .yoy-branch { width: 96px; flex-shrink: 0; text-align: right; color: var(--gray-800); }
+  .yoy-track { flex: 1; background: var(--gray-100); border-radius: 3px; height: 16px; position: relative; overflow: visible; }
+  .yoy-fill { height: 100%; border-radius: 3px; background: var(--green); }
+  .yoy-fill.neg { background: var(--red); }
+  .yoy-pct { width: 58px; flex-shrink: 0; font-weight: 700; font-size: 12px; }
+  .yoy-pct.pos { color: var(--green); }
+  .yoy-pct.neg { color: var(--red); }
+
+  /* Dream Team badge */
+  .dt-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--orange-bg); border: 1px solid var(--ein-orange-100);
+    border-radius: 18px; color: var(--navy); font-weight: 700;
+    padding: 4px 9px 4px 7px; font-size: 11px; margin: 2px 3px 2px 0;
+  }
+  .dt-badge svg { fill: var(--orange); flex-shrink: 0; width: 12px; height: 12px; }
+
+  /* FAQ / collapsible */
+  .faq-group-title {
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 18px 0 6px 0;
+  }
+  .faq-group-title:first-child { margin-top: 4px; }
+  details.faq-item {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    margin: 6px 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  details.faq-item summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 13.5px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary::after {
+    content: '+';
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--orange);
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  details.faq-item[open] summary::after { content: '−'; }
+  details.faq-item .faq-answer {
+    padding: 0 16px 14px;
+    font-size: 13.5px;
+    color: var(--gray-700);
+    line-height: 1.55;
+  }
+  details.faq-item summary:hover { background: var(--gray-50); }
+
+  /* Scorecard link grid */
+  .scorecard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 14px 0 6px 0;
+  }
+  .scorecard-tile {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-top: 4px solid var(--green);
+    border-radius: 8px;
+    padding: 13px 14px;
+    text-decoration: none;
+    color: var(--gray-800);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .scorecard-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(39,52,61,0.12); }
+  .scorecard-tile-eyebrow {
+    color: var(--orange);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .scorecard-tile-name { color: var(--navy); font-size: 14.5px; font-weight: 700; margin: 0; line-height: 1.2; }
+  .scorecard-tile-go { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--gray-200); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--green); }
+
+  /* Q3 placeholder */
+  .placeholder-box {
+    text-align: center;
+    padding: 22px 16px;
+    color: var(--gray-600);
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  hr.divider { border: none; border-top: 1px solid var(--gray-200); margin: 26px 0; }
+
+  footer.page-footer {
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-200);
+    color: var(--gray-600);
+    font-size: 11.5px;
+    text-align: center;
+  }
+
+  @media print {
+    body { background: white; }
+    .card { box-shadow: none; }
+  }
+</style>
+
+<style>
+  /* ══ Mode bar (Read / Present / Edit) — additive chrome, v1.
+     Mode itself is never persisted (always loads in Read); only notes (flp-q2-notes)
+     and edits (flp-q2-edits) survive a refresh, mirroring the deck's review-note pattern. ══ */
+  body { padding-top: 52px; }
+  @media (max-width: 640px) { body { padding-top: 84px; } }
+  .mode-bar {
+    position: sticky; top: 0; z-index: 300;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: 0 2px 8px rgba(39,52,61,0.06);
+    backdrop-filter: saturate(160%) blur(4px);
+  }
+  .mode-bar-inner {
+    max-width: 880px; margin: 0 auto;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 8px 16px;
+  }
+  .mode-draft-chip {
+    background: #fff7e6; border: 1.5px dashed #cc7700; color: #8a5200;
+    font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px;
+    padding: 3px 8px; border-radius: 10px; flex-shrink: 0;
+  }
+  .mode-btns { display: inline-flex; gap: 4px; background: var(--gray-100); border-radius: 20px; padding: 3px; }
+  .mode-btn {
+    border: none; background: transparent; color: var(--gray-700);
+    font-family: 'Roboto', Arial, sans-serif; font-size: 12.5px; font-weight: 700;
+    padding: 6px 13px; border-radius: 16px; cursor: pointer; white-space: nowrap;
+  }
+  .mode-btn:hover { color: var(--navy); }
+  .mode-btn.active { background: var(--navy); color: white; }
+  .mode-btn:focus-visible { outline: 2px solid var(--orange); outline-offset: 1px; }
+  .mode-export-btn, .mode-copy-btn {
+    margin-left: auto;
+    background: var(--orange); color: white; border: none; border-radius: 14px;
+    padding: 7px 13px; font-size: 11.5px; font-weight: 700; cursor: pointer;
+    font-family: 'Roboto', Arial, sans-serif; white-space: nowrap;
+  }
+  .mode-export-btn:hover, .mode-export-btn:focus-visible { background: var(--orange-dark); outline: none; }
+  .mode-copy-btn { margin-left: 0; background: white; color: var(--gray-700); border: 1px solid var(--gray-300); }
+  .mode-copy-btn:hover { border-color: var(--orange); color: var(--orange-dark); }
+  .mode-reset-btn {
+    background: transparent; color: var(--red); border: 1px dashed var(--red);
+    border-radius: 12px; padding: 5px 10px; font-size: 11px; font-weight: 700;
+    cursor: pointer; font-family: 'Roboto', Arial, sans-serif; white-space: nowrap;
+  }
+  .mode-reset-btn:hover { background: var(--red-light); }
+  @media (max-width: 640px) {
+    .mode-bar-inner { padding: 8px 10px; }
+    .mode-export-btn, .mode-copy-btn { font-size: 11px; padding: 7px 10px; }
+    .mode-btn { padding: 6px 10px; font-size: 11.5px; }
+  }
+  @media print { .mode-bar { display: none !important; } }
+  body.mode-present .mode-bar { background: rgba(255,255,255,0.9); }
+
+  /* ══ Edit mode — contenteditable affordance ══ */
+  body.mode-edit [contenteditable="true"] {
+    outline: 1.5px dashed var(--orange-dark);
+    outline-offset: 2px;
+    background: #fffceb;
+    border-radius: 3px;
+    cursor: text;
+  }
+  body.mode-edit [contenteditable="true"]:hover { background: #fff6d6; }
+  body.mode-edit [contenteditable="true"]:focus { outline: 2px solid var(--orange); background: #fff6d6; }
+  @media print { body.mode-edit [contenteditable="true"] { outline: none; background: transparent; } }
+
+  /* ══ Review notes (mirrors the financial-deck review-note pattern) — Cameron's live
+     walkthrough notes. Never part of the page copy: dashed borders, muted tones, hidden
+     in print and in Present mode. Autosaves to localStorage 'flp-q2-notes'. ══ */
+  .review-note { margin: 14px 0 4px 0; }
+  .review-note-toggle {
+    background: transparent;
+    border: 1px dashed var(--gray-400);
+    color: var(--gray-600);
+    font-size: 11px;
+    padding: 4px 11px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
+  .review-note-toggle:hover, .review-note-toggle:focus-visible { border-color: var(--orange); color: var(--orange-dark); outline: none; }
+  .review-note-toggle.has-note::after { content: '\2022'; color: var(--orange); margin-left: 6px; font-weight: 900; }
+  .review-note-body {
+    margin-top: 6px; border: 1px dashed var(--gray-400); border-radius: 4px;
+    padding: 10px 12px; background: var(--gray-50);
+  }
+  .review-note-microlabel { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--gray-600); font-weight: 700; margin-bottom: 6px; }
+  .review-note-textarea {
+    width: 100%; min-height: 60px; border: 1px solid var(--gray-300); border-radius: 4px;
+    padding: 8px 10px; font-family: 'Roboto', Arial, sans-serif; font-size: 12.5px;
+    resize: vertical; box-sizing: border-box; color: var(--gray-800); background: white;
+  }
+  .review-note-textarea:focus-visible { outline: 2px solid var(--orange); outline-offset: 1px; }
+  @media print { .review-note { display: none !important; } }
+  body.mode-present .review-note { display: none !important; }
+
+  /* ══ Present mode — one card at a time, big type, TV/huddle friendly ══ */
+  body.mode-present .page-header,
+  body.mode-present .wrap > hr.divider,
+  body.mode-present footer.page-footer { display: none !important; }
+  body.mode-present .wrap { max-width: 100%; padding: 0; }
+  .slide-el { display: block; }
+  body.mode-present .slide-el { display: none; }
+  body.mode-present .slide-el.present-current {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; min-height: calc(100vh - 110px);
+    padding: 32px 24px 120px; margin: 0; max-width: 900px; margin-left: auto; margin-right: auto;
+    box-shadow: none; border-top-width: 5px;
+  }
+  body.mode-present .slide-el.present-current .card-num { font-size: 1.1em; }
+  body.mode-present .slide-el.present-current .card-title,
+  body.mode-present .slide-el.present-current h2.section-title {
+    font-size: 2.5em; border-bottom: none; padding-bottom: 0; margin-top: 0;
+  }
+  /* .sec-eyebrow is nested INSIDE h2.section-title — a relative em here would compound
+     against the 2.5em title above, so it's pinned to an absolute size instead. */
+  body.mode-present .slide-el.present-current h2.section-title .sec-eyebrow { font-size: 13px; }
+  body.mode-present .slide-el.present-current .mini-stat-row { width: 100%; gap: 16px; }
+  body.mode-present .slide-el.present-current .mini-stat { padding: 18px 16px; text-align: center; }
+  body.mode-present .slide-el.present-current .mini-stat .ms-label { font-size: 1.2em; }
+  body.mode-present .slide-el.present-current .mini-stat .ms-value { font-size: 2.5em; }
+  body.mode-present .slide-el.present-current .mini-stat .ms-sub { font-size: 1.1em; }
+  body.mode-present .slide-el.present-current .wsw:not(.sowhat):not(.nowwhat) { text-align: left; }
+  body.mode-present .slide-el.present-current .wsw:not(.sowhat):not(.nowwhat) p { font-size: 1.55em; line-height: 1.5; }
+  body.mode-present .slide-el.present-current .wsw:not(.sowhat):not(.nowwhat) .wsw-label { font-size: 1.05em; }
+  /* So What / Now What tucked behind a talking-points expander — dimmer, presenter-note styled */
+  body.mode-present .slide-el.present-current .wsw.sowhat,
+  body.mode-present .slide-el.present-current .wsw.nowwhat { display: none; }
+  body.mode-present .slide-el.present-current.talkpoints-open .wsw.sowhat,
+  body.mode-present .slide-el.present-current.talkpoints-open .wsw.nowwhat {
+    display: block; text-align: left; opacity: 0.68; font-size: 0.62em; max-width: 720px; margin: 10px auto 0;
+  }
+  .present-talk-toggle { display: none; }
+  body.mode-present .slide-el.present-current .present-talk-toggle {
+    display: inline-block; margin: 14px auto 0; background: transparent;
+    border: 1px dashed var(--gray-400); color: var(--gray-600);
+    font-size: 0.62em; padding: 6px 16px; border-radius: 14px; cursor: pointer;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
+  body.mode-present .slide-el.present-current .present-talk-toggle:hover { border-color: var(--orange); color: var(--orange-dark); }
+  /* FAQ + scorecard slides: condensed present-mode view */
+  .present-faq-summary { display: none; }
+  body.mode-present #faq-section.present-current .faq-real { display: none; }
+  body.mode-present #faq-section.present-current .present-faq-summary { display: block; }
+  .present-faq-summary-title { font-size: 1.7em; font-weight: 800; color: var(--navy); margin: 6px 0; }
+  .present-faq-summary-count { font-size: 1.15em; color: var(--gray-600); }
+  body.mode-present #scorecard-section.present-current .sc-intro { display: none; }
+  body.mode-present #scorecard-section.present-current .scorecard-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); max-width: 820px; margin: 18px auto 0;
+  }
+  body.mode-present #scorecard-section.present-current .scorecard-tile { padding: 20px 18px; }
+  body.mode-present #scorecard-section.present-current .scorecard-tile-name { font-size: 1.3em; }
+  @media (max-width: 480px) {
+    body.mode-present #scorecard-section.present-current .scorecard-grid { grid-template-columns: 1fr 1fr; gap: 8px; max-width: 100%; }
+    body.mode-present #scorecard-section.present-current .scorecard-tile { padding: 14px 12px; }
+    body.mode-present #scorecard-section.present-current .scorecard-tile-name { font-size: 1.05em; }
+  }
+
+  /* Present nav bar (prev/next/counter) — fixed bottom, big tap targets for TV + phone */
+  .present-nav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 310;
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    background: rgba(255,255,255,0.96); border-top: 1px solid var(--gray-200);
+    padding: 12px 16px; box-shadow: 0 -2px 10px rgba(39,52,61,0.08);
+  }
+  .present-nav[hidden] { display: none !important; }
+  .present-nav-btn {
+    background: var(--navy); color: white; border: none; border-radius: 50%;
+    width: 52px; height: 52px; font-size: 22px; cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .present-nav-btn:hover { background: var(--orange-dark); }
+  .present-nav-btn:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  .present-counter { font-size: 14px; font-weight: 700; color: var(--navy); min-width: 64px; text-align: center; }
+  @media print { .present-nav { display: none !important; } }
+
+  /* ══ Notes/export toast ══ */
+  .flp-toast {
+    position: fixed; left: 16px; bottom: 18px; z-index: 999;
+    background: var(--ein-navy-700); color: white; font-size: 12px;
+    padding: 8px 14px; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    max-width: 320px; line-height: 1.4;
+  }
+  body.mode-present .flp-toast { display: none !important; }
+  @media print { .flp-toast { display: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="mode-bar" id="modeBar">
+  <div class="mode-bar-inner">
+    <span class="mode-draft-chip">🚧 DRAFT</span>
+    <div class="mode-btns" role="group" aria-label="View mode">
+      <button type="button" class="mode-btn" data-mode="read">📖 Read</button>
+      <button type="button" class="mode-btn" data-mode="present">🖥 Present</button>
+      <button type="button" class="mode-btn" data-mode="edit">✏️ Edit</button>
+    </div>
+    <button type="button" class="mode-reset-btn" id="flpResetEditsBtn" hidden>Reset edits</button>
+    <button type="button" class="mode-copy-btn" id="flpCopyBtn">Copy to clipboard</button>
+    <button type="button" class="mode-export-btn" id="flpExportBtn">📝 Export notes &amp; edits</button>
+  </div>
+</div>
+
+<div class="present-nav" id="presentNav" hidden>
+  <button type="button" class="present-nav-btn" id="presentPrev" aria-label="Previous card">&#8592;</button>
+  <span class="present-counter" id="presentCounter">1 / 1</span>
+  <button type="button" class="present-nav-btn" id="presentNext" aria-label="Next card">&#8594;</button>
+</div>
+
+<div class="flp-toast" id="flpToast" hidden></div>
+
+<div class="wrap">
+
+  <header class="page-header">
+    <p class="page-eyebrow">Einstein Moving Company</p>
+    <h1>Q2 2026: How We Did</h1>
+    <p class="estimate-note">July numbers are estimates until books close ~Aug 1.</p>
+    <p class="estimate-note" style="background:#fff7e6;border:1.5px dashed #cc7700;color:#8a5200;font-weight:700;padding:8px 14px;border-radius:8px;display:inline-block;">DRAFT — internal only. Do not share: pending Cameron's final review + the QGR rulings (Q3 theme, survey treatment). Numbers re-sync to the final deck before send.</p>
+  </header>
+
+  <!-- ══════════════════ MAIN FINANCIAL STORY (spec §3, verbatim) ══════════════════ -->
+  <!-- ══════════════════ WHO WE ARE (vision summary grounding — Cameron 7/23) ══════════════════ -->
+  <section class="card slide-el" id="who-we-are">
+    <p class="card-num">Before the Numbers</p>
+    <h3 class="card-title" data-eid="who-title">Who We Are &amp; Why We Do This</h3>
+    <div class="wsw">
+      <span class="wsw-label">Our purpose</span>
+      <p data-eid="who-purpose-1"><strong>Making moving easy and fun</strong> — because it usually sucks — by creating a customer service experience so remarkable it gets studied in college courses and analyzed in books.</p>
+    </div>
+    <div class="mini-stat-row">
+      <div class="mini-stat green"><div class="ms-label">Promise 1</div><div class="ms-value" style="font-size:1.05em;">Easy</div><div class="ms-sub" data-eid="who-bp-1">Moving made simple, start to finish</div></div>
+      <div class="mini-stat green"><div class="ms-label">Promise 2</div><div class="ms-value" style="font-size:1.05em;">Happy customers for life</div><div class="ms-sub" data-eid="who-bp-2">Reviews &amp; referrals prove it</div></div>
+      <div class="mini-stat green"><div class="ms-label">Promise 3</div><div class="ms-value" style="font-size:1.05em;">Do what we promise</div><div class="ms-sub" data-eid="who-bp-3">On time, no surprises</div></div>
+      <div class="mini-stat green"><div class="ms-label">Promise 4</div><div class="ms-value" style="font-size:1.05em;">Care for your stuff like it&#39;s our own</div><div class="ms-sub" data-eid="who-bp-4">Every box, every home</div></div>
+    </div>
+    <div class="wsw sowhat">
+      <span class="wsw-label">Where we&#39;re headed</span>
+      <p data-eid="who-bhag-1">The big goal: <strong>300 trucks on the road by 2033</strong>. Every quarter below is a step toward it — and how we get there is our CHOICES values, the same ones we hire, praise, and promote on. This quarter&#39;s story starts on the next card.</p>
+    </div>
+  </section>
+
+  <section class="card hero-card-flavor slide-el" id="financial-story">
+    <p class="card-num">How the Company Did</p>
+    <h3 class="card-title" data-eid="fs-title">Q2 in Plain English</h3>
+
+    <div class="wsw">
+      <span class="wsw-label">What — Record revenue, profit behind plan</span>
+      <p data-eid="fs-what-1">We did <strong>$8.4M in revenue — up almost 10% over last year, the biggest quarter in company history.</strong> And we didn't just ride a good market: the moving markets around us grew about 2–5% — <strong>we grew at roughly 3× the market's pace</strong>. We hit ~95% of our revenue plan. Profit came in at about <strong>two-thirds of what we planned</strong> — record revenue did not mean record profit this quarter. (July numbers are estimates until books close ~Aug 1.)</p>
+    </div>
+
+    <div class="mini-stat-row three" aria-label="Three ways to look at the quarter">
+      <div class="mini-stat amber"><div class="ms-label">Against our plan</div><div class="ms-value">Fell short</div><div class="ms-sub" data-eid="fs-lens-1">Revenue came close (~95%) — profit well short. The honest miss.</div></div>
+      <div class="mini-stat green"><div class="ms-label">Against the market</div><div class="ms-value">Strong</div><div class="ms-sub" data-eid="fs-lens-2">We grew ~3&times; the pace of the markets around us.</div></div>
+      <div class="mini-stat green"><div class="ms-label">Against our history</div><div class="ms-value">Record</div><div class="ms-sub" data-eid="fs-lens-3">Biggest revenue quarter ever — but less profit than last year&#39;s Q2.</div></div>
+    </div>
+
+    <div class="wsw sowhat">
+      <span class="wsw-label">So What — The profit gap was mostly spending we chose, and a lot of it was spent on you</span>
+      <p data-eid="fs-sowhat-1">When we dug into the miss, it wasn't waste and it wasn't crews costing too much — total mover pay actually came in <strong>under budget</strong>. Here's what happened: May demand started slow, and instead of cutting crews back, <strong>we held the full summer crew build</strong> — we kept hiring and kept hours steady so we'd be ready when the season hit, rather than running you thin and scrambling. We also invested in things that don't pay off in the same quarter: leadership coaching, a stronger finance team, and a bigger marketing push (billboards, mailers). Add those up and they explain most of the gap. The honest miss on our side: we didn't forecast those investments well — that's on leadership, and fixing our forecasting is part of why the finance investment exists.</p>
+      <p data-eid="fs-sowhat-2">Meanwhile the company stayed strong where it counts: we bought <strong>17 trucks</strong> this quarter (4 net-new, 13 replacements) and still generated cash — revenue covered our bills roughly 1.5 times over. Nobody should read this quarter as "the company is in trouble." It isn't.</p>
+    </div>
+
+    <div class="wsw nowwhat">
+      <span class="wsw-label">Now What — Book more of the work we're already built to serve</span>
+      <p data-eid="fs-nowwhat-1">We proved this quarter that we have the people, the trucks, and the leads (leads nearly doubled). The constraint was <strong>turning leads into booked jobs</strong> — and that's exactly where Q3 points. For movers: keep availability up and keep NPS up — utilization and reviews are how your branch earns its next truck and your next promotion slot opens. For CERs and sales: speed-to-lead and follow-up on the thousands of new leads the quote form now captures. Your branch's specific picture is on your branch scorecard — same link family as this page.</p>
+    </div>
+
+    <div class="review-note" data-section="financial-story">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Q2 in Plain English…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ REVENUE YoY BY BRANCH (spec §2.1 row 1.5) ══════════════════ -->
+  <section class="card green slide-el" id="revenue-yoy">
+    <p class="card-num">The Numbers</p>
+    <h3 class="card-title" data-eid="rev-title">Revenue Growth by Branch</h3>
+
+    <div class="wsw">
+      <span class="wsw-label">What</span>
+      <p data-eid="rev-what-1">Company revenue grew <strong>+9.9% vs last year</strong> — 8 of 10 branches grew, Garland fastest at <strong>+38%</strong>.</p>
+    </div>
+
+    <div class="yoy-bars" role="img" aria-label="Revenue growth percentage by branch, Garland fastest at plus 38%, North Austin down 11%">
+      <div class="yoy-row"><div class="yoy-branch">Garland</div><div class="yoy-track"><div class="yoy-fill" style="width:100%;"></div></div><div class="yoy-pct pos">+38.3%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Fort Worth</div><div class="yoy-track"><div class="yoy-fill" style="width:74.6%;"></div></div><div class="yoy-pct pos">+28.6%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Tampa</div><div class="yoy-track"><div class="yoy-fill" style="width:64.5%;"></div></div><div class="yoy-pct pos">+24.7%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">South Austin</div><div class="yoy-track"><div class="yoy-fill" style="width:64.0%;"></div></div><div class="yoy-pct pos">+24.5%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Dallas</div><div class="yoy-track"><div class="yoy-fill" style="width:53.3%;"></div></div><div class="yoy-pct pos">+20.4%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">McKinney</div><div class="yoy-track"><div class="yoy-fill" style="width:49.9%;"></div></div><div class="yoy-pct pos">+19.1%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">San Antonio</div><div class="yoy-track"><div class="yoy-fill" style="width:11.0%;"></div></div><div class="yoy-pct pos">+4.2%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Houston</div><div class="yoy-track"><div class="yoy-fill" style="width:9.1%;"></div></div><div class="yoy-pct pos">+3.5%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Leander</div><div class="yoy-track"><div class="yoy-fill neg" style="width:2.8%;"></div></div><div class="yoy-pct neg">−1.1%</div></div>
+      <div class="yoy-row"><div class="yoy-branch">North Austin</div><div class="yoy-track"><div class="yoy-fill neg" style="width:28.5%;"></div></div><div class="yoy-pct neg">−10.9%</div></div>
+    </div>
+    <p style="font-size:11px;color:var(--gray-600);">Growth shown as a percent only — no dollar figures. Every Q2'26 branch reading carries the standard July-estimate caveat (final numbers land ~Aug 1).</p>
+
+    <div class="wsw sowhat">
+      <span class="wsw-label">So What</span>
+      <p data-eid="rev-sowhat-1">Growth is why trucks keep getting added and promotion rungs keep opening — a growing branch is a branch with more lead-mover and driver slots.</p>
+    </div>
+
+    <div class="wsw nowwhat">
+      <span class="wsw-label">Now What</span>
+      <p data-eid="rev-nowwhat-1">Branches that grew will staff up behind it; the two that shrank have specific plans with their RM — ask your BM where yours landed.</p>
+    </div>
+
+    <div class="review-note" data-section="revenue-yoy">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Revenue Growth by Branch…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ TRUCKS & STAFFING (spec §1.6) ══════════════════ -->
+  <section class="card slide-el" id="trucks-staffing">
+    <p class="card-num">The Numbers</p>
+    <h3 class="card-title" data-eid="trk-title">Trucks &amp; Staffing</h3>
+
+    <div class="mini-stat-row three">
+      <div class="mini-stat green"><div class="ms-label" data-eid="trk-stat-1-label">Truck Utilization</div><div class="ms-value">~76%</div><div class="ms-sub" data-eid="trk-stat-1-sub">Company average, all quarter</div></div>
+      <div class="mini-stat green"><div class="ms-label" data-eid="trk-stat-2-label">Personnel vs Budget</div><div class="ms-value">~101%</div><div class="ms-sub" data-eid="trk-stat-2-sub">At or above plan from June on</div></div>
+      <div class="mini-stat"><div class="ms-label" data-eid="trk-stat-3-label">New Trucks</div><div class="ms-value">17</div><div class="ms-sub" data-eid="trk-stat-3-sub">4 net-new, 13 replacements</div></div>
+    </div>
+
+    <div class="wsw">
+      <span class="wsw-label">What</span>
+      <p data-eid="trk-what-1">We ran trucks at ~76% utilization and staffed at or above budget from June on.</p>
+    </div>
+
+    <div class="wsw sowhat">
+      <span class="wsw-label">So What</span>
+      <p data-eid="trk-sowhat-1">We had crews and trucks ready all quarter — nobody missed hours because we understaffed. That was a choice: we hired early for summer instead of running you thin.</p>
+    </div>
+
+    <div class="wsw nowwhat">
+      <span class="wsw-label">Now What</span>
+      <p data-eid="trk-nowwhat-1">Keep availability up — utilization is how the branch earns its next truck.</p>
+    </div>
+
+    <div class="review-note" data-section="trucks-staffing">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Trucks &amp; Staffing…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ MARKETING / LEADS (spec §2) ══════════════════ -->
+  <section class="card slide-el" id="marketing-leads">
+    <p class="card-num">The Numbers</p>
+    <h3 class="card-title" data-eid="mkt-title">Leads &amp; the New Quote Form</h3>
+
+    <div class="mini-stat-row three">
+      <div class="mini-stat green"><div class="ms-label" data-eid="mkt-stat-1-label">Leads</div><div class="ms-value">+97%</div><div class="ms-sub" data-eid="mkt-stat-1-sub">vs last year</div></div>
+      <div class="mini-stat green"><div class="ms-label" data-eid="mkt-stat-2-label">Quote-Start Rate</div><div class="ms-value">13% → 29%</div><div class="ms-sub" data-eid="mkt-stat-2-sub">Visitors who start a quote</div></div>
+      <div class="mini-stat amber"><div class="ms-label" data-eid="mkt-stat-3-label">Unworked Leads</div><div class="ms-value">4,300+</div><div class="ms-sub" data-eid="mkt-stat-3-sub">Arrived with nobody following up</div></div>
+    </div>
+
+    <div class="wsw">
+      <span class="wsw-label">What</span>
+      <p data-eid="mkt-what-1">The new quote form nearly doubled our leads (+97%) and the share of visitors starting a quote more than doubled (13% → 29%).</p>
+    </div>
+
+    <div class="wsw sowhat">
+      <span class="wsw-label">So What</span>
+      <p data-eid="mkt-sowhat-1">We used to lose ~6 of 10 people who got an estimate — now we keep every one as a contactable lead. More leads = more booked jobs = more hours and bigger branches.</p>
+    </div>
+
+    <div class="wsw nowwhat">
+      <span class="wsw-label">Now What</span>
+      <p data-eid="mkt-nowwhat-1">Q3 is about working those leads fast — 4,300+ arrived that nobody followed up on. Speed-to-lead is the #1 lever, and CERs own the first touch.</p>
+    </div>
+
+    <div class="review-note" data-section="marketing-leads">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Leads &amp; the New Quote Form…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ EINSTEIN GAMES (spec §2.2, nearly whole) ══════════════════ -->
+  <section class="card amber slide-el" id="games">
+    <p class="card-num">Component · Recognition</p>
+    <h3 class="card-title" data-eid="gam-title">Einstein Games Season 3</h3>
+
+    <div class="mini-stat-row three">
+      <div class="mini-stat green"><div class="ms-label" data-eid="gam-stat-1-label">Company Score</div><div class="ms-value">7.59 <span class="badge green">Green</span></div><div class="ms-sub" data-eid="gam-stat-1-sub">Average of the 8 weekly averages</div></div>
+      <div class="mini-stat green"><div class="ms-label" data-eid="gam-stat-2-label">Bracket Champion</div><div class="ms-value">San Antonio</div><div class="ms-sub" data-eid="gam-stat-2-sub">Won the head-to-head finals</div></div>
+      <div class="mini-stat"><div class="ms-label" data-eid="gam-stat-3-label">Overall #1</div><div class="ms-value">Tampa · 10.05</div><div class="ms-sub" data-eid="gam-stat-3-sub">Best season-long score — a different trophy on purpose</div></div>
+    </div>
+
+    <div class="wsw">
+      <span class="wsw-label">What</span>
+      <p data-eid="gam-what-1">Company scored <strong>7.59 — Green</strong> (average of the 8 weekly averages). San Antonio won the bracket; Tampa posted the best overall score (10.05) — two different trophies, on purpose.</p>
+    </div>
+
+    <div class="wsw sowhat">
+      <span class="wsw-label">So What</span>
+      <p data-eid="gam-sowhat-1"><strong>Games are a coaching tool, directionally accurate by design — in-week estimates, not resolved actuals.</strong> Real coaching and accountability run off hard numbers and final data results; game scores have never been a direct read on final bonus.</p>
+    </div>
+
+    <h4 style="margin:16px 0 6px;font-size:13.5px;color:var(--navy);">Dream Team — 21 Trophy Holders</h4>
+    <p style="font-size:12.5px;color:var(--gray-600);margin:0 0 8px;">The top 10% of Q2 mover scores among everyone who cleared the busy-season hours floor. Congrats to all 21 — spread across 7 branches.</p>
+    <div>
+      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Leander · 5 members</span>
+      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>S. Austin · 4</span>
+      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Tampa · 4</span>
+      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Houston · 3</span>
+      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>San Antonio · 3</span>
+      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>McKinney · 1</span>
+      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Ft. Worth · 1</span>
+    </div>
+
+    <div class="wsw nowwhat" style="margin-top:14px;">
+      <span class="wsw-label">Now What</span>
+      <p data-eid="gam-nowwhat-1">Season 4 pauses official tracking next quarter while scoring gets automated — no live leaderboard, no bracket. The underlying metrics keep running and still feed bonuses.</p>
+    </div>
+
+    <div class="review-note" data-section="games">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Einstein Games Season 3…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ FLEET SAFETY (spec §2.2, wins-first) ══════════════════ -->
+  <section class="card green slide-el" id="fleet-safety">
+    <p class="card-num">Component · Standing</p>
+    <h3 class="card-title" data-eid="flt-title">Fleet Safety</h3>
+
+    <div class="mini-stat-row three">
+      <div class="mini-stat green"><div class="ms-label" data-eid="flt-stat-1-label">Following Distance</div><div class="ms-value">−54%</div><div class="ms-sub" data-eid="flt-stat-1-sub">Quarter's biggest safety win</div></div>
+      <div class="mini-stat amber"><div class="ms-label" data-eid="flt-stat-2-label">Rolling Stop / Inattentive</div><div class="ms-value">Tightened</div><div class="ms-sub" data-eid="flt-stat-2-sub">Two standards deliberately raised mid-quarter</div></div>
+      <div class="mini-stat green"><div class="ms-label" data-eid="flt-stat-3-label">Live Fixes</div><div class="ms-value">2</div><div class="ms-sub" data-eid="flt-stat-3-sub">See below</div></div>
+    </div>
+
+    <div class="wsw">
+      <span class="wsw-label">What</span>
+      <p data-eid="flt-what-1">Following Distance events fell 54% — the quarter's biggest safety win. Total events rose only because we deliberately tightened two standards (Rolling Stop, Inattentive).</p>
+    </div>
+
+    <div class="wsw sowhat">
+      <span class="wsw-label">So What</span>
+      <p data-eid="flt-sowhat-1">Fewer real events = fewer claims = money that stays in the company and the bonus pool instead of going to the insurance company. The "increase" is stricter refereeing, not worse driving.</p>
+    </div>
+
+    <div class="wsw nowwhat">
+      <span class="wsw-label">Now What</span>
+      <p data-eid="flt-nowwhat-1">Two fixes are live: iPad-looking Inattentive alerts can't be dismissed anymore, and San Antonio's broken visor gets fixed, not dismissed.</p>
+    </div>
+
+    <div class="review-note" data-section="fleet-safety">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Fleet Safety…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ NPS + eNPS (spec §5 / §5b) ══════════════════ -->
+  <section class="card slide-el" id="nps-enps">
+    <p class="card-num">Component · Voice</p>
+    <h3 class="card-title" data-eid="nps-title">Customer NPS &amp; eNPS</h3>
+
+    <div class="wsw">
+      <span class="wsw-label">What</span>
+      <p data-eid="nps-what-1">Customer NPS came in at <strong>88</strong> vs our <strong>90</strong> bar (just under 92 in Q1).</p>
+    </div>
+
+    <div class="yoy-bars" role="img" aria-label="Customer NPS bar chart, 88 versus 90 target">
+      <div class="yoy-row"><div class="yoy-branch">Q2'26</div><div class="yoy-track"><div class="yoy-fill" style="width:88%;"></div></div><div class="yoy-pct" style="color:var(--navy);">88</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Target</div><div class="yoy-track"><div class="yoy-fill" style="width:90%;background:var(--gray-400);"></div></div><div class="yoy-pct" style="color:var(--gray-600);">90</div></div>
+    </div>
+
+    <div class="wsw sowhat">
+      <span class="wsw-label">So What</span>
+      <p data-eid="nps-sowhat-1">Reviews and referrals are the cheapest jobs we ever book — every point of NPS is future work your branch doesn't have to buy.</p>
+    </div>
+
+    <div class="wsw nowwhat">
+      <span class="wsw-label">Now What</span>
+      <p data-eid="nps-nowwhat-1">The playbook doesn't change: on-time, careful, communicate. Branch-level numbers are on your scorecard.</p>
+    </div>
+
+    <hr class="divider" style="margin:18px 0;">
+
+    <h4 style="margin:0 0 8px;font-size:13.5px;color:var(--navy);">Employee Voice (eNPS)</h4>
+    <div class="mini-stat-row">
+      <div class="mini-stat green"><div class="ms-label" data-eid="nps-stat-1-label">Manager / CET eNPS</div><div class="ms-value">+81</div><div class="ms-sub" data-eid="nps-stat-1-sub">52 salaried respondents · 100% participation</div></div>
+      <div class="mini-stat"><div class="ms-label" data-eid="nps-stat-2-label">Mover eNPS</div><div class="ms-value">+46</div><div class="ms-sub" data-eid="nps-stat-2-sub">Q1 read — most recent mover survey</div></div>
+    </div>
+    <p style="font-size:12.5px;">+81 is the salaried manager/CET survey; the mover survey (last +46) runs separately. <strong>The salaried survey's next run is voluntary — participation itself becomes the signal.</strong></p>
+    <div class="wsw nowwhat" style="margin-top:10px;">
+      <span class="wsw-label">Now What</span>
+      <p data-eid="nps-nowwhat-2">When the next survey lands, answer it. Leadership decisions this quarter — including holding the summer crew build — were made with this kind of employee data on the table; participation is the leverage.</p>
+    </div>
+
+    <div class="review-note" data-section="nps-enps">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Customer NPS &amp; eNPS…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ CLAIMS & MAGIC MOMENTS PLACEHOLDER (spec §2.2 KEEP — content lands at final cut) ══════════════════ -->
+  <section class="card placeholder slide-el" id="claims-mm">
+    <p class="card-num">Component · Claims &amp; Magic Moments</p>
+    <h3 class="card-title" data-eid="cmm-title">Claims &amp; Magic Moments</h3>
+    <div class="placeholder-box">
+      Wins-first claims + Magic Moments story (CER/claims audience) — lands with the final cut, after Cameron's review.
+    </div>
+    <div class="review-note" data-section="claims-mm">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Claims &amp; Magic Moments…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ CX SALES LOOKBACK PLACEHOLDER (spec §2.2 CONDENSE — content lands at final cut) ══════════════════ -->
+  <section class="card placeholder slide-el" id="cx-lookback">
+    <p class="card-num">Component · CX Sales</p>
+    <h3 class="card-title" data-eid="cxl-title">CX Sales Look-back</h3>
+    <div class="placeholder-box">
+      Team-level result + top-performer shoutouts (positive names only) — lands with the final cut, after Cameron's review.
+    </div>
+    <div class="review-note" data-section="cx-lookback">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on CX Sales Look-back…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ Q3 THEME PLACEHOLDER (spec D5) ══════════════════ -->
+  <section class="card placeholder slide-el" id="q3-theme">
+    <p class="card-num">Coming Next Quarter</p>
+    <h3 class="card-title" data-eid="q3t-title">Q3 Theme</h3>
+    <div class="placeholder-box">
+      Decided at the QGR 7/29–30 — this card fills in after.
+    </div>
+    <div class="review-note" data-section="q3-theme">
+      <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+      <div class="review-note-body" hidden>
+        <div class="review-note-microlabel">Review note — not part of the page copy</div>
+        <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on Q3 Theme…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ FAQ (spec §5) ══════════════════ -->
+  <div class="slide-el slide-section" id="faq-section">
+  <div class="faq-real">
+  <h2 class="section-title"><span class="sec-eyebrow">Questions Answered</span>Ask Away — Chances Are, It's Here</h2>
+
+  <div class="faq-group-title">Money / Job Security</div>
+  <details class="faq-item"><summary data-eid="faq-1-q">Profit missed — are layoffs or hour cuts coming?</summary><div class="faq-answer" data-eid="faq-1-a">No; mover pay ran under budget because we chose to keep crews whole, and Q3 planning assumes the full crew build.</div></details>
+  <details class="faq-item"><summary data-eid="faq-2-q">Does the profit miss hit my bonus?</summary><div class="faq-answer" data-eid="faq-2-a">Bonus bases are the branch metrics on your scorecard, not company profit; games scores were never a direct read on bonus.</div></details>
+  <details class="faq-item"><summary data-eid="faq-3-q">If revenue is a record, where did the money go?</summary><div class="faq-answer" data-eid="faq-3-a">Mostly chosen investments: early summer staffing, coaching, finance team, marketing — plus 17 trucks.</div></details>
+  <details class="faq-item"><summary data-eid="faq-4-q">Is the company okay on cash?</summary><div class="faq-answer" data-eid="faq-4-a">Yes: cash-generating quarter, bills covered ~1.5×, and the truck buys were mostly bank-financed.</div></details>
+  <details class="faq-item"><summary data-eid="faq-5-q">Will prices go up to fix the profit gap?</summary><div class="faq-answer" data-eid="faq-5-a">Pricing runs on its own weekly cadence; nothing in this quarter's story is a price-panic move.</div></details>
+
+  <div class="faq-group-title">My Branch</div>
+  <details class="faq-item"><summary data-eid="faq-6-q">Why does my branch look bad on the scorecard when we worked our tails off?</summary><div class="faq-answer" data-eid="faq-6-a">Effort shows in the tiles you control (NPS, safety, availability); some misses this quarter were target-math or market issues, and your BM has the branch-specific read.</div></details>
+  <details class="faq-item"><summary data-eid="faq-7-q">North Austin / Leander shrank — what happens to those crews?</summary><div class="faq-answer" data-eid="faq-7-a">Turnaround plans with their RM; growth elsewhere means moves and slots across the network, not cuts.</div></details>
+  <details class="faq-item"><summary data-eid="faq-8-q">I heard Tampa's numbers ran light — are we giving up on Florida?</summary><div class="faq-answer" data-eid="faq-8-a">Florida's market genuinely cooled; Tampa was a deliberate capacity bet and its utilization climbed every month — we're sequencing, not retreating.</div></details>
+  <details class="faq-item"><summary data-eid="faq-9-q">How does my branch get another truck?</summary><div class="faq-answer" data-eid="faq-9-a">Utilization + booked demand: run the trucks you have full and convert your leads, and the fleet plan follows.</div></details>
+
+  <div class="faq-group-title">Leads / Sales</div>
+  <details class="faq-item"><summary data-eid="faq-10-q">Leads doubled — why didn't revenue double?</summary><div class="faq-answer" data-eid="faq-10-a">Most of the "new" leads are ones we used to lose before getting contact info; the real win is we now get to work them.</div></details>
+  <details class="faq-item"><summary data-eid="faq-11-q">Whose job are those 4,300 unworked leads?</summary><div class="faq-answer" data-eid="faq-11-a">That's the Q3 theme: assignment + speed-to-lead, owned by CX/sales with branch support — specifics land at the theme rollout.</div></details>
+  <details class="faq-item"><summary data-eid="faq-12-q">Is conversion down? I heard the rate dropped.</summary><div class="faq-answer" data-eid="faq-12-a">Same-universe conversion actually rose +2 pts; the scary-looking drop is math from flooding the funnel with captured leads.</div></details>
+
+  <div class="faq-group-title">Safety / Samsara</div>
+  <details class="faq-item"><summary data-eid="faq-13-q">Safety events went UP — are we driving worse?</summary><div class="faq-answer" data-eid="faq-13-a">No: two standards were deliberately tightened (Rolling Stop, Inattentive) and they explain most of the increase; Following Distance fell 54%.</div></details>
+  <details class="faq-item"><summary data-eid="faq-14-q">Why can't I dismiss the iPad Inattentive alert anymore?</summary><div class="faq-answer" data-eid="faq-14-a">Too many real events were being dismissed as "iPad" — now they route to review so the data stays honest.</div></details>
+  <details class="faq-item"><summary data-eid="faq-15-q">Does a Samsara score affect my pay or promotion?</summary><div class="faq-answer" data-eid="faq-15-a">Safety is coaching-first (redirects before anything else); promotion runs on the promotion framework, not raw telematics.</div></details>
+
+  <div class="faq-group-title">Games / Recognition</div>
+  <details class="faq-item"><summary data-eid="faq-16-q">San Antonio won the bracket but Tampa is #1 overall — which is it?</summary><div class="faq-answer" data-eid="faq-16-a">Both: SA won the head-to-head season, Tampa posted the best overall score — different trophies on purpose.</div></details>
+  <details class="faq-item"><summary data-eid="faq-17-q">Why is there no Games season next quarter?</summary><div class="faq-answer" data-eid="faq-17-a">S4 pauses official tracking while scoring gets automated; the underlying metrics keep running and still feed bonuses.</div></details>
+  <details class="faq-item"><summary data-eid="faq-18-q">Why did the scores change late in the season?</summary><div class="faq-answer" data-eid="faq-18-a">Final scoring uses the average of weekly averages over the 8 real weeks; the post-season week was exhibition and never counted.</div></details>
+
+  <div class="faq-group-title">Surveys / Voice</div>
+  <details class="faq-item"><summary data-eid="faq-19-q">eNPS is +81 — but that's not us, right?</summary><div class="faq-answer" data-eid="faq-19-a">Right: +81 is the salaried manager/CET survey; the mover survey (last +46) runs separately — a different population, so never compare the two numbers directly.</div></details>
+  <details class="faq-item"><summary data-eid="faq-20-q">Will my survey answers really change anything?</summary><div class="faq-answer" data-eid="faq-20-a">Leadership decisions this quarter — including holding the summer crew build — were made with this kind of employee data on the table; participation is the leverage.</div></details>
+  <details class="faq-item"><summary data-eid="faq-21-q">What's the Q3 theme and what's in it for me?</summary><div class="faq-answer" data-eid="faq-21-a">Decided at QGR 7/29–30; the leading candidates all center on converting demand and building skills faster — both mean more hours and faster promotions. (Hold final wording until the QGR rules.)</div></details>
+  </div>
+
+  <div class="present-faq-summary">
+    <p class="present-faq-summary-title">Questions? Chances are it's answered — see the page.</p>
+    <p class="present-faq-summary-count">21 questions covered across 6 topics on this page.</p>
+  </div>
+
+  <div class="review-note" data-section="faq-section">
+    <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+    <div class="review-note-body" hidden>
+      <div class="review-note-microlabel">Review note — not part of the page copy</div>
+      <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on the FAQ…"></textarea>
+    </div>
+  </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ SCORECARD LINK GRID ══════════════════ -->
+  <div class="slide-el slide-section" id="scorecard-section">
+  <h2 class="section-title"><span class="sec-eyebrow">Now — Your Branch</span>Branch Scorecards</h2>
+  <p class="sc-intro" style="font-size:13px;color:var(--gray-600);" data-eid="sc-intro-1">That was the company story — <strong>your branch&#39;s own quarter</strong> (NPS, safety, availability, recognition) lives on your scorecard. In the huddle this is the handoff: company page first, then your branch&#39;s page.</p>
+  <div class="scorecard-grid">
+    <a class="scorecard-tile" href="branch-scorecard-naustin-q2.html"><p class="scorecard-tile-eyebrow">CTXH</p><p class="scorecard-tile-name">North Austin</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-saustin-q2.html"><p class="scorecard-tile-eyebrow">CTXH</p><p class="scorecard-tile-name">South Austin</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-leander-q2.html"><p class="scorecard-tile-eyebrow">CTXH</p><p class="scorecard-tile-name">Leander</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-sanantonio-q2.html"><p class="scorecard-tile-eyebrow">CTXH</p><p class="scorecard-tile-name">San Antonio</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-houston-q2.html"><p class="scorecard-tile-eyebrow">CTXH</p><p class="scorecard-tile-name">Houston</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-dallas-q2.html"><p class="scorecard-tile-eyebrow">DFWT</p><p class="scorecard-tile-name">Dallas</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-fortworth-q2.html"><p class="scorecard-tile-eyebrow">DFWT</p><p class="scorecard-tile-name">Fort Worth</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-garland-q2.html"><p class="scorecard-tile-eyebrow">DFWT</p><p class="scorecard-tile-name">Garland</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-mckinney-q2.html"><p class="scorecard-tile-eyebrow">DFWT</p><p class="scorecard-tile-name">McKinney</p><span class="scorecard-tile-go">Open →</span></a>
+    <a class="scorecard-tile" href="branch-scorecard-tampa-q2.html"><p class="scorecard-tile-eyebrow">Tampa</p><p class="scorecard-tile-name">Tampa</p><span class="scorecard-tile-go">Open →</span></a>
+  </div>
+
+  <div class="review-note" data-section="scorecard-section">
+    <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
+    <div class="review-note-body" hidden>
+      <div class="review-note-microlabel">Review note — not part of the page copy</div>
+      <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on the Branch Scorecards grid…"></textarea>
+    </div>
+  </div>
+  </div>
+
+  <footer class="page-footer">
+    Einstein Moving Company · Q2 2026 · July numbers are estimates until books close ~Aug 1.
+  </footer>
+
+</div>
+<script>
+  // Smooth-scroll to section anchors when linked (defensive — no external deps, no analytics).
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+</script>
+
+<!-- ══════════════════ MODE BAR / PRESENT / EDIT / NOTES layer (additive, v1) ══════════════════
+     Read is always the load-in mode (never persisted). Notes + edits persist to localStorage
+     under the flp-q2- prefix. Everything here is chrome on top of the existing markup — no
+     page copy was rewritten to build this. ══ -->
+<script>
+(function () {
+  'use strict';
+
+  var NOTES_KEY = 'flp-q2-notes';
+  var EDITS_KEY = 'flp-q2-edits';
+  var PAGE_TITLE = "Einstein Q2 2026 Frontline Cascade Packet";
+
+  var SLIDES = [
+    'who-we-are', 'financial-story', 'revenue-yoy', 'trucks-staffing', 'marketing-leads',
+    'games', 'fleet-safety', 'nps-enps', 'claims-mm', 'cx-lookback', 'q3-theme',
+    'faq-section', 'scorecard-section'
+  ];
+  var SECTION_TITLES = {
+    'who-we-are': 'Who We Are & Why We Do This',
+    'financial-story': 'Q2 in Plain English',
+    'revenue-yoy': 'Revenue Growth by Branch',
+    'trucks-staffing': 'Trucks & Staffing',
+    'marketing-leads': 'Leads & the New Quote Form',
+    'games': 'Einstein Games Season 3',
+    'fleet-safety': 'Fleet Safety',
+    'nps-enps': 'Customer NPS & eNPS',
+    'claims-mm': 'Claims & Magic Moments',
+    'cx-lookback': 'CX Sales Look-back',
+    'q3-theme': 'Q3 Theme',
+    'faq-section': 'FAQ — Ask Away',
+    'scorecard-section': 'Now — Your Branch'
+  };
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function localDateStamp() {
+    var d = new Date();
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function localTimestamp() {
+    var d = new Date();
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' +
+      pad(d.getHours()) + ':' + pad(d.getMinutes()) + ' (local time)';
+  }
+  function stripTags(html) {
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html || '';
+    return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+  }
+
+  var toastTimer = null;
+  function showToast(msg, ms) {
+    var t = document.getElementById('flpToast');
+    if (!t) return;
+    t.textContent = msg;
+    t.hidden = false;
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.hidden = true; }, ms || 4000);
+  }
+
+  /* ── Talking-points toggle (Present mode) — one per card, CSS-driven, never
+     reorders the underlying So What / Now What blocks. ── */
+  document.querySelectorAll('.card.slide-el').forEach(function (card) {
+    var hasPoints = card.querySelector('.wsw.sowhat, .wsw.nowwhat');
+    if (!hasPoints) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'present-talk-toggle';
+    btn.textContent = '▼ talking points';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', function () {
+      var open = card.classList.toggle('talkpoints-open');
+      btn.textContent = (open ? '▲' : '▼') + ' talking points';
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    var anchor = card.querySelector('.mini-stat-row') || card.querySelector('.wsw:not(.sowhat):not(.nowwhat)');
+    if (anchor && anchor.parentNode === card) {
+      anchor.insertAdjacentElement('afterend', btn);
+    } else {
+      card.appendChild(btn);
+    }
+  });
+
+  /* ── Edit mode: capture originals BEFORE applying saved edits, then re-apply
+     saved edits on load so a refresh keeps Cameron's rewrite. ── */
+  var ORIGINALS = {};
+  document.querySelectorAll('[data-eid]').forEach(function (el) {
+    ORIGINALS[el.getAttribute('data-eid')] = el.innerHTML;
+  });
+
+  var edits = {};
+  try {
+    var rawEdits = localStorage.getItem(EDITS_KEY);
+    if (rawEdits) edits = JSON.parse(rawEdits) || {};
+  } catch (e) { edits = {}; }
+
+  Object.keys(edits).forEach(function (eid) {
+    var el = document.querySelector('[data-eid="' + eid + '"]');
+    if (el) el.innerHTML = edits[eid];
+  });
+
+  var editsWarnedOnce = false;
+  function saveEdits() {
+    try {
+      localStorage.setItem(EDITS_KEY, JSON.stringify(edits));
+    } catch (e) {
+      if (!editsWarnedOnce) {
+        editsWarnedOnce = true;
+        showToast('Edits could not autosave (browser storage unavailable) — export before closing this tab.', 7000);
+      }
+    }
+  }
+
+  document.querySelectorAll('[data-eid]').forEach(function (el) {
+    el.addEventListener('input', function () {
+      var eid = el.getAttribute('data-eid');
+      edits[eid] = el.innerHTML;
+      saveEdits();
+    });
+  });
+
+  function resetEdits() {
+    if (!confirm('This will erase every edit made in Edit mode and restore the original page text. Continue?')) return;
+    edits = {};
+    saveEdits();
+    Object.keys(ORIGINALS).forEach(function (eid) {
+      var el = document.querySelector('[data-eid="' + eid + '"]');
+      if (el) el.innerHTML = ORIGINALS[eid];
+    });
+    showToast('Edits reset to the original page text.');
+  }
+
+  /* ── Review notes (mirrors the financial-deck review-note pattern) ── */
+  var notes = {};
+  try {
+    var rawNotes = localStorage.getItem(NOTES_KEY);
+    if (rawNotes) notes = JSON.parse(rawNotes) || {};
+  } catch (e) { notes = {}; }
+
+  var notesWarnedOnce = false;
+  function saveNotes() {
+    try {
+      localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+    } catch (e) {
+      if (!notesWarnedOnce) {
+        notesWarnedOnce = true;
+        showToast('Notes could not autosave (browser storage unavailable) — export before closing this tab.', 7000);
+      }
+    }
+  }
+
+  document.querySelectorAll('.review-note').forEach(function (block) {
+    var id = block.getAttribute('data-section');
+    var toggle = block.querySelector('.review-note-toggle');
+    var body = block.querySelector('.review-note-body');
+    var textarea = block.querySelector('.review-note-textarea');
+    if (!id || !toggle || !body || !textarea) return;
+
+    if (notes[id]) {
+      textarea.value = notes[id];
+      toggle.classList.toggle('has-note', !!notes[id].trim());
+    }
+
+    toggle.addEventListener('click', function () {
+      var willOpen = body.hidden;
+      body.hidden = !willOpen;
+      toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      if (willOpen) textarea.focus();
+    });
+
+    textarea.addEventListener('input', function () {
+      notes[id] = textarea.value;
+      saveNotes();
+      toggle.classList.toggle('has-note', !!textarea.value.trim());
+    });
+  });
+
+  /* ── Export: notes + edited blocks → markdown, plus a clipboard-copy fallback. ── */
+  function buildMarkdown() {
+    var lines = [];
+    lines.push('# ' + PAGE_TITLE + ' — Review Notes & Edits');
+    lines.push('');
+    lines.push('Exported: ' + localTimestamp());
+    lines.push('');
+    var any = false;
+
+    var noteLines = [];
+    SLIDES.forEach(function (id) {
+      var text = (notes[id] || '').replace(/\r\n/g, '\n').trim();
+      if (!text) return;
+      noteLines.push('## ' + (SECTION_TITLES[id] || id));
+      noteLines.push('');
+      text.split('\n').forEach(function (l) { noteLines.push('  ' + l); });
+      noteLines.push('');
+    });
+    if (noteLines.length) {
+      any = true;
+      lines.push('## Notes by section');
+      lines.push('');
+      lines = lines.concat(noteLines);
+    }
+
+    var changed = [];
+    document.querySelectorAll('[data-eid]').forEach(function (el) {
+      var eid = el.getAttribute('data-eid');
+      var original = stripTags(ORIGINALS[eid] || '');
+      var current = stripTags(el.innerHTML);
+      if (original === current) return;
+      var sectionEl = el.closest('.slide-el');
+      var sectionTitle = sectionEl ? (SECTION_TITLES[sectionEl.id] || sectionEl.id) : 'Unknown section';
+      changed.push({ eid: eid, section: sectionTitle, original: original, edited: current });
+    });
+    if (changed.length) {
+      any = true;
+      lines.push('## Edited blocks (' + changed.length + ')');
+      lines.push('');
+      changed.forEach(function (c) {
+        lines.push('- **' + c.section + ' / ' + c.eid + '** — ORIGINAL: ' + c.original + ' → EDITED: ' + c.edited);
+      });
+      lines.push('');
+    }
+
+    return { markdown: lines.join('\n').replace(/\n+$/, '\n'), any: any };
+  }
+
+  function downloadMarkdown(md, filename) {
+    try {
+      var blob = new Blob([md], { type: 'text/markdown' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function exportNotesAndEdits() {
+    var built = buildMarkdown();
+    if (!built.any) {
+      showToast('No notes or edits yet — nothing to export.');
+      return;
+    }
+    var filename = 'q2-frontline-feedback-' + localDateStamp() + '.md';
+    var downloaded = downloadMarkdown(built.markdown, filename);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(built.markdown).then(function () {
+        showToast((downloaded ? 'Downloaded ' + filename + ' + ' : '') + 'copied to clipboard.');
+      }, function () {
+        showToast((downloaded ? 'Downloaded ' + filename + '. ' : '') + 'Clipboard copy failed (browser blocked it).');
+      });
+    } else {
+      showToast((downloaded ? 'Downloaded ' + filename + '. ' : '') + 'Clipboard copy not supported in this browser.');
+    }
+  }
+
+  function copyToClipboardOnly() {
+    var built = buildMarkdown();
+    if (!built.any) {
+      showToast('No notes or edits yet — nothing to copy.');
+      return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(built.markdown).then(function () {
+        showToast('Copied to clipboard.');
+      }, function () {
+        showToast('Clipboard copy failed (browser blocked it) — use Export instead.');
+      });
+    } else {
+      showToast('Clipboard copy not supported in this browser — use Export instead.');
+    }
+  }
+
+  document.getElementById('flpExportBtn').addEventListener('click', exportNotesAndEdits);
+  document.getElementById('flpCopyBtn').addEventListener('click', copyToClipboardOnly);
+  document.getElementById('flpResetEditsBtn').addEventListener('click', resetEdits);
+
+  /* ── Present-mode slide navigation ── */
+  var presentIndex = 0;
+  var presentNav = document.getElementById('presentNav');
+  var presentCounter = document.getElementById('presentCounter');
+
+  function clearSlideState() {
+    document.querySelectorAll('.slide-el').forEach(function (el) {
+      el.classList.remove('present-current');
+      el.classList.remove('talkpoints-open');
+    });
+  }
+
+  function showSlide(i) {
+    presentIndex = Math.max(0, Math.min(SLIDES.length - 1, i));
+    clearSlideState();
+    var el = document.getElementById(SLIDES[presentIndex]);
+    if (el) el.classList.add('present-current');
+    presentCounter.textContent = (presentIndex + 1) + ' / ' + SLIDES.length;
+  }
+
+  function presentKeyHandler(e) {
+    if (e.key === 'ArrowRight') { showSlide(presentIndex + 1); }
+    else if (e.key === 'ArrowLeft') { showSlide(presentIndex - 1); }
+    else if (e.key === 'Escape') { setMode('read'); }
+  }
+
+  document.getElementById('presentPrev').addEventListener('click', function () { showSlide(presentIndex - 1); });
+  document.getElementById('presentNext').addEventListener('click', function () { showSlide(presentIndex + 1); });
+
+  /* ── Mode switching ── */
+  var currentMode = 'read';
+
+  function setMode(mode) {
+    var prevMode = currentMode;
+    currentMode = mode;
+
+    document.body.classList.remove('mode-read', 'mode-present', 'mode-edit');
+    document.body.classList.add('mode-' + mode);
+
+    var editing = mode === 'edit';
+    document.querySelectorAll('[data-eid]').forEach(function (el) {
+      el.contentEditable = editing ? 'true' : 'false';
+    });
+    document.getElementById('flpResetEditsBtn').hidden = !editing;
+
+    if (mode === 'present') {
+      presentNav.hidden = false;
+      showSlide(presentIndex);
+      document.addEventListener('keydown', presentKeyHandler);
+    } else {
+      presentNav.hidden = true;
+      document.removeEventListener('keydown', presentKeyHandler);
+      if (prevMode === 'present') {
+        var el = document.getElementById(SLIDES[presentIndex]);
+        clearSlideState();
+        if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+      } else {
+        clearSlideState();
+      }
+    }
+
+    document.querySelectorAll('.mode-btn').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-mode') === mode);
+    });
+  }
+
+  document.querySelectorAll('.mode-btn').forEach(function (b) {
+    b.addEventListener('click', function () { setMode(b.getAttribute('data-mode')); });
+  });
+
+  // Always load in Read mode — mode is never read from localStorage, per spec.
+  setMode('read');
+})();
+</script>
+
+</body>
+</html>
