@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Einstein QGR — FLM Workshop Results</title>
+<!-- qgr-flm-results v0.2 2026-07-24 — design-audit fixes: staleness guard on overwrite (skip + warn if a dropped file is older than what's loaded) + projector-readable type sizes (Albert) -->
+
+<!--
+  HARD DATA RULE: this page carries ZERO quarterly metrics of its own.
+  Every number shown here is computed live from dropped-in
+  einstein-flm-workshop/v1 export files — nothing is typed in, nothing
+  is pulled from the roundtable packet or the central manifest.
+
+  FLM RESULTS AGGREGATOR — mirrors the mgr-AAR / People-Analyzer-Directs
+  results.html pattern: ships EMPTY, room drags in qgr-flm-workshop-hub.html
+  exports live, rollup renders instantly. Re-dropping the same participant
+  (normalized name+branch) OVERWRITES their prior entry, never duplicates.
+  Same brand tokens as the workshop hub (sibling surface).
+-->
+<style>
+:root{
+  --orange-50:#FEF6EC; --orange-100:#FDE3C2; --orange-200:#FABD84; --orange-500:#EF8B22; --orange-700:#D96B10; --orange-900:#CC5500;
+  --navy-50:#EEF1F4; --navy-100:#CDD5DA; --navy-200:#9AADB7; --navy-400:#507080; --navy-500:#27343D; --navy-700:#1A2329; --navy-900:#0B1014;
+  --blue-50:#EBF4FB; --blue-100:#C3DFEF; --blue-500:#0979C3; --blue-700:#065E9A; --blue-900:#023B63;
+  --grey-50:#F4F5F5; --grey-100:#E2E3E4; --grey-200:#C0C2C4; --grey-400:#787C7F; --grey-500:#53575A; --grey-700:#363839; --grey-900:#191A1B;
+  --success:#69995D; --error:#CC0100; --text-faint:#5F6468;
+  --radius-sm:6px; --radius-md:12px; --radius-lg:20px; --radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(39,52,61,.08); --shadow-md:0 4px 12px rgba(39,52,61,.10); --shadow-lg:0 12px 32px rgba(39,52,61,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{font-family:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:var(--grey-700);background:var(--grey-50);font-size:14px;line-height:1.5}
+h1,h2,h3,h4{color:var(--navy-500);font-weight:700}
+a{color:var(--blue-500)}
+button{font:inherit;cursor:pointer}
+::selection{background:var(--blue-100)}
+
+#privacyBar{background:var(--navy-900);color:#fff;text-align:center;font-size:11.5px;padding:7px 12px}
+
+#appHeader{background:var(--navy-500);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:50;box-shadow:var(--shadow-md)}
+#appHeader .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+#appHeader .brand .bebas{font-family:'Bebas Neue','Roboto',sans-serif;font-size:24px;letter-spacing:.03em;color:#fff}
+#appHeader .brand .tag{font-size:11.5px;color:var(--navy-100)}
+#appHeader .clearbtn{background:none;border:1px solid var(--navy-200);color:#fff;border-radius:var(--radius-pill);padding:7px 15px;font-size:11.5px;font-weight:700}
+#appHeader .clearbtn:hover{background:var(--navy-700)}
+
+main{max-width:1100px;margin:0 auto;padding:22px 18px 90px}
+
+/* ---- Drop zone ---- */
+#dropZone{border:2px dashed var(--grey-200);border-radius:var(--radius-lg);background:#fff;padding:44px 22px;text-align:center;margin-bottom:22px;transition:.15s}
+#dropZone.drag{border-color:var(--blue-500);background:var(--blue-50)}
+#dropZone h2{font-size:18px;margin-bottom:8px}
+#dropZone p{color:var(--grey-400);font-size:12.5px;margin-bottom:16px}
+#dropZone label.filebtn{display:inline-block;background:var(--navy-500);color:#fff;border:none;border-radius:var(--radius-sm);padding:12px 22px;font-size:13px;font-weight:700;cursor:pointer}
+#dropZone label.filebtn:hover{background:var(--navy-700)}
+#dropZone input[type=file]{display:none}
+
+.file-errors{margin-top:14px;text-align:left}
+.file-error{background:#F8DCDC;color:#8E0000;border-radius:var(--radius-sm);padding:8px 12px;font-size:12px;margin-bottom:6px}
+
+/* ---- summary strip ---- */
+.summary-strip{display:flex;gap:24px;align-items:center;background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:16px 20px;margin-bottom:18px;flex-wrap:wrap}
+.summary-strip .stat{text-align:center}
+.summary-strip .stat b{display:block;font-size:30px;color:var(--navy-500)}
+.summary-strip .stat span{font-size:10.5px;color:var(--grey-400);text-transform:uppercase;letter-spacing:.04em}
+.branch-chips{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.branch-chip{font-size:11px;font-weight:700;background:var(--navy-50);color:var(--navy-500);border-radius:var(--radius-pill);padding:4px 11px}
+
+.section-title{font-size:19px;color:var(--navy-500);margin:24px 0 12px;font-weight:700}
+
+/* ---- bar groups ---- */
+.bar-groups{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:760px){.bar-groups{grid-template-columns:1fr}}
+.bar-card{background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:16px 18px}
+.bar-card h4{font-size:16px;margin-bottom:10px}
+.bar-row{display:grid;grid-template-columns:200px 1fr 34px;align-items:center;gap:10px;padding:6px 0;border-top:1px solid var(--grey-50)}
+.bar-row:first-of-type{border-top:none}
+.bar-row .bname{font-size:16px;color:var(--navy-500);font-weight:700}
+.bar-track{height:10px;background:var(--grey-100);border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;background:var(--blue-500)}
+.bar-fill.leak{background:var(--orange-700)}
+.bar-row .bcount{font-size:11.5px;color:var(--grey-500);text-align:right}
+
+.engine-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.engine-chip{font-size:11.5px;font-weight:700;background:var(--navy-50);color:var(--navy-500);border-radius:var(--radius-pill);padding:6px 13px}
+
+.gwc-strip{display:flex;gap:14px;flex-wrap:wrap}
+.gwc-stat{background:var(--grey-50);border-radius:var(--radius-md);padding:12px 18px;text-align:center;min-width:90px}
+.gwc-stat b{display:block;font-size:30px;color:var(--navy-500)}
+.gwc-stat span{font-size:10.5px;color:var(--grey-400);text-transform:uppercase}
+
+/* ---- verbatim walls ---- */
+.wall{background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:16px 18px}
+.wall-quote{border-top:1px solid var(--grey-50);padding:10px 0;font-size:16px;color:var(--grey-700)}
+.wall-quote:first-of-type{border-top:none}
+.wall-quote .wq-tag{display:block;font-size:10.5px;color:var(--grey-400);margin-top:4px;font-weight:700}
+
+.empty-state{text-align:center;color:var(--grey-400);padding:50px 0;font-size:13px}
+
+footer{background:var(--navy-700);color:var(--navy-100);text-align:center;padding:14px;font-size:10.5px}
+.toast{position:fixed;bottom:20px;right:24px;background:var(--navy-500);color:#fff;padding:10px 18px;border-radius:var(--radius-sm);font-size:12.5px;box-shadow:var(--shadow-lg);opacity:0;transform:translateY(6px);transition:.25s;z-index:300;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<div id="privacyBar">Room view — data loaded here came from exported files, dropped in live. Nothing auto-syncs.</div>
+
+<header id="appHeader">
+  <div class="brand"><span class="bebas">FLM WORKSHOP RESULTS</span><span class="tag">Room view — feed it exports live · Q3 2026</span></div>
+  <button class="clearbtn" id="btnClear">Clear all</button>
+</header>
+
+<main>
+  <div id="dropZone">
+    <h2>Drop the exported files here</h2>
+    <p>Accepts multiple <code>flm-*.json</code> files at once (einstein-flm-workshop/v1). Re-dropping the same participant (name + branch) overwrites their prior entry — never duplicates. Bad files get flagged, not silently dropped.</p>
+    <label class="filebtn" for="fileInput">Choose files…</label>
+    <input type="file" id="fileInput" accept="application/json" multiple>
+    <div class="file-errors" id="fileErrors"></div>
+  </div>
+
+  <div id="rollup" style="display:none">
+    <div class="summary-strip" id="summaryStrip"></div>
+
+    <div class="section-title">Flywheel — where it's spinning, where it's leaking</div>
+    <div class="bar-groups">
+      <div class="bar-card"><h4>Strongest right now</h4><div id="barsStrongest"></div></div>
+      <div class="bar-card"><h4>Biggest leak / opportunity</h4><div id="barsLeak"></div></div>
+    </div>
+    <div class="bar-card" style="margin-top:14px"><h4>Engine interest</h4><div class="engine-chips" id="engineChips"></div></div>
+
+    <div class="section-title">Mover People Analyzer — average weighting</div>
+    <div class="bar-groups">
+      <div class="bar-card"><h4>CHOICES values (avg points of 100, high to low)</h4><div id="barsValues"></div></div>
+      <div class="bar-card"><h4>Humble / Hungry / Smart (avg points of 100)</h4><div id="barsHHS"></div></div>
+    </div>
+    <div class="bar-card" style="margin-top:14px"><h4>Day-one clarity gut-check</h4><div class="gwc-strip" id="gwcStrip"></div></div>
+
+    <div class="section-title">"The one thing" — flywheel speed-up</div>
+    <div class="wall" id="wallOneThing"></div>
+
+    <div class="section-title">Promote vs. keep</div>
+    <div class="wall" id="wallPromote"></div>
+
+    <div class="section-title">Keep-your-job line (not a promotion factor)</div>
+    <div class="wall" id="wallKeepJob"></div>
+  </div>
+
+  <div class="empty-state" id="emptyState">Nothing loaded yet. Drop the JSON exports above.</div>
+</main>
+
+<footer>Einstein Moving Company — internal. Loaded files stay in this browser (localStorage) until cleared. Nothing is sent anywhere.</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+const STORAGE_KEY = "einstein-flm-workshop-results-q3";
+const CORE_VALUES = [
+  "Communicate clearly and with kindness",
+  "Hustle but don't rush",
+  "Ownership over results",
+  "Improve with Enthusiasm",
+  "Conscientious attention to detail",
+  "Elevate attitudes",
+  "Support Generously"
+];
+const HHS = ["Humble","Hungry","Smart"];
+const WHEEL = [
+  "Attract & Develop Great Movers",
+  "Deliver the Smart Move Experience",
+  "Earn Trust at Scale",
+  "Win Demand",
+  "Optimize Capacity",
+  "Reinvest Profit in People and Innovation"
+];
+
+let ENTRIES = {}; // key(name+branch) -> {fileName, payload}
+
+function normKey(name, branch){
+  return (name||"").trim().toLowerCase().replace(/\s+/g," ") + "|" + (branch||"").trim().toLowerCase();
+}
+
+function load(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw){
+    try{ ENTRIES = JSON.parse(raw); }catch(e){ ENTRIES = {}; }
+  }
+  render();
+}
+function persist(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(ENTRIES)); }
+
+function validatePayload(json){
+  if (!json || typeof json !== 'object') return 'Not a JSON object.';
+  if (json.schema !== 'einstein-flm-workshop/v1') return 'Wrong schema (expected einstein-flm-workshop/v1).';
+  if (!json.participant || !json.participant.name || !json.participant.branch) return 'Missing participant.name / participant.branch.';
+  return null;
+}
+
+// Staleness guard: if a dropped file's key (name+branch) matches an entry already
+// loaded, only overwrite when the incoming exportedAt is newer than (or equal to)
+// what's loaded. An older drop is skipped and surfaced as a visible warning row —
+// never silently replaces a newer answer with a stale one.
+function checkStaleness(existing, incoming){
+  if (!existing || !existing.payload) return { skip:false };
+  const existingAt = existing.payload.exportedAt;
+  const incomingAt = incoming.exportedAt;
+  if (!existingAt || !incomingAt) return { skip:false }; // can't compare — allow overwrite (today's behavior)
+  const existingTime = new Date(existingAt).getTime();
+  const incomingTime = new Date(incomingAt).getTime();
+  if (isNaN(existingTime) || isNaN(incomingTime)) return { skip:false };
+  if (incomingTime < existingTime){
+    const name = (incoming.participant && incoming.participant.name) || existing.payload.participant.name;
+    const branch = (incoming.participant && incoming.participant.branch) || existing.payload.participant.branch;
+    return {
+      skip: true,
+      message: 'Skipped older export for ' + name + ' · ' + branch + ' (loaded ' +
+        new Date(existingTime).toLocaleString() + ', dropped file is from ' +
+        new Date(incomingTime).toLocaleString() + '). Drop the newer file to update.'
+    };
+  }
+  return { skip:false };
+}
+
+function handleFiles(fileList){
+  const errors = [];
+  let pending = fileList.length;
+  if (!pending) return;
+  let addedCount = 0;
+  let skippedCount = 0;
+  Array.from(fileList).forEach(file=>{
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      pending--;
+      try{
+        const json = JSON.parse(e.target.result);
+        const err = validatePayload(json);
+        if (err){ errors.push(file.name + ': ' + err); }
+        else{
+          const key = normKey(json.participant.name, json.participant.branch);
+          const staleCheck = checkStaleness(ENTRIES[key], json);
+          if (staleCheck.skip){
+            errors.push(staleCheck.message);
+            skippedCount++;
+          } else {
+            ENTRIES[key] = { fileName:file.name, payload:json }; // overwrite, never duplicate
+            addedCount++;
+          }
+        }
+      }catch(parseErr){
+        errors.push(file.name + ': could not parse JSON (' + parseErr.message + ')');
+      }
+      if (pending === 0){
+        persist();
+        showFileErrors(errors);
+        render();
+        if (addedCount && skippedCount) showToast('Loaded ' + addedCount + ' file(s). Skipped ' + skippedCount + ' older export(s) — see notes below.');
+        else if (addedCount) showToast('Loaded ' + addedCount + ' file(s).');
+        else if (skippedCount) showToast('Skipped ' + skippedCount + ' older export(s) — see notes below.');
+      }
+    };
+    reader.onerror = ()=>{
+      pending--;
+      errors.push(file.name + ': could not read file.');
+      if (pending===0){ persist(); showFileErrors(errors); render(); }
+    };
+    reader.readAsText(file);
+  });
+}
+
+function showFileErrors(errors){
+  const box = document.getElementById('fileErrors');
+  box.innerHTML = errors.map(e=>'<div class="file-error">'+esc(e)+'</div>').join('');
+}
+
+/* ---- Drop zone wiring ---- */
+const dz = document.getElementById('dropZone');
+['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev, e=>{ e.preventDefault(); dz.classList.add('drag'); }));
+['dragleave','drop'].forEach(ev=>dz.addEventListener(ev, e=>{ e.preventDefault(); dz.classList.remove('drag'); }));
+dz.addEventListener('drop', e=>{ if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files); });
+document.getElementById('fileInput').addEventListener('change', e=>{ if (e.target.files.length) handleFiles(e.target.files); e.target.value=''; });
+
+document.getElementById('btnClear').addEventListener('click', ()=>{
+  if (!Object.keys(ENTRIES).length) return;
+  if (confirm('Clear all loaded files from this room view? This does not touch any participant\'s own device.')){
+    ENTRIES = {}; persist(); render();
+  }
+});
+
+/* ---- Computation + render ---- */
+function entryList(){ return Object.values(ENTRIES); }
+
+function render(){
+  const list = entryList();
+  const hasData = list.length > 0;
+  document.getElementById('rollup').style.display = hasData ? 'block' : 'none';
+  document.getElementById('emptyState').style.display = hasData ? 'none' : 'block';
+  if (!hasData) return;
+
+  renderSummaryStrip(list);
+  renderWheelBars(list, 'strongest', 'barsStrongest', '');
+  renderWheelBars(list, 'leak', 'barsLeak', 'leak');
+  renderEngineChips(list);
+  renderValueBars(list);
+  renderHHSBars(list);
+  renderGwcStrip(list);
+  renderWall(list, 'wallOneThing', p => p.flywheel && p.flywheel.oneThing);
+  renderWall(list, 'wallPromote', p => p.pa && p.pa.promoteVsKeep);
+  renderWall(list, 'wallKeepJob', p => p.pa && p.pa.keepYourJobLine);
+}
+
+function renderSummaryStrip(list){
+  const byBranch = {};
+  list.forEach(e=>{
+    const b = e.payload.participant.branch || 'Unknown';
+    byBranch[b] = (byBranch[b]||0) + 1;
+  });
+  const chips = Object.keys(byBranch).sort().map(b=>'<span class="branch-chip">'+esc(b)+' ('+byBranch[b]+')</span>').join('');
+  const strip = document.getElementById('summaryStrip');
+  strip.innerHTML = stat(list.length, 'Participants in') + stat(Object.keys(byBranch).length, 'Branches represented') +
+    '<div class="branch-chips">'+chips+'</div>';
+}
+function stat(val,label){
+  return '<div class="stat"><b>'+val+'</b><span>'+label+'</span></div>';
+}
+
+function renderWheelBars(list, field, elId, extraCls){
+  const counts = {};
+  WHEEL.forEach(w=>counts[w]=0);
+  let total = 0;
+  list.forEach(e=>{
+    const v = e.payload.flywheel && e.payload.flywheel[field];
+    if (v && counts.hasOwnProperty(v)){ counts[v]++; total++; }
+  });
+  const rows = WHEEL.map(w=>({label:w, n:counts[w]})).sort((a,b)=>b.n-a.n);
+  const max = Math.max(1, ...rows.map(r=>r.n));
+  document.getElementById(elId).innerHTML = rows.map(r=>{
+    const pct = r.n===0 ? 0 : (r.n/max*100);
+    return '<div class="bar-row"><div class="bname">'+esc(r.label)+'</div>'+
+      '<div class="bar-track"><div class="bar-fill'+(extraCls?' '+extraCls:'')+'" style="width:'+pct+'%"></div></div>'+
+      '<div class="bcount">'+r.n+'</div></div>';
+  }).join('');
+}
+
+function renderEngineChips(list){
+  const counts = {};
+  list.forEach(e=>{
+    const v = e.payload.flywheel && e.payload.flywheel.engine;
+    if (v) counts[v] = (counts[v]||0)+1;
+  });
+  const keys = Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+  document.getElementById('engineChips').innerHTML = keys.length
+    ? keys.map(k=>'<span class="engine-chip">'+esc(k)+' &middot; '+counts[k]+'</span>').join('')
+    : '<span class="muted" style="color:var(--grey-400);font-size:12px">No engine picks yet.</span>';
+}
+
+function renderValueBars(list){
+  const sums = {}, counts = {};
+  CORE_VALUES.forEach(cv=>{ sums[cv]=0; counts[cv]=0; });
+  list.forEach(e=>{
+    const vp = e.payload.pa && e.payload.pa.valuePoints || {};
+    CORE_VALUES.forEach(cv=>{
+      const n = Number(vp[cv]);
+      if (!isNaN(n)){ sums[cv]+=n; counts[cv]++; }
+    });
+  });
+  const rows = CORE_VALUES.map(cv=>({label:cv, avg: counts[cv] ? sums[cv]/counts[cv] : null})).sort((a,b)=>{
+    if (a.avg==null) return 1; if (b.avg==null) return -1; return b.avg - a.avg;
+  });
+  document.getElementById('barsValues').innerHTML = rows.map(r=>{
+    const pct = r.avg==null ? 0 : Math.min(100, r.avg);
+    return '<div class="bar-row"><div class="bname">'+esc(r.label)+'</div>'+
+      '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="bcount">'+(r.avg==null?'—':r.avg.toFixed(1))+'</div></div>';
+  }).join('');
+}
+function renderHHSBars(list){
+  const sums = {}, counts = {};
+  HHS.forEach(h=>{ sums[h]=0; counts[h]=0; });
+  list.forEach(e=>{
+    const hhs = e.payload.pa && e.payload.pa.hhs || {};
+    HHS.forEach(h=>{
+      const n = Number(hhs[h]);
+      if (!isNaN(n)){ sums[h]+=n; counts[h]++; }
+    });
+  });
+  const rows = HHS.map(h=>({label:h, avg: counts[h] ? sums[h]/counts[h] : null}));
+  document.getElementById('barsHHS').innerHTML = rows.map(r=>{
+    const pct = r.avg==null ? 0 : Math.min(100, r.avg);
+    return '<div class="bar-row"><div class="bname">'+esc(r.label)+'</div>'+
+      '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div>'+
+      '<div class="bcount">'+(r.avg==null?'—':r.avg.toFixed(1))+'</div></div>';
+  }).join('');
+}
+function renderGwcStrip(list){
+  const counts = {yes:0, mostly:0, no:0};
+  list.forEach(e=>{
+    const g = e.payload.pa && e.payload.pa.gwc;
+    if (g && counts.hasOwnProperty(g)) counts[g]++;
+  });
+  document.getElementById('gwcStrip').innerHTML =
+    '<div class="gwc-stat"><b>'+counts.yes+'</b><span>Yes</span></div>'+
+    '<div class="gwc-stat"><b>'+counts.mostly+'</b><span>Mostly</span></div>'+
+    '<div class="gwc-stat"><b>'+counts.no+'</b><span>No</span></div>';
+}
+
+function renderWall(list, elId, getter){
+  const quotes = [];
+  list.forEach(e=>{
+    const text = (getter(e.payload)||'').trim();
+    if (text) quotes.push({text, name:e.payload.participant.name, branch:e.payload.participant.branch});
+  });
+  const box = document.getElementById(elId);
+  if (!quotes.length){ box.innerHTML = '<div class="muted" style="color:var(--grey-400);font-size:12.5px">Nothing here yet.</div>'; return; }
+  box.innerHTML = quotes.map(q=>'<div class="wall-quote">&ldquo;'+esc(q.text)+'&rdquo;<span class="wq-tag">'+esc(q.name)+' &middot; '+esc(q.branch)+'</span></div>').join('');
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2600);
+}
+
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+load();
+
+})();
+</script>
+</body>
+</html>

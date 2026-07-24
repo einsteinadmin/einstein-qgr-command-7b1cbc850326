@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Einstein QGR Ecosystem Map</title>
-<!-- qgr-ecosystem-map v2.1 2026-07-23 -->
+<!-- qgr-ecosystem-map v2.2 2026-07-24 — FLM cascade nodes added (flmhub, flmresults, hosted) -->
 <!--
   QGR ECOSYSTEM MAP — v2.0 (redesign: simplify + live links + data-driven)
   ========================================================================
@@ -148,7 +148,7 @@ a.step:hover{border-color:var(--blue-500);background:var(--blue-50);text-decorat
    localhost URL for tools served elsewhere. null = no link in
    that context.
    ============================================================ */
-const VERIFIED = "7/23/2026 · 3:10 AM";
+const VERIFIED = "7/24/2026 · overnight — FLM cascade lane";
 const HQ_HOSTED = "https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/";
 
 const LANES = [
@@ -227,7 +227,18 @@ const NODES = [
   { lane:"3", icon:"🧮", id:"pad", name:"People Analyzer — Directs", status:"hosted", upd:"7/23 · HOSTED",
     note:"NEW: leaders eval their own directs (CHOICES · GWC · rehire), private-until-export → results.html = the room gut-check view.",
     path:"canon: People Analyzer/directs-tier/ · sanitized deploy",
-    urlHosted:"https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/", urlLocal:"https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/" }
+    urlHosted:"https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/", urlLocal:"https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/" },
+
+  // Cascade tier — audience: frontline (added 7/24, HQ v3.53 cascade reorg). Built v0.2 same night
+  // (2-critic design audit + adversarial data audit applied); flip status to "hosted" + fill urlHosted at deploy.
+  { lane:"3", icon:"🧰", id:"flmhub", name:"FLM Workshop Hub", status:"hosted", upd:"7/24 · built v0.2, HOSTED",
+    note:"Audience: frontline. The FLM/regional-QGR mirror of the Leader Workshop Hub — flywheel placement + build-with-us activities, private-until-export. Session design DRAFT (agenda = strawman, Cameron reacting).",
+    path:"canon: QGR Prep HQ/qgr-flm-workshop-hub.html",
+    urlHosted:"https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/qgr-flm-workshop-hub.html", urlLocal:"qgr-flm-workshop-hub.html" },
+  { lane:"3", icon:"📊", id:"flmresults", name:"FLM Results — room view", status:"hosted", upd:"7/24 · built v0.2, HOSTED",
+    note:"Audience: frontline. Ships empty — drag the collected FLM session exports in live, mirrors the AAR Live Results pattern; skips stale re-drops by exportedAt.",
+    path:"canon: QGR Prep HQ/qgr-flm-results.html",
+    urlHosted:"https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/qgr-flm-results.html", urlLocal:"qgr-flm-results.html" }
 ];
 
 

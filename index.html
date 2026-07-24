@@ -479,6 +479,8 @@
   <div class="tabs">
     <button class="tab-btn active" data-zone="zone1">🗓 Runway</button>
     <button class="tab-btn" data-zone="zone2">🏁 The Room</button>
+    <button class="tab-btn" data-zone="zone4">🧢 Frontline</button>
+    <button class="tab-btn" data-zone="zone5">🚚 Movers &amp; CX</button>
     <button class="tab-btn" data-zone="zone3">📦 Aftermath</button>
   </div>
 </div>
@@ -494,14 +496,14 @@
       <div id="ecoGrid"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-the-kit">
       <div class="section-eyebrow">Start here</div>
       <div class="section-title">The kit — one front door</div>
       <div class="section-desc">Every QGR tool, linked from here and linking back — live decision tools first, then inputs, then reference. HQ = the map (all quarter) · Triage Room = the workbench · AAR Review Room = the mirror. <span style="color:#94a3b8;">(Swept 7/22: Walking Pack v2 + Day-1 Runsheet retired — built, never used; they live on in git/Drive.)</span></div>
       <div class="materials-grid" id="toolkitGrid"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-how-this-machine-works">
       <div class="section-eyebrow">Start here</div>
       <div class="section-title">How this machine works</div>
       <div class="section-desc">
@@ -590,14 +592,14 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-gate-timeline">
       <div class="section-eyebrow">Pre-QGR</div>
       <div class="section-title">Gate timeline</div>
       <div class="section-desc">Click a gate to cycle its status manually (upcoming → today → done → upcoming). Auto-computed from today’s date on load.</div>
       <div class="gate-strip" id="gateStrip"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-phase-checklist">
       <div class="section-eyebrow">Runway</div>
       <div class="section-title">Phase checklist</div>
       <div class="section-desc">Four phases in attack order: ① Pre-QGR signals + data · ② Cameron + Paul owners' days · ③ Leadership QGR readiness (the QGR itself runs in The Room tab) · ④ Cascade to front line. Check items as they land; ✎ to note.</div>
@@ -609,7 +611,7 @@
       <div id="phaseAccordion"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-team-prework-tracker">
       <div class="section-eyebrow">Runway</div>
       <div class="section-title">Team pre-work tracker</div>
       <div class="section-desc">Click a cell to cycle: ⬜ not started → 🟡 sent/reminded → ✅ verified.</div>
@@ -632,7 +634,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-my-rocks-aar-workspace">
       <div class="section-eyebrow">Runway</div>
       <div class="section-title">My rocks — AAR workspace</div>
       <div class="section-desc">Six Q2 rocks. Expand a card for Rob’s 6-question AAR — autosaves as you type.</div>
@@ -643,7 +645,7 @@
 
   <div class="zone" id="zone2">
 
-    <div class="section">
+    <div class="section" id="sec-room-agenda">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">Agenda — the live QGR checklist (7/29–30)</div>
       <div class="section-desc">THIS is where the QGR itself runs — check blocks off as the room moves, ✎-note each one (decisions, quotes, parking-lot). Runway Phase ③ only tracks readiness; no more duplication. Notes ride the normal Export, or copy them alone here:</div>
@@ -651,14 +653,14 @@
       <div id="agendaWrap"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-materials-shelf">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">Materials shelf</div>
       <div class="section-desc">One-click open, new tab, for anything you need on screen during the room.</div>
       <div class="materials-grid" id="materialsGrid"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-live-decision-log">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">Live decision log</div>
       <div class="section-desc">The room’s capture surface. Add a row per decision as it happens — mirrors into Aftermath automatically.</div>
@@ -676,6 +678,95 @@
 
   </div>
 
+  <div class="zone" id="zone4">
+
+    <div class="section" id="frontlineIntro">
+      <div class="section-eyebrow">The cascade</div>
+      <div class="section-title">Frontline Managers — the second room</div>
+      <div class="section-desc">After the leadership QGR (7/29–30) decides the quarter, the story cascades down: BMs and Ops Managers get their own ~6-hour regional FLM QGR sessions, running the same What/So-What/Now-What arc at their altitude. This tab holds that session's materials. <b style="color:var(--orange-900);">⚠ DRAFT — session design not locked yet.</b> Cameron is still reacting to the strawman agenda below; nothing here is scheduled or final.</div>
+    </div>
+
+    <div class="section" id="flmKit">
+      <div class="section-eyebrow">The cascade</div>
+      <div class="section-title">FLM/Regional session kit</div>
+      <div class="section-desc">Everything staged for the regional FLM sessions — build-with-us activities, the packet, scorecards, and the manager AAR tool.</div>
+      <div class="materials-grid">
+        <a class="material-tile" href="qgr-flm-workshop-hub.html" target="_blank" rel="noopener noreferrer">
+          <div class="material-icon">🧰</div>
+          <div><div class="material-label">FLM Workshop Hub <span class="chase-new-chip">NEW</span></div>
+          <div class="material-sub">flywheel placement + build-with-us activities, private-until-export</div></div>
+        </a>
+        <a class="material-tile" href="qgr-flm-results.html" target="_blank" rel="noopener noreferrer">
+          <div class="material-icon">📊</div>
+          <div><div class="material-label">FLM Results — room view <span class="chase-new-chip">NEW</span></div>
+          <div class="material-sub">drag exports in live</div></div>
+        </a>
+        <a class="material-tile" href="https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/q2-materials/q2-frontline-packet.html" target="_blank" rel="noopener noreferrer">
+          <div class="material-icon">🧭</div>
+          <div><div class="material-label">Frontline Packet</div>
+          <div class="material-sub">present mode = the room opener</div></div>
+        </a>
+        <a class="material-tile" href="https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/q2-materials/" target="_blank" rel="noopener noreferrer">
+          <div class="material-icon">🗂</div>
+          <div><div class="material-label">Branch Scorecards</div>
+          <div class="material-sub">all 10, from the Q2 materials index</div></div>
+        </a>
+        <a class="material-tile" href="https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/" target="_blank" rel="noopener noreferrer">
+          <div class="material-icon">📝</div>
+          <div><div class="material-label">Manager AAR Tool</div>
+          <div class="material-sub">the Roundtable exercise — seats preloaded for every BM/Ops/FM (rollout message HELD until Cameron final-states it)</div></div>
+        </a>
+        <div class="material-tile" style="cursor:default;">
+          <div class="material-icon">🧠</div>
+          <div><div class="material-label">Brainstorm + strawman agenda</div>
+          <div class="material-sub">local doc — <code>flm-regional-qgr-brainstorm-2026-07-23.md</code> (parking lot, not decisions)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="flmOpenBefore">
+      <div class="section-eyebrow">The cascade</div>
+      <div class="section-title">Open before the session</div>
+      <div class="section-desc">Not tracked as state yet — a running checklist to clear before the regional sessions can run.</div>
+      <ul style="margin:0; padding-left:20px; font-size:0.85rem; color:#2A2A2A; line-height:1.7;">
+        <li>Frontline-packet placeholders fill after the QGR rulings (Claims/MM · CX lookback · Q3 theme)</li>
+        <li>Session dates + facilitators per region — TBD</li>
+        <li>OPSP write-out worksheet to print</li>
+        <li>Cameron's edit-mode rewrite pass on the frontline packet</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="zone" id="zone5">
+
+    <div class="section" id="moversCxIntro">
+      <div class="section-eyebrow">The cascade</div>
+      <div class="section-title">Movers &amp; CX Reps — the third room</div>
+      <div class="section-desc">The same What/Why/How reduction goes one level further — what a mover or a CX rep actually sees. Design starts after the FLM tier lands; nothing here is built yet beyond a local prototype.</div>
+      <div class="materials-grid">
+        <div class="material-tile" style="cursor:default;">
+          <div class="material-icon">📄</div>
+          <div><div class="material-label">Mover Packet prototype</div>
+          <div class="material-sub">prototype exists locally (<code>QGR Packet/mover-packet-naustin.html</code>) — not hosted yet</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="moversCxPrinciples">
+      <div class="section-eyebrow">The cascade</div>
+      <div class="section-title">Design principles</div>
+      <div class="section-desc">Same rules the frontline packet already runs on, carried one level further.</div>
+      <ul style="margin:0; padding-left:20px; font-size:0.85rem; color:#2A2A2A; line-height:1.7;">
+        <li>Plain language</li>
+        <li>No letter grades</li>
+        <li>WIFM framing</li>
+        <li>Zero sensitive financials</li>
+      </ul>
+    </div>
+
+  </div>
+
   <div class="zone" id="zone3">
 
     <div class="section" id="scorecardSection">
@@ -686,7 +777,7 @@
       <div class="scorecard-grid" id="scorecardLeaders"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-q2-headlines">
       <div class="section-eyebrow">For the room</div>
       <div class="section-title">📣 Q2 headlines — Cameron, from the 7/22 AAR review</div>
       <div class="section-desc">The two statements to discuss with the team when the AARs come up (also baked into the AAR Review Room's company panel).</div>
@@ -702,21 +793,21 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-cross-team-lessons">
       <div class="section-eyebrow">Aftermath</div>
       <div class="section-title">Cross-team lessons</div>
       <div class="section-desc">Patterns that showed up across more than one leader's AAR this quarter — direct input to Q3 rock design and the goal-hygiene gate.</div>
       <div class="scorecard-rail" id="scorecardLessons"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-divergence-conversations">
       <div class="section-eyebrow">Aftermath</div>
       <div class="section-title">Divergence conversations</div>
       <div class="section-desc">Grade disagreements that need a live conversation at QGR — this tool surfaces them, it doesn't resolve them. Now six: the original four plus Cameron's 7/22 review adds (Anne Mover Promotion G→R · Matisen Call Grading R→G, an upgrade).</div>
       <div class="divergence-strip" id="scorecardDivergence"></div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-who-owns-what">
       <div class="section-eyebrow">Aftermath</div>
       <div class="section-title">Who-owns-what</div>
       <div class="section-desc">Auto-mirrors the decision log from The Room, plus manual adds. Update status as things move.</div>
@@ -732,13 +823,13 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="sec-rollout-moved">
       <div class="section-eyebrow">Aftermath</div>
       <div class="section-title">Rollout → moved</div>
       <div class="section-desc">The rollout checklist is now <b>Phase ④ Cascade</b> on the Runway tab (single list, no duplication). This tab keeps the decision log + changelog.</div>
     </div>
 
-    <div class="section">
+    <div class="section" id="changelogSection">
       <div class="section-eyebrow">Aftermath</div>
       <div class="section-title">Changelog</div>
       <div class="section-desc">Dated entries — every session that touches this project appends here.</div>
@@ -780,7 +871,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.52 2026-07-23'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.53 2026-07-24'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1117,6 +1208,8 @@
   // built, never used; both live on in git/Drive), the room's working tools promoted to the
   // front door. Order = live decision tools first, then inputs, then reference.
   var TOOLKIT_SEED = [
+    { icon: '🧰', label: 'FLM Workshop Hub', sub: 'cascade tier — flywheel placement + build-with-us activities for the regional FLM QGR sessions, private-until-export', url: 'qgr-flm-workshop-hub.html' },
+    { icon: '📊', label: 'FLM Results — room view', sub: 'cascade tier — ships empty, drag the collected FLM session exports in live', url: 'qgr-flm-results.html' },
     { icon: '🛠', label: 'QGR Triage Room', sub: 'the workbench — walked-group sync · triage bar (QG + Super Critical only) · per-leader lanes · dependencies', url: 'qgr-triage-room.html' },
     { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'how every tool connects — data spine → artifacts → people loops; the get-your-head-around-it one-pager', url: 'qgr-ecosystem-map.html' },
     { icon: '🗳', label: 'QGR Workshop Hub (leader link)', sub: 'send THIS to the Roundtable — debate ballot (4 redlined leans) + prep tiles; ballots export-and-return to Cameron, nobody sees anybody else\'s pre-room', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/' },
@@ -1208,6 +1301,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/24', text: '\u{1F9E2} CASCADE REORG (HQ v3.53): the hub now represents the FULL QGR cascade, not just the leadership room. ① <b>Two new tabs</b> — \u{1F9E2} Frontline (zone4: FLM/regional session kit, open-before-session checklist, DRAFT-flagged — session design not locked) and \u{1F69A} Movers &amp; CX (zone5: the third-room reduction, design starts after the FLM tier lands) — sit between The Room and Aftermath, so the tab bar now reads the cascade in order: Runway → The Room → Frontline → Movers &amp; CX → Aftermath. ② <b>Every section in every zone now collapses</b> — click the title to fold it to just the eyebrow+title row, state saved per-section in localStorage; each zone got a Collapse all / Expand all pair top-right. Built to fix the “this is overwhelming” read, additively — no existing zone IDs, storage keys, or section IDs touched. ③ <b>FLM Workshop Hub v0.2 BUILT + wired</b> into the toolkit shelf + the new Frontline kit (qgr-flm-workshop-hub.html = flywheel placement + build-with-us activities, private-until-export · qgr-flm-results.html = drag-drop room aggregator w/ staleness guard) — design-audited (2 critics) + data-audited same night. + audit fixes' },
     { date: '7/23j', text: '\u{1F9ED} FRONTLINE CASCADE PACKET SHIPPED (wrap session): <b>q2-frontline-packet.html</b> live in /q2-materials/ \u2014 the plain-English What/So-What/Now-What company story for BMs/movers/CERs, built off flm-cascade-cut-spec, redaction-audited (only $ on page = $8.4M). Cameron additions ruled + built same night: \u2460 <b>3 modes</b> \u2014 Read (default) / Present (12\u219213 big-type slides for TV/huddles, talking-points expander) / Edit (inline contenteditable, 103+ tracked blocks, localStorage, markdown export of notes+edits for his rewrite pass) + deck-style review notes. \u2461 <b>Three-lens strip in plain language</b> (vs plan: fell short \u00b7 vs market: strong ~3\u00d7 \u00b7 vs history: record revenue, less profit) \u2014 the lens QUESTIONS cascade, the letter grades never do. \u2462 <b>Who-We-Are opener</b> (purpose \u00b7 4 brand promises \u00b7 BHAG \u00b7 CHOICES line) = the Scaling-Up vision-summary grounding. \u2463 <b>Now\u2014Your-Branch closing handoff</b> to the branch scorecards (the huddle flow: company page \u2192 branch page). Wired: roundtable-packet TOC Cascade link + Workshop Hub tile. DRAFT-bannered \u2014 placeholders (Claims/MM \u00b7 CX lookback \u00b7 Q3 theme) fill after the QGR rulings; Cameron rewrites via Edit mode \u2192 exports \u2192 Albert folds. Roundtable play ruled: present mode = the ROOM OPENER before the deck deep-dive.' },
     { date: '7/23i', text: '\u{1F4E5} DATA-DROP FOLD SESSION (Albert lane, evening): \u2460 <b>BEN VALIDATED THE NOI-MISS DECOMPOSITION</b> \u2014 all six questions answered from the full GL (reply on pulse 12614747310 + NOI_Miss_Validated_Answers file). Deck \u00a71.2 driver rows DRAFT\u2192VALIDATED (P&O fully explained: PH team via 64029/Rippling EOR, 62200 zero activity \u2014 mirror confirmed mechanically; advertising = half deliberate digital + $18K Indeed miscoding; packing = New Haven bulk timing; occupancy = one-time $27K repair; mover comp \u201cvalidated as written\u2026 lead with it\u201d). Lens 3 B\u2212 chip \u2192 VALIDATED; Priority #2 marked done; 26/74 split footnoted pre-reclass (restates once at July close; May+Jun 43/57 view \u2192 appendix per Ben). NEW open item: Burst Growth 2\u00d7$6,667 in May AND June \u2014 Ben verifying billing vs duplicate. \u2461 <b>ROAS LANDED</b> \u2014 Matisen\u2019s rebuilt CPL & ROAS dashboard folded as deck \u00a72.4 (CPL $17/$19 \u00b7 33.0% apples conversion \u00b7 $59/booked move \u00b7 $251K media ~5% rev \u00b7 LTV:CAC \u224813:1 \u00b7 isRepeat-bug callout: real repeat ~23%, CRM ~10% is a bug). Chase row checked; prelim pending Cameron\u2019s dashboard read. \u2462 <b>INSURANCE/ACCIDENTS LANDED</b> \u2014 Jaci\u2019s accident log folded as packet 4B \u201cReal-World Outcomes\u201d (YTD 40 accidents/$56.7K/3 claims $15K; Q2 26/~$28.5K; FW+Tampa zero = cross-validates per-10K; May worst month = 13; mix = fixed-object strikes \u2192 maneuvering/spotting TRAINING focus, cameras already in trucks ~6 mo). NOT_CALCULABLE retired; chase row checked. \u2463 Paul\u2019s What/So What/Now What framework filed to memory + <b>flm-cascade-cut-spec-2026-07-23.md</b> authored (subagent) for the frontline stripped build. Deploy still HELD for Cameron\u2019s red-line finish; adversarial audit of the stacked folds launched same session.' },
     { date: '7/23h', text: '\u{1F69B} FLEET SAFETY — MIKE’S REVIEW ADOPTED AS THE DEFINITIVE BASIS (Cameron’s ruling). Mike delivered a Q2 Fleet Safety Review built off an <b>alert-by-alert re-review in Samsara</b> of the top dismissals at every branch — confirming whether each was legitimate and summarising the why. Cameron ruled it definitive over the packet’s prior figures. ① <b>Company headline moved:</b> safety score 89.3→89.0, at-risk 11.9%→10.9%, events 1,031→902, miles 319,204→290,151, rate 32.3→31.1 per 10K. ② <b>Component 4B is now SINGLE-BASIS</b> — events, miles and dismissals finally share one denominator (Mike’s 902 review basis), retiring the dual-basis caveat that has sat on this section since 7/22. Per-branch rows rebased and re-sorted worst→best on events/10K (McKinney 62.1, Dallas 39.5 still the two outliers; FW 10.2 cleanest). ③ <b>Two placeholders closed:</b> the 8-behavior Q2 counts landed (Following Distance −54% is the quarter’s biggest win; Rolling Stop +217% and Inattentive +23% are the two deliberately tightened standards, 78% of the whole event increase), and a NEW <b>Dismissal Integrity Audit</b> table shipped with a per-branch verdict + the 2 actions (iPad-looking Inattentive alerts no longer dismissible — hits N.Austin + Dallas; San Antonio broken-visor = fix the truck, don’t dismiss the alert). ④ <b>Matisen’s API feed was NOT deleted</b> — relabelled in the financial deck as “all detected telemetry events”, because it is the only source with monthly per-branch granularity. Two measures, named apart, no longer presented as one. Manifest → <b>v0.9.6</b> (validator clean, new <code>_fleet_safety_review_q2_26</code> block). ⚠ ⑤ <b>Coaching volume RETIRED as a metric</b> (Cameron’s call): its Q1 thesis — “dismissing less because we’re coaching more” — is proven, so the AWAITING placeholder is replaced by a DERIVED <b>Events Retained</b> table needing no further Samsara pull: retention <b>51.8% (Q4) → 63.8% (Q1) → 79.3% (Q2)</b>, retained volume 429→715 even as the standard tightened. ⚠ Guardrail shipped with it: retained is the CEILING on coaching, not a count — a retained event may be coached, unreviewed, or closed without a conversation, so never say “715 coaching conversations.” ⑥ <b>Mike’s full review is now HOSTED</b> at <code>/q2-materials/q2-fleet-safety-review.html</code> (noindex, v1.0.1) and linked from 4B both as a top button and in the footer, with a back-link home. Its dismissal KPI was reconciled 20.4%→20.7% so the deep dive can’t contradict the packet it hangs off. <b>All 4 of Mike’s Q2 deep-dive asks are now closed.</b> Packet v2.1.1.' },
@@ -2142,10 +2236,10 @@
   // Update the `upd` stamps whenever a tool materially changes; the band is the LIVE view, the map is the snapshot.
   var ECO_SEED = [
     { lane: '🗺 The map', items: [
-      { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'the one-page drawing — v2: simplified, click-through cards, verified stamp', url: 'qgr-ecosystem-map.html', upd: '7/23 · v2.1 people-flows' }
+      { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'the one-page drawing — v2: simplified, click-through cards, verified stamp', url: 'qgr-ecosystem-map.html', upd: '7/24 · v2.2 FLM nodes' }
     ]},
     { lane: '1 · Data spine', items: [
-      { icon: '📊', label: 'Manifest + metric registry', sub: 'branch-metrics-q2-26.json v0.8.3 — the one spine every artifact reads · registry = cross-quarter trend IDs', url: '#chase-list', upd: '7/23 · dismissals folded' },
+      { icon: '📊', label: 'Manifest + metric registry', sub: 'branch-metrics-q2-26.json v0.9.9 — the one spine every artifact reads · registry = cross-quarter trend IDs', url: '#chase-list', upd: '7/24 · version reconcile (parallel-lane 0.9.7/0.9.8 collision)' },
       { icon: '📥', label: 'Packet Data Chase List', sub: 'every feed · source · owner · landed-state', url: '#chase-list', upd: '7/23' }
     ]},
     { lane: '2 · Artifacts', items: [
@@ -2163,6 +2257,11 @@
       { icon: '🛠', label: 'Triage Room', sub: 'bar view + department funnel — the Cameron+Paul workbench', url: 'qgr-triage-room.html', upd: '7/23 · v1.8 bars+funnel' },
       { icon: '🧮', label: 'People Analyzer — Leadership', sub: 'LOCAL ONLY, never hosted — launch people-analyzer :8136', url: 'http://localhost:8136/people-analyzer-leadership.html', upd: '7/22 · UX pass' },
       { icon: '🧮', label: 'People Analyzer — Directs (NEW)', sub: 'leaders eval their own directs + results room view — LIVE, wired from the Workshop Hub', url: 'https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/', upd: '7/23 · HOSTED' }
+    ]},
+    { lane: '🧢 · Frontline cascade (NEW)', items: [
+      { icon: '🧰', label: 'FLM Workshop Hub', sub: 'the FLM/regional-QGR room tool — flywheel placement + build-with-us activities, private-until-export · session design DRAFT', url: 'qgr-flm-workshop-hub.html', upd: '7/24 · v0.2 built + audited' },
+      { icon: '📊', label: 'FLM Results — room view', sub: 'ships empty — drag FLM exports in live · skips stale re-drops', url: 'qgr-flm-results.html', upd: '7/24 · v0.2' },
+      { icon: '🧭', label: 'Frontline Packet', sub: 'the plain-English company story — present mode = the room opener', url: 'q2-materials/q2-frontline-packet.html', upd: '7/23 · DRAFT live' }
     ]}
   ];
   function renderEcosystem() {
@@ -2606,6 +2705,110 @@
     renderChangelog();
   }
 
+  /* ============================================================
+     COLLAPSIBLE SECTIONS (7/24 cascade reorg — additive, all zones)
+     Every .section collapses on title click; state persists per-section
+     in its own localStorage key so it survives across sessions. Does not
+     touch any existing zone IDs, section IDs, or state migrations.
+     ============================================================ */
+  var SECTION_COLLAPSE_KEY = LS_PREFIX + 'sections-collapsed';
+  function getSectionCollapseMap() {
+    try { return JSON.parse(localStorage.getItem(SECTION_COLLAPSE_KEY)) || {}; } catch (e) { return {}; }
+  }
+  function setSectionCollapseMap(m) { localStorage.setItem(SECTION_COLLAPSE_KEY, JSON.stringify(m)); }
+  function slugifySectionTitle(s) {
+    return (s || 'section').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '').slice(0, 60) || 'section';
+  }
+  function sectionSlug(section) {
+    if (section.id) return section.id;
+    var titleEl = section.querySelector('.section-title');
+    return slugifySectionTitle(titleEl ? titleEl.textContent : '');
+  }
+  function applySectionCollapsed(section, collapsed) {
+    var titleEl = section.querySelector('.section-title');
+    var eyebrowEl = section.querySelector('.section-eyebrow');
+    Array.prototype.forEach.call(section.children, function (child) {
+      if (child === titleEl || child === eyebrowEl) return;
+      child.style.display = collapsed ? 'none' : '';
+    });
+    if (titleEl) {
+      var caret = titleEl.querySelector('.section-caret');
+      if (caret) caret.textContent = collapsed ? '▸' : '▾';
+    }
+    section.classList.toggle('section-collapsed', collapsed);
+  }
+  function wireSectionCollapse(section) {
+    if (section.dataset.collapseWired === '1') return;
+    var titleEl = section.querySelector('.section-title');
+    if (!titleEl) return; // no title row — nothing to collapse against
+    section.dataset.collapseWired = '1';
+    var caret = document.createElement('span');
+    caret.className = 'section-caret';
+    caret.textContent = '▾';
+    caret.style.cssText = 'display:inline-block; width:14px; margin-right:6px; font-size:0.85em; color:#94a3b8;';
+    titleEl.insertBefore(caret, titleEl.firstChild);
+    titleEl.style.cursor = 'pointer';
+    titleEl.addEventListener('click', function (e) {
+      if (e.target.closest('a, button, input, textarea, select, label, [contenteditable="true"]')) return;
+      var slug = sectionSlug(section);
+      var map = getSectionCollapseMap();
+      var collapsed = !map[slug];
+      map[slug] = collapsed;
+      setSectionCollapseMap(map);
+      applySectionCollapsed(section, collapsed);
+    });
+  }
+  function wireZoneCollapseControls(zone) {
+    if (zone.dataset.collapseControlsWired === '1') return;
+    zone.dataset.collapseControlsWired = '1';
+    var bar = document.createElement('div');
+    bar.style.cssText = 'display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-bottom:8px; font-size:0.76rem;';
+    bar.innerHTML =
+      '<button type="button" class="zone-collapse-all-btn" style="background:none; border:none; color:var(--blue); font-weight:700; cursor:pointer; padding:2px 4px;">Collapse all</button>' +
+      '<span style="color:#c9c9c9;">·</span>' +
+      '<button type="button" class="zone-expand-all-btn" style="background:none; border:none; color:var(--blue); font-weight:700; cursor:pointer; padding:2px 4px;">Expand all</button>';
+    zone.insertBefore(bar, zone.firstChild);
+    bar.querySelector('.zone-collapse-all-btn').addEventListener('click', function () {
+      var map = getSectionCollapseMap();
+      zone.querySelectorAll('.section').forEach(function (section) {
+        map[sectionSlug(section)] = true;
+        applySectionCollapsed(section, true);
+      });
+      setSectionCollapseMap(map);
+    });
+    bar.querySelector('.zone-expand-all-btn').addEventListener('click', function () {
+      var map = getSectionCollapseMap();
+      zone.querySelectorAll('.section').forEach(function (section) {
+        map[sectionSlug(section)] = false;
+        applySectionCollapsed(section, false);
+      });
+      setSectionCollapseMap(map);
+    });
+  }
+  // First-boot collapse defaults (design-audit fix, 7/24): if NO saved map exists yet
+  // (i.e. this is the first load after this shipped), seed it opinionated — these four
+  // sections start collapsed, everything else starts expanded — then save immediately
+  // so later user toggles persist normally. If a map already exists, leave it untouched.
+  var DEFAULT_COLLAPSED_SLUGS = ['sec-how-this-machine-works', 'runbook', 'changelogSection', 'ecosystemSection'];
+  function seedDefaultCollapseMapIfNeeded() {
+    var raw = localStorage.getItem(SECTION_COLLAPSE_KEY);
+    if (raw !== null) return; // a map already exists (even if empty {}) — never touch it
+    var seeded = {};
+    DEFAULT_COLLAPSED_SLUGS.forEach(function (slug) { seeded[slug] = true; });
+    setSectionCollapseMap(seeded);
+  }
+  function initSectionCollapse() {
+    seedDefaultCollapseMapIfNeeded();
+    var map = getSectionCollapseMap();
+    document.querySelectorAll('.zone').forEach(function (zone) {
+      wireZoneCollapseControls(zone);
+      zone.querySelectorAll('.section').forEach(function (section) {
+        wireSectionCollapse(section);
+        applySectionCollapsed(section, !!map[sectionSlug(section)]);
+      });
+    });
+  }
+
   function init() {
     renderAll();
     renderScorecard();
@@ -2673,6 +2876,8 @@
     });
 
     setInterval(renderCountdown, 60 * 1000);
+
+    initSectionCollapse();
   }
 
   if (document.readyState === 'loading') {
