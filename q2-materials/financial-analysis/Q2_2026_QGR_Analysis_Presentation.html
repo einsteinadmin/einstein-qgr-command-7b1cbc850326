@@ -813,6 +813,21 @@
   body.present-mode .stat-tile .stat-label { font-size: 13px; }
   body.present-mode .stat-tile .stat-num { font-size: 34px; }
   body.present-mode .stat-tile .stat-sub { font-size: 14.5px; }
+
+  /* === Section 1 accordion (Cameron 7/24) === */
+  .fin-controls { display:flex; gap:8px; margin:10px 0 14px 0; }
+  .fin-controls button { font: 600 11.5px 'Roboto', Arial, sans-serif; color: var(--gray-700);
+    background: var(--gray-100); border: 1px solid var(--gray-300); border-radius: 14px;
+    padding: 4px 12px; cursor: pointer; }
+  .fin-controls button:hover { background: var(--gray-200); }
+  .fin-sec > .fin-sec-head { cursor: pointer; user-select: none; position: relative; padding-right: 28px; }
+  .fin-sec > .fin-sec-head::after { content: '\25BE'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%); color: var(--gray-400); font-size: 14px; transition: transform .15s; }
+  .fin-sec.collapsed > .fin-sec-head::after { transform: translateY(-50%) rotate(-90deg); }
+  .fin-sec.collapsed > .fin-sec-body { display: none; }
+  .fin-sec.collapsed > .fin-sec-head { opacity: .8; border-bottom: 1px dashed var(--gray-300); padding-bottom: 6px; }
+  @media print { .fin-sec > .fin-sec-body { display: block !important; } .fin-controls { display: none; } }
+  body.present-mode .fin-sec > .fin-sec-body { display: block !important; }
 </style>
 <style>
   .cv-tag { color: var(--orange-dark); font-weight: 800; cursor: help; margin-left: 1px; }
@@ -3613,6 +3628,93 @@ const yoyData = [
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', reapply);
   else reapply();
+})();
+</script>
+
+<script>
+(function(){
+  // Section 1 accordion — wraps each 1.x subsection so it can collapse. Expanded by default.
+  var start = document.getElementById('sec-financial');
+  var end = document.getElementById('sec-marketing');
+  if (!start || !end || start.parentElement !== end.parentElement) return;
+  var KEY = 'q2-findeck-v2-fin-collapse-v1';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { saved = {}; }
+
+  function isSectionHead(n){
+    if (!(n instanceof HTMLElement)) return false;
+    if (n.tagName === 'H3' && /^1\./.test(n.textContent.trim())) return true;
+    if (n.tagName === 'H2' && (n.id === 'sec-cash' || n.id === 'sec-rankings')) return true;
+    return false;
+  }
+  function slug(head){ return (head.textContent.trim().match(/^1\.[0-9a-z.]*/) || ['sec'])[0]; }
+
+  var parent = start.parentElement;
+  var nodes = [];
+  for (var n = start.nextSibling; n && n !== end; n = n.nextSibling) nodes.push(n);
+
+  var groups = [], cur = null;
+  nodes.forEach(function(n){
+    if (isSectionHead(n)) { cur = { head: n, body: [] }; groups.push(cur); }
+    else if (cur) cur.body.push(n);
+  });
+  if (!groups.length) return;
+
+  var secs = [];
+  groups.forEach(function(g){
+    var wrap = document.createElement('div'); wrap.className = 'fin-sec';
+    var body = document.createElement('div'); body.className = 'fin-sec-body';
+    parent.insertBefore(wrap, g.head);
+    g.head.classList.add('fin-sec-head');
+    wrap.appendChild(g.head);
+    g.body.forEach(function(n){ body.appendChild(n); });
+    wrap.appendChild(body);
+    var id = slug(g.head);
+    wrap.dataset.finId = id;
+    if (saved[id]) wrap.classList.add('collapsed');
+    g.head.addEventListener('click', function(ev){
+      if (ev.target.closest('a, .cv-tag, sup, button')) return; // don't toggle on tag/link clicks
+      toggle(wrap, !wrap.classList.contains('collapsed'));
+      persist();
+    });
+    secs.push(wrap);
+  });
+
+  function toggle(wrap, collapse){
+    wrap.classList.toggle('collapsed', collapse);
+    if (!collapse && window.Chart) {
+      wrap.querySelectorAll('canvas').forEach(function(c){
+        var ch = Chart.getChart ? Chart.getChart(c) : null;
+        if (ch) setTimeout(function(){ ch.resize(); }, 0);
+      });
+    }
+  }
+  function persist(){
+    var st = {};
+    secs.forEach(function(w){ if (w.classList.contains('collapsed')) st[w.dataset.finId] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e){}
+  }
+
+  var ctrl = document.createElement('div'); ctrl.className = 'fin-controls';
+  ctrl.innerHTML = '<button type="button" data-act="collapse">Collapse all 1.x</button><button type="button" data-act="expand">Expand all</button>';
+  start.parentElement.insertBefore(ctrl, start.nextSibling);
+  ctrl.addEventListener('click', function(ev){
+    var act = ev.target && ev.target.dataset && ev.target.dataset.act;
+    if (!act) return;
+    secs.forEach(function(w){ toggle(w, act === 'collapse'); });
+    persist();
+  });
+
+  function expandForHash(){
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var t = document.getElementById(id);
+    if (!t) return;
+    var wrap = t.closest('.fin-sec');
+    if (wrap && wrap.classList.contains('collapsed')) { toggle(wrap, false); persist(); t.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', expandForHash);
+  expandForHash();
 })();
 </script>
 </body>
