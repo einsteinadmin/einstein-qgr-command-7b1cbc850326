@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>North Austin — Q2'26 Branch Scorecard</title>
-<meta name="robots" content="noindex, nofollow">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   /* ══ Local fonts (C3 design pass, 2026-07-10) — bundled from the Einstein Brand Kit
@@ -2240,7 +2240,7 @@
 
       <div class="dt-strip" style="margin-top:14px;">
         <h4 style="margin:0 0 6px 0;font-size:13px;color:var(--navy);">Dream Team — N. Austin has no trophy holders this season</h4>
-        <p style="font-size:11.5px;color:var(--gray-600);margin:0 0 8px 0;">The Season 3 Dream Team = the top 10% of Overall Q2 score among the 213 movers who cleared the 250 Rippling-hour busy-season floor (21 trophy holders company-wide, top-21 hard slice per the live S3 page's own roster). N. Austin placed none of its movers on that list this season.</p>
+        <p style="font-size:11.5px;color:var(--gray-600);margin:0 0 8px 0;">The Season 3 Dream Team = the top 10% of Overall Q2 score among the 212 movers who cleared the 250 Rippling-hour busy-season floor (24 trophy holders company-wide — inclusive-tie rule: all movers tied at the cutline qualify). N. Austin placed none of its movers on that list this season.</p>
       </div>
 
       <h3 class="games-subhead" style="margin-top:14px;">The Conferences</h3>
@@ -2400,7 +2400,8 @@
           <span class="metric-grade r">Red</span>
         </div>
         <p class="metric-target">vs target <strong>75.6%</strong> · <strong>−8.7 pts below target</strong> · ranks <strong>#9 of 10</strong> branches (only Tampa lower)</p>
-        <details class="drill"><summary>Why this matters</summary><p>TUR is the company's guiding capacity metric — it tells us whether trucks are working or sitting idle. North Austin is running 8.7 points below target and ranks 9th of 10 branches this quarter — Garland leads at 92.8%, Fort Worth 81.4%, Dallas 81.2%. TUR moved into this section for Q2 (was paired with Personnel-Budget in Critical Numbers through Q1); Q2's 2 graded Critical Numbers are Personal-Goal Attainment and the Einstein Games Branch Average — see Critical Numbers · Q2 below.</p></details>
+        <p class="metric-footnote" style="font-size:11px;color:var(--gray-600);margin-top:4px;">Running-truck TUR (crew-out excluded): <strong>88.3%</strong> — 177 crew-out truck-days in Q2. Owned-fleet is the graded basis; the gap between the two is staffing, not demand.</p>
+        <details class="drill"><summary>Why this matters</summary><p>TUR is the company's guiding capacity metric — it tells us whether trucks are working or sitting idle. On running trucks NA ran 88.3% — above target; the owned-fleet shortfall was crew-out (177 truck-days), a staffing constraint, not idle demand. On the graded owned-fleet basis, North Austin ranks 9th of 10 branches this quarter — Garland leads at 92.8%, Fort Worth 81.4%, Dallas 81.2%. TUR moved into this section for Q2 (was paired with Personnel-Budget in Critical Numbers through Q1); Q2's 2 graded Critical Numbers are Personal-Goal Attainment and the Einstein Games Branch Average — see Critical Numbers · Q2 below.</p></details>
         <details class="metric-source"><summary></summary><p class="source-detail">Matisen feed tur-actuals-q2-26-2026-07-21.csv v8 · targets = Q3 '26 Revenue Forecaster row-6 "Adjusted Forcast after Q1" set, of-record per Cameron ruling 7/21 · <strong>caveats:</strong> Rippling punch-clock outage 6/29→ (hours approximated) · target method was mis-built and is being validated w/ Matisen+Paul 7/22 (tur_target still preliminary) · July = projected-landing estimate</p></details>
       </div>
 
@@ -2436,7 +2437,7 @@
 
     <div class="chart-wrap">
       <p class="chart-title">TUR by Branch — Actual vs Target <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></p>
-      <p class="chart-sub">N. Austin (highlighted) runs 8.7 pts below its preliminary target, ranking 9th of 10. TUR grading now lives here in Financial Engine (moved from Critical Numbers for Q2 — see the note in Critical Numbers · Q2 below). tur_target values are preliminary pending Cameron's 7/22 validation with Matisen + Paul.</p>
+      <p class="chart-sub">N. Austin (highlighted) runs 8.7 pts below its preliminary target on the graded owned-fleet basis, ranking 9th of 10. On running trucks NA ran 88.3% — above target; the owned-fleet shortfall was crew-out (177 truck-days), a staffing constraint, not idle demand. TUR grading now lives here in Financial Engine (moved from Critical Numbers for Q2 — see the note in Critical Numbers · Q2 below). tur_target values are preliminary pending Cameron's 7/22 validation with Matisen + Paul.</p>
       <div class="chart-canvas-wrap tall"><canvas id="chartTUR"></canvas></div>
     </div>
   </section>
@@ -2816,7 +2817,7 @@
     <details class="data-source-collapsible"><summary>📍 Driver Safety Score rubric (v3.3.7) — standing reference this quarter</summary><div class="data-source-content">SG ≥90 score AND &lt;10% high-risk · G ≥80 AND ≤20% HR · W 70-79 OR (≥80 AND &gt;20% HR) · R &lt;70. N. Austin Q2: 88 score / 15.4% high-risk (6 of 39 active drivers) → <strong>Green</strong> under this rubric, up from Watch (72/18%) in Q1. Driver Safety is no longer one of Q2's 2 graded Critical Numbers (Cameron's 7/22 ruling replaced it with Personal-Goal Attainment + Einstein Games) but stays visible as a standing Fleet Safety reference — theme-independent, permanent per the qgr-packet-builder skill. Source: Mike Vandenbroader manual Samsara pull, master org 7005377, delivered 2026-07-22.</div></details>
     <details class="data-source-collapsible"><summary>📍 Personnel-Budget rubric (v3.4.4, Cameron 5/4 ruling — LOCKED, now "Avg % to Personal (Budget) Goal — Q2")</summary><div class="data-source-content">SG &gt;110% (over plan) · G 95-110% (on plan) · W 85-94% (under plan) · R chronic-F (&lt;95% sustained). Over-budget alone does NOT dock. N. Austin Q2: 100.9% day-weighted → <strong>Green</strong> (on-plan band). This metric is now one of Q2's 2 graded Critical Numbers per Cameron's 7/22 ruling, standing in for "average % to personal goal" — see the flag under that tile above.</div></details>
     <details class="data-source-collapsible"><summary>📍 Strategic Weight (v3.3.2 lens)</summary><div class="data-source-content">Cover-hero chip frames each branch's cash-contribution scale separately from the operational composite. Tiers: Cash Leader (≥20% NOI) · Cash Contributor (8-20%) · Cash Neutral (0-8%) · Growth Bet (negative NOI, planned-loss / new market) · Underperforming (negative NOI, NOT designated investment). NO impact on grade math — parallel display only. N. Austin moved from Cash Leader (Q1, 37.5% NOI share) to Cash Contributor (Q2, 17.9% NOI share) — a real trajectory shift, named here rather than explained without proof.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Sources</summary><div class="data-source-content">Manifest <code>branch-metrics-q2-26.json</code> v0.8.2 (validator-clean) — the sole number source for this file. Feed lineage: Matisen's 5-feed fold (sales, TUR, personnel-budget, Samsara safety, GatherUp NPS), intake-validated, folded via <code>fold_feeds_v080.py</code> v0.8.0→v0.8.2. Sage Intacct via Ben Young workbook v4 (financials, posted 7/20). Games data: <code>_games_s3_q2_26</code> block + <code>q2-data/games-s3-branch-slices/n_austin.json</code>. Metric registry: <code>metric-registry.json</code> — stable metric ids + basis_version; watch the TUR basis note (the Matisen staffing-model redefinition, if it lands, is a basis bump + trend break, not a silent re-baseline).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Sources</summary><div class="data-source-content">Manifest <code>branch-metrics-q2-26.json</code> v0.10.4 (validator-clean) — the sole number source for this file. Feed lineage: Matisen's 5-feed fold (sales, TUR, personnel-budget, Samsara safety, GatherUp NPS), intake-validated, folded via <code>fold_feeds_v080.py</code> v0.8.0→v0.10.4. Sage Intacct via Ben Young workbook v4 (financials, posted 7/20). Games data: <code>_games_s3_q2_26</code> block + <code>q2-data/games-s3-branch-slices/n_austin.json</code>. Metric registry: <code>metric-registry.json</code> — stable metric ids + basis_version; watch the TUR basis note (the Matisen staffing-model redefinition, if it lands, is a basis bump + trend break, not a silent re-baseline).</div></details>
     <details class="data-source-collapsible"><summary>📍 Known data gaps (Q3 collection target)</summary><div class="data-source-content">Sales Target Attainment basis resolution (three competing revenue reads) · Mover eNPS cycle resumption + graded-component treatment decision · Recognition % (Q2 praise export) · Conversion #, Cancellation Rate, Contracts Count (EMMA missing-contracts backfill) · Damages per Hour (post-season reconciliation) · <code>nps_moves</code> · Magic Moments per Move · QGR Rock Performance · People Analyzer A/B/C mix · On-Site Eval coverage — all carried from the Q1 wishlist, none newly landed this quarter except Damages (now a scored Einstein Games component).</div></details>
 
     <div class="audit-callout">
@@ -2825,7 +2826,7 @@
   </section>
 
   <p class="manifest-stamp" style="font-size:11px;color:var(--gray-500);text-align:center;margin-top:24px;">
-    Rendered from branch-metrics-q2-26.json v0.8.2 &middot; 2026-07-22 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate)
+    Rendered from branch-metrics-q2-26.json v0.10.4 &middot; 2026-07-25 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate)
   </p>
 
   <div class="footer">

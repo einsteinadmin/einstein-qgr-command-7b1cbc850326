@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>San Antonio — Q2'26 Branch Scorecard</title>
-<meta name="robots" content="noindex, nofollow">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   /* ══ Local fonts (C3 design pass, 2026-07-10) — bundled from the Einstein Brand Kit
@@ -1368,7 +1368,7 @@
 
       <div class="dt-strip" style="margin-top:14px;">
         <h4 style="margin:0 0 6px 0;font-size:13px;">Dream Team — San Antonio's 3 trophy holders</h4>
-        <p style="font-size:11.5px;color:var(--gray-600);margin:0 0 8px 0;">The Season 3 Dream Team = the top 10% of Overall Q2 score among the 213 movers who cleared the 250 Rippling-hour busy-season floor (21 trophy holders company-wide, top-21 hard slice per the live S3 page's own roster).</p>
+        <p style="font-size:11.5px;color:var(--gray-600);margin:0 0 8px 0;">The Season 3 Dream Team = the top 10% of Overall Q2 score among the 212 movers who cleared the 250 Rippling-hour busy-season floor (24 trophy holders company-wide — inclusive-tie rule: all movers tied at the cutline qualify).</p>
         <div style="display:flex;flex-wrap:wrap;gap:6px;">
           <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Gatlin Jones — 9.5</span>
           <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Leeroy Delgado — 9.25</span>
@@ -1485,6 +1485,7 @@
           <span class="metric-grade r">Below target</span>
         </div>
         <p class="metric-target">vs target-as-set <strong>80.17%</strong> · <strong>−3.18 pts</strong> · target itself is under Cameron's 7/22 validation w/ Matisen+Paul (may still move)</p>
+        <p class="metric-footnote" style="font-size:11px;color:var(--gray-600);margin-top:4px;">Running-truck TUR (crew-out excluded): <strong>84.4%</strong> — 139 crew-out truck-days in Q2. Owned-fleet is the graded basis; the gap between the two is staffing, not demand.</p>
         <details class="drill"><summary>Why this matters</summary><p>TUR is the company's guiding capacity metric — it tells us whether trucks are working or sitting idle. San Antonio's capacity-weighted Q2 TUR is 76.99% (May 154, Jun 185, Jul 195-est. moves), against an 80.17% target-as-set that carries its own open dispute (tur_target_source_dispute_2026_07_21 — the target-build method itself was flagged this quarter). Hours are approximated for late June/July due to the 6/29 Rippling punch-clock outage.</p></details>
         <details class="metric-source"><summary></summary><p class="source-detail">Matisen feed tur-actuals-q2-26-2026-07-21.csv v8 · targets = Q3 '26 Revenue Forecaster row-6 (of-record per Cameron 7/21) · caveats: rippling_punch_clock_outage_2026_06_29, tur_nps_workbook_rows_invalid, july_partial_windows_q2_feeds</p></details>
       </div>
@@ -1838,7 +1839,7 @@
     <details class="data-source-collapsible"><summary>📍 Personnel-Budget / "Avg % to Personal Goal" rubric (v3.4.4, Cameron 5/4 ruling — LOCKED, reframed for Q2's Critical Numbers per brief §1a)</summary><div class="data-source-content">&lt;95% Red · 95–110% Green · &gt;110% Super Green. Over-budget alone does NOT dock; branches above 100% are not penalized — reflects demand strength or a deliberate staff-up. San Antonio Q2: 102.9% (Green) — May 88.8% (under) → Jun 105.6% (on-plan) → Jul 124.9% (over, deliberate summer staff-up).</div></details>
     <details class="data-source-collapsible"><summary>📍 Einstein Games — Branch Season Average (Cameron's 7/22 replacement Critical Number)</summary><div class="data-source-content">No SG/G/R paint — games are a coaching tool, directionally accurate by design, not a performance grade (locked 7/15 philosophy). Value = the branch's average of the weekly averages (the mean of its 8 weekly scorecards — W1-W8, wrapped Week 8 National 7/11) per the <code>scoring_basis</code> ruled 2026-07-23, superseding the earlier pooled-aggregate basis; rank = <code>final_standing_entry.rank</code> re-sorted on the new basis. Status confirmed_matisen_2026-07-23.</div></details>
     <details class="data-source-collapsible"><summary>📍 Strategic Weight (v3.3.2 lens)</summary><div class="data-source-content">Cover-hero chip frames each branch's cash-contribution scale separately from the operational composite. Tiers: Cash Leader (≥20% NOI) · Cash Contributor (8-20%) · Cash Neutral (0-8%) · Growth Bet (negative NOI, planned-loss / new market) · Underperforming (negative NOI, NOT designated investment). NO impact on grade math — parallel display only. San Antonio Q2: Cash Contributor (9.9% NOI share).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Sources (Q2 feed lineage)</summary><div class="data-source-content">Sage Intacct via Ben Young workbook v4 (Monday asset 3122213413, posted 7/20) — revenue, NOI, trucks, gross margin. Matisen 5-feed fold (sales-metrics, tur-actuals v8, personnel-budget, samsara-safety, gatherup-nps — all intake-validated 2026-07-21) v0.8.0 → v0.8.2. Manifest: <code>q2-data/branch-metrics-q2-26.json</code> v0.8.2, rankings block re-synced same version. Metric registry pointer: <code>Supporting Projects/QGR Packet/metric-registry.json</code> (<code>_registry_ref</code>) — <strong>TUR basis watch:</strong> if Matisen's staffing-per-truck model redefinition lands, that's a registry <code>basis_version</code> bump and a trend-line break, never a silent re-baseline.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Sources (Q2 feed lineage)</summary><div class="data-source-content">Sage Intacct via Ben Young workbook v4 (Monday asset 3122213413, posted 7/20) — revenue, NOI, trucks, gross margin. Matisen 5-feed fold (sales-metrics, tur-actuals v8, personnel-budget, samsara-safety, gatherup-nps — all intake-validated 2026-07-21) v0.8.0 → v0.10.4. Manifest: <code>q2-data/branch-metrics-q2-26.json</code> v0.10.4, rankings block re-synced same version. Metric registry pointer: <code>Supporting Projects/QGR Packet/metric-registry.json</code> (<code>_registry_ref</code>) — <strong>TUR basis watch:</strong> if Matisen's staffing-per-truck model redefinition lands, that's a registry <code>basis_version</code> bump and a trend-line break, never a silent re-baseline.</div></details>
     <details class="data-source-collapsible"><summary>📍 Known data gaps (fold as they land)</summary><div class="data-source-content">Sales Target Attainment basis reconciliation · Mover eNPS treatment decision (Cameron, at review) · Recognition % export · conversion_count / cancellation_rate / contracts_count · damages_per_hour (post-week-8 reconciliation) · nps_moves · July flash → final (~8/1) · tur_target preliminary→final (Cameron's 7/22 validations w/ Matisen+Paul, and Mike on the Dallas truck count).</div></details>
 
     <div class="audit-callout">
@@ -1851,7 +1852,7 @@
     Built by Albert (Cameron's AI Chief of Staff) · Concept: Brian Herzig + Cameron · For internal Roundtable use<br>
     Methodology + scorecard version log live in the QGR Packet "How the Branch Scorecards Are Built" section
     <p class="manifest-stamp" style="font-size:11px;color:var(--gray-500);text-align:center;margin-top:24px;">
-      Rendered from branch-metrics-q2-26.json v0.8.2 &middot; 2026-07-22 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate)
+      Rendered from branch-metrics-q2-26.json v0.10.4 &middot; 2026-07-25 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate)
     </p>
   </div>
 

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leander — Q2'26 Branch Scorecard</title>
-<meta name="robots" content="noindex, nofollow">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   /* ══ Local fonts (C3 design pass, 2026-07-10) — bundled from the Einstein Brand Kit
@@ -1382,7 +1382,7 @@
 
       <div class="dt-strip" style="margin-top:14px;">
         <h4 style="margin:0 0 6px 0;font-size:13px;color:var(--navy);">Dream Team — Leander's 5 trophy holders</h4>
-        <p style="font-size:11.5px;color:var(--gray-600);margin:0 0 8px 0;">The Season 3 Dream Team = the top 10% of Overall Q2 score among the 213 movers who cleared the 250 Rippling-hour busy-season floor (21 trophy holders company-wide, top-21 hard slice per the live S3 page's own roster).</p>
+        <p style="font-size:11.5px;color:var(--gray-600);margin:0 0 8px 0;">The Season 3 Dream Team = the top 10% of Overall Q2 score among the 212 movers who cleared the 250 Rippling-hour busy-season floor (24 trophy holders company-wide — inclusive-tie rule: all movers tied at the cutline qualify).</p>
         <div style="display:flex;flex-wrap:wrap;gap:6px;">
           <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Nathan Swain — 9.8</span>
           <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Brendon Steele — 9.75</span>
@@ -1512,6 +1512,7 @@
           <span class="metric-grade w">Watch</span>
         </div>
         <p class="metric-target">vs target <strong>78.2%</strong> · <strong>−0.6 pts vs target</strong> <span class="status-ribbon preliminary" style="margin-left:4px;">Prelim</span></p>
+        <p class="metric-footnote" style="font-size:11px;color:var(--gray-600);margin-top:4px;">Running-truck TUR (crew-out excluded): <strong>89.8%</strong> — 79 crew-out truck-days in Q2. Owned-fleet is the graded basis; the gap between the two is staffing, not demand.</p>
         <details class="drill"><summary>Why this matters</summary><p>TUR is the company's guiding capacity metric — it tells us whether trucks are working or sitting idle. Leander landed just under target (−0.6 pts, ~99% of target). Both actual and target carry the Rippling punch-clock outage approximation caveat; the target itself is preliminary pending Cameron's 7/22 validation with Matisen+Paul (a target-method error was caught and fixed in-quarter — see the target's own drill-down). No grading harm resulted.</p></details>
         <details class="metric-source"><summary></summary><p class="source-detail">Matisen feed tur-actuals-q2-26-2026-07-21.csv v8 · targets = Q3 '26 Revenue Forecaster row-6 "Adjusted Forcast after Q1" set, of-record per Cameron ruling 7/21 · Q2 window May 1 – Jul 31, 2026 (July = projected landing estimate) · caveats: rippling_punch_clock_outage_2026_06_29, tur_nps_workbook_rows_invalid, july_partial_windows_q2_feeds (actual); tur_target_method_error_q2, tur_target_source_dispute_2026_07_21 (target — open, Cameron validates with Matisen+Paul 7/22)</p></details>
       </div>
@@ -1872,7 +1873,7 @@
     <details class="data-source-collapsible"><summary>📍 Driver Safety Score rubric (v3.3.7) — now standing reference, not a Q2 Critical Number</summary><div class="data-source-content">SG ≥90 score AND &lt;10% high-risk · G ≥80 AND ≤20% HR · W 70-79 OR (≥80 AND &gt;20% HR) · R &lt;70. Per PHASE-B-AGENT-BRIEF.md §1b, Driver Safety moved out of the graded Critical Numbers slot this quarter (Cameron's 7/22 ruling replaced that slot's contents with Personal-Goal % + Einstein Games avg) into the standing, theme-independent Fleet Safety reference block. Leander Q2: 96 score / 0% high-risk = Super Green under this rubric (shown as reference, not composite-graded). Source: Mike's Q2 Samsara master-org pull, q2-fleet-safety-by-branch.csv.</div></details>
     <details class="data-source-collapsible"><summary>📍 "Avg % to Personal Goal" rubric — Q2 interpretation (judgment call)</summary><div class="data-source-content">Cameron's 7/22 ruling named this section's #1 metric "Average % to Personal Goal — Q2." No per-branch individual-goal-attainment field exists in the Q2 manifest, so this build renders it from <code>personnel_budget_pct</code> (actual ÷ budgeted FTE) — the only live per-branch "% to an assigned goal" figure, and the same metric Q1 graded in this section's #2 slot. Grade bands as specified for Q2: <strong>&lt;95% Red · 95–110% Green · &gt;110% Super Green</strong> (over-plan reads as strength — deliberate summer staff-up, not a discipline flag). Note this collapses Q1's locked 4-band rubric (which had an 85–94% Watch band and a "chronic-F" 5-period-average concept) into a simpler 3-band read; applied exactly as given in the Phase-B brief. If Cameron means individual sales/rep attainment instead, this tile needs correction once he clarifies — flagged prominently in this build's report.</div></details>
     <details class="data-source-collapsible"><summary>📍 Strategic Weight (v3.3.2 lens)</summary><div class="data-source-content">Cover-hero chip frames each branch's cash-contribution scale separately from the operational composite. Tiers: Cash Leader (≥20% NOI) · Cash Contributor (8-20%) · Cash Neutral (0-8%) · Growth Bet (negative NOI, planned-loss / new market) · Underperforming (negative NOI, NOT designated investment). NO impact on grade math — parallel display only. Leander Q2: 9.8% NOI share → Cash Contributor.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Sources</summary><div class="data-source-content">Q2 2026 manifest <code>branch-metrics-q2-26.json</code> v0.8.2 — Matisen's 5-feed fold (sales, TUR, personnel, NPS, Samsara safety), Sage Intacct via Ben Young workbook v4 (revenue/NOI, Monday asset 3122213413), <code>_games_s3_q2_26</code> (Einstein Games), <code>manager_cet_enps_q2_26</code> (company eNPS). Metric Registry pointer: <code>metric-registry.json</code> (stable ids + basis_version — the TUR truck-on/off vs utilization redefinition, if it lands, is a basis-version bump and trend break, never a silent re-baseline). Composite-offline ruling + the two Q2 Critical Numbers interpretation both per Cameron's 7/22 rulings.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Sources</summary><div class="data-source-content">Q2 2026 manifest <code>branch-metrics-q2-26.json</code> v0.10.4 — Matisen's 5-feed fold (sales, TUR, personnel, NPS, Samsara safety), Sage Intacct via Ben Young workbook v4 (revenue/NOI, Monday asset 3122213413), <code>_games_s3_q2_26</code> (Einstein Games), <code>manager_cet_enps_q2_26</code> (company eNPS). Metric Registry pointer: <code>metric-registry.json</code> (stable ids + basis_version — the TUR truck-on/off vs utilization redefinition, if it lands, is a basis-version bump and trend break, never a silent re-baseline). Composite-offline ruling + the two Q2 Critical Numbers interpretation both per Cameron's 7/22 rulings.</div></details>
     <details class="data-source-collapsible"><summary>📍 Known data gaps (Q3 collection target)</summary><div class="data-source-content">Sales target attainment basis resolution (three competing revenue reads) · mover eNPS Q2 cycle (none ran) · recognition % (Q2 praise export incomplete) · conversion count / cancellation rate / contracts count (EMMA missing-contracts backfill) · damages per hour (post-season reconciliation, Matisen, post-week-8) · nps_moves · per-rep sales cadence/conversion/cancellation (Q2 feed is branch-level only) · Magic Moments per Move · QGR Rock Performance per branch · People Analyzer A/B/C player mix · On-Site Eval coverage + score · Fleet Safety per-behavior event breakdown (only aggregate safety_events_q2 exists this quarter).</div></details>
 
     <div class="audit-callout">
@@ -1885,7 +1886,7 @@
     Built by Albert (Cameron's AI Chief of Staff) · Concept: Brian Herzig + Cameron · For internal Roundtable use<br>
     Methodology + scorecard version log live in the QGR Packet "How the Branch Scorecards Are Built" section
     <p class="manifest-stamp" style="font-size:11px;color:var(--gray-500);text-align:center;margin-top:24px;">
-      Rendered from branch-metrics-q2-26.json v0.8.2 &middot; 2026-07-22 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate)
+      Rendered from branch-metrics-q2-26.json v0.10.4 &middot; 2026-07-25 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate)
     </p>
   </div>
 
