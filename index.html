@@ -645,6 +645,20 @@
 
   <div class="zone" id="zone2">
 
+    <div class="section" id="sec-room-preflight">
+      <div class="section-eyebrow">The Room</div>
+      <div class="section-title">🛫 Pre-flight — nothing surprises us mid-room</div>
+      <div class="section-desc">Every import, export, print job, and login that must be TRUE before Day 1 opens — grouped by deadline. Rob sits in Day 1: if a box here is unchecked Wednesday 7:30 AM, that's the fire to fight first. Checkboxes save in this browser like everything else.</div>
+      <div id="preflightWrap"></div>
+    </div>
+
+    <div class="section" id="sec-agenda-linkmap">
+      <div class="section-eyebrow">The Room</div>
+      <div class="section-title">🔗 Block-by-block link map</div>
+      <div class="section-desc">For each agenda block: what goes up on screen, and what must already be loaded before the room reaches it. No hunting for links mid-QGR — this table is the co-pilot; the agenda below is the checklist.</div>
+      <div class="tracker-table-wrap" id="linkmapWrap"></div>
+    </div>
+
     <div class="section" id="sec-room-agenda">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">Agenda — the live QGR checklist (7/29–30)</div>
@@ -871,7 +885,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.61 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.62 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -949,7 +963,8 @@
     rollout: LS_PREFIX + 'rollout',
     changelog: LS_PREFIX + 'changelog',
     activeZone: LS_PREFIX + 'activeZone',
-    chase: LS_PREFIX + 'chase'
+    chase: LS_PREFIX + 'chase',
+    preflight: LS_PREFIX + 'preflight'
   };
 
   var GATES_SEED = [
@@ -1072,11 +1087,11 @@
           ctx: 'BLOCKING: all 10 branch composites are OFFLINE this quarter — 3 of 7 inputs missing (mover eNPS 15% · recognition 10% · sales target 10%, the last of which is now RULED). Three options: (A) carry Q1 forward with a stale badge — but two quarters then show identical people-scores, so Q3\'s "change" is really a 6-month delta mislabeled; (B) leave it N/A — honest, but no letter grade for any branch in a grading quarter; (C) reweight to the live inputs — restores a grade but quietly makes it ops-and-finance-only (the 25% measuring how movers FEEL disappears, TUR jumps 20%→31%). ⭐ ALBERT REC: C, but labeled honestly — call it a "Q2 Operating Composite (4 inputs)", NOT the branch grade, and restate Q1 on the same 4 metrics (one script run, Q1 has full data) so the trend is real. The 7-metric letter stays "not run this quarter" and returns in Q3. UNDERNEATH IT: if mover eNPS is 15% of every branch grade AND one of your 3 personal KPIs, skipping the survey silently downgrades the grading system — quarterly vs formally semi-annual is a Q3 decision.' },
         { text: '📦 BUILD OUT THE DISTRIBUTION TOOLS — everything leader-facing that must ship before 7/29',
           url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/', urlLabel: 'Workshop Hub (live)',
-          ctx: 'The Day-5 build block. ① SEND LEADERS THE WORKSHOP HUB LINK — gated on Cameron confirming the per-leader action-item checklists (seeded DRAFT) + optional leans on the 2 no-lean ballot questions (conversion-$ standard, COS→BMs). ② Manager-AAR rollout message — HELD until Cameron tests the paste-back loop himself + final-states the tool. ③ Ballot aggregator — spec\'d (room-reveal mode), Sonnet builds when ballots start returning. ④ Dojo who-sees-what ruling (v1.2 built, LOCAL). ⑤ results.html — strip the per-manager CHOICES chips before the room (Cameron: self-evals visible to him/rollup ONLY).' }
+          ctx: 'UPDATED 7/27 mid-day: ① Workshop Hub SENT ✅ — v1.9.1 live, leaders instructed, prep exports due TUE NOON (only Cameron\'s ballot staged in ballots-q3/ so far — chase gaps Tue 1pm). ② Manager-AAR rollout message — STILL HELD; paste-back proven 7/26 (v1.4.1, 3 simulated cold Claudes), so the remaining gate is Cameron\'s go. Managers need runway before the FLM QGRs 8/4–8/5. ③ Ballot aggregator BUILT ✅ — ballot-results.html (43/43 QC, aggregate + Room Reveal). ④ Dojo who-sees-what ruling (v1.2 built, LOCAL) — still open. ⑤ results.html CHOICES-chip strip before the room — still open.' }
       ]
     },
     {
-      id: 'P3', title: '③ Data confirm + Leadership readiness (the QGR itself runs in The Room tab)', window: 'Matisen data day ~7/27–28 · QGR 7/29–30, two FULL days (Rob joins)',
+      id: 'P3', title: '③ Data confirm + Leadership readiness (the QGR itself runs in The Room tab)', window: 'Matisen data day TUE 7/28 · leader prep exports due TUE NOON · QGR 7/29–30, two FULL days (Rob joins Day 1) · ⚠ the 🛫 Pre-flight gate lives in The Room tab',
       items: [
         'Matisen data day: dashboards + Games scoring + branch data confirmed clean',
         'Matisen data day: EMMA CSV feed verified end-to-end',
@@ -1096,7 +1111,7 @@
         { text: '🪞 Manager AARs: send hub link Mon 7/27 → collect JSONs → stage for the room',
           url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/', urlLabel: 'Manager AAR Hub',
           url2: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html', url2Label: 'Live Results (room view)',
-          ctx: 'The collection loop: ① Cameron (or regionals) send managers the hub link Mon (may slide Tue/Wed) — 30-45 min exercise, Claude-interview prompt built in. ② Managers export → send their aar-*.json to their regional or Albert. ③ Albert stages the folder (Supporting Projects/People Analyzer/aar-manager-tool/submissions-q2/, LOCAL ONLY — never pushed to the public repo). ④ In the room: open Live Results, drag the folder\'s files in, arrow-keys walk manager to manager — replaces ~an hour of serial presenting. Chase list: Albert flags unsubmitted managers Fri + Mon AM.' }
+          ctx: 'STATUS 7/27: tool is FINAL (v1.4.1 — paste-back proven vs 3 simulated cold Claudes 7/26); the rollout message is the ONLY thing held, on Cameron\'s go. The collection loop: ① Cameron (or regionals) send managers the hub link (Mon may slide Tue/Wed — but FLM QGRs are 8/4–8/5, so managers need the runway). ② Managers export → send their aar-*.json to their regional or Albert. ③ Albert stages the folder (Supporting Projects/People Analyzer/aar-manager-tool/submissions-q2/, LOCAL ONLY — never pushed to the public repo). ④ In the room: open Live Results, drag the folder\'s files in, arrow-keys walk manager to manager. Chase list: Albert flags unsubmitted managers Fri + Mon AM.' }
       ]
     },
     {
@@ -1254,8 +1269,69 @@
     { icon: '🧾', label: 'Q2 Revenue Targets (realized + realization)', sub: 'fleet repo · daily refresh', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/revenue-targets-c832529932b8.html' },
     { icon: '🔮', label: 'Q3 Revenue Manager View', sub: 'fleet repo', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-manager-view-c78d344e2d62.html' },
     { icon: '🚚', label: 'Q3 TUR / Fleet Requirement', sub: 'fleet repo', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-tur-projection-3dde0a126d8c.html' },
-    { icon: '🏃', label: 'Amanda’s Q2 Sales Pacing (rep grain)', sub: 'aware13.github.io', url: 'https://aware13.github.io/einstein-q2-pacing-5ec73dc867/' }
+    { icon: '🏃', label: 'Amanda’s Q2 Sales Pacing (rep grain)', sub: 'aware13.github.io', url: 'https://aware13.github.io/einstein-q2-pacing-5ec73dc867/' },
+    { icon: '🗳', label: 'Ballot Room View', sub: 'ships EMPTY — drag the returned qgr-ballot-*.json in · aggregate + Room Reveal', url: 'ballot-results.html' },
+    { icon: '📽', label: 'Mgr AAR Live Results', sub: 'ships EMPTY — drag collected aar-*.json in · rollup + arrow-key walk', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html' },
+    { icon: '🏆', label: 'QG Success Tracker (hosted, sanitized)', sub: 'cross-quarter success rates — Q2 = 80.0% FINAL · expandable per-goal detail', url: 'einstein-qg-tracker.html' },
+    { icon: '🧢', label: 'Q2 Debrief (frontline cascade packet)', sub: 'Read/Present modes — the Day-2 "manager presentation started" surface', url: 'q2-materials/q2-frontline-packet.html' },
+    { icon: '🛠', label: 'QGR Triage Room (walked slate)', sub: '196 cards / 178 rulings baked in — the Q3-goals-per-leader working surface', url: 'qgr-triage-room.html' },
+    { icon: '🧮', label: 'People Analyzer — Leadership (LOCAL)', sub: '⚠ needs launch people-analyzer :8136 running — see Pre-flight', url: 'http://localhost:8136/people-analyzer-leadership.html' }
   ];
+
+  // ── Room Pre-flight (added v3.62, 7/27) — the nothing-surprises-us-mid-room gate.
+  // Rendered from code every load (unlike the agenda, which lives in localStorage),
+  // so status text stays updatable by Albert; checkbox state persists per-browser.
+  var PREFLIGHT_SEED = [
+    { group: '🕛 By Tue noon (leader prep deadline)', items: [
+      { id: 'pf-ballots', text: '8/8 leader ballots staged in ballots-q3/ — due Tue 12pm; Albert chases gaps Tue 1pm', ctx: 'As of Mon 12:45 only Cameron\'s is in. Exports arrive via the Workshop Hub → forward JSONs to Albert as they land.' },
+      { id: 'pf-ballot-test', text: 'Drag Cameron\'s own ballot JSON into the Ballot Room View — prove the drag-in on the room machine', url: 'ballot-results.html', urlLabel: 'Ballot Room View' },
+      { id: 'pf-mgraar-go', text: 'Manager-AAR rollout GO/NO-GO — message is written and held; tool is final (v1.4.1)', ctx: 'Every day it slides eats manager runway before the FLM QGRs 8/4–8/5.' }
+    ]},
+    { group: '🌙 By Tue EOD', items: [
+      { id: 'pf-matisen', text: 'Matisen data-day outputs folded: Games 0–10 scores · per-rep attainment · booked-vs-target pull recipe · wedge 3-way decomposition · his Q3 slate triaged (he is the LAST un-triaged leader)' },
+      { id: 'pf-redlines', text: 'Redlines done: packet (Cameron) · financial deck (Paul) · Q2 Debrief (Cameron, once the working-on-now/WIFM section lands)' },
+      { id: 'pf-prereads', text: 'Pre-reads out to leadership ≥2 days ahead — that window is NOW (eNPS one-pager + whatever Cameron gates from the deck)' },
+      { id: 'pf-pa', text: 'People Analyzer current: latest exports re-baked (seed = snapshot) · Ben Young + Kickpoint done or consciously skipped' },
+      { id: 'pf-print', text: 'PRINT: blank one-page strategic plans (one per leader + spares) · praise handouts (praise-counts pull = Cameron)' },
+      { id: 'pf-food', text: 'Dinner / activity reservations booked for Wed + Thu nights' }
+    ]},
+    { group: '🌅 Wed 7:30 AM (room machine = this Mac)', items: [
+      { id: 'pf-localhost', text: 'Launch the people-analyzer server (:8136) — People Analyzer + Manager AAR local tools are dead without it' },
+      { id: 'pf-shelf', text: 'Click through EVERY Materials-shelf link once — find dead links now, not live in front of Rob' },
+      { id: 'pf-imports', text: 'Imports loaded: Ballot Room View has all returned ballots · Live Results has the mgr-AAR folder (if rollout went) · QG tracker shows 80.0% FINAL' },
+      { id: 'pf-backup', text: 'Export a baseline HQ JSON (⬇ Export) so the room state has a restore point · decision log clean of test rows' },
+      { id: 'pf-screen', text: 'Screen/HDMI tested · OPSP builder logged in · Mural open · Rob\'s dial-in/seat sorted (he joins Day 1)' }
+    ]}
+  ];
+
+  // ── Block-by-block link map (v3.62) — static co-pilot table; agenda text itself lives in LS.
+  var LINKMAP = {
+    day1: [
+      ['3 best things', '—', '—'],
+      ['AAR TL;DR round', '<a href="aar-review.html" target="_blank">AAR Review Room</a> · <a href="https://einsteinadmin.github.io/goals-dashboard/" target="_blank">Goals Dashboard</a>', 'Review Room loads reviewed (42 highlights baked in)'],
+      ['Slow open — SWT + OPSP aloud', '<a href="https://goal-plan-access.replit.app/" target="_blank">OPSP builder</a> · <a href="strata-swt-worksheet.html" target="_blank">SWT worksheet (RULED 7/20)</a>', 'Builder logged in (pre-flight)'],
+      ['QGR packet walkthrough (fin + marketing)', '<a href="q2-materials/" target="_blank">Q2 materials index</a> · <a href="q2-materials/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html" target="_blank">Financial deck</a>', 'Cameron + Paul redlines DONE (pre-flight) · cover grade presented as DRAFT unless ruled'],
+      ['eNPS results', '<a href="https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/" target="_blank">eNPS one-pager</a>', 'Sent as pre-read Mon/Tue'],
+      ['Branch scorecards until everyone can read their own', '<a href="q2-materials/" target="_blank">10 scorecards (materials index)</a>', '⚠ composites OFFLINE pending the eNPS off-survey ruling — decide before, or open with the ruling'],
+      ['Finalize Q2 SG/G/R', '<a href="einstein-qg-tracker.html" target="_blank">QG Success Tracker</a>', '80.0% FINAL (32/40) — Day-1 sync now REVIEWS finals, not sets them; any change goes through the ledger + sync script after the room'],
+      ['People Analyzers as a group', '<a href="http://localhost:8136/people-analyzer-leadership.html" target="_blank">People Analyzer (localhost)</a>', ':8136 running + latest exports re-baked (pre-flight)'],
+      ['Q3 goals per leader — R/G/SG definitions tested', '<a href="ballot-results.html" target="_blank">Ballot Room View</a> · <a href="qgr-triage-room.html" target="_blank">Triage Room</a> · <a href="https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/" target="_blank">Workshop Hub</a>', 'All 8 ballots dragged in BEFORE this block — this is the one that dies without the JSONs'],
+      ['Lunch walk DP', '—', '—'],
+      ['OPSP page 2 + Vision Summary', '<a href="https://goal-plan-access.replit.app/" target="_blank">OPSP builder</a>', 'Blank OPSPs printed as the table copy']
+    ],
+    day2: [
+      ['Praise + Legends of the Quarter', 'printed handouts', 'Praise-counts pull (Cameron) + print (pre-flight)'],
+      ['Quarterly theme locked', '<a href="https://einsteinmoving.monday.com/boards/18408300070" target="_blank">MB theme pulses</a> (12556457451/2/3)', 'Back to School leading · Estimate Accuracy likely Q4'],
+      ['Cascading goals chart', '<a href="https://docs.google.com/spreadsheets/d/1CEwbltgyvNbpl5_1pVsWL70qaCMGgDE9Jk7RGm1eAsM" target="_blank">Cascading Goals sheet</a>', 'Q3 tab ready'],
+      ['Revenue targets buy-in', '<a href="https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-manager-view-c78d344e2d62.html" target="_blank">Q3 manager view</a> · <a href="https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-tur-projection-3dde0a126d8c.html" target="_blank">Q3 TUR/fleet</a>', 'Q3 reforecast settled w/ Ben + Paul'],
+      ['Bonus Goals / Mid-Quarter Pivots', '<a href="einstein-qg-tracker.html" target="_blank">QG tracker</a>', '—'],
+      ['CASh / Power of One recap', '<a href="https://paulm-emc.github.io/EMC-Power-of-One-Tool-70c5c4bdaade/" target="_blank">Power of One (Paul)</a>', '5 min — decisions already made'],
+      ['RATIFY rows (damages · AI governance · cross-cutting goals)', '<a href="https://einsteinmoving.monday.com/boards/18408300070" target="_blank">Master Backlog</a>', 'Pulse links in the agenda notes'],
+      ['Manager presentation started', '<a href="q2-materials/q2-frontline-packet.html" target="_blank">Q2 Debrief</a> · <a href="https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html" target="_blank">Mgr AAR Live Results</a>', 'Debrief DRAFT chips (Q3 theme + Claims/MM) fill from THIS room\'s rulings'],
+      ['Remaining to-dos → pulses', 'Live decision log (below)', 'Log rows carry owner + due — export at close'],
+      ['Debrief + sensitive-doc access cleanup', '<a href="qgr-ecosystem-map.html" target="_blank">Ecosystem map</a>', 'Cloudflare gate decision rides the FLM-cascade lane (Fri/Mon)']
+    ]
+  };
 
   var ROLLOUT_SEED = [
     'Finalize Cascading Goals chart + statuses',
@@ -1302,6 +1378,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/27b', text: '\u{1F6EB} ROOM READINESS BUILD (HQ v3.62, Cameron’s Monday lay-of-the-land session): The Room tab gains two code-rendered sections above the agenda — ① <b>\u{1F6EB} Pre-flight gate</b>: every import/export/print/login that must be true before Day 1, grouped by deadline (Tue noon · Tue EOD · Wed 7:30 AM), own LS key + rides Export/Import; ② <b>\u{1F517} Block-by-block link map</b>: for each Day-1/Day-2 agenda block, what goes on screen + what must already be loaded — the no-hunting-for-links co-pilot (agenda itself stays the LS-backed checklist). Also: Materials shelf +7 tiles (Ballot Room View · Mgr AAR Live Results · QG Tracker · Q2 Debrief · Triage Room · People Analyzer local) · P2/P3 statuses trued up (hub SENT, ballots due Tue noon · mgr-AAR rollout still HELD on Cameron’s go · aggregator BUILT). FLM gated distribution deliberately parked to Fri 7/31–Mon 8/3.' },
     { date: '7/27', text: '\u{1F5F3} SEND-READY WAVE (Cameron’s ballot-prep weekend, three deploys). ① <b>Workshop Hub v1.8.2→v1.9.0</b>: flex-days lean REDLINED to default-on-with-a-floor (two tiers: untracked daily norm w/ launch-through-lunch presence + assigned midweek flex day, BM/OM alternating, Rippling zero-impact type; 2-of-3 KPI floor pauses flex automatically; multi-day = PTO) · mgr-sales-comp lean updated (no pay component this year; competition = the direct pull; named Q4 revisit) · send-ready trim per Cameron (Goals Dashboard link out · action items ALL PENDING/grayed · financial + frontline tiles grayed non-clickable placeholders — lit up via later push) · NEW <b>Directs’ Q3 Slate module</b>: amanda/anne/matisen/mike/brian draft candidate goals per direct, seeded UNCAPPED from the triage walk (Jalissa 2 · Tet 4 · Carly 5 · Nhel 4 · Fabian 7; Mike/Brian FLM seats empty-by-design until the theme locks), finalized in the room — leaders finalize their own directs’ slates; export schema v6. · Cameron’s completeness ruling executed: 4 consolidation cards restored to the leaders’ own slates (Anne 6→8, Amanda 5→7). ② <b>QG Tracker</b>: top leader tiles now CLICK-TO-EXPAND to the exact goals behind each % (SG/G/R chips, critical stars) — detail const DERIVED from qg-results-2026-Q2.json by script, tile math reproduced exactly, sync --check still green. ③ <b>Ballot Room View shipped</b> (ballot-results.html, toolkit tile above): ships EMPTY, drag returned qgr-ballot-*.json in — aggregate spreads/splits/goals/directs’ slates + Room Reveal card-flip; handles schema v1–v6; ballots stay in the browser, staging = ballots-q3/ (local). Cameron’s own 7-core ballot LOCKED same weekend (ballots-q3/ballot-cameron-2026-07-26.md + drag-ready JSON).' },
     { date: '7/24e', text: '\u{1F5F3} WORKSHOP HUB v1.7 — CAMERON’S BALLOT FOLD (local; NOT deployed — his redlines gate the push). ① <b>Three questions added</b>: “A sales competition this quarter” for everyone (deliberately separate from the existing manager sales-<i>comp</i> question — that one is pay, this one is a contest, and the contest is one of the named alternatives to adding pay), plus <b>Sales training — our biggest opportunities</b> and <b>Carly’s capacity — more Magic Moments?</b>, both targeted to Amanda. ② <b>New <code>forLeaders</code> targeting</b> — a question renders only for the leaders it is for; everyone else never sees it, and it is not counted or exported for them. Cameron’s ruling: targeting yes, a separate Nhel hub entry no — Amanda talks it through with Nhel and answers for both. ③ <b>SPEED-TO-COMPETENCE BUILD SHEET</b> (new section) — the theme material would have been mush as one free-text ballot box, so it became five role tracks (Movers · Leads · Managers · CX Reps · EX+IT), each with Cameron’s own framing questions, plus a theme-<i>name</i> field and Green/Super-Green gates on the three roles he asked about. Worth 3 progress points, not one per track — nobody is expected to have a view on all five. Own COS prompt. ④ <b>Core vs optional</b> — 9 questions is double the old ask, so 7 are must-answer (<code>CORE_QIDS</code>, one edit point) and 2 are marked optional; only core drags the progress meter. ⑤ New <b>open-ended</b> question type (no position chips — forcing agree/disagree on “what would you re-certify?” was wrong). ⑥ Export <b>schema v4</b> (+buildsheet, +core/openEnded/targeted flags, leader-filtered ballot[]) — aggregator spec updated for all four schema versions incl. the naive-aggregation traps. ⑦ Fixed stale “four open decisions” copy in 3 places (it had been six since 7/22). Verified: script parses, targeting correct per leader (Mike 7/Amanda 9), export round-trip clean, legacy v3 saves backfill without throwing, no overflow desktop or mobile.' },
     { date: '7/24d', text:'\u{1F527} TRIAGE ROOM v1.9.1 — CONSOLIDATION BUG FIXED, 4 GOALS RECOVERED. Cameron caught it reading the v1.9 notes: he merged 8 cards into 4 on 7/22, but the room was showing a net loss of <b>eight</b>, not four. Cause: <code>Consolidate</code> saved the <b>hide</b> but not the <b>replacement</b> — it wrote <code>consolidatedInto</code> to storage (durable) while building the merged card only in memory, so on the next reload the 8 sources stayed hidden and all 4 merged cards vanished. Worse, those 4 were sitting <b>unruled</b>, because they were never visible to rule. New <code>hydrateConsolidations()</code> rebuilds them from <code>state.consolidations</code> at boot — additive, idempotent, runs before ROCK_INDEX, no storage-key change. <b>Anne 8 → 10 cards</b> (Workers Comp Process Improvements · WHO/Culture Interviews), <b>Amanda 16 → 18</b> (Incentivize Manager Sales / Quarterly Sales Comp · Magic Moments Toolkit); all four ruled <b>ACCEPT + shortlist</b> per Cameron in session, so total rulings 178 → 182. No merge data was ever lost — <code>state.consolidations</code> kept every member and the export always printed the merge block; only the rendering was missing. Verified by re-running the room’s own export against the 7/24 log: the ONLY differences are the 4 recovered cards and the count lines they move. Both leaders were already far over the cap of 5, so this doesn’t change the over-cap story — it corrects an understatement of their real load going into the QGR.' },
@@ -1620,7 +1697,8 @@
     rollout: loadState(LS_KEYS.rollout, {}),       // { idx: bool }
     changelog: loadState(LS_KEYS.changelog, null), // [{date,text}] or null = use seed
     activeZone: loadState(LS_KEYS.activeZone, 'zone1'),
-    chase: loadState(LS_KEYS.chase, JSON.parse(JSON.stringify(DEFAULT_CHASE)))  // { feedId: bool }
+    chase: loadState(LS_KEYS.chase, JSON.parse(JSON.stringify(DEFAULT_CHASE))),  // { feedId: bool }
+    preflight: loadState(LS_KEYS.preflight, {})    // { pfId: bool }
   };
 
 
@@ -2387,6 +2465,62 @@
     });
   }
 
+  function renderPreflight() {
+    var wrap = document.getElementById('preflightWrap');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    var total = 0, done = 0;
+    PREFLIGHT_SEED.forEach(function (grp) {
+      var g = document.createElement('div');
+      g.style.margin = '0 0 14px 0';
+      var rows = '';
+      grp.items.forEach(function (it) {
+        total++;
+        var checked = !!state.preflight[it.id];
+        if (checked) done++;
+        rows +=
+          '<div class="phase-item" style="align-items:flex-start">' +
+            '<div class="phase-item-check' + (checked ? ' checked' : '') + '" data-pf="' + it.id + '" style="flex-shrink:0;margin-top:2px">' + (checked ? '✓' : '') + '</div>' +
+            '<div style="flex:1' + (checked ? ';opacity:.55' : '') + '">' +
+              '<span' + (checked ? ' style="text-decoration:line-through"' : '') + '>' + it.text + '</span>' +
+              (it.url ? ' <a href="' + it.url + '" target="_blank" rel="noopener">' + esc(it.urlLabel || 'open') + ' ↗</a>' : '') +
+              (it.ctx ? '<div style="font-size:12px;opacity:.75;margin-top:2px">' + it.ctx + '</div>' : '') +
+            '</div>' +
+          '</div>';
+      });
+      g.innerHTML = '<div style="font-weight:700;margin-bottom:6px">' + esc(grp.group) + '</div>' + rows;
+      wrap.appendChild(g);
+    });
+    var cnt = document.createElement('div');
+    cnt.style.cssText = 'font-size:12px;opacity:.7;margin-top:4px';
+    cnt.textContent = done + ' / ' + total + ' pre-flight checks green';
+    wrap.appendChild(cnt);
+    wrap.querySelectorAll('[data-pf]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var id = el.getAttribute('data-pf');
+        state.preflight[id] = !state.preflight[id];
+        saveStateNow(LS_KEYS.preflight, state.preflight);
+        renderPreflight();
+      });
+    });
+  }
+
+  function renderLinkmap() {
+    var wrap = document.getElementById('linkmapWrap');
+    if (!wrap) return;
+    var html = '';
+    [['day1', 'Day 1 — Wed 7/29 (Review + Validate)'], ['day2', 'Day 2 — Thu 7/30 (Decide + Cascade)']].forEach(function (d) {
+      html += '<div style="font-weight:700;margin:10px 0 6px">' + d[1] + '</div>' +
+        '<table class="decision-tbl" style="width:100%"><thead><tr>' +
+        '<th style="width:30%">Agenda block</th><th style="width:38%">On screen</th><th>Must already be true</th></tr></thead><tbody>';
+      LINKMAP[d[0]].forEach(function (r) {
+        html += '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td style="font-size:12px;opacity:.85">' + r[2] + '</td></tr>';
+      });
+      html += '</tbody></table>';
+    });
+    wrap.innerHTML = html;
+  }
+
   function renderMaterials() {
     var wrap = document.getElementById('materialsGrid');
     wrap.innerHTML = '';
@@ -2616,7 +2750,8 @@
         rollout: state.rollout,
         changelog: state.changelog,
         activeZone: state.activeZone,
-        chase: state.chase
+        chase: state.chase,
+        preflight: state.preflight
       }
     };
   }
@@ -2652,7 +2787,9 @@
     state.changelog = s.changelog || JSON.parse(JSON.stringify(CHANGELOG_SEED));
     state.activeZone = s.activeZone || 'zone1';
     state.chase = s.chase || JSON.parse(JSON.stringify(DEFAULT_CHASE));
+    state.preflight = s.preflight || {};
 
+    saveStateNow(LS_KEYS.preflight, state.preflight);
     saveStateNow(LS_KEYS.gates, state.gates);
     saveStateNow(LS_KEYS.phases, state.phases);
     saveStateNow(LS_KEYS.tracker, state.tracker);
@@ -2704,6 +2841,8 @@
     renderOverallProgress();
     renderTracker();
     renderRockGrid();
+    renderPreflight();
+    renderLinkmap();
     renderAgenda();
     renderEcosystem();
     renderToolkit();
