@@ -885,7 +885,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.65 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.66 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1124,6 +1124,10 @@
         'Quarterly theme poster / rewards / dashboard produced (~$10–20 per FTE per quarter)',
         { text: 'Manager presentation → regional distribution (town hall format)',
           ctx: 'Celebrate first — "how did you do it?" round — THEN the theme reveal. 30–45 min.' },
+        { text: '🧱 Quarter in Review: fold Day-2 redlines → strip banner + redline box + ⚠ notes → resanitize → redeploy → link from Q2 Debrief + FLM hub (BEFORE the FLM QGRs 8/4–8/5)',
+          ctx: 'Canonical: QGR Packet/q2-quarter-in-review.html · hosted on the Workshop Hub repo (v0.4 draft). Redline inputs = the Day-2 PLAUD transcript ("Quarter in Review" spoken seam marker) + anything leaders posted back on their hub-prep pulses. Fill remaining slots as assets land in the room: Mike live-app URL · Amanda dashboard · Matisen chatbot shot · Anne questions · Paul finance half.' },
+        { text: '🧱 Quarter in Review — mover/CX filtered cut: BM-delivered huddle walk (AFTER Cameron is back 8/17)',
+          ctx: 'Same page — the audience filter (Movers / CX Reps) is already built in, so this is a default-view flip + a short BM walkthrough note, not a rebuild. Nothing lands in the 8/6–8/16 out-window by ruling.' },
         'Vision Summary page for movers / CX / CET',
         'Branch scorecards + QG packet remainder (qgr-packet-builder skill)',
         'Pay-confirm conversations',
@@ -1382,6 +1386,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/27f', text: '\u{1F9F1} QUARTER IN REVIEW POST-ROOM STEPS → PHASE ④ (HQ v3.66, Cameron asked "is this on my task list?" — the room half was, the aftermath half wasn’t): two cascade-checklist items added — ① fold redlines → strip → resanitize → redeploy → link from Q2 Debrief + FLM hub BEFORE 8/4–8/5 (inputs: Day-2 PLAUD transcript + hub-prep pulse replies + in-room assets) · ② mover/CX filtered-cut BM huddle walk AFTER 8/17 (filter already built; out-window stays clear by ruling).' },
     { date: '7/27e', text: '\u{1F310} QUARTER IN REVIEW PUBLISHED + HUB TILE (HQ v3.65, Cameron’s ruling: hub = the standing workshop template, so the showcase joins it): draft v0.4 now HOSTED at Workshop-Hub-repo/q2-quarter-in-review.html (+ assets/qir/ screenshots; banner reworded to Roundtable+COS review copy) so each leader’s chief of staff can open it pre-room · <b>Workshop Hub v1.10.0</b> deployed w/ a "Quarter in Review — Your Tiles" tile (find your presenter chip, run it past your COS, bring corrections + the ⚠-noted fetch item Thursday) · HQ materials tile + Day-2 link-map repointed hosted (:8101 pre-flight dependency dropped) · room mechanic recorded: PLAUD runs, Cameron says "Quarter in Review" aloud as the transcript seam marker, Albert folds from the transcript same-day. Comms: leaders’ original hub pulse updated w/ the new ask + Roundtable Slack reminder (Cameron-approved).' },
     { date: '7/27d', text: '\u{1F9F1} QUARTER IN REVIEW WIRED INTO DAY 2 (HQ v3.64): new cascade artifact <b>"What We Built &amp; What’s Coming"</b> (Supporting Projects/QGR Packet/q2-quarter-in-review.html, v0.3, LOCAL DRAFT via qgr-packet :8101) — 8 leader-owned tiles (quote form · field app · training app · hiring-for-culture · call grading · chatbot/Leadferno · finance+AI · website) w/ WIFM framing, live screenshots, audience filter (FLM/mover/CX cuts built in). Day-2 agenda gains a <b>15-min redline block</b> (after theme lock, before "Manager presentation started") + link-map row w/ the in-room pending list: Mike live-app URL · Amanda dashboard + framing sign-off · Matisen chatbot screenshot + benefit list · Anne question swap · Paul finance half. Pre-flight now launches qgr-packet :8101 alongside :8136; Materials shelf +1 tile. Post-room path: fold → strip internal notes → sanitize → deploy (obscure+noindex) → link from Q2 Debrief + FLM hub for 8/4–8/5; mover/CX filtered cut = BM-delivered huddle walk after 8/17.' },
     { date: '7/27c', text: '✅ CAMERON STATUS CORRECTIONS (HQ v3.63, same session): Games 0–10 reconciled scores DONE · QG-82.5 rejection reply already SENT · Matisen IS triaged (shortlist on the Workshop Hub; finalized version possibly today) · dinner BOOKED (60 Vines, the Domain, 6:45, tentative) · per-rep attainment + booked-vs-target + praise counts all deliberately EOQ pulls 7/31–8/1, NOT data-day items. Matisen data day (Tue) now reads: EMMA CSV verify · dashboards clean · wedge 3-way decomposition · finalized shortlist.' },
