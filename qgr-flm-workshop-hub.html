@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Einstein QGR Workshop — FLM / Regional Hub</title>
-<!-- qgr-flm-workshop-hub v0.2 2026-07-24 — design-audit fixes: collapsible agenda/materials (collapsed by default), top progress summary, hub privacy band demoted to one line, live chip/summary updates without stealing textarea focus (Albert) -->
+<!-- qgr-flm-workshop-hub v0.3 2026-07-27 — HHS trait explainers under each allocator row (Cameron: managers have not read ITP); prior: v0.2 2026-07-24 — design-audit fixes: collapsible agenda/materials (collapsed by default), top progress summary, hub privacy band demoted to one line, live chip/summary updates without stealing textarea focus (Albert) -->
 
 <!--
   HARD DATA RULE: this page carries ZERO quarterly metrics. No revenue,
@@ -523,7 +523,12 @@ function activity2Html(p){
     '<div class="shelp">We\'re rebuilding how movers get evaluated and promoted. Before we lock it, we want your read &mdash; you see the floor every day.</div>';
 
   html += allocatorHtml("valuePoints", "Value weighting", "Allocate 100 points across the seven CHOICES values &mdash; put the most points where it matters most for a mover.", CORE_VALUES, pa.valuePoints, cvSum);
-  html += allocatorHtml("hhs", "Humble / Hungry / Smart", "Same idea, across the three Ideal Team Player traits.", HHS, pa.hhs, hhsSum);
+  allocatorHtml._descs = { hhs: {
+    "Humble": "Shares credit, owns mistakes, puts the crew's win over their own spotlight. Not weak — just no ego in the way.",
+    "Hungry": "Self-motivated. Does more than the minimum, looks for the next thing to pick up without being told or prodded.",
+    "Smart": "People-smart, not book-smart. Reads the room; knows how their words and actions land on teammates and customers."
+  }};
+  html += allocatorHtml("hhs", "Humble / Hungry / Smart", "The three Ideal Team Player traits (from the book our leadership team works from) — quick definitions under each. Same idea as above: 100 points, weighted where it matters most.", HHS, pa.hhs, hhsSum);
 
   html += '<div class="q-block"><label>What separates a mover you\'d PROMOTE from a mover you\'d merely keep?</label>'+
     '<textarea data-patext="promoteVsKeep" placeholder="Think of two real movers you know — what\'s the actual difference?">'+esc(pa.promoteVsKeep||"")+'</textarea></div>';
@@ -547,9 +552,11 @@ function allocatorHtml(field, title, help, items, obj, sum){
     '<div class="alloc-head"><span class="alloc-remaining '+cls+'" data-allocremaining="'+esc(field)+'">'+
     (remaining===0 ? "All 100 allocated" : (remaining>0 ? remaining+" points left" : (remaining*-1)+" over 100")) +
     '</span><button type="button" class="alloc-reset" data-allocreset="'+esc(field)+'">Spread evenly</button></div>';
+  const descs = allocatorHtml._descs && allocatorHtml._descs[field] || null;
   items.forEach(item=>{
     const val = Number(obj[item])||0;
-    html += '<div class="alloc-row"><span class="ar-label">'+esc(item)+'</span>'+
+    html += '<div class="alloc-row"><span class="ar-label">'+esc(item)+
+      (descs && descs[item] ? '<span class="small muted" style="display:block;font-weight:400;line-height:1.35">'+esc(descs[item])+'</span>' : '')+'</span>'+
       '<div class="ar-bar-track"><div class="ar-bar-fill" style="width:'+Math.min(100,val)+'%"></div></div>'+
       '<input type="number" min="0" max="100" step="1" data-allocinput="'+esc(field)+'" data-allockey="'+esc(item)+'" value="'+val+'">'+
       '</div>';
