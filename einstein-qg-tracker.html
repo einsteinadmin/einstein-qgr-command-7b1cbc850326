@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>QG Success Rate Tracker — Einstein Moving Company</title>
-<!-- qg-tracker hosted-sanitized 2026-07-24 — leader-facing copy; canonical (full candor) = Supporting Projects/Cascading Goals Tracker/ -->
+<!-- 2026-07-27: added click-to-expand goal detail on the top leader tiles (accordion panel below the
+     card row, keyboard-accessible). Purely additive UI — no anchors sync_qg_from_ledger.py audits were
+     touched. Goal-level data lives in QG_GOAL_DETAIL_Q2_2026 below, generated FROM qg-results-2026-Q2.json
+     via a throwaway script — regenerate it from the ledger, never hand-edit. -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
   /* ── Reset & Base ── */
@@ -154,6 +157,90 @@
   .card.team-wide .counts .r  { color: #EF9A9A; }
   .card.team-wide .counts .ung { color: rgba(255,255,255,0.5); }
   .card.team-wide .trend-arrow { color: rgba(255,255,255,0.7); }
+
+  /* ── Card click-to-expand (goal detail) ── */
+  .card[data-leader] { cursor: pointer; outline-offset: 2px; }
+  .card[data-leader]:focus-visible { outline: 2px solid var(--navy); }
+  .card[data-leader].selected {
+    box-shadow: var(--shadow-lg);
+    outline: 2px solid var(--navy);
+  }
+  .card[data-leader] .expand-hint {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    font-size: 0.68rem;
+    color: #aaa;
+    font-weight: 400;
+  }
+  .card[data-leader].selected .expand-hint { color: var(--navy); font-weight: 600; }
+
+  .goal-detail-panel {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    border-top: 4px solid var(--navy);
+    padding: 18px 22px 20px;
+    margin-top: 14px;
+  }
+  .goal-detail-panel[hidden] { display: none; }
+  .goal-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .goal-detail-name { font-size: 1.02rem; font-weight: 700; color: var(--navy); }
+  .goal-detail-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: #888;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .goal-detail-close:hover { background: var(--light-gray); color: var(--navy); }
+  .goal-detail-quarter-label {
+    font-size: 0.82rem;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .goal-detail-list { list-style: none; margin: 0; padding: 0; }
+  .goal-detail-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.87rem;
+  }
+  .goal-detail-item:last-child { border-bottom: none; }
+  .goal-detail-goal-name { color: var(--text); }
+  .crit-star { color: var(--orange); font-size: 0.8rem; margin-right: 2px; }
+  .qg-chip {
+    display: inline-block;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  .qg-chip.sg { background: #2E7D32; color: white; }
+  .qg-chip.g  { background: #4CAF50; color: white; }
+  .qg-chip.r  { background: #F44336; color: white; }
+  .qg-chip.ung { background: #BDBDBD; color: white; }
+  .goal-detail-quiet {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 12px;
+  }
+  .goal-detail-empty { font-size: 0.85rem; color: #888; }
 
   /* ── Section 3: Heat Map ── */
   .heatmap-section { margin-bottom: 36px; }
@@ -508,6 +595,13 @@
   <div class="cards-section">
     <h2>Roundtable Leaders <span class="legend-hint">Headline = current quarter's success rate (all-time running average below it). Sorted by current quarter. Border color = health zone.</span></h2>
     <div class="cards-grid" id="cardsGrid"></div>
+    <div class="goal-detail-panel" id="goalDetailPanel" hidden>
+      <div class="goal-detail-header">
+        <span class="goal-detail-name"></span>
+        <button type="button" class="goal-detail-close" aria-label="Close goal detail">&times;</button>
+      </div>
+      <div class="goal-detail-body"></div>
+    </div>
   </div>
 
   <!-- Section 3: Heat Map -->
@@ -566,9 +660,10 @@
       <div class="focus-card landmines">
         <h3><span class="icon">⚠️</span> Landmines (grade divergences for Day-1 sync)</h3>
         <ul>
-          <li><span class="leader-tag">Anne</span> <strong>Two goals land R</strong> — Mover Promotion Guidance <span class="arrow">Self G → R</span> (shared goal with Paul, whose side self-graded R) and Hiring for Culture / 100-Point <span class="arrow">Self G → R</span> (a Critical — 100-pt never went live company-wide). Both walked at Day 1.</li>
-          <li><span class="leader-tag">Matisen</span> <strong>Call Grading lands G</strong> <span class="arrow">Self R → G</span> — the substitution (Claims RAG out, Games automation in) was never re-scored, which drove the self-R; weekly call audits have run since 6/11, so the work landed. Takes him to a clean 6 of 6 and the company to 80.0%.</li>
-                    <li><span class="leader-tag">Mike</span> <strong>Games methodology fork — RESOLVED 7/23:</strong> avg-of-weekly over the 8-week season (the post-season week Matisen added to the live tool is exhibition, not graded). DFWT lands 8.12 = Super Green.</li>
+          <li><strong>RATIFIED (fixed 7/24):</strong> <span class="leader-tag">Anne</span> carries <strong>two</strong> final R's, not zero — Mover Promotion Guidance <span class="arrow">Self G → R</span> (shared goal with Paul, whose side self-graded R) and Hiring for Culture / 100-Point <span class="arrow">Self G → R</span> (a Critical — 100-pt never went live company-wide). She was reading 100% on this page until today because neither had been applied. <strong>⚠ Confirm the Hiring-for-Culture one at Day 1</strong> — it is recorded final in both the AAR Review Room and the QG ledger, but the 7/22 review export only ruled Mover Promotion outright.</li>
+          <li><strong>RATIFIED (7/24):</strong> <span class="leader-tag">Matisen</span> Call Grading <span class="arrow">Self R → G</span> — the substitution (Claims RAG out, Games automation in) was never re-scored, which drove the self-R; weekly call audits have run since 6/11, so the work landed. Takes him to a clean 6 of 6 and the company to 80.0%.</li>
+          <li><span class="leader-tag">Paul</span> <strong>Mover Comp three-way read</strong> — Paul R / Anne G / dashboard G on a Critical Number. Decide whose bar governs.</li>
+          <li><span class="leader-tag">Mike</span> <strong>Games methodology fork — RESOLVED 7/23:</strong> avg-of-weekly over the 8-week season (the post-season week Matisen added to the live tool is exhibition, not graded). DFWT lands 8.12 = Super Green.</li>
           <li><strong>No open grade disputes.</strong> All five flips are ratified; the remaining grades are the leaders' own and ratify at the QGR Day-1 sync 7/29.</li>
         </ul>
       </div>
@@ -576,7 +671,7 @@
       <div class="focus-card convo">
         <h3><span class="icon">💬</span> Conversation Points (QGR 7/29-30)</h3>
         <ul>
-          <li><strong>The dependency queue is THE lesson of the quarter</strong> — three leaders' misses routed through the same IT queue. Q3 rule: name the dependency deliverable in the rock text or it doesn't exist, and cap rock load on shared-dependency owners.</li>
+          <li><strong>The dependency queue is THE lesson of the quarter</strong> — three leaders' misses routed through the same IT queue. Q3 rule: name the dependency deliverable in the rock text or it doesn't exist; cap the queue owner at 3-4 rocks.</li>
           <li><strong>Damages-in-promotion is a live unresolved disagreement</strong> — Anne read "damages out" as settled; Cameron and Paul want it in. Day-2 decide item.</li>
           <li><strong>Trial-day consistency audit</strong> — some branches may have sunset trial days ahead of the HPE network being ready; audit before the Q3 company-wide launch.</li>
           <li><strong>Goal-definition hygiene for Q3</strong> — definitions gradable unambiguously by one person, dates + dependencies internally consistent (the scoring fork, date inversion, and dependency-gated bars all trace here).</li>
@@ -810,6 +905,69 @@ const leaders = [
   ]},
 ];
 
+// ── Per-goal detail behind the top leader tiles (Q2 2026 only) ──────────────
+// DERIVED from qg-results-2026-Q2.json (the ledger of record) via a throwaway
+// script — regenerate from the ledger, never hand-edit. Scope matches
+// sync_qg_from_ledger.py's LEADERSHIP map (the 7 leadership rows this tracker
+// carries); grade = the same "effective grade" rule the sync script uses
+// (ratified final where provisional is false, else the self-grade).
+const QG_GOAL_DETAIL_Q2_2026 = {
+  "Cameron": [
+    { name: "Scale AI COS Network + World Model", critical: true, grade: "G" },
+    { name: "AI Wedge Audit + QG Support", critical: true, grade: "G" },
+    { name: "Variable Pricing Full Rollout + Weekly Cadence", critical: false, grade: "SG" },
+    { name: "Branch Visits + O3s", critical: false, grade: "R" },
+    { name: "Oversee Website Redesign — Smart Move Pt 2", critical: false, grade: "G" },
+    { name: "Ideal Team Player Reading", critical: false, grade: "SG" },
+  ],
+  "Paul": [
+    { name: "Annual Mover Comp Review", critical: true, grade: "R" },
+    { name: "N. Austin Office Move-In", critical: true, grade: "SG" },
+    { name: "Branch Visits", critical: false, grade: "G" },
+    { name: "Geographic Expansion Strategy", critical: false, grade: "R" },
+    { name: "Money Collection Process", critical: false, grade: "G" },
+    { name: "Ideal Team Player Reading", critical: false, grade: "G" },
+  ],
+  "Amanda": [
+    { name: "AI Call Grading + Regular Reporting (Conversions/Estimate Accuracy)", critical: true, grade: "R" },
+    { name: "Replace Leadferno with Chatbot (80% deflection)", critical: true, grade: "G" },
+    { name: "New Email Design + Copy Polish + Rollout (KP)", critical: false, grade: "G" },
+    { name: "CX Q2 Theme Rollout (First Class Precision)", critical: false, grade: "SG" },
+    { name: "Ideal Team Player Reading", critical: false, grade: "SG" },
+  ],
+  "Brian": [
+    { name: "Einstein Games Season 3 Launch (CTXH)", critical: true, grade: "G" },
+    { name: "Hiring + Personnel Budgets + People Analyzer", critical: true, grade: "G" },
+    { name: "Scrum Accountability Pt 4 — Manager Certification", critical: false, grade: "G" },
+    { name: "Branch Visits / Audits", critical: false, grade: "G" },
+    { name: "Training Day Overhaul + Calendar", critical: false, grade: "R" },
+    { name: "Ideal Team Player Reading", critical: false, grade: "G" },
+  ],
+  "Mike": [
+    { name: "Personnel Mgmt — Manager Hiring + New Manager Development (Garland/Tampa)", critical: true, grade: "SG" },
+    { name: "Einstein Games Season 4 Launch (DFWT)", critical: true, grade: "SG" },
+    { name: "Fleet Safety Pt 2", critical: false, grade: "R" },
+    { name: "Mover Training Handbook / Training App", critical: false, grade: "SG" },
+    { name: "Ideal Team Player Reading", critical: false, grade: "SG" },
+  ],
+  "Matisen": [
+    { name: "AI Wedge Audit + MVP Scoping", critical: true, grade: "G" },
+    { name: "Variable Pricing Full Rollout + Weekly Review Cadence", critical: true, grade: "SG" },
+    { name: "AI Call Grading + Claims RAG", critical: false, grade: "G" },
+    { name: "ClearCo + Rippling API -> HR Dashboard", critical: false, grade: "G" },
+    { name: "Production Line Cleanup — 8 Loose Threads", critical: false, grade: "SG" },
+    { name: "Ideal Team Player Reading (Bonus)", critical: false, grade: "SG" },
+  ],
+  "Anne": [
+    { name: "Hire HR Generalist", critical: true, grade: "SG" },
+    { name: "Hiring for Culture / Extended Trial Period + 100-Point Behavioral", critical: true, grade: "R" },
+    { name: "ClearCo Hiring Funnel Visualization", critical: false, grade: "G" },
+    { name: "Mover Promotion Guidance Metrics", critical: false, grade: "R" },
+    { name: "Einstein Onboarding Experience", critical: false, grade: "G" },
+    { name: "Ideal Team Player Reading (Bonus)", critical: false, grade: "SG" },
+  ],
+};
+
 // All quarters in order
 const allQuarters = ["Q2 2024","Q3 2024","Q4 2024","Q1 2025","Q2 2025","Q3 2025","Q4 2025","Q1 2026","Q2 2026"];
 
@@ -895,6 +1053,7 @@ function trendArrow(rocks) {
 // ── Filter State ──
 let showCriticalOnly = false;
 let chartInstance = null;
+let selectedLeader = null; // click-to-expand goal detail on the top leader tiles
 
 // Helper: get the active rock data for a leader
 function getRocks(leader) {
@@ -970,6 +1129,12 @@ function buildCards() {
 
     const card = document.createElement("div");
     card.className = "card " + zone;
+    card.dataset.leader = leader.name;
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-expanded", selectedLeader === leader.name ? "true" : "false");
+    card.setAttribute("aria-label", `${leader.name} — show goal detail`);
+    if (selectedLeader === leader.name) card.classList.add("selected");
     card.innerHTML = `
       <div class="trend-arrow ${trend.cls}">${trend.arrow}</div>
       <div class="name">${leader.name}</div>
@@ -982,9 +1147,13 @@ function buildCards() {
         ${latest.ung > 0 ? `<span class="ung">UNG ${latest.ung}</span>` : ""}` : ""}
       </div>
       <div class="counts" style="margin-top:4px;opacity:0.7;">All-time: ${allPct !== null ? Math.round(allPct) + "%" : "N/A"} (${t.sg + t.g + t.r + t.ung} rocks)</div>
+      <div class="expand-hint">${selectedLeader === leader.name ? "▲ hide goals" : "▼ goal detail"}</div>
     `;
     grid.appendChild(card);
   });
+
+  // Keep the detail panel in sync with the freshly-rebuilt cards (filter toggle rebuilds cards).
+  if (selectedLeader) renderDetailPanel(selectedLeader);
 }
 
 // ── Build Heat Map ──
@@ -1234,6 +1403,97 @@ function buildChart() {
     }],
   });
 }
+
+// ── Goal Detail (click-to-expand on the top leader tiles) ──
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[c]));
+}
+
+function gradeLabel(grade) {
+  return grade === "SG" ? "Super Green" : grade === "G" ? "Green" : grade === "R" ? "Red" : "Ungraded";
+}
+
+function renderDetailPanel(leaderName) {
+  const leader = leaders.find(l => l.name === leaderName);
+  const panel = document.getElementById("goalDetailPanel");
+  if (!leader) { panel.hidden = true; return; }
+
+  const rocks = getRocks(leader);
+  const latest = latestGraded(rocks);
+  const nameEl = panel.querySelector(".goal-detail-name");
+  const body = panel.querySelector(".goal-detail-body");
+  nameEl.textContent = `${leader.name} — goal detail`;
+
+  let html = "";
+  const ledgerGoals = QG_GOAL_DETAIL_Q2_2026[leader.name];
+
+  if (!latest) {
+    html = `<p class="goal-detail-empty">No graded rocks on record for ${escapeHtml(leader.name)}.</p>`;
+  } else if (latest.q === "Q2 2026" && ledgerGoals) {
+    const goals = showCriticalOnly ? ledgerGoals.filter(g => g.critical) : ledgerGoals;
+    const pct = successRate(latest);
+    html += `<div class="goal-detail-quarter-label">Q2 2026${showCriticalOnly ? " · Critical Rocks only" : ""} &mdash; ${fmtPct(pct)}
+      (${latest.sg} SG / ${latest.g} G / ${latest.r} R${latest.ung > 0 ? " / " + latest.ung + " UNG" : ""})</div>`;
+    html += '<ul class="goal-detail-list">';
+    goals.forEach(g => {
+      const cls = (g.grade || "ung").toLowerCase();
+      html += `<li class="goal-detail-item">
+        <span class="goal-detail-goal-name">${g.critical ? '<span class="crit-star" title="Critical Number">&#9733;</span> ' : ""}${escapeHtml(g.name)}</span>
+        <span class="qg-chip ${cls}">${gradeLabel(g.grade)}</span>
+      </li>`;
+    });
+    html += "</ul>";
+    html += `<div class="goal-detail-quiet">Q1 2026 and earlier: rate only &mdash; per-goal detail starts Q2 2026.</div>`;
+  } else {
+    // This leader's headline quarter is earlier than Q2 2026 (e.g. Nhel, or a leader with
+    // no Q2 2026 row yet) — the ledger only carries per-goal detail from Q2 2026 forward.
+    html = `<div class="goal-detail-quiet">${escapeHtml(latest.q)} and earlier: rate only &mdash; per-goal detail starts Q2 2026.</div>`;
+  }
+
+  body.innerHTML = html;
+  panel.hidden = false;
+}
+
+function collapseDetailPanel() {
+  selectedLeader = null;
+  document.getElementById("goalDetailPanel").hidden = true;
+  document.querySelectorAll(".card[data-leader]").forEach(c => {
+    c.classList.remove("selected");
+    c.setAttribute("aria-expanded", "false");
+    const hint = c.querySelector(".expand-hint");
+    if (hint) hint.textContent = "▼ goal detail";
+  });
+}
+
+function toggleDetailPanel(leaderName) {
+  if (selectedLeader === leaderName) { collapseDetailPanel(); return; }
+  selectedLeader = leaderName;
+  document.querySelectorAll(".card[data-leader]").forEach(c => {
+    const isSel = c.dataset.leader === leaderName;
+    c.classList.toggle("selected", isSel);
+    c.setAttribute("aria-expanded", isSel ? "true" : "false");
+    const hint = c.querySelector(".expand-hint");
+    if (hint) hint.textContent = isSel ? "▲ hide goals" : "▼ goal detail";
+  });
+  renderDetailPanel(leaderName);
+}
+
+document.getElementById("cardsGrid").addEventListener("click", function(e) {
+  const card = e.target.closest(".card[data-leader]");
+  if (!card) return;
+  toggleDetailPanel(card.dataset.leader);
+});
+document.getElementById("cardsGrid").addEventListener("keydown", function(e) {
+  const card = e.target.closest(".card[data-leader]");
+  if (!card) return;
+  if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+    e.preventDefault();
+    toggleDetailPanel(card.dataset.leader);
+  }
+});
+document.querySelector("#goalDetailPanel .goal-detail-close").addEventListener("click", collapseDetailPanel);
 
 // ── Toggle Handler ──
 document.getElementById("filterToggle").addEventListener("click", function(e) {

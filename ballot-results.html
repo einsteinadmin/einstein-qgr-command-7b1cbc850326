@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Q3 QGR — Ballot Room View</title>
+<!-- ballot-results v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
+<style>
+:root{
+  --orange-50:#FEF6EC; --orange-100:#FDE3C2; --orange-500:#EF8B22; --orange-700:#D96B10; --orange-900:#CC5500;
+  --navy-50:#EEF1F4; --navy-100:#CDD5DA; --navy-200:#9AADB7; --navy-400:#507080; --navy-500:#27343D; --navy-700:#1A2329;
+  --blue-50:#EBF4FB; --blue-100:#C3DFEF; --blue-500:#0979C3; --blue-900:#023B63;
+  --grey-50:#F4F5F5; --grey-100:#E2E3E4; --grey-200:#C0C2C4; --grey-400:#787C7F; --grey-500:#53575A; --grey-700:#363839;
+  --success:#69995D; --error:#CC0100;
+  --radius-sm:6px; --radius-md:12px; --radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(39,52,61,.08); --shadow-md:0 4px 12px rgba(39,52,61,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:var(--grey-700);background:var(--grey-50);font-size:15px;line-height:1.5;min-width:1000px}
+h1,h2,h3,h4{color:var(--navy-500);font-weight:700}
+button{font:inherit;cursor:pointer}
+#appHeader{background:var(--navy-500);color:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:80;box-shadow:var(--shadow-md);flex-wrap:wrap}
+#appHeader .bebas{font-family:'Bebas Neue','Roboto',sans-serif;font-size:26px;letter-spacing:.03em}
+#appHeader .tag{font-size:12px;color:var(--navy-100);margin-left:10px}
+#appHeader .hbtns{display:flex;gap:8px;align-items:center}
+#appHeader .modebtn{background:var(--navy-700);color:var(--navy-100);border:1px solid var(--navy-400);border-radius:var(--radius-sm);padding:8px 16px;font-size:12.5px;font-weight:700}
+#appHeader .modebtn.active{background:var(--orange-500);color:#fff;border-color:var(--orange-500)}
+#appHeader .clearbtn{background:none;color:var(--navy-100);border:1px solid var(--navy-400);border-radius:var(--radius-sm);padding:8px 12px;font-size:11.5px}
+#appHeader .clearbtn:hover{color:#fff;border-color:#fff}
+main{max-width:1360px;margin:0 auto;padding:24px 28px 60px}
+.badge{display:inline-block;padding:2px 10px;border-radius:var(--radius-pill);font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.badge.opt{background:var(--grey-100);color:var(--grey-500)}
+.badge.tgt{background:var(--blue-100);color:var(--blue-900)}
+.badge.split{background:var(--orange-100);color:var(--orange-900)}
+.badge.crit{background:var(--orange-100);color:var(--orange-900)}
+.badge.updated{background:var(--blue-100);color:var(--blue-900)}
+.badge.room{background:var(--orange-500);color:#fff}
+
+.dropzone{border:2px dashed var(--navy-200);border-radius:var(--radius-md);background:#fff;padding:28px;text-align:center;margin-bottom:20px}
+.dropzone.drag{border-color:var(--orange-500);background:var(--orange-50)}
+.dropzone h2{font-size:17px;margin-bottom:5px}
+.dropzone p{font-size:12.5px;color:var(--grey-500);max-width:680px;margin:0 auto 10px}
+.dropzone label{display:inline-block;background:var(--navy-500);color:#fff;border-radius:var(--radius-sm);padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer}
+.dropzone input{display:none}
+.dropzone .privacy{font-size:11px;color:var(--grey-400);margin-top:8px}
+
+.roster{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.rcard{background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:10px 14px;min-width:150px;box-shadow:var(--shadow-sm)}
+.rcard.empty{border-style:dashed;color:var(--grey-400);background:var(--grey-50)}
+.rcard .rn{font-size:13px;font-weight:700;color:var(--navy-500)}
+.rcard .rr{font-size:10.5px;color:var(--grey-400)}
+.rcard .rmeta{font-size:10px;color:var(--grey-400);margin-top:4px}
+
+.section{background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:20px 24px;margin-bottom:20px}
+.section h2{font-size:19px;margin-bottom:4px}
+.section .shint{font-size:12px;color:var(--grey-400);margin-bottom:14px}
+.qblock{border-top:1px solid var(--grey-100);padding:18px 0}
+.qblock:first-of-type{border-top:none;padding-top:0}
+.qhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px}
+.qhead h3{font-size:15.5px}
+.qmeta{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.qtext{font-size:13px;color:var(--grey-500);margin-bottom:6px}
+.leantext{font-size:12.5px;color:var(--navy-400);background:var(--navy-50);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:10px}
+.chiprow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.pchip{font-size:11.5px;font-weight:700;border-radius:var(--radius-pill);padding:4px 12px;border:1px solid var(--grey-100)}
+.pchip.good{background:#E3EEDF;color:#3E6636}
+.pchip.mid{background:var(--orange-50);color:var(--orange-900)}
+.pchip.bad{background:#F8DCDC;color:#8E0000}
+.pchip.und{background:var(--grey-100);color:var(--grey-500)}
+.pchip.neutral{background:var(--blue-50);color:var(--blue-900)}
+.answers{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.acard{border:1px solid var(--grey-100);border-radius:var(--radius-sm);padding:10px 12px;background:var(--grey-50)}
+.acard .an{font-size:12.5px;font-weight:700;color:var(--navy-500);display:flex;justify-content:space-between;gap:6px}
+.acard .apos{font-size:11px;font-weight:700;margin-top:2px}
+.acard .apos.good{color:#3E6636}.acard .apos.mid{color:var(--orange-900)}.acard .apos.bad{color:var(--error)}.acard .apos.und{color:var(--grey-400)}.acard .apos.neutral{color:var(--blue-900)}
+.acard .areason{font-size:12.5px;color:var(--grey-700);margin-top:5px;white-space:pre-wrap}
+.acard.blank{color:var(--grey-400);font-style:italic}
+
+.goalcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:16px}
+.goalcol{border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:12px 14px;background:var(--grey-50)}
+.goalcol h4{font-size:13px;margin-bottom:8px}
+.gcard{background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:8px}
+.gcard .gt{font-size:12.5px;font-weight:700;color:var(--navy-500)}
+.gcard .gbar{font-size:11px;color:var(--grey-500);margin-top:3px}
+.gcard .gbar b{color:var(--grey-700);font-weight:700}
+.gcard .gbar.blank{color:var(--grey-400);font-style:italic}
+.pile{border:2px dashed var(--orange-500);border-radius:var(--radius-md);padding:14px;background:var(--orange-50);margin-bottom:16px}
+.pile h3{font-size:15px;color:var(--orange-900)}
+.pileitem{display:flex;justify-content:space-between;gap:8px;background:#fff;border-radius:var(--radius-sm);padding:7px 10px;margin-top:8px;font-size:12.5px}
+.routegroup{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:14px}
+.routebox{border:1px solid var(--grey-100);border-radius:var(--radius-sm);padding:10px 12px}
+.routebox h5{font-size:11.5px;color:var(--grey-400);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px}
+.addcard{border:1px solid var(--orange-100);background:var(--orange-50);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:8px}
+.addcard .at{font-size:12.5px;font-weight:700;color:var(--orange-900)}
+
+.trackgrid{display:grid;grid-template-columns:170px 1fr;gap:10px;margin-bottom:16px;align-items:start}
+.trackgrid .tlabel{font-size:13.5px;font-weight:700;color:var(--navy-500);padding-top:6px}
+.trackrows{display:grid;gap:8px}
+.trow{border:1px solid var(--grey-100);border-radius:var(--radius-sm);padding:8px 12px;background:var(--grey-50)}
+.trow .tn{font-size:11.5px;font-weight:700;color:var(--navy-500)}
+.trow .tt{font-size:12.5px;margin-top:2px}
+.trow .tg{font-size:11px;color:var(--grey-500);margin-top:4px}
+.emptytrack{font-size:12px;color:var(--grey-400);font-style:italic;padding:8px 0}
+
+.chorollup{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.chobox{border:1px solid var(--grey-100);border-radius:var(--radius-sm);padding:10px 12px}
+.chobox .cv{font-size:12.5px;font-weight:700;color:var(--navy-500)}
+.chobox .cavg{font-size:20px;font-weight:700;color:var(--navy-500)}
+.chobox .crange{font-size:11px;color:var(--grey-400)}
+
+.celebrow{display:flex;gap:8px;flex-wrap:wrap}
+.celebchip{background:var(--grey-50);border:1px solid var(--grey-100);border-radius:var(--radius-sm);padding:8px 12px;font-size:12.5px;max-width:320px}
+.celebchip .cl{font-size:10.5px;color:var(--grey-400);text-transform:uppercase;letter-spacing:.03em}
+
+.actiongrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.actionbox{border:1px solid var(--grey-100);border-radius:var(--radius-sm);padding:10px 12px}
+.actionbox .an{font-size:12.5px;font-weight:700;color:var(--navy-500)}
+.actionbox .af{font-size:20px;font-weight:700;color:var(--navy-500)}
+
+.pwrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.pwbox{border:1px solid var(--grey-100);border-radius:var(--radius-sm);padding:10px 12px}
+.pwbox .pn{font-size:12.5px;font-weight:700;color:var(--navy-500)}
+.pwbox .po{font-size:12px;color:var(--grey-700);margin-top:3px}
+.pwbox .pg{font-size:11px;color:var(--grey-400);margin-top:3px}
+
+.notsub{background:#fff;border:1px dashed var(--grey-200);border-radius:var(--radius-md);padding:40px;text-align:center;color:var(--grey-400);font-size:14px}
+a.pulselink{color:var(--blue-500);text-decoration:none;font-size:11px}
+a.pulselink:hover{text-decoration:underline}
+
+/* ---- Room Reveal ---- */
+#revealStage{display:none}
+#revealStage.active{display:block}
+.revealHead{text-align:center;padding:10px 0 24px}
+.revealHead .rq{font-size:11px;color:var(--grey-400);text-transform:uppercase;letter-spacing:.05em}
+.revealHead h2{font-size:26px;margin:6px 0 10px}
+.revealHead .rctx{font-size:14px;color:var(--grey-500);max-width:760px;margin:0 auto}
+.revealHead .rlean{font-size:13px;color:var(--navy-400);background:var(--navy-50);border-radius:var(--radius-sm);padding:10px 16px;max-width:760px;margin:12px auto 0;text-align:left}
+.cardsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;perspective:1200px;margin:26px 0}
+.card3d{height:150px}
+.card3d .inner{position:relative;width:100%;height:100%;transition:transform .6s ease;transform-style:preserve-3d;transition-delay:var(--d,0ms)}
+.card3d.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius-md);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center}
+.face.back{background:var(--navy-500);color:#fff}
+.face.back .fn{font-size:14px;font-weight:700}
+.face.back .fr{font-size:10.5px;color:var(--navy-100);margin-top:4px}
+.face.front{background:#fff;border:2px solid var(--grey-100);transform:rotateY(180deg)}
+.face.front.good{border-color:var(--success)}
+.face.front.bad{border-color:var(--error)}
+.face.front.mid{border-color:var(--orange-500)}
+.face.front .fpos{font-size:12.5px;font-weight:700;color:var(--navy-500);line-height:1.3}
+.card3d.dim .face.back{background:var(--grey-100);color:var(--grey-400)}
+.card3d.dim .face.back .fr{color:var(--grey-400)}
+.revealReasons{max-width:900px;margin:0 auto;display:grid;gap:12px}
+.reasonrow{opacity:0;transform:translateY(6px);transition:opacity .4s ease,transform .4s ease;background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:12px 16px}
+.reasonrow.show{opacity:1;transform:none}
+.reasonrow b{color:var(--navy-500)}
+.openendedGrid{max-width:900px;margin:0 auto;display:grid;gap:12px}
+.oecard{background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:14px 18px}
+.oecard b{color:var(--navy-500)}
+.revealFoot{text-align:center;margin-top:24px;font-size:12px;color:var(--grey-400)}
+.revealNav{display:flex;justify-content:center;gap:10px;margin-top:18px}
+.revealNav button{background:var(--navy-500);color:#fff;border:none;border-radius:var(--radius-sm);padding:8px 18px;font-size:12.5px;font-weight:700}
+.revealNav button:disabled{background:var(--grey-100);color:var(--grey-400);cursor:default}
+.progressDots{display:flex;justify-content:center;gap:5px;margin-top:14px}
+.pdot{width:7px;height:7px;border-radius:50%;background:var(--grey-100)}
+.pdot.on{background:var(--orange-500)}
+
+.keys{font-size:11px;color:var(--grey-400);text-align:center;margin-top:14px}
+footer{background:var(--navy-700);color:var(--navy-100);text-align:center;padding:12px;font-size:11px}
+</style>
+</head>
+<body>
+<header id="appHeader">
+  <div><span class="bebas">Q3 QGR — BALLOT ROOM VIEW</span><span class="tag">Q3 2026 QGR · July 29–30 · drag qgr-ballot-*.json files in · data stays in this browser</span></div>
+  <div class="hbtns">
+    <button class="modebtn active" id="btnModeAgg">Aggregate</button>
+    <button class="modebtn" id="btnModeReveal">Room Reveal</button>
+    <button class="clearbtn" id="btnClearAll">Clear all</button>
+  </div>
+</header>
+<main>
+  <div id="aggView">
+    <div class="dropzone" id="dropzone">
+      <h2>Drop the leaders' ballot files here</h2>
+      <p>Drag in every leader's exported <b>qgr-ballot-*.json</b> (or Cameron's hand-authored file). Everything renders in this browser only — nothing uploads anywhere. A leader missing here just shows as "not yet returned," never faked.</p>
+      <label>Choose files<input type="file" id="filePick" multiple accept=".json,application/json"></label>
+      <div class="privacy">Ballots are the sensitive layer — this page deliberately ships empty and never gets deployed. Reload to clear, or use "Clear all" above.</div>
+    </div>
+    <div id="rosterStrip"></div>
+    <div id="aggContent"></div>
+  </div>
+  <div id="revealStage"></div>
+</main>
+<footer>Internal · LOCAL-ONLY · Einstein Moving Company · never hosted, ballots stay on this computer</footer>
+<div class="toast" id="toast" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy-700);color:#fff;padding:10px 20px;border-radius:var(--radius-pill);font-size:13px;box-shadow:var(--shadow-md);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:200"></div>
+
+<script>
+/* ============================================================
+   CONSTANTS
+   ============================================================ */
+var LEADERS = [
+  { id:"cameron", name:"Cameron Brown",  role:"CEO" },
+  { id:"paul",    name:"Paul Morin",     role:"CFO / COO" },
+  { id:"amanda",  name:"Amanda Ware",    role:"Director of CX" },
+  { id:"brian",   name:"Brian Herzig",   role:"CTXH Regional Manager" },
+  { id:"mike",    name:"Mike Vandenbroader", role:"DFWT Regional Manager · Head of Ops" },
+  { id:"matisen", name:"Matisen Harper", role:"Director of IT" },
+  { id:"anne",    name:"Anne Bosse",     role:"Director of Employee Experience" }
+];
+var LEADERS_BY_ID = {};
+LEADERS.forEach(function(l){ LEADERS_BY_ID[l.id] = l; });
+
+// Canonical question order (matches the workshop hub's DEBATES order).
+// Any question id not in this list (future additions) sorts after, alphabetically.
+var QUESTION_ORDER = [
+  "flex-days","damages-metric","q3-theme","mgr-sales-comp","sales-competition",
+  "sales-training","carly-magic-moments","conversion-standard","cos-to-bms"
+];
+
+// Role tracks for the build sheet (matches the workshop hub's TRACKS list/order/gates).
+var TRACK_META = [
+  { id:"movers",   label:"Movers",              icon:"📦", gate:true },
+  { id:"leads",    label:"Leads",                icon:"🎓", gate:false },
+  { id:"managers", label:"Managers (BMs / OMs)", icon:"🧭", gate:true },
+  { id:"cx",       label:"CX Reps (CERs)",       icon:"🎧", gate:true },
+  { id:"support",  label:"Employee Experience + IT", icon:"🛠", gate:false }
+];
+
+var LS_KEY = "qgrhq-q3-2026-v2-ballot-results";
+
+// The five leaders who own the Directs' Q3 Slate module (v6). Fixed render
+// order; cameron/paul are never flagged "missing" since they don't have one.
+var EXPECTED_DIRECT_SLATE_LEADERS = ["amanda","anne","matisen","mike","brian"];
+
+/* ============================================================
+   PURE FUNCTIONS — parseBallot / aggregate / splitDetect
+   No DOM references below this block. Kept standalone and
+   callable from Node for the QC test harness.
+   ============================================================ */
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+function parseBallot(raw){
+  if(!raw || typeof raw !== "object") throw new Error("Not a JSON object");
+  if(!raw.schema || String(raw.schema).indexOf("einstein-qgr-ballot/") !== 0) throw new Error("Not a QGR ballot file (schema: "+raw.schema+")");
+  if(!raw.leader || !raw.leader.id) throw new Error("Ballot file is missing leader.id");
+
+  var leader = { id: raw.leader.id, name: raw.leader.name || raw.leader.id, role: raw.leader.role || "" };
+
+  var ballot = Array.isArray(raw.ballot) ? raw.ballot.map(function(q){
+    return {
+      id: q.id,
+      title: q.title || q.id,
+      core: q.core === undefined ? true : !!q.core,          // v1-v3 files had no flag — treat as core (everyone answered it)
+      openEnded: !!q.openEnded,
+      targeted: !!q.targeted,
+      question: q.question || "",
+      leanShown: q.leanShown === undefined ? null : q.leanShown,
+      position: q.position === undefined ? null : q.position,
+      positionLabel: q.positionLabel === undefined ? null : q.positionLabel,
+      reasoning: q.reasoning || ""
+    };
+  }) : [];
+
+  var choices = Array.isArray(raw.choices) ? raw.choices.map(function(c){
+    return { value: c.value, score: (c.score === undefined || c.score === null) ? null : Number(c.score), note: c.note || "" };
+  }) : [];
+
+  var celebrations = raw.celebrations ? { celebration: raw.celebrations.celebration || "", prizes: raw.celebrations.prizes || "" } : { celebration:"", prizes:"" };
+
+  var actionItems = Array.isArray(raw.actionItems) ? raw.actionItems.map(function(a){ return { item: a.item, done: !!a.done }; }) : [];
+
+  var goals = null;
+  if(raw.goals){
+    goals = {
+      pickTarget: raw.goals.pickTarget === undefined ? null : raw.goals.pickTarget,
+      picked: Array.isArray(raw.goals.picked) ? raw.goals.picked : [],
+      routed: Array.isArray(raw.goals.routed) ? raw.goals.routed : [],
+      additions: Array.isArray(raw.goals.additions) ? raw.goals.additions : []
+    };
+  }
+
+  // legacyPrework — v5 key, OR the older top-level "prework" shape ({own, goals:[{idea,green,superGreen}]})
+  var legacyPrework = null;
+  if(raw.legacyPrework){
+    legacyPrework = {
+      themeOwnership: raw.legacyPrework.themeOwnership || "",
+      draftGoals: Array.isArray(raw.legacyPrework.draftGoals) ? raw.legacyPrework.draftGoals : []
+    };
+  } else if(raw.prework){
+    var pw = raw.prework;
+    var goalsArr = Array.isArray(pw.goals) ? pw.goals
+      .filter(function(g){ return (g.idea||"").trim() || (g.green||"").trim() || (g.superGreen||"").trim(); })
+      .map(function(g){ return { idea:g.idea||"", green:g.green||"", superGreen:g.superGreen||"" }; }) : [];
+    if((pw.own||"").trim() || goalsArr.length){
+      legacyPrework = { themeOwnership: pw.own || "", draftGoals: goalsArr };
+    }
+  }
+
+  var buildsheet = null;
+  if(raw.buildsheet){
+    buildsheet = {
+      themeName: raw.buildsheet.themeName || "",
+      workingName: raw.buildsheet.workingName || "",
+      tracks: Array.isArray(raw.buildsheet.tracks) ? raw.buildsheet.tracks : []
+    };
+  }
+
+  // directSlates — v6 key. Absent on v1-v5 files; defaults to an empty array
+  // so older exports keep parsing without a single code path change.
+  var directSlates = Array.isArray(raw.directSlates) ? raw.directSlates.map(function(ds){
+    return {
+      direct: ds.direct || "",
+      candidates: Array.isArray(ds.candidates) ? ds.candidates.map(function(c){
+        return {
+          name: c.name || "",
+          pulse: c.pulse || null,
+          why: c.why || "",
+          critical: !!c.critical,
+          removed: !!c.removed,
+          source: c.source || "seed"
+        };
+      }) : [],
+      note: ds.note || ""
+    };
+  }) : [];
+
+  return {
+    schema: raw.schema,
+    exportedAt: raw.exportedAt || null,
+    quarter: raw.quarter || "",
+    leader: leader,
+    choices: choices,
+    celebrations: celebrations,
+    actionItems: actionItems,
+    goals: goals,
+    legacyPrework: legacyPrework,
+    buildsheet: buildsheet,
+    directSlates: directSlates,
+    ballot: ballot,
+    startedAt: raw.startedAt || null
+  };
+}
+
+// dist: {positionValue: count}, eligibleCount: number of leaders eligible to answer this question
+function splitDetect(dist, eligibleCount){
+  var majorityNeeded = Math.floor(eligibleCount/2) + 1;
+  var maxCount = 0, maxOption = null;
+  Object.keys(dist||{}).forEach(function(k){
+    if(dist[k] > maxCount){ maxCount = dist[k]; maxOption = k; }
+  });
+  return {
+    isSplit: eligibleCount > 0 && maxCount < majorityNeeded,
+    majorityNeeded: majorityNeeded,
+    maxOption: maxOption,
+    maxCount: maxCount
+  };
+}
+
+function questionSortIndex(id){
+  var i = QUESTION_ORDER.indexOf(id);
+  return i === -1 ? 999 : i;
+}
+
+// ballotsMap: { leaderId: normalizedBallot } — pure, no DOM
+function aggregate(ballotsMap){
+  var leaderIds = Object.keys(ballotsMap);
+
+  /* -------- Questions (union of ids seen, keyed off what each leader's own export contains) -------- */
+  var qMap = {}, qOrder = [];
+  leaderIds.forEach(function(lid){
+    (ballotsMap[lid].ballot || []).forEach(function(q){
+      if(!qMap[q.id]){
+        qMap[q.id] = { id:q.id, title:q.title, question:q.question, leanShown:q.leanShown, core:q.core, openEnded:q.openEnded, targeted:q.targeted, answers:{} };
+        qOrder.push(q.id);
+      }
+      if(!qMap[q.id].leanShown && q.leanShown) qMap[q.id].leanShown = q.leanShown;
+      if(q.targeted) qMap[q.id].targeted = true;
+      if(q.core) qMap[q.id].core = true; // core if ANY leader's export marked it core
+      qMap[q.id].answers[lid] = { position:q.position, positionLabel:q.positionLabel, reasoning:q.reasoning, targetedFlag:q.targeted };
+    });
+  });
+  qOrder.sort(function(a,b){ return questionSortIndex(a) - questionSortIndex(b) || a.localeCompare(b); });
+
+  var questions = qOrder.map(function(id){
+    var q = qMap[id];
+    // If ANY leader's own export flagged this question targeted, restrict eligibility to leaders
+    // whose OWN entry carried that flag — protects against pre-v4 "unfiltered" legacy files that
+    // happen to still contain the question id (they were never actually eligible to answer it).
+    var eligible = Object.keys(q.answers).filter(function(lid){
+      return !q.targeted || q.answers[lid].targetedFlag;
+    });
+    var dist = {}, answeredCount = 0;
+    eligible.forEach(function(lid){
+      var a = q.answers[lid];
+      if(q.openEnded) return;
+      if(a.position != null){ dist[a.position] = (dist[a.position]||0) + 1; answeredCount++; }
+    });
+    var split = q.openEnded ? null : splitDetect(dist, eligible.length);
+    return {
+      id: q.id, title: q.title, question: q.question, leanShown: q.leanShown,
+      core: !!q.core, openEnded: !!q.openEnded, targeted: !!q.targeted,
+      answers: q.answers,
+      eligibleLeaders: eligible, eligibleCount: eligible.length,
+      distribution: dist, answeredCount: answeredCount, split: split
+    };
+  });
+
+  /* -------- CHOICES rollup -------- */
+  var choiceValues = {};
+  leaderIds.forEach(function(lid){
+    (ballotsMap[lid].choices || []).forEach(function(c){
+      if(!choiceValues[c.value]) choiceValues[c.value] = { scores:[], noNote:0, entries:[] };
+      if(c.score != null){
+        choiceValues[c.value].scores.push(c.score);
+        choiceValues[c.value].entries.push({ leader:lid, score:c.score, note:c.note });
+        if(!c.note || !c.note.trim()) choiceValues[c.value].noNote++;
+      }
+    });
+  });
+  var choicesRollup = Object.keys(choiceValues).map(function(v){
+    var d = choiceValues[v];
+    var avg = d.scores.length ? (d.scores.reduce(function(a,b){ return a+b; },0) / d.scores.length) : null;
+    return {
+      value:v, avg:avg,
+      min: d.scores.length ? Math.min.apply(null, d.scores) : null,
+      max: d.scores.length ? Math.max.apply(null, d.scores) : null,
+      count: d.scores.length, noNote: d.noNote, entries: d.entries
+    };
+  });
+
+  /* -------- Celebrations & prizes (pooled, deduped) -------- */
+  var celebSeen = {}, prizeSeen = {}, celebrations = [];
+  leaderIds.forEach(function(lid){
+    var c = ballotsMap[lid].celebrations || {};
+    if((c.celebration||"").trim()){
+      var k1 = c.celebration.trim();
+      celebrations.push({ type:"celebration", leader:lid, text:k1, dup: !!celebSeen[k1] });
+      celebSeen[k1] = true;
+    }
+    if((c.prizes||"").trim()){
+      var k2 = c.prizes.trim();
+      celebrations.push({ type:"prize", leader:lid, text:k2, dup: !!prizeSeen[k2] });
+      prizeSeen[k2] = true;
+    }
+  });
+
+  /* -------- Action items -------- */
+  var actionItems = {};
+  leaderIds.forEach(function(lid){
+    var items = ballotsMap[lid].actionItems || [];
+    actionItems[lid] = { total: items.length, done: items.filter(function(i){ return i.done; }).length, items: items };
+  });
+
+  /* -------- Legacy prework -------- */
+  var prework = {};
+  leaderIds.forEach(function(lid){
+    var pw = ballotsMap[lid].legacyPrework;
+    if(pw) prework[lid] = pw;
+  });
+
+  /* -------- Goals (pick-5) -------- */
+  var goalsByLeader = {}, roomDecides = [], routedByLeaderGrouped = {}, additions = [];
+  leaderIds.forEach(function(lid){
+    var g = ballotsMap[lid].goals;
+    if(!g) return;
+    goalsByLeader[lid] = g;
+    (g.routed || []).forEach(function(r){
+      if(r.route === "room-decides") roomDecides.push(Object.assign({ leader:lid }, r));
+      if(!routedByLeaderGrouped[lid]) routedByLeaderGrouped[lid] = [];
+      routedByLeaderGrouped[lid].push(r);
+    });
+    (g.additions || []).forEach(function(a){ additions.push(Object.assign({ leader:lid }, a)); });
+  });
+
+  /* -------- Build sheet (group by role track) -------- */
+  var tracksAgg = {}, themeNames = [];
+  leaderIds.forEach(function(lid){
+    var bs = ballotsMap[lid].buildsheet;
+    if(!bs) return;
+    if((bs.themeName||"").trim()) themeNames.push({ leader:lid, name:bs.themeName.trim() });
+    (bs.tracks || []).forEach(function(t){
+      if(!tracksAgg[t.id]) tracksAgg[t.id] = [];
+      tracksAgg[t.id].push({ leader:lid, label:t.label, take:t.take||"", green:t.green, superGreen:t.superGreen });
+    });
+  });
+
+  /* -------- Directs' Q3 Slates (v6) -------- */
+  var directSlatesByLeader = {};
+  leaderIds.forEach(function(lid){
+    var ds = ballotsMap[lid].directSlates;
+    if(ds && ds.length) directSlatesByLeader[lid] = ds;
+  });
+  // Missing = one of the five expected owners with no directSlates data loaded
+  // yet (either their ballot hasn't been dropped in at all, or it's a legacy
+  // file predating v6). cameron/paul are never expected, so never flagged.
+  var missingDirectSlateLeaders = EXPECTED_DIRECT_SLATE_LEADERS.filter(function(lid){
+    return !directSlatesByLeader[lid];
+  });
+
+  return {
+    leaderIds: leaderIds,
+    questions: questions,
+    choicesRollup: choicesRollup,
+    celebrations: celebrations,
+    actionItems: actionItems,
+    prework: prework,
+    goalsByLeader: goalsByLeader,
+    roomDecides: roomDecides,
+    routedByLeaderGrouped: routedByLeaderGrouped,
+    additions: additions,
+    tracksAgg: tracksAgg,
+    themeNames: themeNames,
+    directSlatesByLeader: directSlatesByLeader,
+    missingDirectSlateLeaders: missingDirectSlateLeaders
+  };
+}
+
+function posClsFor(value){
+  if(value == null) return "none";
+  var v = String(value).toLowerCase();
+  if(v.indexOf("undecided") !== -1) return "und";
+  if(v.indexOf("disagree") !== -1 || v === "no" || v.indexOf("lower") !== -1 || v.indexOf("no") === 0) return "bad";
+  if(v.indexOf("agree-mod") !== -1 || v.indexOf("mid") !== -1 || v.indexOf("later") !== -1 || v.indexOf("hold") !== -1 || v.indexOf("after") !== -1) return "mid";
+  if(v.indexOf("agree") !== -1 || v.indexOf("yes") !== -1 || v.indexOf("raise") !== -1 || v.indexOf("pilot") !== -1) return "good";
+  return "neutral";
+}
+
+/* ============================================================
+   Node/browser export guard — keeps the functions above pure
+   and testable from a standalone Node harness without pulling
+   in any DOM. Everything below this point is DOM-only and is
+   never reached when this file's <script> body is required()
+   as plain JS by a test runner without a `document` global.
+   ============================================================ */
+if(typeof module !== "undefined" && module.exports){
+  module.exports = { parseBallot: parseBallot, aggregate: aggregate, splitDetect: splitDetect, posClsFor: posClsFor, LEADERS: LEADERS, TRACK_META: TRACK_META, QUESTION_ORDER: QUESTION_ORDER, EXPECTED_DIRECT_SLATE_LEADERS: EXPECTED_DIRECT_SLATE_LEADERS };
+}
+
+/* ============================================================
+   DOM WIRING — everything below touches document/localStorage/
+   FileReader and only ever runs in a browser.
+   ============================================================ */
+function initApp(){
+
+var CACHE = { ballots:{} };   // leaderId -> { raw, fileName, exportedAt, historyCount }
+var BALLOTS = {};             // leaderId -> normalized ballot (only successfully-parsed ones)
+var MODE = "agg";             // "agg" | "reveal"
+var REVEAL_IDX = 0;
+var REVEAL_FLIPPED = false;
+
+function toast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg; t.style.opacity = "1";
+  clearTimeout(toast._tm);
+  toast._tm = setTimeout(function(){ t.style.opacity = "0"; }, 3200);
+}
+
+function loadCache(){
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    if(raw) CACHE = JSON.parse(raw) || { ballots:{} };
+    if(!CACHE.ballots) CACHE.ballots = {};
+  }catch(e){ console.warn("ballot-results cache load failed", e); CACHE = { ballots:{} }; }
+}
+function persistCache(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(CACHE)); }
+  catch(e){ toast("⚠ Not saving — this browser is blocking local storage."); }
+}
+function rebuildBallotsMap(){
+  BALLOTS = {};
+  Object.keys(CACHE.ballots).forEach(function(lid){
+    try{ BALLOTS[lid] = parseBallot(CACHE.ballots[lid].raw); }
+    catch(e){ console.warn("failed to reparse cached ballot for", lid, e); }
+  });
+}
+
+function ingestFiles(fileList){
+  var files = Array.prototype.slice.call(fileList).filter(function(f){ return f.name.endsWith(".json"); });
+  if(!files.length){ toast("No .json files found in that drop."); return; }
+  var done = 0, ok = 0, bad = [];
+  files.forEach(function(f){
+    var r = new FileReader();
+    r.onload = function(){
+      try{
+        var raw = JSON.parse(r.result);
+        var norm = parseBallot(raw);
+        var lid = norm.leader.id;
+        var existing = CACHE.ballots[lid];
+        var isNewer = !existing || !existing.exportedAt || !norm.exportedAt || (norm.exportedAt > existing.exportedAt);
+        if(isNewer){
+          CACHE.ballots[lid] = { raw: raw, fileName: f.name, exportedAt: norm.exportedAt, historyCount: existing ? (existing.historyCount||1)+1 : 1 };
+          ok++;
+        } else {
+          bad.push(f.name + " (older export — newest for " + lid + " already loaded)");
+        }
+      }catch(e){ bad.push(f.name + " — " + e.message); }
+      if(++done === files.length){
+        persistCache(); rebuildBallotsMap(); renderAll();
+        toast(ok + " file(s) loaded" + (bad.length ? " · " + bad.length + " skipped" : ""));
+        if(bad.length) console.warn("ballot-results skipped:", bad);
+      }
+    };
+    r.readAsText(f);
+  });
+}
+
+/* ---- ingest wiring ---- */
+var dz = document.getElementById("dropzone");
+if(dz){
+  ["dragover","dragenter"].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.add("drag"); }); });
+  ["dragleave","drop"].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.remove("drag"); }); });
+  dz.addEventListener("drop", function(e){ ingestFiles(e.dataTransfer.files); });
+}
+var fp = document.getElementById("filePick");
+if(fp) fp.addEventListener("change", function(e){ ingestFiles(e.target.files); });
+
+document.getElementById("btnClearAll").addEventListener("click", function(){
+  if(!confirm("Clear all loaded ballots from this browser? This can't be undone (leaders would need to re-drop their files).")) return;
+  CACHE = { ballots:{} }; BALLOTS = {};
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  MODE = "agg"; setMode("agg");
+  renderAll();
+  toast("Cleared.");
+});
+
+document.getElementById("btnModeAgg").addEventListener("click", function(){ setMode("agg"); });
+document.getElementById("btnModeReveal").addEventListener("click", function(){
+  if(!Object.keys(BALLOTS).length){ toast("Load at least one ballot before starting Room Reveal."); return; }
+  setMode("reveal");
+});
+function setMode(m){
+  MODE = m;
+  document.getElementById("btnModeAgg").classList.toggle("active", m==="agg");
+  document.getElementById("btnModeReveal").classList.toggle("active", m==="reveal");
+  document.getElementById("aggView").style.display = m==="agg" ? "" : "none";
+  document.getElementById("revealStage").className = m==="reveal" ? "active" : "";
+  if(m==="reveal"){ REVEAL_IDX = 0; REVEAL_FLIPPED = false; renderReveal(); }
+}
+
+/* ============================================================
+   AGGREGATE RENDER
+   ============================================================ */
+function renderAll(){
+  renderRoster();
+  renderAggregate();
+  if(MODE==="reveal") renderReveal();
+}
+
+function renderRoster(){
+  var el = document.getElementById("rosterStrip");
+  var html = '<div class="roster">';
+  LEADERS.forEach(function(l){
+    var meta = CACHE.ballots[l.id];
+    if(!meta){
+      html += '<div class="rcard empty"><div class="rn">'+esc(l.name)+'</div><div class="rr">'+esc(l.role)+'</div><div class="rmeta">not yet returned</div></div>';
+      return;
+    }
+    var when = meta.exportedAt ? new Date(meta.exportedAt).toLocaleString([], {month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}) : "no timestamp";
+    html += '<div class="rcard"><div class="rn">'+esc(l.name)+(meta.historyCount>1?' <span class="badge updated">updated</span>':'')+'</div>'+
+      '<div class="rr">'+esc(l.role)+'</div><div class="rmeta">'+esc(meta.fileName)+' · '+esc(when)+'</div></div>';
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderAggregate(){
+  var el = document.getElementById("aggContent");
+  if(!Object.keys(BALLOTS).length){ el.innerHTML = ''; return; }
+  var agg = aggregate(BALLOTS);
+  var html = '';
+  html += renderQuestionsSection(agg);
+  html += renderGoalsSection(agg);
+  html += renderDirectSlatesSection(agg);
+  html += renderBuildsheetSection(agg);
+  html += renderChoicesSection(agg);
+  html += renderCelebrationsSection(agg);
+  html += renderActionItemsSection(agg);
+  html += renderPreworkSection(agg);
+  el.innerHTML = html;
+}
+
+function leaderName(lid){ return (LEADERS_BY_ID[lid]||{}).name || lid; }
+
+function renderQuestionsSection(agg){
+  if(!agg.questions.length) return '';
+  var html = '<div class="section"><h2>Ballot questions</h2><div class="shint">Position spread + every leader\'s reasoning, verbatim. Genuinely split questions (no option holding a majority of eligible leaders) are flagged.</div>';
+  agg.questions.forEach(function(q){
+    html += '<div class="qblock"><div class="qhead"><h3>'+esc(q.title)+'</h3><div class="qmeta">'+
+      (q.targeted ? '<span class="badge tgt">targeted: '+q.eligibleLeaders.map(leaderName).join(", ")+'</span>' : '') +
+      (!q.core ? '<span class="badge opt">optional</span>' : '') +
+      (q.split && q.split.isSplit ? '<span class="badge split">split — no majority ('+q.eligibleCount+' eligible)</span>' : '') +
+      '</div></div>';
+    if(q.question) html += '<div class="qtext">'+esc(q.question)+'</div>';
+    if(q.leanShown) html += '<div class="leantext"><b>Lean shown:</b> '+esc(q.leanShown)+'</div>';
+
+    if(q.openEnded){
+      html += '<div class="answers">';
+      q.eligibleLeaders.forEach(function(lid){
+        var a = q.answers[lid];
+        html += '<div class="acard'+((a.reasoning||"").trim()?'':' blank')+'"><div class="an">'+esc(leaderName(lid))+'</div>'+
+          '<div class="areason">'+esc((a.reasoning||"").trim() || "(no answer yet)")+'</div></div>';
+      });
+      html += '</div>';
+    } else {
+      // chip spread
+      html += '<div class="chiprow">';
+      Object.keys(q.distribution).forEach(function(v){
+        var lbl = null;
+        q.eligibleLeaders.some(function(lid){ if(q.answers[lid].position===v){ lbl = q.answers[lid].positionLabel || v; return true; } return false; });
+        html += '<span class="pchip '+posClsFor(v)+'">'+esc(lbl||v)+' · '+q.distribution[v]+'</span>';
+      });
+      if(q.eligibleCount - q.answeredCount > 0) html += '<span class="pchip und">no position yet · '+(q.eligibleCount-q.answeredCount)+'</span>';
+      html += '</div>';
+      // per-leader cards
+      html += '<div class="answers">';
+      q.eligibleLeaders.forEach(function(lid){
+        var a = q.answers[lid];
+        var blank = a.position==null && !(a.reasoning||"").trim();
+        html += '<div class="acard'+(blank?' blank':'')+'"><div class="an">'+esc(leaderName(lid))+'</div>';
+        if(a.position!=null) html += '<div class="apos '+posClsFor(a.position)+'">'+esc(a.positionLabel||a.position)+'</div>';
+        html += '<div class="areason">'+esc((a.reasoning||"").trim() || (blank?"(no answer yet)":""))+'</div></div>';
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function pulseLink(pulse){
+  if(!pulse) return '';
+  return ' <a class="pulselink" href="https://einsteinmoving.monday.com/pulses/'+encodeURIComponent(pulse)+'" target="_blank" rel="noopener">pulse ↗</a>';
+}
+
+function renderGoalsSection(agg){
+  var leaderIds = Object.keys(agg.goalsByLeader);
+  if(!leaderIds.length) return '';
+  var html = '<div class="section"><h2>Q3 Goals (pick-5)</h2><div class="shint">Each leader\'s picks (criticals starred), what got routed instead of picked, and additions flagged for the room.</div>';
+
+  html += '<div class="goalcols">';
+  LEADERS.forEach(function(l){
+    var g = agg.goalsByLeader[l.id];
+    if(!g) return;
+    html += '<div class="goalcol"><h4>'+esc(l.name)+(g.pickTarget!=null?' · picked '+g.picked.length+'/'+g.pickTarget:'')+'</h4>';
+    if(!g.picked.length) html += '<div class="emptytrack">No picks recorded.</div>';
+    g.picked.forEach(function(p){
+      html += '<div class="gcard"><div class="gt">'+(p.critical?'⭐ ':'')+esc(p.name)+(p.shared?' <span class="badge opt">shared target</span>':'')+pulseLink(p.pulse)+'</div>'+
+        '<div class="gbar'+(p.green?'':' blank')+'">Green: '+esc(p.green||'—')+'</div>'+
+        '<div class="gbar'+(p.superGreen?'':' blank')+'">Super Green: '+esc(p.superGreen||'—')+'</div>'+
+        '<div class="gbar'+(p.howMeasured?'':' blank')+'">How measured: '+esc(p.howMeasured||'—')+'</div></div>';
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Room decides pile — the prominent work queue
+  html += '<div class="pile"><h3>Room decides — the work queue ('+agg.roomDecides.length+')</h3>';
+  if(!agg.roomDecides.length) html += '<div class="emptytrack">Nothing routed to the room yet.</div>';
+  agg.roomDecides.forEach(function(r){
+    html += '<div class="pileitem"><span>'+esc(r.name)+pulseLink(r.pulse)+'</span><span class="badge opt">'+esc(leaderName(r.leader))+'</span></div>';
+  });
+  html += '</div>';
+
+  // Routed-to-direct / parked, grouped per leader
+  var hasOtherRoutes = Object.keys(agg.routedByLeaderGrouped).some(function(lid){
+    return agg.routedByLeaderGrouped[lid].some(function(r){ return r.route !== "room-decides"; });
+  });
+  if(hasOtherRoutes){
+    html += '<div class="routegroup">';
+    Object.keys(agg.routedByLeaderGrouped).forEach(function(lid){
+      var others = agg.routedByLeaderGrouped[lid].filter(function(r){ return r.route !== "room-decides"; });
+      if(!others.length) return;
+      html += '<div class="routebox"><h5>'+esc(leaderName(lid))+' — routed / parked</h5>';
+      others.forEach(function(r){
+        var label = r.route && r.route.indexOf("direct:")===0 ? "assign to "+r.route.slice(7) : (r.route==="park" ? "parked — not this quarter" : r.route);
+        html += '<div style="font-size:12.5px;margin-bottom:4px">'+esc(r.name)+pulseLink(r.pulse)+' — <i>'+esc(label)+'</i></div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // Additions
+  if(agg.additions.length){
+    html += '<h4 style="margin-bottom:8px">Additions — not on the shortlist, flagged for the room</h4>';
+    agg.additions.forEach(function(a){
+      html += '<div class="addcard"><div class="at">'+(a.critical?'⭐ ':'')+esc(a.name)+' <span class="badge room">flagged for room</span></div>'+
+        (a.why ? '<div style="font-size:12.5px;margin-top:4px"><b>Why:</b> '+esc(a.why)+'</div>' : '') +
+        '<div style="font-size:11.5px;color:var(--grey-500);margin-top:4px">'+esc(leaderName(a.leader))+
+        ' · Green: '+esc(a.green||'—')+' · Super Green: '+esc(a.superGreen||'—')+' · How measured: '+esc(a.howMeasured||'—')+'</div></div>';
+    });
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function renderDirectSlatesSection(agg){
+  if(!agg.leaderIds.length) return '';
+  var html = '<div class="section"><h2>Directs\' Q3 Slates (drafts)</h2><div class="shint">Each of the five leaders\' candidate goals for their own directs &mdash; pre-seeded from the shortlist walk, routed from their own five, or added by hand. These are drafts; nothing here has gone to the directs yet.</div>';
+  EXPECTED_DIRECT_SLATE_LEADERS.forEach(function(lid){
+    var slates = agg.directSlatesByLeader[lid];
+    html += '<h3 style="font-size:14.5px;margin:16px 0 8px">'+esc(leaderName(lid))+'</h3>';
+    if(!slates || !slates.length){
+      html += '<div class="emptytrack">No slate returned yet.</div>';
+      return;
+    }
+    html += '<div class="goalcols">';
+    slates.forEach(function(d){
+      var cands = d.candidates || [];
+      html += '<div class="goalcol"><h4>'+esc(d.direct)+' <span class="badge opt">'+cands.filter(function(c){return !c.removed;}).length+' active</span></h4>';
+      if(!cands.length) html += '<div class="emptytrack">No candidates listed.</div>';
+      cands.forEach(function(c){
+        var badges = '';
+        if(c.source === "routed") badges += ' <span class="badge tgt">routed</span>';
+        if(c.source === "own") badges += ' <span class="badge room">own addition</span>';
+        if(c.removed) badges += ' <span class="badge opt">removed</span>';
+        var nameHtml = c.removed ? '<s>'+esc(c.name)+'</s>' : esc(c.name);
+        html += '<div class="gcard"><div class="gt">'+(c.critical?'⭐ ':'')+nameHtml+badges+pulseLink(c.pulse)+'</div>'+
+          (c.why ? '<div class="gbar">'+esc(c.why)+'</div>' : '') +
+          '</div>';
+      });
+      if((d.note||"").trim()) html += '<div style="font-size:11.5px;color:var(--grey-500);margin-top:6px"><b>Note:</b> '+esc(d.note)+'</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderBuildsheetSection(agg){
+  var trackIds = Object.keys(agg.tracksAgg);
+  if(!trackIds.length && !agg.themeNames.length) return '';
+  var html = '<div class="section"><h2>Speed to competence — build sheet</h2><div class="shint">Grouped by role track so convergence and disagreement are visible in one column. Empty tracks are expected — they read as blank, never as a miss.</div>';
+
+  if(agg.themeNames.length){
+    html += '<div style="margin-bottom:14px"><b style="font-size:12.5px;color:var(--navy-500)">Proposed theme names:</b> ';
+    html += agg.themeNames.map(function(t){ return esc(t.name)+' <span class="badge opt">'+esc(leaderName(t.leader))+'</span>'; }).join('  ');
+    html += '</div>';
+  }
+
+  TRACK_META.forEach(function(tm){
+    var rows = agg.tracksAgg[tm.id] || [];
+    html += '<div class="trackgrid"><div class="tlabel">'+tm.icon+' '+esc(tm.label)+(tm.gate?' <span class="badge opt">gate</span>':'')+'</div><div class="trackrows">';
+    if(!rows.length){
+      html += '<div class="emptytrack">No leader weighed in on this track yet.</div>';
+    } else {
+      rows.forEach(function(r){
+        html += '<div class="trow"><div class="tn">'+esc(leaderName(r.leader))+'</div><div class="tt">'+esc(r.take||'—')+'</div>';
+        if(tm.gate && (r.green || r.superGreen)) html += '<div class="tg">Green: '+esc(r.green||'—')+' · Super Green: '+esc(r.superGreen||'—')+'</div>';
+        html += '</div>';
+      });
+    }
+    html += '</div></div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+function renderChoicesSection(agg){
+  if(!agg.choicesRollup.length) return '';
+  var html = '<div class="section"><h2>CHOICES self-eval rollup</h2><div class="shint">Per-value average + range across everyone loaded. Rating with no note attached is flagged.</div><div class="chorollup">';
+  agg.choicesRollup.forEach(function(c){
+    html += '<div class="chobox"><div class="cv">'+esc(c.value)+'</div>'+
+      '<div class="cavg">'+(c.avg!=null ? c.avg.toFixed(1) : '—')+'</div>'+
+      '<div class="crange">'+(c.count ? 'range '+c.min+'–'+c.max+' · '+c.count+' scored' : 'no scores yet')+
+      (c.noNote ? ' · '+c.noNote+' with no note' : '')+'</div></div>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function renderCelebrationsSection(agg){
+  if(!agg.celebrations.length) return '';
+  var html = '<div class="section"><h2>Celebrations & prizes</h2><div class="shint">All ideas pooled — exact repeats are visually deduped.</div><div class="celebrow">';
+  agg.celebrations.forEach(function(c){
+    if(c.dup) return;
+    html += '<div class="celebchip"><div class="cl">'+(c.type==="celebration"?"celebration idea":"prize idea")+' · '+esc(leaderName(c.leader))+'</div>'+esc(c.text)+'</div>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function renderActionItemsSection(agg){
+  var leaderIds = Object.keys(agg.actionItems).filter(function(lid){ return agg.actionItems[lid].total > 0; });
+  if(!leaderIds.length) return '';
+  var html = '<div class="section"><h2>Action items</h2><div class="actiongrid">';
+  leaderIds.forEach(function(lid){
+    var a = agg.actionItems[lid];
+    html += '<div class="actionbox"><div class="an">'+esc(leaderName(lid))+'</div><div class="af">'+a.done+'/'+a.total+'</div></div>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function renderPreworkSection(agg){
+  var leaderIds = Object.keys(agg.prework);
+  if(!leaderIds.length) return '';
+  var html = '<div class="section"><h2>Prework (legacy)</h2><div class="shint">Theme-ownership lines + draft goal counts from earlier hub versions.</div><div class="pwrow">';
+  leaderIds.forEach(function(lid){
+    var pw = agg.prework[lid];
+    html += '<div class="pwbox"><div class="pn">'+esc(leaderName(lid))+'</div>'+
+      '<div class="po">'+esc(pw.themeOwnership || '—')+'</div>'+
+      '<div class="pg">'+pw.draftGoals.length+' draft goal'+(pw.draftGoals.length===1?'':'s')+'</div></div>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+/* ============================================================
+   ROOM REVEAL
+   ============================================================ */
+function revealQuestions(){
+  if(!Object.keys(BALLOTS).length) return [];
+  return aggregate(BALLOTS).questions;
+}
+
+function renderReveal(){
+  var stage = document.getElementById("revealStage");
+  var qs = revealQuestions();
+  if(!qs.length){ stage.innerHTML = '<div class="notsub">No ballots loaded — switch to Aggregate and drag files in first.</div>'; return; }
+  if(REVEAL_IDX >= qs.length) REVEAL_IDX = qs.length-1;
+  if(REVEAL_IDX < 0) REVEAL_IDX = 0;
+  var q = qs[REVEAL_IDX];
+
+  var html = '<div class="revealHead"><div class="rq">Question '+(REVEAL_IDX+1)+' of '+qs.length+(q.targeted?' · targeted':'')+(!q.core?' · optional':'')+'</div>'+
+    '<h2>'+esc(q.title)+'</h2>'+
+    (q.question ? '<div class="rctx">'+esc(q.question)+'</div>' : '') +
+    (q.leanShown ? '<div class="rlean"><b>Lean shown:</b> '+esc(q.leanShown)+'</div>' : '') +
+    '</div>';
+
+  if(q.openEnded){
+    html += '<div class="openendedGrid">';
+    LEADERS.forEach(function(l){
+      var eligible = q.eligibleLeaders.indexOf(l.id) !== -1;
+      if(!eligible) return; // targeted question — never show ineligible leaders as "missing"
+      var a = q.answers[l.id];
+      html += '<div class="oecard"><b>'+esc(l.name)+'</b><div style="margin-top:6px;white-space:pre-wrap">'+esc((a.reasoning||"").trim() || "(no answer yet)")+'</div></div>';
+    });
+    html += '</div>';
+  } else {
+    html += '<div class="cardsGrid" id="cardsGrid">';
+    LEADERS.forEach(function(l, idx){
+      var eligible = q.targeted ? (q.eligibleLeaders.indexOf(l.id) !== -1) : true;
+      if(!eligible) return; // targeted — omit ineligible leaders entirely, never flag them "missing"
+      var loaded = q.eligibleLeaders.indexOf(l.id) !== -1;
+      var a = loaded ? q.answers[l.id] : null;
+      var cls = loaded && a && a.position!=null ? posClsFor(a.position) : 'neutral';
+      var dim = !loaded ? ' dim' : '';
+      html += '<div class="card3d'+(REVEAL_FLIPPED?' flipped':'')+dim+'" style="--d:'+(idx*80)+'ms">'+
+        '<div class="inner">'+
+          '<div class="face back"><div class="fn">'+esc(l.name)+'</div><div class="fr">'+(loaded?esc(l.role):'not yet returned')+'</div></div>'+
+          '<div class="face front '+cls+'"><div class="fpos">'+(loaded ? (a.position!=null? esc(a.positionLabel||a.position) : 'no position yet') : '—')+'</div></div>'+
+        '</div></div>';
+    });
+    html += '</div>';
+
+    html += '<div class="revealReasons" id="revealReasons">';
+    LEADERS.forEach(function(l, idx){
+      var eligible = q.targeted ? (q.eligibleLeaders.indexOf(l.id) !== -1) : true;
+      if(!eligible) return;
+      var loaded = q.eligibleLeaders.indexOf(l.id) !== -1;
+      var a = loaded ? q.answers[l.id] : null;
+      var text = loaded ? ((a.reasoning||"").trim() || "(no reasoning written)") : "(not yet returned)";
+      html += '<div class="reasonrow" data-ri="'+idx+'" style="transition-delay:'+(REVEAL_FLIPPED ? (600+idx*90)+'ms' : '0ms')+'"><b>'+esc(l.name)+':</b> '+esc(text)+'</div>';
+    });
+    html += '</div>';
+  }
+
+  html += '<div class="progressDots">'+qs.map(function(x,i){ return '<span class="pdot'+(i===REVEAL_IDX?' on':'')+'"></span>'; }).join('')+'</div>';
+  html += '<div class="revealNav">'+
+    '<button id="revPrev"'+(REVEAL_IDX===0?' disabled':'')+'>← Prev</button>'+
+    (q.openEnded ? '' : '<button id="revFlip">'+(REVEAL_FLIPPED?'Hide positions':'Flip (space)')+'</button>')+
+    '<button id="revNext"'+(REVEAL_IDX===qs.length-1?' disabled':'')+'>Next →</button></div>'+
+    '<div class="revealFoot">Space / click Flip to reveal all positions at once · ← → to move between questions</div>';
+
+  stage.innerHTML = html;
+
+  var prevBtn = document.getElementById("revPrev");
+  var nextBtn = document.getElementById("revNext");
+  var flipBtn = document.getElementById("revFlip");
+  if(prevBtn) prevBtn.addEventListener("click", function(){ revealNav(-1); });
+  if(nextBtn) nextBtn.addEventListener("click", function(){ revealNav(1); });
+  if(flipBtn) flipBtn.addEventListener("click", function(){ toggleFlip(); });
+
+  if(REVEAL_FLIPPED && !q.openEnded){
+    setTimeout(function(){
+      document.querySelectorAll("#revealReasons .reasonrow").forEach(function(row){ row.classList.add("show"); });
+    }, 30);
+  }
+}
+
+function revealNav(delta){
+  var qs = revealQuestions();
+  var next = REVEAL_IDX + delta;
+  if(next < 0 || next >= qs.length) return;
+  REVEAL_IDX = next; REVEAL_FLIPPED = false;
+  renderReveal();
+}
+function toggleFlip(){
+  var qs = revealQuestions();
+  if(!qs.length || qs[REVEAL_IDX].openEnded) return;
+  REVEAL_FLIPPED = !REVEAL_FLIPPED;
+  renderReveal();
+}
+
+document.addEventListener("keydown", function(e){
+  if(MODE !== "reveal") return;
+  if(e.key === "ArrowRight"){ revealNav(1); }
+  else if(e.key === "ArrowLeft"){ revealNav(-1); }
+  else if(e.key === " " || e.code === "Space"){ e.preventDefault(); toggleFlip(); }
+});
+var stageEl = document.getElementById("revealStage");
+if(stageEl) stageEl.addEventListener("click", function(e){
+  if(e.target.closest("button")) return;
+  toggleFlip();
+});
+
+/* ---- boot ---- */
+loadCache();
+rebuildBallotsMap();
+renderAll();
+
+} // end initApp
+
+if(typeof document !== "undefined" && document.getElementById){
+  initApp();
+}
+</script>
+</body>
+</html>
