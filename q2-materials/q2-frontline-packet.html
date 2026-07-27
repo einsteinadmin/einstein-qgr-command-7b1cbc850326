@@ -13,257 +13,341 @@
   @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/Roboto-500.woff2') format('woff2'); }
   @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/Roboto-700.woff2') format('woff2'); }
   @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 900; font-display: swap; src: url('assets/fonts/Roboto-900.woff2') format('woff2'); }
+  @font-face { font-family: 'Bebas Neue'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/BebasNeue-Regular.ttf') format('truetype'); }
   :root {
-    /* ══ Einstein Brand Kit tokens — same block as the packet/deck/scorecards ══ */
+    /* ══ Einstein Brand Kit tokens — full ramps (colors_and_type.css) ══ */
     --ein-orange-50:  #FEF6EC;
     --ein-orange-100: #FDE3C2;
+    --ein-orange-200: #FABD84;
+    --ein-orange-300: #F5A054;
     --ein-orange-500: #EF8B22;
     --ein-orange-700: #D96B10;
     --ein-orange-900: #CC5500;
     --ein-navy-50:  #EEF1F4;
     --ein-navy-100: #CDD5DA;
+    --ein-navy-200: #9AADB7;
     --ein-navy-400: #507080;
     --ein-navy-500: #27343D;
     --ein-navy-700: #1A2329;
+    --ein-navy-900: #0B1014;
     --ein-blue-50:  #EBF4FB;
+    --ein-blue-100: #C3DFEF;
+    --ein-blue-300: #46A2D5;
     --ein-blue-500: #0979C3;
     --ein-blue-700: #065E9A;
+    --ein-blue-900: #023B63;
     --ein-grey-50:  #F4F5F5;
+    --ein-grey-100: #E2E3E4;
+    --ein-grey-200: #C0C2C4;
+    --ein-grey-400: #787C7F;
     --ein-grey-500: #53575A;
     --ein-grey-700: #363839;
     --ein-grey-900: #191A1B;
+    /* ── role aliases (legacy var names kept so the mode-bar/notes CSS keeps working) ── */
     --navy: var(--ein-navy-500);
-    --navy-light: #3B4A55;
-    --navy-2: #46586B;
+    --navy-light: var(--ein-navy-400);
+    --navy-2: var(--ein-navy-700);
     --orange: var(--ein-orange-500);
-    --orange-dark: #B85C00;
+    --orange-dark: var(--ein-orange-900);
     --orange-bg: var(--ein-orange-50);
-    --green: #2e7d32;
-    --green-light: #e8f5e9;
-    --red: #CC0100;
-    --red-light: #ffebee;
-    --amber: #ef6c00;
-    --amber-bg: #fff3e0;
+    --green: #4C7A3D;          /* brand-adjacent success — dark enough for 14px text on tints */
+    --green-light: #EFF4EC;
+    --red: #B3261E;
+    --red-light: #FBEDEB;
+    --amber: var(--ein-orange-700);
+    --amber-bg: var(--ein-orange-50);
     --blue: var(--ein-blue-500);
+    --blue-700: var(--ein-blue-700);
     --blue-bg: var(--ein-blue-50);
-    --gray-50: #F6F6F6;
-    --gray-100: #f0f2f5;
-    --gray-200: #dde3e8;
-    --gray-300: #c8d0d8;
-    --gray-400: #b0bec5;
+    --gray-50: var(--ein-grey-50);
+    --gray-100: var(--ein-grey-100);
+    --gray-200: #D6D8D9;
+    --gray-300: var(--ein-grey-200);
+    --gray-400: var(--ein-grey-400);
     --gray-600: var(--ein-grey-500);
     --gray-700: var(--ein-grey-700);
     --gray-800: var(--ein-grey-900);
+    /* ── type scale (internal-tool cut of the kit scale) ── */
+    --fs-body: 17px;
+    --fs-small: 14px;
+    --fs-micro: 12px;
+    --font-display: 'Bebas Neue', 'Roboto', Arial, sans-serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .scorecard-tile { transition: none; }
+  }
   body {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     margin: 0; padding: 0;
-    color: var(--gray-800);
+    color: var(--ein-navy-500);
     background: var(--gray-50);
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: var(--fs-body);
+    line-height: 1.65;
   }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 20px 16px 80px; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 20px 16px 80px; }
   @media (min-width: 640px) { .wrap { padding: 32px 24px 90px; } }
 
-  /* Header */
+  /* Header — the opening moment */
   .page-header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    background: linear-gradient(150deg, var(--ein-navy-500) 0%, var(--ein-navy-700) 70%, var(--ein-navy-900) 100%);
     color: white;
-    border-radius: 12px;
-    padding: 26px 24px;
-    margin-bottom: 20px;
-    box-shadow: 0 6px 18px rgba(39,52,61,0.15);
+    border-radius: 14px;
+    padding: 40px 32px 34px;
+    margin-bottom: 8px;
+    box-shadow: 0 8px 24px rgba(11,16,20,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute; left: 32px; top: 0;
+    width: 64px; height: 6px;
+    background: var(--ein-orange-500);
+    border-radius: 0 0 4px 4px;
   }
   .page-eyebrow {
-    color: var(--orange);
-    font-size: 11px;
-    letter-spacing: 1.6px;
+    color: var(--ein-orange-100);
+    font-size: 13px;
+    letter-spacing: 2.2px;
     text-transform: uppercase;
     font-weight: 700;
-    margin: 0 0 8px 0;
+    margin: 6px 0 10px 0;
   }
   .page-header h1 {
-    font-size: 24px;
-    font-weight: 900;
-    margin: 0 0 10px 0;
-    line-height: 1.2;
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0 0 12px 0;
+    line-height: 1.02;
   }
-  @media (min-width: 640px) { .page-header h1 { font-size: 28px; } }
+  @media (min-width: 640px) { .page-header h1 { font-size: 64px; } }
   .page-header .estimate-note {
-    color: rgba(255,255,255,0.9);
-    font-size: 13.5px;
+    color: rgba(255,255,255,0.92);
+    font-size: var(--fs-small);
     margin: 0;
-    background: rgba(255,255,255,0.1);
-    border-left: 3px solid var(--orange);
-    padding: 8px 12px;
+    background: rgba(255,255,255,0.08);
+    border-left: 3px solid var(--ein-orange-500);
+    padding: 8px 14px;
     border-radius: 0 6px 6px 0;
     display: inline-block;
   }
 
+  /* Chapter bands — the arc of the scroll */
+  .chapter-band {
+    background: var(--ein-navy-500);
+    color: white;
+    border-radius: 14px;
+    padding: 26px 30px 24px;
+    margin: 40px 0 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .chapter-band::after {
+    content: attr(data-ch);
+    position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: 96px; line-height: 1;
+    color: rgba(255,255,255,0.07);
+    pointer-events: none;
+  }
+  .chapter-kicker {
+    color: var(--ein-orange-100);
+    font-size: var(--fs-micro);
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+  }
+  .chapter-title {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px 0;
+    line-height: 1.05;
+  }
+  .chapter-sub { color: rgba(255,255,255,0.78); font-size: 15px; margin: 0; max-width: 640px; }
+  body.mode-present .chapter-band { display: none !important; }
+  @media print { .chapter-band { break-inside: avoid; } }
+
   h2.section-title {
     color: var(--navy);
-    font-size: 18px;
-    font-weight: 800;
-    margin: 30px 0 4px 0;
-    padding-bottom: 6px;
-    border-bottom: 2px solid var(--navy);
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 34px 0 6px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ein-navy-100);
+    line-height: 1.05;
   }
   h2.section-title .sec-eyebrow {
     display: block;
-    color: var(--orange-dark);
-    font-size: 10.5px;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: var(--ein-orange-900);
+    font-size: var(--fs-micro);
     text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.6px;
     font-weight: 700;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
   }
-  p { margin: 6px 0 10px 0; }
-  ul { margin: 6px 0 10px 0; padding-left: 20px; }
-  li { margin: 4px 0; }
-  strong { color: var(--gray-800); font-weight: 700; }
+  p { margin: 6px 0 12px 0; }
+  ul { margin: 6px 0 12px 0; padding-left: 20px; }
+  li { margin: 5px 0; }
+  strong { color: var(--ein-navy-500); font-weight: 700; }
 
-  /* Card = one component */
+  /* Card = one story */
   .card {
     background: white;
     border: 1px solid var(--gray-200);
-    border-top: 5px solid var(--navy);
-    border-radius: 10px;
-    padding: 20px 20px 18px;
-    margin: 16px 0;
-    box-shadow: 0 2px 8px rgba(39,52,61,0.05);
+    border-top: 4px solid var(--navy);
+    border-radius: 12px;
+    padding: 26px 26px 22px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(39,52,61,0.05);
   }
-  .card.hero-card-flavor { border-top-color: var(--orange); }
+  @media (max-width: 520px) { .card { padding: 20px 16px 18px; } }
+  .card.hero-card-flavor { border-top-color: var(--ein-orange-500); }
   .card.green { border-top-color: var(--green); }
-  .card.amber { border-top-color: var(--amber); }
+  .card.amber { border-top-color: var(--ein-orange-500); background: linear-gradient(180deg, var(--ein-orange-50) 0%, #fff 140px); }
   .card.placeholder { border-top-color: var(--gray-400); background: var(--gray-50); }
   .card h3.card-title {
     color: var(--navy);
-    font-size: 18px;
-    font-weight: 800;
-    margin: 0 0 2px 0;
-    line-height: 1.25;
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0 0 6px 0;
+    line-height: 1.05;
   }
   .card .card-num {
-    color: var(--orange-dark);
-    font-size: 10.5px;
+    color: var(--gray-600);
+    font-size: var(--fs-micro);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.6px;
     font-weight: 700;
-    margin: 0 0 4px 0;
+    margin: 0 0 2px 0;
   }
 
-  /* What / So What / Now What blocks */
+  /* What / So What / Now What — typographic markers, open prose (no boxes-in-boxes) */
   .wsw {
-    margin: 12px 0;
-    padding: 12px 14px;
-    border-radius: 6px;
-    background: var(--gray-50);
-    border-left: 4px solid var(--orange);
+    margin: 18px 0;
+    padding: 2px 0 2px 16px;
+    border-left: 3px solid var(--ein-orange-500);
+    background: transparent;
+    border-radius: 0;
   }
-  .wsw.sowhat { border-left-color: var(--blue); }
+  .wsw.sowhat { border-left-color: var(--ein-blue-500); }
   .wsw.nowwhat { border-left-color: var(--green); }
   .wsw .wsw-label {
     display: block;
-    font-size: 10.5px;
+    font-size: var(--fs-micro);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 800;
-    color: var(--orange-dark);
-    margin-bottom: 4px;
+    letter-spacing: 1.4px;
+    font-weight: 700;
+    color: var(--ein-orange-900);
+    margin-bottom: 5px;
   }
-  .wsw.sowhat .wsw-label { color: var(--blue-700, var(--blue)); }
+  .wsw.sowhat .wsw-label { color: var(--ein-blue-700); }
   .wsw.nowwhat .wsw-label { color: var(--green); }
   .wsw p:last-child { margin-bottom: 0; }
 
   /* Badge */
   .badge {
     display: inline-block;
-    padding: 2px 9px;
-    border-radius: 11px;
-    font-size: 10.5px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: var(--fs-micro);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
   .badge.green { background: var(--green-light); color: var(--green); }
   .badge.red { background: var(--red-light); color: var(--red); }
-  .badge.amber { background: var(--amber-bg); color: var(--amber); }
+  .badge.amber { background: var(--ein-orange-50); color: var(--ein-orange-900); }
   .badge.gray { background: var(--gray-100); color: var(--gray-600); }
   .badge.navy { background: var(--navy); color: white; }
 
-  /* Mini stats */
+  /* Mini stats — the scannable entry point of each card */
   .mini-stat-row {
     display: grid;
     grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 8px;
-    margin: 10px 0;
+    gap: 10px;
+    margin: 14px 0;
   }
   @media (min-width: 520px) { .mini-stat-row.three { grid-template-columns: repeat(3, minmax(0,1fr)); } }
   .mini-stat {
-    background: var(--gray-50);
-    padding: 10px 12px;
-    border-radius: 6px;
-    border-left: 3px solid var(--orange);
+    background: var(--ein-navy-50);
+    padding: 14px 16px 12px;
+    border-radius: 8px;
+    border-left: 3px solid var(--ein-orange-500);
     min-width: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
   .mini-stat.green { border-left-color: var(--green); }
   .mini-stat.red { border-left-color: var(--red); }
-  .mini-stat.amber { border-left-color: var(--amber); }
+  .mini-stat.amber { border-left-color: var(--ein-orange-700); }
   .mini-stat .ms-label {
     color: var(--gray-600);
-    font-size: 10px;
+    font-size: 11.5px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
   }
   .mini-stat .ms-value {
     color: var(--navy);
-    font-size: 19px;
-    font-weight: 900;
-    line-height: 1.15;
-    margin-top: 3px;
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.05;
+    margin-top: 4px;
   }
   .mini-stat .ms-sub {
     color: var(--gray-600);
-    font-size: 11px;
-    margin-top: 3px;
-    line-height: 1.3;
+    font-size: 13px;
+    margin-top: 4px;
+    line-height: 1.35;
   }
 
   /* Bar chart (revenue YoY, no $ axis) */
-
-  .yoy-bars { margin: 12px 0; }
-  .yoy-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; font-size: 12.5px; }
-  .yoy-branch { width: 96px; flex-shrink: 0; text-align: right; color: var(--gray-800); }
-  .yoy-track { flex: 1; background: var(--gray-100); border-radius: 3px; height: 16px; position: relative; overflow: visible; }
-  .yoy-fill { height: 100%; border-radius: 3px; background: var(--green); }
+  .yoy-bars { margin: 16px 0; }
+  .yoy-row { display: flex; align-items: center; gap: 10px; margin: 6px 0; font-size: var(--fs-small); }
+  .yoy-branch { width: 104px; flex-shrink: 0; text-align: right; color: var(--ein-navy-500); }
+  .yoy-track { flex: 1; background: var(--gray-100); border-radius: 3px; height: 20px; position: relative; overflow: visible; }
+  .yoy-fill { height: 100%; border-radius: 3px; background: var(--green); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .yoy-fill.neg { background: var(--red); }
-  .yoy-pct { width: 58px; flex-shrink: 0; font-weight: 700; font-size: 12px; }
+  .yoy-pct { width: 62px; flex-shrink: 0; font-weight: 700; font-size: 13.5px; }
   .yoy-pct.pos { color: var(--green); }
   .yoy-pct.neg { color: var(--red); }
 
-  /* Dream Team badge */
+  /* Dream Team badge — trophies, not inventory rows */
   .dt-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: var(--orange-bg); border: 1px solid var(--ein-orange-100);
-    border-radius: 18px; color: var(--navy); font-weight: 700;
-    padding: 4px 9px 4px 7px; font-size: 11px; margin: 2px 3px 2px 0;
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--ein-orange-100); border: 1px solid var(--ein-orange-300);
+    border-radius: 20px; color: var(--ein-navy-500); font-weight: 700;
+    padding: 7px 14px 7px 11px; font-size: 13.5px; margin: 3px 4px 3px 0;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
   }
-  .dt-badge svg { fill: var(--orange); flex-shrink: 0; width: 12px; height: 12px; }
+  .dt-badge svg { fill: var(--ein-orange-700); flex-shrink: 0; width: 15px; height: 15px; }
 
   /* FAQ / collapsible */
   .faq-group-title {
     color: var(--navy);
-    font-size: 13px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin: 18px 0 6px 0;
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    margin: 22px 0 8px 0;
   }
   .faq-group-title:first-child { margin-top: 4px; }
   details.faq-item {
@@ -275,11 +359,11 @@
     overflow: hidden;
   }
   details.faq-item summary {
-    padding: 12px 16px;
+    padding: 13px 16px;
     cursor: pointer;
     font-weight: 700;
     color: var(--navy);
-    font-size: 13.5px;
+    font-size: 15.5px;
     list-style: none;
     display: flex;
     align-items: center;
@@ -289,77 +373,95 @@
   details.faq-item summary::-webkit-details-marker { display: none; }
   details.faq-item summary::after {
     content: '+';
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 400;
-    color: var(--orange);
+    color: var(--ein-blue-500);
     flex-shrink: 0;
     line-height: 1;
   }
   details.faq-item[open] summary::after { content: '−'; }
   details.faq-item .faq-answer {
     padding: 0 16px 14px;
-    font-size: 13.5px;
+    font-size: 15px;
     color: var(--gray-700);
-    line-height: 1.55;
+    line-height: 1.6;
   }
-  details.faq-item summary:hover { background: var(--gray-50); }
+  details.faq-item summary:hover { background: var(--ein-blue-50); }
+  details.faq-item summary:focus-visible { outline: 2px solid var(--ein-blue-500); outline-offset: -2px; }
 
-  /* Scorecard link grid */
+  /* Scorecard closer — the destination, full navy band */
+  #scorecard-section {
+    background: var(--ein-navy-500);
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+    margin-top: 34px;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+  #scorecard-section h2.section-title { color: white; border-bottom-color: rgba(255,255,255,0.25); margin-top: 0; }
+  #scorecard-section h2.section-title .sec-eyebrow { color: var(--ein-orange-100); }
+  #scorecard-section .sc-intro { color: rgba(255,255,255,0.85) !important; font-size: 15px !important; }
+  #scorecard-section .sc-intro strong { color: #fff; }
+  #scorecard-section .review-note-toggle { border-color: var(--ein-navy-200); color: var(--ein-navy-100); }
   .scorecard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-    margin: 14px 0 6px 0;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    margin: 16px 0 6px 0;
   }
   .scorecard-tile {
     background: white;
     border: 1px solid var(--gray-200);
-    border-top: 4px solid var(--green);
-    border-radius: 8px;
-    padding: 13px 14px;
+    border-radius: 10px;
+    padding: 14px 16px;
     text-decoration: none;
-    color: var(--gray-800);
+    color: var(--ein-navy-500);
     display: flex;
     flex-direction: column;
     gap: 4px;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
   }
-  .scorecard-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(39,52,61,0.12); }
+  .scorecard-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(11,16,20,0.3); }
+  .scorecard-tile:focus-visible { outline: 3px solid var(--ein-orange-500); outline-offset: 2px; }
   .scorecard-tile-eyebrow {
-    color: var(--orange);
-    font-size: 9.5px;
+    color: var(--ein-navy-400);
+    font-size: 10.5px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     font-weight: 700;
     margin: 0;
   }
-  .scorecard-tile-name { color: var(--navy); font-size: 14.5px; font-weight: 700; margin: 0; line-height: 1.2; }
-  .scorecard-tile-go { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--gray-200); font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--green); }
+  .scorecard-tile-name { color: var(--navy); font-family: var(--font-display); font-size: 21px; font-weight: 400; letter-spacing: 0.5px; margin: 0; line-height: 1.1; }
+  .scorecard-tile-go { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--gray-200); font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ein-blue-500); }
+
+  /* Recognition polish — winners' names read as names (first .wsw in the CET card = FCP winners) */
+  #cx-lookback .wsw:not(.sowhat):not(.nowwhat) p strong { font-size: 1.1em; }
 
   /* Q3 placeholder */
   .placeholder-box {
     text-align: center;
-    padding: 22px 16px;
+    padding: 26px 16px;
     color: var(--gray-600);
-    font-size: 14px;
+    font-size: 15px;
     font-style: italic;
   }
 
-  hr.divider { border: none; border-top: 1px solid var(--gray-200); margin: 26px 0; }
+  hr.divider { border: none; border-top: 1px solid var(--gray-200); margin: 30px 0; }
 
   footer.page-footer {
     margin-top: 30px;
     padding-top: 16px;
     border-top: 1px solid var(--gray-200);
     color: var(--gray-600);
-    font-size: 11.5px;
+    font-size: 13px;
     text-align: center;
   }
 
   @media print {
-    body { background: white; }
-    .card { box-shadow: none; }
+    body { background: white; padding-top: 0 !important; }
+    .card { box-shadow: none; break-inside: avoid; }
+    .chapter-band, .page-header, #scorecard-section { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   }
+
 </style>
 
 <style>
@@ -554,15 +656,15 @@
 
 <div class="mode-bar" id="modeBar">
   <div class="mode-bar-inner">
-    <span class="mode-draft-chip">🚧 DRAFT</span>
+    <span class="mode-draft-chip">DRAFT</span>
     <div class="mode-btns" role="group" aria-label="View mode">
-      <button type="button" class="mode-btn" data-mode="read">📖 Read</button>
-      <button type="button" class="mode-btn" data-mode="present">🖥 Present</button>
-      <button type="button" class="mode-btn" data-mode="edit">✏️ Edit</button>
+      <button type="button" class="mode-btn" data-mode="read">Read</button>
+      <button type="button" class="mode-btn" data-mode="present">Present</button>
+      <button type="button" class="mode-btn" data-mode="edit">Edit</button>
     </div>
     <button type="button" class="mode-reset-btn" id="flpResetEditsBtn" hidden>Reset edits</button>
     <button type="button" class="mode-copy-btn" id="flpCopyBtn">Copy to clipboard</button>
-    <button type="button" class="mode-export-btn" id="flpExportBtn">📝 Export notes &amp; edits</button>
+    <button type="button" class="mode-export-btn" id="flpExportBtn">Export notes &amp; edits</button>
   </div>
 </div>
 
@@ -579,13 +681,18 @@
   <header class="page-header">
     <p class="page-eyebrow">Einstein Moving Company · Q2 2026</p>
     <h1>The Q2 Debrief</h1>
-    <p style="color:rgba(255,255,255,0.85);font-size:13.5px;margin:0 0 10px 0;">What happened, what it means for you, and what we're doing about it. Five-minute read, straight talk.</p>
+    <p style="color:rgba(255,255,255,0.85);font-size:15px;margin:0 0 10px 0;">What happened, what it means for you, and what we're doing about it. Five-minute read, straight talk.</p>
     <p class="estimate-note">July numbers are estimates until books close ~Aug 1.</p>
     <p class="estimate-note" style="background:#fff7e6;border:1.5px dashed #cc7700;color:#8a5200;font-weight:700;padding:8px 14px;border-radius:8px;display:inline-block;">DRAFT — internal only. Do not share: pending Cameron's final review + the QGR rulings (Q3 theme, survey treatment). Numbers re-sync to the final deck before send.</p>
   </header>
 
   <!-- ══════════════════ MAIN FINANCIAL STORY (spec §3, verbatim) ══════════════════ -->
   <!-- ══════════════════ WHO WE ARE (vision summary grounding — Cameron 7/23) ══════════════════ -->
+  <div class="chapter-band" data-ch="1">
+    <p class="chapter-kicker">Chapter 1</p>
+    <h2 class="chapter-title">The Big Picture</h2>
+    <p class="chapter-sub">Who we are, and how the quarter really went — record revenue, honest math on the misses.</p>
+  </div>
   <section class="card slide-el" id="who-we-are">
     <p class="card-num">Before the Numbers</p>
     <h3 class="card-title" data-eid="who-title">Who We Are &amp; Why We Do This</h3>
@@ -641,6 +748,11 @@
   </section>
 
   <!-- ══════════════════ REVENUE YoY BY BRANCH (spec §2.1 row 1.5) ══════════════════ -->
+  <div class="chapter-band" data-ch="2">
+    <p class="chapter-kicker">Chapter 2</p>
+    <h2 class="chapter-title">The Numbers</h2>
+    <p class="chapter-sub">Branch by branch: growth, trucks and crews, and a flood of new leads.</p>
+  </div>
   <section class="card green slide-el" id="revenue-yoy">
     <p class="card-num">The Numbers</p>
     <h3 class="card-title" data-eid="rev-title">Revenue Growth by Branch</h3>
@@ -662,7 +774,7 @@
       <div class="yoy-row"><div class="yoy-branch">Leander</div><div class="yoy-track"><div class="yoy-fill neg" style="width:2.8%;"></div></div><div class="yoy-pct neg">−1.1%</div></div>
       <div class="yoy-row"><div class="yoy-branch">North Austin</div><div class="yoy-track"><div class="yoy-fill neg" style="width:28.5%;"></div></div><div class="yoy-pct neg">−10.9%</div></div>
     </div>
-    <p style="font-size:11px;color:var(--gray-600);">Growth shown as a percent only — no dollar figures. Every Q2'26 branch reading carries the standard July-estimate caveat (final numbers land ~Aug 1).</p>
+    <p style="font-size:12.5px;color:var(--gray-600);">Growth shown as a percent only — no dollar figures. Every Q2'26 branch reading carries the standard July-estimate caveat (final numbers land ~Aug 1).</p>
 
     <div class="wsw sowhat">
       <span class="wsw-label">So What</span>
@@ -755,8 +867,13 @@
   </section>
 
   <!-- ══════════════════ EINSTEIN GAMES (spec §2.2, nearly whole) ══════════════════ -->
+  <div class="chapter-band" data-ch="3">
+    <p class="chapter-kicker">Chapter 3</p>
+    <h2 class="chapter-title">The People</h2>
+    <p class="chapter-sub">Games, safety, your voice, and the moments customers will never forget.</p>
+  </div>
   <section class="card amber slide-el" id="games">
-    <p class="card-num">Component · Recognition</p>
+    <p class="card-num">Recognition</p>
     <h3 class="card-title" data-eid="gam-title">Einstein Games Season 3</h3>
 
     <div class="mini-stat-row three">
@@ -776,8 +893,8 @@
       <p data-eid="gam-sowhat-2"><strong>Quick reminder:</strong> games are a coaching tool, directionally accurate by design — in-week estimates, not resolved actuals. Real coaching and accountability run off hard numbers and final data results; game scores have never been a direct read on final bonus.</p>
     </div>
 
-    <h4 style="margin:16px 0 6px;font-size:13.5px;color:var(--navy);">Dream Team — 24 Trophy Holders</h4>
-    <p style="font-size:12.5px;color:var(--gray-600);margin:0 0 8px;">The top 10% of Q2 mover scores among everyone who cleared the busy-season hours floor. Congrats to all 24 — spread across 7 branches (inclusive-tie rule: all movers tied at the cutline qualify).</p>
+    <h4 style="margin:16px 0 6px;font-size:15px;color:var(--navy);">Dream Team — 24 Trophy Holders</h4>
+    <p style="font-size:14px;color:var(--gray-600);margin:0 0 8px;">The top 10% of Q2 mover scores among everyone who cleared the busy-season hours floor. Congrats to all 24 — spread across 7 branches (inclusive-tie rule: all movers tied at the cutline qualify).</p>
     <div>
       <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Tampa · 5 members</span>
       <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Leander · 5</span>
@@ -804,7 +921,7 @@
 
   <!-- ══════════════════ FLEET SAFETY (spec §2.2, wins-first) ══════════════════ -->
   <section class="card green slide-el" id="fleet-safety">
-    <p class="card-num">Component · Standing</p>
+    <p class="card-num">Safety</p>
     <h3 class="card-title" data-eid="flt-title">Fleet Safety</h3>
 
     <div class="mini-stat-row three">
@@ -840,7 +957,7 @@
 
   <!-- ══════════════════ NPS + eNPS (spec §5 / §5b) ══════════════════ -->
   <section class="card slide-el" id="nps-enps">
-    <p class="card-num">Component · Voice</p>
+    <p class="card-num">Customer Voice</p>
     <h3 class="card-title" data-eid="nps-title">Customer NPS</h3>
 
     <div class="wsw">
@@ -850,7 +967,7 @@
 
     <div class="yoy-bars" role="img" aria-label="Customer NPS bar chart, 88 versus 90 target">
       <div class="yoy-row"><div class="yoy-branch">Q2'26</div><div class="yoy-track"><div class="yoy-fill" style="width:88%;"></div></div><div class="yoy-pct" style="color:var(--navy);">88</div></div>
-      <div class="yoy-row"><div class="yoy-branch">Target</div><div class="yoy-track"><div class="yoy-fill" style="width:90%;background:var(--gray-400);"></div></div><div class="yoy-pct" style="color:var(--gray-600);">90</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Target</div><div class="yoy-track"><div class="yoy-fill" style="width:90%;background:repeating-linear-gradient(45deg, var(--gray-300) 0 6px, var(--gray-100) 6px 12px);"></div></div><div class="yoy-pct" style="color:var(--gray-600);">90</div></div>
     </div>
 
     <div class="wsw sowhat">
@@ -874,7 +991,7 @@
 
   <!-- ══════════════════ EMPLOYEE VOICE / eNPS (split from Customer NPS per Cameron 7/27) ══════════════════ -->
   <section class="card slide-el" id="employee-voice">
-    <p class="card-num">Component · Employee Voice</p>
+    <p class="card-num">Employee Voice</p>
     <h3 class="card-title" data-eid="ev-title">Employee Voice (eNPS)</h3>
 
     <div class="mini-stat-row">
@@ -882,13 +999,13 @@
       <div class="mini-stat green"><div class="ms-label" data-eid="nps-stat-2-label">Participation</div><div class="ms-value">100%</div><div class="ms-sub" data-eid="nps-stat-2-sub">All 52 salaried folks answered — every voice counted</div></div>
       <div class="mini-stat green"><div class="ms-label" data-eid="nps-stat-3-label">Praised (14 days)</div><div class="ms-value">87%</div><div class="ms-sub" data-eid="nps-stat-3-sub">Recognition culture showing up in the data</div></div>
     </div>
-    <p style="font-size:12.5px;" data-eid="nps-ev-intro">+81 is the salaried manager/CET survey (July cycle — the highest response count this survey has ever had, and near the all-time high of +84). The mover survey runs separately — the last mover read was Q1's +46, and <strong>the next mover survey runs this quarter. That's the fresh read.</strong></p>
+    <p style="font-size:14px;" data-eid="nps-ev-intro">+81 is the salaried manager/CET survey (July cycle — the highest response count this survey has ever had, and near the all-time high of +84). The mover survey runs separately — the last mover read was Q1's +46, and <strong>the next mover survey runs this quarter. That's the fresh read.</strong></p>
 
     <!-- ── Q1 promises-kept scoreboard ── -->
     <div style="border:1px solid var(--gray-200); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:14px 16px; margin:14px 0; background:#fbfdfb;">
-      <p style="margin:0 0 4px; font-size:11px; font-weight:800; letter-spacing:0.15em; color:var(--green); text-transform:uppercase;" data-eid="nps-sb-title">The Q1 Scoreboard — You Talked. Here's What Happened.</p>
-      <p style="margin:0 0 10px; font-size:12.5px;" data-eid="nps-sb-intro">After April's mover survey, leadership made six commitments in direct response to what movers asked for. Here's where each one stands, three months later:</p>
-      <ul style="list-style:none; padding:0; margin:0; font-size:12.5px;">
+      <p style="margin:0 0 4px; font-size:12.5px; font-weight:800; letter-spacing:0.15em; color:var(--green); text-transform:uppercase;" data-eid="nps-sb-title">The Q1 Scoreboard — You Talked. Here's What Happened.</p>
+      <p style="margin:0 0 10px; font-size:14px;" data-eid="nps-sb-intro">After April's mover survey, leadership made six commitments in direct response to what movers asked for. Here's where each one stands, three months later:</p>
+      <ul style="list-style:none; padding:0; margin:0; font-size:14px;">
         <li style="padding:6px 0; border-bottom:1px solid var(--gray-100);" data-eid="nps-sb-1"><strong style="color:var(--green);">✔ DONE</strong> — <strong>Mover comp review.</strong> Base pay went up across every branch in May. The #1 ask on the survey, answered with real money.</li>
         <li style="padding:6px 0; border-bottom:1px solid var(--gray-100);" data-eid="nps-sb-2"><strong style="color:var(--green);">✔ BUILT</strong> — <strong>Performance-based lead promotions.</strong> The framework is designed and with HR now: earn the next rung on performance, reviewed every pay period — not tenure, not who-you-know.</li>
         <li style="padding:6px 0; border-bottom:1px solid var(--gray-100);" data-eid="nps-sb-3"><strong style="color:var(--green);">✔ LIVE</strong> — <strong>Call grading on sales calls.</strong> Automated grading now runs on real sales calls, feeding coaching on estimate accuracy — the #1 frustration movers named. The training side keeps deepening this quarter.</li>
@@ -906,7 +1023,7 @@
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What — What you told us in July, and what we're doing about it</span>
       <p data-eid="nps-nowwhat-2">The loudest theme in the July survey, by a wide margin: <strong>develop people faster.</strong> More structured training for managers, clearer career paths, clearer roles. That's exactly where the company is pointed:</p>
-      <ul style="font-size:12.5px; padding-left:18px; margin:8px 0;" data-eid="nps-nowwhat-list">
+      <ul style="font-size:14px; padding-left:18px; margin:8px 0;" data-eid="nps-nowwhat-list">
         <li><strong>Branch scorecards &amp; dashboards</strong> — every manager sees the same numbers as leadership, so coaching conversations run on facts, not opinions.</li>
         <li><strong>Consistent check-ins &amp; performance management</strong> — a regular check-in rhythm tied to clear expectations, so nobody wonders where they stand or what earns the next step.</li>
         <li><strong>The Mover Training App</strong> — develops movers faster today, and the same platform carries driver and lead training next. One place to learn the job and see your progress.</li>
@@ -918,12 +1035,12 @@
 
     <!-- ── FLM-ONLY DEEP DIVE — drop this <details> block from the mover/CX cut ── -->
     <details style="border:1px solid var(--gray-200); border-radius:8px; margin:14px 0 4px; padding:0 16px; background:var(--gray-50, #fafafa);">
-      <summary style="cursor:pointer; padding:12px 0; font-size:13px; font-weight:800; color:var(--navy);" data-eid="nps-dd-summary">📊 Manager Deep Dive — the July survey in detail <span style="font-weight:500; color:var(--gray-600);">(manager session only)</span></summary>
+      <summary style="cursor:pointer; padding:12px 0; font-size:15px; font-weight:800; color:var(--navy);" data-eid="nps-dd-summary">📊 Manager Deep Dive — the July survey in detail <span style="font-weight:500; color:var(--gray-600);">(manager session only)</span></summary>
       <div style="padding:4px 0 14px;">
 
-        <p style="font-size:12px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:8px 0 6px;">Trend — two years at a high plateau</p>
+        <p style="font-size:13px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:8px 0 6px;">Trend — two years at a high plateau</p>
         <div style="overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
+        <table style="width:100%; border-collapse:collapse; font-size:14px;">
           <thead><tr style="border-bottom:2px solid var(--gray-200); text-align:left;"><th style="padding:5px 8px;">Cycle</th><th style="padding:5px 8px;">n</th><th style="padding:5px 8px;">Avg</th><th style="padding:5px 8px;">eNPS</th></tr></thead>
           <tbody>
             <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">July 2024</td><td style="padding:5px 8px;">38</td><td style="padding:5px 8px;">9.0</td><td style="padding:5px 8px;">+63</td></tr>
@@ -934,11 +1051,11 @@
           </tbody>
         </table>
         </div>
-        <p style="font-size:12px; color:var(--gray-600); margin:6px 0 0;">Distribution this cycle: 43 promoters · 8 passives · 1 detractor. The story is no longer the number — it's the themes.</p>
+        <p style="font-size:13px; color:var(--gray-600); margin:6px 0 0;">Distribution this cycle: 43 promoters · 8 passives · 1 detractor. The story is no longer the number — it's the themes.</p>
 
-        <p style="font-size:12px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:14px 0 6px;">By group</p>
+        <p style="font-size:13px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:14px 0 6px;">By group</p>
         <div style="overflow-x:auto;">
-        <table style="width:100%; border-collapse:collapse; font-size:12.5px;">
+        <table style="width:100%; border-collapse:collapse; font-size:14px;">
           <thead><tr style="border-bottom:2px solid var(--gray-200); text-align:left;"><th style="padding:5px 8px;">Group</th><th style="padding:5px 8px;">n</th><th style="padding:5px 8px;">eNPS</th><th style="padding:5px 8px;">Praised (14d)</th></tr></thead>
           <tbody>
             <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">G&amp;A</td><td style="padding:5px 8px;">4</td><td style="padding:5px 8px;">+100</td><td style="padding:5px 8px;">100%</td></tr>
@@ -948,13 +1065,13 @@
           </tbody>
         </table>
         </div>
-        <p style="font-size:12px; color:var(--gray-600); margin:6px 0 0;">Recognition is the closest lever in this table — it's free, it's fast, and the praised-recently rate tracks the score.</p>
+        <p style="font-size:13px; color:var(--gray-600); margin:6px 0 0;">Recognition is the closest lever in this table — it's free, it's fast, and the praised-recently rate tracks the score.</p>
 
-        <p style="font-size:12px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:14px 0 6px;">Start / Stop / Keep — top themes from 52 responses</p>
+        <p style="font-size:13px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:14px 0 6px;">Start / Stop / Keep — top themes from 52 responses</p>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
           <div style="border-left:4px solid var(--orange); background:var(--orange-bg); border-radius:0 6px 6px 0; padding:10px 12px;">
-            <p style="margin:0 0 6px; font-size:11px; font-weight:800; letter-spacing:0.12em; color:var(--orange-dark); text-transform:uppercase;">Start</p>
-            <ul style="font-size:12px; padding-left:16px; margin:0;">
+            <p style="margin:0 0 6px; font-size:12.5px; font-weight:800; letter-spacing:0.12em; color:var(--orange-dark); text-transform:uppercase;">Start</p>
+            <ul style="font-size:13px; padding-left:16px; margin:0;">
               <li><strong>Manager training &amp; a leadership pipeline</strong> — the dominant ask, by far</li>
               <li>Career-path transparency &amp; regular reviews</li>
               <li>Work-life flexibility</li>
@@ -963,8 +1080,8 @@
             </ul>
           </div>
           <div style="border-left:4px solid var(--red); background:#fdecea; border-radius:0 6px 6px 0; padding:10px 12px;">
-            <p style="margin:0 0 6px; font-size:11px; font-weight:800; letter-spacing:0.12em; color:var(--red); text-transform:uppercase;">Stop</p>
-            <ul style="font-size:12px; padding-left:16px; margin:0;">
+            <p style="margin:0 0 6px; font-size:12.5px; font-weight:800; letter-spacing:0.12em; color:var(--red); text-transform:uppercase;">Stop</p>
+            <ul style="font-size:13px; padding-left:16px; margin:0;">
               <li><strong>Mid-quarter rule changes / pace of change</strong> — the loudest stop</li>
               <li>Sales-block load on BMs</li>
               <li>AI output without human verification</li>
@@ -973,8 +1090,8 @@
             </ul>
           </div>
           <div style="border-left:4px solid var(--green); background:#e8f5e9; border-radius:0 6px 6px 0; padding:10px 12px;">
-            <p style="margin:0 0 6px; font-size:11px; font-weight:800; letter-spacing:0.12em; color:var(--green); text-transform:uppercase;">Keep</p>
-            <ul style="font-size:12px; padding-left:16px; margin:0;">
+            <p style="margin:0 0 6px; font-size:12.5px; font-weight:800; letter-spacing:0.12em; color:var(--green); text-transform:uppercase;">Keep</p>
+            <ul style="font-size:13px; padding-left:16px; margin:0;">
               <li><strong>Recognition &amp; celebration culture</strong> — the overwhelming favorite</li>
               <li>Bonuses &amp; incentives</li>
               <li>Open-door leadership</li>
@@ -984,7 +1101,7 @@
           </div>
         </div>
 
-        <p style="font-size:12.5px; margin:12px 0 0;" data-eid="nps-dd-straight"><strong>Straight talk on the Stop column:</strong> pace of change is a fair hit — this company ships a lot, and mid-quarter rule changes landed on you more than once last quarter. Leadership heard it. And the Start column is exactly what this quarter's theme is built to answer: the survey asked for faster manager development before leadership ever put it on a whiteboard.</p>
+        <p style="font-size:14px; margin:12px 0 0;" data-eid="nps-dd-straight"><strong>Straight talk on the Stop column:</strong> pace of change is a fair hit — this company ships a lot, and mid-quarter rule changes landed on you more than once last quarter. Leadership heard it. And the Start column is exactly what this quarter's theme is built to answer: the survey asked for faster manager development before leadership ever put it on a whiteboard.</p>
       </div>
     </details>
 
@@ -999,7 +1116,7 @@
 
   <!-- ══════════════════ CLAIMS & MAGIC MOMENTS PLACEHOLDER (spec §2.2 KEEP — content lands at final cut) ══════════════════ -->
   <section class="card green slide-el" id="claims-mm">
-    <p class="card-num">Component · Claims &amp; Magic Moments</p>
+    <p class="card-num">Claims &amp; Magic Moments</p>
     <h3 class="card-title" data-eid="cmm-title">Claims &amp; Magic Moments</h3>
 
     <div class="mini-stat-row three">
@@ -1020,39 +1137,39 @@
     </div>
 
     <!-- ── Magic Moments photo wall — sourced from #magicmoments Slack, Q2 posts ── -->
-    <p style="margin:14px 0 8px; font-size:11px; font-weight:800; letter-spacing:0.15em; color:var(--orange-dark); text-transform:uppercase;" data-eid="cmm-photos-title">A Few of Them, In Pictures</p>
+    <p style="margin:14px 0 8px; font-size:12.5px; font-weight:800; letter-spacing:0.15em; color:var(--orange-dark); text-transform:uppercase;" data-eid="cmm-photos-title">A Few of Them, In Pictures</p>
     <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; margin:0 0 6px;">
       <figure style="margin:0;">
         <img src="assets/mm/mm-highscore-card.jpg" alt="Custom Einstein thank-you card: cartoon Einstein at an arcade cabinet reading High Score" loading="lazy" style="width:100%; border-radius:8px; border:1px solid var(--gray-200); display:block;">
-        <figcaption style="font-size:11.5px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-1">The custom card our crew hand-delivered — with an arcade gift card — to a family grieving their husband and dad, who shared their love of games.</figcaption>
+        <figcaption style="font-size:13px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-1">The custom card our crew hand-delivered — with an arcade gift card — to a family grieving their husband and dad, who shared their love of games.</figcaption>
       </figure>
       <figure style="margin:0;">
         <img src="assets/mm/mm-goat-tote.jpg" alt="Canvas tote bag covered in illustrated goats" loading="lazy" style="width:100%; border-radius:8px; border:1px solid var(--gray-200); display:block;">
-        <figcaption style="font-size:11.5px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-3">The crew bonded with a first-time homebuyer over a shared love of goats. So: goat tote.</figcaption>
+        <figcaption style="font-size:13px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-3">The crew bonded with a first-time homebuyer over a shared love of goats. So: goat tote.</figcaption>
       </figure>
       <figure style="margin:0;">
         <img src="assets/mm/mm-texas-board.jpg" alt="Texas-shaped wooden cutting board" loading="lazy" style="width:100%; border-radius:8px; border:1px solid var(--gray-200); display:block;">
-        <figcaption style="font-size:11.5px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-4">Half of a Texas welcome kit for a customer arriving alone from Minnesota after losing both parents…</figcaption>
+        <figcaption style="font-size:13px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-4">Half of a Texas welcome kit for a customer arriving alone from Minnesota after losing both parents…</figcaption>
       </figure>
       <figure style="margin:0;">
         <img src="assets/mm/mm-austin-candle.jpg" alt="Candle jar with the Austin skyline printed on it" loading="lazy" style="width:100%; border-radius:8px; border:1px solid var(--gray-200); display:block;">
-        <figcaption style="font-size:11.5px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-5">…and the other half: an Austin skyline candle to make the new house feel like home.</figcaption>
+        <figcaption style="font-size:13px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-5">…and the other half: an Austin skyline candle to make the new house feel like home.</figcaption>
       </figure>
     </div>
     <figure style="margin:8px 0 0;">
       <img src="assets/mm/mm-review-diapers.jpg" alt="Five-star Google review describing movers who brought a box of diapers and wipes" loading="lazy" style="width:100%; max-width:720px; border-radius:8px; border:1px solid var(--gray-200); display:block;">
-      <figcaption style="font-size:11.5px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-6">And this is what comes back: the 5-star review after our crew showed up with diapers and wipes for a 9-months-pregnant customer. Her words: "I've never heard of such a thing from a moving company."</figcaption>
+      <figcaption style="font-size:13px; color:var(--gray-600); margin-top:4px;" data-eid="cmm-ph-6">And this is what comes back: the 5-star review after our crew showed up with diapers and wipes for a 9-months-pregnant customer. Her words: "I've never heard of such a thing from a moving company."</figcaption>
     </figure>
 
     <!-- ── First-ever mover-submitted Magic Moments callout ── -->
     <div style="border:1px solid var(--gray-200); border-left:4px solid var(--orange); border-radius:0 8px 8px 0; padding:14px 16px; margin:14px 0 4px; background:var(--orange-bg);">
-      <p style="margin:0 0 6px; font-size:11px; font-weight:800; letter-spacing:0.15em; color:var(--orange-dark); text-transform:uppercase;" data-eid="cmm-mover-title">A Q2 First: Movers Submitted Magic Moments</p>
-      <p style="margin:0 0 8px; font-size:12.5px;" data-eid="cmm-mover-1">Until this quarter, every Magic Moment came from the office. Q2 changed that — <strong>the first mover-submitted Magic Moments in company history</strong>:</p>
-      <ul style="font-size:12.5px; padding-left:18px; margin:0 0 8px;">
+      <p style="margin:0 0 6px; font-size:12.5px; font-weight:800; letter-spacing:0.15em; color:var(--orange-dark); text-transform:uppercase;" data-eid="cmm-mover-title">A Q2 First: Movers Submitted Magic Moments</p>
+      <p style="margin:0 0 8px; font-size:14px;" data-eid="cmm-mover-1">Until this quarter, every Magic Moment came from the office. Q2 changed that — <strong>the first mover-submitted Magic Moments in company history</strong>:</p>
+      <ul style="font-size:14px; padding-left:18px; margin:0 0 8px;">
         <li data-eid="cmm-mover-2"><strong>Luis Sanchez</strong> spotted a mom with two daughters (plus a cat and two dogs) navigating a divorce mid-move — his nomination became a family spa package, with treats for the pets.</li>
         <li data-eid="cmm-mover-3"><strong>Noah Schroder</strong>, on a SAFE move, noticed a dad and his 6-year-old bonding over toy cars — his nomination became a LEGO car set for them to build together in the new house.</li>
       </ul>
-      <p style="margin:0; font-size:12.5px;" data-eid="cmm-mover-4"><strong>Why this matters: you're in the living room — we're not.</strong> Nobody spots these moments before the crew does. See one, submit it, and the claims team handles everything from there. Let's make mover-submitted the biggest category in Q3.</p>
+      <p style="margin:0; font-size:14px;" data-eid="cmm-mover-4"><strong>Why this matters: you're in the living room — we're not.</strong> Nobody spots these moments before the crew does. See one, submit it, and the claims team handles everything from there. Let's make mover-submitted the biggest category in Q3.</p>
     </div>
 
     <div class="wsw nowwhat">
@@ -1070,7 +1187,7 @@
 
   <!-- ══════════════════ CX SALES LOOKBACK (folded 7/24 — Amanda's look-back, pulse 12603023313 + Nhel's FCP finals, manifest _cx_sales_q2_26 / _fcp_q2_26) ══════════════════ -->
   <section class="card green slide-el" id="cx-lookback">
-    <p class="card-num">Component · CX / CET</p>
+    <p class="card-num">The CET</p>
     <h3 class="card-title" data-eid="cxl-title">First-Class Precision — the CET's Q2 Game</h3>
 
     <div class="wsw">
@@ -1085,7 +1202,7 @@
 
     <hr class="divider" style="margin:18px 0;">
 
-    <h4 style="margin:0 0 8px;font-size:13.5px;color:var(--navy);">CX Sales Look-back</h4>
+    <h4 style="margin:0 0 8px;font-size:15px;color:var(--navy);">CX Sales Look-back</h4>
 
     <div class="mini-stat-row three">
       <div class="mini-stat green"><div class="ms-label" data-eid="cxl-stat-1-label">Sales Plan</div><div class="ms-value">88%</div><div class="ms-sub" data-eid="cxl-stat-1-sub">Booked at day 83 of 92 — final lands at quarter close</div></div>
@@ -1117,6 +1234,11 @@
   </section>
 
   <!-- ══════════════════ Q3 THEME PLACEHOLDER (spec D5) ══════════════════ -->
+  <div class="chapter-band" data-ch="4">
+    <p class="chapter-kicker">Chapter 4</p>
+    <h2 class="chapter-title">What's Next</h2>
+    <p class="chapter-sub">Q3, your questions answered, and your branch's own page.</p>
+  </div>
   <section class="card placeholder slide-el" id="q3-theme">
     <p class="card-num">Coming Next Quarter</p>
     <h3 class="card-title" data-eid="q3t-title">Q3 Theme</h3>
@@ -1194,7 +1316,7 @@
   <!-- ══════════════════ SCORECARD LINK GRID ══════════════════ -->
   <div class="slide-el slide-section" id="scorecard-section">
   <h2 class="section-title"><span class="sec-eyebrow">Now — Your Branch</span>Branch Scorecards</h2>
-  <p class="sc-intro" style="font-size:13px;color:var(--gray-600);" data-eid="sc-intro-1">That was the company story — <strong>your branch&#39;s own quarter</strong> (NPS, safety, availability, recognition) lives on your scorecard. In the huddle this is the handoff: company page first, then your branch&#39;s page.</p>
+  <p class="sc-intro" style="font-size:15px;color:var(--gray-600);" data-eid="sc-intro-1">That was the company story — <strong>your branch&#39;s own quarter</strong> (NPS, safety, availability, recognition) lives on your scorecard. In the huddle this is the handoff: company page first, then your branch&#39;s page.</p>
   <div class="scorecard-grid">
     <a class="scorecard-tile" href="branch-scorecard-naustin-q2.html"><p class="scorecard-tile-eyebrow">CTXH</p><p class="scorecard-tile-name">North Austin</p><span class="scorecard-tile-go">Open →</span></a>
     <a class="scorecard-tile" href="branch-scorecard-saustin-q2.html"><p class="scorecard-tile-eyebrow">CTXH</p><p class="scorecard-tile-name">South Austin</p><span class="scorecard-tile-go">Open →</span></a>
