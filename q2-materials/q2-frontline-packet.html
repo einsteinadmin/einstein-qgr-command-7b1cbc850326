@@ -88,20 +88,16 @@
     line-height: 1.65;
   }
   .wrap { max-width: 1150px; margin: 0 auto; padding: 20px 16px 80px; }
-  body { overflow-x: hidden; } /* full-bleed bands use 50vw; this absorbs the scrollbar sliver */
   @media (min-width: 640px) { .wrap { padding: 32px 24px 90px; } }
 
   /* Header — the opening moment */
   .page-header {
     background: linear-gradient(105deg, rgba(19,26,31,0.94) 0%, rgba(19,26,31,0.80) 40%, rgba(19,26,31,0.18) 100%), url('assets/debrief/hero-crew-ramp.jpg') center 42% / cover no-repeat, var(--ein-navy-700);
     color: white;
-    border-radius: 0;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    margin-top: -20px;
-    padding: 84px max(24px, calc(50vw - 551px)) 52px;
+    border-radius: 14px;
+    padding: 72px 36px 46px;
     margin-bottom: 8px;
-    min-height: 360px;
+    min-height: 340px;
     display: flex; flex-direction: column; justify-content: flex-end;
     box-shadow: 0 8px 24px rgba(11,16,20,0.18);
     position: relative;
@@ -109,7 +105,7 @@
   }
   .page-header::before {
     content: '';
-    position: absolute; left: max(24px, calc(50vw - 551px)); top: 0;
+    position: absolute; left: 36px; top: 0;
     width: 64px; height: 6px;
     background: var(--ein-orange-500);
     border-radius: 0 0 4px 4px;
@@ -148,15 +144,15 @@
     background-size: cover;
     background-position: center;
     color: white;
-    border-radius: 0;
-    margin: 48px calc(50% - 50vw) 22px;
-    padding: 34px max(24px, calc(50vw - 551px)) 30px;
+    border-radius: 14px;
+    margin: 48px 0 22px;
+    padding: 32px 36px 28px;
     position: relative;
     overflow: hidden;
   }
   .chapter-band::after {
     content: attr(data-ch);
-    position: absolute; right: max(28px, calc(50vw - 575px)); top: 50%; transform: translateY(-50%);
+    position: absolute; right: 28px; top: 50%; transform: translateY(-50%);
     font-family: 'Roboto', Arial, sans-serif; font-weight: 900;
     font-size: 88px; line-height: 1;
     color: rgba(255,255,255,0.10);
