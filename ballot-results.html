@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Q3 QGR — Ballot Room View</title>
-<!-- ballot-results v1.3 2026-07-28 — ⚖️ DECISION BOARD tab: digest-driven room agenda (RATIFY/NARROW/DECIDE/MISLABELED triage replacing the split badge's blind spots), per-leader recap rows w/ click-to-verbatim, layer-1 prompts + layer-2 copy-button facilitation prompt, ruling strip (Decide/Defer/Delegate + dissent-noted) persisted in the same cache + export to JSON/markdown for the HQ decision log. Digest = einstein-qgr-digest/v1, dropped through the same dropzone, newest-wins on preparedAt; hosted page still ships EMPTY (digest + ballots are the sensitive layer). Prior: ballot-results v1.2 2026-07-28 — 🏆 CELEBRATE MODE folded in (Cameron: "combine ballot results and celebration presentation into one place — one drag-in"). Third header mode between Aggregate and Room Reveal: Best-of-Q2 wall (per-leader cards, Personal/Professional badges, photos rendered from the v7 exports' embedded data-URLs) + Legends board (stories + named-by tally) + full-screen ▶ Present slide stepper (arrow keys / click / Esc; best-things slides then legend slides). Reads CACHE raw (not the normalized layer — parseBallot + Node QC harness untouched); v1–v6 files still parse everywhere, they just show "no celebration sections — ask for a re-export" per leader on this tab. Deep link: #celebrate opens straight into the tab (HQ agenda links use it). Same single drop zone feeds all three modes; ballots+photos persist in this browser's cache (if photo weight ever trips the storage quota the existing not-saving toast fires — everything still works for the session, re-drop after reload). Standalone qgr-celebration-wall.html RETIRED same day → redirect stub to this page. Prior: v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
+<!-- ballot-results v1.4 2026-07-28 — per-question room TIMERS on the Decision Board: click-to-start chip per card (pause on click, reset on double-click), blinks orange past 10:00 and red past 20:00 while running, starting one pauses the others, clock survives reload via the same cache. Prior: v1.3 2026-07-28 — ⚖️ DECISION BOARD tab: digest-driven room agenda (RATIFY/NARROW/DECIDE/MISLABELED triage replacing the split badge's blind spots), per-leader recap rows w/ click-to-verbatim, layer-1 prompts + layer-2 copy-button facilitation prompt, ruling strip (Decide/Defer/Delegate + dissent-noted) persisted in the same cache + export to JSON/markdown for the HQ decision log. Digest = einstein-qgr-digest/v1, dropped through the same dropzone, newest-wins on preparedAt; hosted page still ships EMPTY (digest + ballots are the sensitive layer). Prior: ballot-results v1.2 2026-07-28 — 🏆 CELEBRATE MODE folded in (Cameron: "combine ballot results and celebration presentation into one place — one drag-in"). Third header mode between Aggregate and Room Reveal: Best-of-Q2 wall (per-leader cards, Personal/Professional badges, photos rendered from the v7 exports' embedded data-URLs) + Legends board (stories + named-by tally) + full-screen ▶ Present slide stepper (arrow keys / click / Esc; best-things slides then legend slides). Reads CACHE raw (not the normalized layer — parseBallot + Node QC harness untouched); v1–v6 files still parse everywhere, they just show "no celebration sections — ask for a re-export" per leader on this tab. Deep link: #celebrate opens straight into the tab (HQ agenda links use it). Same single drop zone feeds all three modes; ballots+photos persist in this browser's cache (if photo weight ever trips the storage quota the existing not-saving toast fires — everything still works for the session, re-drop after reload). Standalone qgr-celebration-wall.html RETIRED same day → redirect stub to this page. Prior: v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
 <style>
 :root{
   --orange-50:#FEF6EC; --orange-100:#FDE3C2; --orange-500:#EF8B22; --orange-700:#D96B10; --orange-900:#CC5500;
@@ -228,6 +228,13 @@ a.pulselink:hover{text-decoration:underline}
 .decide-card{font-size:13px}
 .decide-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .decide-timebox{background:var(--grey-100);color:var(--grey-500);font-size:11px;font-weight:700;border-radius:var(--radius-pill);padding:3px 10px;flex-shrink:0}
+.decide-timer{font-size:12px;font-weight:700;border-radius:var(--radius-pill);padding:3px 12px;flex-shrink:0;cursor:pointer;background:var(--navy-50);color:var(--navy-500);border:1px solid var(--navy-100);font-variant-numeric:tabular-nums;user-select:none}
+.decide-timer:hover{border-color:var(--navy-400)}
+.decide-timer.running{background:#E3EEDF;color:#3E6636;border-color:var(--success)}
+.decide-timer.warn{background:var(--orange-100);color:var(--orange-900);border-color:var(--orange-500);animation:decideBlink 1s step-end infinite}
+.decide-timer.over{background:#F8DCDC;color:#8E0000;border-color:var(--error);animation:decideBlink .6s step-end infinite}
+.decide-timer.paused{animation:none}
+@keyframes decideBlink{0%,100%{opacity:1}50%{opacity:.35}}
 .decide-title{font-size:17px;flex:1;min-width:200px}
 .decide-ruledchip{background:#E3EEDF;color:#3E6636;font-size:11px;font-weight:700;border-radius:var(--radius-pill);padding:3px 10px;flex-shrink:0}
 
@@ -1242,7 +1249,7 @@ function updateDecideRuledChip(card, rulingObj){
   chip.style.display = (rulingObj && (rulingObj.call || rulingObj.ruling)) ? "" : "none";
 }
 
-function renderDecide(){
+function renderDecide(){ /* timer chips refreshed at end via updateTimerChips */
   var el = document.getElementById("decideView");
   var hasBallots = !!Object.keys(BALLOTS).length;
   var hasDigest = !!CACHE.digest;
@@ -1279,6 +1286,7 @@ function renderDecide(){
   el.innerHTML = html;
 
   cards.forEach(function(c){ wireDecideCard(c); });
+  updateTimerChips();
   var expBtn = document.getElementById("btnExportRulings");
   if(expBtn) expBtn.addEventListener("click", exportRulings);
 }
@@ -1292,6 +1300,7 @@ function renderDecideCard(c){
   html += '<div class="decide-head">'+
     '<span class="dmode '+decideModeColorClass(mode)+'">'+esc(decideModeLabel(mode))+'</span>'+
     (d && d.timebox ? '<span class="decide-timebox">'+esc(d.timebox)+'</span>' : '')+
+    '<span class="decide-timer" data-tqid="'+esc(id)+'" title="Click: start / pause · double-click: reset · orange at 10:00, red at 20:00">▶ timer</span>'+
     '<h3 class="decide-title">'+esc(title)+'</h3>'+
     '<span class="decide-ruledchip" style="'+((ruling && (ruling.call || ruling.ruling)) ? '' : 'display:none')+'">✓ ruled</span>'+
     '</div>';
@@ -1355,13 +1364,63 @@ function renderDecideCard(c){
   return html;
 }
 
+/* ---- per-question room timers — click start/pause, dblclick reset.
+   Blinks orange past 10:00 and red past 20:00 (while running; paused = static tint).
+   Starting one pauses any other running timer — the room debates one question at a time.
+   State lives in CACHE.timers so a mid-room reload keeps the clock. ---- */
+function timerState(id){
+  if(!CACHE.timers) CACHE.timers = {};
+  if(!CACHE.timers[id]) CACHE.timers[id] = { acc:0, since:null };
+  return CACHE.timers[id];
+}
+function timerElapsed(t){ return (t.acc||0) + (t.since ? (Date.now() - t.since) : 0); }
+function fmtTimer(ms){ var sec = Math.floor(ms/1000); return Math.floor(sec/60) + ":" + ("0"+(sec%60)).slice(-2); }
+function toggleTimer(id){
+  var t = timerState(id);
+  if(t.since){ t.acc = timerElapsed(t); t.since = null; }
+  else {
+    Object.keys(CACHE.timers).forEach(function(k){
+      var o = CACHE.timers[k];
+      if(o && o.since){ o.acc = (o.acc||0) + (Date.now() - o.since); o.since = null; }
+    });
+    t.since = Date.now();
+  }
+  persistCache(); updateTimerChips();
+}
+function resetTimer(id){
+  if(CACHE.timers) CACHE.timers[id] = { acc:0, since:null };
+  persistCache(); updateTimerChips();
+}
+function updateTimerChips(){
+  var chips = document.querySelectorAll(".decide-timer");
+  for(var i=0;i<chips.length;i++){
+    var chip = chips[i];
+    var id = chip.getAttribute("data-tqid");
+    var t = (CACHE.timers && CACHE.timers[id]) || { acc:0, since:null };
+    var el = timerElapsed(t);
+    var running = !!t.since;
+    chip.textContent = (running ? "\u23F1 " : (el > 0 ? "\u23F8 " : "\u25B6 ")) + (el > 0 ? fmtTimer(el) : "timer");
+    chip.classList.toggle("running", running && el < 600000);
+    chip.classList.toggle("warn", el >= 600000 && el < 1200000);
+    chip.classList.toggle("over", el >= 1200000);
+    chip.classList.toggle("paused", !running);
+  }
+}
+setInterval(function(){ if(MODE === "decide") updateTimerChips(); }, 1000);
+
 function wireDecideCard(c){
   var id = c.id;
   var card = document.getElementById("dc_"+id);
   if(!card) return;
+  card.addEventListener("dblclick", function(e){
+    var tchip = e.target.closest(".decide-timer");
+    if(tchip){ resetTimer(id); }
+  });
 
   // one delegated click listener covers row-toggle, ruling-call buttons and the copy button
   card.addEventListener("click", function(e){
+    var tchip = e.target.closest(".decide-timer");
+    if(tchip){ toggleTimer(id); return; }
     var row = e.target.closest(".decide-leaderrow");
     if(row){
       var verbatim = row.nextElementSibling;
