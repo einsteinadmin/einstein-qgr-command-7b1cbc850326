@@ -13,7 +13,7 @@
   @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/Roboto-500.woff2') format('woff2'); }
   @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/Roboto-700.woff2') format('woff2'); }
   @font-face { font-family: 'Roboto'; font-style: normal; font-weight: 900; font-display: swap; src: url('assets/fonts/Roboto-900.woff2') format('woff2'); }
-  @font-face { font-family: 'Bebas Neue'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/BebasNeue-Regular.ttf') format('truetype'); }
+  @font-face { font-family: 'Lora'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/Lora-SemiBold.ttf') format('truetype'); }
   :root {
     /* ══ Einstein Brand Kit tokens — full ramps (colors_and_type.css) ══ */
     --ein-orange-50:  #FEF6EC;
@@ -71,7 +71,7 @@
     --fs-body: 17px;
     --fs-small: 14px;
     --fs-micro: 12px;
-    --font-display: 'Bebas Neue', 'Roboto', Arial, sans-serif;
+    --font-display: 'Lora', Georgia, serif;  /* kit rule: Lora = hero/banner display ONLY */
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -92,11 +92,13 @@
 
   /* Header — the opening moment */
   .page-header {
-    background: linear-gradient(150deg, var(--ein-navy-500) 0%, var(--ein-navy-700) 70%, var(--ein-navy-900) 100%);
+    background: linear-gradient(105deg, rgba(19,26,31,0.94) 0%, rgba(19,26,31,0.80) 40%, rgba(19,26,31,0.18) 100%), url('assets/debrief/hero-crew-ramp.jpg') center 42% / cover no-repeat, var(--ein-navy-700);
     color: white;
     border-radius: 14px;
-    padding: 40px 32px 34px;
+    padding: 64px 32px 44px;
     margin-bottom: 8px;
+    min-height: 300px;
+    display: flex; flex-direction: column; justify-content: flex-end;
     box-shadow: 0 8px 24px rgba(11,16,20,0.18);
     position: relative;
     overflow: hidden;
@@ -118,13 +120,13 @@
   }
   .page-header h1 {
     font-family: var(--font-display);
-    font-size: 52px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
     margin: 0 0 12px 0;
-    line-height: 1.02;
+    line-height: 1.08;
   }
-  @media (min-width: 640px) { .page-header h1 { font-size: 64px; } }
+  @media (min-width: 640px) { .page-header h1 { font-size: 48px; } }
   .page-header .estimate-note {
     color: rgba(255,255,255,0.92);
     font-size: var(--fs-small);
@@ -139,6 +141,8 @@
   /* Chapter bands — the arc of the scroll */
   .chapter-band {
     background: var(--ein-navy-500);
+    background-size: cover;
+    background-position: center;
     color: white;
     border-radius: 14px;
     padding: 26px 30px 24px;
@@ -148,12 +152,16 @@
   }
   .chapter-band::after {
     content: attr(data-ch);
-    position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
-    font-family: var(--font-display);
-    font-size: 96px; line-height: 1;
-    color: rgba(255,255,255,0.07);
+    position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+    font-family: 'Roboto', Arial, sans-serif; font-weight: 900;
+    font-size: 88px; line-height: 1;
+    color: rgba(255,255,255,0.10);
     pointer-events: none;
   }
+  .chapter-band[data-ch="2"] { background-image: linear-gradient(100deg, rgba(19,26,31,0.93) 0%, rgba(19,26,31,0.60) 55%, rgba(19,26,31,0.28) 100%), url('assets/debrief/band-truck.jpg'); }
+  .chapter-band[data-ch="3"] { background-image: linear-gradient(100deg, rgba(19,26,31,0.93) 0%, rgba(19,26,31,0.60) 55%, rgba(19,26,31,0.28) 100%), url('assets/debrief/band-mover-blanket.jpg'); background-position: center 30%; }
+  .chapter-band[data-ch="4"] { background-image: linear-gradient(100deg, rgba(19,26,31,0.93) 0%, rgba(19,26,31,0.60) 55%, rgba(19,26,31,0.28) 100%), url('assets/debrief/band-smartest-move.jpg'); background-position: center 55%; }
+  .chapter-band[data-ch="2"], .chapter-band[data-ch="3"], .chapter-band[data-ch="4"] { min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end; }
   .chapter-kicker {
     color: var(--ein-orange-100);
     font-size: var(--fs-micro);
@@ -164,22 +172,22 @@
   }
   .chapter-title {
     font-family: var(--font-display);
-    font-size: 38px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
     margin: 0 0 4px 0;
-    line-height: 1.05;
+    line-height: 1.1;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.35);
   }
-  .chapter-sub { color: rgba(255,255,255,0.78); font-size: 15px; margin: 0; max-width: 640px; }
+  .chapter-sub { color: rgba(255,255,255,0.92); font-size: 15px; margin: 0; max-width: 640px; text-shadow: 0 1px 6px rgba(0,0,0,0.45); }
   body.mode-present .chapter-band { display: none !important; }
   @media print { .chapter-band { break-inside: avoid; } }
 
   h2.section-title {
     color: var(--navy);
-    font-family: var(--font-display);
-    font-size: 34px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: -0.3px;
     margin: 34px 0 6px 0;
     padding-bottom: 8px;
     border-bottom: 2px solid var(--ein-navy-100);
@@ -217,12 +225,11 @@
   .card.placeholder { border-top-color: var(--gray-400); background: var(--gray-50); }
   .card h3.card-title {
     color: var(--navy);
-    font-family: var(--font-display);
-    font-size: 30px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -0.3px;
     margin: 0 0 6px 0;
-    line-height: 1.05;
+    line-height: 1.15;
   }
   .card .card-num {
     color: var(--gray-600);
@@ -254,6 +261,7 @@
   }
   .wsw.sowhat .wsw-label { color: var(--ein-blue-700); }
   .wsw.nowwhat .wsw-label { color: var(--green); }
+  .wsw p { max-width: 70ch; }
   .wsw p:last-child { margin-bottom: 0; }
 
   /* Badge */
@@ -305,11 +313,10 @@
   }
   .mini-stat .ms-value {
     color: var(--navy);
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    line-height: 1.05;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    line-height: 1.08;
     margin-top: 4px;
   }
   .mini-stat .ms-sub {
@@ -343,10 +350,10 @@
   /* FAQ / collapsible */
   .faq-group-title {
     color: var(--navy);
-    font-family: var(--font-display);
-    font-size: 21px;
-    font-weight: 400;
-    letter-spacing: 0.8px;
+    font-size: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
     margin: 22px 0 8px 0;
   }
   .faq-group-title:first-child { margin-top: 4px; }
@@ -430,7 +437,7 @@
     font-weight: 700;
     margin: 0;
   }
-  .scorecard-tile-name { color: var(--navy); font-family: var(--font-display); font-size: 21px; font-weight: 400; letter-spacing: 0.5px; margin: 0; line-height: 1.1; }
+  .scorecard-tile-name { color: var(--navy); font-size: 17px; font-weight: 900; letter-spacing: -0.2px; margin: 0; line-height: 1.2; }
   .scorecard-tile-go { margin-top: auto; padding-top: 8px; border-top: 1px solid var(--gray-200); font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ein-blue-500); }
 
   /* Recognition polish — winners' names read as names (first .wsw in the CET card = FCP winners) */
@@ -729,8 +736,11 @@
 
     <div class="wsw sowhat">
       <span class="wsw-label">So What — The yardstick was off, and the spending was on purpose (a lot of it on you)</span>
-      <p data-eid="fs-sowhat-1"><strong>The revenue miss:</strong> here's the thing we found when we dug in — the "miss" mostly wasn't a miss. We actually served <strong>more hours of moving than we had budgeted</strong>, which means most branches did MORE moves than we expected. The problem was the plan itself: we didn't end up charging the prices we had planned to charge in the budget. Think of it like a lemonade stand. We planned the summer assuming $2 a cup. We poured <em>more</em> cups than planned — but a lot of them sold at the old $1.75 price, so the cash box came up short of plan even while we sold more lemonade than ever. That's mostly a planning miss, and Paul and I own it.</p>
-      <p data-eid="fs-sowhat-2"><strong>The profit gap:</strong> mostly us choosing to invest more money into the company than expected, plus more overtime than we budgeted and a few pop-up costs we didn't see coming (like a $30K plumbing repair at our North Dallas location). The biggest choice was you: in mid-May we gave <strong>every mover a raise</strong>, about <strong>$1.85/hour on average</strong>. That wasn't budgeted in the quarter. We moved it up because it was the right call, not because the spreadsheet had room — and we'd make the same call again. The rest of the gap was more bets on growth: we built the summer crews early and kept them when May started slow, invested in leadership coaching and a stronger finance team, pushed harder on marketing, and added <strong>17 trucks</strong> (4 net-new, 13 replacements). Meanwhile the company stayed strong where it counts: revenue covered our bills roughly 1.5 times over. Nobody should read this quarter as "the company is in trouble." It isn't.</p>
+      <p data-eid="fs-sowhat-1"><strong>The revenue miss:</strong> here's the thing we found when we dug in — the "miss" mostly wasn't a miss. We actually served <strong>more hours of moving than we had budgeted</strong>, which means most branches did MORE moves than we expected. The problem was the plan itself: we didn't end up charging the prices we had planned to charge in the budget.</p>
+      <p data-eid="fs-sowhat-1b">Think of it like a lemonade stand. We planned the summer assuming $2 a cup. We poured <em>more</em> cups than planned — but a lot of them sold at the old $1.75 price, so the cash box came up short of plan even while we sold more lemonade than ever. That's mostly a planning miss, and Paul and I own it.</p>
+      <p data-eid="fs-sowhat-2"><strong>The profit gap:</strong> mostly us choosing to invest more money into the company than expected, plus more overtime than we budgeted and a few pop-up costs we didn't see coming (like a $30K plumbing repair at our North Dallas location).</p>
+      <p data-eid="fs-sowhat-2b">The biggest choice was you: in mid-May we gave <strong>every mover a raise</strong>, about <strong>$1.85/hour on average</strong>. That wasn't budgeted in the quarter. We moved it up because it was the right call, not because the spreadsheet had room — and we'd make the same call again. The rest of the gap was more bets on growth: we built the summer crews early and kept them when May started slow, invested in leadership coaching and a stronger finance team, pushed harder on marketing, and added <strong>17 trucks</strong> (4 net-new, 13 replacements).</p>
+      <p data-eid="fs-sowhat-2c">Meanwhile the company stayed strong where it counts: revenue covered our bills roughly 1.5 times over. Nobody should read this quarter as "the company is in trouble." It isn't.</p>
     </div>
 
     <div class="wsw nowwhat">
