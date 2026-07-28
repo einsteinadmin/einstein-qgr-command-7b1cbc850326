@@ -36,9 +36,11 @@
     --ein-grey-700: #363839;
     --ein-grey-900: #191A1B;
     /* ── Artifact aliases — existing rules reference these ── */
-    --navy: var(--ein-navy-500);
-    --navy-light: #3B4A55;      /* derived light step of brand navy (hovers, secondary headings) */
-    --navy-2: #46586B;          /* derived gradient companion within the navy family */
+    /* Primary reverted to the Q1-as-presented blue-navy per Cameron's 7/27 redline
+       (same swap as roundtable packet v2.2 — exact values from the Q1 archive). */
+    --navy: #0d2b4e;
+    --navy-light: #1a3a5c;
+    --navy-2: #2a4a72;
     --orange: var(--ein-orange-500);
     --orange-dark: #B85C00;     /* text-safe deep orange — kit orange-700/900 miss WCAG AA at body sizes */
     --orange-bg: var(--ein-orange-50);
@@ -50,8 +52,8 @@
     --red-light: #ffebee;
     --amber: #ef6c00;
     --amber-bg: #fff3e0;
-    --blue: var(--ein-blue-500);
-    --blue-bg: var(--ein-blue-50);
+    --blue: #1565c0;            /* Q1-as-presented accent blue */
+    --blue-bg: #e3f2fd;
     --gray-50: #F6F6F6;         /* kit semantic light */
     --gray-100: #f0f2f5;
     --gray-200: #dde3e8;
@@ -65,16 +67,16 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Roboto', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 15px; /* breathing-room bump, Cameron 7/27 */
     color: var(--gray-800);
-    line-height: 1.55;
+    line-height: 1.6;
     margin: 0;
     background: var(--gray-50);
   }
   .layout {
     display: grid;
     grid-template-columns: 240px 1fr;
-    max-width: 1440px;
+    max-width: 1280px;  /* reverted to Q1 width per Cameron 7/27 — 1440 read as denser/smaller */
     margin: 0 auto;
     background: white;
     min-height: 100vh;
@@ -130,7 +132,7 @@
   }
   /* Content */
   .content {
-    padding: 32px 48px 48px 48px;
+    padding: 40px 56px 56px 56px;
     max-width: 100%;
     overflow-x: hidden;
   }
@@ -155,15 +157,15 @@
   /* Headings */
   h2 {
     color: var(--navy);
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 700;
-    margin: 36px 0 8px 0;
+    margin: 44px 0 10px 0;
     padding-bottom: 6px;
     border-bottom: 2px solid var(--navy);
   }
   h3 {
     color: var(--navy-light);
-    font-size: 15.5px;
+    font-size: 16.5px;
     font-weight: 700;
     margin: 22px 0 6px 0;
   }
@@ -722,17 +724,17 @@
     stroke-linecap: round;
   }
   .sparkline .line-crit { stroke: var(--red); }
-  .sparkline .line-warn { stroke: var(--orange); }
+  .sparkline .line-warn { stroke: #f0a500; } /* yellow — GYR per Cameron 7/27 */
   .sparkline .line-ok { stroke: var(--green); }
-  .sparkline .line-over { stroke: #1565c0; }
+  .sparkline .line-over { stroke: #1b5e20; } /* deep green — over-plan stays in the green family */
   .sparkline .dot-crit { fill: var(--red); }
-  .sparkline .dot-warn { fill: var(--orange); }
+  .sparkline .dot-warn { fill: #f0a500; }
   .sparkline .dot-ok { fill: var(--green); }
-  .sparkline .dot-over { fill: #1565c0; }
+  .sparkline .dot-over { fill: #1b5e20; }
   .pa-legend-dot.dot-crit { background: var(--red); }
-  .pa-legend-dot.dot-warn { background: var(--orange); }
+  .pa-legend-dot.dot-warn { background: #f0a500; }
   .pa-legend-dot.dot-ok { background: var(--green); }
-  .pa-legend-dot.dot-over { background: #1565c0; }
+  .pa-legend-dot.dot-over { background: #1b5e20; }
   .pa-foot {
     display: flex;
     justify-content: space-between;
@@ -937,7 +939,7 @@
   .review-notes-clear:hover { color: var(--orange-dark); }
   .review-notes-toast {
     position: fixed; left: 16px; bottom: 66px; z-index: 999;
-    background: var(--ein-navy-700); color: white; font-size: 12px;
+    background: var(--navy); color: white; font-size: 12px;
     padding: 8px 14px; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.25);
     max-width: 320px; line-height: 1.4;
   }
