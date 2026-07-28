@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>QG Success Rate Tracker — Einstein Moving Company</title>
+<!-- qg-tracker hosted-sanitized 2026-07-28 — leader-facing copy; canonical (full candor) = Supporting Projects/Cascading Goals Tracker/ -->
 <!-- 2026-07-27: added click-to-expand goal detail on the top leader tiles (accordion panel below the
      card row, keyboard-accessible). Purely additive UI — no anchors sync_qg_from_ledger.py audits were
      touched. Goal-level data lives in QG_GOAL_DETAIL_Q2_2026 below, generated FROM qg-results-2026-Q2.json
@@ -660,10 +661,9 @@
       <div class="focus-card landmines">
         <h3><span class="icon">⚠️</span> Landmines (grade divergences for Day-1 sync)</h3>
         <ul>
-          <li><strong>RATIFIED (fixed 7/24):</strong> <span class="leader-tag">Anne</span> carries <strong>two</strong> final R's, not zero — Mover Promotion Guidance <span class="arrow">Self G → R</span> (shared goal with Paul, whose side self-graded R) and Hiring for Culture / 100-Point <span class="arrow">Self G → R</span> (a Critical — 100-pt never went live company-wide). She was reading 100% on this page until today because neither had been applied. <strong>⚠ Confirm the Hiring-for-Culture one at Day 1</strong> — it is recorded final in both the AAR Review Room and the QG ledger, but the 7/22 review export only ruled Mover Promotion outright.</li>
-          <li><strong>RATIFIED (7/24):</strong> <span class="leader-tag">Matisen</span> Call Grading <span class="arrow">Self R → G</span> — the substitution (Claims RAG out, Games automation in) was never re-scored, which drove the self-R; weekly call audits have run since 6/11, so the work landed. Takes him to a clean 6 of 6 and the company to 80.0%.</li>
-          <li><span class="leader-tag">Paul</span> <strong>Mover Comp three-way read</strong> — Paul R / Anne G / dashboard G on a Critical Number. Decide whose bar governs.</li>
-          <li><span class="leader-tag">Mike</span> <strong>Games methodology fork — RESOLVED 7/23:</strong> avg-of-weekly over the 8-week season (the post-season week Matisen added to the live tool is exhibition, not graded). DFWT lands 8.12 = Super Green.</li>
+          <li><span class="leader-tag">Anne</span> <strong>Two goals land R</strong> — Mover Promotion Guidance <span class="arrow">Self G → R</span> (shared goal with Paul, whose side self-graded R) and Hiring for Culture / 100-Point <span class="arrow">Self G → R</span> (a Critical — 100-pt never went live company-wide). Both walked at Day 1.</li>
+          <li><span class="leader-tag">Matisen</span> <strong>Call Grading lands G</strong> <span class="arrow">Self R → G</span> — the substitution (Claims RAG out, Games automation in) was never re-scored, which drove the self-R; weekly call audits have run since 6/11, so the work landed. Takes him to a clean 6 of 6 and the company to 80.0%.</li>
+                    <li><span class="leader-tag">Mike</span> <strong>Games methodology fork — RESOLVED 7/23:</strong> avg-of-weekly over the 8-week season (the post-season week Matisen added to the live tool is exhibition, not graded). DFWT lands 8.12 = Super Green.</li>
           <li><strong>No open grade disputes.</strong> All five flips are ratified; the remaining grades are the leaders' own and ratify at the QGR Day-1 sync 7/29.</li>
         </ul>
       </div>
@@ -671,7 +671,7 @@
       <div class="focus-card convo">
         <h3><span class="icon">💬</span> Conversation Points (QGR 7/29-30)</h3>
         <ul>
-          <li><strong>The dependency queue is THE lesson of the quarter</strong> — three leaders' misses routed through the same IT queue. Q3 rule: name the dependency deliverable in the rock text or it doesn't exist; cap the queue owner at 3-4 rocks.</li>
+          <li><strong>The dependency queue is THE lesson of the quarter</strong> — three leaders' misses routed through the same IT queue. Q3 rule: name the dependency deliverable in the rock text or it doesn't exist, and cap rock load on shared-dependency owners.</li>
           <li><strong>Damages-in-promotion is a live unresolved disagreement</strong> — Anne read "damages out" as settled; Cameron and Paul want it in. Day-2 decide item.</li>
           <li><strong>Trial-day consistency audit</strong> — some branches may have sunset trial days ahead of the HPE network being ready; audit before the Q3 company-wide launch.</li>
           <li><strong>Goal-definition hygiene for Q3</strong> — definitions gradable unambiguously by one person, dates + dependencies internally consistent (the scoring fork, date inversion, and dependency-gated bars all trace here).</li>
@@ -717,7 +717,7 @@ const leaders = [
     {q: "Q3 2025", sg: 1, g: 3, r: 2, ung: 0},
     {q: "Q4 2025", sg: 0, g: 5, r: 1, ung: 0},
     {q: "Q1 2026", sg: 2, g: 4, r: 0, ung: 0, pending: true},
-    {q: "Q2 2026", sg: 2, g: 3, r: 1, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 2, g: 3, r: 1, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ], criticalRocks: [
     {q: "Q2 2024", sg: 2, g: 0, r: 0, ung: 0},
     {q: "Q3 2024", sg: 1, g: 1, r: 0, ung: 0},
@@ -727,7 +727,7 @@ const leaders = [
     {q: "Q3 2025", sg: 1, g: 1, r: 0, ung: 0},
     {q: "Q4 2025", sg: 0, g: 0, r: 0, ung: 2},
     {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0, pending: true},
-    {q: "Q2 2026", sg: 0, g: 2, r: 0, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 0, g: 2, r: 0, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ]},
   { name: "Paul", title: "CFO/COO", rocks: [
     {q: "Q2 2024", sg: 1, g: 0, r: 3, ung: 1},
@@ -738,7 +738,7 @@ const leaders = [
     {q: "Q3 2025", sg: 1, g: 3, r: 2, ung: 0},
     {q: "Q4 2025", sg: 1, g: 2, r: 3, ung: 0},
     {q: "Q1 2026", sg: 0, g: 3, r: 2, ung: 0, pending: true},
-    {q: "Q2 2026", sg: 1, g: 3, r: 2, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 1, g: 3, r: 2, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ], criticalRocks: [
     {q: "Q2 2024", sg: 0, g: 0, r: 1, ung: 1},
     {q: "Q3 2024", sg: 1, g: 0, r: 1, ung: 0},
@@ -748,7 +748,7 @@ const leaders = [
     {q: "Q3 2025", sg: 1, g: 1, r: 0, ung: 0},
     {q: "Q4 2025", sg: 0, g: 1, r: 1, ung: 0},
     {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0, pending: true},
-    {q: "Q2 2026", sg: 1, g: 0, r: 1, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 1, g: 0, r: 1, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ]},
   { name: "Amanda", title: "Dir. of CX", rocks: [
     {q: "Q2 2024", sg: 3, g: 0, r: 2, ung: 0},
@@ -757,7 +757,7 @@ const leaders = [
     {q: "Q1 2025", sg: 2, g: 1, r: 2, ung: 0},
     {q: "Q2 2025", sg: 0, g: 2, r: 3, ung: 0},
     {q: "Q1 2026", sg: 1, g: 4, r: 0, ung: 0},
-    {q: "Q2 2026", sg: 2, g: 2, r: 1, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 2, g: 2, r: 1, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ], criticalRocks: [
     {q: "Q2 2024", sg: 1, g: 0, r: 1, ung: 0},
     {q: "Q3 2024", sg: 1, g: 0, r: 1, ung: 0},
@@ -765,7 +765,7 @@ const leaders = [
     {q: "Q1 2025", sg: 1, g: 0, r: 1, ung: 0},
     {q: "Q2 2025", sg: 0, g: 0, r: 0, ung: 2},
     {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0},
-    {q: "Q2 2026", sg: 0, g: 1, r: 1, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 0, g: 1, r: 1, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ]},
   { name: "Brian", title: "CTXH Regional Mgr", rocks: [
     {q: "Q2 2024", sg: 3, g: 1, r: 1, ung: 0},
@@ -776,7 +776,7 @@ const leaders = [
     {q: "Q3 2025", sg: 2, g: 2, r: 1, ung: 0},
     {q: "Q4 2025", sg: 0, g: 3, r: 1, ung: 0},
     {q: "Q1 2026", sg: 0, g: 4, r: 1, ung: 0},
-    {q: "Q2 2026", sg: 0, g: 5, r: 1, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 0, g: 5, r: 1, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ], criticalRocks: [
     {q: "Q2 2024", sg: 2, g: 0, r: 0, ung: 0},
     {q: "Q3 2024", sg: 0, g: 2, r: 0, ung: 0},
@@ -786,7 +786,7 @@ const leaders = [
     {q: "Q3 2025", sg: 1, g: 1, r: 0, ung: 0},
     {q: "Q4 2025", sg: 0, g: 2, r: 0, ung: 0},
     {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0},
-    {q: "Q2 2026", sg: 0, g: 2, r: 0, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 0, g: 2, r: 0, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ]},
   { name: "Mike", title: "DFWT Regional Mgr", rocks: [
     {q: "Q2 2024", sg: 3, g: 2, r: 0, ung: 0},
@@ -797,7 +797,7 @@ const leaders = [
     {q: "Q3 2025", sg: 3, g: 2, r: 0, ung: 0},
     {q: "Q4 2025", sg: 2, g: 2, r: 1, ung: 0},
     {q: "Q1 2026", sg: 0, g: 4, r: 1, ung: 0},
-    {q: "Q2 2026", sg: 4, g: 0, r: 1, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 4, g: 0, r: 1, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ], criticalRocks: [
     {q: "Q2 2024", sg: 1, g: 1, r: 0, ung: 0},
     {q: "Q3 2024", sg: 1, g: 0, r: 0, ung: 1},
@@ -807,7 +807,7 @@ const leaders = [
     {q: "Q3 2025", sg: 0, g: 1, r: 0, ung: 1},
     {q: "Q4 2025", sg: 1, g: 0, r: 1, ung: 0},
     {q: "Q1 2026", sg: 0, g: 2, r: 0, ung: 0},
-    {q: "Q2 2026", sg: 2, g: 0, r: 0, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 2, g: 0, r: 0, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ]},
   { name: "Matisen", title: "Dir. of IT", rocks: [
     {q: "Q2 2024", sg: 2, g: 2, r: 1, ung: 0},
@@ -818,7 +818,7 @@ const leaders = [
     {q: "Q3 2025", sg: 0, g: 1, r: 4, ung: 0},
     {q: "Q4 2025", sg: 1, g: 0, r: 4, ung: 0},
     {q: "Q1 2026", sg: 2, g: 0, r: 3, ung: 0},
-    {q: "Q2 2026", sg: 3, g: 3, r: 0, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 3, g: 3, r: 0, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ], criticalRocks: [
     {q: "Q2 2024", sg: 0, g: 2, r: 0, ung: 0},
     {q: "Q3 2024", sg: 1, g: 0, r: 0, ung: 1},
@@ -828,7 +828,7 @@ const leaders = [
     {q: "Q3 2025", sg: 0, g: 0, r: 0, ung: 2},
     {q: "Q4 2025", sg: 0, g: 0, r: 2, ung: 0},
     {q: "Q1 2026", sg: 1, g: 0, r: 1, ung: 0},
-    {q: "Q2 2026", sg: 1, g: 1, r: 0, ung: 0, pending: true},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
+    {q: "Q2 2026", sg: 1, g: 1, r: 0, ung: 0},  // generated by sync_qg_from_ledger.py from qg-results-2026-Q2.json — do NOT hand-edit
   ]},
   { name: "Anne", title: "Dir. of Employee Exp.", rocks: [
     {q: "Q3 2024", sg: 3, g: 1, r: 1, ung: 0},
