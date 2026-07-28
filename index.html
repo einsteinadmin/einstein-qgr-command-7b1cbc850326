@@ -936,7 +936,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.78 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.79 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1052,9 +1052,6 @@
           ctx: '✅ 7/20: 81 master summaries + 26 dupes closed + eNPS/AAR evidence attached. Remaining: fold Brian/Anne exports + write back triage verdicts (Phase ④).' },
         { text: "Collect Amanda's next-quarter theme/dashboard/rewards ideas (Claims + Sales)",
           ctx: 'Idea-collection FROM Amanda — her eNPS export + AAR carry most of it; anything extra → her Monday sync.' },
-        { text: 'Q2 results snapshot (SG/G/R per rock off dashboard)',
-          url: 'https://einsteinadmin.github.io/goals-dashboard/', urlLabel: 'dashboard',
-          ctx: '✅ Effectively done 7/20 — the dashboard now carries all 34 AAR self-grades as (PROJ); FINAL at QGR.' },
         'QG success-rate tracker refresh (7-quarter parser)',
         { text: 'Q3 reforecast lands (Ben model off first 2 wks July actuals + Matisen revenue reforecast)',
           ctx: '✅ Landed 7/21: Ben H2 reforecast posted (pulse 12255099906) + Matisen Q3 plan $6.62M +7.9% YoY live on hosted pages.' },
@@ -1073,12 +1070,9 @@
     {
       id: 'P2', title: '② Cameron + Paul — inputs → warehouse → triage', window: '7/20–24 · backlog INPUTS first, then the warehouse gate, then decisions · ⚠ 2 DECISIONS OWED BY CAMERON sit at the top of this list',
       items: [
-        { text: 'SWT refresh — rule on the pre-seeded worksheet (Strengths / Weaknesses / Trends)',
+        { text: 'SWT + 7 Strata + FACe refresh — rule on the pre-seeded worksheet (consolidated per Cameron 7/27 — one worksheet, one ruling session)',
           url: 'strata-swt-worksheet.html', urlLabel: 'open the worksheet',
-          ctx: 'BACKLOG INPUT. April as-written vs proposed edits w/ sources — 3 strength upgrades, 2 new HUGE-candidate weaknesses, insurance/AI-fatigue trend changes. Survivors → OPSP builder + MB.' },
-        { text: '7 Strata + FACe review/refresh',
-          url: 'strata-swt-worksheet.html', urlLabel: 'open the worksheet',
-          ctx: "BACKLOG INPUT. Draft verdict: strata mostly STAND — flags: conv-rate KPI wording awaits the replacement decision · X-Factor vs COS-layer question. FACe: Paul=CFO locked (execution only); still open — Mike's role-split + Calvin." },
+          ctx: "BACKLOG INPUT. SWT: April as-written vs proposed edits w/ sources — survivors → OPSP builder + MB. Strata: mostly STAND — flags: conv-rate KPI wording awaits the replacement decision · X-Factor vs COS-layer question. FACe: Paul=CFO locked (execution only); still open — Mike's role-split + Calvin." },
         { text: 'PACe + Flywheel SELF-EVALUATION — grade every element, update the live artifacts',
           url: 'https://einsteinadmin.github.io/einstein-flywheel/', urlLabel: 'Flywheel',
           url2: 'https://einsteinadmin.github.io/einstein-pace/', url2Label: 'PACe',
@@ -1470,6 +1464,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/27q', text: '\u{1F4E5} CAMERON\'S 9:24PM EXPORT BAKED IN — TO-DO LIST NOW CURRENT EVERYWHERE (HQ v3.79). His qgr-hq-export-2026-07-27.json folded as a forward-only one-shot sync (_sync0727): 33 phase checkmarks + all his notes, tracker all-green, chase list current (games-scores landed etc.) — any browser (room machine, second Mac, fresh) opens matching his state; checks only ever set TRUE, notes only fill blanks. HIS EXPORT NOTES EXECUTED AS INSTRUCTIONS: ① P1 "Q2 results snapshot" row DELETED (his note: duplicate of Collect-AAR-exports) ② P2 SWT + 7-Strata/FACe rows CONSOLIDATED into one (his note: "let\'s consolidate") — both with an _v8 index-remap migration so saved checkboxes stay pointed right ③ the malformed day-1 agenda row (his HQ feedback typed into a block) auto-stripped — its ask (Room = pure leadership-QGR checklist, no runway overlap, per-block exportable notes) SHIPPED as v3.78 ④ his P1-2 note (COS plan to mirror prior-quarter QG folder setup) logged to the Q3 SOP lane. Still open per his own notes: revenue targets "next day or two" · Aug budgets by EOM (not a QGR blocker).' },
     { date: '7/27p', text: '\u{1F50E} ROOM TAB CONSOLIDATION + TWO-CRITIC DESIGN AUDIT (HQ v3.78, Cameron\'s dedupe + readability ask). ① LINK MAP MERGED INTO THE AGENDA — the standalone block-by-block table is gone; every agenda block now carries its \u{1F5A5} on-screen links + ⚑ must-be-true deps right under the row (AGENDA_META, keyed by a stable mk field so wording edits don\'t orphan the links). ② PRE-FLIGHT DEDUPED vs Runway — Matisen data day, FLM rollout GO, and dinner rows removed (they live in P3/P2); P3 lost its pre-reads + room-readiness dupes (with a _v7 index-remap migration so saved checkmarks don\'t shift); Pre-flight is now strictly the room-machine gate, counter moved to top w/ per-deadline-group counts. ③ THE CHECKBOX-LAYOUT BUG: pre-flight rows used an undefined CSS class (phase-item), stacking text under checkboxes — now phase-item-row flex like everything else. ④ AUDIT CATCHES APPLIED: agenda rows are wrapping TEXT (no more clipped 300-char single-line inputs; double-click to edit, Enter/Esc to commit/cancel) w/ bold-title/detail split + an orange NOW marker on the first unchecked block per day · STANDING agenda seed-merge (critical: the 7/27 "Quarter in Review redline" Day-2 row never reached browsers whose state predated it — one-shot guards; now any new seed row auto-inserts at position, ✕-removed rows remembered in removedTexts and stay gone) · anchor jumps now activate the right TAB + un-collapse the target section · scroll-margin tracks the jump bar\'s wrapped height · Import reloads so old JSONs pass the migration chain · ✕ remove asks confirm · print hides nav/buttons · badges legible at 0.68rem · preflight text esc()\'d · shelf band 1 reordered to agenda order w/ unique icons · day labels de-drafted. Convergence: both critics independently flagged the long-text readability + the meta-dies-on-edit trap.' },
     { date: '7/27o', text: '\u{1F3C1} ROOM TAB NAV + MATERIALS-SHELF REORG (HQ v3.77, Cameron\'s find-everything-in-place ask): The Room gains a sticky jump bar (Pre-flight · Link map · Agenda · Materials shelf · Decision log — tracks the topbar height, sections get scroll-margin so anchors land clean). Materials shelf regrouped from a flat 25-tile wall into 4 bands — \u{1F3AC} Decision surfaces · \u{1F4E6} Q2 story/packet family · \u{1F4E1} Live dashboards · \u{1F9ED} Strategy & reference — with gotcha badges (LOCAL :8136 · LOG IN · MONDAY/DRIVE/SHEET/MURAL). BACKFILLED 10 links that previously lived only in the toolkit or link map: OPSP Builder · SWT+7-Strata worksheet · Power of One (Paul) · eNPS Q2 one-pager · direct Roundtable Packet link · Ben QGR Working Brief · PA-Directs (hosted) · Growth Toolkit workbook (Drive) · master SOP pulse · Curation Receipt. Every link the link map references is now also on the shelf.' },
     { date: '7/27n', text: '\u{1F4D8} ROUNDTABLE PACKET v2.2 DEPLOYED (Cameron\'s 10-note redline fold, notes export on his Desktop) — orphan </div> layout break fixed (everything after Claims/MM rendered full-bleed); primary reverted to the Q1-as-presented blue-navy (#0d2b4e + #1565c0 accent, from the Q1 archive); cover callout + hero-strong white-on-white readability fixes; exec tiles now lead with the two critical numbers (Personnel 101.1% SG + Games 7.59 G — team-wide-QG tile OUT, rate relabeled leadership-only in Quarter Highlights with named ledger wins); strategic foundation shortened; NOI-basis + Dream-Team source behind tooltips; Bonus Goals → Continuing Education (all 7 ITP + improvement plans); games heat map GYR on grade bands; special-recognition watch deleted (ruled); winning-story placeholder removed. sync_qg_from_ledger.py anchor repointed to the quarter-highlights lead; --check 9/9 green; live byte-exact (c11b332). Same session: Q2 financial deck section-collapse rebuilt outline-style — H2 collapse keeps H3 subheads visible (5af8ad6, live byte-exact). Carry-over for the Debrief lane: add the games-PRIZE mention for movers ($75/effective-truck fridge stock).' },
@@ -1869,6 +1864,67 @@
       if (st) state.phases['P3-' + (5 + i)] = st; else delete state.phases['P3-' + (5 + i)];
     });
     state.phases._v7 = true;
+  }
+
+  // v3.79 (_v8) — two seed-row edits per Cameron's 7/27 export notes: P1 "Q2 results snapshot"
+  // DELETED (his note: duplicate of Collect-AAR-exports) and P2 SWT + 7-Strata/FACe CONSOLIDATED
+  // into one row. Index-keyed states shift: P1 old 8..16 -> 7..15, P2 old 2..18 -> 1..17.
+  if (!state.phases._v8) {
+    var v8shift = function (pid, delIdx, maxIdx) {
+      var moved = {};
+      for (var i = delIdx + 1; i <= maxIdx; i++) moved[i] = state.phases[pid + '-' + i];
+      delete state.phases[pid + '-' + delIdx];
+      for (var j = delIdx + 1; j <= maxIdx; j++) {
+        if (moved[j]) state.phases[pid + '-' + (j - 1)] = moved[j];
+        else delete state.phases[pid + '-' + (j - 1)];
+      }
+      delete state.phases[pid + '-' + maxIdx];
+    };
+    v8shift('P1', 7, 16);
+    v8shift('P2', 1, 18);
+    state.phases._v8 = true;
+  }
+
+  // v3.79 STATE SYNC — Cameron's 7/27 HQ export baked in (qgr-hq-export-2026-07-27.json,
+  // exported 9:24pm) so EVERY browser opens current: forward-only — checks are only ever set
+  // true, notes only fill where empty, tracker only raises, chase only lands. One-shot flag.
+  if (!state.phases._sync0727) {
+    var SYNC0727 = {"phases":{"P1-0":{"c":1},"P1-1":{"c":1},"P1-2":{"c":1,"n":"Probably going to want my COS to make a plan to mirror previous quarters QG folders, set up, access, etc. "},"P1-4":{"c":1,"n":"Still getting individual leaders' exports but Cam/Paul side has been reviewed and updated."},"P1-5":{"c":1,"n":"Done once initially (7/16 reconciliation). Final dedupe + cleanup after all AARs/eNPS exports land — Albert's multi-agent consolidation audit launched 7/20."},"P1-6":{"c":1},"P1-8":{"c":1,"n":"Pending. Should have it in the next day or two."},"P1-9":{"c":1,"n":"Already done and confirmed with regionals and branches."},"P1-10":{"n":"July targets already in place run higher than projected Aug revenue needs; Aug–Oct targets usually wait until closer to EOM. Handle by EOM — not a QGR blocker."},"P1-13":{"c":1},"P2-12":{"n":"Deliberately moved later in the order per Cameron 7/20 — reforecast lands ~Tue 7/21 with Ben."},"P2-0":{"c":1,"n":"SWT ruled 7/20 (swt-strata-FINAL)."},"P2-1":{"c":1,"n":"PACe graded 7/20 (v4.1) + Flywheel v3.1."},"P2-2":{"c":1,"n":"Not working on it today (7/20). Running it on the software with Ben. Goal with Ben on Tuesday is to review finances and do a gut check on what we need to pay attention to and what goals we should have for each branch. "},"P2-3":{"c":1,"n":"Ben block ran Tue 7/21 (9–1)."},"P2-4":{"c":1,"n":"Warehouse gate ran 7/20; receipt regenerated."},"P2-5":{"c":1,"n":"Receipt ruled 7/20 — 22 confirm / 7 challenge (digest file)."},"P2-6":{"c":1},"P1-3":{"c":1,"n":"AARs 7/7 complete; Cameron reviewed all 7 in the Review Room 7/22."},"P1-11":{"c":1,"n":"Deck LIVE 7/21 — manifest v0.8.x, §6.1a refereed findings, audited."},"P2-11":{"c":1},"P2-7":{"c":1},"P2-8":{"c":1},"P1-7":{"c":1},"P2-9":{"c":1},"P2-16":{"c":1},"P1-12":{"c":1},"P2-14":{"c":1},"P2-15":{"c":1},"P2-17":{"c":1},"P2x-0":{"c":1},"P2x-1":{"c":1},"P3-0":{"c":1},"P4-7":{"c":1,"n":"Not happneing this quarter. Generally only in Q1"},"P1-14":{"n":"GatherUp folded into the manifest 7/21 (§5)."}},"chaseTrue":["ben-workbook","moves","py-branch","tur","personnel","sales","marketing","nps","market-bench","bookings-feed","eNPS","self-grades","samsara","games-scores","roas","insurance-claims","truck-target","gm-target"],"gates":{"g5":"today"}};
+    Object.keys(SYNC0727.phases).forEach(function (k) {
+      var v = SYNC0727.phases[k];
+      var p = state.phases[k] || { checked: false, note: '', noteOpen: false };
+      if (v.c) p.checked = true;
+      if (v.n && !p.note) p.note = v.n;
+      state.phases[k] = p;
+    });
+    Object.keys(SYNC0727.gates).forEach(function (g) {
+      if (!state.gates[g]) state.gates[g] = SYNC0727.gates[g];
+    });
+    ['Amanda', 'Brian', 'Mike', 'Matisen', 'Anne', 'Paul', 'Cameron'].forEach(function (ld) {
+      for (var c = 0; c <= 2; c++) {
+        var tk = ld + '-' + c;
+        if (!state.tracker[tk] || state.tracker[tk] < 2) state.tracker[tk] = 2;
+      }
+    });
+    SYNC0727.chaseTrue.forEach(function (id) { state.chase[id] = true; });
+    // his 7/27 export carried one malformed day-1 agenda row (feedback text typed into a block —
+    // the ask it contains shipped as v3.78); strip it wherever that browser state lands.
+    // ⚠ state.agenda is still NULL here on a fresh browser (null-resolves to the seed further
+    // down) — guard, or first-ever loads crash before anything renders.
+    if (state.agenda) {
+      ['day1', 'day2'].forEach(function (dk) {
+        if (!state.agenda[dk]) return;
+        state.agenda[dk].items = state.agenda[dk].items.filter(function (it) {
+          var t = (typeof it === 'string') ? it : it.text;
+          return !(t && t.indexOf('3 best thingsOne thing I noticed') === 0);
+        });
+      });
+      saveStateNow(LS_KEYS.agenda, state.agenda);
+    }
+    state.phases._sync0727 = true;
+    saveStateNow(LS_KEYS.gates, state.gates);
+    saveStateNow(LS_KEYS.tracker, state.tracker);
+    saveStateNow(LS_KEYS.chase, state.chase);
   }
   saveStateNow(LS_KEYS.phases, state.phases);
 
