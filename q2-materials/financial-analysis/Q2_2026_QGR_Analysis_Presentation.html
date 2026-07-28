@@ -3805,20 +3805,34 @@ h2[data-coll].closed:after,h3[data-coll].closed:after{content:"▸"}
 <div class="coll-toolbar"><button onclick="collAll(true)">Collapse all</button><button onclick="collAll(false)">Expand all</button></div>
 <script>
 (function(){
+  // Outline-style collapse: closing an H2 keeps its H3 subheadings (and Section 1's
+  // .fin-sec wrappers) visible in collapsed form, so the section stays navigable.
+  function isFinSec(n){return n.classList&&n.classList.contains('fin-sec')}
   function sectionNodes(h){var out=[],lvl=h.tagName,n=h.nextElementSibling;
     while(n){var t=n.tagName;
       if(t==='H2')break;
       if(t==='H3'&&lvl==='H3')break;
+      if(isFinSec(n)&&lvl==='H3')break;
       if(t==='HR')break;
       out.push(n);n=n.nextElementSibling}
     return out}
-  var heads=[].slice.call(document.querySelectorAll('h2,h3')).filter(function(h){return sectionNodes(h).length});
+  function setH3(h,closed){h.classList.toggle('closed',closed);
+    sectionNodes(h).forEach(function(n){n.style.display=closed?'none':''})}
+  function setH2(h,closed){h.classList.toggle('closed',closed);
+    sectionNodes(h).forEach(function(n){
+      if(n.tagName==='H3'){n.style.display='';setH3(n,closed)}
+      else if(isFinSec(n)){n.style.display='';n.classList.toggle('collapsed',closed)}
+      else if(n.classList&&n.classList.contains('fin-controls')){n.style.display=''}
+      else n.style.display=closed?'none':''})}
+  // Section 1's accordion owns its own heads — skip them here to avoid double-toggling.
+  var heads=[].slice.call(document.querySelectorAll('h2,h3')).filter(function(h){
+    return !h.classList.contains('fin-sec-head')&&sectionNodes(h).length});
   heads.forEach(function(h){h.setAttribute('data-coll','1');
-    h.addEventListener('click',function(){var closed=h.classList.toggle('closed');
-      sectionNodes(h).forEach(function(n){n.style.display=closed?'none':''})})});
-  window.collAll=function(close){heads.forEach(function(h){
-    var isClosed=h.classList.contains('closed');
-    if(close&&!isClosed)h.click();if(!close&&isClosed)h.click()})};
+    h.addEventListener('click',function(){var closed=!h.classList.contains('closed');
+      if(h.tagName==='H2')setH2(h,closed);else setH3(h,closed)})});
+  window.collAll=function(close){
+    heads.forEach(function(h){if(h.tagName==='H2')setH2(h,close)});
+    heads.forEach(function(h){if(h.tagName==='H3')setH3(h,close)})};
 })();
 </script>
 </body>
