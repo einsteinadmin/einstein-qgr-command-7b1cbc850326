@@ -35,10 +35,13 @@
     --ein-grey-500: #53575A;
     --ein-grey-700: #363839;
     --ein-grey-900: #191A1B;
-    /* ── Artifact aliases — existing rules reference these ── */
-    --navy: var(--ein-navy-500);
-    --navy-light: #3B4A55;      /* derived light step of brand navy (hovers, secondary headings) */
-    --navy-2: #46586B;          /* derived gradient companion within the navy family */
+    /* ── Artifact aliases — existing rules reference these ──
+       Primary reverted to the Q1-as-presented blue-navy per Cameron's 7/27 redline
+       (Note 1: "go with the lighter blue colors from Q1"). Exact values copied from
+       _archive/q1-final-as-presented/q1-2026-roundtable-packet.html. */
+    --navy: #0d2b4e;
+    --navy-light: #1a3a5c;
+    --navy-2: #2a4a72;
     --orange: var(--ein-orange-500);
     --orange-dark: #B85C00;     /* text-safe deep orange — kit orange-700/900 miss WCAG AA at body sizes */
     --orange-bg: var(--ein-orange-50);
@@ -50,8 +53,8 @@
     --red-light: #ffebee;
     --amber: #ef6c00;
     --amber-bg: #fff3e0;
-    --blue: var(--ein-blue-500);
-    --blue-bg: var(--ein-blue-50);
+    --blue: #1565c0;            /* Q1-as-presented accent blue */
+    --blue-bg: #e3f2fd;
     --gray-50: #F6F6F6;         /* kit semantic light */
     --gray-100: #f0f2f5;
     --gray-200: #dde3e8;
@@ -308,6 +311,7 @@
     font-weight: 700;
   }
   .hero-headline-text { flex: 1; min-width: 0; }
+  .hero-card p strong { color: inherit; } /* white-on-navy hero copy — a global strong color rule was rendering these dark */
   .hero-headline-text h2 { margin: 0 0 6px 0; }
   .evidence-label {
     color: var(--orange);
@@ -2043,13 +2047,15 @@
     padding: 8px 12px; margin: 10px 0; font-style: italic;
   }
 
-  /* Einstein Games — heat-map sequential ramp (neutral → navy; orange reserved for champion/cross markers) */
+  /* Einstein Games — heat-map ramp recolored green/yellow/red per Cameron's 7/27 redline
+     (bands follow grade semantics: red below ~5.5 · amber below the 7.0 Green bar · greens ≥7.0,
+     deepening with score; orange still reserved for champion/cross markers) */
   :root {
-    --games-heat-0: #F6F6F6;
-    --games-heat-1: #dde3e8;
-    --games-heat-2: #a9c7e8;
-    --games-heat-3: #5c93c9;
-    --games-heat-4: var(--ein-navy-500);
+    --games-heat-0: #ef9a9a;   /* red — scores ≤5.4 */
+    --games-heat-1: #ffe082;   /* amber — 5.5-6.9, below the 7.0 Green bar */
+    --games-heat-2: #c5e1a5;   /* light green — 7.0-8.4 */
+    --games-heat-3: #81c784;   /* green — 8.5-9.9 */
+    --games-heat-4: #2e7d32;   /* deep green — 10+ */
   }
   .games-heatmap-wrap { overflow-x: auto; margin: 14px 0 8px 0; border-radius: 8px; border: 1px solid var(--gray-200); }
   .games-heatmap { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 12px; margin: 0; }
@@ -2069,7 +2075,7 @@
   .games-heatmap td.gh-0, td.gh-0 { background: var(--games-heat-0); color: var(--gray-800); }
   .games-heatmap td.gh-1, td.gh-1 { background: var(--games-heat-1); color: var(--gray-800); }
   .games-heatmap td.gh-2, td.gh-2 { background: var(--games-heat-2); color: var(--gray-800); }
-  .games-heatmap td.gh-3, td.gh-3 { background: var(--games-heat-3); color: white; }
+  .games-heatmap td.gh-3, td.gh-3 { background: var(--games-heat-3); color: var(--gray-800); }
   .games-heatmap td.gh-4, td.gh-4 { background: var(--games-heat-4); color: white; }
   .games-heatmap td.gh-nodata, td.gh-nodata { background: repeating-linear-gradient(45deg, var(--gray-100), var(--gray-100) 4px, var(--gray-200) 4px, var(--gray-200) 8px); color: var(--gray-500); font-size: 10px; }
   .games-heatmap tr:nth-child(even) td.gh-branch-cell { background: var(--gray-50); }
@@ -2085,7 +2091,7 @@
   }
   .games-drilldown.open { display: block; }
   .games-drilldown .gd-arc { display: flex; align-items: flex-end; gap: 6px; height: 70px; margin: 10px 0 4px 0; }
-  .games-drilldown .gd-bar { flex: 1; background: var(--ein-navy-400); border-radius: 3px 3px 0 0; position: relative; min-height: 4px; }
+  .games-drilldown .gd-bar { flex: 1; background: var(--navy-2); border-radius: 3px 3px 0 0; position: relative; min-height: 4px; }
   .games-drilldown .gd-bar span { position: absolute; top: -16px; left: 0; right: 0; text-align: center; font-size: 9.5px; color: var(--gray-600); }
   .games-drilldown .gd-bar-label { text-align: center; font-size: 9.5px; color: var(--gray-600); margin-top: 3px; }
 
@@ -2197,7 +2203,7 @@
           <div class="hero-headline-text">
             <h2>Q2 FY'26 lands a draft B− — revenue grew almost 10%, but the profit plan was missed by a third.</h2>
             <p>Revenue $8.40M (+9.87% YoY) — a record quarter, and roughly <strong>3× the market's growth pace</strong> (our metros blended ~2–5%) — every month NOI-positive, margin climbing monthly (15.08% → 16.54% → 18.33% flash) — but allocated NOI hit only 65.66% of the Q2 plan. The miss is margin/cost, not top-line: revenue reached 95.46% of plan while NOI reached two-thirds of its target. TUR (76.2%) clears both the 65% KPI line and the 73.0% target-as-set; company NPS 88.0 sits just under the standing 90 target; personnel ran 101.1% of budget — a deliberate staff-up graded Super Green per the locked personnel-budget rubric, not a miss.</p>
-            <p style="font-size:12.5px;background:var(--gray-50);border-left:3px solid var(--orange);padding:6px 10px;"><strong>Mis-set yardsticks, well-executed quarter.</strong> The plan's rate row was never re-priced after April's volume-only revision ($548K wedge, 137% of the revenue gap); crew-out trucks were counted as sellable capacity (861 truck-days); all 10 mover personnel budgets were set below demand-need. Volume beat plan by +$148K and 9 of 10 branches beat their as-set utilization targets on running trucks — the branches largely out-ran a bad map. Full basis: Financial Deck §1.1/§1.6.</p>
+            <p style="font-size:12.5px;background:var(--gray-50);border-left:3px solid var(--orange);padding:6px 10px;color:var(--gray-800);"><strong style="color:var(--navy);">Mis-set yardsticks, well-executed quarter.</strong> The plan's rate row was never re-priced after April's volume-only revision ($548K wedge, 137% of the revenue gap); crew-out trucks were counted as sellable capacity (861 truck-days); all 10 mover personnel budgets were set below demand-need. Volume beat plan by +$148K and 9 of 10 branches beat their as-set utilization targets on running trucks — the branches largely out-ran a bad map. Full basis: Financial Deck §1.1/§1.6.</p>
           </div>
         </div>
         <div class="evidence-label">Evidence — Three Lenses</div>
@@ -2247,9 +2253,9 @@
           <div class="stat-delta neg">$1.41M of $2.14M planned · preliminary</div>
         </div>
         <div class="stat-tile green">
-          <div class="stat-label">Personnel-Budget</div>
+          <div class="stat-label">Personnel-Budget · Critical #</div>
           <div class="stat-value">101.1%</div>
-          <div class="stat-delta pos">Deliberate staff-up · SG per locked rubric</div>
+          <div class="stat-delta pos">Super Green — deliberate staff-up per locked rubric</div>
         </div>
         <div class="stat-tile green">
           <div class="stat-label">TUR (vs Target)</div>
@@ -2267,9 +2273,9 @@
           <div class="stat-delta pos">n=52, highest response count ever</div>
         </div>
         <div class="stat-tile green">
-          <div class="stat-label">Team-wide QG Success</div>
-          <div class="stat-value">80.0%</div>
-          <div class="stat-delta pos">32 / 40 goals · up from 71% in Q1</div>
+          <div class="stat-label">Einstein Games Score · Critical #</div>
+          <div class="stat-value">7.59</div>
+          <div class="stat-delta pos">Green — company avg of weekly avgs · DFWT 8.12 SG</div>
         </div>
         <div class="stat-tile">
           <div class="stat-label">Moves Completed</div>
@@ -2282,7 +2288,8 @@
       <h3 id="quarter-highlights">Quarter Highlights</h3>
       <p style="margin:0 0 12px 0;">The big moves of Q2 — branch-side and department-side together. The wins worth opening on.</p>
       <ol class="headline-list">
-        <li><strong>80.0% — Team-wide QG success rate.</strong> Up from 71% in Q1 (32 of 40 goals SG/G; all five grade flips ratified as of 7/24). Sitting at the top edge of the healthy 70-80% band — worth asking in the room whether Q3 goals are set aggressively enough. The AAR-to-lessons-to-next-quarter-design loop is provable this cycle, not ritual — the mechanisms named in the Q1 AAR (dependency-aware allocation, weekly cadences) were executed in Q2, and the numbers moved.</li>
+        <li><strong>Both company critical numbers hit.</strong> Personnel-budget attainment 101.1% — <strong>Super Green</strong> per the locked rubric (a deliberate staff-up, not a miss) — and the Einstein Games company score 7.59 — <strong>Green</strong> (DFWT regional 8.12 Super Green).</li>
+        <li><strong>80.0% — Leadership QG success rate</strong> (32 of 40 leadership goals SG/G, up from 71% in Q1; all five grade flips ratified 7/24). The wins behind the number: Variable Pricing full rollout — Super Green for both Cameron and Matisen; Mike's Mover Training App live across all of DFWT with zero bugs (SG); Amanda + Nhel's First Class Precision theme rollout (SG); Anne's HR Generalist hire fully ramped by end of May (SG). Sitting at the top edge of the healthy 70-80% band — worth asking in the room whether Q3 goals are set aggressively enough.</li>
         <li><strong>Garland — the only branch over plan on BOTH revenue and NOI.</strong> +38.3% YoY, 121.9% of revenue plan, 103.0% of NOI plan, zero truck growth all quarter (3 trucks flat) — a utilization-first demonstration case.</li>
         <li><strong>+9.9% revenue YoY</strong>, accelerating from Q1's +6.9%, running 4–8 points ahead of metro market growth. Every month of Q2 was NOI-positive with margin climbing monthly (15.08% → 16.54% → 18.33% flash).</li>
         <li><strong>San Antonio — Einstein Games Season 3 Champion.</strong> Bracket/finals winner — National final over Fort Worth 43–30 (corrected 7/25; Tampa placed 3rd in the bracket and separately led the Q2 Overall heat-map, 10.05) — the two results are deliberately distinct measures; see the Games section for the framing.</li>
@@ -2298,7 +2305,7 @@
       <div class="strat-card">
         <p style="font-size:11px;font-weight:800;letter-spacing:0.18em;color:var(--orange-dark);text-transform:uppercase;margin:0 0 6px 0;">★ Primary Lens · Most Referenced</p>
         <h2>The Flywheel — Six Components Compounding</h2>
-        <p>Great Movers → Smart Move Experience → Trust → Demand → Capacity → Reinvest → back to Great Movers. AI = cross-functional enabler. Scoring 1–10 per component (locked at the 4/14 Rob Lynch session): <strong>≥7 reads Green, 5–6 Amber, &lt;5 Red</strong>. <em>No Q2 re-scoring workshop has run yet</em> — scores below carry forward from Q1 pending a live re-score at the 7/29-30 QGR; anchor stats underneath each score are refreshed to Q2 manifest data.</p>
+        <p>Scoring 1–10 per component (locked at the 4/14 Rob Lynch session): <strong>≥7 Green, 5–6 Amber, &lt;5 Red</strong>. Scores carry forward from Q1 — re-score live at the QGR; the anchor stats under each score are refreshed to Q2 data.</p>
         <div class="flywheel-grid">
           <div class="fw-tile">
             <span class="fw-num">1 · 12:00<span class="fw-score">6/10*</span></span>Attract &amp; Develop<br>Great Movers
@@ -2335,8 +2342,8 @@
       <div class="info-callout" style="margin-top:14px;">
         <strong>Supporting strategic frames — linked, not visualized here:</strong>
         <ul style="margin:8px 0 0 0; padding-left:20px;">
-          <li><strong>Five Strategic Pillars</strong> (locked 4/14 with Rob Lynch) — the evaluation lens for grading rocks and shaping the quarter. No Q2 re-lock has run. <a href="https://einsteinadmin.github.io/einstein-pillars/" target="_blank">Open Live Pillars →</a></li>
-          <li><strong>PACe — E=MCash²</strong> — Susko's 12-box Process Accountability Chart. Box-level Q2 read not yet re-run. <a href="https://einsteinadmin.github.io/einstein-pace/" target="_blank">Open Live PACe →</a></li>
+          <li><strong>Five Strategic Pillars</strong> — <a href="https://einsteinadmin.github.io/einstein-pillars/" target="_blank">Open Live Pillars →</a></li>
+          <li><strong>PACe — E=MCash²</strong> — <a href="https://einsteinadmin.github.io/einstein-pace/" target="_blank">Open Live PACe →</a></li>
         </ul>
       </div>
 
@@ -2360,11 +2367,8 @@
           <span class="badge amber">D → B → B− (Three-Lens, draft)</span>
         </div>
         <p class="comp-summary">
-          Revenue $8.40M (+9.87% YoY), allocated NOI $1.41M — every month NOI-positive with margin climbing monthly. Revenue reached 95.46% of the Q2 reforecast plan; NOI reached only 65.66% — the miss is margin/cost, not top-line. Growth concentrated mid-pack (Garland +38.3%, Fort Worth +28.6%, Tampa +24.7%) while North Austin (−10.9%) and Leander (−1.1%) shrank. Regionally DFWT grew +23.3% YoY vs CTXH +3.0%; CTXH still holds 62.2% of revenue at the higher margin (18.5% vs 13.9%). <strong>Marketing + web funnel landed 7/23</strong> (Deck §2): leads <strong>+97% YoY</strong> — largely lead <em>recapture</em> from last quarter's variable-form change (contact now captured at step 1, so we keep the ~62% we used to leak), not a demand doubling; same-universe conversion <strong>+2 pts</strong> (16.2→18.2%) and quote engagement 12.9→28.5% are the real, non-definitional gains. $175K digital spend with per-branch cost-per-lead — ROAS economics landed 7/23 (Matisen's CPL & ROAS dashboard: $17-19/lead, $59 ad cost per booked move, LTV:CAC ≈13:1; Financial Deck §2.4). <strong>The card below is a summary — the full audited analysis, adversarially-refereed findings, and per-branch detail live in the Financial Deck.</strong>
+          Revenue $8.40M (+9.87% YoY), allocated NOI $1.41M<sup style="cursor:help;color:var(--blue);font-weight:700;" title="NOI basis this quarter (Cameron's 7/21 ruling): Ben's ALLOCATED view — corporate overhead allocated to branches by Q2 revenue share. GL 88888 booked ~$0 in 2026, so the packet's usual 88888-netted definition is superseded this quarter by this ruled basis. Plan baseline = the $8.80M/$2.14M Q2 Cascading Team Goals reforecast, not the original annual budget.">ⓘ</sup> — every month NOI-positive with margin climbing monthly. Revenue reached 95.46% of the Q2 reforecast plan; NOI reached only 65.66% — the miss is margin/cost, not top-line. Growth concentrated mid-pack (Garland +38.3%, Fort Worth +28.6%, Tampa +24.7%) while North Austin (−10.9%) and Leander (−1.1%) shrank. Regionally DFWT grew +23.3% YoY vs CTXH +3.0%; CTXH still holds 62.2% of revenue at the higher margin (18.5% vs 13.9%). <strong>Marketing + web funnel landed 7/23</strong> (Deck §2): leads <strong>+97% YoY</strong> — largely lead <em>recapture</em> from last quarter's variable-form change (contact now captured at step 1, so we keep the ~62% we used to leak), not a demand doubling; same-universe conversion <strong>+2 pts</strong> (16.2→18.2%) and quote engagement 12.9→28.5% are the real, non-definitional gains. $175K digital spend with per-branch cost-per-lead — ROAS economics landed 7/23 (Matisen's CPL & ROAS dashboard: $17-19/lead, $59 ad cost per booked move, LTV:CAC ≈13:1; Financial Deck §2.4). <strong>The card below is a summary — the full audited analysis, adversarially-refereed findings, and per-branch detail live in the Financial Deck.</strong>
         </p>
-        <div class="info-callout" style="font-size:12px;">
-          <strong>NOI basis this quarter</strong> is Cameron's 7/21 ruling: Ben's ALLOCATED view (corporate overhead allocated to branches by Q2 revenue share) — GL 88888 booked ~$0 in 2026, so the packet's usual "88888-netted" definition is superseded this quarter by this ruled basis. Plan baseline = the $8.80M/$2.14M Q2 Cascading Team Goals reforecast, not the original annual budget.
-        </div>
         <div class="info-callout" style="font-size:12px;">
           <strong>The revenue miss is a rate-vintage artifact, not a selling shortfall.</strong> The plan's rate row was set 1/26 and never re-priced when April's reforecast raised the hours; re-pricing the plan's own hours at what customers actually paid erases $548,138 — 137% of the −$400,110 gap. Volume ran +$148K ahead of the plan's own hours assumption. <strong>TUR also reads on two bases:</strong> 76.2% owned-fleet (graded) vs 83.8% running-truck (crew-out excluded, diagnostic) — 9 of 10 branches beat their as-set target on the running basis; only Tampa misses (65.8 vs 73.4). Full basis: Financial Deck §1.1 and §1.6.
         </div>
@@ -2491,10 +2495,9 @@
           </tbody>
         </table>
         <p style="font-size:12px;color:var(--gray-600);"><em>Games grades finalized 7/23 on the 8-week avg-of-weekly ruling (W1-W8; the post-season week on the live tool is exhibition, not graded): Brian S3 R→G (CTXH 7.07) and Mike S4 G→SG (DFWT 8.12). Leadership QG success rate = <strong>80.0%</strong> (32/40 · 14 SG · 18 G · 8 R), Grades are final for the quarter.</em></p>
-        <h4 style="margin-top:14px;">Bonus Goals — Required Even When "None"</h4>
+        <h4 style="margin-top:14px;">Continuing Education</h4>
         <div class="method-callout" style="background:#fff7e6; border-left:3px solid var(--orange);">
-          <p style="margin:0 0 8px 0;"><strong>Matisen &amp; Anne — Ideal Team Player Reading (Bonus) <span class="grade-pill sg" title="Super Green"></span> both.</strong> The only two leaders who flagged this as an explicit Bonus Goal this cycle (the other 5 leaders carried the same reading as a regular, non-bonus rock). No mid-quarter displacement documented for either — additive reading completed alongside the planned rock set.</p>
-          <p style="margin:0; font-size:12px; color:var(--gray-600);"><em>All other 5 leaders (Cameron, Paul, Amanda, Brian, Mike) completed the Ideal Team Player Reading as a standard rock, not a Bonus Goal — no pivots or one-for-one displacements reported this quarter.</em></p>
+          <p style="margin:0;"><strong>All 7 leaders completed the Ideal Team Player reading this quarter</strong> — and each came out of it with a personal improvement plan to execute next quarter (humble / hungry / smart self-assessment → concrete commitments, built at the 7/15 ITP session).</p>
         </div>
         <h4 style="margin-top:14px;">Company Cross-Cutting Lessons</h4>
         <ul style="font-size:12.5px;">
@@ -2526,7 +2529,7 @@
         <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content">Manifest v0.8.2 <code>_games_s3_q2_26</code>, parsed by Albert from the live Season 3 results page (source <code>eg_cachebust.xlsx</code>, generated 2026-07-22 14:17) · <strong>Status: preliminary — pending Matisen's confirm that this export is authoritative/final</strong> · Full mover-level detail (298 movers, per-week scores) in <code>q2-data/games-s3-full-2026-07-22.json</code> · Components tracked: reviews, damages, driver, CE, attendance</div></details>
 
         <h4>Season 3 Overview — Company + 10 Branches × Week</h4>
-        <p style="font-size:12.5px;">Score in every cell (color is never the only signal). Neutral-to-navy ramp = intensity, not good/bad — orange marks the champion row only. Click any branch name to open its season arc.</p>
+        <p style="font-size:12.5px;">Score in every cell (color is never the only signal). Green/amber/red follows the grade bands — greens from 7.0 up (deeper = higher), amber below the 7.0 Green bar, red below ~5.5. Orange marks the champion row only. Click any branch name to open its season arc.</p>
         <div class="games-heatmap-wrap">
         <table class="games-heatmap">
           <thead>
@@ -2799,14 +2802,10 @@
         <h4>Champions Spotlight</h4>
         <div class="method-callout" style="background:linear-gradient(135deg, #fff5e8 0%, #fff 100%); border-left:4px solid var(--orange);">
           <p style="margin:0 0 8px 0;font-size:15px;"><strong>🏆 San Antonio — Season 3 Champion (National final over Fort Worth 43–30; CTXH final over #1-seed Leander 45–42).</strong></p>
-          <p style="margin:0 0 8px 0;">San Antonio's Q2 Overall heat-map score (7.40, rank #5) is well below Tampa's network-leading 10.05 — the bracket format rewards playoff performance, not the full-season average, which is exactly why these are two distinct and equally legitimate results. San Antonio's Week 7 (Conf Champ, 9.0) and Week 8 (National, 8.6) scores were its two best of the season — it peaked when it mattered. <em>[Winning-story narrative slot — full write-up pending Fable/Albert integration pass with Matisen's confirmed data.]</em></p>
+          <p style="margin:0 0 8px 0;">San Antonio's Q2 Overall heat-map score (7.40, rank #5) is well below Tampa's network-leading 10.05 — the bracket format rewards playoff performance, not the full-season average, which is exactly why these are two distinct and equally legitimate results. San Antonio's Week 7 (Conf Champ, 9.0) and Week 8 (National, 8.6) scores were its two best of the season — it peaked when it mattered.</p>
           <p style="margin:0;font-size:12.5px;color:var(--gray-600);">Runner-up: Tampa (finals opponent, Q2 Overall #1 at 9.6). Championship reward: $75/effective-truck fridge stock, per the S3 rewards structure.</p>
         </div>
-        <div class="warn-callout">
-          <strong>⚠ Special-recognition watch — not yet decided:</strong> The 7/15 leadership call left two items open: a Leander 2nd-place-prize-if-reconciliation-shows, and a McKinney consolation (their dirty data traces to the Verizon/Jamf device outage, outside their control). <strong>Neither is rendered as decided here.</strong> Post-season reconciliation may add recognitions — leadership decision pending at QGR.
-        </div>
-
-        <h4>Dream Team — Company Roster</h4>
+        <h4>Dream Team — Company Roster<sup style="cursor:help;color:var(--blue);font-weight:700;font-size:12px;" title="Source: Matisen s3-dream-team.csv (correction set 2026-07-24), names normalized + 6 EMMA canonical corrections; ranks 22-24 (Allister Suber, Jhamar Dixon, Nazier Owens) added 7/25 per the inclusive-tie ruling; Ft. Worth also gains Sully Lowe vs the prior hard-slice roster. Same roster cascades to the 10 branch scorecards. Number after each name = Q2 Overall score.">ⓘ</sup></h4>
         <p style="font-size:12.5px;margin:4px 0 6px;"><strong>24 movers</strong> earned the Season 3 Dream Team: the top 10% of Overall Q2 score among the 212 eligible movers (Rippling hours ≥250), <strong>inclusive-tie basis</strong> — a 5-way tie at 9.0 (ranks 20–24) all qualify, per Cameron's correction of the live page's hard-slice-at-21 render. By branch: Tampa 5 · Leander 5 · S. Austin 4 · Houston 4 · San Antonio 3 · Ft. Worth 2 · McKinney 1. <strong>N. Austin, Dallas, and Garland have no members this season.</strong></p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;">
           <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Jakob Steen · S. Austin — 11.8</span>
@@ -2834,7 +2833,6 @@
           <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Jhamar Dixon · S. Austin — 9.0</span>
           <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Nazier Owens · Tampa — 9.0</span>
         </div>
-        <p style="font-size:11.5px;color:var(--gray-600);"><em>Source: Matisen s3-dream-team.csv (correction set 2026-07-24), names normalized + 6 EMMA canonical corrections; ranks 22–24 (Allister Suber, Jhamar Dixon, Nazier Owens) added 7/25 per the inclusive-tie ruling; Ft. Worth also gains Sully Lowe vs the prior hard-slice roster. Same roster cascades to the 10 branch scorecards. Number after each name = Q2 Overall score.</em></p>
 
         <div class="warn-callout">
           <strong>Framing, locked 7/15:</strong> Einstein Games is a coaching tool, directionally accurate by design — in-week estimates, not resolved actuals. Real coaching and accountability run off hard numbers and final data results; game scores have never been a direct read on final bonus.
@@ -2882,7 +2880,7 @@
           <span class="badge amber">89.0 avg · 10.9% at-risk · 20.7% dismissed</span>
         </div>
         <p class="comp-summary">
-          <strong>This is a permanent, always-visible component — decoupled from the quarterly theme.</strong> Last quarter's Driver's Ed theme surfaced the fleet-safety deep dive; the theme rotates (Q2 = Einstein Games, see Component 4), but the underlying Samsara data is continuous, so it stands on its own from here forward. Company driver safety score <strong>89.0</strong> (up from 80.2 in Q1), at-risk <strong>10.9%</strong> (down from 19.8% — the high-risk driver pool nearly halved), <strong>902</strong> safety events across <strong>290,151</strong> miles (31.1 events / 10K miles). Raw events rose from Q1's 672 — but the fleet ran <strong>23.5% more miles</strong> and two detection standards were tightened mid-quarter; hold those at Q1's level and Q2 lands at 722 events, a <strong>13% lower per-mile rate than Q1</strong>. McKinney remains the clear outlier (62.1/10K), Dallas 2nd-worst (39.5/10K).
+          Company driver safety score <strong>89.0</strong> (up from 80.2 in Q1), at-risk <strong>10.9%</strong> (down from 19.8% — the high-risk driver pool nearly halved), <strong>902</strong> safety events across <strong>290,151</strong> miles (31.1 events / 10K miles). Raw events rose from Q1's 672 — but the fleet ran <strong>23.5% more miles</strong> and two detection standards were tightened mid-quarter; hold those at Q1's level and Q2 lands at 722 events, a <strong>13% lower per-mile rate than Q1</strong>. McKinney remains the clear outlier (62.1/10K), Dallas 2nd-worst (39.5/10K).
         </p>
 
         <div class="callout" style="border-left-color:var(--green);">
@@ -2901,7 +2899,7 @@
           <div class="mini-stat"><div class="ms-label">Insurance Claims</div><div class="ms-value">3 filed YTD</div><div class="ms-sub">$15K our cost (deductibles) · landed 7/23, Jaci&#39;s accident log</div></div>
         </div>
 
-        <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content">Manifest v0.9.6 <code>_fleet_safety_review_q2_26</code> (company score / at-risk / events / miles / behaviors / integrity audit) + <code>_fleet_dismissal_q2_26</code> (per-branch dismissals) + per-branch <code>driver_safety_score</code> / <code>driver_safety_atrisk_pct</code> · Basis: Samsara master org 7005377, <strong>review basis (902)</strong>, window 2026-05-01..2026-07-17 · Source: Mike Vandenbroader, Q2 2026 Fleet Safety Review delivered 2026-07-23 — company score/at-risk supersede his 2026-07-22 branch CSV (89.3 / 11.9%), which remains the only per-branch score source · Caveats: <code>july_preliminary_flash_estimate</code>, <code>samsara_master_org_basis</code>, <code>samsara_untagged_events</code> · Insurance claims + accident outcomes: <strong>landed 7/23</strong> — Jaci's 2026 Truck Accident Report (incident basis, third measure — never merged with the telemetry or review bases)</div></details>
+        <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content"><em>Component permanence: this is a standing, always-visible component decoupled from the quarterly theme — last quarter's Driver's Ed theme surfaced the deep dive, the theme rotates (Q2 = Einstein Games), but the underlying Samsara data is continuous, so it stands on its own from here forward.</em> · Manifest v0.9.6 <code>_fleet_safety_review_q2_26</code> (company score / at-risk / events / miles / behaviors / integrity audit) + <code>_fleet_dismissal_q2_26</code> (per-branch dismissals) + per-branch <code>driver_safety_score</code> / <code>driver_safety_atrisk_pct</code> · Basis: Samsara master org 7005377, <strong>review basis (902)</strong>, window 2026-05-01..2026-07-17 · Source: Mike Vandenbroader, Q2 2026 Fleet Safety Review delivered 2026-07-23 — company score/at-risk supersede his 2026-07-22 branch CSV (89.3 / 11.9%), which remains the only per-branch score source · Caveats: <code>july_preliminary_flash_estimate</code>, <code>samsara_master_org_basis</code>, <code>samsara_untagged_events</code> · Insurance claims + accident outcomes: <strong>landed 7/23</strong> — Jaci's 2026 Truck Accident Report (incident basis, third measure — never merged with the telemetry or review bases)</div></details>
 
         <h4>Branch Safety Scorecard — Live</h4>
         <div class="table-scroll">
@@ -3498,9 +3496,6 @@
         </div>
       </div>
 
-
-    </div>
-
     <!-- ============== LIVE ACTIVITY — pending exercise, no Q2 run scheduled ============== -->
     <section id="weight-activity-cta">
       <div style="background:var(--gray-50); border:2px solid var(--gray-300); border-radius:8px; padding:22px 26px; margin:18px 0; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; position:relative;">
@@ -4051,7 +4046,8 @@
           <tr><td><strong>v2.1.2</strong></td><td><strong>2026-07-23</strong></td><td>Real-World Outcomes landed in 4B (late evening): Jaci's 2026 Truck Accident Report folded as the third, incident-basis measure — YTD 40 accidents / $56.7K / 3 insurance claims ($15K our cost); Q2 fiscal 26 accidents ~$28.5K (8 in progress). Insurance-claims NOT_CALCULABLE placeholder retired. Cross-validation noted: FW + Tampa zero accidents = also cleanest per-10K. Mix (~two-thirds fixed-object strikes) framed as maneuvering/spotting training focus — cameras already in trucks ~6 months.</td></tr>
           <tr><td><strong>v2.1.3</strong></td><td><strong>2026-07-24</strong></td><td><strong>QG success rate corrected — 82.5% → 77.5%</strong> (31/40). Root cause: the Component 3 rollup counted self-grades only, so grades that had already been finalised were not reflected in the company tally. Basis rule now stated explicitly and applied consistently: <em>the ratified final grade where one exists, the self-grade elsewhere</em>. Per-leader rows rebuilt. Source ledger reconciled against <code>qg-results-2026-Q2.json</code>, with per-goal <code>provisional</code> + <code>effective_grade</code> added so the tally is <strong>derived, not hand-typed</strong>. QG Success Tracker re-rendered to match.</td></tr>
 <tr style="background:var(--orange-bg);"><td><strong>v2.1.4</strong></td><td><strong>2026-07-24</strong></td><td><strong>QG rate 77.5% → 80.0%</strong> (32/40 · 14 SG · 18 G · 8 R) — the last outstanding grade was finalised, closing the quarter's grade sync. <strong>All QG figures across the packet family are now generated from one ledger</strong> (<code>qg-results-2026-Q2.json</code>) by <code>sync_qg_from_ledger.py</code>, which also ships a <code>--check</code> audit that fails if any file drifts from it. That wiring is the real fix for the v2.1.3 bug: the figures had been hand-copied between files, so a finalised grade could land in one and not the others. Same pass: grade-sync working notes removed from this packet (they live in the internal review room) so it reads safely if forwarded anywhere in the company.</td></tr>
-          <tr style="background:var(--orange-bg);"><td><strong>v2.1.5</strong></td><td><strong>2026-07-25</strong></td><td><strong>Matisen correction set folded (ruled by Cameron 7/25, Paul confirmed)</strong> — mis-set-yardsticks reframe added to the exec/three-lens area (Lens 1) and Component 1: the plan's rate row was never re-priced after April's volume-only revision ($548,138 wedge = 137% of the −$400,110 revenue gap); crew-out trucks were double-counted as sellable TUR capacity (861 truck-days); all 10 mover personnel budgets were set below demand-need. TUR now reads on two named bases (76.2% owned-fleet, graded · 83.8% running-truck, diagnostic). <strong>Lens 3 corrected D → B → B− everywhere it rendered</strong> (cover hero + Component 1 badge), with NOI YoY validated: $1.41M vs Q2'25 $1.75M = −$342K (Ben 7/23). Component 8 NPS: company Promoters/Passives/Detractors filled 947/33/45, McKinney re-sorted into rank order. Component 5 eNPS Mover climb corrected +29 → +39 pts (+19 → +58). Component 4 Games Dream Team corrected 21 → 24 (inclusive-tie ruling, 3 movers added + Ft. Worth gains Sully Lowe), heat-map cells Leander 8.47→8.48 / Houston 6.97→6.98. Component 4B fleet-dismissal company row relabeled "all events (incl. 35 untagged)" with branch-tagged-only figure (179/867 = 20.6%) added. Component 2 personnel caveat corrected (Rippling-outage note replaced — FTE-count basis is unaffected by the outage) + mis-set-budget caveat added. Component 9 quote-accuracy blanks filled on the lag-clean basis (Leander variance 46.8%, San Antonio Meet-or-Beat 83.7%, CET variance 48.2%). Moves-Completed exec tile relabeled — the May/Jun/Jul split shown was North Austin's, not company's. Financial Deck (Presentation) §3.1 cancellation rate filled (16.0%, upper bound) and §2.4 repeat-rate corrected ~23% → 22.3% (email-merge, CY2026-YTD cohort). Source: <code>q2-data/branch-metrics-q2-26.json</code> v0.10.4, new blocks <code>_tur_correction_q2_26</code> / <code>_revenue_wedge_q2_26</code> / <code>_nps_trend_q1_q2</code> / <code>_dual_gate_availability_q2_26</code> / <code>_personnel_miss_q2_26</code> / <code>_sales_attainment_per_rep_q2_26</code>. QG rate 80.0% (32/40) unchanged and untouched by this pass — a competing 82.5% proposal was reviewed and rejected; the ledger governs.</td></tr></thead>
+          <tr style="background:var(--orange-bg);"><td><strong>v2.1.5</strong></td><td><strong>2026-07-25</strong></td><td><strong>Matisen correction set folded (ruled by Cameron 7/25, Paul confirmed)</strong> — mis-set-yardsticks reframe added to the exec/three-lens area (Lens 1) and Component 1: the plan's rate row was never re-priced after April's volume-only revision ($548,138 wedge = 137% of the −$400,110 revenue gap); crew-out trucks were double-counted as sellable TUR capacity (861 truck-days); all 10 mover personnel budgets were set below demand-need. TUR now reads on two named bases (76.2% owned-fleet, graded · 83.8% running-truck, diagnostic). <strong>Lens 3 corrected D → B → B− everywhere it rendered</strong> (cover hero + Component 1 badge), with NOI YoY validated: $1.41M vs Q2'25 $1.75M = −$342K (Ben 7/23). Component 8 NPS: company Promoters/Passives/Detractors filled 947/33/45, McKinney re-sorted into rank order. Component 5 eNPS Mover climb corrected +29 → +39 pts (+19 → +58). Component 4 Games Dream Team corrected 21 → 24 (inclusive-tie ruling, 3 movers added + Ft. Worth gains Sully Lowe), heat-map cells Leander 8.47→8.48 / Houston 6.97→6.98. Component 4B fleet-dismissal company row relabeled "all events (incl. 35 untagged)" with branch-tagged-only figure (179/867 = 20.6%) added. Component 2 personnel caveat corrected (Rippling-outage note replaced — FTE-count basis is unaffected by the outage) + mis-set-budget caveat added. Component 9 quote-accuracy blanks filled on the lag-clean basis (Leander variance 46.8%, San Antonio Meet-or-Beat 83.7%, CET variance 48.2%). Moves-Completed exec tile relabeled — the May/Jun/Jul split shown was North Austin's, not company's. Financial Deck (Presentation) §3.1 cancellation rate filled (16.0%, upper bound) and §2.4 repeat-rate corrected ~23% → 22.3% (email-merge, CY2026-YTD cohort). Source: <code>q2-data/branch-metrics-q2-26.json</code> v0.10.4, new blocks <code>_tur_correction_q2_26</code> / <code>_revenue_wedge_q2_26</code> / <code>_nps_trend_q1_q2</code> / <code>_dual_gate_availability_q2_26</code> / <code>_personnel_miss_q2_26</code> / <code>_sales_attainment_per_rep_q2_26</code>. QG rate 80.0% (32/40) unchanged and untouched by this pass — a competing 82.5% proposal was reviewed and rejected; the ledger governs.</td></tr>
+          <tr style="background:var(--orange-bg);"><td><strong>v2.2</strong></td><td><strong>2026-07-27</strong></td><td><strong>Cameron's redline session folded (10 notes) + structural fix.</strong> Layout: removed an orphan <code>&lt;/div&gt;</code> that closed the page container early — everything after the Claims/MM card (weight-exercise CTA, Scorecards, Wishlist, Look Ahead, References, Change Log) was rendering full-bleed outside the page shell. Design: packet primary reverted to the <strong>Q1-as-presented blue-navy</strong> (#0d2b4e family + #1565c0 accent — exact values from the Q1 archive; margins/font sizes verified already identical to Q1); cover "mis-set yardsticks" callout given dark text (was white-on-white). Exec summary: "Team-wide QG Success" tile replaced with the <strong>Einstein Games critical-number tile (7.59 Green)</strong>; personnel tile labeled Critical # Super Green; Quarter Highlights lead with both critical numbers hit, and the QG-rate item relabeled <em>leadership</em> success rate with named ledger wins (Variable Pricing SG ×2, Mike training app SG, FCP SG, HR Generalist SG). Strategic Foundation shortened (progression line cut — the flywheel shows it; supporting-frames bullets tightened to links). Component 1 NOI-basis callout moved behind an ⓘ tooltip. Rocks: "Bonus Goals" block replaced with <strong>Continuing Education</strong> — all 7 leaders completed ITP + built an improvement plan for next quarter. Games: heat-map recolored <strong>green/amber/red on the grade bands</strong> (was neutral-to-navy intensity), winning-story placeholder removed (write-up stands), special-recognition watch block deleted per ruling, Dream Team source moved to an ⓘ tooltip on the subheading. Fleet Safety: component-permanence note moved into the Source expander.</td></tr></thead>
           <tbody>
             <tr><td>v1.0</td><td>2026-04-27</td><td>Phase 2a build — initial packet skeleton with all 9 component cards, three-lens grade hero, exec summary stat tiles, conversation starters, references. Hybrid format (embedded summaries + deep links). LQA + Salaried eNPS as explicit placeholders per locked decisions.</td></tr>
           <tr><td>v1.1</td><td>2026-04-27</td><td>Visual polish pass — sidebar active-rail, hero progression chip pattern, inline % bars on personnel branch table, table-scroll wrappers, harden print stylesheet, color-coded delta values, decorative emoji removed (functional indicators only).</td></tr>
@@ -4093,7 +4089,7 @@
     </section>
 
     <div class="footer">
-      <strong>Einstein Q2 FY'26 Roundtable QGR Packet · v2.1.5</strong><br>
+      <strong>Einstein Q2 FY'26 Roundtable QGR Packet · v2.2</strong><br>
       Prepared by Albert (Cameron's AI Chief of Staff) · 2026-07-25 · rendered from <code>branch-metrics-q2-26.json</code> v0.10.4 · 2026-07-25<br>
       For internal Roundtable use · Do not distribute outside leadership without Cameron's approval
     </div>
