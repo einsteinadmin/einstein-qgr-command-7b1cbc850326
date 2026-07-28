@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Q3 QGR — Ballot Room View</title>
-<!-- ballot-results v1.2 2026-07-28 — 🏆 CELEBRATE MODE folded in (Cameron: "combine ballot results and celebration presentation into one place — one drag-in"). Third header mode between Aggregate and Room Reveal: Best-of-Q2 wall (per-leader cards, Personal/Professional badges, photos rendered from the v7 exports' embedded data-URLs) + Legends board (stories + named-by tally) + full-screen ▶ Present slide stepper (arrow keys / click / Esc; best-things slides then legend slides). Reads CACHE raw (not the normalized layer — parseBallot + Node QC harness untouched); v1–v6 files still parse everywhere, they just show "no celebration sections — ask for a re-export" per leader on this tab. Deep link: #celebrate opens straight into the tab (HQ agenda links use it). Same single drop zone feeds all three modes; ballots+photos persist in this browser's cache (if photo weight ever trips the storage quota the existing not-saving toast fires — everything still works for the session, re-drop after reload). Standalone qgr-celebration-wall.html RETIRED same day → redirect stub to this page. Prior: v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
+<!-- ballot-results v1.3 2026-07-28 — ⚖️ DECISION BOARD tab: digest-driven room agenda (RATIFY/NARROW/DECIDE/MISLABELED triage replacing the split badge's blind spots), per-leader recap rows w/ click-to-verbatim, layer-1 prompts + layer-2 copy-button facilitation prompt, ruling strip (Decide/Defer/Delegate + dissent-noted) persisted in the same cache + export to JSON/markdown for the HQ decision log. Digest = einstein-qgr-digest/v1, dropped through the same dropzone, newest-wins on preparedAt; hosted page still ships EMPTY (digest + ballots are the sensitive layer). Prior: ballot-results v1.2 2026-07-28 — 🏆 CELEBRATE MODE folded in (Cameron: "combine ballot results and celebration presentation into one place — one drag-in"). Third header mode between Aggregate and Room Reveal: Best-of-Q2 wall (per-leader cards, Personal/Professional badges, photos rendered from the v7 exports' embedded data-URLs) + Legends board (stories + named-by tally) + full-screen ▶ Present slide stepper (arrow keys / click / Esc; best-things slides then legend slides). Reads CACHE raw (not the normalized layer — parseBallot + Node QC harness untouched); v1–v6 files still parse everywhere, they just show "no celebration sections — ask for a re-export" per leader on this tab. Deep link: #celebrate opens straight into the tab (HQ agenda links use it). Same single drop zone feeds all three modes; ballots+photos persist in this browser's cache (if photo weight ever trips the storage quota the existing not-saving toast fires — everything still works for the session, re-drop after reload). Standalone qgr-celebration-wall.html RETIRED same day → redirect stub to this page. Prior: v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
 <style>
 :root{
   --orange-50:#FEF6EC; --orange-100:#FDE3C2; --orange-500:#EF8B22; --orange-700:#D96B10; --orange-900:#CC5500;
@@ -204,6 +204,62 @@ a.pulselink:hover{text-decoration:underline}
 #celebPresent .cp-photos img{max-height:44vh;max-width:44vw;border-radius:var(--radius-md);border:1px solid #27343D}
 #celebPresent .cp-nav{position:fixed;bottom:22px;left:0;right:0;text-align:center;font-size:12px;color:#787C7F}
 #cpClose{position:fixed;top:18px;right:22px;background:none;border:1px solid #27343D;color:#CDD5DA;border-radius:var(--radius-sm);padding:7px 14px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+
+/* ---- ⚖️ Decision Board (v1.3) ---- */
+.decide-banner{background:#fff;border:1px solid var(--grey-100);border-radius:var(--radius-md);padding:12px 18px;margin-bottom:16px;font-size:13px;color:var(--grey-700)}
+.decide-banner-meta{color:var(--grey-400);font-size:12px}
+.decide-banner-warn{background:var(--orange-50);border-color:var(--orange-100);color:var(--orange-900)}
+.decide-summary{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.decide-summary-chips{display:flex;gap:8px;flex-wrap:wrap}
+.decide-countchip{font-size:12px;font-weight:700;border-radius:var(--radius-pill);padding:4px 12px}
+.decide-summary-line{font-size:12.5px;color:var(--grey-400);flex:1;min-width:200px}
+.decide-exportbtn{background:var(--navy-500);color:#fff;border:none;border-radius:var(--radius-sm);padding:9px 18px;font-size:12.5px;font-weight:700}
+.decide-exportbtn:hover:not(:disabled){background:var(--navy-700)}
+.decide-exportbtn:disabled{background:var(--grey-100);color:var(--grey-400);cursor:default}
+
+.dmode{display:inline-block;padding:3px 12px;border-radius:var(--radius-pill);font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;flex-shrink:0}
+.dmode-decide{background:#F8DCDC;color:#8E0000}
+.dmode-mislabeled{background:var(--orange-100);color:var(--orange-900)}
+.dmode-narrow{background:var(--blue-100);color:var(--blue-900)}
+.dmode-ratify{background:#E3EEDF;color:#3E6636}
+.dmode-awaiting{background:var(--grey-100);color:var(--grey-500)}
+.dmode-other{background:var(--grey-100);color:var(--grey-500)}
+
+.decide-card{font-size:13px}
+.decide-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.decide-timebox{background:var(--grey-100);color:var(--grey-500);font-size:11px;font-weight:700;border-radius:var(--radius-pill);padding:3px 10px;flex-shrink:0}
+.decide-title{font-size:17px;flex:1;min-width:200px}
+.decide-ruledchip{background:#E3EEDF;color:#3E6636;font-size:11px;font-weight:700;border-radius:var(--radius-pill);padding:3px 10px;flex-shrink:0}
+
+.decide-warn{background:var(--orange-50);border-left:4px solid var(--orange-500);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;font-size:13.5px;font-weight:700;color:var(--orange-900)}
+.decide-line{font-size:13.5px;color:var(--grey-700);margin-bottom:8px}
+.decide-line b{color:var(--navy-500)}
+.decide-awaiting{font-size:12.5px;color:var(--grey-400);font-style:italic;margin-bottom:10px}
+
+.decide-leaderrows{display:grid;gap:6px;margin:14px 0}
+.decide-leaderrow{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--grey-100);border-radius:var(--radius-sm);background:var(--grey-50);cursor:pointer;transition:background .15s ease}
+.decide-leaderrow:hover{background:var(--blue-50)}
+.decide-chevron{color:var(--grey-400);font-size:11px;width:10px;flex-shrink:0}
+.decide-leadername{font-weight:700;color:var(--navy-500);font-size:13px;flex-shrink:0;min-width:110px}
+.decide-recap{font-size:13px;color:var(--grey-700);flex:1}
+.decide-verbatim{padding:10px 14px 10px 32px;margin-top:-2px;margin-bottom:6px;background:#fff;border:1px dashed var(--grey-200);border-radius:var(--radius-sm)}
+.decide-verbatim-label{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--grey-400);font-weight:700;display:block;margin-bottom:4px}
+.decide-verbatim-text{font-size:13px;color:var(--grey-700);white-space:pre-wrap}
+
+.decide-prompts{background:var(--navy-50);border-radius:var(--radius-md);padding:14px 18px;margin:14px 0}
+.decide-prompts-label{font-size:12.5px;font-weight:700;color:var(--navy-500);margin-bottom:8px}
+.decide-prompts ol{padding-left:20px;display:grid;gap:8px}
+.decide-prompts li{font-size:14px;color:var(--grey-700);line-height:1.5}
+
+.decide-copybtn{background:var(--blue-500);color:#fff;border:none;border-radius:var(--radius-sm);padding:9px 16px;font-size:12.5px;font-weight:700;margin:6px 0 14px;display:inline-block}
+.decide-copybtn:hover{background:var(--blue-900)}
+
+.decide-rulingstrip{border-top:1px solid var(--grey-100);margin-top:16px;padding-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.decide-rulingbtns{display:flex;gap:6px;flex-shrink:0}
+.decide-callbtn{background:#fff;border:1px solid var(--grey-200);color:var(--grey-500);border-radius:var(--radius-sm);padding:7px 14px;font-size:12px;font-weight:700}
+.decide-callbtn.active{background:var(--navy-500);color:#fff;border-color:var(--navy-500)}
+.decide-rulinginput{flex:1;min-width:200px;border:1px solid var(--grey-200);border-radius:var(--radius-sm);padding:8px 12px;font-size:12.5px;font:inherit}
+
 footer{background:var(--navy-700);color:var(--navy-100);text-align:center;padding:12px;font-size:11px}
 </style>
 </head>
@@ -212,6 +268,7 @@ footer{background:var(--navy-700);color:var(--navy-100);text-align:center;paddin
   <div><span class="bebas">Q3 QGR — BALLOT ROOM VIEW</span><span class="tag">Q3 2026 QGR · July 29–30 · drag qgr-ballot-*.json files in · data stays in this browser</span></div>
   <div class="hbtns">
     <button class="modebtn active" id="btnModeAgg">Aggregate</button>
+    <button class="modebtn" id="btnModeDecide">⚖️ Decisions</button>
     <button class="modebtn" id="btnModeCeleb">🏆 Celebrate</button>
     <button class="modebtn" id="btnModeReveal">Room Reveal</button>
     <button class="clearbtn" id="btnClearAll">Clear all</button>
@@ -221,13 +278,14 @@ footer{background:var(--navy-700);color:var(--navy-100);text-align:center;paddin
   <div id="aggView">
     <div class="dropzone" id="dropzone">
       <h2>Drop the leaders' ballot files here</h2>
-      <p>Drag in every leader's exported <b>qgr-ballot-*.json</b> (or Cameron's hand-authored file). Everything renders in this browser only — nothing uploads anywhere. A leader missing here just shows as "not yet returned," never faked.</p>
+      <p>Drag in every leader's exported <b>qgr-ballot-*.json</b> (or Cameron's hand-authored file), plus Albert's <b>decision-digest-*.json</b> prep file for the Decision Board. Everything renders in this browser only — nothing uploads anywhere. A leader missing here just shows as "not yet returned," never faked.</p>
       <label>Choose files<input type="file" id="filePick" multiple accept=".json,application/json"></label>
       <div class="privacy">Ballots are the sensitive layer — this page deliberately ships empty and never gets deployed. Reload to clear, or use "Clear all" above.</div>
     </div>
     <div id="rosterStrip"></div>
     <div id="aggContent"></div>
   </div>
+  <div id="decideView" style="display:none"></div>
   <div id="revealStage"></div>
   <div id="celebView" style="display:none"></div>
 </main>
@@ -566,6 +624,52 @@ function posClsFor(value){
   return "neutral";
 }
 
+// dirRollup — for a question object from aggregate(), buckets eligibleLeaders
+// by posClsFor(position) into { good, mid, bad, und, none }. posClsFor(null)
+// already returns "none", and any other non-bucketed class (e.g. "neutral")
+// also falls into "none" — the Decision Board only triages on these 5 lanes.
+// openEnded questions have no position axis, so everyone lands in "none".
+function dirRollup(q){
+  var out = { good:[], mid:[], bad:[], und:[], none:[] };
+  if(!q) return out;
+  var elig = q.eligibleLeaders || [];
+  if(q.openEnded){
+    elig.forEach(function(lid){ out.none.push(lid); });
+    return out;
+  }
+  elig.forEach(function(lid){
+    var a = q.answers ? q.answers[lid] : null;
+    var pos = a ? a.position : null;
+    var cls = posClsFor(pos);
+    if(cls==="good"||cls==="mid"||cls==="bad"||cls==="und") out[cls].push(lid);
+    else out.none.push(lid);
+  });
+  return out;
+}
+
+// autoMode — fallback triage used when no digest entry exists for a question:
+// open-ended = always NARROW (needs a room conversation, not a vote read);
+// any real disagreement (bad) = DECIDE; any soft disagreement (mid) = NARROW;
+// otherwise the room already agrees = RATIFY.
+function autoMode(q, rollup){
+  if(q && q.openEnded) return "NARROW";
+  if(rollup && rollup.bad && rollup.bad.length) return "DECIDE";
+  if(rollup && rollup.mid && rollup.mid.length) return "NARROW";
+  return "RATIFY";
+}
+
+// modeRank — sort key, hottest-first. Unrecognized/future modes sort last.
+function modeRank(mode){
+  switch(mode){
+    case "DECIDE": return 0;
+    case "MISLABELED": return 1;
+    case "NARROW": return 2;
+    case "RATIFY": return 3;
+    case "AWAITING": return 4;
+    default: return 5;
+  }
+}
+
 /* ============================================================
    Node/browser export guard — keeps the functions above pure
    and testable from a standalone Node harness without pulling
@@ -574,7 +678,7 @@ function posClsFor(value){
    as plain JS by a test runner without a `document` global.
    ============================================================ */
 if(typeof module !== "undefined" && module.exports){
-  module.exports = { parseBallot: parseBallot, aggregate: aggregate, splitDetect: splitDetect, posClsFor: posClsFor, LEADERS: LEADERS, TRACK_META: TRACK_META, QUESTION_ORDER: QUESTION_ORDER, EXPECTED_DIRECT_SLATE_LEADERS: EXPECTED_DIRECT_SLATE_LEADERS };
+  module.exports = { parseBallot: parseBallot, aggregate: aggregate, splitDetect: splitDetect, posClsFor: posClsFor, LEADERS: LEADERS, TRACK_META: TRACK_META, QUESTION_ORDER: QUESTION_ORDER, EXPECTED_DIRECT_SLATE_LEADERS: EXPECTED_DIRECT_SLATE_LEADERS, dirRollup: dirRollup, autoMode: autoMode, modeRank: modeRank };
 }
 
 /* ============================================================
@@ -583,7 +687,7 @@ if(typeof module !== "undefined" && module.exports){
    ============================================================ */
 function initApp(){
 
-var CACHE = { ballots:{} };   // leaderId -> { raw, fileName, exportedAt, historyCount }
+var CACHE = { ballots:{}, rulings:{} };   // ballots: leaderId -> { raw, fileName, exportedAt, historyCount }; rulings: questionId -> { call, ruling, dissent, at }; digest (once loaded): { raw, fileName, preparedAt }
 var BALLOTS = {};             // leaderId -> normalized ballot (only successfully-parsed ones)
 var MODE = "agg";             // "agg" | "reveal"
 var REVEAL_IDX = 0;
@@ -601,7 +705,8 @@ function loadCache(){
     var raw = localStorage.getItem(LS_KEY);
     if(raw) CACHE = JSON.parse(raw) || { ballots:{} };
     if(!CACHE.ballots) CACHE.ballots = {};
-  }catch(e){ console.warn("ballot-results cache load failed", e); CACHE = { ballots:{} }; }
+    if(!CACHE.rulings) CACHE.rulings = {};
+  }catch(e){ console.warn("ballot-results cache load failed", e); CACHE = { ballots:{}, rulings:{} }; }
 }
 function persistCache(){
   try{ localStorage.setItem(LS_KEY, JSON.stringify(CACHE)); }
@@ -624,15 +729,27 @@ function ingestFiles(fileList){
     r.onload = function(){
       try{
         var raw = JSON.parse(r.result);
-        var norm = parseBallot(raw);
-        var lid = norm.leader.id;
-        var existing = CACHE.ballots[lid];
-        var isNewer = !existing || !existing.exportedAt || !norm.exportedAt || (norm.exportedAt > existing.exportedAt);
-        if(isNewer){
-          CACHE.ballots[lid] = { raw: raw, fileName: f.name, exportedAt: norm.exportedAt, historyCount: existing ? (existing.historyCount||1)+1 : 1 };
-          ok++;
+        if(raw && typeof raw.schema === "string" && raw.schema.indexOf("einstein-qgr-digest/") === 0){
+          // Decision Board prep file — separate from ballots, newest-wins on preparedAt.
+          var existingD = CACHE.digest;
+          var isNewerD = !existingD || !existingD.preparedAt || !raw.preparedAt || (raw.preparedAt > existingD.preparedAt);
+          if(isNewerD){
+            CACHE.digest = { raw: raw, fileName: f.name, preparedAt: raw.preparedAt || null };
+            ok++;
+          } else {
+            bad.push(f.name + " (older digest — a newer decision-digest is already loaded)");
+          }
         } else {
-          bad.push(f.name + " (older export — newest for " + lid + " already loaded)");
+          var norm = parseBallot(raw);
+          var lid = norm.leader.id;
+          var existing = CACHE.ballots[lid];
+          var isNewer = !existing || !existing.exportedAt || !norm.exportedAt || (norm.exportedAt > existing.exportedAt);
+          if(isNewer){
+            CACHE.ballots[lid] = { raw: raw, fileName: f.name, exportedAt: norm.exportedAt, historyCount: existing ? (existing.historyCount||1)+1 : 1 };
+            ok++;
+          } else {
+            bad.push(f.name + " (older export — newest for " + lid + " already loaded)");
+          }
         }
       }catch(e){ bad.push(f.name + " — " + e.message); }
       if(++done === files.length){
@@ -656,8 +773,8 @@ var fp = document.getElementById("filePick");
 if(fp) fp.addEventListener("change", function(e){ ingestFiles(e.target.files); });
 
 document.getElementById("btnClearAll").addEventListener("click", function(){
-  if(!confirm("Clear all loaded ballots from this browser? This can't be undone (leaders would need to re-drop their files).")) return;
-  CACHE = { ballots:{} }; BALLOTS = {};
+  if(!confirm("Clear all loaded ballots, the decision digest, and any rulings from this browser? This can't be undone (leaders would need to re-drop their files).")) return;
+  CACHE = { ballots:{}, rulings:{} }; BALLOTS = {};
   try{ localStorage.removeItem(LS_KEY); }catch(e){}
   MODE = "agg"; setMode("agg");
   renderAll();
@@ -665,6 +782,7 @@ document.getElementById("btnClearAll").addEventListener("click", function(){
 });
 
 document.getElementById("btnModeAgg").addEventListener("click", function(){ setMode("agg"); });
+document.getElementById("btnModeDecide").addEventListener("click", function(){ setMode("decide"); });
 document.getElementById("btnModeCeleb").addEventListener("click", function(){ setMode("celeb"); });
 document.getElementById("btnModeReveal").addEventListener("click", function(){
   if(!Object.keys(BALLOTS).length){ toast("Load at least one ballot before starting Room Reveal."); return; }
@@ -673,13 +791,16 @@ document.getElementById("btnModeReveal").addEventListener("click", function(){
 function setMode(m){
   MODE = m;
   document.getElementById("btnModeAgg").classList.toggle("active", m==="agg");
+  document.getElementById("btnModeDecide").classList.toggle("active", m==="decide");
   document.getElementById("btnModeCeleb").classList.toggle("active", m==="celeb");
   document.getElementById("btnModeReveal").classList.toggle("active", m==="reveal");
   document.getElementById("aggView").style.display = m==="agg" ? "" : "none";
+  document.getElementById("decideView").style.display = m==="decide" ? "" : "none";
   document.getElementById("celebView").style.display = m==="celeb" ? "" : "none";
   document.getElementById("revealStage").className = m==="reveal" ? "active" : "";
   if(m==="reveal"){ REVEAL_IDX = 0; REVEAL_FLIPPED = false; renderReveal(); }
   if(m==="celeb") renderCelebrate();
+  if(m==="decide") renderDecide();
 }
 
 /* ============================================================
@@ -801,6 +922,7 @@ function renderAll(){
   renderAggregate();
   if(MODE==="reveal") renderReveal();
   if(MODE==="celeb") renderCelebrate();
+  if(MODE==="decide") renderDecide();
 }
 
 function renderRoster(){
@@ -1068,6 +1190,309 @@ function renderPreworkSection(agg){
 }
 
 /* ============================================================
+   ⚖️ DECISION BOARD (v1.3) — digest-driven room agenda. Reads the
+   SAME BALLOTS/CACHE.digest as everything else; nothing new to drop
+   beyond decision-digest-*.json. Pure triage (dirRollup/autoMode/
+   modeRank) lives in the pure section above; everything below is
+   presentation + the ruling-strip persistence.
+   ============================================================ */
+function decideModeLabel(mode){
+  var map = { DECIDE:"DECIDE", MISLABELED:"⚠ MISLABELED", NARROW:"NARROW", RATIFY:"RATIFY", AWAITING:"AWAITING" };
+  return map[mode] || mode || "—";
+}
+function decideModeColorClass(mode){ return "dmode-"+String(mode||"other").toLowerCase(); }
+function decideQuestionTitle(id, q, d){ return (q && q.title) ? q.title : (d && d.title) ? d.title : id; }
+
+function decideBuildCards(){
+  var digest = CACHE.digest ? CACHE.digest.raw : null;
+  var agg = Object.keys(BALLOTS).length ? aggregate(BALLOTS) : null;
+  var qById = {};
+  if(agg) agg.questions.forEach(function(q){ qById[q.id] = q; });
+  var dQuestions = (digest && digest.questions) || {};
+  var idSeen = {};
+  Object.keys(qById).forEach(function(id){ idSeen[id] = true; });
+  Object.keys(dQuestions).forEach(function(id){ idSeen[id] = true; });
+  var cards = Object.keys(idSeen).map(function(id){
+    var q = qById[id];
+    var d = dQuestions[id];
+    var rollup = dirRollup(q);
+    var mode = (d && d.mode) || autoMode(q, rollup);
+    return { id:id, q:q, d:d, rollup:rollup, mode:mode };
+  });
+  cards.sort(function(a,b){
+    return modeRank(a.mode) - modeRank(b.mode) || questionSortIndex(a.id) - questionSortIndex(b.id) || a.id.localeCompare(b.id);
+  });
+  return cards;
+}
+
+function hasAnyRulings(){
+  var r = CACHE.rulings || {};
+  return Object.keys(r).some(function(k){
+    var x = r[k];
+    return x && (x.call || x.ruling || x.dissent);
+  });
+}
+function updateExportButtonState(){
+  var btn = document.getElementById("btnExportRulings");
+  if(btn) btn.disabled = !hasAnyRulings();
+}
+function updateDecideRuledChip(card, rulingObj){
+  var chip = card.querySelector(".decide-ruledchip");
+  if(!chip) return;
+  chip.style.display = (rulingObj && (rulingObj.call || rulingObj.ruling)) ? "" : "none";
+}
+
+function renderDecide(){
+  var el = document.getElementById("decideView");
+  var hasBallots = !!Object.keys(BALLOTS).length;
+  var hasDigest = !!CACHE.digest;
+  if(!hasBallots && !hasDigest){
+    el.innerHTML = '<div class="notsub">No ballots or digest loaded — drop files on the Aggregate tab (one drop feeds every mode).</div>';
+    return;
+  }
+
+  var cards = decideBuildCards();
+  var html = '';
+
+  if(hasDigest && CACHE.digest.raw){
+    var dg = CACHE.digest.raw;
+    var when = dg.preparedAt ? new Date(dg.preparedAt).toLocaleString([], {month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}) : "unknown time";
+    html += '<div class="decide-banner"><b>'+esc(dg.basis||"")+'</b><span class="decide-banner-meta"> · digest prepared '+esc(when)+'</span></div>';
+  } else {
+    html += '<div class="decide-banner decide-banner-warn">No decision digest loaded — showing auto-triage from chips only. Drop Albert\'s <b>decision-digest-*.json</b> for convergence lines, recaps and prompts.</div>';
+  }
+
+  var counts = {};
+  cards.forEach(function(c){ counts[c.mode] = (counts[c.mode]||0)+1; });
+  var modeOrder = ["DECIDE","MISLABELED","NARROW","RATIFY","AWAITING"];
+  var chipsHtml = modeOrder.filter(function(m){ return counts[m]; }).map(function(m){
+    return '<span class="decide-countchip '+decideModeColorClass(m)+'">'+counts[m]+' '+esc(decideModeLabel(m))+'</span>';
+  }).join(" ");
+  html += '<div class="decide-summary">'+
+    '<div class="decide-summary-chips">'+chipsHtml+'</div>'+
+    '<div class="decide-summary-line">Sorted hottest-first — the scroll order is the agenda.</div>'+
+    '<button id="btnExportRulings" class="decide-exportbtn"'+(hasAnyRulings()?'':' disabled')+'>⬇ Export rulings</button>'+
+  '</div>';
+
+  cards.forEach(function(c){ html += renderDecideCard(c); });
+
+  el.innerHTML = html;
+
+  cards.forEach(function(c){ wireDecideCard(c); });
+  var expBtn = document.getElementById("btnExportRulings");
+  if(expBtn) expBtn.addEventListener("click", exportRulings);
+}
+
+function renderDecideCard(c){
+  var id = c.id, q = c.q, d = c.d, mode = c.mode;
+  var title = decideQuestionTitle(id, q, d);
+  var ruling = (CACHE.rulings && CACHE.rulings[id]) || null;
+
+  var html = '<div class="section decide-card" id="dc_'+esc(id)+'" data-qid="'+esc(id)+'">';
+  html += '<div class="decide-head">'+
+    '<span class="dmode '+decideModeColorClass(mode)+'">'+esc(decideModeLabel(mode))+'</span>'+
+    (d && d.timebox ? '<span class="decide-timebox">'+esc(d.timebox)+'</span>' : '')+
+    '<h3 class="decide-title">'+esc(title)+'</h3>'+
+    '<span class="decide-ruledchip" style="'+((ruling && (ruling.call || ruling.ruling)) ? '' : 'display:none')+'">✓ ruled</span>'+
+    '</div>';
+
+  if(d && d.chipWarning) html += '<div class="decide-warn">⚠ '+esc(d.chipWarning)+'</div>';
+  if(d && d.call) html += '<div class="decide-line"><b>The call:</b> '+esc(d.call)+'</div>';
+  if(d && d.converge) html += '<div class="decide-line">✅ <b>Where you already agree:</b> '+esc(d.converge)+'</div>';
+  if(d && d.fork) html += '<div class="decide-line">⚡ <b>The fork:</b> '+esc(d.fork)+'</div>';
+  if(d && d.awaiting && d.awaiting.length){
+    var names = d.awaiting.map(function(lid){ return (LEADERS_BY_ID[lid]||{name:lid}).name; }).join(", ");
+    html += '<div class="decide-awaiting">Awaiting: '+esc(names)+' — card fills in when their ballot lands.</div>';
+  }
+
+  if(q){
+    html += '<div class="decide-leaderrows">';
+    LEADERS.forEach(function(l){
+      if(q.eligibleLeaders.indexOf(l.id) === -1) return;
+      var a = q.answers[l.id] || {};
+      var posCls = a.position!=null ? posClsFor(a.position) : "und";
+      var posText = a.position!=null ? (a.positionLabel||a.position) : "no position";
+      var recap = (d && d.recaps && d.recaps[l.id]) ? d.recaps[l.id] : null;
+      var reasoning = (a.reasoning||"").trim();
+      var previewText = null;
+      if(recap) previewText = recap;
+      else if(reasoning) previewText = reasoning.length>160 ? reasoning.slice(0,160)+"…" : reasoning;
+      html += '<div class="decide-leaderrow" data-lid="'+esc(l.id)+'">'+
+        '<span class="decide-chevron">▸</span>'+
+        '<span class="decide-leadername">'+esc(l.name)+'</span>'+
+        '<span class="pchip '+posCls+'">'+esc(posText)+'</span>'+
+        '<span class="decide-recap">'+(previewText ? esc(previewText) : '<i>(no answer yet)</i>')+'</span>'+
+        '</div>';
+      html += '<div class="decide-verbatim" style="display:none">'+
+        (reasoning ? '<span class="decide-verbatim-label">verbatim</span><div class="decide-verbatim-text">'+esc(reasoning)+'</div>' : '<i>(no reasoning written)</i>')+
+        '</div>';
+    });
+    html += '</div>';
+  }
+
+  if(d && d.prompts && d.prompts.length){
+    html += '<div class="decide-prompts"><div class="decide-prompts-label">🎤 Run the room</div><ol>';
+    d.prompts.forEach(function(p){ html += '<li>'+esc(p)+'</li>'; });
+    html += '</ol></div>';
+  }
+
+  if(d && d.layer2) html += '<button class="decide-copybtn">📋 Copy live facilitation prompt</button>';
+
+  var savedCall = ruling ? (ruling.call||"") : "";
+  var savedRulingText = ruling ? (ruling.ruling||"") : "";
+  var savedDissent = ruling ? (ruling.dissent||"") : "";
+  html += '<div class="decide-rulingstrip">'+
+    '<div class="decide-rulingbtns">'+
+      '<button class="decide-callbtn'+(savedCall==="Decide"?' active':'')+'" data-call="Decide">Decide</button>'+
+      '<button class="decide-callbtn'+(savedCall==="Defer"?' active':'')+'" data-call="Defer">Defer</button>'+
+      '<button class="decide-callbtn'+(savedCall==="Delegate"?' active':'')+'" data-call="Delegate">Delegate</button>'+
+    '</div>'+
+    '<input type="text" class="decide-rulinginput" data-field="ruling" placeholder="The ruling, one line — written in the room" value="'+esc(savedRulingText)+'">'+
+    '<input type="text" class="decide-rulinginput" data-field="dissent" placeholder="Dissent noted — who, what, and what would reopen it" value="'+esc(savedDissent)+'">'+
+  '</div>';
+
+  html += '</div>'; // .decide-card
+  return html;
+}
+
+function wireDecideCard(c){
+  var id = c.id;
+  var card = document.getElementById("dc_"+id);
+  if(!card) return;
+
+  // one delegated click listener covers row-toggle, ruling-call buttons and the copy button
+  card.addEventListener("click", function(e){
+    var row = e.target.closest(".decide-leaderrow");
+    if(row){
+      var verbatim = row.nextElementSibling;
+      var chevron = row.querySelector(".decide-chevron");
+      var isOpen = !!verbatim && verbatim.style.display !== "none";
+      if(verbatim) verbatim.style.display = isOpen ? "none" : "block";
+      if(chevron) chevron.textContent = isOpen ? "▸" : "▾";
+      return;
+    }
+    var callBtn = e.target.closest(".decide-callbtn");
+    if(callBtn){
+      var val = callBtn.getAttribute("data-call");
+      if(!CACHE.rulings[id]) CACHE.rulings[id] = { call:"", ruling:"", dissent:"" };
+      var cur = CACHE.rulings[id].call || "";
+      var next = cur === val ? "" : val;
+      CACHE.rulings[id].call = next;
+      CACHE.rulings[id].at = new Date().toISOString();
+      persistCache();
+      card.querySelectorAll(".decide-callbtn").forEach(function(b){
+        b.classList.toggle("active", b.getAttribute("data-call")===next && next!=="");
+      });
+      updateDecideRuledChip(card, CACHE.rulings[id]);
+      updateExportButtonState();
+      return;
+    }
+    var copyBtn = e.target.closest(".decide-copybtn");
+    if(copyBtn){ copyLayer2Prompt(c); return; }
+  });
+
+  card.querySelectorAll(".decide-rulinginput").forEach(function(inp){
+    inp.addEventListener("input", function(){
+      var field = inp.getAttribute("data-field");
+      if(!CACHE.rulings[id]) CACHE.rulings[id] = { call:"", ruling:"", dissent:"" };
+      CACHE.rulings[id][field] = inp.value;
+      CACHE.rulings[id].at = new Date().toISOString();
+      persistCache();
+      updateDecideRuledChip(card, CACHE.rulings[id]);
+      updateExportButtonState();
+    });
+  });
+}
+
+function copyTextToClipboard(text, successMsg){
+  function fallback(){
+    try{
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed"; ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      if(ok) toast(successMsg); else toast("⚠ Copy failed — select and copy manually.");
+    }catch(e){ toast("⚠ Copy failed — select and copy manually."); }
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ toast(successMsg); }).catch(fallback);
+  } else {
+    fallback();
+  }
+}
+
+function copyLayer2Prompt(c){
+  var digest = CACHE.digest ? CACHE.digest.raw : null;
+  var d = c.d, q = c.q;
+  if(!digest || !d || !d.layer2) return;
+  var lines = [];
+  lines.push(digest.layer2Common || "");
+  lines.push("");
+  lines.push(d.layer2.personaFraming || "");
+  lines.push("");
+  lines.push("NAME THE DISAGREEMENT FIRST — read this to the room before any question:");
+  lines.push(d.fork || "");
+  lines.push("");
+  lines.push("CONVERGENCE GOAL:");
+  lines.push(d.layer2.goal || "");
+  lines.push("");
+  lines.push("VERBATIM POSITIONS (quoted with each leader's consent to being read):");
+  if(q){
+    LEADERS.forEach(function(l){
+      if(q.eligibleLeaders.indexOf(l.id) === -1) return;
+      var a = q.answers[l.id];
+      if(!a) return;
+      var posText = a.position!=null ? (a.positionLabel||a.position) : "no position";
+      lines.push("--- "+l.name+" ("+posText+") ---");
+      lines.push(a.reasoning || "");
+      lines.push("");
+    });
+  }
+  copyTextToClipboard(lines.join("\n"), "Facilitation prompt copied — paste into Claude.");
+}
+
+function exportRulings(){
+  var agg = Object.keys(BALLOTS).length ? aggregate(BALLOTS) : null;
+  var qById = {};
+  if(agg) agg.questions.forEach(function(q){ qById[q.id] = q; });
+  var digest = CACHE.digest ? CACHE.digest.raw : null;
+  var dQuestions = (digest && digest.questions) || {};
+
+  var now = new Date();
+  var dateStr = now.toISOString().slice(0,10);
+  var rulingsOut = {}, mdBlocks = [];
+
+  Object.keys(CACHE.rulings||{}).forEach(function(id){
+    var r = CACHE.rulings[id];
+    if(!r || (!r.call && !r.ruling && !r.dissent)) return;
+    var q = qById[id];
+    var d = dQuestions[id];
+    var title = decideQuestionTitle(id, q, d);
+    var mode = (d && d.mode) || autoMode(q, dirRollup(q));
+    rulingsOut[id] = { title:title, mode:mode, call:r.call||"", ruling:r.ruling||"", dissent:r.dissent||"", at:r.at||null };
+    mdBlocks.push(
+      "### "+title+" — "+mode+" → "+(r.call||"no call")+"\n"+
+      "Ruling: "+(r.ruling||"—")+"\n"+
+      "Dissent noted: "+(r.dissent||"—")+"\n"
+    );
+  });
+
+  var exportObj = { schema:"einstein-qgr-rulings/v1", exportedAt: now.toISOString(), quarter:"Q3 2026", rulings: rulingsOut };
+  var blob = new Blob([JSON.stringify(exportObj, null, 2)], { type:"application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = "qgr-rulings-"+dateStr+".json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+
+  var md = "## QGR rulings — exported "+dateStr+"\n\n"+mdBlocks.join("\n");
+  copyTextToClipboard(md, "Rulings downloaded + markdown copied for the HQ decision log.");
+}
+
+/* ============================================================
    ROOM REVEAL
    ============================================================ */
 function revealQuestions(){
@@ -1182,6 +1607,8 @@ rebuildBallotsMap();
 renderAll();
 // deep link: #celebrate opens straight into the Celebrate tab (HQ agenda links use this)
 if(location.hash === "#celebrate" || location.hash === "#celeb") setMode("celeb");
+// deep link: #decisions/#decide opens straight into the ⚖️ Decision Board tab
+else if(location.hash === "#decisions" || location.hash === "#decide") setMode("decide");
 
 } // end initApp
 
