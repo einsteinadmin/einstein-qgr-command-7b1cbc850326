@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>McKinney — Q2'26 Branch Scorecard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -35,9 +36,11 @@
     --ein-grey-700: #363839;
     --ein-grey-900: #191A1B;
     /* ── Artifact aliases — existing rules reference these ── */
-    --navy: var(--ein-navy-500);
-    --navy-light: #3B4A55;      /* derived light step of brand navy (hovers, secondary headings) */
-    --navy-2: #46586B;          /* derived gradient companion within the navy family */
+    /* Primary reverted to the Q1-as-presented blue-navy per Cameron's 7/27 cascade
+       (matches roundtable packet v2.2 + financial deck). */
+    --navy: #0d2b4e;
+    --navy-light: #1a3a5c;
+    --navy-2: #2a4a72;
     --orange: var(--ein-orange-500);
     --orange-dark: #B85C00;     /* text-safe deep orange — kit orange-700/900 miss WCAG AA at body sizes */
     --orange-bg: var(--ein-orange-50);
@@ -49,8 +52,8 @@
     --red-light: #ffebee;
     --amber: #ef6c00;
     --amber-bg: #fff3e0;
-    --blue: var(--ein-blue-500);
-    --blue-bg: var(--ein-blue-50);
+    --blue: #1565c0;            /* Q1-as-presented accent blue */
+    --blue-bg: #e3f2fd;
     --gray-50: #F6F6F6;         /* kit semantic light */
     --gray-100: #f0f2f5;
     --gray-200: #dde3e8;
@@ -61,8 +64,8 @@
     --gray-800: var(--ein-grey-900);
   }
   * { box-sizing: border-box; }
-  body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 0; color: var(--gray-800); background: var(--gray-50); font-size: 14px; line-height: 1.55; }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 28px 80px; }
+  body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 0; color: var(--gray-800); background: var(--gray-50); font-size: 15px; /* breathing-room bump, Cameron 7/27 */ line-height: 1.6; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 36px 88px; }
   .branch-header { background: var(--navy); color: white; border-radius: 10px; padding: 28px 30px; margin-bottom: 22px; box-shadow: 0 4px 14px rgba(39,52,61,0.12); }
   .branch-eyebrow { color: var(--orange); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 700; margin: 0 0 6px 0; }
   .branch-title { font-size: 30px; font-weight: 900; margin: 0 0 8px 0; line-height: 1.15; }
@@ -1027,11 +1030,11 @@
   <style id="q2-shared-snippets-css">
     /* Einstein Games — heat-map sequential ramp (neutral → navy; orange reserved for champion/cross markers). */
     :root {
-      --games-heat-0: #F6F6F6;
-      --games-heat-1: #dde3e8;
-      --games-heat-2: #a9c7e8;
-      --games-heat-3: #5c93c9;
-      --games-heat-4: var(--ein-navy-500);
+      --games-heat-0: #ef9a9a;   /* red — GYR grade bands, Cameron 7/27 */
+      --games-heat-1: #ffe082;   /* amber — below the 7.0 Green bar */
+      --games-heat-2: #c5e1a5;
+      --games-heat-3: #81c784;
+      --games-heat-4: #2e7d32;
     }
     .games-heatmap-wrap { overflow-x: auto; margin: 14px 0 8px 0; border-radius: 8px; border: 1px solid var(--gray-200); }
     .games-heatmap { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 12px; margin: 0; }
@@ -1046,7 +1049,7 @@
     .games-heatmap td.gh-0, td.gh-0 { background: var(--games-heat-0); color: var(--gray-800); }
     .games-heatmap td.gh-1, td.gh-1 { background: var(--games-heat-1); color: var(--gray-800); }
     .games-heatmap td.gh-2, td.gh-2 { background: var(--games-heat-2); color: var(--gray-800); }
-    .games-heatmap td.gh-3, td.gh-3 { background: var(--games-heat-3); color: white; }
+    .games-heatmap td.gh-3, td.gh-3 { background: var(--games-heat-3); color: var(--gray-800); }
     .games-heatmap td.gh-4, td.gh-4 { background: var(--games-heat-4); color: white; }
     .games-heatmap td.gh-nodata, td.gh-nodata { background: repeating-linear-gradient(45deg, var(--gray-100), var(--gray-100) 4px, var(--gray-200) 4px, var(--gray-200) 8px); color: var(--gray-500); font-size: 10px; }
     .games-heatmap tr:nth-child(even) td.gh-branch-cell { background: var(--gray-50); }
@@ -1056,7 +1059,7 @@
     @media print { .games-heatmap { min-width: 0; font-size: 9px; } }
 
     .gd-arc { display: flex; align-items: flex-end; gap: 6px; height: 70px; margin: 10px 0 4px 0; }
-    .gd-bar { flex: 1; background: var(--ein-navy-400); border-radius: 3px 3px 0 0; position: relative; min-height: 4px; }
+    .gd-bar { flex: 1; background: var(--navy-2); border-radius: 3px 3px 0 0; position: relative; min-height: 4px; }
     .gd-bar span { position: absolute; top: -16px; left: 0; right: 0; text-align: center; font-size: 9.5px; color: var(--gray-600); }
     .gd-bar-label { text-align: center; font-size: 9.5px; color: var(--gray-600); margin-top: 3px; }
 
