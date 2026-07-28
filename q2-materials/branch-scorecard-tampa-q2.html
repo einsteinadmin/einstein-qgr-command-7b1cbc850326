@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tampa — Q2'26 Branch Scorecard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -873,7 +872,89 @@
     line-height: 1.55;
   }
 
-  
+
+  /* Trophy Strip — branch honors + reviews */
+  .trophy-strip {
+    background: linear-gradient(180deg, #fafaf9 0%, #fffdf8 100%);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin: 22px 0 18px 0;
+    box-shadow: 0 1px 3px rgba(39, 52, 61, 0.04);
+  }
+  .trophy-eyebrow {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    margin: 0 0 12px 0;
+  }
+  .trophy-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px 26px;
+    align-items: center;
+  }
+  .trophy {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .trophy-logo {
+    flex-shrink: 0;
+    height: 38px;
+    width: auto;
+    max-width: 64px;
+    object-fit: contain;
+  }
+  .trophy-icon {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    background: var(--gray-100);
+    border-radius: 50%;
+    color: var(--orange-dark);
+    letter-spacing: 0;
+  }
+  .trophy-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .trophy-headline {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .trophy-sub {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--gray-600);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .trophy.review-google .trophy-icon { background: #4285F4; color: white; }
+  .trophy.review-yelp .trophy-icon { background: #d32323; color: white; }
+  .trophy.review-angi .trophy-icon { background: var(--orange); color: white; }
+
+  @media (max-width: 720px) {
+    .trophy-strip { padding: 14px 16px; }
+    .trophy-grid { gap: 14px 18px; }
+    .trophy-logo { height: 32px; }
+    .trophy-icon { width: 32px; height: 32px; font-size: 14px; }
+    .trophy-headline { font-size: 12px; }
+    .trophy-sub { font-size: 9px; }
+  }
+
   /* ══ Customer quote block — Joy pass (2026-07-10) ══
      One real, verbatim Google review per branch, refreshed each quarter.
      Sits with the honors band: the brand-warmth moment on every scorecard. */
@@ -1033,16 +1114,34 @@
     <p class="branch-meta">
       Branch Manager <strong>Steven Anderson</strong> · Region <strong>DFWT (Mike)</strong> · <strong>3.17 trucks</strong> <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span> · Window <strong>May 1 – Jul 31, 2026 (July = flash estimate)</strong>
     </p>
-    <p class="branch-meta" style="font-size:11px;opacity:.65;">BM change from Q1: Brandon Kelley → Steven Anderson (was Ops Mgr, promoted to BM); Shane Heaberlin now Ops Mgr. Rendered from branch-metrics-q2-26.json v0.10.4.</p>
+    <p class="branch-meta" style="font-size:11px;opacity:.65;">BM change from Q1: Brandon Kelley → Steven Anderson (was Ops Mgr, promoted to BM); Shane Heaberlin now Ops Mgr. Rendered from branch-metrics-q2-26.json v0.10.5.</p>
   </div>
 
-  <!-- QUOTE-SLOT: refresh each quarter from review corpus; selection criteria in qgr-packet-builder skill -->
-  <section class="customer-quote manager-only" aria-label="Customer review quote">
-    <span class="cq-mark" aria-hidden="true">&ldquo;</span>
-    <div class="cq-body">
-      <p class="cq-eyebrow">In Their Words &middot; Tampa</p>
-      <p class="cq-text">Z and Sloan were great! Moved my very heavy dresser down a flight of stairs no problem, and finished under the estimated time. Highly recommend!&rdquo;</p>
-      <p class="cq-attrib"><span class="cq-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="sr-only">5-star review</span> &mdash; Kim &middot; Google review &middot; ~June 2026</p>
+  <!-- ============== TROPHY STRIP (manager view) ============== -->
+  <section class="trophy-strip manager-only">
+    <p class="trophy-eyebrow">Honors &amp; Reviews · Tampa</p>
+    <div class="trophy-grid">
+      <div class="trophy">
+        <img src="./assets/awards/inc-5000.png" alt="Inc. 5000 Honoree" class="trophy-logo">
+        <div class="trophy-text">
+          <span class="trophy-headline">7× Inc. 5000</span>
+          <span class="trophy-sub">Inc. Magazine · Fastest-Growing</span>
+        </div>
+      </div>
+      <div class="trophy">
+        <img src="./assets/awards/angi.svg" alt="Angi" class="trophy-logo">
+        <div class="trophy-text">
+          <span class="trophy-headline">3× Super Service</span>
+          <span class="trophy-sub">Angi</span>
+        </div>
+      </div>
+      <div class="trophy">
+        <img src="./assets/awards/google.svg" alt="Google" class="trophy-logo">
+        <div class="trophy-text">
+          <span class="trophy-headline">4.9 ★ · 8,000+ reviews</span>
+          <span class="trophy-sub">Google · company-wide</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1058,13 +1157,31 @@
       </div>
     </div>
 
-    <!-- QUOTE-SLOT: refresh each quarter from review corpus; selection criteria in qgr-packet-builder skill -->
-    <section class="customer-quote" aria-label="Customer review quote">
-      <span class="cq-mark" aria-hidden="true">&ldquo;</span>
-      <div class="cq-body">
-        <p class="cq-eyebrow">In Their Words &middot; Tampa</p>
-        <p class="cq-text">Z and Sloan were great! Moved my very heavy dresser down a flight of stairs no problem, and finished under the estimated time. Highly recommend!&rdquo;</p>
-        <p class="cq-attrib"><span class="cq-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="sr-only">5-star review</span> &mdash; Kim &middot; Google review &middot; ~June 2026</p>
+    <!-- ============== TROPHY STRIP (mover view) ============== -->
+    <section class="trophy-strip">
+      <p class="trophy-eyebrow">Honors &amp; Reviews · Tampa</p>
+      <div class="trophy-grid">
+        <div class="trophy">
+          <img src="./assets/awards/inc-5000.png" alt="Inc. 5000 Honoree" class="trophy-logo">
+          <div class="trophy-text">
+            <span class="trophy-headline">7× Inc. 5000</span>
+            <span class="trophy-sub">Inc. Magazine · Fastest-Growing</span>
+          </div>
+        </div>
+        <div class="trophy">
+          <img src="./assets/awards/angi.svg" alt="Angi" class="trophy-logo">
+          <div class="trophy-text">
+            <span class="trophy-headline">3× Super Service</span>
+            <span class="trophy-sub">Angi</span>
+          </div>
+        </div>
+        <div class="trophy">
+          <img src="./assets/awards/google.svg" alt="Google" class="trophy-logo">
+          <div class="trophy-text">
+            <span class="trophy-headline">4.9 ★ · 8,000+ reviews</span>
+            <span class="trophy-sub">Google · company-wide</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1072,20 +1189,11 @@
     <section class="mover-section">
       <p class="section-eyebrow-mover">The Big Picture</p>
       <h2>How the Company Did in Q2</h2>
-      <p class="lede">The 7-metric company composite is offline this quarter (3 of 7 inputs unavailable — see the callout below). Here are the real Q2 company numbers instead of a rolled-up letter grade.</p>
+      <p class="lede">Branch composites are back this quarter on the restored Q2 basis (provisional — 2 of 7 inputs land at the 7/31–8/1 quarter-close pulls). The 3-lens company rollup stamps once those pulls land; here are the real, manifest-sourced Q2 company numbers in the meantime. <span class="status-ribbon pending">Company rollup — stamps after 7/31–8/1</span></p>
 
-      <div class="company-composite">
-        <div class="cc-grade-circle" style="background:var(--gray-400);">
-          <div class="cc-letter" style="font-size:22px;">N/A</div>
-          <div class="cc-num">Composite offline</div>
-        </div>
-        <div class="cc-body">
-          <p class="cc-headline">Q2 letter grade: <strong>not calculable</strong></p>
-          <p class="cc-explainer">3 of the 7 composite inputs are unavailable this quarter (sales target basis unresolved · no mover eNPS cycle · recognition data pending). The composite returns in Q3. What follows is what's actually live in the manifest.</p>
-        </div>
-      </div>
+      <div class="placeholder-note">Company letter grade stamps at quarter close — Sales Target (booked-vs-target EOQ pull) and Recognition (praise-count pull) land 7/31–8/1 company-wide. Branch grades render provisional until then (see Manager View). <!-- WIRED: stamp the 3-lens company composite once the 7/31–8/1 pulls land --></div>
 
-      <p class="lens-divider-label">Company Q2 numbers — the ones that ARE live:</p>
+      <p class="lens-divider-label">Company Q2 facts (manifest-sourced):</p>
       <div class="lens-grid" style="grid-template-columns: repeat(2, 1fr);">
         <div class="lens-card grade-b">
           <p class="lens-eyebrow">Truck Utilization (TUR) <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></p>
@@ -1127,37 +1235,54 @@
     <section class="mover-section">
       <p class="section-eyebrow-mover">Our Branch · Q2</p>
       <h2>The Numbers That Matter to Movers</h2>
-      <p class="lede">These are the metrics movers and drivers most directly influence. The full Financial Engine + Critical Numbers breakdown is in Manager View.</p>
+      <p class="lede">These are the metrics movers and drivers most directly influence. The full breakdown is in Manager View. The branch letter grade is back this quarter (provisional — it finalizes when the last two inputs land at quarter close, 7/31–8/1); individual tiles show actual vs target.</p>
       <div class="mover-metrics-grid">
-        <div class="mover-metric grade-g">
-          <div class="metric-label">Customer NPS <span class="metric-grade-pill g">On/Above Target</span> <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></div>
+        <div class="mover-metric grade-sg">
+          <div class="metric-label">Customer NPS <span class="metric-grade-pill sg">Super Green</span> <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></div>
           <div class="metric-value">93.8</div>
-          <div class="metric-explainer">3.8 above the 90 standing target — a step down from Q1's perfect 100, but still strong on a small sample.</div>
+          <div class="metric-explainer">+3.8 above the standing 90 target. Customers love us. A step down from Q1's perfect 100, but still comfortably clearing target — 3rd of 10 branches.</div>
           <details class="why-it-matters">
             <summary>Why this matters</summary>
             <p>NPS measures how likely customers are to recommend Einstein after their move. It's calculated from post-move surveys: % of promoters minus % of detractors. NPS is the strongest leading indicator of revenue growth — high-NPS branches see more repeat bookings, more referrals, and better online reviews. Service quality on every move is what moves this number.</p>
           </details>
         </div>
-        <div class="mover-metric placeholder">
-          <div class="metric-row1"><span class="metric-label">Mover eNPS</span><span class="status-ribbon not-calculable">GRADED COMPONENT PENDING</span></div>
-          <div class="placeholder-note">No Q2 mover-eNPS survey cycle ran (Q2's eNPS instrument was the manager/CET salaried survey, company-grain only). Cameron to decide treatment of this missing graded input at review — not fabricated, not dropped silently.</div>
+        <div class="mover-metric">
+          <div class="metric-label">Mover eNPS <span class="status-ribbon pending" style="font-size:8px;">Side metric — last read Q1</span></div>
+          <div class="metric-value">+100 <span style="font-size:14px;color:var(--gray-600);">· Q1 2026 (stale reference)</span></div>
+          <div class="metric-explainer">No mover eNPS survey ran this quarter — Q2's eNPS cycle was the manager/CET salaried survey (company +81, n=52), not the mover population. Shown value is last quarter's read (Tampa +100 on n=9, highest in the company, vs company +46). No longer part of the branch grade — it returns as a KPI when the regular mover-engagement survey cadence starts (~2 quarters).</div>
+          <details class="why-it-matters">
+            <summary>Why this matters</summary>
+            <p>eNPS measures how likely movers are to recommend Einstein as a place to work. It's the employee equivalent of customer NPS. eNPS is one of the clearest signals of team health and tracks closely with retention. Its old share of the branch grade now measures Driver Safety instead, until the constant survey cadence brings this back — see the Mover eNPS Trends section below for the last mover-population read and what's already moving in response.</p>
+          </details>
         </div>
         <div class="mover-metric grade-g">
-          <div class="metric-label">Driver Safety <span class="metric-grade-pill g">Green</span> <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></div>
+          <div class="metric-label">Driver Safety <span class="metric-grade-pill g">Green</span> <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></div>
           <div class="metric-value">93 <span style="font-size:14px;color:var(--gray-600);">· 20.0% high-risk</span></div>
-          <div class="metric-explainer">1 of 5 active drivers high-risk (DSS ≤69) — small sample. Score is elite; the 20.0% high-risk rate sits right at the G ceiling (≤20%), not over it.</div>
+          <div class="metric-explainer">1 of 5 active drivers high-risk (DSS ≤69) — small sample. Score is elite; the 20.0% high-risk rate sits right at the G ceiling (≤20%), not over it. Now a permanent part of the branch grade (15%, every quarter) — it took the slot the mover survey held until that cadence returns.</div>
           <details class="why-it-matters">
             <summary>Why this matters</summary>
             <p>Driver Safety Score combines a driver's Samsara harsh-event data with the % of drivers in the high-risk band. Safer driving lowers fleet insurance premiums, reduces accident-related downtime, and prevents claims. Drivers are the line of defense — every habit shows up here.</p>
           </details>
         </div>
-        <div class="mover-metric placeholder">
-          <div class="metric-row1"><span class="metric-label">Recognition</span><span class="status-ribbon pending">PENDING</span></div>
-          <div class="placeholder-note">Recognition % — Q2 praise export incomplete. Owed post-QGR; the by-giver praise dimension in this quarter's export can't be read as branch recognition rate.</div>
+        <div class="mover-metric">
+          <div class="metric-label">Recognition <span class="status-ribbon pending">Pending</span> <span class="metric-display-only-tag">Manager-driven</span></div>
+          <div class="metric-value">—</div>
+          <div class="metric-explainer">Fills in at the 7/31 praise pull. New Q2 basis: praise counts vs each position's target on the Praise Tracking board, rolled up per branch. This is a number for managers to lift; shown here so the team knows where the branch stands once it's live.</div>
+          <details class="why-it-matters">
+            <summary>Why this matters</summary>
+            <p>Recognition tracks the % of movers who report being praised by a manager in the last 14 days. It's a leading indicator for retention and team morale — recognized teams stay longer, perform more consistently, and train new hires faster. This metric is manager-driven; it's shown in the mover view so the team knows where the branch landed.</p>
+          </details>
+          <!-- WIRED: populate from branches.tampa.recognition_pct once status flips from pending to a real value -->
         </div>
-        <div class="mover-metric placeholder" style="grid-column: 1 / -1;">
-          <div class="metric-row1"><span class="metric-label">Damages per Hour</span><span class="status-ribbon pending">PENDING</span></div>
-          <div class="placeholder-note">Damages per hour — pending post-season reconciliation on closed claims + Rippling hours (Matisen, post-week-8). Rippling punch-clock outage (6/29) also taints the hours denominator this quarter.</div>
+        <div class="mover-metric" style="grid-column: 1 / -1;">
+          <div class="metric-label">Damages per Hour <span class="status-ribbon pending">Pending</span></div>
+          <div class="metric-value">—</div>
+          <div class="metric-explainer">Pending post-season reconciliation on closed claims + Rippling hours (Matisen, post-week-8). Rippling punch-clock outage since 6/29 also taints the hours denominator until backfilled.</div>
+          <details class="why-it-matters">
+            <summary>Why this matters</summary>
+            <p>Damages per Hour is the dollar value of customer property damaged per labor hour worked across the quarter. It's a direct read on care and craft: every move where things stay protected drives this number down.</p>
+          </details>
+          <!-- WIRED: populate from branches.tampa.damages_per_hour once status flips from pending to a real value -->
         </div>
       </div>
     </section>
@@ -1166,13 +1291,13 @@
     <section class="mover-section">
       <p class="section-eyebrow-mover">The Visuals</p>
       <h2>Branch Performance — At a Glance</h2>
-      <p class="lede">The same charts the leadership team reviews. The composite radar is offline this quarter (see below) — the bars show how the branch ranks vs the other 9 on the metrics that ARE live.</p>
+      <p class="lede">The same charts the leadership team reviews. The 7-metric radar is back on the restored Q2 composite basis — 2 of its axes (Sales Target · Recognition) are pending until the 7/31–8/1 quarter-close pulls; the bars show how the branch ranks vs the other 9.</p>
 
       <div class="mover-charts-grid">
         <div class="mover-chart-card mover-chart-full">
-          <div class="mover-chart-title">Seven-Metric Radar <span class="status-ribbon composite-offline" style="font-size:8px;padding:2px 6px;">COMPOSITE OFFLINE — Q2</span></div>
-          <p class="mover-chart-sub">The radar is suspended with the composite this quarter (sales target basis unresolved · no mover eNPS cycle · recognition pending). Returns in Q3.</p>
-          <div class="chart-canvas-wrap" style="display:flex;align-items:center;justify-content:center;"><canvas id="moverChartRadar" style="display:none;"></canvas><p class="placeholder-note" style="margin:0;">Radar not rendered — composite offline this quarter.</p></div>
+          <div class="mover-chart-title">Seven-Metric Radar <span class="status-ribbon pending" style="font-size:8px;">2 axes pending</span></div>
+          <p class="mover-chart-sub">Filled shape = Tampa's Q2 grades on the 5 live inputs; dashed line = the "all Green" target shape. Sales Target and Recognition are <strong>pending, not zero</strong> — they render at the center until the 7/31–8/1 pulls land.</p>
+          <div class="chart-canvas-wrap"><canvas id="moverChartRadar"></canvas></div>
         </div>
         <div class="mover-chart-card">
           <div class="mover-chart-title">Truck Utilization Rate (TUR) <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></div>
@@ -1411,40 +1536,49 @@
 
   </div>
 
+  <!-- ============== COVER HERO — COMPOSITE (PROVISIONAL) + GROWTH + NOI-TO-PLAN + STRATEGIC WEIGHT ============== -->
   <div class="cover-hero manager-only">
     <div class="composite-badge">
-      <div class="composite-letter" style="font-size:38px;background:var(--navy);color:white;">24.5%</div>
-      <div class="composite-score">NOI-to-Plan</div>
-      <div class="composite-breakdown">Rank #10 of 10 &middot; <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></div>
-      <div class="growth-chip g">
-        <span class="growth-chip-label">Growth (reference)</span>
-        <span class="growth-chip-grade">Breakout</span>
-        <span class="growth-chip-detail">+24.7% YoY</span>
+      <div class="composite-letter">A−</div>
+      <div class="composite-score">Provisional Final 86.3</div>
+      <div class="composite-breakdown">Composite 76.3 (B) + 10 growth · 61 of 80 live pts</div>
+      <div style="margin:8px 0 0 0;"><span class="status-ribbon pending" style="font-size:8.5px;">PROVISIONAL — finalizes at the 7/31–8/1 pulls (sales target · recognition)</span></div>
+      <div class="growth-chip sg">
+        <span class="growth-chip-label">Growth</span>
+        <span class="growth-chip-grade">+10</span>
+        <span class="growth-chip-detail">Breakout +24.7% YoY</span>
+      </div>
+      <div class="strategic-chip cash-neutral" style="border-top-color:#5c6670;">
+        <span class="strategic-chip-label">NOI to Plan <span class="status-ribbon preliminary" style="font-size:7px;">Prelim</span></span>
+        <span class="strategic-chip-tier">24.5%</span>
+        <span class="strategic-chip-detail">$7,238 of $29,570 plan · #10 of 10</span>
       </div>
       <div class="strategic-chip cash-neutral">
         <span class="strategic-chip-label">Strategic Weight</span>
         <span class="strategic-chip-tier">Cash Neutral</span>
-        <span class="strategic-chip-detail">0.5% NOI · 3.1% Rev · 3.17 trucks</span>
+        <span class="strategic-chip-detail">0.5% NOI · 3.1% Rev · 3.9% trucks</span>
       </div>
     </div>
     <div>
-      <p class="composite-headline">Q2 letter grade: not calculable — 3 of the 7 composite inputs are unavailable this quarter (sales target basis unresolved &middot; no mover eNPS cycle &middot; recognition data pending). The composite returns in Q3.</p>
+      <p class="composite-headline">Strong quarter on the restored composite — Customer NPS and Personnel-Budget both Super Green, Driver Safety Green, and the Einstein Games critical cleared clean at the top of the company (10.05, full 15 pts). The one drag is TUR Red, the lowest in the company. Breakout revenue growth (+24.7% YoY, held a second straight quarter) lifts the grade further. Grade is PROVISIONAL: 2 of 7 inputs (sales target · recognition) land at quarter close.</p>
       <p class="composite-subhead">
-        In place of a letter grade, the cover lens is <strong>NOI-to-plan</strong> — the same lens the Q2 packet leaderboard uses. Tampa landed at <strong>24.5% of its Q2 NOI plan</strong> ($7,238 of $29,570 plan), rank <strong>#10 of 10</strong> — the lowest NOI-to-plan read in the company this quarter (preliminary — contains the July flash estimate; allocated-NOI basis ruled by Cameron 7/21). NOI itself is barely positive ($7,238) — a real improvement over Q1's planned loss, but still the branch to watch on the cash line. The offsetting story: Tampa carries the <strong>highest gross margin in the company (51.55%)</strong> and the <strong>highest Einstein Games season average (10.05, rank #1 of 10)</strong> this quarter — strong operating fundamentals sitting on a very thin absolute-dollar base (3.17 trucks). Individual metric tiles below still show actual-vs-target with status colors where both exist (TUR, Customer NPS, Personnel-to-Budget) — only the rolled-up composite and category pills are suspended this quarter.
+        <strong>Provisional composite 76.3 (B)</strong> on the 5 live inputs — earned 61 of 80 available points: TUR Red (4/20, 56.5% vs 73.4% target), Customer NPS Super Green (15/15, 93.8 vs 90), Driver Safety Green (12/15, 93 / 20.0% HR), Personnel-Budget Super Green (15/15, 116.7%), Einstein Games 15/15 (10.05 season avg — critical number CLEARED at the published 7.0 bar, highest in the company, full graduated credit). <strong>Growth modifier +10</strong> (Breakout, +24.7% YoY — held for a second straight quarter) → <strong>provisional final 86.3 (A−)</strong>. Sales Target Attainment (10 pts, booked-vs-target EOQ pull) and Recognition (10 pts, praise-count attainment) finalize 7/31–8/1 — the final letter grades on all 100 points then. <strong>NOI to plan (allocated basis, ruled by Cameron 7/21): 24.5%</strong> — $7,238 of a $29,570 Q2 reforecast plan, #10 of 10 on that basis — the one real watch item underneath an otherwise strong grade.
       </p>
       <div class="contribution-callout">
-        <strong>Strategic Weight — Cash Neutral:</strong> Generates <strong>0.5% of company NOI</strong> ($7,238 of $1,407,535) on <strong>3.1% of revenue</strong> ($262,068 of $8.40M) and <strong>3.17 of 81.17 trucks (3.9%)</strong>. NOI/Truck shown in Financial Engine below as ungraded reference. NOI flipped from Q1's planned-loss Growth Bet to barely-positive this quarter — watch whether it holds or slips back negative as the branch scales past 3 trucks.
+        <strong>Strategic Weight — Cash Neutral:</strong> Generates <strong>0.5% of company NOI</strong> ($7,238 of $1,407,535) on <strong>3.1% of revenue</strong> ($262,068 of $8.40M) and <strong>3.17 of 81.17 trucks (3.9%)</strong>. NOI/Truck $2,283 (preliminary) — shown in Financial Engine below as ungraded reference. Not part of the grade math. NOI flipped from Q1's planned-loss Growth Bet to barely-positive this quarter — watch whether it holds or slips back negative as the branch scales past 3 trucks.
       </div>
     </div>
   </div>
 
+  <!-- ============== PHILOSOPHY ============== -->
   <section class="philosophy manager-only">
-    <h2>How We Grade a Branch <span class="status-ribbon composite-offline" style="font-size:9px;">COMPOSITE OFFLINE — Q2</span></h2>
-    <p class="philosophy-lede">Final grade = composite + growth modifier. The composite measures where you landed; the growth modifier measures where you're going. <strong>This quarter the composite itself is offline</strong> — 3 of 7 inputs are unavailable: sales target attainment (three competing revenue bases, unresolved), mover eNPS (no Q2 survey cycle), and recognition % (Q2 praise export incomplete). The philosophy below describes how grading works when the composite is live again in Q3.</p>
+    <h2>How We Grade a Branch <span class="status-ribbon pending" style="font-size:9px;">Provisional — finalizes 7/31–8/1</span></h2>
+    <p class="philosophy-lede">Final grade = composite + growth modifier. The composite measures where you landed; the growth modifier measures where you're going. <strong>The composite is BACK this quarter on the ruled Q2 basis (Cameron, 7/27)</strong> — zero reweighting from Q1; only the labels rotate. The crit slots were always 15% apiece by design: Q1's crits were Personnel-Budget + Driver Safety; Q2's crits are Personnel-Budget + Einstein Games. Driver Safety is now a <strong>permanent constant</strong>, taking the 15% that Mover eNPS held — eNPS is out of the composite (no survey cycle) and renders as a side metric until the constant mover-engagement cadence starts (~2 quarters). Two inputs (Sales Target · Recognition) land at the 7/31–8/1 quarter-close pulls, so the grade renders <strong>provisional</strong>: earned points ÷ the 80 points currently live.</p>
+
     <div class="philosophy-grid">
       <div class="bucket">
-        <h3>Composite · 7 Metrics</h3>
-        <p>Financial Engine (TUR + Sales Target) · Critical Numbers (quarter-specific pair — Q1 was Driver Safety + Personnel-Budget, Q2 is Avg % to Personal Goal + Einstein Games per Cameron's 7/22 ruling — 30% combined weight when the composite is live) · People + Customer (NPS + eNPS + Recognition). Each metric counted exactly once. Σ(weight × grade) / 5.</p>
+        <h3>Composite · 7 Metrics · Q2 Basis</h3>
+        <p>TUR <strong>20</strong> (hours running — price never a factor) · Customer NPS <strong>15</strong> · Driver Safety <strong>15</strong> (constant — takes Mover eNPS's old slot) · Sales Target <strong>10</strong> (booked-vs-target, EOQ pull — <em>pending</em>) · Recognition <strong>10</strong> (praise-count attainment vs position targets — <em>pending</em>) · Critical #1 Personnel-Budget <strong>15</strong> · Critical #2 Einstein Games <strong>15</strong> (graduated points — see the math below). Weights sum to 100; each metric counted exactly once.</p>
       </div>
       <div class="bucket">
         <h3>Growth Modifier · Revenue YoY</h3>
@@ -1455,27 +1589,43 @@
         <p>Final score = composite + growth. Breakout YoY can lift a branch by a full letter; declining can drop one. Cover shows both halves so the BM can read landing AND trajectory at once.</p>
       </div>
     </div>
-    <p class="philosophy-close">We grow by growing our people and customers — not at their expense. Critical Numbers carry 30% combined weight in the composite — the quarterly theme isn't a footnote, it's a structural anchor. Growth lives alongside as a separate signal. <strong>NOI/Truck</strong> sits in the Financial Engine top block as ungraded reference this quarter (actively calibrating). <strong>Strategic Weight</strong> tier on the cover hero is a parallel display lens — measures cash contribution scale, separate from the operational composite.</p>
+
+    <div class="composite-math">
+      <h4>How the composite math works — and Tampa's provisional numbers</h4>
+      <p>Each metric has a weight (the seven weights sum to <strong>100</strong>) and a grade worth points: Super Green = <strong>5</strong>, Green = <strong>4</strong>, Watch = <strong>2</strong>, Red = <strong>1</strong>. A metric's earned points = weight × (grade points ÷ 5) — so a Super Green earns its full weight, a Green earns 80% of it, a Watch 40%, a Red 20%.</p>
+      <div class="math-grades">
+        <span class="grade-pill">SG = 5</span>
+        <span class="grade-pill">G = 4</span>
+        <span class="grade-pill">W = 2</span>
+        <span class="grade-pill">R = 1</span>
+      </div>
+      <p><strong>The one exception — Einstein Games (critical #2) uses graduated points, not the SG/G/W/R ladder (Cameron ruling, 7/27).</strong> The critical-number line stays exactly where it was published: <strong>7.0 pass/fail — a miss reads RED, visibly, nothing hidden.</strong> But the 15 composite points resolve finer than the cliff: <strong>≥7.0 → full 15</strong> · <strong>5.0–6.99 → 7.5 × (avg − 5.0)</strong> · <strong>&lt;5.0 → 0</strong>. Why: with an all-or-nothing cliff, a 6.87 and a 5.67 take the identical 15-point hit — a near-miss by a hair grades the same as a miss by a mile and a half, which makes the scorecard a worse lens. Worked example of the curve: a branch at <strong>6.87</strong> still shows a RED missed critical, but earns 7.5 × 1.87 = <strong>~14.0 of 15</strong> composite points; a 6.0 earns 7.5; below 5.0 earns 0. The floor was softened the same way the cliff logic works at the top — a just-under-6 miss no longer grades identical to a true blowout. The bar didn't move — only the credit curve under it resolves. Tampa's 10.05 season average clears the 7.0 bar outright — full 15 of 15, the highest Games score in the company this quarter.</p>
+      <div class="math-formula">Provisional grade % = earned points ÷ points currently live (80 of 100) · final grade % = earned ÷ 100 after the 7/31–8/1 pulls</div>
+      <p><strong>Tampa provisional arithmetic (5 live inputs):</strong> TUR Red → 20 × 1/5 = <strong>4.0</strong> · Customer NPS Super Green → 15 × 5/5 = <strong>15.0</strong> · Driver Safety Green → 15 × 4/5 = <strong>12.0</strong> · Personnel-Budget Super Green → 15 × 5/5 = <strong>15.0</strong> · Einstein Games 10.05 (clears the 7.0 graduated ceiling) → <strong>15.0</strong> of 15. Sum = <strong>61.0 earned of 80 available</strong> → 61 ÷ 80 = <strong>76.3 (B)</strong>. Growth modifier <strong>+10</strong> (Breakout, +24.7% YoY) → provisional final <strong>86.3 (A−)</strong>. Sales Target (10) + Recognition (10) land at quarter close and re-base the grade on all 100 points.</p>
+      <p>Why <em>SG=5, G=4, W=2, R=1</em> and not 5/4/3/2/1? The skip from G to W creates a real penalty for Watch — a Watch metric isn't "halfway between Green and Red," it's noticeably off pace. An all-Green branch lands at 80 (B+ baseline). All-Watch lands at 40. All-Red lands at 20. Hitting plan should read as above-average; this scale enforces that.</p>
+    </div>
+
+    <p class="philosophy-close">We grow by growing our people and customers — not at their expense. Critical Numbers carry 30% combined weight in the composite — the quarterly theme isn't a footnote, it's a structural anchor. Growth lives alongside as a separate signal so a strong-trajectory branch in a tough quarter (or a declining branch propped up by past plan) is read honestly. <strong>NOI/Truck</strong> sits in the Financial Engine top block as ungraded reference this quarter (actively calibrating; see methodology details in the QGR packet). <strong>Strategic Weight</strong> tier on the cover hero is a parallel display lens — measures cash contribution scale (NOI share / revenue share / truck share), separate from the operational composite.</p>
   </section>
 
   <div class="info-callout manager-only">
-    <strong>How to read this scorecard:</strong> Cover hero shows the NOI-to-plan badge + Strategic Weight tier in place of the (offline) composite letter grade. Below: metric-by-metric breakdown grouped by Financial Engine, Critical Numbers · Q2, and People + Customer — category grade pills read <strong>—</strong> this quarter (suspended with the composite), but individual tiles still show actual-vs-target with status colors where both exist. Trajectory section covers revenue YoY (shown for reference — no composite to modify this quarter). Drill-down on any tile for the plain-language explanation.
+    <strong>How to read this scorecard:</strong> Cover hero shows the final letter grade (composite + growth) plus the breakdown beside it. Below: metric-by-metric breakdown grouped by Financial Engine, Critical Numbers, and People + Customer (the three buckets that roll into the 7-metric composite), then a dedicated Trajectory section for revenue YoY (the growth modifier). Drill-down on any tile for the plain-language explanation.
   </div>
 
   <div class="cover-radar-wrap manager-only">
-    <p class="chart-title">Seven-Metric Radar <span class="status-ribbon composite-offline" style="font-size:9px;">COMPOSITE OFFLINE — Q2</span></p>
-    <p class="chart-sub">The radar is suspended with the composite this quarter — 3 of 7 inputs are unavailable (sales target basis unresolved · no mover eNPS cycle · recognition pending). Returns in Q3.</p>
-    <div class="chart-canvas-wrap" style="display:flex;align-items:center;justify-content:center;"><canvas id="chartRadar" style="display:none;"></canvas><p class="placeholder-note" style="margin:0;">Radar not rendered — composite offline this quarter.</p></div>
+    <p class="chart-title">Seven-Metric Radar — Tampa vs Target ("All Green" Shape) <span class="status-ribbon pending" style="font-size:8px;">2 axes pending</span></p>
+    <p class="chart-sub">Filled shape = Tampa's Q2 grades on the 5 live inputs; dashed line = "all Green" target shape. <strong>2 axes are pending, not zero:</strong> Sales Target and Recognition land at the 7/31–8/1 quarter-close pulls — they render at the center until then. Live reads: NPS, Personnel-Budget, and Games all push outside the target line (Super Green / full graduated credit); Driver Safety sits on it (Green); TUR sits deep inside it (Red).</p>
+    <div class="chart-canvas-wrap"><canvas id="chartRadar"></canvas></div>
   </div>
 
   <section class="manager-only">
-    <h2>Financial Engine <span class="cat-grade">Category Grade <span class="pill offline">—</span></span></h2>
+    <h2>Financial Engine <span class="cat-grade">Category Grade <span class="pill" style="background:var(--gray-200);color:var(--gray-700);" title="pending inputs — Sales Target Attainment (booked-vs-target) lands at the 7/31–8/1 EOQ pull; the category grade renders once both inputs are live">—</span></span></h2>
     <div class="metric-grid">
 
       <div class="metric r">
         <div class="metric-row1">
           <span class="metric-name">Truck Utilization (TUR)</span>
-          <span class="metric-weight status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span>
+          <span class="metric-weight">20% · earned 4.0 of 20 <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></span>
         </div>
         <div class="metric-value-row">
           <span class="metric-actual">56.5%</span>
@@ -1487,12 +1637,18 @@
         <details class="metric-source"><summary></summary><p class="source-detail">Matisen feed tur-actuals-q2-26-2026-07-21.csv v8 · targets = Q3 '26 Revenue Forecaster row-6 'Adjusted Forcast after Q1' · caveats: rippling_punch_clock_outage_2026_06_29, tur_nps_workbook_rows_invalid, july_partial_windows_q2_feeds, tur_target_method_error_q2, tur_target_source_dispute_2026_07_21</p></details>
       </div>
 
-      <div class="metric placeholder">
+      <div class="metric" style="opacity:0.65;">
         <div class="metric-row1">
           <span class="metric-name">Sales Target Attainment</span>
-          <span class="status-ribbon not-calculable">NOT CALCULABLE — Q2</span>
+          <span class="metric-weight">10% · pending quarter close</span>
         </div>
-        <div class="placeholder-note">Three competing revenue reads exist this quarter (projected full-quarter · booked-to-date · realized-to-date) with no single reconciled basis — see the manifest's <code>booked_vs_realized_basis</code> caveat. Sales $ attainment vs plan lives in the revenue/NOI blocks above, not here. Owed: a reconciled basis before this tile can grade again.</div>
+        <div class="metric-value-row">
+          <span class="metric-actual">—</span>
+          <span class="status-ribbon pending">Pending — lands 7/31–8/1</span>
+        </div>
+        <p class="metric-target">Ruled Q2 basis (Cameron 7/27): <strong>booked-vs-target</strong>, pulled at end of quarter. This tile and its 10 composite points fill at the 7/31–8/1 EOQ pull; until then the grade renders provisional on the other 80 points.</p>
+        <details class="drill"><summary>Why this matters</summary><p>Sales Target Attainment measures the branch's sales-contributing team against quarterly targets. Q2 carried three competing revenue reads for most of the quarter; the 7/27 ruling resolved the graded basis to <strong>booked-vs-target at the EOQ pull</strong> — booked $ against the sales target, pulled once the quarter closes so July is whole. Per the feed's no-blended-rate rule, Q2 is not scored against the 40% conversion target. The branch's live quotes/bookings/conversion figures are in Reference Data below.</p></details>
+        <details class="metric-source"><summary></summary><p class="source-detail">Basis ruled in <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code> (Cameron's 3pm rulings) · manifest caveat <code>booked_vs_realized_basis</code> still governs labeling · value lands at the 7/31–8/1 EOQ pull.</p></details>
       </div>
 
       <div class="metric ref">
@@ -1519,14 +1675,13 @@
   </section>
 
   <section class="manager-only">
-    <h2>Critical Numbers · Q2 <span class="cat-grade">Category Grade <span class="pill offline" title="category grades suspended with the composite this quarter">—</span></span></h2>
-    <p style="font-size:12.5px;color:var(--gray-600);margin:-8px 0 16px 0;">Cameron's 7/22 ruling repoints the 2 graded Critical Numbers for Q2: <strong>Average % to Personal Goal</strong> and <strong>Einstein Games — Branch Season Average</strong>. Driver Safety + safety-event detail move to the Fleet Safety standing-reference block below — they don't disappear, they're just no longer one of the 2 graded slots.</p>
+    <h2>Critical Numbers · Q2 <span class="cat-grade">Category Grade <span class="pill sg" title="Both inputs live. Category = points earned ÷ points possible: Personnel-Budget 15/15 + Games 15/15 = 30/30 (100%) — clean Super Green on both critical slots.">SG</span></span></h2>
     <div class="metric-grid">
 
       <div class="metric sg">
         <div class="metric-row1">
           <span class="metric-name">Avg % to Personal (Budget) Goal — Q2</span>
-          <span class="metric-weight status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span>
+          <span class="metric-weight">15% · critical #1 · earned 15.0 of 15 <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></span>
         </div>
         <div class="metric-value-row">
           <span class="metric-actual">116.7%</span>
@@ -1534,22 +1689,22 @@
         </div>
         <p class="metric-target">Day-weighted actual/budget FTE, May–Jul (Jul to-date) · Monthly: 05 123.2% / 06 118.9% / 07 105.1%</p>
         <div class="placeholder-note">Interpreting Cameron's "average % to personal goal" as branch Personnel-Budget attainment — the only per-branch "% to an assigned goal" figure with live Q2 data. If Cameron means individual sales/rep goal attainment, that data doesn't exist in the Q2 manifest this quarter (sales_target_attainment = not_calculable) and this tile should be corrected once he clarifies.</div>
-        <details class="drill"><summary>Why this matters</summary><p>Rubric (locked 5/4): &lt;95% Red · 95–110% Green · &gt;110% Super Green. Tampa's 116.7% is the highest Personnel-Budget attainment in the company this quarter — up from Q1's 106% Green, and trending down each month toward the G band (123.2%→118.9%→105.1%) as the branch scales. Deliberate summer staff-up, not a discipline flag.</p></details>
+        <details class="drill"><summary>Why this matters</summary><p>Rubric (locked 5/4): SG &gt;110% (over plan) · G 95–110% (on plan) · W 85–94% (under plan) · R chronic-F (&lt;95% sustained). Tampa's 116.7% is the highest Personnel-Budget attainment in the company this quarter — up from Q1's 106% Green, and trending down each month toward the G band (123.2%→118.9%→105.1%) as the branch scales. Deliberate summer staff-up, not a discipline flag. Earns 15.0 of 15 composite points (Super Green).</p></details>
         <details class="metric-source"><summary></summary><p class="source-detail">Matisen feed personnel-budget-q2-26-2026-07-21.csv · actuals = FTE Budget Tracker; budget = Q3 '26 Revenue Forecaster 'FTE (35) Budget' row · caveats: rippling_punch_clock_outage_2026_06_29, july_partial_windows_q2_feeds</p></details>
       </div>
 
-      <div class="metric ref">
+      <div class="metric sg">
         <div class="metric-row1">
           <span class="metric-name">Einstein Games — Branch Season Average</span>
-          <span class="metric-weight">critical #2</span>
+          <span class="metric-weight">15% · critical #2 · earned 15.0 of 15 (graduated)</span>
         </div>
         <div class="metric-value-row">
           <span class="metric-actual">10.05</span>
-          <span class="metric-grade ref">Rank #1 of 10</span>
+          <span class="metric-grade sg">Green crit · Rank #1 of 10</span>
         </div>
-        <p class="metric-target">Season 3 (8 weeks: W1-W8, ended Jul 24) · average of the weekly averages (Cameron's 7/23 ruling) · no SG/G/W/R paint on games per the locked 7/15 philosophy — coaching tool, not a performance grade. Highest season average in the company (bracket champion was San Antonio; Tampa was the finals runner-up).</p>
-        <details class="drill"><summary>Why this matters</summary><p>Games are a coaching tool, directionally accurate by design — in-week estimates, not resolved actuals. Final bonuses and real accountability run off reconciled hard numbers elsewhere in this scorecard, never off the games score. Full season breakdown (heat-strip, 5-component scores, final standing) is in the Einstein Games — Season 3 Results section below.</p></details>
-        <details class="metric-source"><summary></summary><p class="source-detail">Manifest <code>_games_s3_q2_26</code> v0.9.8, Tampa slice · basis = average-of-weekly-averages, 8-week season (scoring_basis ruled 2026-07-23) · status confirmed_matisen_2026-07-23</p></details>
+        <p class="metric-target">Season 3 (8 weeks: W1-W8, ended Jul 24) · average of the weekly averages (Cameron's 7/23 ruling) · critical-number bar published at 7.0 pass/fail — Tampa clears it outright, highest season average in the company (bracket champion was San Antonio; Tampa was the finals runner-up).</p>
+        <details class="drill"><summary>Why this matters</summary><p>Games are a coaching tool, directionally accurate by design — in-week estimates, not resolved actuals. Final bonuses and real accountability run off reconciled hard numbers elsewhere in this scorecard, never off the games score. The critical-number line stays pass/fail at 7.0 (Cameron's 7/27 ruling on graduated points) — Tampa's 10.05 clears it with room to spare, earning the full 15 of 15 composite points, the highest Games score in the company this quarter. Full season breakdown (heat-strip, 5-component scores, final standing) is in the Einstein Games — Season 3 Results section below.</p></details>
+        <details class="metric-source"><summary></summary><p class="source-detail">Manifest <code>_games_s3_q2_26</code> v0.9.8, Tampa slice · basis = average-of-weekly-averages, 8-week season (scoring_basis ruled 2026-07-23) · status confirmed_matisen_2026-07-23 · graduated-points formula ruled in <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code></p></details>
       </div>
 
     </div>
@@ -1560,20 +1715,20 @@
       <div class="chart-canvas-wrap tall"><canvas id="chartPersonnelBudget"></canvas></div>
     </div>
 
-    <h3 style="font-size:15px;color:var(--navy);margin:22px 0 10px 0;padding-top:16px;border-top:1px dashed var(--gray-300);">Fleet Safety — Standing Reference <span style="font-weight:400;font-size:12px;color:var(--gray-600);">(not one of Q2's 2 graded Critical Numbers)</span></h3>
-    <p style="font-size:12px;color:var(--gray-600);margin:0 0 12px 0;">Fleet Safety is a permanent, theme-independent deep dive per the packet-builder skill — it doesn't disappear just because Cameron's 7/22 ruling repointed the 2 graded Critical Number slots elsewhere.</p>
+    <h3 style="font-size:15px;color:var(--navy);margin:22px 0 10px 0;padding-top:16px;border-top:1px dashed var(--gray-300);">Fleet Safety — Permanent Constant <span style="font-weight:400;font-size:12px;color:var(--gray-600);">(graded at 15% every quarter — not one of the 2 rotating crit slots)</span></h3>
+    <p style="font-size:12.5px;color:var(--gray-600);margin:0 0 12px 0;">Driver Safety was <strong>promoted to a permanent composite constant (Cameron 7/27)</strong> — it takes the 15% that Mover eNPS held until the mover survey cadence returns. Samsara data is continuous, so this stays visible and graded every quarter regardless of which two metrics rotate through the crit slots above.</p>
     <div class="metric-grid">
       <div class="metric g">
         <div class="metric-row1">
           <span class="metric-name">Driver Safety Score</span>
-          <span class="metric-weight status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span>
+          <span class="metric-weight">15% · constant · earned 12.0 of 15 <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></span>
         </div>
         <div class="metric-value-row">
           <span class="metric-actual">93</span>
           <span class="metric-grade g">Green</span>
         </div>
         <p class="metric-target">20.0% high-risk (1 of 5 active drivers, DSS ≤69) · locked v3.3.7 rubric: G = ≥80 score AND ≤20% HR</p>
-        <details class="drill"><summary>Why this matters</summary><p>Driver Safety Score is the rolling weighted Samsara score across braking, following distance, mobile usage, etc. Master org 7005377 basis (single shared config, branch-comparable). Score itself (93) is elite, near-SG territory — the 20.0% high-risk figure sits right at the G ceiling (≤20% qualifies), not over it, but on a small 5-driver pool a single driver is 20% of the denominator. Score category-level event breakdown isn't in this quarter's feed (aggregate only) — Mike/Matisen owe the detail pull if it's wanted for Q3.</p></details>
+        <details class="drill"><summary>Why this matters</summary><p>Driver Safety Score is the rolling weighted Samsara score across braking, following distance, mobile usage, etc. Master org 7005377 basis (single shared config, branch-comparable). Score itself (93) is elite, near-SG territory — the 20.0% high-risk figure sits right at the G ceiling (≤20% qualifies), not over it, but on a small 5-driver pool a single driver is 20% of the denominator. Score category-level event breakdown isn't in this quarter's feed (aggregate only) — Mike/Matisen owe the detail pull if it's wanted for Q3. Earns 12.0 of 15 composite points (Green).</p></details>
         <details class="metric-source"><summary></summary><p class="source-detail">Mike Vandenbroader manual Samsara pull, master org 7005377 · q2-fleet-safety-by-branch.csv delivered 2026-07-22 · caveats: july_preliminary_flash_estimate, samsara_master_org_basis</p></details>
       </div>
       <div class="metric ref">
@@ -1594,31 +1749,50 @@
   </section>
 
   <section class="manager-only">
-    <h2>People + Customer <span class="cat-grade">Category Grade <span class="pill offline" title="category grades suspended with the composite this quarter">—</span></span></h2>
+    <h2>People + Customer <span class="cat-grade">Category Grade <span class="pill" style="background:var(--gray-200);color:var(--gray-700);" title="pending inputs — Recognition (praise-count attainment) lands at the 7/31 pull; the category grade renders once every graded input in this category is live. Mover eNPS is a side metric (zero points) and doesn't gate the category.">—</span></span></h2>
     <div class="metric-grid">
 
-      <div class="metric g">
+      <div class="metric sg">
         <div class="metric-row1">
           <span class="metric-name">Customer NPS</span>
-          <span class="metric-weight status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span>
+          <span class="metric-weight">15% · earned 15.0 of 15 <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></span>
         </div>
         <div class="metric-value-row">
           <span class="metric-actual">93.8</span>
-          <span class="metric-grade g">On/Above Target</span>
+          <span class="metric-grade sg">Super Green</span>
         </div>
         <p class="metric-target">vs standing target <strong>90</strong> · <strong>+3.8 vs target</strong> · n=32 responses (31 promoters, 0 passives, 1 detractor)</p>
-        <details class="drill"><summary>Why this matters</summary><p>NPS measures whether customers actively recommend the branch. Tampa came in 3.8 points above the standing 90 target this quarter, pooled across all 32 responses (not a mean of monthly scores) — a step down from Q1's perfect 100, but still clearing target on a still-small sample. Response rate: 20.5% (responses ÷ completed moves, May+June only — never surveys_sent as the denominator, per the gatherup_response_rate_denominator caveat).</p></details>
+        <details class="drill"><summary>Why this matters</summary><p>NPS measures whether customers actively recommend the branch. Tampa came in 3.8 points above the standing 90 target this quarter, pooled across all 32 responses (not a mean of monthly scores) — a step down from Q1's perfect 100, but still comfortably clearing target (3rd of 10 branches). Response rate: 20.5% (responses ÷ completed moves, May+June only — never surveys_sent as the denominator, per the gatherup_response_rate_denominator caveat). Earns 15.0 of 15 composite points (Super Green) — the same tier Houston's identical 93.8 read graded in Q1.</p></details>
         <details class="metric-source"><summary></summary><p class="source-detail">Matisen feed gatherup-nps-q2-2026-07-21.csv · GatherUp API v2, window 5/1–7/17 · caveats: tur_nps_workbook_rows_invalid, july_partial_windows_q2_feeds</p></details>
       </div>
 
-      <div class="metric placeholder">
-        <div class="metric-row1"><span class="metric-name">Mover eNPS</span><span class="status-ribbon not-calculable">GRADED COMPONENT PENDING</span></div>
-        <div class="placeholder-note">No Q2 mover-eNPS survey cycle ran — the Q2 instrument was the manager/CET salaried survey (company +81, n=52), not the mover population. Cameron to decide treatment of this missing graded input at review (never fabricated, never dropped silently).</div>
+      <div class="metric ref" style="border-style:dashed;">
+        <div class="metric-row1">
+          <span class="metric-name">Mover eNPS — Side Metric</span>
+          <span class="metric-weight">0% · out of the composite (ruled 7/27)</span>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-actual">+100</span>
+          <span class="metric-grade ref">Stale reference · Q1 2026</span>
+        </div>
+        <p class="metric-target"><strong>Out of the composite permanently (Cameron 7/27)</strong> — its old 15% now belongs to Driver Safety as a constant. Shown value = the last mover survey (Q1 2026: Tampa +100 on n=9, highest in the company, vs company +46) — a stale reference, not a Q2 read. No mover cycle ran this quarter (Q2's eNPS cycle surveyed the manager/CET salaried population instead, company +81, n=52).</p>
+        <details class="drill"><summary>Why this matters — and when it comes back</summary><p>eNPS measures how likely movers are to recommend Einstein as a place to work — one of the clearest team-health signals. It carries zero composite points now because there's no live survey behind it; grading a stale number would be worse than not grading it. <strong>It returns as a KPI when the constant mover-engagement cadence starts (~2 quarters).</strong> See the Mover eNPS Trends section above for what the team said in Q1 and what's already moving in response. Small-sample caveat carries forward: Tampa's Q1 +100 was on n=9 movers, all promoters.</p></details>
+        <details class="metric-source"><summary></summary><p class="source-detail">Q1 value: QGR Packet v1.26 Component 5 (Q1 mover survey, 227 company-wide responses; Tampa +100 on n=9, company +46) · Manifest caveat <code>enps_population_change_q2</code> — mover population not surveyed this cycle · composite removal ruled in <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code>.</p></details>
       </div>
 
-      <div class="metric placeholder">
-        <div class="metric-row1"><span class="metric-name">Recognition % (praised last 14d)</span><span class="status-ribbon pending">PENDING</span></div>
-        <div class="placeholder-note">Recognition % — Q2 praise export incomplete. The <code>_praise_q2_26</code> block that does exist is by-GIVER dimension, not branch recognition rate — do not derive one from the other.</div>
+      <div class="metric" style="opacity:0.65;">
+        <div class="metric-row1">
+          <span class="metric-name">Recognition — Praise-Count Attainment</span>
+          <span class="metric-weight">10% · pending quarter close</span>
+        </div>
+        <div class="metric-value-row">
+          <span class="metric-actual">—</span>
+          <span class="status-ribbon pending">Pending — lands 7/31</span>
+        </div>
+        <p class="metric-target"><strong>NEW basis (ruled 7/27):</strong> praise-count attainment vs position targets on the Praise Tracking board — each position carries a praise target; the branch metric = current praise count as a % of target, rolled up per branch. Replaces Q1's %-recognized-in-last-2-weeks, which was sourced from the retired mover eNPS survey.</p>
+        <details class="drill"><summary>Why this matters</summary><p>Recognition is a leading indicator for retention and morale — recognized teams stay longer and perform more consistently. Q1's source (the mover survey) is gone, so the Q2 basis moves to the Praise Tracking board's praise-count attainment. Bands get proposed once the 7/31 praise pull shows the distribution (strawman: SG ≥120% of target · G ≥100% · Y 70–99% · R &lt;70%), then locked and published for Q3. This tile and its 10 composite points fill at the 7/31 pull.</p></details>
+        <details class="metric-source"><summary></summary><p class="source-detail">Basis ruled in <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code> · source board = Praise Tracking (praise-count vs position targets) · the by-giver praise data in <code>_praise_q2_26</code> is not a branch recognition rate and is not used as a substitute.</p></details>
+        <!-- WIRED: populate from the 7/31 Praise Tracking pull once it lands -->
       </div>
 
     </div>
@@ -1637,20 +1811,20 @@
   </section>
 
   <section class="manager-only">
-    <h2>Trajectory · Revenue YoY <span class="cat-grade">Growth Modifier <span class="pill offline" title="no composite to modify this quarter">Reference only</span></span></h2>
+    <h2>Trajectory · Revenue YoY <span class="cat-grade">Growth Modifier <span class="pill sg" title="Breakout band (≥+20%) → +10 points applied to the provisional composite">+10</span></span></h2>
     <div class="metric-grid">
 
-      <div class="metric g">
+      <div class="metric sg">
         <div class="metric-row1">
           <span class="metric-name">Revenue YoY</span>
-          <span class="metric-weight">Modifier shown for reference — no composite to modify this quarter</span>
+          <span class="metric-weight">Modifier · +10 applied to the provisional composite <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></span>
         </div>
         <div class="metric-value-row">
           <span class="metric-actual">+24.7%</span>
-          <span class="metric-grade g">Breakout · would be +10</span>
+          <span class="metric-grade sg">Breakout</span>
         </div>
-        <p class="metric-target">$262,068 Q2'26 vs <strong>$210,152</strong> Q2'25 · "Breakout" tier (SG band: ≥+20%) · holds Breakout pace for a second straight quarter <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></p>
-        <details class="drill"><summary>How the modifier works (reference this quarter)</summary><p>Tiers: <strong>Breakout ≥+20% (+10)</strong> · <strong>Strong +10-20% (+7)</strong> · <strong>Stable growth +3-10% (+4)</strong> · <strong>Flat 0-3% (0)</strong> · <strong>Slight decline −3-0% (−3)</strong> · <strong>Declining &lt;−3% (−7)</strong>. Tampa's +24.7% holds Breakout tier for the second straight quarter (Q1 was +23.0%) — the most consistent grower in the company on this measure. There is no composite this quarter for the modifier to add to — shown for trajectory context only. Seasonality caveat: May–Jul vs May–Jul, partly the calendar.</p></details>
+        <p class="metric-target">$262,068 Q2'26 vs <strong>$210,152</strong> Q2'25 · "Breakout" tier (SG band: ≥+20%) · holds Breakout pace for a second straight quarter</p>
+        <details class="drill"><summary>How the modifier scale works</summary><p>The growth modifier scale is unchanged from Q1: <strong>Breakout ≥+20% → +10</strong> · <strong>Strong +10-20% → +7</strong> · <strong>Stable growth +3-10% → +4</strong> · <strong>Flat 0-3% → 0</strong> · <strong>Slight decline −3-0% → −3</strong> · <strong>Declining &lt;−3% → −7</strong>. Tampa's +24.7% holds Breakout tier for a second straight quarter (Q1 was +23.0%) — the most consistent grower in the company on this measure → <strong>+10 applied to the provisional composite</strong> (76.3 + 10 = 86.3 provisional final). Seasonality caveat: this compares May–Jul 2026 to the same window in 2025, so part of any YoY move is calendar, not just performance.</p></details>
         <details class="metric-source"><summary></summary><p class="source-detail">Derived by Albert: revenue_q2_26 ($262,068.18) ÷ revenue_q2_25 ($210,151.83) − 1; caveats: july_preliminary_flash_estimate</p></details>
       </div>
 
@@ -1664,14 +1838,14 @@
           <span class="metric-grade ref">Reference</span>
         </div>
         <p class="metric-target">Total company revenue YoY · Tampa running <strong>+14.8 pts</strong> ahead of company pace</p>
-        <details class="drill"><summary>Why this is reference, not graded</summary><p>Comparing to company pace is useful context for the BM walkthrough. With the composite offline this quarter, the growth modifier isn't being added to anything — it's shown purely for trajectory awareness.</p></details>
+        <details class="drill"><summary>Why this is reference, not graded</summary><p>Comparing to company pace is useful context for the BM walkthrough. Garland (+38.3%) and Fort Worth (+28.6%) lead the company; Tampa's +24.7% holds 3rd of 10, comfortably above the Breakout line for a second straight quarter. N. Austin is the only decliner (−10.9%) — a name-the-gap flag, not an explained one (facts only; no cause claim without proof).</p></details>
       </div>
 
     </div>
 
     <div class="chart-wrap">
       <p class="chart-title">Revenue YoY by Branch — Ranked, Tampa Highlighted <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></p>
-      <p class="chart-sub">Garland leads the company at +38.3%; Tampa's +24.7% holds 3rd of 10, comfortably above the Breakout line for a second straight quarter. N. Austin is the only decliner (−10.9%). Dashed bands show the modifier rubric thresholds (reference only this quarter).</p>
+      <p class="chart-sub">Garland leads the company at +38.3%; Tampa's +24.7% holds 3rd of 10, comfortably above the Breakout line for a second straight quarter. N. Austin is the only decliner (−10.9%). Dashed bands show the modifier rubric thresholds — Tampa's Breakout band applies +10 to the provisional composite.</p>
       <div class="chart-canvas-wrap tall"><canvas id="chartRevenueYoY"></canvas></div>
     </div>
   </section>
@@ -1688,7 +1862,7 @@
         <tr><td>Gross Margin</td><td><strong>51.55%</strong> <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></td><td>Highest gross margin of any branch this quarter (computed directly from all 10 branches' manifest rows; company range 42.55%–51.55%). Not a graded metric — the branch's small absolute-dollar base (3.17 trucks) means the high margin doesn't yet translate to a large NOI dollar figure. <span class="ref-source-icon" title="Sage Intacct via Ben Young workbook v4, 'Q2 2026 Fin. Actuals (Est)' row 11">📍 Ben workbook v4</span></td></tr>
         <tr><td>Sales — Per-Rep Detail</td><td><span class="status-ribbon not-calculable">NOT CALCULABLE — Q2</span></td><td>Q1's per-rep monthly-cadence / conversion / cancellation breakdown doesn't exist at that grain in the Q2 manifest (Matisen's Q2 feed carries branch-level aggregates only, not per-rep). Named structural change from Q1 — not a silent drop.</td></tr>
         <tr><td>$ Conversion (branch-level)</td><td><strong>26.35%</strong> <span class="status-ribbon preliminary" style="font-size:8px;padding:2px 6px;">PRELIM</span></td><td>Canonical Conv $ = quotedRevenue(Booked+Serviced) ÷ quotedRevenue(SQL universe), window 5/1–7/16. YoY comparison not available this quarter (Q1 conversion methodology isn't reconciled to this basis). Not scored against the 40% blended target per the feed's no_blended_rate rule. <span class="ref-source-icon" title="Matisen feed sales-metrics-q2-26-2026-07-21.csv">📍 Matisen sales feed</span></td></tr>
-        <tr><td>Cancellation Rate</td><td><span class="status-ribbon pending">PENDING</span></td><td>Not in this quarter's feed.</td></tr>
+        <tr><td>Cancellation Rate</td><td><strong>16.8%</strong></td><td>Ever-booked basis, upper-bound caveat applies. <span class="ref-source-icon" title="Matisen Q2 correction set 2026-07-24">📍 Matisen correction set 7/24</span></td></tr>
         <tr><td>Pricing Elasticity</td><td><span class="status-ribbon not-calculable">NOT CALCULABLE — Q2</span></td><td>Not tracked in the Q2 manifest this quarter.</td></tr>
         <tr><td>Revenue per Truck</td><td>$82,672</td><td>Below company avg ($103,543) — the small truck base (3.17) keeps the absolute-dollar read modest even with the branch's high margin and Games standing. <span class="ref-source-icon" title="Derived: revenue_q2_26 ÷ trucks">📍 Derived</span></td></tr>
         <tr><td>Moves per Truck</td><td>61.8</td><td>Below company avg (68.0). <span class="ref-source-icon" title="Derived: moves_q2_26 ÷ trucks">📍 Derived</span></td></tr>
@@ -1711,7 +1885,7 @@
       </div>
       <div class="hl-card down">
         <h3>⚠️ Lowlights — Address</h3>
-        <!-- NARRATIVE-SLOT: Q2 Tampa lowlights (Phase C). Candidate facts on hand for Phase C: TUR 56.5% vs 73.4% target — the lowest TUR AND the widest target gap of any branch this quarter (−16.9pts), a real step down from Q1's on-plan 72% (recalibrated basis) · NOI-to-plan 24.5%, rank #10 of 10 — the lowest in the company; NOI itself is barely positive, worth a watch-conversation even though it improved from Q1's planned loss · Revenue/truck ($82,672) and moves/truck (61.8) both below company average — the branch's absolute-dollar base stays thin at 3.17 trucks despite strong per-unit metrics · 3 of 7 composite inputs not_calculable/pending this quarter (sales target, mover eNPS, recognition) · BM transition this quarter (Brandon Kelley → Steven Anderson) — worth naming as context for any trend read. -->
+        <!-- NARRATIVE-SLOT: Q2 Tampa lowlights (Phase C). Candidate facts on hand for Phase C: TUR 56.5% vs 73.4% target — the lowest TUR AND the widest target gap of any branch this quarter (−16.9pts), a real step down from Q1's on-plan 72% (recalibrated basis) · NOI-to-plan 24.5%, rank #10 of 10 — the lowest in the company; NOI itself is barely positive, worth a watch-conversation even though it improved from Q1's planned loss · Revenue/truck ($82,672) and moves/truck (61.8) both below company average — the branch's absolute-dollar base stays thin at 3.17 trucks despite strong per-unit metrics · 2 of 7 composite inputs pending until the 7/31–8/1 quarter-close pulls (sales target, recognition); mover eNPS is a permanent side metric now, not a gap · BM transition this quarter (Brandon Kelley → Steven Anderson) — worth naming as context for any trend read. -->
         <ul></ul>
       </div>
     </div>
@@ -1787,7 +1961,7 @@
       <div class="metric ref">
         <div class="metric-row1"><span class="metric-name">Velocity (Δ from prior quarter)</span><span class="metric-weight">unweighted · still not landed</span></div>
         <div class="metric-value-row"><span class="metric-actual">—</span><span class="metric-grade ref">Blocked</span></div>
-        <p class="metric-target">Final-grade Δ vs prior quarter still can't compute — the Q2 composite is offline, so there's no Q2 final grade to delta against Q1's. Per-metric Δs (TUR, NPS, Personnel-Budget) ARE directionally readable from the tiles above even without a composite; a formal velocity column returns once Q3's composite is live.</p>
+        <p class="metric-target">Final-grade Δ vs prior quarter still can't compute cleanly — Q2's grade is provisional (2 of 7 inputs pending until 7/31–8/1) and Q1's basis differs on the crit slots (Driver Safety + Personnel-Budget vs Q2's Personnel-Budget + Games). Per-metric Δs (TUR, NPS, Personnel-Budget, Driver Safety) ARE directionally readable from the tiles above; a formal velocity column returns once Q2 finalizes and Q3 opens on a stable basis.</p>
         <details class="drill"><summary>Why this is on the wishlist</summary><p>Direction of travel matters more than a single quarter's snapshot.</p></details>
       </div>
 
@@ -1810,37 +1984,45 @@
 
   <section class="manager-only">
     <h2>Methodology &amp; Source Map</h2>
-    <details class="data-source-collapsible" open><summary>📍 How the grade is built — Q2 status</summary><div class="data-source-content">Branch grade is normally a 7-metric weighted composite plus a growth-modifier adjustment. <strong>This quarter the composite is offline</strong> — 3 of 7 inputs are unavailable (sales target attainment: three competing revenue bases, unresolved · mover eNPS: no Q2 survey cycle · recognition %: Q2 praise export incomplete). Cameron's 7/22 ruling: no letter grade renders this quarter; the cover hero shows NOI-to-plan + Strategic Weight instead. Cameron also repointed Critical Numbers · Q2's 2 graded slots to <strong>Average % to Personal (Budget) Goal</strong> and <strong>Einstein Games — Branch Season Average</strong> (Driver Safety moved to a standing Fleet Safety reference block, not dropped).
+    <details class="data-source-collapsible" open><summary>📍 How the grade is built — Q2 <span class="status-ribbon pending" style="font-size:8px;">Provisional</span></summary><div class="data-source-content">The 7-metric composite is <strong>restored on the ruled Q2 basis (Cameron 7/27)</strong> — zero reweighting from Q1; the crit slots rotate by design (always 15% apiece): Q1 crits = Personnel-Budget + Driver Safety; Q2 crits = Personnel-Budget + Einstein Games. Driver Safety is now a permanent constant carrying Mover eNPS's old 15% (eNPS = side metric, zero points, returns as a KPI when the mover-engagement cadence starts, ~2 quarters). Two inputs (Sales Target · Recognition) land at the 7/31–8/1 quarter-close pulls, so the grade is <strong>provisional: earned ÷ the 80 live points</strong>, re-based on all 100 at close.
  <table class="ref-table" style="margin-top: 8px;">
- <thead><tr><th>Component</th><th>Q2 status</th><th>Tampa</th></tr></thead>
+ <thead>
+ <tr><th>Component</th><th>Weight</th><th>Tampa</th><th>Earned</th></tr>
+ </thead>
  <tbody>
- <tr><td><strong>Composite</strong></td><td>Offline — 3 of 7 inputs unavailable</td><td><strong>Not calculable</strong></td></tr>
- <tr><td><strong>Growth Modifier</strong></td><td>Revenue YoY → Breakout tier (≥+20% band) → would be +10, shown for reference only</td><td><strong>+24.7% (reference)</strong></td></tr>
- <tr><td><strong>Final Grade</strong></td><td>Not calculable this quarter</td><td><strong>—</strong></td></tr>
- <tr><td><strong>NOI-to-Plan (cover lens)</strong></td><td>Allocated NOI ÷ Q2 reforecast plan</td><td><strong>24.5% · rank #10 of 10</strong></td></tr>
- <tr><td><strong>Strategic Weight</strong></td><td>Parallel display lens (NOT in grade math). NOI share 0.5% / Revenue share 3.1% / Truck share 3.9%. NOI flipped positive from Q1's planned-loss Growth Bet — still a thin base.</td><td><strong>Cash Neutral</strong></td></tr>
+ <tr><td>TUR (hours running — price never a factor)</td><td>20</td><td>56.5% vs 73.4% target → <strong>Red</strong></td><td><strong>4.0</strong> (20 × 1/5)</td></tr>
+ <tr><td>Customer NPS</td><td>15</td><td>93.8 vs 90 → <strong>Super Green</strong></td><td><strong>15.0</strong> (15 × 5/5)</td></tr>
+ <tr><td>Driver Safety (constant)</td><td>15</td><td>93 / 20.0% HR → <strong>Green</strong></td><td><strong>12.0</strong> (15 × 4/5)</td></tr>
+ <tr><td>Sales Target (booked-vs-target, EOQ pull)</td><td>10</td><td>Pending — lands 7/31–8/1</td><td>—</td></tr>
+ <tr><td>Recognition (praise-count attainment)</td><td>10</td><td>Pending — lands 7/31</td><td>—</td></tr>
+ <tr><td>Critical #1 · Personnel-Budget</td><td>15</td><td>116.7% → <strong>Super Green</strong></td><td><strong>15.0</strong> (15 × 5/5)</td></tr>
+ <tr><td>Critical #2 · Einstein Games (graduated)</td><td>15</td><td>10.05 → <strong>Green, crit CLEARED</strong> (highest in the company, full graduated credit)</td><td><strong>15.0</strong></td></tr>
+ <tr><td><strong>Provisional composite</strong></td><td><strong>80 live</strong></td><td colspan="2"><strong>61.0 ÷ 80 = 76.3 → B</strong></td></tr>
+ <tr><td><strong>Growth modifier</strong></td><td>—</td><td>+24.7% YoY → Breakout</td><td><strong>+10</strong></td></tr>
+ <tr><td><strong>Provisional final</strong></td><td>—</td><td colspan="2"><strong>76.3 + 10 = 86.3 → A−</strong> · finalizes at the 7/31–8/1 pulls</td></tr>
+ <tr><td><strong>Strategic Weight</strong></td><td>—</td><td colspan="2">Parallel display lens (NOT in grade math). NOI share 0.5% / Rev 3.1% / trucks 3.9% → <strong>Cash Neutral</strong>. NOI-to-plan 24.5% shown beside the grade on the cover.</td></tr>
  </tbody>
  </table></div></details>
-    <details class="data-source-collapsible"><summary>📍 Composite Math (returns Q3)</summary><div class="data-source-content">SG=5, G=4, W=2 (Watch), R=1. Score = (Σ weight × grade) / 5. Anchor points: all-Green = 80 (B+ baseline), all-Super Green = 100 (A+), all-Red = 20 (F floor). No composite math renders for Q2 — 3 of 7 inputs are unavailable this quarter (see above).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Growth Modifier Rubric (reference only this quarter)</summary><div class="data-source-content">Breakout (≥+20%) <strong>+10</strong> · Strong (+10-20%) <strong>+7</strong> · Stable growth (+3-10%) <strong>+4</strong> · Flat (0-3%) <strong>0</strong> · Slight decline (−3-0%) <strong>−3</strong> · Declining (&lt;−3%) <strong>−7</strong>. Tampa's +24.7% YoY → Breakout → would be +10 — but there's no composite this quarter for the modifier to add to.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Metric Registry + basis notes</summary><div class="data-source-content">Every rendered number traces to <code>Supporting Projects/QGR Packet/metric-registry.json</code> — stable metric ids + <code>basis_version</code>. TUR watch: if Matisen's staffing-model redefinition lands, that's a registry <code>basis_version</code> bump and a trend-line break, never a silent re-baseline. This manifest's <code>_registry_ref</code> points back to the registry.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Letter thresholds</summary><div class="data-source-content">95+ A+ · 90+ A · 85+ A− · 80+ B+ · 75+ B · 70+ B− · 60+ C · 50+ D · &lt;50 F.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Sales Target rubric (v3.3.5) — suspended this quarter</summary><div class="data-source-content">SG ≥100% · G 80-100% · W 60-80% · R &lt;60%. Rubric stands but has nothing to grade this quarter — sales_target_attainment = not_calculable (three competing revenue bases; see the manifest's <code>booked_vs_realized_basis</code> caveat).</div></details>
-    <details class="data-source-collapsible"><summary>📍 NOI/Truck — ungraded reference</summary><div class="data-source-content">Shown as Reference (ungraded) in the Financial Engine top block. Multi-quarter data is still too thin to calibrate a ratio-to-plan rubric, and seasonality isn't captured yet. NOI/Truck remains the OPSP "profit per truck" economic denominator.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Mover eNPS rubric (v3.4.2) — suspended this quarter</summary><div class="data-source-content">SG ≥+60 · G +40-59 · W +30-39 · R &lt;+30. Rubric stands but has nothing to grade — no Q2 mover-survey cycle ran (the Q2 instrument was the manager/CET salaried survey, company +81 n=52, different population).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Driver Safety Score rubric (v3.3.7) — now the Fleet Safety standing-reference rubric</summary><div class="data-source-content">SG ≥90 score AND &lt;10% high-risk · G ≥80 AND ≤20% HR · W 70-79 OR (≥80 AND &gt;20% HR) · R &lt;70. Still applied this quarter (Fleet Safety is a permanent, theme-independent deep dive per the packet-builder skill) — just relocated out of the 2 graded Critical Numbers slots per Cameron's 7/22 ruling. Tampa: 93 score / 20.0% HR = Green band (small n=5 pool).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Personnel-Budget rubric (v3.4.4, Cameron 5/4 ruling — LOCKED) — now the "Avg % to Personal Goal" tile</summary><div class="data-source-content">SG &gt;110% (over plan — exceeded budget reflects demand strength or planned-loss capacity; rewarded as exceeding the goal, not docked) · G 95-110% (on plan — meeting the budget goal) · W 85-94% (under plan) · R chronic-under (below 95%). Over-budget alone does NOT dock. This rubric now powers Critical Numbers · Q2's first graded slot per Cameron's 7/22 ruling (interpreted as branch Personnel-Budget attainment — see the placeholder-note on that tile for the open interpretation question). Tampa: 116.7% Super Green, highest in the company.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Composite Math — live (provisional basis)</summary><div class="data-source-content">SG=5, G=4, W=2 (Watch), R=1; a metric earns weight × (grade ÷ 5). Exception: Einstein Games earns graduated points (≥7.0 → 15 · 5.0–6.99 → 7.5 × (avg − 5.0) · &lt;5.0 → 0) while the crit line stays pass/fail at 7.0 — a miss reads Red visibly; a 6.87 would earn ~14.0 of 15 without hiding the miss. Provisional score = earned ÷ 80 live points; final = earned ÷ 100 after the 7/31–8/1 pulls. Anchor points unchanged: all-Green = 80 (B+ baseline), all-Super Green = 100 (A+), all-Red = 20 (F floor).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Growth Modifier Rubric</summary><div class="data-source-content">Breakout (≥+20%) <strong>+10</strong> · Strong (+10-20%) <strong>+7</strong> · Stable growth (+3-10%) <strong>+4</strong> · Flat (0-3%) <strong>0</strong> · Slight decline (−3-0%) <strong>−3</strong> · Declining (&lt;−3%) <strong>−7</strong>. Tampa's +24.7% YoY → Breakout tier → <strong>+10 applied to the provisional composite</strong> (76.3 + 10 = 86.3).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Letter thresholds</summary><div class="data-source-content">95+ A+ · 90+ A · 85+ A− · 80+ B+ · 75+ B · 70+ B− · 60+ C · 50+ D · &lt;50 F. Q1 cutoffs, unchanged. This quarter's letter renders PROVISIONAL (÷80 live points) until the 7/31–8/1 pulls land.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Locked grade bands (Q1-consistent, formalized 7/27)</summary><div class="data-source-content"><strong>TUR (pts vs branch target):</strong> Super Green ≥ +5 · Green −4 to +4.9 · Watch −5 to −7.9 · Red ≤ −8.<br><strong>Customer NPS (absolute, 90 target):</strong> Super Green ≥ 91 · Green 88–90.9 · Watch 86–87.9 · Red &lt; 86.<br><strong>Driver Safety Score (v3.3.7 — see the standing rubric reference on this page):</strong> SG ≥90 score AND &lt;10% high-risk · G ≥80 score AND ≤20% high-risk · W 70–79 OR (≥80 AND &gt;20% high-risk) · R &lt;70.<br><strong>Personnel-Budget (v3.4.4 — see the standing rubric reference on this page):</strong> SG &gt;110% · G 95–110% · W 85–94% · R chronic &lt;95% sustained across all three months.<br><strong>Einstein Games:</strong> graduated 5.0–7.0 credit curve (≥7.0 → full 15 pts · 5.0–6.99 → 7.5×(avg−5.0) · &lt;5.0 → 0); critical number stays pass/fail at 7.0 — see the games tile above.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Sales Target — pending quarter close (basis ruled 7/27)</summary><div class="data-source-content">Ruled Q2 basis: <strong>booked-vs-target, pulled at end of quarter (7/31–8/1)</strong> — resolves the three-competing-revenue-bases issue for grading purposes (manifest caveat <code>booked_vs_realized_basis</code> still governs labeling). Q1's attainment rubric (SG ≥100% · G 80-100% · W 60-80% · R &lt;60%) carries forward for the graded read once the EOQ pull lands. Until then this component's 10 points sit out of the provisional denominator.</div></details>
+    <details class="data-source-collapsible"><summary>📍 NOI/Truck — actively calibrating</summary><div class="data-source-content">Shown as Reference (ungraded) in the Financial Engine top block. Single-quarter data is still too thin to calibrate a ratio-to-plan rubric, and plan accuracy itself remains unmeasured. Revisit once multi-quarter data exists. NOI/Truck remains the OPSP "profit per truck" economic denominator. Q2 basis: allocated NOI (Cameron 7/21 ruling) ÷ trucks.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Mover eNPS — side metric, out of the composite (ruled 7/27)</summary><div class="data-source-content"><strong>Ruled by Cameron 7/27: Mover eNPS is out of the composite permanently</strong> — its 15% now belongs to Driver Safety as a permanent constant. It renders as a side metric (zero points) showing the last survey value as a stale reference (Q1 2026: Tampa +100 on n=9, company +46), and <strong>returns as a KPI when the constant mover-engagement cadence starts (~2 quarters)</strong>. Q1's rubric (SG ≥+60 · G +40-59 · W +30-39 · R &lt;+30, locked by Cameron 5/2) is preserved for that return. No Q2 mover-population cycle ran — the Q2 instrument surveyed manager/CET salaried staff instead (company +81, n=52).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Driver Safety Score rubric (v3.3.7) — standing reference this quarter</summary><div class="data-source-content">SG ≥90 score AND &lt;10% high-risk · G ≥80 AND ≤20% HR · W 70-79 OR (≥80 AND &gt;20% HR) · R &lt;70. Tampa Q2: 93 score / 20.0% high-risk (1 of 5 active drivers) → <strong>Green</strong> under this rubric (score is elite, near-SG territory, but the 20.0% HR rate sits right at the G ceiling, not under the SG 10% floor — small 5-driver pool). Driver Safety is no longer one of Q2's 2 rotating Critical Numbers (Cameron's 7/22 ruling replaced it with Personal-Goal Attainment + Einstein Games) — instead it was <strong>promoted to a permanent composite constant at 15% (Cameron 7/27)</strong>, taking Mover eNPS's old slot, and stays visible every quarter (Samsara data is continuous; theme-independent, permanent per the qgr-packet-builder skill). Green here earns 12.0 of 15 points in the provisional composite. Source: Mike Vandenbroader manual Samsara pull, master org 7005377, delivered 2026-07-22.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Personnel-Budget rubric (v3.4.4, Cameron 5/4 ruling — LOCKED, now "Avg % to Personal (Budget) Goal — Q2")</summary><div class="data-source-content">SG &gt;110% (over plan) · G 95-110% (on plan) · W 85-94% (under plan) · R chronic-F (&lt;95% sustained). Over-budget alone does NOT dock. Tampa Q2: 116.7% day-weighted → <strong>Super Green</strong> — the highest Personnel-Budget attainment in the company this quarter, up from Q1's 106% Green. This metric is one of Q2's 2 graded Critical Numbers per Cameron's 7/22 ruling, standing in for "average % to personal goal" — see the flag under that tile above.</div></details>
     <details class="data-source-collapsible"><summary>📍 Strategic Weight (v3.3.2 lens)</summary><div class="data-source-content">Cover-hero chip frames each branch's cash-contribution scale separately from the operational composite. Tiers: Cash Leader (≥20% NOI) · Cash Contributor (8-20%) · Cash Neutral (0-8%) · Growth Bet (negative NOI, planned-loss / new market) · Underperforming (negative NOI, NOT designated investment). NO impact on grade math — parallel display only. Tampa: Cash Neutral (0.5% NOI share) — NOI flipped positive from Q1's Growth Bet, still a thin base at 3.17 trucks.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Sources</summary><div class="data-source-content">Sage Intacct via Ben Young workbook v4 (Monday asset 3122213413, posted 7/20) — branch P&amp;L, allocated NOI, plan baselines. Matisen 5-feed fold v0.8.0–0.8.2 (intake-validated): sales-metrics, tur-actuals, personnel-budget, samsara-safety, gatherup-nps. games-s3-full-2026-07-22.json + branch slice. JSON central data bus <code>branch-metrics-q2-26.json</code> v0.10.4. Metric registry: <code>Supporting Projects/QGR Packet/metric-registry.json</code>.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Known data gaps (post-QGR collection target)</summary><div class="data-source-content">Sales target attainment basis reconciliation · mover eNPS Q2 cycle (didn't run) · recognition % (Q2 praise export incomplete) · conversion_count / cancellation_rate / contracts_count (pending) · damages per hour (pending post-week-8 reconciliation) · nps_moves (pending) · per-branch safety-event category breakdown (only aggregate + per-10K rate this quarter) · per-rep sales detail (branch-aggregate only this quarter). <strong>Tampa-specific:</strong> Central CX rep branch-tagging (Q1 gap, still unresolved) · BM-transition trend continuity (Brandon Kelley → Steven Anderson mid-year).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Sources</summary><div class="data-source-content">Manifest <code>branch-metrics-q2-26.json</code> v0.10.5 (validator-clean) — the sole number source for this file. Composite basis + graduated-points + pending-input rules per <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code> (Cameron's 7/27 rulings). Feed lineage: Matisen's 5-feed fold (sales, TUR, personnel-budget, Samsara safety, GatherUp NPS), intake-validated, folded via <code>fold_feeds_v080.py</code> v0.8.0→v0.10.4. Sage Intacct via Ben Young workbook v4 (financials, posted 7/20). Games data: <code>_games_s3_q2_26</code> block + <code>q2-data/games-s3-branch-slices/tampa.json</code>. Metric registry: <code>metric-registry.json</code> — stable metric ids + basis_version; watch the TUR basis note (the Matisen staffing-model redefinition, if it lands, is a basis bump + trend break, not a silent re-baseline).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Known data gaps (Q3 collection target)</summary><div class="data-source-content">Sales Target booked-vs-target EOQ pull (7/31–8/1 — basis ruled 7/27) · Recognition praise-count pull (7/31 — new basis ruled 7/27) · Mover eNPS cycle resumption (~2 quarters; side metric until then) · Conversion #, Contracts Count (EMMA missing-contracts backfill — cancellation_rate landed final 7/24 at 16.8%) · Damages per Hour (post-season reconciliation) · <code>nps_moves</code> · Magic Moments per Move · QGR Rock Performance · People Analyzer A/B/C mix · On-Site Eval coverage — all carried from the Q1 wishlist, none newly landed this quarter except Damages (now a scored Einstein Games component). <strong>Tampa-specific:</strong> Central CX rep branch-tagging (Q1 gap, still unresolved) · BM-transition trend continuity (Brandon Kelley → Steven Anderson mid-year).</div></details>
 
     <div class="audit-callout">
-      <strong>✓ Data quality reviewed.</strong> Every datapoint is traced to its primary source — click "📍 Source" under any metric tile or hover the 📍 icon in the reference table to verify. This file renders from <code>branch-metrics-q2-26.json</code> v0.10.4 only — no number here is remembered, estimated, or carried from the Q1 file.
+      <strong>✓ Data quality reviewed.</strong> Every datapoint is traced to its primary source — click "📍 Source" under any metric tile or hover the 📍 icon in the reference table to verify. Methodology + version log + open architectural questions live in the QGR packet's <strong>"How the Branch Scorecards Are Built"</strong> expandable section.
     </div>
   </section>
 
   <p class="manifest-stamp" style="font-size:11px;color:var(--gray-500);text-align:center;margin-top:24px;">
-    Rendered from branch-metrics-q2-26.json v0.10.4 &middot; 2026-07-25 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate)
+    Rendered from branch-metrics-q2-26.json v0.10.5 &middot; 2026-07-27 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate) &middot; composite PROVISIONAL — finalizes at the 7/31&ndash;8/1 pulls
   </p>
 
   <div class="footer">
@@ -1904,9 +2086,77 @@ function instantiatePendingMoverCharts() {
   window.__pendingMoverCharts = remaining;
 }
 
-// Seven-Metric Radar: NOT rendered this quarter — composite is offline (3 of 7 inputs unavailable).
-// Both chartRadar and moverChartRadar canvases are set to display:none in the markup; no Chart.js
-// instance is created for them (Chart.js stamps 0-size on hidden canvases and never recovers).
+// ── 1. Cover Radar Chart — RESTORED 2026-07-27 on the ruled Q2 composite basis (Cameron's 7/27 rulings).
+// 7 axes = the Q2 composite components (Driver Safety takes Mover eNPS's old slot as a permanent constant).
+// 2 axes (Sales Target · Recognition) are PENDING until the 7/31–8/1 quarter-close pulls — they render at 0
+// (chart center) with "pending" in the axis label and a tooltip that says pending, never a fake grade.
+// Radar viz scale: SG=4, G=3, W=2, R=1. Live values: TUR R=1 (56.5% vs 73.4% target), NPS SG=4 (93.8),
+// Driver Safety G=3 (93/20.0%HR), Personnel SG=4 (116.7%), Games — full graduated credit (10.05, clears
+// the 7.0 crit bar) mapped to SG=4 on this 1-4 viz scale (same "full weight earned" treatment as an SG grade;
+// the composite math itself uses the graduated-points formula, not this 1-4 ladder — see Composite Math above).
+const RADAR_PENDING_AXES = [1, 4]; // Sales Target, Recognition
+dualChart('chartRadar', 'moverChartRadar', {
+  type: 'radar',
+  data: {
+    labels: ['TUR (20)', ['Sales Target (10)', 'pending 7/31–8/1'], 'Customer NPS (15)', 'Driver Safety (15)', ['Recognition (10)', 'pending 7/31'], 'Personnel-Budget (15)', 'Einstein Games (15)'],
+    datasets: [
+      {
+        label: 'Tampa Q2 Grades (5 live · 2 pending)',
+        data: [1, 0, 4, 3, 0, 4, 4],
+        backgroundColor: ORANGE_FILL,
+        borderColor: ORANGE,
+        borderWidth: 2,
+        pointBackgroundColor: ORANGE,
+        pointRadius: 4,
+      },
+      {
+        label: 'All-Green Target',
+        data: [3, 3, 3, 3, 3, 3, 3],
+        backgroundColor: 'rgba(46,125,50,0.05)',
+        borderColor: GREEN,
+        borderWidth: 1.5,
+        borderDash: [6, 4],
+        pointRadius: 0,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 14, font: { size: 11 } } },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => {
+            if (ctx.datasetIndex === 0 && RADAR_PENDING_AXES.includes(ctx.dataIndex)) {
+              return ctx.dataset.label + ': Pending — lands at the quarter-close pull';
+            }
+            if (ctx.datasetIndex === 0 && ctx.dataIndex === 6) {
+              return ctx.dataset.label + ': Full graduated credit (15/15) — 10.05 avg, clears the 7.0 crit bar';
+            }
+            const labels = { 4: 'Super Green', 3: 'Green', 2: 'Watch', 1: 'Red' };
+            return ctx.dataset.label + ': ' + (labels[ctx.parsed.r] || ctx.parsed.r);
+          }
+        }
+      }
+    },
+    scales: {
+      r: {
+        suggestedMin: 0,
+        suggestedMax: 4,
+        ticks: {
+          stepSize: 1,
+          callback: (v) => ({ 1: 'R', 2: 'W', 3: 'G', 4: 'SG' }[v] || ''),
+          color: GRAY_400,
+          backdropColor: 'transparent',
+        },
+        pointLabels: { font: { size: 10.5, weight: 600 }, color: NAVY },
+        grid: { color: GRAY_300 },
+        angleLines: { color: GRAY_300 },
+      }
+    }
+  }
+});
 
 const turBranches = ['North Austin', 'South Austin', 'Leander', 'San Antonio', 'Houston', 'McKinney', 'Dallas', 'Fort Worth', 'Tampa', 'Garland'];
 const turActual = [66.8, 78.7, 77.7, 77.0, 80.0, 75.2, 81.2, 81.4, 56.5, 92.8];
