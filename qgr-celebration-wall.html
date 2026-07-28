@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Best of Q2 — Celebration Wall</title>
+<!-- qgr-celebration-wall v1.0 2026-07-28 — the room presentation for the hub's two v1.11
+     sections (3 Best Things + Legend of the Quarter). Ships EMPTY like ballot-results:
+     drag the SAME exported ballot JSONs (einstein-qgr-ballot/v7; v6 accepted, just no
+     celebration content) into the drop zone — photos render straight from the embedded
+     data-URLs, nothing uploads anywhere, files never leave this browser. Re-dropping a
+     leader's file overwrites their card. Present mode = full-screen slide stepper
+     (arrow keys / click), one slide per best thing then one per legend story. Dark
+     room-mode styling for the TV. Canonical: QGR Prep HQ. -->
+<style>
+:root{
+  --orange-500:#EF8B22; --orange-900:#CC5500;
+  --navy-500:#27343D; --navy-700:#1A2329; --navy-900:#0B1014; --navy-100:#CDD5DA; --navy-200:#9AADB7;
+  --blue-100:#C3DFEF; --blue-500:#0979C3;
+  --grey-100:#E2E3E4; --grey-400:#787C7F;
+  --success:#69995D;
+  --radius-sm:6px; --radius-md:12px; --radius-pill:999px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--navy-900);color:#fff;font-size:15px;line-height:1.55;min-height:100vh}
+header{padding:26px 32px 8px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+header .bebas{font-family:'Bebas Neue','Roboto',sans-serif;font-size:34px;letter-spacing:.03em}
+header .tag{font-size:12.5px;color:var(--navy-200)}
+main{max-width:1280px;margin:0 auto;padding:14px 32px 80px}
+.drop{border:2px dashed var(--navy-500);border-radius:var(--radius-md);padding:34px;text-align:center;color:var(--navy-200);font-size:14px;margin-bottom:24px;transition:.15s}
+.drop.over{border-color:var(--orange-500);color:#fff;background:rgba(239,139,34,.06)}
+.drop b{color:#fff}
+.drop .tiny{font-size:11.5px;display:block;margin-top:8px;color:var(--grey-400)}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.pill{font-size:12px;font-weight:700;background:var(--navy-700);color:var(--navy-100);border-radius:var(--radius-pill);padding:5px 14px}
+.pill.ok{background:#2E4A28;color:#CDE8C4}
+#btnPresent{background:var(--orange-500);color:#fff;border:none;border-radius:var(--radius-sm);padding:10px 22px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;margin-left:auto}
+#btnPresent:hover{background:var(--orange-900)}
+#btnPresent:disabled{background:var(--navy-700);color:var(--grey-400);cursor:default}
+h2{font-family:'Bebas Neue','Roboto',sans-serif;font-size:26px;letter-spacing:.03em;margin:26px 0 14px;color:var(--orange-500)}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px}
+.card{background:var(--navy-700);border:1px solid var(--navy-500);border-radius:var(--radius-md);padding:18px 20px}
+.card .who{font-size:15px;font-weight:700;margin-bottom:2px}
+.card .role{font-size:11.5px;color:var(--navy-200);margin-bottom:12px}
+.bt{border-top:1px solid var(--navy-500);padding:12px 0}
+.bt:first-of-type{border-top:none;padding-top:0}
+.kind{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-radius:var(--radius-pill);padding:2px 9px;display:inline-block;margin-bottom:6px}
+.kind.professional{background:#2E4A28;color:#CDE8C4}
+.kind.personal{background:#5A3A10;color:#F8D9AE}
+.bt .story{font-size:13.5px;color:#E8ECEF;white-space:pre-wrap}
+.phrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.phrow img{width:110px;height:110px;object-fit:cover;border-radius:var(--radius-sm);cursor:pointer;border:1px solid var(--navy-500)}
+.lg-card{background:var(--navy-700);border:1px solid var(--navy-500);border-left:4px solid var(--orange-500);border-radius:var(--radius-md);padding:18px 22px;margin-bottom:14px}
+.lg-card .lg-head{font-size:15px;font-weight:700;margin-bottom:8px}
+.lg-card .lg-head .from{color:var(--navy-200);font-weight:400;font-size:12.5px}
+.lg-card .story{font-size:13.5px;color:#E8ECEF;white-space:pre-wrap}
+.tally{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.tally .pill b{color:var(--orange-500)}
+.empty{color:var(--grey-400);font-size:13px;padding:8px 0 20px}
+/* ---- Present mode ---- */
+#present{display:none;position:fixed;inset:0;background:var(--navy-900);z-index:100;flex-direction:column;align-items:center;justify-content:center;padding:5vh 6vw;cursor:pointer}
+#present.on{display:flex}
+#present .p-kicker{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--orange-500);margin-bottom:14px}
+#present .p-who{font-family:'Bebas Neue','Roboto',sans-serif;font-size:46px;letter-spacing:.03em;margin-bottom:18px;text-align:center}
+#present .p-who .p-role{display:block;font-family:'Roboto',sans-serif;font-size:14px;letter-spacing:0;color:var(--navy-200)}
+#present .p-story{font-size:clamp(17px,2.2vw,26px);line-height:1.55;max-width:26em;text-align:center;color:#F2F5F7;white-space:pre-wrap}
+#present .p-photos{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:26px;max-width:90vw}
+#present .p-photos img{max-height:44vh;max-width:44vw;border-radius:var(--radius-md);border:1px solid var(--navy-500)}
+#present .p-nav{position:fixed;bottom:22px;left:0;right:0;text-align:center;font-size:12px;color:var(--grey-400)}
+#pClose{position:fixed;top:18px;right:22px;background:none;border:1px solid var(--navy-500);color:var(--navy-100);border-radius:var(--radius-sm);padding:7px 14px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+footer{position:fixed;bottom:0;left:0;right:0;background:var(--navy-700);color:var(--navy-200);text-align:center;padding:10px;font-size:11px}
+</style>
+</head>
+<body>
+<header><span class="bebas">BEST OF Q2 — CELEBRATION WALL</span><span class="tag">Q3 2026 QGR · July 29–30 · drop ballot exports below · nothing leaves this browser</span></header>
+<main>
+  <div class="drop" id="drop"><b>Drag the exported ballot files here</b> — the same <code>qgr-ballot-*.json</code> files leaders sent for the debate spread. Photos render straight from the files.<span class="tiny">Re-dropping a leader's file replaces their card. Files stay on this computer.</span>
+    <div style="margin-top:12px"><input type="file" id="filePick" accept="application/json" multiple></div></div>
+  <div class="bar" id="bar"></div>
+  <h2>🏆 3 Best Things</h2>
+  <div class="wall" id="wall"><div class="empty">Nothing yet — drop the ballot files above.</div></div>
+  <h2>🌟 Legends of the Quarter</h2>
+  <div class="tally" id="tally"></div>
+  <div id="legends"><div class="empty">Nothing yet.</div></div>
+</main>
+<div id="present"><button id="pClose">✕ close (Esc)</button><div id="pSlide"></div><div class="p-nav">← → arrow keys or click to advance</div></div>
+<footer>Internal room tool · Einstein Moving Company · files never leave this browser</footer>
+<script>
+const BALLOTS = {}; // leaderId -> parsed ballot json
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function kindLabel(k){ return k==="professional" ? "Professional" : k==="personal" ? "Personal" : null; }
+
+function ingest(files){
+  let added = 0, skipped = 0;
+  const jobs = Array.from(files).map(f=>f.text().then(t=>{
+    try{
+      const j = JSON.parse(t);
+      if(!j || !j.schema || String(j.schema).indexOf("einstein-qgr-ballot/")!==0 || !j.leader || !j.leader.id){ skipped++; return; }
+      BALLOTS[j.leader.id] = j; added++;
+    }catch(e){ skipped++; }
+  }).catch(()=>{ skipped++; }));
+  Promise.all(jobs).then(()=>{
+    render();
+    const bar = document.getElementById("bar");
+    if(skipped){ const p = document.createElement("span"); p.className="pill"; p.textContent = skipped+" file(s) skipped — not ballot exports"; bar.appendChild(p); }
+  });
+}
+const drop = document.getElementById("drop");
+["dragover","dragenter"].forEach(ev=>drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.add("over"); }));
+["dragleave","drop"].forEach(ev=>drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e=>ingest(e.dataTransfer.files));
+document.getElementById("filePick").addEventListener("change", e=>ingest(e.target.files));
+
+function allBestThings(){
+  const out = [];
+  Object.keys(BALLOTS).forEach(id=>{
+    const b = BALLOTS[id];
+    (b.bestThings||[]).forEach(it=>{
+      if((it.story||"").trim() || (it.photos||[]).length) out.push({leader:b.leader, item:it});
+    });
+  });
+  return out;
+}
+function allLegends(){
+  const out = [];
+  Object.keys(BALLOTS).forEach(id=>{
+    const b = BALLOTS[id];
+    if(b.legend && (b.legend.whoName || (b.legend.story||"").trim())) out.push({leader:b.leader, legend:b.legend});
+  });
+  return out;
+}
+
+function render(){
+  const ids = Object.keys(BALLOTS);
+  const bar = document.getElementById("bar");
+  bar.innerHTML = '<span class="pill'+(ids.length?' ok':'')+'">'+ids.length+' ballot'+(ids.length===1?'':'s')+' loaded</span>'+
+    ids.map(id=>'<span class="pill">'+esc(BALLOTS[id].leader.name.split(" ")[0])+
+      ((BALLOTS[id].bestThings&&BALLOTS[id].bestThings.length)||BALLOTS[id].legend?'':' · no celebration sections (older export)')+'</span>').join("")+
+    '<button id="btnPresent"'+(allBestThings().length+allLegends().length?'':' disabled')+'>▶ Present</button>';
+  document.getElementById("btnPresent").addEventListener("click", startPresent);
+
+  const wall = document.getElementById("wall");
+  const byLeader = {};
+  allBestThings().forEach(x=>{ (byLeader[x.leader.id] = byLeader[x.leader.id] || {leader:x.leader, items:[]}).items.push(x.item); });
+  const lids = Object.keys(byLeader);
+  wall.innerHTML = lids.length ? lids.map(id=>{
+    const g = byLeader[id];
+    return '<div class="card"><div class="who">'+esc(g.leader.name)+'</div><div class="role">'+esc(g.leader.role||"")+'</div>'+
+      g.items.map(it=>'<div class="bt">'+
+        (kindLabel(it.kind)?'<span class="kind '+esc(it.kind)+'">'+kindLabel(it.kind)+'</span>':'')+
+        '<div class="story">'+esc(it.story||"")+'</div>'+
+        ((it.photos||[]).length?'<div class="phrow">'+it.photos.map(p=>'<img src="'+esc(p.dataUrl)+'" alt="" loading="lazy">').join("")+'</div>':'')+
+        '</div>').join("")+'</div>';
+  }).join("") : '<div class="empty">No best-things entries in the loaded ballots yet.</div>';
+
+  const legends = allLegends();
+  const tallyMap = {};
+  legends.forEach(x=>{ if(x.legend.whoName) tallyMap[x.legend.whoName] = (tallyMap[x.legend.whoName]||0)+1; });
+  document.getElementById("tally").innerHTML = Object.keys(tallyMap).map(n=>
+    '<span class="pill"><b>'+esc(n.split(" ")[0])+'</b> · named by '+tallyMap[n]+'</span>').join("");
+  document.getElementById("legends").innerHTML = legends.length ? legends.map(x=>
+    '<div class="lg-card"><div class="lg-head">🌟 '+esc(x.legend.whoName||"—")+' <span class="from">— '+esc(x.leader.name.split(" ")[0])+'’s legend</span></div>'+
+    '<div class="story">'+esc(x.legend.story||"")+'</div></div>').join("")
+    : '<div class="empty">No legend stories in the loaded ballots yet.</div>';
+}
+
+/* ---- Present mode ---- */
+let SLIDES = [], SLIDE_I = 0;
+function buildSlides(){
+  SLIDES = [];
+  allBestThings().forEach(x=>SLIDES.push({type:"bt", x}));
+  allLegends().forEach(x=>SLIDES.push({type:"lg", x}));
+}
+function startPresent(){
+  buildSlides();
+  if(!SLIDES.length) return;
+  SLIDE_I = 0;
+  document.getElementById("present").classList.add("on");
+  renderSlide();
+}
+function renderSlide(){
+  const s = SLIDES[SLIDE_I];
+  const el = document.getElementById("pSlide");
+  if(s.type==="bt"){
+    const it = s.x.item, l = s.x.leader;
+    el.innerHTML = '<div class="p-kicker">🏆 Best of Q2'+(kindLabel(it.kind)?' — '+kindLabel(it.kind):'')+'</div>'+
+      '<div class="p-who">'+esc(l.name)+'<span class="p-role">'+esc(l.role||"")+'</span></div>'+
+      '<div class="p-story">'+esc(it.story||"")+'</div>'+
+      ((it.photos||[]).length?'<div class="p-photos">'+it.photos.map(p=>'<img src="'+esc(p.dataUrl)+'" alt="">').join("")+'</div>':'');
+  } else {
+    const lg = s.x.legend, l = s.x.leader;
+    el.innerHTML = '<div class="p-kicker">🌟 Legend of the Quarter</div>'+
+      '<div class="p-who">'+esc(lg.whoName||"—")+'<span class="p-role">'+esc(l.name.split(" ")[0])+'’s legend</span></div>'+
+      '<div class="p-story">'+esc(lg.story||"")+'</div>';
+  }
+  document.querySelector("#present .p-nav").textContent = (SLIDE_I+1)+" / "+SLIDES.length+" — ← → arrow keys or click to advance · Esc to close";
+}
+function step(d){
+  SLIDE_I = Math.min(Math.max(SLIDE_I+d, 0), SLIDES.length-1);
+  renderSlide();
+}
+document.getElementById("present").addEventListener("click", e=>{ if(e.target.id!=="pClose") step(1); });
+document.getElementById("pClose").addEventListener("click", ()=>document.getElementById("present").classList.remove("on"));
+document.addEventListener("keydown", e=>{
+  const on = document.getElementById("present").classList.contains("on");
+  if(!on) return;
+  if(e.key==="ArrowRight" || e.key===" " || e.key==="Enter") step(1);
+  else if(e.key==="ArrowLeft") step(-1);
+  else if(e.key==="Escape") document.getElementById("present").classList.remove("on");
+});
+render();
+</script>
+</body>
+</html>
