@@ -267,6 +267,30 @@
   .material-label { font-size: 0.82rem; font-weight: 700; color: var(--navy); }
   .material-sub { font-size: 0.68rem; color: var(--gray); }
 
+  /* Room jump bar + shelf badges (v3.76) */
+  .room-nav {
+    position: sticky; top: calc(var(--topbarH, 96px) + 8px); z-index: 40;
+    display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    background: var(--white); border: 1px solid var(--line); border-radius: 12px;
+    padding: 9px 14px; margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(27,58,92,0.08);
+  }
+  .room-nav-label { font-size: 0.66rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #94a3b8; }
+  .room-nav a {
+    font-size: 0.76rem; font-weight: 800; color: var(--navy); text-decoration: none;
+    border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; background: var(--light);
+    white-space: nowrap;
+  }
+  .room-nav a:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-50); text-decoration: none; }
+  #zone2 .section { scroll-margin-top: calc(var(--topbarH, 96px) + 62px); }
+  .mat-badge {
+    display: inline-block; font-size: 0.56rem; font-weight: 800; letter-spacing: .4px;
+    border-radius: 4px; padding: 1px 5px; margin-left: 5px; vertical-align: 1px; white-space: nowrap;
+  }
+  .mat-badge.local { background: #FDEBD7; color: #B45309; }
+  .mat-badge.login { background: #E0ECF7; color: #0979C3; }
+  .mat-badge.ext { background: #EEF1F4; color: #507080; }
+
   /* Ecosystem band (v3.43) */
   .eco-lane-head { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #64748b; margin: 14px 0 8px; }
   .eco-lane-head:first-child { margin-top: 0; }
@@ -645,6 +669,15 @@
 
   <div class="zone" id="zone2">
 
+    <div class="room-nav">
+      <span class="room-nav-label">Jump to</span>
+      <a href="#sec-room-preflight">🛫 Pre-flight</a>
+      <a href="#sec-agenda-linkmap">🔗 Link map</a>
+      <a href="#sec-room-agenda">✅ Agenda</a>
+      <a href="#sec-materials-shelf">🗄 Materials shelf</a>
+      <a href="#sec-live-decision-log">📌 Decision log</a>
+    </div>
+
     <div class="section" id="sec-room-preflight">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">🛫 Pre-flight — nothing surprises us mid-room</div>
@@ -670,8 +703,8 @@
     <div class="section" id="sec-materials-shelf">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">Materials shelf</div>
-      <div class="section-desc">One-click open, new tab, for anything you need on screen during the room.</div>
-      <div class="materials-grid" id="materialsGrid"></div>
+      <div class="section-desc">One-click open, new tab, for anything you need on screen during the room — grouped: decision surfaces first, then the Q2 story, live dashboards, and strategy reference. Badges flag the gotchas (LOCAL = needs :8136 running · LOG IN = do it at pre-flight); everything unbadged just opens.</div>
+      <div id="materialsGrid"></div>
     </div>
 
     <div class="section" id="sec-live-decision-log">
@@ -885,7 +918,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.75 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.76 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1387,6 +1420,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/27n', text: '\u{1F4D8} ROUNDTABLE PACKET v2.2 DEPLOYED (Cameron\'s 10-note redline fold, notes export on his Desktop) — orphan </div> layout break fixed (everything after Claims/MM rendered full-bleed); primary reverted to the Q1-as-presented blue-navy (#0d2b4e + #1565c0 accent, from the Q1 archive); cover callout + hero-strong white-on-white readability fixes; exec tiles now lead with the two critical numbers (Personnel 101.1% SG + Games 7.59 G — team-wide-QG tile OUT, rate relabeled leadership-only in Quarter Highlights with named ledger wins); strategic foundation shortened; NOI-basis + Dream-Team source behind tooltips; Bonus Goals → Continuing Education (all 7 ITP + improvement plans); games heat map GYR on grade bands; special-recognition watch deleted (ruled); winning-story placeholder removed. sync_qg_from_ledger.py anchor repointed to the quarter-highlights lead; --check 9/9 green; live byte-exact (c11b332). Same session: Q2 financial deck section-collapse rebuilt outline-style — H2 collapse keeps H3 subheads visible (5af8ad6, live byte-exact). Carry-over for the Debrief lane: add the games-PRIZE mention for movers ($75/effective-truck fridge stock).' },
     { date: '7/27j', text: '\u{1F4F8} Q2 DEBRIEF v1.6 \u2014 BRAND FONTS + REAL PHOTOGRAPHY (HQ v3.75). Cameron pushed back on Bebas (right call \u2014 kit retired it from web; internal-only exception was a stretch): display now = Roboto 900 headings + Lora hero/band display, the actual website language. Photography landed from the Drive \u201CProfessional Photos / EMC Move Photo Shoot\u201D Favorites: hero = crew running a couch up the ramp; chapter bands 2/3/4 = branded truck / mover mid-carry / \u201Csmartest move\u201D truck rear \u2014 kit-compliant dark-gradient overlays, no washes. Wall-of-text fixes: 70ch prose measure + fs-sowhat-1/2 split into 5 shorter paragraphs (new eids 1b/2b/2c; tie-check rows re-anchored). 118/118 green, live byte-exact + all 5 new assets 200.' },
     { date: '7/27i', text: '\u{1F3A8} Q2 DEBRIEF v1.5 \u2014 BRAND-KIT DESIGN PASS DEPLOYED (HQ v3.74). Cameron called the page AI-generic (identical block components, flat type); ran the design-audit skill (two parallel critics: UX/cognitive-load + craft/code) grounded in the Einstein Brand Kit, then applied: Bebas Neue display type + 17px body on the kit scale \u00b7 the ~36 What/So-What/Now-What tinted boxes retired to open prose with typographic markers \u00b7 4 navy chapter bands give the scroll an arc (Big Picture / Numbers / People / What\u2019s Next, hidden in Present) \u00b7 kit color ramps replace ad-hoc values (orange-900 accents \u2014 orange-as-text-on-white violations fixed \u00b7 blue = interactive \u00b7 AA contrast fixes) \u00b7 hero + full-navy Branch Scorecards closer \u00b7 Dream Team badges scaled to trophies \u00b7 hatched NPS target bar \u00b7 reduced-motion/focus-visible/print fixes \u00b7 chrome emoji stripped. All 4 modes re-verified (read/present/edit/notes; present = 14 slides, edit = 168 editables), tie-check 118/118, mobile-375 clean, live byte-exact (commit dc5bcab). Design language = the template for Q3 branch scorecards.' },
     { date: '7/27m', text: '⭐ Q2 DEBRIEF v1.4 DEPLOYED (HQ v3.73) — Cameron\'s eyeball on v1.3: record tote removed from the photo wall (5 images; goat tote kept — the one he praised in-channel) + the two first-ever mover-submitted Magic Moments promoted from a stat-tile footnote to their own orange callout box in Claims & MM: Luis Sanchez (divorce-move spa package) + Noah Schroder (SAFE-move LEGO car set), closing WIFM line = "you\'re in the living room — we\'re not; make mover-submitted the biggest category in Q3." Tie-check 102/102, live byte-exact.' },
