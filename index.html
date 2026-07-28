@@ -282,14 +282,40 @@
     white-space: nowrap;
   }
   .room-nav a:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-50); text-decoration: none; }
-  #zone2 .section { scroll-margin-top: calc(var(--topbarH, 96px) + 62px); }
+  #zone2 .section { scroll-margin-top: calc(var(--topbarH, 96px) + var(--roomnavH, 44px) + 20px); }
   .mat-badge {
-    display: inline-block; font-size: 0.56rem; font-weight: 800; letter-spacing: .4px;
-    border-radius: 4px; padding: 1px 5px; margin-left: 5px; vertical-align: 1px; white-space: nowrap;
+    display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: .4px;
+    border-radius: 4px; padding: 1px 6px; margin-left: 5px; vertical-align: 1px; white-space: nowrap;
   }
   .mat-badge.local { background: #FDEBD7; color: #B45309; }
   .mat-badge.login { background: #E0ECF7; color: #0979C3; }
   .mat-badge.ext { background: #EEF1F4; color: #507080; }
+  .agenda-meta {
+    margin: 0 0 6px 30px; padding-left: 10px; border-left: 2px solid #E4E9EF;
+    font-size: 0.74rem; color: #64748b; line-height: 1.5;
+    display: flex; flex-wrap: wrap; gap: 4px 14px;
+  }
+  .agenda-meta a { font-weight: 700; }
+  .agenda-meta-dep { color: #8A6D3B; }
+  /* v3.78 agenda rows: wrapping display text (no more clipped inputs), NOW marker, dblclick edit */
+  .agenda-row { align-items: flex-start; }
+  .agenda-row .phase-item-check { width: 20px; height: 20px; margin-top: 2px; cursor: pointer; }
+  .agenda-text { flex: 1; font-size: 0.84rem; color: var(--ink); line-height: 1.45; padding: 2px 2px 0; }
+  .agenda-text b { color: var(--navy); font-weight: 700; }
+  .agenda-text .agenda-text-detail { color: #64748b; }
+  .agenda-row.checked .agenda-text { opacity: .55; }
+  .agenda-row.checked .agenda-text b, .agenda-row.checked .agenda-text .agenda-text-detail { text-decoration: line-through; }
+  .agenda-row.agenda-now { background: var(--orange-50); border-left: 3px solid var(--orange); border-radius: 8px; padding: 5px 6px 5px 9px; margin-left: -12px; }
+  .agenda-now-chip {
+    font-size: 0.6rem; font-weight: 900; letter-spacing: .08em; color: var(--orange-900);
+    background: #FBE3C4; border-radius: 4px; padding: 1px 7px; margin-left: 8px; vertical-align: 2px; white-space: nowrap;
+  }
+  .agenda-edit-input {
+    flex: 1; border: 1px solid var(--blue); border-radius: 6px; padding: 6px 9px;
+    font-size: 0.82rem; background: var(--white); color: var(--ink);
+  }
+  .pf-group-count { font-size: 0.7rem; font-weight: 800; color: #507080; background: #EEF1F4; border-radius: 999px; padding: 2px 9px; margin-left: 8px; vertical-align: 1px; }
+  .pf-group-count.allgreen { background: #DCEFE0; color: var(--green); }
 
   /* Ecosystem band (v3.43) */
   .eco-lane-head { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #64748b; margin: 14px 0 8px; }
@@ -431,7 +457,7 @@
   table.chase-tbl tr.chase-row-done td.chase-feed-cell { text-decoration: line-through; }
 
   @media print {
-    .topbar, .tabs, .btn, .decision-form, .changelog-add, .agenda-add { display: none !important; }
+    .topbar, .tabs, .btn, .decision-form, .changelog-add, .agenda-add, .room-nav, .agenda-remove, .note-toggle { display: none !important; }
     .zone { display: block !important; }
     .scorecard-aar:not([open]) summary ~ * { display: block !important; }
     .section { break-inside: avoid; box-shadow: none; }
@@ -672,7 +698,6 @@
     <div class="room-nav">
       <span class="room-nav-label">Jump to</span>
       <a href="#sec-room-preflight">🛫 Pre-flight</a>
-      <a href="#sec-agenda-linkmap">🔗 Link map</a>
       <a href="#sec-room-agenda">✅ Agenda</a>
       <a href="#sec-materials-shelf">🗄 Materials shelf</a>
       <a href="#sec-live-decision-log">📌 Decision log</a>
@@ -681,21 +706,14 @@
     <div class="section" id="sec-room-preflight">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">🛫 Pre-flight — nothing surprises us mid-room</div>
-      <div class="section-desc">Every import, export, print job, and login that must be TRUE before Day 1 opens — grouped by deadline. Rob sits in Day 1: if a box here is unchecked Wednesday 7:30 AM, that's the fire to fight first. Checkboxes save in this browser like everything else.</div>
+      <div class="section-desc">The room-machine gate ONLY — every import, export, print job, and login that must be TRUE before Day 1 opens, grouped by deadline. Workstreams (Matisen data day, FLM rollout, redline passes) live in Runway Phase ③, not here — this list is what breaks live in front of Rob if it's false Wednesday 7:30 AM. Checkboxes save in this browser like everything else.</div>
       <div id="preflightWrap"></div>
-    </div>
-
-    <div class="section" id="sec-agenda-linkmap">
-      <div class="section-eyebrow">The Room</div>
-      <div class="section-title">🔗 Block-by-block link map</div>
-      <div class="section-desc">For each agenda block: what goes up on screen, and what must already be loaded before the room reaches it. No hunting for links mid-QGR — this table is the co-pilot; the agenda below is the checklist.</div>
-      <div class="tracker-table-wrap" id="linkmapWrap"></div>
     </div>
 
     <div class="section" id="sec-room-agenda">
       <div class="section-eyebrow">The Room</div>
       <div class="section-title">Agenda — the live QGR checklist (7/29–30)</div>
-      <div class="section-desc">THIS is where the QGR itself runs — check blocks off as the room moves, ✎-note each one (decisions, quotes, parking-lot). Runway Phase ③ only tracks readiness; no more duplication. Notes ride the normal Export, or copy them alone here:</div>
+      <div class="section-desc">THIS is where the QGR itself runs — check blocks off as the room moves, ✎-note each one (decisions, quotes, parking-lot). Each block carries its own 🖥 on-screen links and ⚑ what must already be true right underneath it (the old link map, merged in). Notes ride the normal Export, or copy them alone here:</div>
       <div style="margin-bottom:10px"><button class="btn" id="roomNotesBtn">⬇ Copy Room notes (markdown)</button></div>
       <div id="agendaWrap"></div>
     </div>
@@ -918,7 +936,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.77 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.78 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1135,17 +1153,13 @@
         { text: '🧮 People Analyzer — leadership run (Cameron + Paul) — AFTER the AAR fold + packet manifest',
           url: 'http://localhost:8136/people-analyzer-leadership.html', urlLabel: 'run it (local)',
           ctx: 'RESEQUENCED here per Cameron 7/22 (was Phase ①): the PA runs once AARs are digested and the packet manifest/QG success rates land, so criticals, QG rates, and KPI actuals AUTOPOPULATE from those instead of being hand-typed. This cycle proves it — AAR self-grades + criticals are pre-seeded in the tool. IN PROGRESS: Amanda done 7/22 (export round-trip verified); finish the rest after the Matisen data-day fold where possible. STANDING SEQUENCE for the Q3 SOP at close-out: AARs → manifest/QG rates → People Analyzer → QGR group PA review.' },
-        { text: 'Pre-reads out to leadership (eNPS one-pager + gated deck link) ≥2 days ahead',
-          ctx: 'Walking Pack v2 retired 7/22 (built, never used) — the pre-read is now the eNPS one-pager + whatever Cameron gates from the deck.' },
-        { text: 'Room readiness: packet built + materials shelf loaded + OPSP builder up on screen',
-          ctx: 'The full Day 1/Day 2 agenda lives in The Room tab as a live checklist with per-block notes — no duplicate list here.' },
         'Run Day 1 in The Room (live checklist + notes + decision log)',
         'Run Day 2 in The Room (live checklist + notes + decision log)',
         'Export Room notes + decision log to Albert at close of each day',
         { text: '🪞 Manager AARs: send hub link Mon 7/27 → collect JSONs → stage for the room',
           url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/', urlLabel: 'Manager AAR Hub',
           url2: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html', url2Label: 'Live Results (room view)',
-          ctx: 'STATUS 7/27: tool is FINAL (v1.4.1 — paste-back proven vs 3 simulated cold Claudes 7/26); the rollout message is the ONLY thing held, on Cameron\'s go. The collection loop: ① Cameron (or regionals) send managers the hub link (Mon may slide Tue/Wed — but FLM QGRs are 8/4–8/5, so managers need the runway). ② Managers export → send their aar-*.json to their regional or Albert. ③ Albert stages the folder (Supporting Projects/People Analyzer/aar-manager-tool/submissions-q2/, LOCAL ONLY — never pushed to the public repo). ④ In the room: open Live Results, drag the folder\'s files in, arrow-keys walk manager to manager. Chase list: Albert flags unsubmitted managers Fri + Mon AM.' }
+          ctx: 'STATUS 7/27 3pm: rollout = GO, beta-first (Brian/Mike pick a couple managers to test the JSON export, then full send; regionals own distribution + collection via Google Form + DB pulse check-off; due EOD Fri 7/31 · review Mon 8/3 · ~1 hr expectation communicated). Tool is FINAL (v1.4.1 — paste-back proven vs 3 simulated cold Claudes 7/26). The collection loop: ① Cameron (or regionals) send managers the hub link (Mon may slide Tue/Wed — but FLM QGRs are 8/4–8/5, so managers need the runway). ② Managers export → send their aar-*.json to their regional or Albert. ③ Albert stages the folder (Supporting Projects/People Analyzer/aar-manager-tool/submissions-q2/, LOCAL ONLY — never pushed to the public repo). ④ In the room: open Live Results, drag the folder\'s files in, arrow-keys walk manager to manager. Chase list: Albert flags unsubmitted managers Fri + Mon AM.' }
       ]
     },
     {
@@ -1222,7 +1236,7 @@
   // decided in owners' prep, presented for team buy-in — not reopened.
   var AGENDA_SEED = {
     day1: {
-      label: 'Wed 7/29 — REVIEW + VALIDATE (draft v2)',
+      label: 'Day 1 · Wed 7/29 — REVIEW + VALIDATE',
       items: [
         '3 best things',
         'AAR TL;DR round — 2 min per leader: colors, one win, one lesson · praise + recognize before moving forward',
@@ -1238,7 +1252,7 @@
       ]
     },
     day2: {
-      label: 'Thu 7/30 — DECIDE + CASCADE (draft v2)',
+      label: 'Day 2 · Thu 7/30 — DECIDE + CASCADE',
       items: [
         'Praise handouts + Legends of the Quarter',
         'Quarterly theme locked + poster/rewards/dashboard',
@@ -1293,17 +1307,17 @@
   // v3.76: shelf regrouped into 4 bands + backfilled so EVERY link the room needs lives here
   // (several previously existed only in the toolkit or the link map). Badges = gotchas only.
   var MATERIALS_BANDS = [
-    { band: '🎬 Decision surfaces — what the room drives from', items: [
-      { icon: '🗳', label: 'Ballot Room View', sub: 'ships EMPTY — drag the returned qgr-ballot-*.json in · aggregate + Room Reveal', url: 'ballot-results.html' },
-      { icon: '🛠', label: 'QGR Triage Room (walked slate)', sub: '196 cards / 178 rulings baked in — the Q3-goals-per-leader working surface', url: 'qgr-triage-room.html' },
-      { icon: '🧾', label: 'OPSP + Vision Summary Builder', sub: 'the output surface — SWT/worksheet results get entered here', url: 'https://goal-plan-access.replit.app/', badge: 'LOG IN', badgeClass: 'login' },
-      { icon: '🗺', label: 'SWT + 7 Strata Worksheet', sub: 'RULED 7/20 — survivors feed the OPSP builder', url: 'strata-swt-worksheet.html' },
-      { icon: '🧮', label: 'People Analyzer — Leadership', sub: 'never hosted — dead without the server; see Pre-flight', url: 'http://localhost:8136/people-analyzer-leadership.html', badge: 'LOCAL :8136', badgeClass: 'local' },
-      { icon: '🧮', label: 'People Analyzer — Directs', sub: 'leaders eval their OWN directs · exports return to Cameron', url: 'https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/' },
-      { icon: '🪞', label: 'AAR Review Room (all 7 write-ups)', sub: "Cameron's 7/22 review baked in + Q2 headlines", url: 'aar-review.html' },
-      { icon: '📽', label: 'Mgr AAR Live Results', sub: 'ships EMPTY — drag collected aar-*.json in · rollup + arrow-key walk', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html' },
-      { icon: '🏆', label: 'QG Success Tracker', sub: 'cross-quarter success rates — Q2 = 80.0% FINAL · per-goal detail', url: 'einstein-qg-tracker.html' },
-      { icon: '🗳', label: 'QGR Workshop Hub (leader-facing)', sub: 'debate ballot + prep tiles — the leader mirror of this HQ', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/' }
+    { band: '🎬 Decision surfaces — in agenda order', items: [
+      { icon: '🪞', label: 'AAR Review Room (all 7 write-ups)', sub: 'Day-1 AAR round — opens pre-highlighted for the walk', url: 'aar-review.html' },
+      { icon: '✍️', label: 'OPSP + Vision Summary Builder', sub: 'Day-1 slow open + Day-1 close — results get entered here', url: 'https://goal-plan-access.replit.app/', badge: 'LOG IN', badgeClass: 'login' },
+      { icon: '🗺', label: 'SWT + 7 Strata Worksheet', sub: 'read aloud at the slow open — survivors feed the builder', url: 'strata-swt-worksheet.html' },
+      { icon: '🏆', label: 'QG Success Tracker', sub: 'the finalize-SG/G/R block — Q2 = 80.0% FINAL · per-goal detail', url: 'einstein-qg-tracker.html' },
+      { icon: '🧮', label: 'People Analyzer — Leadership', sub: 'the group-PA block — dead without the server; see Pre-flight', url: 'http://localhost:8136/people-analyzer-leadership.html', badge: 'LOCAL :8136', badgeClass: 'local' },
+      { icon: '👥', label: 'People Analyzer — Directs', sub: 'leaders eval their OWN directs · exports return to Cameron', url: 'https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/' },
+      { icon: '🗳', label: 'Ballot Room View', sub: 'the Q3-goals block — drag the returned ballot JSONs in · Room Reveal', url: 'ballot-results.html' },
+      { icon: '🛠', label: 'QGR Triage Room (walked slate)', sub: 'the Q3-goals block — 196 cards / 178 rulings, per-leader lanes', url: 'qgr-triage-room.html' },
+      { icon: '🎟', label: 'QGR Workshop Hub (leader-facing)', sub: 'the leader mirror — debate ballot + prep tiles', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/' },
+      { icon: '📽', label: 'Mgr AAR Live Results', sub: 'Day-2 manager block — drag collected aar-*.json in · arrow-key walk', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html' }
     ]},
     { band: '📦 The Q2 story — packet family', items: [
       { icon: '🗂', label: 'Q2 Materials — landing index', sub: 'packet + all 10 scorecards + Q2/Q1 decks, one index', url: 'q2-materials/' },
@@ -1344,20 +1358,17 @@
   var PREFLIGHT_SEED = [
     { group: '🕛 By Tue noon (leader prep deadline)', items: [
       { id: 'pf-ballots', text: '8/8 leader ballots staged in ballots-q3/ — due Tue 12pm; Albert chases gaps Tue 1pm', ctx: 'As of Mon 12:45 only Cameron\'s is in. Exports arrive via the Workshop Hub → forward JSONs to Albert as they land.' },
-      { id: 'pf-ballot-test', text: 'Drag Cameron\'s own ballot JSON into the Ballot Room View — prove the drag-in on the room machine', url: 'ballot-results.html', urlLabel: 'Ballot Room View' },
-      { id: 'pf-mgraar-go', text: '✅ FLM QGR Prep rollout = GO (3pm 7/27 ruling) — beta first: Brian/Mike pick a couple managers to test the JSON export today/tomorrow, then full send', ctx: 'Regionals own distribution + collection: Google Form (upload JSON) + check-off list via DB pulse; DMs honored. Deadline EOD FRI 7/31 (quarter close) · review MON 8/3 · Tue 8/4 session data may be slightly wonky (accepted). Communicate ~1 hour time expectation. Albert watches beta feedback while Cameron is with Matisen Tue.' }
+      { id: 'pf-ballot-test', text: 'Drag Cameron\'s own ballot JSON into the Ballot Room View — prove the drag-in on the room machine', url: 'ballot-results.html', urlLabel: 'Ballot Room View' }
     ]},
     { group: '🌙 By Tue EOD', items: [
-      { id: 'pf-matisen', text: 'Matisen data day — 9 AM KICKOFF CONFIRMED (Cameron\'s Slack agenda, Paul in): ① confirm QGR packet + redline data inconsistencies together ② confirm his goal shortlist + cross-goal dependencies (fast — workshop did the heavy lift) ③ theme measurement & success — IT/Data\'s part ④ O3 if time', ctx: 'Their adds from the thread: MATISEN — flag which packet sections managers should get on a REGULAR REFRESH + automate those (feeds the Q3 data-bus/One-Truth workstream). PAUL — data frameworks being stood up + how they impact the next QGRs over the coming 3 months. Still riding the day: EMMA CSV verify end-to-end · dashboards/branch data clean · wedge 3-way decomposition (ask with him) · finalized shortlist. ✅ Done: Games 0–10 · QG-82.5 reply · slate triaged. ⏳ EOQ 7/31–8/1: per-rep attainment · booked-vs-target · praise counts.' },
       { id: 'pf-redlines', text: 'Redlines done: packet (Cameron) · financial deck (Paul) · Q2 Debrief (Cameron, once the working-on-now/WIFM section lands)' },
-      { id: 'pf-scorecard-rework', text: 'Scorecard rework (3pm 7/27 ruling): mover eNPS OUT of composite permanently (side metric w/ caveats) · Games IN as critical #2 (avg-of-weekly-avgs) · driver safety → CONSTANT @15% · recognition basis → straight praise counts · TUR = hours running only. Cameron owes Paul/Brian/Mike the proposed point reallocation + rubrics', ctx: 'Albert drafts the reallocation + rubric proposal for Cameron\'s review. Final grades wait for praise counts + sales attainment at quarter close. Regional written-assessment lane PARKED, not decided.' },
+      { id: 'pf-scorecard-rework', text: 'Scorecard rework: send Paul/Brian/Mike the point-reallocation + rubrics proposal', ctx: '3pm 7/27 ruling: mover eNPS OUT of composite permanently (side metric w/ caveats) · Games IN as critical #2 (avg-of-weekly-avgs) · driver safety → CONSTANT @15% · recognition = straight praise counts · TUR = hours running only. Albert drafts for Cameron\'s review. Final grades wait for praise counts + sales attainment at quarter close. Regional written-assessment lane PARKED, not decided.' },
       { id: 'pf-prereads', text: 'Pre-reads out to leadership ≥2 days ahead — that window is NOW (eNPS one-pager + whatever Cameron gates from the deck)' },
       { id: 'pf-pa', text: 'People Analyzer current: latest exports re-baked (seed = snapshot) · Ben Young + Kickpoint done or consciously skipped' },
-      { id: 'pf-print', text: 'PRINT: blank one-page strategic plans (one per leader + spares) · praise handouts for the Roundtable' },
-      { id: 'pf-food', text: '✅ Dinner booked — 60 Vines (the Domain), 6:45, tentative (Cameron 7/27) — check this off', ctx: 'Confirm the reservation holds; firm up if still tentative by Tue.' }
+      { id: 'pf-print', text: 'PRINT: blank one-page strategic plans (one per leader + spares) · praise handouts for the Roundtable' }
     ]},
     { group: '🌅 Wed 7:30 AM (room machine = this Mac)', items: [
-      { id: 'pf-localhost', text: 'Launch the people-analyzer server (:8136) — People Analyzer + Manager AAR local tools are dead without it (Quarter in Review no longer needs :8101 — hosted on the Workshop Hub repo since 7/27)' },
+      { id: 'pf-localhost', text: 'Launch the people-analyzer server (:8136) — People Analyzer + Manager AAR local tools are dead without it', ctx: 'Quarter in Review no longer needs :8101 — hosted on the Workshop Hub repo since 7/27.' },
       { id: 'pf-shelf', text: 'Click through EVERY Materials-shelf link once — find dead links now, not live in front of Rob' },
       { id: 'pf-imports', text: 'Imports loaded: Ballot Room View has all returned ballots · Live Results has the mgr-AAR folder (if rollout went) · QG tracker shows 80.0% FINAL' },
       { id: 'pf-backup', text: 'Export a baseline HQ JSON (⬇ Export) so the room state has a restore point · decision log clean of test rows' },
@@ -1365,34 +1376,53 @@
     ]}
   ];
 
-  // ── Block-by-block link map (v3.62) — static co-pilot table; agenda text itself lives in LS.
-  var LINKMAP = {
-    day1: [
-      ['3 best things', '—', '—'],
-      ['AAR TL;DR round', '<a href="aar-review.html" target="_blank">AAR Review Room</a> · <a href="https://einsteinadmin.github.io/goals-dashboard/" target="_blank">Goals Dashboard</a>', 'Review Room loads reviewed (42 highlights baked in)'],
-      ['Slow open — SWT + OPSP aloud', '<a href="https://goal-plan-access.replit.app/" target="_blank">OPSP builder</a> · <a href="strata-swt-worksheet.html" target="_blank">SWT worksheet (RULED 7/20)</a>', 'Builder logged in (pre-flight)'],
-      ['QGR packet walkthrough (fin + marketing)', '<a href="q2-materials/" target="_blank">Q2 materials index</a> · <a href="q2-materials/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html" target="_blank">Financial deck</a>', 'Cameron + Paul redlines DONE (pre-flight) · cover grade presented as DRAFT unless ruled'],
-      ['eNPS results', '<a href="https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/" target="_blank">eNPS one-pager</a>', 'Sent as pre-read Mon/Tue'],
-      ['Branch scorecards until everyone can read their own', '<a href="q2-materials/" target="_blank">10 scorecards (materials index)</a>', '⚠ composites OFFLINE pending the eNPS off-survey ruling — decide before, or open with the ruling'],
-      ['Finalize Q2 SG/G/R', '<a href="einstein-qg-tracker.html" target="_blank">QG Success Tracker</a>', '80.0% FINAL (32/40) — Day-1 sync now REVIEWS finals, not sets them; any change goes through the ledger + sync script after the room'],
-      ['People Analyzers as a group', '<a href="http://localhost:8136/people-analyzer-leadership.html" target="_blank">People Analyzer (localhost)</a>', ':8136 running + latest exports re-baked (pre-flight)'],
-      ['Q3 goals per leader — R/G/SG definitions tested', '<a href="ballot-results.html" target="_blank">Ballot Room View</a> · <a href="qgr-triage-room.html" target="_blank">Triage Room</a> · <a href="https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/" target="_blank">Workshop Hub</a>', 'All 8 ballots dragged in BEFORE this block — this is the one that dies without the JSONs'],
-      ['Lunch walk DP', '—', '—'],
-      ['OPSP page 2 + Vision Summary', '<a href="https://goal-plan-access.replit.app/" target="_blank">OPSP builder</a>', 'Blank OPSPs printed as the table copy']
-    ],
-    day2: [
-      ['Praise + Legends of the Quarter', 'printed handouts', 'Praise-counts pull (Cameron) + print (pre-flight)'],
-      ['Quarterly theme locked', '<a href="https://einsteinmoving.monday.com/boards/18408300070" target="_blank">MB theme pulses</a> (12556457451/2/3)', 'Back to School leading · Estimate Accuracy likely Q4'],
-      ['Cascading goals chart', '<a href="https://docs.google.com/spreadsheets/d/1CEwbltgyvNbpl5_1pVsWL70qaCMGgDE9Jk7RGm1eAsM" target="_blank">Cascading Goals sheet</a>', 'Q3 tab ready'],
-      ['Revenue targets buy-in', '<a href="https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-manager-view-c78d344e2d62.html" target="_blank">Q3 manager view</a> · <a href="https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-tur-projection-3dde0a126d8c.html" target="_blank">Q3 TUR/fleet</a>', 'Q3 reforecast settled w/ Ben + Paul'],
-      ['Bonus Goals / Mid-Quarter Pivots', '<a href="einstein-qg-tracker.html" target="_blank">QG tracker</a>', '—'],
-      ['CASh / Power of One recap', '<a href="https://paulm-emc.github.io/EMC-Power-of-One-Tool-70c5c4bdaade/" target="_blank">Power of One (Paul)</a>', '5 min — decisions already made'],
-      ['RATIFY rows (damages · AI governance · cross-cutting goals)', '<a href="https://einsteinmoving.monday.com/boards/18408300070" target="_blank">Master Backlog</a>', 'Pulse links in the agenda notes'],
-      ['Quarter in Review redline (15 min)', '<a href="https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/q2-quarter-in-review.html" target="_blank">Quarter in Review draft (hosted, Workshop Hub repo)</a>', 'Run AFTER the theme locks (several "What\'s coming" lines depend on it). PLAUD runs — Cameron says "Quarter in Review" aloud at block start (transcript seam marker); leaders speak corrections, Albert folds same-day. Pending in room: Mike live-app URL · Amanda dashboard link/screenshot + framing OK · Matisen chatbot shot + benefit list · Anne question swap · Paul finance half'],
-      ['Manager presentation started', '<a href="q2-materials/q2-frontline-packet.html" target="_blank">Q2 Debrief</a> · <a href="https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html" target="_blank">Mgr AAR Live Results</a>', 'Debrief DRAFT chips (Q3 theme + Claims/MM) fill from THIS room\'s rulings'],
-      ['Remaining to-dos → pulses', 'Live decision log (below)', 'Log rows carry owner + due — export at close'],
-      ['Debrief + sensitive-doc access cleanup', '<a href="qgr-ecosystem-map.html" target="_blank">Ecosystem map</a>', 'Cloudflare gate decision rides the FLM-cascade lane (Fri/Mon)']
-    ]
+  // ── Per-block agenda meta (v3.78) — the old block-by-block link map, merged INTO the agenda.
+  // Keyed by the agenda item's CURRENT text (seed text unless Cameron edits a row — an edited row
+  // simply drops its meta, which is honest: the meta may no longer fit the rewritten block).
+  // links = raw HTML (anchors) · dep = "must already be true" plain text.
+  var AGENDA_META = {
+    'AAR TL;DR round — 2 min per leader: colors, one win, one lesson · praise + recognize before moving forward':
+      { links: '<a href="aar-review.html" target="_blank">AAR Review Room</a> · <a href="https://einsteinadmin.github.io/goals-dashboard/" target="_blank">Goals Dashboard</a>', dep: 'Review Room loads reviewed (42 highlights baked in)' },
+    'Slow open — re-read SWT + OPSP first 3 columns aloud, update live in the OPSP builder (go-slow-to-go-fast)':
+      { links: '<a href="https://goal-plan-access.replit.app/" target="_blank">OPSP builder</a> · <a href="strata-swt-worksheet.html" target="_blank">SWT worksheet (RULED 7/20)</a>', dep: 'Builder logged in (pre-flight)' },
+    'QGR packet walkthrough: financial analysis + marketing analysis':
+      { links: '<a href="q2-materials/" target="_blank">Q2 materials index</a> · <a href="q2-materials/q2-2026-roundtable-packet.html" target="_blank">Packet</a> · <a href="q2-materials/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html" target="_blank">Financial deck</a>', dep: 'Cameron + Paul redlines DONE (pre-flight) · cover grade presented as DRAFT unless ruled' },
+    'eNPS results — the one-pager + action slate (quick pass, deep-dive linked)':
+      { links: '<a href="https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/" target="_blank">eNPS one-pager</a>', dep: 'Sent as pre-read Mon/Tue' },
+    'Branch scorecards — walk the team through them until everyone can read their own':
+      { links: '<a href="q2-materials/" target="_blank">10 scorecards (materials index)</a>', dep: 'Scorecard rework RULED 7/27 (mover eNPS out · Games in) — walk the ruling; final grades land at July close' },
+    'Finalize Q2 SG/G/R for all leadership + directs':
+      { links: '<a href="einstein-qg-tracker.html" target="_blank">QG Success Tracker</a>', dep: '80.0% FINAL (32/40) — this block REVIEWS finals, not sets them; changes go through the ledger + sync script after the room' },
+    'People Analyzers as a group':
+      { links: '<a href="http://localhost:8136/people-analyzer-leadership.html" target="_blank">People Analyzer (localhost)</a>', dep: ':8136 running + latest exports re-baked (pre-flight)' },
+    'Q3 goals outlined per leader — exact Red/Green/Super-Green definitions + how each is measured, TESTED and validated against the team (goal-hygiene gate: no unmeasurable bars leave the room)':
+      { links: '<a href="ballot-results.html" target="_blank">Ballot Room View</a> · <a href="qgr-triage-room.html" target="_blank">Triage Room</a> · <a href="https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/" target="_blank">Workshop Hub</a>', dep: 'All 8 ballots dragged in BEFORE this block — this is the one that dies without the JSONs' },
+    'OPSP page 2 + Vision Summary — finalize Roundtable draft in the builder':
+      { links: '<a href="https://goal-plan-access.replit.app/" target="_blank">OPSP builder</a>', dep: 'Blank OPSPs printed as the table copy' },
+    'Praise handouts + Legends of the Quarter':
+      { links: 'printed handouts', dep: 'Praise-counts pull (Cameron) + print (pre-flight)' },
+    'Quarterly theme locked + poster/rewards/dashboard':
+      { links: '<a href="https://einsteinmoving.monday.com/boards/18408300070" target="_blank">MB theme pulses</a> (12556457451/2/3)', dep: 'Back to School leading · Estimate Accuracy likely Q4' },
+    'Cascading goals chart finalized (incl. below-Roundtable tier: Jalissa/Nhel/Tet/Carly/KP/Prosper/Fabian/Austin L)':
+      { links: '<a href="https://docs.google.com/spreadsheets/d/1CEwbltgyvNbpl5_1pVsWL70qaCMGgDE9Jk7RGm1eAsM" target="_blank">Cascading Goals sheet</a>', dep: 'Q3 tab ready' },
+    'Revenue targets buy-in (NI bonus is company-wide)':
+      { links: '<a href="https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-manager-view-c78d344e2d62.html" target="_blank">Q3 manager view</a> · <a href="https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-tur-projection-3dde0a126d8c.html" target="_blank">Q3 TUR/fleet</a>', dep: 'Q3 reforecast settled w/ Ben + Paul' },
+    'Bonus Goals / Mid-Quarter Pivots section per leader (incl. ITP follow-up bonus goals)':
+      { links: '<a href="einstein-qg-tracker.html" target="_blank">QG tracker</a>', dep: '' },
+    'CASh / Power of One — RECAP of the Cameron+Paul+Ben owners’ session (5 min, decisions already made)':
+      { links: '<a href="https://paulm-emc.github.io/EMC-Power-of-One-Tool-70c5c4bdaade/" target="_blank">Power of One (Paul)</a>', dep: '5 min — decisions already made' },
+    'RATIFY: Damages reframe (decided in owners’ prep — branch-level baseline, pause individual accountability; incl. pausing the two conflicting MB items: individual damage attribution 11728394179 + damage leaderboards 11728354415)':
+      { links: '<a href="https://einsteinmoving.monday.com/boards/18408300070" target="_blank">Master Backlog</a>', dep: '' },
+    'RATIFY: AI/tool governance workstream (Master Backlog 12556198241)':
+      { links: '<a href="https://einsteinmoving.monday.com/boards/18408300070/pulses/12556198241" target="_blank">governance pulse</a>', dep: '' },
+    'Quarter in Review redline (15 min) — walk "What We Built & What\'s Coming" tile-by-tile; each leader corrects their own tiles LIVE, Albert folds same-day':
+      { links: '<a href="https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/q2-quarter-in-review.html" target="_blank">Quarter in Review (hosted)</a>', dep: 'Run AFTER theme lock · PLAUD runs — Cameron says "Quarter in Review" aloud (transcript seam) · pending in room: Mike app URL · Amanda dashboard + framing OK · Matisen chatbot shot + benefits · Anne question swap · Paul finance half' },
+    'Manager presentation started':
+      { links: '<a href="q2-materials/q2-frontline-packet.html" target="_blank">Q2 Debrief</a> · <a href="https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html" target="_blank">Mgr AAR Live Results</a>', dep: 'Debrief DRAFT chips (Q3 theme + Claims/MM) fill from THIS room\'s rulings' },
+    'Remaining to-dos — Roundtable OPSPs → pulses + presentation ownership assigned':
+      { links: '<a href="#sec-live-decision-log">Live decision log ↓</a>', dep: 'Log rows carry owner + due — export at close' },
+    'Debrief + sensitive-doc access cleanup':
+      { links: '<a href="qgr-ecosystem-map.html" target="_blank">Ecosystem map</a>', dep: 'Cloudflare gate decision rides the FLM-cascade lane (Fri/Mon)' }
   };
 
   var ROLLOUT_SEED = [
@@ -1440,6 +1470,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/27p', text: '\u{1F50E} ROOM TAB CONSOLIDATION + TWO-CRITIC DESIGN AUDIT (HQ v3.78, Cameron\'s dedupe + readability ask). ① LINK MAP MERGED INTO THE AGENDA — the standalone block-by-block table is gone; every agenda block now carries its \u{1F5A5} on-screen links + ⚑ must-be-true deps right under the row (AGENDA_META, keyed by a stable mk field so wording edits don\'t orphan the links). ② PRE-FLIGHT DEDUPED vs Runway — Matisen data day, FLM rollout GO, and dinner rows removed (they live in P3/P2); P3 lost its pre-reads + room-readiness dupes (with a _v7 index-remap migration so saved checkmarks don\'t shift); Pre-flight is now strictly the room-machine gate, counter moved to top w/ per-deadline-group counts. ③ THE CHECKBOX-LAYOUT BUG: pre-flight rows used an undefined CSS class (phase-item), stacking text under checkboxes — now phase-item-row flex like everything else. ④ AUDIT CATCHES APPLIED: agenda rows are wrapping TEXT (no more clipped 300-char single-line inputs; double-click to edit, Enter/Esc to commit/cancel) w/ bold-title/detail split + an orange NOW marker on the first unchecked block per day · STANDING agenda seed-merge (critical: the 7/27 "Quarter in Review redline" Day-2 row never reached browsers whose state predated it — one-shot guards; now any new seed row auto-inserts at position, ✕-removed rows remembered in removedTexts and stay gone) · anchor jumps now activate the right TAB + un-collapse the target section · scroll-margin tracks the jump bar\'s wrapped height · Import reloads so old JSONs pass the migration chain · ✕ remove asks confirm · print hides nav/buttons · badges legible at 0.68rem · preflight text esc()\'d · shelf band 1 reordered to agenda order w/ unique icons · day labels de-drafted. Convergence: both critics independently flagged the long-text readability + the meta-dies-on-edit trap.' },
     { date: '7/27o', text: '\u{1F3C1} ROOM TAB NAV + MATERIALS-SHELF REORG (HQ v3.77, Cameron\'s find-everything-in-place ask): The Room gains a sticky jump bar (Pre-flight · Link map · Agenda · Materials shelf · Decision log — tracks the topbar height, sections get scroll-margin so anchors land clean). Materials shelf regrouped from a flat 25-tile wall into 4 bands — \u{1F3AC} Decision surfaces · \u{1F4E6} Q2 story/packet family · \u{1F4E1} Live dashboards · \u{1F9ED} Strategy & reference — with gotcha badges (LOCAL :8136 · LOG IN · MONDAY/DRIVE/SHEET/MURAL). BACKFILLED 10 links that previously lived only in the toolkit or link map: OPSP Builder · SWT+7-Strata worksheet · Power of One (Paul) · eNPS Q2 one-pager · direct Roundtable Packet link · Ben QGR Working Brief · PA-Directs (hosted) · Growth Toolkit workbook (Drive) · master SOP pulse · Curation Receipt. Every link the link map references is now also on the shelf.' },
     { date: '7/27n', text: '\u{1F4D8} ROUNDTABLE PACKET v2.2 DEPLOYED (Cameron\'s 10-note redline fold, notes export on his Desktop) — orphan </div> layout break fixed (everything after Claims/MM rendered full-bleed); primary reverted to the Q1-as-presented blue-navy (#0d2b4e + #1565c0 accent, from the Q1 archive); cover callout + hero-strong white-on-white readability fixes; exec tiles now lead with the two critical numbers (Personnel 101.1% SG + Games 7.59 G — team-wide-QG tile OUT, rate relabeled leadership-only in Quarter Highlights with named ledger wins); strategic foundation shortened; NOI-basis + Dream-Team source behind tooltips; Bonus Goals → Continuing Education (all 7 ITP + improvement plans); games heat map GYR on grade bands; special-recognition watch deleted (ruled); winning-story placeholder removed. sync_qg_from_ledger.py anchor repointed to the quarter-highlights lead; --check 9/9 green; live byte-exact (c11b332). Same session: Q2 financial deck section-collapse rebuilt outline-style — H2 collapse keeps H3 subheads visible (5af8ad6, live byte-exact). Carry-over for the Debrief lane: add the games-PRIZE mention for movers ($75/effective-truck fridge stock).' },
     { date: '7/27j', text: '\u{1F4F8} Q2 DEBRIEF v1.6 \u2014 BRAND FONTS + REAL PHOTOGRAPHY (HQ v3.75). Cameron pushed back on Bebas (right call \u2014 kit retired it from web; internal-only exception was a stretch): display now = Roboto 900 headings + Lora hero/band display, the actual website language. Photography landed from the Drive \u201CProfessional Photos / EMC Move Photo Shoot\u201D Favorites: hero = crew running a couch up the ramp; chapter bands 2/3/4 = branded truck / mover mid-carry / \u201Csmartest move\u201D truck rear \u2014 kit-compliant dark-gradient overlays, no washes. Wall-of-text fixes: 70ch prose measure + fs-sowhat-1/2 split into 5 shorter paragraphs (new eids 1b/2b/2c; tie-check rows re-anchored). 118/118 green, live byte-exact + all 5 new assets 200.' },
@@ -1824,6 +1855,21 @@
     });
     state.phases._v6 = true;
   }
+
+  // v3.78 (_v7) P3 dedupe 7/27: two rows removed from the P3 seed (pre-reads + room readiness —
+  // both now live ONLY in the Room tab's 🛫 Pre-flight gate). Phase keys are index-based, so the
+  // saved states for old P3-7..P3-10 must shift up to P3-5..P3-8 or every checkbox re-points.
+  if (!state.phases._v7) {
+    var v7old = [state.phases['P3-7'], state.phases['P3-8'], state.phases['P3-9'], state.phases['P3-10']];
+    delete state.phases['P3-5'];
+    delete state.phases['P3-6'];
+    delete state.phases['P3-9'];
+    delete state.phases['P3-10'];
+    v7old.forEach(function (st, i) {
+      if (st) state.phases['P3-' + (5 + i)] = st; else delete state.phases['P3-' + (5 + i)];
+    });
+    state.phases._v7 = true;
+  }
   saveStateNow(LS_KEYS.phases, state.phases);
 
   // tracker sweep 7/22: AAR column complete for all 7 (only fills, never downgrades)
@@ -1901,6 +1947,48 @@
     state.agenda._su0720c = true;
     saveStateNow(LS_KEYS.agenda, state.agenda);
   }
+
+  // v3.78 STANDING seed-row merge (runs every load, not one-shot): the guards above only ran once
+  // per browser, so seed rows added later — e.g. the 7/27 "Quarter in Review redline" Day-2 block —
+  // silently never reached browsers that had already run them. Any seed row missing from saved
+  // state gets inserted at its seed position. Rows Cameron deliberately ✕-removes are remembered
+  // in state.agenda.removedTexts (written by the remove handler) and stay gone.
+  (function mergeNewSeedRows() {
+    var removed = {};
+    (state.agenda.removedTexts || []).forEach(function (t) { removed[t] = true; });
+    var changed = false;
+    ['day1', 'day2'].forEach(function (dayKey) {
+      var cur = (state.agenda[dayKey] && state.agenda[dayKey].items) || [];
+      var have = {};
+      var isSeedText = {};
+      AGENDA_SEED[dayKey].items.forEach(function (t) { isSeedText[t] = true; });
+      cur.forEach(function (it) {
+        var txt = (typeof it === 'string') ? it : it.text;
+        have[txt] = true;
+        // mk = stable meta key: stamp seed rows once so AGENDA_META links/deps survive later
+        // wording edits (lookup is item.mk || item.text)
+        if (typeof it !== 'string' && !it.mk && isSeedText[txt]) { it.mk = txt; changed = true; }
+      });
+      AGENDA_SEED[dayKey].items.forEach(function (t, si) {
+        if (have[t] || removed[t]) return;
+        var insertAt = 0;
+        for (var j = si - 1; j >= 0; j--) {
+          var prevSeed = AGENDA_SEED[dayKey].items[j];
+          if (have[prevSeed]) {
+            cur.forEach(function (it, ci) {
+              if (((typeof it === 'string') ? it : it.text) === prevSeed) insertAt = ci + 1;
+            });
+            break;
+          }
+        }
+        cur.splice(insertAt, 0, { text: t, checked: false, note: '', mk: t });
+        have[t] = true;
+        changed = true;
+      });
+      state.agenda[dayKey] = { label: AGENDA_SEED[dayKey].label, items: cur };
+    });
+    if (changed) saveStateNow(LS_KEYS.agenda, state.agenda);
+  })();
   if (state.changelog === null) {
     state.changelog = JSON.parse(JSON.stringify(CHANGELOG_SEED));
   } else {
@@ -2268,20 +2356,57 @@
     normalizeAgenda();
     var wrap = document.getElementById('agendaWrap');
     wrap.innerHTML = '';
+    var editing = renderAgenda._editing || null; // {day, idx} while a row's wording is being edited
     ['day1', 'day2'].forEach(function (dayKey) {
       var day = state.agenda[dayKey];
       var dayBlock = document.createElement('div');
       dayBlock.className = 'agenda-day';
       var listHtml = '';
+      var nowFound = false;
       day.items.forEach(function (item, idx) {
+        var isEditing = editing && editing.day === dayKey && editing.idx === idx;
+        var isNow = !item.checked && !nowFound;
+        if (isNow) nowFound = true;
+        var textHtml;
+        if (isEditing) {
+          textHtml = '<input type="text" class="agenda-edit-input" data-day="' + dayKey + '" data-idx="' + idx + '" value="' + esc(item.text) + '">';
+        } else {
+          var t = item.text || '';
+          var sep = t.indexOf(' \u2014 ') !== -1 ? t.indexOf(' \u2014 ') : t.indexOf(': ');
+          var title = sep > 0 ? t.slice(0, sep) : t;
+          var detail = sep > 0 ? t.slice(sep) : '';
+          textHtml =
+            '<div class="agenda-text" data-day="' + dayKey + '" data-idx="' + idx + '" title="Double-click to edit wording">' +
+              '<b>' + esc(title) + '</b>' +
+              (detail ? '<span class="agenda-text-detail">' + esc(detail) + '</span>' : '') +
+              (isNow ? '<span class="agenda-now-chip">NOW</span>' : '') +
+            '</div>';
+        }
         listHtml +=
-          '<div class="agenda-row">' +
-            '<div class="phase-item-check' + (item.checked ? ' checked' : '') + '" data-day="' + dayKey + '" data-idx="' + idx + '" style="flex-shrink:0">' + (item.checked ? '✓' : '') + '</div>' +
-            '<input type="text" data-day="' + dayKey + '" data-idx="' + idx + '" value="' + esc(item.text) + '"' + (item.checked ? ' style="text-decoration:line-through;opacity:.6"' : '') + '>' +
-            '<button class="agenda-note-toggle note-toggle" data-day="' + dayKey + '" data-idx="' + idx + '" style="flex-shrink:0">✎</button>' +
-            '<button class="agenda-remove" data-day="' + dayKey + '" data-idx="' + idx + '">✕</button>' +
-          '</div>' +
-          '<textarea class="phase-item-note agenda-note" data-day="' + dayKey + '" data-idx="' + idx + '" placeholder="Room notes for this block…" style="display:' + ((item.note || item.noteOpen) ? 'block' : 'none') + '; margin:0 0 4px 30px; width:calc(100% - 30px);">' + esc(item.note || '') + '</textarea>';
+          '<div class="agenda-row' + (item.checked ? ' checked' : '') + (isNow ? ' agenda-now' : '') + '">' +
+            '<div class="phase-item-check' + (item.checked ? ' checked' : '') + '" data-day="' + dayKey + '" data-idx="' + idx + '" style="flex-shrink:0">' + (item.checked ? '\u2713' : '') + '</div>' +
+            textHtml +
+            '<button class="agenda-note-toggle note-toggle" data-day="' + dayKey + '" data-idx="' + idx + '" style="flex-shrink:0">\u270E</button>' +
+            '<button class="agenda-remove" data-day="' + dayKey + '" data-idx="' + idx + '">\u2715</button>' +
+          '</div>';
+        var meta = AGENDA_META[item.mk || item.text];
+        if (meta) {
+          var depHtml = '';
+          if (meta.dep) {
+            var clauses = meta.dep.split(' \u00b7 ');
+            if (clauses.length >= 3) {
+              depHtml = clauses.map(function (c) { return '<span class="agenda-meta-dep">\u2691 ' + c + '</span>'; }).join('');
+            } else {
+              depHtml = '<span class="agenda-meta-dep">\u2691 ' + meta.dep + '</span>';
+            }
+          }
+          listHtml += '<div class="agenda-meta">' +
+            (meta.links ? '<span class="agenda-meta-links">\u{1F5A5} ' + meta.links + '</span>' : '') +
+            depHtml +
+          '</div>';
+        }
+        listHtml +=
+          '<textarea class="phase-item-note agenda-note" data-day="' + dayKey + '" data-idx="' + idx + '" placeholder="Room notes for this block\u2026" style="display:' + ((item.note || item.noteOpen) ? 'block' : 'none') + '; margin:0 0 4px 30px; width:calc(100% - 30px);">' + esc(item.note || '') + '</textarea>';
       });
       dayBlock.innerHTML =
         '<div class="agenda-day-title">' + esc(day.label) + '</div>' +
@@ -2319,19 +2444,42 @@
       });
     });
 
-    wrap.querySelectorAll('.agenda-list input[type="text"]').forEach(function (el) {
-      el.addEventListener('input', function () {
-        var d = el.getAttribute('data-day');
-        var idx = parseInt(el.getAttribute('data-idx'), 10);
-        state.agenda[d].items[idx].text = el.value;
-        saveState(LS_KEYS.agenda, state.agenda);
+    // Wording is display-only by default (wraps, so long blocks stay readable) — double-click
+    // to edit. The row's meta survives edits via item.mk (set at seed-merge time).
+    wrap.querySelectorAll('.agenda-text').forEach(function (el) {
+      el.addEventListener('dblclick', function () {
+        renderAgenda._editing = { day: el.getAttribute('data-day'), idx: parseInt(el.getAttribute('data-idx'), 10) };
+        renderAgenda();
+        var inp = wrap.querySelector('.agenda-edit-input');
+        if (inp) { inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
       });
     });
+    var editInp = wrap.querySelector('.agenda-edit-input');
+    if (editInp) {
+      var commitEdit = function () {
+        var d = editInp.getAttribute('data-day');
+        var idx = parseInt(editInp.getAttribute('data-idx'), 10);
+        if (state.agenda[d] && state.agenda[d].items[idx]) state.agenda[d].items[idx].text = editInp.value;
+        renderAgenda._editing = null;
+        saveStateNow(LS_KEYS.agenda, state.agenda);
+        renderAgenda();
+      };
+      editInp.addEventListener('blur', commitEdit);
+      editInp.addEventListener('keydown', function (e) { if (e.key === 'Enter') editInp.blur(); if (e.key === 'Escape') { renderAgenda._editing = null; renderAgenda(); } });
+    }
 
     wrap.querySelectorAll('.agenda-remove').forEach(function (el) {
       el.addEventListener('click', function () {
         var d = el.getAttribute('data-day');
         var idx = parseInt(el.getAttribute('data-idx'), 10);
+        var removedItem = state.agenda[d].items[idx];
+        var removedText = removedItem && ((typeof removedItem === 'string') ? removedItem : removedItem.text);
+        if (!window.confirm('Remove this agenda block' + (removedText ? ':\n\n\u201C' + removedText.slice(0, 90) + '\u201D' : '') + '?')) return;
+        // remember deliberate removals of SEED rows so the standing seed-merge doesn't resurrect them
+        if (removedText) {
+          state.agenda.removedTexts = state.agenda.removedTexts || [];
+          if (state.agenda.removedTexts.indexOf(removedText) === -1) state.agenda.removedTexts.push(removedText);
+        }
         state.agenda[d].items.splice(idx, 1);
         saveStateNow(LS_KEYS.agenda, state.agenda);
         renderAgenda();
@@ -2342,8 +2490,11 @@
       el.addEventListener('click', function () {
         var d = el.getAttribute('data-day');
         state.agenda[d].items.push({ text: '', checked: false, note: '' });
+        renderAgenda._editing = { day: d, idx: state.agenda[d].items.length - 1 };
         saveStateNow(LS_KEYS.agenda, state.agenda);
         renderAgenda();
+        var inp = wrap.querySelector('.agenda-edit-input');
+        if (inp) inp.focus();
       });
     });
   }
@@ -2547,31 +2698,38 @@
     if (!wrap) return;
     wrap.innerHTML = '';
     var total = 0, done = 0;
+    var groups = [];
     PREFLIGHT_SEED.forEach(function (grp) {
-      var g = document.createElement('div');
-      g.style.margin = '0 0 14px 0';
-      var rows = '';
+      var gTotal = 0, gDone = 0, rows = '';
       grp.items.forEach(function (it) {
-        total++;
+        total++; gTotal++;
         var checked = !!state.preflight[it.id];
-        if (checked) done++;
+        if (checked) { done++; gDone++; }
         rows +=
-          '<div class="phase-item" style="align-items:flex-start">' +
-            '<div class="phase-item-check' + (checked ? ' checked' : '') + '" data-pf="' + it.id + '" style="flex-shrink:0;margin-top:2px">' + (checked ? '✓' : '') + '</div>' +
-            '<div style="flex:1' + (checked ? ';opacity:.55' : '') + '">' +
-              '<span' + (checked ? ' style="text-decoration:line-through"' : '') + '>' + it.text + '</span>' +
-              (it.url ? ' <a href="' + it.url + '" target="_blank" rel="noopener">' + esc(it.urlLabel || 'open') + ' ↗</a>' : '') +
-              (it.ctx ? '<div style="font-size:12px;opacity:.75;margin-top:2px">' + it.ctx + '</div>' : '') +
+          '<div class="phase-item-row">' +
+            '<div class="phase-item-check' + (checked ? ' checked' : '') + '" data-pf="' + it.id + '">' + (checked ? '\u2713' : '') + '</div>' +
+            '<div class="phase-item-text-wrap"' + (checked ? ' style="opacity:.55"' : '') + '>' +
+              '<span class="phase-item-text"' + (checked ? ' style="text-decoration:line-through"' : '') + '>' + esc(it.text) + '</span>' +
+              (it.url ? ' <a class="item-link" href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.urlLabel || 'open') + ' \u2197</a>' : '') +
+              (it.ctx ? '<div class="item-ctx">' + esc(it.ctx) + '</div>' : '') +
             '</div>' +
           '</div>';
       });
-      g.innerHTML = '<div style="font-weight:700;margin-bottom:6px">' + esc(grp.group) + '</div>' + rows;
-      wrap.appendChild(g);
+      groups.push({ label: grp.group, done: gDone, total: gTotal, rows: rows });
     });
-    var cnt = document.createElement('div');
-    cnt.style.cssText = 'font-size:12px;opacity:.7;margin-top:4px';
-    cnt.textContent = done + ' / ' + total + ' pre-flight checks green';
-    wrap.appendChild(cnt);
+    var top = document.createElement('div');
+    top.style.cssText = 'font-weight:800; font-size:0.92rem; margin-bottom:12px; color:' + (done === total ? 'var(--green)' : 'var(--navy)');
+    top.textContent = (done === total ? '\u2705 ' : '') + done + ' / ' + total + ' pre-flight checks green';
+    wrap.appendChild(top);
+    groups.forEach(function (g) {
+      var el = document.createElement('div');
+      el.style.margin = '0 0 16px 0';
+      el.innerHTML =
+        '<div style="font-weight:700; margin-bottom:4px">' + esc(g.label) +
+          '<span class="pf-group-count' + (g.done === g.total ? ' allgreen' : '') + '">' + g.done + ' / ' + g.total + '</span></div>' +
+        g.rows;
+      wrap.appendChild(el);
+    });
     wrap.querySelectorAll('[data-pf]').forEach(function (el) {
       el.addEventListener('click', function () {
         var id = el.getAttribute('data-pf');
@@ -2580,22 +2738,6 @@
         renderPreflight();
       });
     });
-  }
-
-  function renderLinkmap() {
-    var wrap = document.getElementById('linkmapWrap');
-    if (!wrap) return;
-    var html = '';
-    [['day1', 'Day 1 — Wed 7/29 (Review + Validate)'], ['day2', 'Day 2 — Thu 7/30 (Decide + Cascade)']].forEach(function (d) {
-      html += '<div style="font-weight:700;margin:10px 0 6px">' + d[1] + '</div>' +
-        '<table class="decision-tbl" style="width:100%"><thead><tr>' +
-        '<th style="width:30%">Agenda block</th><th style="width:38%">On screen</th><th>Must already be true</th></tr></thead><tbody>';
-      LINKMAP[d[0]].forEach(function (r) {
-        html += '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td style="font-size:12px;opacity:.85">' + r[2] + '</td></tr>';
-      });
-      html += '</tbody></table>';
-    });
-    wrap.innerHTML = html;
   }
 
   function renderMaterials() {
@@ -2628,13 +2770,22 @@
     });
   }
 
-  // Room jump bar: keep it stuck just below the (variable-height) sticky topbar.
+  // Room jump bar: keep it stuck just below the (variable-height) sticky topbar. Also measure the
+  // nav's own height — at narrow widths it wraps to two lines, and anchor scroll-margins must grow
+  // with it or jumped-to section titles land hidden underneath.
   (function trackTopbarHeight() {
     var tb = document.querySelector('.topbar');
-    if (!tb) return;
-    function set() { document.documentElement.style.setProperty('--topbarH', tb.offsetHeight + 'px'); }
+    var nav = document.querySelector('.room-nav');
+    function set() {
+      if (tb) document.documentElement.style.setProperty('--topbarH', tb.offsetHeight + 'px');
+      if (nav) document.documentElement.style.setProperty('--roomnavH', nav.offsetHeight + 'px');
+    }
     set();
     window.addEventListener('resize', set);
+    // the nav measures 0 while its tab is hidden — re-measure after any tab switch
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      b.addEventListener('click', function () { setTimeout(set, 0); });
+    });
   })();
 
   /* ============================================================
@@ -2898,9 +3049,11 @@
     saveStateNow(LS_KEYS.activeZone, state.activeZone);
     saveStateNow(LS_KEYS.chase, state.chase);
 
-    renderAll();
-    activateZone(state.activeZone);
-    toast('Import complete');
+    // v3.78: reload instead of re-render — the inline migration chain (_v6/_v7 phase remaps,
+    // agenda seed merges) only runs at boot, so an imported older-build JSON must pass back
+    // through it or index-keyed checkmarks land on the wrong rows.
+    toast('Import complete — reloading');
+    setTimeout(function () { window.location.reload(); }, 500);
   }
 
   function doReset() {
@@ -2939,7 +3092,6 @@
     renderTracker();
     renderRockGrid();
     renderPreflight();
-    renderLinkmap();
     renderAgenda();
     renderEcosystem();
     renderToolkit();
@@ -3055,17 +3207,39 @@
     });
   }
 
+  // v3.78: anchor jumps must actually SHOW their target — activate the right tab (not hard-coded
+  // zone1) and un-collapse the target's section before scrolling, else the jump lands on a bare
+  // collapsed title (or nothing at all).
+  function revealAnchorTarget(id) {
+    var target = document.getElementById(id);
+    if (!target) return null;
+    var zone = target.closest('.zone');
+    if (zone && !zone.classList.contains('active')) activateZone(zone.id);
+    var section = target.classList && target.classList.contains('section') ? target : target.closest('.section');
+    if (section && section.classList.contains('section-collapsed')) {
+      var map = getSectionCollapseMap();
+      map[sectionSlug(section)] = false;
+      setSectionCollapseMap(map);
+      applySectionCollapsed(section, false);
+    }
+    return target;
+  }
+
   function init() {
     renderAll();
     renderScorecard();
 
-    // Anchor links (e.g. toolkit card / P2 warehouse item → #chase-list) live inside zone1;
-    // force that tab active + scroll to the target so the link actually lands somewhere visible.
-    var hashTarget = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
-    activateZone(hashTarget ? 'zone1' : (state.activeZone || 'zone1'));
+    var hashTarget = window.location.hash ? revealAnchorTarget(window.location.hash.slice(1)) : null;
+    if (!hashTarget) activateZone(state.activeZone || 'zone1');
     if (hashTarget) {
       setTimeout(function () { hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
     }
+
+    // in-page anchor clicks (jump bar, agenda-meta, toolkit tiles): reveal before the browser jumps
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (a) revealAnchorTarget(a.getAttribute('href').slice(1));
+    });
 
     document.querySelectorAll('.tab-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
