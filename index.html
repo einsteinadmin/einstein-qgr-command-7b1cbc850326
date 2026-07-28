@@ -918,7 +918,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v3.76 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v3.77 2026-07-27'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1290,32 +1290,52 @@
     { icon: '✏️', label: 'OPSP Builder — editor (Replit)', sub: "Cameron's edit surface for the builder itself", url: 'https://replit.com/t/einstein-moving-company/repls/Mike-OPSPVision-Summary' }
   ];
 
-  var MATERIALS_SEED = [
-    { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'the one-pager of how the whole QGR machine fits together', url: 'qgr-ecosystem-map.html' },
-    { icon: '🗳', label: 'QGR Workshop Hub (leader-facing)', sub: 'debate ballot + prep tiles — the leader mirror of this HQ (hosted, obscure+noindex)', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/' },
-    { icon: '🪞', label: 'AAR Review Room (all 7 full write-ups)', sub: "this repo · Cameron's 7/22 review baked in + Q2 headlines", url: 'aar-review.html' },
-    { icon: '📈', label: 'Q2 Financial Analysis Deck (LIVE)', sub: 'hosted · noindex (sensitive — Cameron gates before wide share)', url: 'q2-materials/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html' },
-    { icon: '📊', label: 'Goals Dashboard', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/goals-dashboard/' },
-    { icon: '🌀', label: 'Flywheel', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-flywheel/' },
-    { icon: '🧭', label: 'PACe', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-pace/' },
-    { icon: '🏛', label: 'Pillars', sub: 'einsteinadmin.github.io', url: 'https://einsteinadmin.github.io/einstein-pillars/' },
-    { icon: '🎨', label: 'Rob’s Mural', sub: 'app.mural.co', url: 'https://app.mural.co/t/scalingup7158/m/scalingup7158/1782656311798/62c4addf26b51244ac88ac2ce71c322264bad748' },
-    { icon: '📈', label: 'Q2 Cascading Goals sheet', sub: 'docs.google.com', url: 'https://docs.google.com/spreadsheets/d/1CEwbltgyvNbpl5_1pVsWL70qaCMGgDE9Jk7RGm1eAsM' },
-    { icon: '📋', label: 'Master Backlog', sub: 'einsteinmoving.monday.com', url: 'https://einsteinmoving.monday.com/boards/18408300070' },
-    { icon: '🗂', label: 'Q2 Materials — all packet-family artifacts', sub: 'hosted · noindex — landing index for packet, 10 scorecards, Q2+Q1 decks', url: 'q2-materials/' },
-    { icon: '🛰', label: 'Matisen’s Hosted-Pages Hub (58 dashboards)', sub: 'einstein-moving.github.io', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/main-dashboard.html' },
-    { icon: '💰', label: 'Q2 Sales Targets (booked, manager grain)', sub: 'fleet repo · daily refresh', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/sales-targets-4c2a94f80706.html' },
-    { icon: '🧾', label: 'Q2 Revenue Targets (realized + realization)', sub: 'fleet repo · daily refresh', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/revenue-targets-c832529932b8.html' },
-    { icon: '🔮', label: 'Q3 Revenue Manager View', sub: 'fleet repo', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-manager-view-c78d344e2d62.html' },
-    { icon: '🚚', label: 'Q3 TUR / Fleet Requirement', sub: 'fleet repo', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-tur-projection-3dde0a126d8c.html' },
-    { icon: '🏃', label: 'Amanda’s Q2 Sales Pacing (rep grain)', sub: 'aware13.github.io', url: 'https://aware13.github.io/einstein-q2-pacing-5ec73dc867/' },
-    { icon: '🗳', label: 'Ballot Room View', sub: 'ships EMPTY — drag the returned qgr-ballot-*.json in · aggregate + Room Reveal', url: 'ballot-results.html' },
-    { icon: '📽', label: 'Mgr AAR Live Results', sub: 'ships EMPTY — drag collected aar-*.json in · rollup + arrow-key walk', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html' },
-    { icon: '🏆', label: 'QG Success Tracker (hosted, sanitized)', sub: 'cross-quarter success rates — Q2 = 80.0% FINAL · expandable per-goal detail', url: 'einstein-qg-tracker.html' },
-    { icon: '🧢', label: 'Q2 Debrief (frontline cascade packet)', sub: 'Read/Present modes — the Day-2 "manager presentation started" surface', url: 'q2-materials/q2-frontline-packet.html' },
-    { icon: '🧱', label: 'Quarter in Review — What We Built (v0.4 HOSTED)', sub: 'live on the Workshop Hub repo (leaders + COSes review pre-room) — 8-tile showcase for the Day-2 redline · strips + resanitizes post-room for the FLM QGRs 8/4–8/5 · canonical: QGR Packet/', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/q2-quarter-in-review.html' },
-    { icon: '🛠', label: 'QGR Triage Room (walked slate)', sub: '196 cards / 178 rulings baked in — the Q3-goals-per-leader working surface', url: 'qgr-triage-room.html' },
-    { icon: '🧮', label: 'People Analyzer — Leadership (LOCAL)', sub: '⚠ needs launch people-analyzer :8136 running — see Pre-flight', url: 'http://localhost:8136/people-analyzer-leadership.html' }
+  // v3.76: shelf regrouped into 4 bands + backfilled so EVERY link the room needs lives here
+  // (several previously existed only in the toolkit or the link map). Badges = gotchas only.
+  var MATERIALS_BANDS = [
+    { band: '🎬 Decision surfaces — what the room drives from', items: [
+      { icon: '🗳', label: 'Ballot Room View', sub: 'ships EMPTY — drag the returned qgr-ballot-*.json in · aggregate + Room Reveal', url: 'ballot-results.html' },
+      { icon: '🛠', label: 'QGR Triage Room (walked slate)', sub: '196 cards / 178 rulings baked in — the Q3-goals-per-leader working surface', url: 'qgr-triage-room.html' },
+      { icon: '🧾', label: 'OPSP + Vision Summary Builder', sub: 'the output surface — SWT/worksheet results get entered here', url: 'https://goal-plan-access.replit.app/', badge: 'LOG IN', badgeClass: 'login' },
+      { icon: '🗺', label: 'SWT + 7 Strata Worksheet', sub: 'RULED 7/20 — survivors feed the OPSP builder', url: 'strata-swt-worksheet.html' },
+      { icon: '🧮', label: 'People Analyzer — Leadership', sub: 'never hosted — dead without the server; see Pre-flight', url: 'http://localhost:8136/people-analyzer-leadership.html', badge: 'LOCAL :8136', badgeClass: 'local' },
+      { icon: '🧮', label: 'People Analyzer — Directs', sub: 'leaders eval their OWN directs · exports return to Cameron', url: 'https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/' },
+      { icon: '🪞', label: 'AAR Review Room (all 7 write-ups)', sub: "Cameron's 7/22 review baked in + Q2 headlines", url: 'aar-review.html' },
+      { icon: '📽', label: 'Mgr AAR Live Results', sub: 'ships EMPTY — drag collected aar-*.json in · rollup + arrow-key walk', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html' },
+      { icon: '🏆', label: 'QG Success Tracker', sub: 'cross-quarter success rates — Q2 = 80.0% FINAL · per-goal detail', url: 'einstein-qg-tracker.html' },
+      { icon: '🗳', label: 'QGR Workshop Hub (leader-facing)', sub: 'debate ballot + prep tiles — the leader mirror of this HQ', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/' }
+    ]},
+    { band: '📦 The Q2 story — packet family', items: [
+      { icon: '🗂', label: 'Q2 Materials — landing index', sub: 'packet + all 10 scorecards + Q2/Q1 decks, one index', url: 'q2-materials/' },
+      { icon: '📖', label: 'Roundtable Packet (direct)', sub: 'the distributed leadership packet — 21 sections', url: 'q2-materials/q2-2026-roundtable-packet.html' },
+      { icon: '📈', label: 'Q2 Financial Analysis Deck', sub: 'sensitive — Cameron gates before wide share', url: 'q2-materials/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html' },
+      { icon: '🧢', label: 'Q2 Debrief (frontline cascade)', sub: 'Read/Present modes — the Day-2 "manager presentation started" surface', url: 'q2-materials/q2-frontline-packet.html' },
+      { icon: '📊', label: 'eNPS Q2 One-Pager', sub: 'the packet deep-dive — pre-read + Day-1 eNPS block', url: 'https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/' },
+      { icon: '🧱', label: 'Quarter in Review — What We Built', sub: 'the Day-2 15-min redline · leaders + COSes review pre-room', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/q2-quarter-in-review.html' },
+      { icon: '📊', label: 'Goals Dashboard', sub: 'all 40 Q2 goals w/ self-grades', url: 'https://einsteinadmin.github.io/goals-dashboard/' },
+      { icon: '💼', label: 'Ben × Einstein — QGR Working Brief', sub: 'Ben-visible meeting tool — 13 questions · cash primer · export', url: 'ben-qgr-brief.html' }
+    ]},
+    { band: '📡 Live dashboards — numbers on screen', items: [
+      { icon: '🛰', label: 'Matisen’s Hosted-Pages Hub', sub: '58 dashboards · live health checks — the front door', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/main-dashboard.html' },
+      { icon: '💰', label: 'Q2 Sales Targets (booked, manager grain)', sub: 'fleet repo · daily refresh', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/sales-targets-4c2a94f80706.html' },
+      { icon: '🧾', label: 'Q2 Revenue Targets (realized)', sub: 'fleet repo · daily refresh', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/revenue-targets-c832529932b8.html' },
+      { icon: '🔮', label: 'Q3 Revenue Manager View', sub: '$6.62M plan +7.9% YoY — the buy-in surface', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-manager-view-c78d344e2d62.html' },
+      { icon: '🚚', label: 'Q3 TUR / Fleet Requirement', sub: 'staffing-per-truck model · truck-sale go/no-go flags', url: 'https://einstein-moving.github.io/einstein-fleet-5e12a9f13a86/q3-tur-projection-3dde0a126d8c.html' },
+      { icon: '🏃', label: 'Amanda’s Q2 Sales Pacing (rep grain)', sub: 'reconciles w/ Matisen’s numbers (7/21 cross-check ✓)', url: 'https://aware13.github.io/einstein-q2-pacing-5ec73dc867/' },
+      { icon: '💵', label: 'Power of One tool (Paul)', sub: '8 levers · Q2 FY2026 actuals pre-loaded — the CASh recap', url: 'https://paulm-emc.github.io/EMC-Power-of-One-Tool-70c5c4bdaade/' }
+    ]},
+    { band: '🧭 Strategy & reference', items: [
+      { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'how the whole QGR machine fits together', url: 'qgr-ecosystem-map.html' },
+      { icon: '🌀', label: 'Flywheel', sub: '3 sub-flywheels — Rob lane', url: 'https://einsteinadmin.github.io/einstein-flywheel/' },
+      { icon: '🧭', label: 'PACe', sub: 'process accountability chart', url: 'https://einsteinadmin.github.io/einstein-pace/' },
+      { icon: '🏛', label: 'Pillars', sub: 'Rob’s pillars doc, live version', url: 'https://einsteinadmin.github.io/einstein-pillars/' },
+      { icon: '🎨', label: 'Rob’s Mural', sub: '3 constraints + pre-work board', url: 'https://app.mural.co/t/scalingup7158/m/scalingup7158/1782656311798/62c4addf26b51244ac88ac2ce71c322264bad748', badge: 'MURAL', badgeClass: 'ext' },
+      { icon: '📈', label: 'Q2 Cascading Goals sheet', sub: 'Day-2 chart finalize — Q3 tab', url: 'https://docs.google.com/spreadsheets/d/1CEwbltgyvNbpl5_1pVsWL70qaCMGgDE9Jk7RGm1eAsM', badge: 'SHEET', badgeClass: 'ext' },
+      { icon: '📋', label: 'Master Backlog', sub: '🚶 Q3 Walk view = the walk surface · theme + RATIFY pulses', url: 'https://einsteinmoving.monday.com/boards/18408300070', badge: 'MONDAY', badgeClass: 'ext' },
+      { icon: '📕', label: "Cam's Q2 26 Growth Toolkit", sub: 'the April workbook — baseline for the left-page refresh', url: 'https://drive.google.com/file/d/1zyBbTy2R3kdrMXbAIssvK6NECZu5B_us/view', badge: 'DRIVE', badgeClass: 'ext' },
+      { icon: '📘', label: 'Master pulse + SOP', sub: 'pulse 12581466585 — pointer + weekly LOW', url: 'https://einsteinmoving.monday.com/boards/549231076/pulses/12581466585', badge: 'MONDAY', badgeClass: 'ext' },
+      { icon: '🧾', label: 'Curation Receipt — RULED ✓ 7/20', sub: '22 confirm / 7 challenge + 12 near-misses', url: 'curation-receipt-2026-07-20.html' }
+    ]}
   ];
 
   // ── Room Pre-flight (added v3.62, 7/27) — the nothing-surprises-us-mid-room gate.
@@ -1420,6 +1440,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/27o', text: '\u{1F3C1} ROOM TAB NAV + MATERIALS-SHELF REORG (HQ v3.77, Cameron\'s find-everything-in-place ask): The Room gains a sticky jump bar (Pre-flight · Link map · Agenda · Materials shelf · Decision log — tracks the topbar height, sections get scroll-margin so anchors land clean). Materials shelf regrouped from a flat 25-tile wall into 4 bands — \u{1F3AC} Decision surfaces · \u{1F4E6} Q2 story/packet family · \u{1F4E1} Live dashboards · \u{1F9ED} Strategy & reference — with gotcha badges (LOCAL :8136 · LOG IN · MONDAY/DRIVE/SHEET/MURAL). BACKFILLED 10 links that previously lived only in the toolkit or link map: OPSP Builder · SWT+7-Strata worksheet · Power of One (Paul) · eNPS Q2 one-pager · direct Roundtable Packet link · Ben QGR Working Brief · PA-Directs (hosted) · Growth Toolkit workbook (Drive) · master SOP pulse · Curation Receipt. Every link the link map references is now also on the shelf.' },
     { date: '7/27n', text: '\u{1F4D8} ROUNDTABLE PACKET v2.2 DEPLOYED (Cameron\'s 10-note redline fold, notes export on his Desktop) — orphan </div> layout break fixed (everything after Claims/MM rendered full-bleed); primary reverted to the Q1-as-presented blue-navy (#0d2b4e + #1565c0 accent, from the Q1 archive); cover callout + hero-strong white-on-white readability fixes; exec tiles now lead with the two critical numbers (Personnel 101.1% SG + Games 7.59 G — team-wide-QG tile OUT, rate relabeled leadership-only in Quarter Highlights with named ledger wins); strategic foundation shortened; NOI-basis + Dream-Team source behind tooltips; Bonus Goals → Continuing Education (all 7 ITP + improvement plans); games heat map GYR on grade bands; special-recognition watch deleted (ruled); winning-story placeholder removed. sync_qg_from_ledger.py anchor repointed to the quarter-highlights lead; --check 9/9 green; live byte-exact (c11b332). Same session: Q2 financial deck section-collapse rebuilt outline-style — H2 collapse keeps H3 subheads visible (5af8ad6, live byte-exact). Carry-over for the Debrief lane: add the games-PRIZE mention for movers ($75/effective-truck fridge stock).' },
     { date: '7/27j', text: '\u{1F4F8} Q2 DEBRIEF v1.6 \u2014 BRAND FONTS + REAL PHOTOGRAPHY (HQ v3.75). Cameron pushed back on Bebas (right call \u2014 kit retired it from web; internal-only exception was a stretch): display now = Roboto 900 headings + Lora hero/band display, the actual website language. Photography landed from the Drive \u201CProfessional Photos / EMC Move Photo Shoot\u201D Favorites: hero = crew running a couch up the ramp; chapter bands 2/3/4 = branded truck / mover mid-carry / \u201Csmartest move\u201D truck rear \u2014 kit-compliant dark-gradient overlays, no washes. Wall-of-text fixes: 70ch prose measure + fs-sowhat-1/2 split into 5 shorter paragraphs (new eids 1b/2b/2c; tie-check rows re-anchored). 118/118 green, live byte-exact + all 5 new assets 200.' },
     { date: '7/27i', text: '\u{1F3A8} Q2 DEBRIEF v1.5 \u2014 BRAND-KIT DESIGN PASS DEPLOYED (HQ v3.74). Cameron called the page AI-generic (identical block components, flat type); ran the design-audit skill (two parallel critics: UX/cognitive-load + craft/code) grounded in the Einstein Brand Kit, then applied: Bebas Neue display type + 17px body on the kit scale \u00b7 the ~36 What/So-What/Now-What tinted boxes retired to open prose with typographic markers \u00b7 4 navy chapter bands give the scroll an arc (Big Picture / Numbers / People / What\u2019s Next, hidden in Present) \u00b7 kit color ramps replace ad-hoc values (orange-900 accents \u2014 orange-as-text-on-white violations fixed \u00b7 blue = interactive \u00b7 AA contrast fixes) \u00b7 hero + full-navy Branch Scorecards closer \u00b7 Dream Team badges scaled to trophies \u00b7 hatched NPS target bar \u00b7 reduced-motion/focus-visible/print fixes \u00b7 chrome emoji stripped. All 4 modes re-verified (read/present/edit/notes; present = 14 slides, edit = 168 editables), tie-check 118/118, mobile-375 clean, live byte-exact (commit dc5bcab). Design language = the template for Q3 branch scorecards.' },
@@ -2580,21 +2601,41 @@
   function renderMaterials() {
     var wrap = document.getElementById('materialsGrid');
     wrap.innerHTML = '';
-    MATERIALS_SEED.forEach(function (m) {
-      var a = document.createElement('a');
-      a.className = 'material-tile';
-      a.href = m.url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.innerHTML =
-        '<div class="material-icon">' + m.icon + '</div>' +
-        '<div>' +
-          '<div class="material-label">' + esc(m.label) + '</div>' +
-          '<div class="material-sub">' + esc(m.sub) + '</div>' +
-        '</div>';
-      wrap.appendChild(a);
+    MATERIALS_BANDS.forEach(function (b) {
+      var h = document.createElement('div');
+      h.className = 'eco-lane-head';
+      h.textContent = b.band;
+      wrap.appendChild(h);
+      var grid = document.createElement('div');
+      grid.className = 'materials-grid';
+      b.items.forEach(function (m) {
+        var a = document.createElement('a');
+        a.className = 'material-tile';
+        a.href = m.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.innerHTML =
+          '<div class="material-icon">' + m.icon + '</div>' +
+          '<div>' +
+            '<div class="material-label">' + esc(m.label) +
+              (m.badge ? ' <span class="mat-badge ' + (m.badgeClass || 'ext') + '">' + esc(m.badge) + '</span>' : '') +
+            '</div>' +
+            '<div class="material-sub">' + esc(m.sub) + '</div>' +
+          '</div>';
+        grid.appendChild(a);
+      });
+      wrap.appendChild(grid);
     });
   }
+
+  // Room jump bar: keep it stuck just below the (variable-height) sticky topbar.
+  (function trackTopbarHeight() {
+    var tb = document.querySelector('.topbar');
+    if (!tb) return;
+    function set() { document.documentElement.style.setProperty('--topbarH', tb.offsetHeight + 'px'); }
+    set();
+    window.addEventListener('resize', set);
+  })();
 
   /* ============================================================
      DECISION LOG (shared store, rendered in Room + Aftermath)
