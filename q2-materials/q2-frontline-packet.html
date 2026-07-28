@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Einstein Moving — The Q2 Debrief · Q2 2026</title>
-<!-- Q2 Debrief v1.4 — 2026-07-27 · MM photo wall: record tote removed (5 images) + first-ever mover-submitted Magic Moments callout (Luis Sanchez, Noah Schroder) -->
+<!-- Q2 Debrief v1.8 — 2026-07-28 eve · Cameron's full redline folded: revenue/profit misses split under separate headers, second metaphor cut (lawn-mowing = the one metaphor, ELI6 expander promoted + teaser), Q&A section removed (manager-bonus answer preserved in comment below), per-branch spend-per-lead table in marketing deep dive, untouched-leads phrasing corrected, Dream Team pills expand to names (24), fleet per-10K trend beat + new damages-focused Now What, NPS + reviews branch tables, formatting pass (short paragraphs, real lists) -->
+<!-- (v1.4 2026-07-27: MM photo wall 5 images + first mover-submitted MM callout · v1.5–v1.7.1: design lane) -->
 
 <style>
   /* ══ Local fonts — bundled from the Einstein Brand Kit, same block as the packet/scorecards ══ */
@@ -261,7 +262,7 @@
   }
   .wsw.sowhat .wsw-label { color: var(--ein-blue-700); }
   .wsw.nowwhat .wsw-label { color: var(--green); }
-  .wsw p, .wsw ul, .card > p, .card > ul { max-width: 70ch; }
+  .wsw p, .wsw ul, .card > p, .card > ul { max-width: none; }
   .wsw p:last-child { margin-bottom: 0; }
 
   /* Badge */
@@ -346,39 +347,45 @@
     print-color-adjust: exact; -webkit-print-color-adjust: exact;
   }
   .dt-badge svg { fill: var(--ein-orange-700); flex-shrink: 0; width: 15px; height: 15px; }
+  /* Expandable pill (Cameron 7/28): each branch pill opens to show its Dream Team names */
+  details.dt-pill { display: inline-block; vertical-align: top; margin: 0; }
+  details.dt-pill summary { list-style: none; cursor: pointer; display: inline-block; }
+  details.dt-pill summary::-webkit-details-marker { display: none; }
+  details.dt-pill summary:hover .dt-badge { background: var(--ein-orange-200); }
+  details.dt-pill summary:focus-visible { outline: 2px solid var(--ein-orange-500); outline-offset: 2px; border-radius: 20px; }
+  details.dt-pill[open] .dt-badge { background: var(--ein-orange-300); }
+  details.dt-pill .dt-names {
+    font-size: 13.5px; color: var(--ein-navy-500); line-height: 1.5;
+    background: var(--ein-orange-50); border: 1px solid var(--ein-orange-100);
+    border-radius: 8px; padding: 8px 12px; margin: 2px 4px 6px 0; max-width: 340px;
+  }
 
-  /* FAQ / collapsible */
-  .faq-group-title {
-    color: var(--navy);
-    font-size: 15px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1.4px;
-    margin: 22px 0 8px 0;
-  }
-  .faq-group-title:first-child { margin-top: 4px; }
-  details.faq-item {
-    background: white;
+  /* 🧒 ELI6 expander — plain-English explainer. Keyed via data-eli6-for (deliberately NO data-eid:
+     it is not a review/edit block and must not enter the review-mode overlay). Collapsed by default. */
+  details.eli6 {
+    background: var(--ein-navy-50);
     border: 1px solid var(--gray-200);
+    border-left: 3px solid var(--ein-blue-500);
     border-radius: 8px;
-    margin: 6px 0;
-    padding: 0;
+    margin: 16px 0;
     overflow: hidden;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
-  details.faq-item summary {
-    padding: 13px 16px;
+  details.eli6 summary {
+    padding: 12px 16px;
     cursor: pointer;
     font-weight: 700;
-    color: var(--navy);
-    font-size: 15.5px;
+    color: var(--ein-blue-700);
+    font-size: 15px;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
   }
-  details.faq-item summary::-webkit-details-marker { display: none; }
-  details.faq-item summary::after {
+  details.eli6 summary::-webkit-details-marker { display: none; }
+  details.eli6 summary::after {
     content: '+';
     font-size: 22px;
     font-weight: 400;
@@ -386,15 +393,18 @@
     flex-shrink: 0;
     line-height: 1;
   }
-  details.faq-item[open] summary::after { content: '−'; }
-  details.faq-item .faq-answer {
-    padding: 0 16px 14px;
+  details.eli6[open] summary::after { content: '−'; }
+  details.eli6 summary:hover { background: var(--ein-blue-50); }
+  details.eli6 summary:focus-visible { outline: 2px solid var(--ein-blue-500); outline-offset: -2px; }
+  details.eli6 .eli6-body {
+    padding: 2px 16px 14px;
     font-size: 15px;
     color: var(--gray-700);
-    line-height: 1.6;
+    line-height: 1.65;
   }
-  details.faq-item summary:hover { background: var(--ein-blue-50); }
-  details.faq-item summary:focus-visible { outline: 2px solid var(--ein-blue-500); outline-offset: -2px; }
+  details.eli6 .eli6-body p { margin: 10px 0; }
+  details.eli6 .eli6-body p:first-child { margin-top: 4px; }
+  @media print { details.eli6 { break-inside: avoid; } }
 
   /* Scorecard closer — the destination, full navy band */
   #scorecard-section {
@@ -612,12 +622,7 @@
     font-family: 'Roboto', Arial, sans-serif;
   }
   body.mode-present .slide-el.present-current .present-talk-toggle:hover { border-color: var(--orange); color: var(--orange-dark); }
-  /* FAQ + scorecard slides: condensed present-mode view */
-  .present-faq-summary { display: none; }
-  body.mode-present #faq-section.present-current .faq-real { display: none; }
-  body.mode-present #faq-section.present-current .present-faq-summary { display: block; }
-  .present-faq-summary-title { font-size: 1.7em; font-weight: 800; color: var(--navy); margin: 6px 0; }
-  .present-faq-summary-count { font-size: 1.15em; color: var(--gray-600); }
+  /* Scorecard slide: condensed present-mode view (Q&A section removed 7/28 per Cameron) */
   body.mode-present #scorecard-section.present-current .sc-intro { display: none; }
   body.mode-present #scorecard-section.present-current .scorecard-grid {
     grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); max-width: 820px; margin: 18px auto 0;
@@ -725,26 +730,53 @@
 
     <div class="wsw">
       <span class="wsw-label">What — Record revenue, profit behind plan</span>
-      <p data-eid="fs-what-1">We did <strong>$8.4M in revenue — up almost 10% over last year, the biggest quarter in company history!</strong> And we didn't just ride a good market: the moving markets around us grew about 2–5% — <strong>we grew at roughly 3× the market's pace</strong>. We hit ~95% of our revenue plan. Profit came in at about <strong>two-thirds of what we planned</strong> — record revenue did not mean record profit this quarter. (July numbers are estimates until books close ~Aug 1.)</p>
+      <p data-eid="fs-what-1">We did <strong>$8.4M in revenue — up almost 10% over last year, the biggest quarter in company history!</strong> And we didn't just ride a good market: the moving markets around us grew about 2–5% — <strong>we grew at roughly 3× the market's pace</strong>.</p>
+      <p data-eid="fs-what-1b">We hit ~95% of our revenue plan. Profit came in at about <strong>two-thirds of what we planned</strong> — record revenue did not mean record profit this quarter. (July numbers are estimates until books close ~Aug 1.)</p>
     </div>
 
-    <div class="mini-stat-row three" aria-label="Three ways to look at the quarter">
-      <div class="mini-stat amber"><div class="ms-label">Against our plan</div><div class="ms-value">Fell short</div><div class="ms-sub" data-eid="fs-lens-1">Revenue came close (~95%) — profit well short. The honest miss.</div></div>
-      <div class="mini-stat green"><div class="ms-label">Against the market</div><div class="ms-value">Strong</div><div class="ms-sub" data-eid="fs-lens-2">We grew ~3&times; the pace of the markets around us.</div></div>
-      <div class="mini-stat green"><div class="ms-label">Against our history</div><div class="ms-value">Record</div><div class="ms-sub" data-eid="fs-lens-3">Biggest revenue quarter ever — but less profit than last year&#39;s Q2.</div></div>
+    <!-- Company report card — three-lens composite (_company_composite_q2_26, manifest v0.10.9; Cameron ruling 7/28 eve) -->
+    <div class="mini-stat green" style="margin:16px 0 8px;">
+      <div class="ms-label">The Company Report Card — Q2 Overall</div>
+      <div class="ms-value" style="font-size:34px;">B+</div>
+      <div class="ms-sub">One grade for the whole quarter, built from three things that all count equally. Provisional until the books close ~Aug 1.</div>
+    </div>
+    <div class="mini-stat-row three" aria-label="The three lenses behind the company grade">
+      <div class="mini-stat amber"><div class="ms-label">Money</div><div class="ms-value">B−</div><div class="ms-sub">Made real money and grew — but landed under the plan we set.</div></div>
+      <div class="mini-stat green"><div class="ms-label">Theme / Critical Numbers</div><div class="ms-value">A−</div><div class="ms-sub">Einstein Games hit Green (7.59) and staffing hit Super Green (101% of plan).</div></div>
+      <div class="mini-stat green"><div class="ms-label">People &amp; Customers</div><div class="ms-value">A−</div><div class="ms-sub">Customers scored us 88 (goal is 90 — close). The team scored us +81 — second-highest ever.</div></div>
     </div>
 
     <div class="wsw sowhat">
-      <span class="wsw-label">So What — The yardstick was off, and the spending was on purpose (a lot of it on you)</span>
-      <p data-eid="fs-sowhat-1"><strong>The revenue miss:</strong> here's the thing we found when we dug in — the "miss" mostly wasn't a miss. We actually served <strong>more hours of moving than we had budgeted</strong>, which means most branches did MORE moves than we expected. The problem was the plan itself: we didn't end up charging the prices we had planned to charge in the budget.</p>
-      <p data-eid="fs-sowhat-1b">Think of it like a lemonade stand. We planned the summer assuming $2 a cup. We poured <em>more</em> cups than planned — but a lot of them sold at the old $1.75 price, so the cash box came up short of plan even while we sold more lemonade than ever. That's mostly a planning miss, and Paul and I own it.</p>
+      <span class="wsw-label">So What — Miss #1: The revenue miss (the yardstick was off)</span>
+      <p data-eid="fs-sowhat-1">Here's the thing we found when we dug in — the "miss" mostly wasn't a miss. We served <strong>more hours of moving than we had budgeted</strong>, which means most branches did MORE moves than we expected.</p>
+      <p data-eid="fs-sowhat-1e">Full honesty: part of that "beat" is that the budget asked for too few hours in the first place — it counted trip-fee money in the price of an hour without counting the trip time, so the budget price was set too high and the budget hours too low.</p>
+      <p data-eid="fs-sowhat-1f"><strong>The real gap:</strong> we didn't end up billing the budget price — mostly because a lot of Q2 work was booked back in the spring at its old quoted price, before our new pricing went live in May. That backlog effect faded to almost nothing by July. That's mostly a planning miss, and Paul and I own it.</p>
+      <p data-eid="fs-sowhat-1c"><strong>The short version, lawn-mowing edition:</strong> we planned the summer with a broken measuring tape, a chunk of the summer's lawns were already promised at the old price, and we sent free helpers we never budgeted. The full story — the one worth two minutes — is right here:</p>
+    </div>
+
+    <details class="eli6" data-eli6-for="fs-sowhat-1" style="border-left:4px solid var(--ein-orange-500); background:var(--ein-orange-50);">
+      <summary style="font-size:16px; color:var(--ein-orange-900);">🧒 Explain this like I'm in sixth grade</summary>
+      <div class="eli6-body">
+        <p><strong>You mow lawns. You charge $20 an hour.</strong></p>
+        <p><strong>The plan.</strong> "I want to make $800 this summer. At $20/hour, I need 40 hours." That's how the Q2 plan was built: hours &times; rate = revenue.</p>
+        <p><strong>Mistake #1 — the broken ruler 📏</strong> You also charge $5 "gas money" to bike to each lawn. You counted the $5 as money you made, but you didn't count the 15 minutes of biking as time you worked. So you figured "$25 for an hour's work!" — except it took an hour and fifteen. You really make $20. Two things break: you plan to work too few hours, and your scoreboard is bent on both ends.</p>
+        <p><strong>Mistake #2 — you already shook on it 🤝</strong> In May you raise to $25/hour. Smart. But back in March you promised twenty lawns at $20. Those neighbors keep the old price. The raise barely shows in May, half in June, and by July everyone's paying the new price.</p>
+        <p><strong>Mistake #3 — you forgot to raise on some streets 🏘️</strong> Oak Street never got raised. Rich Hill got charged more than planned. On average it's a wash — but nothing happens "on average." Two real things happened on two real streets, and only one is a problem.</p>
+        <p><strong>Mistake #4 — the free helper 🧑&#8205;🌾</strong> Sometimes you bring a kid who's trying out for the job. With him helping, a lawn that should take 8 hours gets done in 5&frac12;. But he's free — it's his tryout — so you don't charge the neighbor for him. The bill comes in smaller than the number you quoted, and you never wrote that down when you planned your summer. May: $50. June: $26. July: $5. <em>(Real: $49.5K / $25.9K / $4.8K.)</em> And a chunk of the money you knocked off, you never wrote down a reason for at all.</p>
+        <p><strong>What did NOT go wrong — the neighbors ✅</strong> Nobody haggled you down. You never cut your posted price. You mowed more lawns than last year at higher prices and your schedule stayed full. One exception: on Tampa Street you bought four mowers and only found work for two. That's not a price problem — that's a too-many-mowers problem.</p>
+        <p><strong>The whole story in four sentences:</strong> We built the plan with a measuring tape that was wrong, so we aimed at too few hours and too high a rate. We raised prices in the spring — but two million dollars of work was already promised at the old price, so the raise took two months to show up. We sent free helpers on jobs and never budgeted the discount. All of that faded to almost nothing by July; customers never pushed back on price. Where we're actually hurting is Tampa, and it's empty trucks, not cheap prices.</p>
+      </div>
+    </details>
+
+    <div class="wsw sowhat">
+      <span class="wsw-label">So What — Miss #2: The profit miss (spending on purpose, a lot of it on you)</span>
       <p data-eid="fs-sowhat-2"><strong>The profit gap:</strong> mostly us choosing to invest more money into the company than expected, plus more overtime than we budgeted and a few pop-up costs we didn't see coming (like a $30K plumbing repair at our North Dallas location).</p>
       <p data-eid="fs-sowhat-2b">The biggest choice was you: in mid-May we gave <strong>every mover a raise</strong>, about <strong>$1.85/hour on average</strong>. That wasn't budgeted in the quarter. We moved it up because it was the right call, not because the spreadsheet had room — and we'd make the same call again.</p>
-      <p data-eid="fs-sowhat-2d">The rest of the gap was more bets on growth:</p>
+      <p data-eid="fs-sowhat-2d">The rest of the gap was more bets on growth and some missed forecasting:</p>
       <ul data-eid="fs-sowhat-2-list">
-        <li><strong>Summer crews</strong> — built early, and kept when May started slow</li>
-        <li><strong>Leadership coaching</strong> and a stronger finance team</li>
-        <li><strong>A bigger marketing push</strong></li>
+        <li><strong>Investments in leadership coaching</strong> and a stronger finance team</li>
+        <li><strong>Trial Day Discounts</strong> — an expense we didn't account for, reducing billable hours on a move</li>
+        <li><strong>A bigger marketing push</strong> — more marketing dollars spent than budgeted</li>
         <li><strong>17 trucks</strong> — 4 net-new, 13 replacements</li>
       </ul>
       <p data-eid="fs-sowhat-2c">Meanwhile the company stayed strong where it counts: revenue covered our bills roughly 1.5 times over. Nobody should read this quarter as "the company is in trouble." It isn't.</p>
@@ -752,7 +784,7 @@
 
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What — More crews on trucks, faster follow-up on leads</span>
-      <p data-eid="fs-nowwhat-1">We proved we can win demand — leads nearly doubled and we out-grew the market. Q3 points at two things. First, <strong>getting more crews on trucks</strong>: we finished the quarter with more work available than crews to run it (more on that two cards down). Second, <strong>turning leads into booked jobs faster</strong> — for CERs and sales, speed-to-lead is the play. For movers: keep availability up, keep NPS up, and send us people you'd want on your own crew. Your branch's specific picture is on your scorecard, linked at the bottom.</p>
+      <p data-eid="fs-nowwhat-1">We proved we can win demand — leads nearly doubled and we out-grew the market. Q3 points at two things: First, <strong>getting more crews on trucks</strong>: we finished the quarter with more work available than crews to run it (more on that two cards down). Second, <strong>turning leads into booked jobs faster</strong> — for CERs and sales, speed-to-lead is the play. For movers: keep availability up, keep NPS up, and send us people you'd want on your own crew. Your branch's specific picture is on your scorecard, linked at the bottom.</p>
     </div>
 
     <div class="review-note" data-section="financial-story">
@@ -800,7 +832,7 @@
 
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What</span>
-      <p data-eid="rev-nowwhat-1">Branches that grew are staffing up behind that growth. And one plot twist worth knowing: North Austin's dip wasn't idle crews — the trucks it could crew ran above target. It was short of movers, so it's getting more crew, not less.</p>
+      <p data-eid="rev-nowwhat-1">We continue to hire up, improve forecasting/budgeting, and ensure we continue to outpace the residential market so that we continue to gobble up market share.</p>
     </div>
 
     <div class="review-note" data-section="revenue-yoy">
@@ -818,24 +850,27 @@
     <h3 class="card-title" data-eid="trk-title">Trucks &amp; Staffing</h3>
 
     <div class="mini-stat-row three">
-      <div class="mini-stat green"><div class="ms-label" data-eid="trk-stat-1-label">Truck Utilization</div><div class="ms-value">~76%</div><div class="ms-sub" data-eid="trk-stat-1-sub">Every truck on the lot, crewed or not</div></div>
-      <div class="mini-stat green"><div class="ms-label" data-eid="trk-stat-2-label">Crewed-Truck Utilization</div><div class="ms-value">~84%</div><div class="ms-sub" data-eid="trk-stat-2-sub">The trucks we had crews for — 9 of 10 branches beat target</div></div>
+      <div class="mini-stat amber"><div class="ms-label" data-eid="trk-stat-1-label">Truck Utilization</div><div class="ms-value">~76%</div><div class="ms-sub" data-eid="trk-stat-1-sub">Every truck on the lot, crewed or not — vs our 81% goal, ~94% of the way there</div></div>
+      <div class="mini-stat"><div class="ms-label" data-eid="trk-stat-2-label">Crewed-Truck Utilization</div><div class="ms-value">~84%</div><div class="ms-sub" data-eid="trk-stat-2-sub">The trucks we had crews for — a reference read, not the graded number</div></div>
       <div class="mini-stat"><div class="ms-label" data-eid="trk-stat-3-label">New Trucks</div><div class="ms-value">17</div><div class="ms-sub" data-eid="trk-stat-3-sub">4 net-new, 13 replacements</div></div>
     </div>
 
     <div class="wsw">
       <span class="wsw-label">What — Two honest ways to count a truck</span>
-      <p data-eid="trk-what-1">Count <strong>every truck on the lot</strong> and we ran ~76% utilization — that's the number we grade ourselves on, and we beat the target. Count only the trucks we actually had crews for, and we ran <strong>~84%</strong> — on that basis, <strong>9 of 10 branches beat their target</strong>. The difference between those two numbers is <strong>861 truck-days</strong> — 861 separate days where a truck sat parked from open to close because there was no crew to run it. Real work left on the table.</p>
+      <p data-eid="trk-what-1">Count <strong>every truck on the lot</strong> and we ran ~76% utilization — that's the number we grade ourselves on, and against our 81% goal we got ~94% of the way there. A miss, and an honest one.</p>
+      <p data-eid="trk-what-1b">Count only the trucks we actually had crews for, and we ran <strong>~84%</strong> — that's a reference number, not what we're graded on, but it tells you something important: the trucks that HAD crews stayed busy.</p>
+      <p data-eid="trk-what-1c">The difference between those two numbers is <strong>861 truck-days</strong> — 861 separate days where a truck sat parked from open to close because there was no crew to run it. Real work left on the table.</p>
     </div>
 
     <div class="wsw sowhat">
       <span class="wsw-label">So What — The crews performed; we needed more crews</span>
-      <p data-eid="trk-sowhat-1">This means the movers we did hire were utilized well and got the hours we intended — plus some, since we ran way more overtime than we budgeted this quarter. We just needed to hire even more crews to open up even more trucks. We hired to ~101% of the staffing plan and it still wasn't enough — the plan was set below what summer demand actually needed, by roughly <strong>40 movers</strong> company-wide. That's a target-setting miss on the planning side, not a hustle problem on yours.</p>
+      <p data-eid="trk-sowhat-1">This means the movers we did hire were utilized well and got the hours we intended — plus some, since we ran way more overtime than we budgeted this quarter. We just needed to hire even more crews to open up even more trucks.</p>
+      <p data-eid="trk-sowhat-1b">We hired to ~101% of the staffing plan and it still wasn't enough — the plan was set below what summer demand actually needed, by roughly <strong>40 movers</strong> company-wide. That's a target-setting miss on the planning side, not a hustle problem on yours.</p>
     </div>
 
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What — Full crews turn parked trucks into paychecks</span>
-      <p data-eid="trk-nowwhat-1">Q3 staffing targets are re-set to real demand — which means the hours are there, and promotion slots open as crews grow. Two asks: keep your availability up, and if you know somebody who works the way you do, refer them. A parked truck with a full crew becomes hours, tips, and a bigger branch.</p>
+      <p data-eid="trk-nowwhat-1">Q3 staffing targets are re-set to real demand — which means the hours are there, and promotion slots open as crews grow. Two asks: keep your availability up, and if you know somebody who works the way you do, refer them.</p>
     </div>
 
     <div class="review-note" data-section="trucks-staffing">
@@ -871,8 +906,58 @@
 
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What</span>
-      <p data-eid="mkt-nowwhat-1">Q3 is about two things with those leads: working them fast and working the <em>right</em> ones first (lead triage). Honest answer on how 4,300+ leads went unworked: the old form only produced leads who asked to be contacted. The new one captures everyone — and nobody yet owned that new queue or had a speed target for it. Now it's getting owned: the quote form's been updated, the mobile app is next, and speed-to-lead is becoming the sales team's headline number.</p>
+      <p data-eid="mkt-nowwhat-1">Q3 is about two things with those leads: working them fast and working the <em>right</em> ones first (lead triage).</p>
+      <p data-eid="mkt-nowwhat-1b">Honest answer on how 4,300+ leads went unworked: the old form only produced leads who asked to be contacted. The new one captures everyone — and nobody yet owned that new queue or had a speed target for it. Now we need to take control of that pipeline and juice it for all it's worth. We are on our way:</p>
+      <ul data-eid="mkt-nowwhat-1-list">
+        <li><strong>The quote form's been updated</strong> — better screening for intent, better lead triage</li>
+        <li><strong>The mobile app is next</strong> — to improve estimate accuracy</li>
+        <li><strong>Automated follow-ups</strong> — we're automating customer contact where it makes sense</li>
+        <li><strong>Speed-to-lead</strong> — becoming the sales team's headline number</li>
+      </ul>
     </div>
+
+    <!-- ── FLM-ONLY DEEP DIVE — drop this <details> block from the mover/CX cut ── -->
+    <details style="border:1px solid var(--gray-200); border-radius:8px; margin:14px 0 4px; padding:0 16px; background:var(--gray-50, #fafafa);">
+      <summary style="cursor:pointer; padding:12px 0; font-size:15px; font-weight:800; color:var(--navy);">📣 Manager Deep Dive — marketing &amp; the demand picture <span style="font-weight:500; color:var(--gray-600);">(manager session only)</span></summary>
+      <div style="padding:4px 0 14px;">
+
+        <p style="font-size:13px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:8px 0 6px;">Marketing recap — the machine behind your leads</p>
+        <ul style="font-size:14px; padding-left:18px; margin:0 0 8px;">
+          <li style="padding:3px 0;"><strong>Form engagement more than doubled.</strong> The share of website visitors who engage the quote form went from <strong>12.9% to 28.5%</strong> year over year — and that happened while overall site traffic was <em>down</em> about 8%. Fewer visitors, way more of them raising a hand. That's an efficiency win, not a traffic wave.</li>
+          <li style="padding:3px 0;"><strong>Direct visits are up 18% year over year.</strong> "Direct" means someone typed einsteinmoving.com straight into their browser — no ad, no Google search. That's brand reputation compounding: reviews, word of mouth, trucks on the road, and Einstein showing up in AI answers when people ask "who's a good mover in my city."</li>
+          <li style="padding:3px 0;"><strong>What we spent to feed the funnel:</strong> about <strong>$175K in digital ads</strong> (Google, Microsoft, Meta) from May 1 through mid-July. Blended out, that's roughly <strong>$8.42 of ad spend per lead</strong> company-wide — with a real spread by branch. The full branch table is just below. (That's total spend over <em>all</em> leads including free organic/direct ones — a blended number, not what one paid click costs.)</li>
+          <li style="padding:3px 0;"><strong>Texas lead volume grew faster than the Texas housing market did</strong> — the campaigns are adding to the tailwind, not just riding it. Tampa's market genuinely cooled, which is part of why its cost per lead runs higher.</li>
+        </ul>
+
+        <p style="font-size:13px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:14px 0 6px;">Ad spend per lead, branch by branch</p>
+        <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:14px;">
+          <thead><tr style="border-bottom:2px solid var(--gray-200); text-align:left;"><th style="padding:5px 8px;">Branch</th><th style="padding:5px 8px;">Ad spend</th><th style="padding:5px 8px;">Leads</th><th style="padding:5px 8px;">Spend per lead</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Austin (North + South)</td><td style="padding:5px 8px;">$29,086</td><td style="padding:5px 8px;">5,628</td><td style="padding:5px 8px;">$5.17</td></tr>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Houston</td><td style="padding:5px 8px;">$20,075</td><td style="padding:5px 8px;">2,789</td><td style="padding:5px 8px;">$7.20</td></tr>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Dallas</td><td style="padding:5px 8px;">$20,276</td><td style="padding:5px 8px;">2,812</td><td style="padding:5px 8px;">$7.21</td></tr>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">McKinney</td><td style="padding:5px 8px;">$15,489</td><td style="padding:5px 8px;">1,775</td><td style="padding:5px 8px;">$8.73</td></tr>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">San Antonio</td><td style="padding:5px 8px;">$20,119</td><td style="padding:5px 8px;">2,089</td><td style="padding:5px 8px;">$9.63</td></tr>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Leander</td><td style="padding:5px 8px;">$14,279</td><td style="padding:5px 8px;">1,138</td><td style="padding:5px 8px;">$12.55</td></tr>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Fort Worth</td><td style="padding:5px 8px;">$13,558</td><td style="padding:5px 8px;">1,071</td><td style="padding:5px 8px;">$12.66</td></tr>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Garland</td><td style="padding:5px 8px;">$12,838</td><td style="padding:5px 8px;">917</td><td style="padding:5px 8px;">$14.00</td></tr>
+            <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Tampa</td><td style="padding:5px 8px;">$13,028</td><td style="padding:5px 8px;">627</td><td style="padding:5px 8px;">$20.78</td></tr>
+            <tr style="font-weight:700;"><td style="padding:5px 8px;">All branches</td><td style="padding:5px 8px;">$158,748</td><td style="padding:5px 8px;">18,846</td><td style="padding:5px 8px;">$8.42</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="font-size:13px; color:var(--gray-600); margin:6px 0 0;">Table covers the ~$159K of Google + Microsoft spend that can be tied to a branch; regional campaigns and Meta aren't branch-split (that's the gap to the ~$175K total). Same blended basis as above: spend ÷ all leads, including free organic/direct ones.</p>
+
+        <p style="font-size:13px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:14px 0 6px;">The number worth reading twice: $34.65 million</p>
+        <p style="font-size:14px; margin:0 0 8px;">That's the total value of the jobs we <strong>quoted</strong> in Q2. Thirty-four and a half million dollars of people who came to us, told us about their move, and got a real price. We booked about $7.2M of it. Read that as the demand engine working: the customers are there, at real prices, in numbers we've never seen. The gap between quoted and booked isn't a demand problem — it's a follow-up opportunity, which brings us to the next item.</p>
+
+        <p style="font-size:13px; font-weight:800; letter-spacing:0.1em; color:var(--gray-600); text-transform:uppercase; margin:14px 0 6px;">Q3's biggest low-hanging fruit — the EMMA Leads queue</p>
+        <p style="font-size:14px; margin:0 0 6px;">Since the April 5 form launched, leads split into two lanes. Leads the form <em>can't</em> price automatically route to humans — and humans work them <strong>99% of the time</strong>. Leads the form <em>can</em> price get an instant quote and land in the "EMMA Leads" queue — where <strong>64.6% of the time, nobody ever follows up</strong>. No call, no text, no email.</p>
+        <p style="font-size:14px; margin:0 0 6px;">That untouched pool is about <strong>4,382 leads a quarter holding roughly $9.04M in quoted work we never touched again</strong>. Real people, real moves, real prices. They did everything right; we just never called.</p>
+        <p style="font-size:14px; margin:0;"><strong>Why this is the headline:</strong> most improvements cost something — more trucks, more hires, more spend. This one is already paid for. The leads exist, the quotes exist, and the fix is follow-up: speed-to-lead targets and clear ownership of that queue. When your branch's phones get busier in Q3, this is a big part of why.</p>
+      </div>
+    </details>
 
     <div class="review-note" data-section="marketing-leads">
       <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
@@ -906,20 +991,20 @@
 
     <div class="wsw sowhat">
       <span class="wsw-label">So What</span>
-      <p data-eid="gam-sowhat-1">This is a pretty incredible result! This quarter is when we hired the most new movers, new managers, and new customer experience reps — which means we had the most new movers doing jobs estimated by the most new managers and CERs. That's a recipe for lower scores, and keeping standards up across all five metrics anyway is incredible work.</p>
-      <p data-eid="gam-sowhat-2"><strong>Quick reminder:</strong> games are a coaching tool, directionally accurate by design — in-week estimates, not resolved actuals. Real coaching and accountability run off hard numbers and final data results; game scores have never been a direct read on final bonus.</p>
+      <p data-eid="gam-sowhat-1">This is a pretty incredible result! This quarter is when we hired the most new movers, new managers, and new customer experience reps — which means we had the most new movers doing jobs estimated by the most new managers and CERs. That's a recipe for friction and ultimately lower scores. Even accounting for that, we were able to keep standards up across all five metrics — and that's incredible work.</p>
+      <p data-eid="gam-sowhat-2"><strong>Quick reminder:</strong> games are a coaching tool, directionally accurate by design — in-week estimates, not resolved actuals. Real coaching and accountability run off hard numbers and final data results; game scores are not a perfect match for quarterly bonus numbers.</p>
     </div>
 
     <h4 style="margin:16px 0 6px;font-size:15px;color:var(--navy);">Dream Team — 24 Trophy Holders</h4>
-    <p style="font-size:14px;color:var(--gray-600);margin:0 0 8px;">The top 10% of Q2 mover scores among everyone who cleared the busy-season hours floor. Congrats to all 24 — spread across 7 branches (inclusive-tie rule: all movers tied at the cutline qualify).</p>
+    <p style="font-size:14px;color:var(--gray-600);margin:0 0 8px;">The top 10% of Q2 mover scores among everyone who cleared the busy-season hours floor. Congrats to all 24 — spread across 7 branches (inclusive-tie rule: all movers tied at the cutline qualify). <strong>Tap a branch to see its Dream Team names.</strong></p>
     <div>
-      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Tampa · 5 members</span>
-      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Leander · 5</span>
-      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>S. Austin · 4</span>
-      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Houston · 4</span>
-      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>San Antonio · 3</span>
-      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Ft. Worth · 2</span>
-      <span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>McKinney · 1</span>
+      <details class="dt-pill"><summary><span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Tampa · 5 members</span></summary><div class="dt-names" data-eid="gam-dt-tampa">Stephen Crilly · Sloan Kraus · Connor Legro · Eric Corbitt Jr · Nazier Owens</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Leander · 5</span></summary><div class="dt-names" data-eid="gam-dt-leander">Nathan Swain · Bren Steele · Emily Harris · Joe Michaud Jr · Rocky Taylor</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>S. Austin · 4</span></summary><div class="dt-names" data-eid="gam-dt-saustin">Jakob Steen · Luis Sanchez-Garcia · Allister Suber · Jhamar Dixon</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Houston · 4</span></summary><div class="dt-names" data-eid="gam-dt-houston">Shawn Blake · Landon Sprigler · Jalen Gregor · Armando Lozano</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>San Antonio · 3</span></summary><div class="dt-names" data-eid="gam-dt-sanantonio">Gatlin Jones · Leeroy Delgado · Brennan Culbertson</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Ft. Worth · 2</span></summary><div class="dt-names" data-eid="gam-dt-ftworth">Ernesto Padilla · Sully Lowe</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>McKinney · 1</span></summary><div class="dt-names" data-eid="gam-dt-mckinney">Wade Woodard</div></details>
     </div>
 
     <div class="wsw nowwhat" style="margin-top:14px;">
@@ -949,18 +1034,55 @@
 
     <div class="wsw">
       <span class="wsw-label">What</span>
-      <p data-eid="flt-what-1">Our fleet safety score climbed to <strong>89, up from 80 last quarter</strong>, and the share of drivers flagged high-risk nearly halved. Following Distance events fell <strong>54%</strong> — the quarter's biggest safety win. Total events rose only because we deliberately tightened two standards (Rolling Stop, Inattentive) — that's stricter refereeing, not worse driving.</p>
+      <p data-eid="flt-what-1">Our fleet safety score climbed to <strong>89, up from 80 last quarter</strong>, and the share of drivers flagged high-risk nearly halved. Following Distance events fell <strong>54%</strong> — the quarter's biggest safety win.</p>
       <p data-eid="flt-what-2">And here's the number that hits the wallet: just <strong>3 insurance claims in all of 2026 so far</strong>, roughly $15K out of pocket — versus <strong>54 claims in all of 2025</strong>.</p>
     </div>
 
+    <!-- ── Events per 10K miles trend beat (Cameron 7/28: headline number for this section) ── -->
+    <h4 style="margin:16px 0 6px;font-size:15px;color:var(--navy);">The Headline Number: Safety Events per 10,000 Miles — Dropping</h4>
+    <div class="yoy-bars" role="img" aria-label="Safety events per ten thousand miles, Q1 28.5 down to Q2 24.8 on the same standards">
+      <div class="yoy-row"><div class="yoy-branch">Q1&#39;26</div><div class="yoy-track"><div class="yoy-fill" style="width:100%;background:var(--gray-300);"></div></div><div class="yoy-pct" style="color:var(--gray-600);width:auto;">28.5</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Q2&#39;26</div><div class="yoy-track"><div class="yoy-fill" style="width:87%;"></div></div><div class="yoy-pct pos" style="width:auto;">24.8 · down 13%</div></div>
+    </div>
+    <p data-eid="flt-per10k-1" style="font-size:14px;">This is the fairest way to measure safe driving — events for every 10,000 miles driven, so a busier quarter can't hide anything. Measured on the same standards, we went from <strong>28.5 in Q1 to 24.8 in Q2 — down 13%</strong>, while the fleet ran 23.5% MORE miles. (Count Q2 on the raw numbers and it reads 31.1 — but that's because mid-quarter we deliberately tightened two standards, Rolling Stop and Inattentive, to referee ourselves harder. That's stricter refereeing, not worse driving.)</p>
+
+    <!-- ── Branch-by-branch safety events table (Cameron 7/28 eve) ── -->
+    <p style="margin:14px 0 6px; font-size:12.5px; font-weight:800; letter-spacing:0.15em; color:var(--ein-blue-700); text-transform:uppercase;">Safety Events per 10,000 Miles, Branch by Branch</p>
+    <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:14px;">
+      <thead><tr style="border-bottom:2px solid var(--gray-200); text-align:left;"><th style="padding:5px 8px;">Branch</th><th style="padding:5px 8px;">Events</th><th style="padding:5px 8px;">Miles driven</th><th style="padding:5px 8px;">Events per 10K miles</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Fort Worth</td><td style="padding:5px 8px;">24</td><td style="padding:5px 8px;">18,030</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">13.3</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Tampa</td><td style="padding:5px 8px;">13</td><td style="padding:5px 8px;">7,529</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">17.3</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Leander</td><td style="padding:5px 8px;">55</td><td style="padding:5px 8px;">25,197</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">21.8</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Houston</td><td style="padding:5px 8px;">95</td><td style="padding:5px 8px;">40,403</td><td style="padding:5px 8px;font-weight:700;">23.5</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">South Austin</td><td style="padding:5px 8px;">94</td><td style="padding:5px 8px;">37,927</td><td style="padding:5px 8px;font-weight:700;">24.8</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">San Antonio</td><td style="padding:5px 8px;">102</td><td style="padding:5px 8px;">37,309</td><td style="padding:5px 8px;font-weight:700;">27.3</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Garland</td><td style="padding:5px 8px;">55</td><td style="padding:5px 8px;">15,852</td><td style="padding:5px 8px;font-weight:700;color:var(--ein-orange-700);">34.7</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">North Austin</td><td style="padding:5px 8px;">169</td><td style="padding:5px 8px;">48,292</td><td style="padding:5px 8px;font-weight:700;color:var(--ein-orange-700);">35.0</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Dallas</td><td style="padding:5px 8px;">286</td><td style="padding:5px 8px;">66,277</td><td style="padding:5px 8px;font-weight:700;color:var(--red);">43.2</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">McKinney</td><td style="padding:5px 8px;">138</td><td style="padding:5px 8px;">22,388</td><td style="padding:5px 8px;font-weight:700;color:var(--red);">61.6</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:12px;color:var(--gray-600);margin:6px 0 0;">Raw Q2 numbers — every branch was refereed on the same standards all quarter, so branch-to-branch is a fair comparison. The company trend above adjusts Q2 back to Q1's standards, so these rows won't average to 24.8. Events are Samsara-flagged driving events, not accidents or claims.</p>
+    <!-- NO_SOURCE (July close ask for Matisen): a MONTHLY events-per-10K series on the REVIEW basis does not exist —
+         only the API/telemetry basis has monthly grain (35.1/34.0/36.5), and that basis is ruled out as a headline
+         (manifest _monthly / safety notes). The Q1→Q2 pair above is the review-basis series (events_per_1k_mi ×10).
+         If Matisen can produce monthly review-basis per-10K at July close, upgrade the two-bar chart to a monthly line. -->
+    <!-- NO_SOURCE (July close, Jaci's 2025 report): Cameron's edit asserts "about 27 claims at this point last year" —
+         no structured mid-2025 cumulative claims field exists; ~27 ≈ straight-line half of the 54-claim 2025 total.
+         Confirm the actual mid-2025 cumulative count when Jaci's 2025 claims report surfaces. -->
+
     <div class="wsw sowhat">
       <span class="wsw-label">So What</span>
-      <p data-eid="flt-sowhat-1">Fewer real events = fewer claims = money that stays in the company and the bonus pool instead of going to the insurance company. And this one's bigger than a bonus line: over the last couple of years our insurance rates rose so fast it was becoming one of the biggest existential threats to the business. Going from 54 claims to 3 is how that threat gets beat — safe driving is one of the most direct ways a crew protects its own branch, and the whole company.</p>
+      <p data-eid="flt-sowhat-1">Fewer real events = fewer claims = money that stays in the company and the bonus pool instead of going to the insurance company.</p>
+      <p data-eid="flt-sowhat-1b">And this one's bigger than a bonus line: over the last couple of years our insurance rates rose so fast it was becoming one of the biggest existential threats to the business. At this point in time last year, we had about 27 claims. This year, we only have three! This kind of safe driving is one of the most direct ways a crew protects its own branch, and the whole company.</p>
     </div>
 
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What</span>
-      <p data-eid="flt-nowwhat-1">Two fixes are live: iPad-looking Inattentive alerts can't be dismissed anymore, and San Antonio's broken visor gets fixed, not dismissed.</p>
+      <p data-eid="flt-nowwhat-1">The packet review turned up one more honest read: the vast majority of our damages were us hitting things — not collisions with other cars. So the next step is aimed exactly there: <strong>improved driver training and recertifications</strong> built to avoid those types of accidents.</p>
     </div>
 
     <div class="review-note" data-section="fleet-safety">
@@ -987,10 +1109,56 @@
       <div class="yoy-row"><div class="yoy-branch">Target</div><div class="yoy-track"><div class="yoy-fill" style="width:90%;background:repeating-linear-gradient(45deg, var(--gray-300) 0 6px, var(--gray-100) 6px 12px);"></div></div><div class="yoy-pct" style="color:var(--gray-600);">90</div></div>
     </div>
 
+    <!-- ── Branch-by-branch NPS table (Cameron 7/28) ── -->
+    <p style="margin:14px 0 6px; font-size:12.5px; font-weight:800; letter-spacing:0.15em; color:var(--ein-blue-700); text-transform:uppercase;">NPS, Branch by Branch</p>
+    <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:14px;">
+      <thead><tr style="border-bottom:2px solid var(--gray-200); text-align:left;"><th style="padding:5px 8px;">Branch</th><th style="padding:5px 8px;">Q2 NPS</th><th style="padding:5px 8px;">Q1 NPS</th><th style="padding:5px 8px;">Surveys back</th><th style="padding:5px 8px;">Response rate</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Leander</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">99.1</td><td style="padding:5px 8px;">87.7</td><td style="padding:5px 8px;">107</td><td style="padding:5px 8px;">34.2%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Houston</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">96.2</td><td style="padding:5px 8px;">93.6</td><td style="padding:5px 8px;">238</td><td style="padding:5px 8px;">53.1%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Tampa</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">93.8</td><td style="padding:5px 8px;">100.0</td><td style="padding:5px 8px;">32</td><td style="padding:5px 8px;">20.5%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">North Austin</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">92.3</td><td style="padding:5px 8px;">91.4</td><td style="padding:5px 8px;">78</td><td style="padding:5px 8px;">8.7%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Fort Worth</td><td style="padding:5px 8px;font-weight:700;">88.2</td><td style="padding:5px 8px;">96.2</td><td style="padding:5px 8px;">68</td><td style="padding:5px 8px;">29.8%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Garland</td><td style="padding:5px 8px;font-weight:700;">86.4</td><td style="padding:5px 8px;">100.0</td><td style="padding:5px 8px;">44</td><td style="padding:5px 8px;">21.4%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">McKinney</td><td style="padding:5px 8px;font-weight:700;">81.0</td><td style="padding:5px 8px;">94.8</td><td style="padding:5px 8px;">84</td><td style="padding:5px 8px;">21.3%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">South Austin</td><td style="padding:5px 8px;font-weight:700;">80.8</td><td style="padding:5px 8px;">89.6</td><td style="padding:5px 8px;">104</td><td style="padding:5px 8px;">14.5%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">San Antonio</td><td style="padding:5px 8px;font-weight:700;">79.8</td><td style="padding:5px 8px;">85.2</td><td style="padding:5px 8px;">114</td><td style="padding:5px 8px;">22.4%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Dallas</td><td style="padding:5px 8px;font-weight:700;">79.5</td><td style="padding:5px 8px;">91.4</td><td style="padding:5px 8px;">156</td><td style="padding:5px 8px;">18.3%</td></tr>
+        <tr style="font-weight:700;"><td style="padding:5px 8px;">Company</td><td style="padding:5px 8px;">88.0</td><td style="padding:5px 8px;">91.9</td><td style="padding:5px 8px;">1,025</td><td style="padding:5px 8px;">—</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:13px; color:var(--gray-600); margin:6px 0 0;">Green = at or above the 90 bar. Response rate = surveys back ÷ completed moves (May + June, the full-month pair). Small survey counts at Tampa and Garland make their quarter-to-quarter swings noisier. July responses still coming in — final numbers land ~Aug 1.</p>
+
     <div class="wsw sowhat">
       <span class="wsw-label">So What</span>
-      <p data-eid="nps-sowhat-1">Reviews and referrals are the cheapest jobs we ever book — every point of NPS is future work your branch doesn't have to buy. Some honest context on the dip: like we mentioned above, this quarter we had more new movers, new managers, and new CX reps in the system at once than we've ever had. More new people means more chances for a rough edge — and it means the fix is reps and coaching, not panic.</p>
+      <p data-eid="nps-sowhat-1">Reviews and referrals are the cheapest jobs we ever book — every point of NPS is future work your branch doesn't have to buy.</p>
+      <p data-eid="nps-sowhat-1b">Some honest context on the dip: like we mentioned above, this quarter we had more new movers, new managers, and new CX reps in the system at once than we've ever had. More new people means more chances for a rough edge — and it means the fix is reps and coaching, not panic.</p>
+      <p data-eid="nps-reviews-1">And here's the proof customers still love the work: they posted <strong>754 five-star reviews</strong> about your moves this quarter — up from <strong>688</strong> last quarter. Those reviews name names, and the most-named mover in the company was <strong>Luis Sanchez-Garcia with 29</strong>. When a customer takes five minutes after a long move day to write about you by name, that's the whole job done right.</p>
     </div>
+
+    <!-- ── Branch-by-branch reviews table (Cameron 7/28) ── -->
+    <p style="margin:14px 0 6px; font-size:12.5px; font-weight:800; letter-spacing:0.15em; color:var(--ein-blue-700); text-transform:uppercase;">5-Star Reviews, Branch by Branch</p>
+    <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:14px;">
+      <thead><tr style="border-bottom:2px solid var(--gray-200); text-align:left;"><th style="padding:5px 8px;">Branch</th><th style="padding:5px 8px;">5-star reviews</th><th style="padding:5px 8px;">Per 100 moves</th></tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Tampa</td><td style="padding:5px 8px;">95</td><td style="padding:5px 8px;font-weight:700;">48.5</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Houston</td><td style="padding:5px 8px;">114</td><td style="padding:5px 8px;font-weight:700;">21.4</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Fort Worth</td><td style="padding:5px 8px;">47</td><td style="padding:5px 8px;font-weight:700;">17.5</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">South Austin</td><td style="padding:5px 8px;">151</td><td style="padding:5px 8px;font-weight:700;">17.2</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Leander</td><td style="padding:5px 8px;">59</td><td style="padding:5px 8px;font-weight:700;">15.1</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">San Antonio</td><td style="padding:5px 8px;">74</td><td style="padding:5px 8px;font-weight:700;">13.9</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">McKinney</td><td style="padding:5px 8px;">52</td><td style="padding:5px 8px;font-weight:700;">11.9</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Garland</td><td style="padding:5px 8px;">26</td><td style="padding:5px 8px;font-weight:700;">11.6</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Dallas</td><td style="padding:5px 8px;">81</td><td style="padding:5px 8px;font-weight:700;">8.1</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">North Austin</td><td style="padding:5px 8px;">55</td><td style="padding:5px 8px;font-weight:700;">5.2</td></tr>
+        <tr style="font-weight:700;"><td style="padding:5px 8px;">Company</td><td style="padding:5px 8px;">754</td><td style="padding:5px 8px;">13.7</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:13px; color:var(--gray-600); margin:6px 0 0;">Reviews logged through 7/21 — the quarter's last ~10 days aren't entered yet, so every branch's real number is a touch higher.</p>
 
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What</span>
@@ -1191,7 +1359,7 @@
 
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What</span>
-      <p data-eid="cmm-nowwhat-1">Carly's back as of late July. Wall damages weren't tracked in Q2 — they return as a tracked item in Q3. And keep the Magic Moment nominations coming: the crews on the ground spot them first.</p>
+      <p data-eid="cmm-nowwhat-1">Carly's back as of late July (she leads the Claims Team) and we plan on continuing to expand our Magic Moments program to deliver more magic moments across all cycles of the moving experience (not just post-move). Keep the Magic Moment nominations coming!</p>
     </div>
     <div class="review-note" data-section="claims-mm">
       <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note</button>
@@ -1273,64 +1441,13 @@
 
   <hr class="divider">
 
-  <!-- ══════════════════ FAQ (spec §5) ══════════════════ -->
-  <div class="slide-el slide-section" id="faq-section">
-  <div class="faq-real">
-  <h2 class="section-title"><span class="sec-eyebrow">Questions Answered</span>Ask Away — Chances Are, It's Here</h2>
+  <!-- FAQ SECTION REMOVED per Cameron's 7/28 redline ("Let's remove the FAQ entirely. Not adding value.")
+       PRESERVED for the manager-cut discussion — Cameron's edited manager-bonus answer (was faq-2-a,
+       "Does the profit miss hit my bonus?"):
+       "For movers, bonus bases are the branch metrics on your scorecard, not company profit; games scores
+        were never a direct read on bonus. For managers, yes, a margin hit impacts bonuses." -->
 
-  <div class="review-note" data-section="faq-section" style="margin:0 0 12px;">
-    <button type="button" class="review-note-toggle" aria-expanded="false">&#9998; add review note on the FAQ</button>
-    <div class="review-note-body" hidden>
-      <div class="review-note-microlabel">Review note — not part of the page copy</div>
-      <textarea class="review-note-textarea" rows="3" placeholder="Questions/notes on the FAQ — call out any question by its first few words…"></textarea>
-    </div>
-  </div>
-
-  <div class="faq-group-title">Money / Job Security</div>
-  <details class="faq-item"><summary data-eid="faq-1-q">Profit missed — are layoffs or hour cuts coming?</summary><div class="faq-answer" data-eid="faq-1-a">The opposite. We finished the quarter roughly 40 movers short of what demand actually needed, and Q3 staffing targets went up, not down. We're hiring — refer your people.</div></details>
-  <details class="faq-item"><summary data-eid="faq-2-q">Does the profit miss hit my bonus?</summary><div class="faq-answer" data-eid="faq-2-a">Bonus bases are the branch metrics on your scorecard, not company profit; games scores were never a direct read on bonus.</div></details>
-  <details class="faq-item"><summary data-eid="faq-3-q">If revenue is a record, where did the money go?</summary><div class="faq-answer" data-eid="faq-3-a">Mostly things we chose: a mid-quarter raise for every mover, early summer staffing, coaching, a stronger finance team, a bigger marketing push — plus 17 trucks.</div></details>
-  <details class="faq-item"><summary data-eid="faq-22-q">Did the mover raise cause the profit miss?</summary><div class="faq-answer" data-eid="faq-22-a">It's part of the gap, and we'd make the same call tomorrow. The raise went out in mid-May — unbudgeted, on purpose — because paying the people who carry the work beats protecting a spreadsheet. It stays.</div></details>
-  <details class="faq-item"><summary data-eid="faq-4-q">Is the company okay on cash?</summary><div class="faq-answer" data-eid="faq-4-a">Yes: cash-generating quarter, bills covered ~1.5×, and the truck buys were mostly bank-financed.</div></details>
-  <details class="faq-item"><summary data-eid="faq-5-q">Will prices go up to fix the profit gap?</summary><div class="faq-answer" data-eid="faq-5-a">Pricing runs on its own weekly cadence; nothing in this quarter's story is a price-panic move.</div></details>
-
-  <div class="faq-group-title">My Branch</div>
-  <details class="faq-item"><summary data-eid="faq-6-q">Why does my branch look bad on the scorecard when we worked our tails off?</summary><div class="faq-answer" data-eid="faq-6-a">Effort shows in the tiles you control (NPS, safety, availability); some misses this quarter were target-math or market issues, and your BM has the branch-specific read.</div></details>
-  <details class="faq-item"><summary data-eid="faq-7-q">North Austin / Leander shrank — what happens to those crews?</summary><div class="faq-answer" data-eid="faq-7-a">Nobody's cutting. North Austin was actually short of crews — the trucks it could staff ran above target — so it's getting more movers, not fewer. Leander has a specific plan with its RM, and growth elsewhere means slots across the network.</div></details>
-  <details class="faq-item"><summary data-eid="faq-8-q">I heard Tampa's numbers ran light — are we giving up on Florida?</summary><div class="faq-answer" data-eid="faq-8-a">Florida's market genuinely cooled; Tampa was a deliberate capacity bet and its utilization climbed every month — we're sequencing, not retreating.</div></details>
-  <details class="faq-item"><summary data-eid="faq-9-q">How does my branch get another truck?</summary><div class="faq-answer" data-eid="faq-9-a">Utilization + booked demand: run the trucks you have full and convert your leads, and the fleet plan follows.</div></details>
-
-  <div class="faq-group-title">Leads / Sales</div>
-  <details class="faq-item"><summary data-eid="faq-10-q">Leads doubled — why didn't revenue double?</summary><div class="faq-answer" data-eid="faq-10-a">Most of the "new" leads are ones we used to lose before getting contact info; the real win is we now get to work them.</div></details>
-  <details class="faq-item"><summary data-eid="faq-11-q">Whose job are those 4,300 unworked leads?</summary><div class="faq-answer" data-eid="faq-11-a">That's the Q3 theme: assignment + speed-to-lead, owned by CX/sales with branch support — specifics land at the theme rollout.</div></details>
-  <details class="faq-item"><summary data-eid="faq-12-q">Is conversion down? I heard the rate dropped.</summary><div class="faq-answer" data-eid="faq-12-a">Same-universe conversion actually rose +2 pts; the scary-looking drop is math from flooding the funnel with captured leads.</div></details>
-
-  <div class="faq-group-title">Safety / Samsara</div>
-  <details class="faq-item"><summary data-eid="faq-13-q">Safety events went UP — are we driving worse?</summary><div class="faq-answer" data-eid="faq-13-a">No: two standards were deliberately tightened (Rolling Stop, Inattentive) and they explain most of the increase; Following Distance fell 54%.</div></details>
-  <details class="faq-item"><summary data-eid="faq-14-q">Why can't I dismiss the iPad Inattentive alert anymore?</summary><div class="faq-answer" data-eid="faq-14-a">Too many real events were being dismissed as "iPad" — now they route to review so the data stays honest.</div></details>
-  <details class="faq-item"><summary data-eid="faq-15-q">Does a Samsara score affect my pay or promotion?</summary><div class="faq-answer" data-eid="faq-15-a">Safety is coaching-first (redirects before anything else); promotion runs on the promotion framework, not raw telematics.</div></details>
-
-  <div class="faq-group-title">Games / Recognition</div>
-  <details class="faq-item"><summary data-eid="faq-16-q">San Antonio won the bracket but Tampa is #1 overall — which is it?</summary><div class="faq-answer" data-eid="faq-16-a">Both: SA won the head-to-head season, Tampa posted the best overall score — different trophies on purpose.</div></details>
-  <details class="faq-item"><summary data-eid="faq-17-q">Why is there no Games season next quarter?</summary><div class="faq-answer" data-eid="faq-17-a">S4 pauses official tracking while scoring gets automated; the underlying metrics keep running and still feed bonuses.</div></details>
-  <details class="faq-item"><summary data-eid="faq-18-q">Why did the scores change late in the season?</summary><div class="faq-answer" data-eid="faq-18-a">Final scoring uses the average of weekly averages over the 8 real weeks; the post-season week was exhibition and never counted.</div></details>
-
-  <div class="faq-group-title">Surveys / Voice</div>
-  <details class="faq-item"><summary data-eid="faq-19-q">eNPS is +81 — but that's not us, right?</summary><div class="faq-answer" data-eid="faq-19-a">Right: +81 is the salaried manager/CET survey; the mover survey runs separately — a different population, so never compare the two directly. Your next mover survey is the fresh read.</div></details>
-  <details class="faq-item"><summary data-eid="faq-20-q">Will my survey answers really change anything?</summary><div class="faq-answer" data-eid="faq-20-a">Leadership decisions this quarter — including holding the summer crew build — were made with this kind of employee data on the table; participation is the leverage.</div></details>
-  <details class="faq-item"><summary data-eid="faq-21-q">What's the Q3 theme and what's in it for me?</summary><div class="faq-answer" data-eid="faq-21-a">Decided at QGR 7/29–30; the leading candidates all center on converting demand and building skills faster — both mean more hours and faster promotions. (Hold final wording until the QGR rules.)</div></details>
-  </div>
-
-  <div class="present-faq-summary">
-    <p class="present-faq-summary-title">Questions? Chances are it's answered — see the page.</p>
-    <p class="present-faq-summary-count">22 questions covered across 6 topics on this page.</p>
-  </div>
-
-  </div>
-
-  <hr class="divider">
-
-  <!-- ══════════════════ SCORECARD LINK GRID ══════════════════ -->
+<!-- ══════════════════ SCORECARD LINK GRID ══════════════════ -->
   <div class="slide-el slide-section" id="scorecard-section">
   <h2 class="section-title"><span class="sec-eyebrow">Now — Your Branch</span>Branch Scorecards</h2>
   <p class="sc-intro" style="font-size:15px;color:var(--gray-600);" data-eid="sc-intro-1">That was the company story — <strong>your branch&#39;s own quarter</strong> (NPS, safety, availability, recognition) lives on your scorecard. In the huddle this is the handoff: company page first, then your branch&#39;s page.</p>
@@ -1390,7 +1507,7 @@
   var SLIDES = [
     'who-we-are', 'financial-story', 'revenue-yoy', 'trucks-staffing', 'marketing-leads',
     'games', 'fleet-safety', 'nps-enps', 'employee-voice', 'claims-mm', 'cx-lookback', 'q3-theme',
-    'faq-section', 'scorecard-section'
+    'scorecard-section'
   ];
   var SECTION_TITLES = {
     'who-we-are': 'Who We Are & Why We Do This',
@@ -1405,7 +1522,6 @@
     'claims-mm': 'Claims & Magic Moments',
     'cx-lookback': 'First-Class Precision & CX Sales Look-back',
     'q3-theme': 'Q3 Theme',
-    'faq-section': 'FAQ — Ask Away',
     'scorecard-section': 'Now — Your Branch'
   };
 
