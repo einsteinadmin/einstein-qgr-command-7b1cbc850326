@@ -2151,7 +2151,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
 
     <div class="toc-section">
       <h4>Cascade</h4>
-      <a href="q2-frontline-packet.html" style="font-weight:700;">🧭 Frontline Packet (DRAFT) — the plain-English company story for BMs/movers/CERs; present mode for huddles, room-opener candidate</a>
+      <a href="q2-frontline-packet.html" style="font-weight:700;">🧭 Frontline Packet — the plain-English company story for BMs/movers/CERs; present mode for huddles, room-opener candidate</a>
     </div>
 
     <div class="toc-section">
@@ -3570,184 +3570,184 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
     <!-- ============== SCORECARDS ============== -->
     <section id="scorecards">
       <h2>Scorecards — Branch + Department</h2>
-      <p>Brian's idea: collapse all the branch-by-branch tables in this packet into one rolled-up scorecard <em>per branch</em>, so a BM and their managers can see <strong>their</strong> Financial · Operational · Customer · People metrics in one place with a composite grade. <strong>The 10 branch-scorecard HTML files themselves are their own re-render task (not rebuilt in this pass) — they still show Q1 content.</strong> The leaderboard and tiles below are updated to Q2 manifest data even though the linked detail pages are not yet refreshed; each tile is labeled accordingly.</p>
+      <p>Brian's idea: collapse all the branch-by-branch tables in this packet into one rolled-up scorecard <em>per branch</em>, so a BM and their managers can see <strong>their</strong> Financial · Operational · Customer · People metrics in one place with a composite grade. <strong>The 10 branch scorecards are live and fully rebuilt on Q2 data</strong> (linked below) — each renders the branch's own composite on a <strong>provisional ÷60 basis</strong> (TUR retired to a side metric this quarter; Sales Target attainment + Recognition% land at the 7/31–8/1 close pulls, at which point every composite goes ÷80 and the letters stamp FINAL).</p>
       <div class="placeholder-note">Dream Team highlights (the additive layer planned for branch scorecard rows) now render on each branch scorecard from the corrected 24-mover inclusive-tie roster (folded 7/25); the full company roster is in the Games section.</div>
-      <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content">Concept = Brian Herzig (CTXH Regional Manager) · Q1's 7-metric weighted composite (TUR/Sales/NPS/eNPS/Recognition/Safety/Personnel → SG=5/G=4/W=2/R=1) can't run cleanly this quarter — 3 of 7 inputs (Sales Target attainment, Mover eNPS, Recognition%) are <code>not_calculable</code> in the Q2 manifest. Ranking below uses <strong>NOI-to-plan attainment</strong> (fully sourced, cross-checked against the Financial Deck's rankings block) instead of a partial composite · Source: Manifest v0.8.2 <code>branch-metrics-q2-26.json</code>, <code>_rankings_q2_26.noi_to_plan</code> · Roundtable ask: restore the 7-metric composite once Sales Target/Mover eNPS/Recognition feeds land, or lock a Q3 substitute rubric</div></details>
+      <details class="data-source-collapsible"><summary>📍 Source</summary><div class="data-source-content">Concept = Brian Herzig (CTXH Regional Manager) · Ranking below uses the <strong>provisional composite FINAL grade</strong> from each card's 6-metric basis (TUR retired to a side metric per Cameron's 7/28 ruling — Sales Target + Mover eNPS + Recognition% were the not-yet-calculable inputs it replaces) — earned live points ÷60 → composite letter, plus each card's published growth modifier → the final grade shown. NOI-to-plan attainment remains visible per row as secondary context (title attribute), not the ranking basis. Letters are provisional and re-stamp FINAL once Sales Target + Recognition land at the 7/31–8/1 close (denominator moves to ÷80) · Source: Manifest v0.10.10 <code>branch-metrics-q2-26.json</code>, <code>_branch_composites_q2_26_provisional</code> · Roundtable ask: none open — composite basis is set; only the July-close inputs are pending</div></details>
 
       <p class="scorecard-section-sub-title">Branch Scorecards · 10 locations</p>
 
-      <!-- Branch Performance Leaderboard — horizontal-bar viz, ranked by Final composite grade -->
+      <!-- Branch Performance Leaderboard — horizontal-bar viz, ranked by provisional composite FINAL grade -->
       <div class="leaderboard" role="region" aria-label="Branch Performance Leaderboard">
         <div class="leaderboard-header">
-          <p class="leaderboard-title">Branch Performance — Q2'26 Ranked by NOI-to-Plan</p>
+          <p class="leaderboard-title">Branch Performance — Q2'26 Ranked by Provisional Composite Grade</p>
         </div>
-        <p class="leaderboard-sub">All 10 branches sorted by allocated-NOI attainment vs the Q2 reforecast plan. Bar color = attainment band (green ≥100% · blue 70-99% · amber 50-69% · red &lt;50%). Financials preliminary until August close.</p>
+        <p class="leaderboard-sub">All 10 branches sorted by their provisional composite FINAL grade (÷60 live points, TUR ungraded this quarter, plus each card's growth modifier) — finalizes at the 7/31–8/1 close. Bar length = final grade as a share of the field-leading final (Tampa 105.0); Tampa's above-100 final renders as computed — the growth modifier is a published rule, not a cap override.</p>
         <div class="leaderboard-rows">
-          <div class="lb-row" title="Garland · NOI 103.0% of plan · Revenue +38.3% YoY">
+          <div class="lb-row" title="Tampa · provisional final 105.0 (A+) · composite 95.0% ÷60 · growth +10 · NOI 24.5% of plan">
             <div class="lb-rank">#1</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">Garland</span>
-              <span class="lb-bm">BM Jack Davis</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-cash-leader" style="width:100%;">103.0% of NOI plan</div>
-            </div>
-            <div class="lb-growth up">▲ +38.3% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">103%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="South Austin · NOI 90.2% of plan · Revenue +24.5% YoY">
-            <div class="lb-rank">#2</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">South Austin</span>
-              <span class="lb-bm">BM Chris Anderson</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-cash-contributor" style="width:90%;">90.2% of NOI plan</div>
-            </div>
-            <div class="lb-growth up">▲ +24.5% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">90%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="Leander · NOI 82.8% of plan · Revenue -1.1% YoY">
-            <div class="lb-rank">#3</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">Leander</span>
-              <span class="lb-bm">BM Frank Williams</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-cash-contributor" style="width:83%;">82.8% of NOI plan</div>
-            </div>
-            <div class="lb-growth down">▼ -1.1% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">83%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="Houston · NOI 73.1% of plan · Revenue +3.5% YoY">
-            <div class="lb-rank">#4</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">Houston</span>
-              <span class="lb-bm">BM Sergio Buenrostro</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-cash-contributor" style="width:73%;">73.1% of NOI plan</div>
-            </div>
-            <div class="lb-growth up">▲ +3.5% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">73%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="McKinney · NOI 61.6% of plan · Revenue +19.1% YoY">
-            <div class="lb-rank">#5</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">McKinney</span>
-              <span class="lb-bm">BM Khevan Dueck</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-cash-neutral" style="width:62%;">61.6% of NOI plan</div>
-            </div>
-            <div class="lb-growth up">▲ +19.1% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">62%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="Dallas · NOI 60.6% of plan · Revenue +20.4% YoY">
-            <div class="lb-rank">#6</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">Dallas</span>
-              <span class="lb-bm">BM Chris Beattie</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-cash-neutral" style="width:61%;">60.6% of NOI plan</div>
-            </div>
-            <div class="lb-growth up">▲ +20.4% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">61%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="San Antonio · NOI 60.1% of plan · Revenue +4.2% YoY">
-            <div class="lb-rank">#7</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">San Antonio</span>
-              <span class="lb-bm">BM Dustin Street</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-cash-neutral" style="width:60%;">60.1% of NOI plan</div>
-            </div>
-            <div class="lb-growth up">▲ +4.2% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">60%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="Fort Worth · NOI 51.1% of plan · Revenue +28.6% YoY">
-            <div class="lb-rank">#8</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">Fort Worth</span>
-              <span class="lb-bm">BM Grant Hardison</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-cash-neutral" style="width:51%;">51.1% of NOI plan</div>
-            </div>
-            <div class="lb-growth up">▲ +28.6% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">51%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="North Austin · NOI 48.9% of plan · Revenue -10.9% YoY">
-            <div class="lb-rank">#9</div>
-            <div class="lb-name-cell">
-              <span class="lb-name">North Austin</span>
-              <span class="lb-bm">BM Calvin Hughes</span>
-            </div>
-            <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-underperforming" style="width:49%;">48.9% of NOI plan</div>
-            </div>
-            <div class="lb-growth down">▼ -10.9% rev YoY</div>
-            <div class="lb-final-cell">
-              <span class="lb-final-letter">49%</span>
-              <span class="lb-final-num">NOI</span>
-            </div>
-          </div>
-
-          <div class="lb-row" title="Tampa · NOI 24.5% of plan · Revenue +24.7% YoY">
-            <div class="lb-rank">#10</div>
             <div class="lb-name-cell">
               <span class="lb-name">Tampa</span>
               <span class="lb-bm">BM Steven Anderson</span>
             </div>
             <div class="lb-bar-track">
-              <div class="lb-bar-fill tier-underperforming" style="width:24%;">24.5% of NOI plan</div>
+              <div class="lb-bar-fill tier-cash-leader" style="width:100%;">final 105.0</div>
             </div>
             <div class="lb-growth up">▲ +24.7% rev YoY</div>
             <div class="lb-final-cell">
-              <span class="lb-final-letter">24%</span>
-              <span class="lb-final-num">NOI</span>
+              <span class="lb-final-letter">A+</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="Fort Worth · provisional final 95.0 (A+) · composite 85.0% ÷60 · growth +10 · NOI 51.1% of plan">
+            <div class="lb-rank">#2</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">Fort Worth</span>
+              <span class="lb-bm">BM Grant Hardison</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-cash-leader" style="width:90%;">final 95.0</div>
+            </div>
+            <div class="lb-growth up">▲ +28.6% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">A+</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="Houston · provisional final 93.8 (A) · composite 89.8% ÷60 · growth +4 · NOI 73.1% of plan">
+            <div class="lb-rank">#3</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">Houston</span>
+              <span class="lb-bm">BM Sergio Buenrostro</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-cash-leader" style="width:89%;">final 93.8</div>
+            </div>
+            <div class="lb-growth up">▲ +3.5% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">A</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="South Austin · provisional final 81.5 (B+) · composite 71.5% ÷60 · growth +10 · NOI 90.2% of plan">
+            <div class="lb-rank">#4</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">South Austin</span>
+              <span class="lb-bm">BM Chris Anderson</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-cash-contributor" style="width:78%;">final 81.5</div>
+            </div>
+            <div class="lb-growth up">▲ +24.5% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">B+</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="San Antonio · provisional final 79.0 (B) · composite 75.0% ÷60 · growth +4 · NOI 60.1% of plan">
+            <div class="lb-rank">#5</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">San Antonio</span>
+              <span class="lb-bm">BM Dustin Street</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-cash-contributor" style="width:75%;">final 79.0</div>
+            </div>
+            <div class="lb-growth up">▲ +4.2% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">B</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="Leander · provisional final 77.0 (B) · composite 80.0% ÷60 · growth -3 · NOI 82.8% of plan">
+            <div class="lb-rank">#6</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">Leander</span>
+              <span class="lb-bm">BM Frank Williams</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-cash-contributor" style="width:73%;">final 77.0</div>
+            </div>
+            <div class="lb-growth down">▼ -1.1% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">B</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="Garland · provisional final 75.0 (B) · composite 65.0% ÷60 · growth +10 · NOI 103.0% of plan">
+            <div class="lb-rank">#7</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">Garland</span>
+              <span class="lb-bm">BM Jack Davis</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-cash-contributor" style="width:71%;">final 75.0</div>
+            </div>
+            <div class="lb-growth up">▲ +38.3% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">B</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="North Austin · provisional final 67.8 (C) · composite 74.8% ÷60 · growth -7 · NOI 48.9% of plan">
+            <div class="lb-rank">#8</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">North Austin</span>
+              <span class="lb-bm">BM Calvin Hughes</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-cash-neutral" style="width:65%;">final 67.8</div>
+            </div>
+            <div class="lb-growth down">▼ -10.9% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">C</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="Dallas · provisional final 66.9 (C) · composite 56.9% ÷60 · growth +10 · NOI 60.6% of plan">
+            <div class="lb-rank">#9</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">Dallas</span>
+              <span class="lb-bm">BM Chris Beattie</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-cash-neutral" style="width:64%;">final 66.9</div>
+            </div>
+            <div class="lb-growth up">▲ +20.4% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">C</span>
+              <span class="lb-final-num">provisional</span>
+            </div>
+          </div>
+
+          <div class="lb-row" title="McKinney · provisional final 57.0 (D) · composite 50.0% ÷60 · growth +7 · NOI 61.6% of plan">
+            <div class="lb-rank">#10</div>
+            <div class="lb-name-cell">
+              <span class="lb-name">McKinney</span>
+              <span class="lb-bm">BM Khevan Dueck</span>
+            </div>
+            <div class="lb-bar-track">
+              <div class="lb-bar-fill tier-underperforming" style="width:54%;">final 57.0</div>
+            </div>
+            <div class="lb-growth up">▲ +19.1% rev YoY</div>
+            <div class="lb-final-cell">
+              <span class="lb-final-letter">D</span>
+              <span class="lb-final-num">provisional</span>
             </div>
           </div>
         </div>
-        <div class="leaderboard-legend" aria-label="NOI attainment band legend">
-          <span class="lb-legend-chip"><span class="lb-legend-swatch tier-cash-leader"></span>≥100% of NOI plan</span>
-          <span class="lb-legend-chip"><span class="lb-legend-swatch tier-cash-contributor"></span>70-99%</span>
-          <span class="lb-legend-chip"><span class="lb-legend-swatch tier-cash-neutral"></span>50-69%</span>
-          <span class="lb-legend-chip"><span class="lb-legend-swatch tier-underperforming"></span>&lt;50%</span>
+        <div class="leaderboard-legend" aria-label="Provisional final grade band legend">
+          <span class="lb-legend-chip"><span class="lb-legend-swatch tier-cash-leader"></span>A-family</span>
+          <span class="lb-legend-chip"><span class="lb-legend-swatch tier-cash-contributor"></span>B-family</span>
+          <span class="lb-legend-chip"><span class="lb-legend-swatch tier-cash-neutral"></span>C-family</span>
+          <span class="lb-legend-chip"><span class="lb-legend-swatch tier-underperforming"></span>D-family</span>
         </div>
       </div>
 
@@ -3770,7 +3770,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
           <p class="scorecard-tile-name">South Austin</p>
           <p class="scorecard-tile-meta">BM Chris Anderson · 12 trucks</p>
           <div class="scorecard-tile-bottom">
-            <span>Q1 detail · Q2 refresh pending →</span>
+            <span>Q2 scorecard →</span>
             <span class="scorecard-grade-badge">90%</span>
           </div>
         </a>
@@ -3781,7 +3781,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
           <p class="scorecard-tile-name">Leander</p>
           <p class="scorecard-tile-meta">BM Frank Williams · 6.33 trucks</p>
           <div class="scorecard-tile-bottom">
-            <span>Q1 detail · Q2 refresh pending →</span>
+            <span>Q2 scorecard →</span>
             <span class="scorecard-grade-badge">83%</span>
           </div>
         </a>
@@ -3792,7 +3792,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
           <p class="scorecard-tile-name">Houston</p>
           <p class="scorecard-tile-meta">BM Sergio Buenrostro · 8.33 trucks</p>
           <div class="scorecard-tile-bottom">
-            <span>Q1 detail · Q2 refresh pending →</span>
+            <span>Q2 scorecard →</span>
             <span class="scorecard-grade-badge">73%</span>
           </div>
         </a>
@@ -3814,7 +3814,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
           <p class="scorecard-tile-name">Dallas</p>
           <p class="scorecard-tile-meta">BM Chris Beattie · 14.67 trucks</p>
           <div class="scorecard-tile-bottom">
-            <span>Q1 detail · Q2 refresh pending →</span>
+            <span>Q2 scorecard →</span>
             <span class="scorecard-grade-badge">61%</span>
           </div>
         </a>
@@ -3825,7 +3825,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
           <p class="scorecard-tile-name">San Antonio</p>
           <p class="scorecard-tile-meta">BM Dustin Street · 9 trucks</p>
           <div class="scorecard-tile-bottom">
-            <span>Q1 detail · Q2 refresh pending →</span>
+            <span>Q2 scorecard →</span>
             <span class="scorecard-grade-badge">60%</span>
           </div>
         </a>
@@ -3836,7 +3836,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
           <p class="scorecard-tile-name">Fort Worth</p>
           <p class="scorecard-tile-meta">BM Grant Hardison · 4 trucks</p>
           <div class="scorecard-tile-bottom">
-            <span>Q1 detail · Q2 refresh pending →</span>
+            <span>Q2 scorecard →</span>
             <span class="scorecard-grade-badge">51%</span>
           </div>
         </a>
@@ -3847,7 +3847,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
           <p class="scorecard-tile-name">North Austin</p>
           <p class="scorecard-tile-meta">BM Calvin Hughes · 14.67 trucks</p>
           <div class="scorecard-tile-bottom">
-            <span>Q1 detail · Q2 refresh pending →</span>
+            <span>Q2 scorecard →</span>
             <span class="scorecard-grade-badge">49%</span>
           </div>
         </a>
@@ -4094,7 +4094,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
       <h2>Change Log</h2>
       <p style="color: var(--gray-600); font-size: 14px; margin: 4px 0 0;">Iteration history for this packet. Useful for traceability; not intended as Roundtable conversation material.</p>
       <details class="change-log-collapsed">
-        <summary>Show version history — 40 versions, v1.0 → v1.27 (Q1) + v2.0 → v2.5 (Q2)</summary>
+        <summary>Show version history — 41 versions, v1.0 → v1.27 (Q1) + v2.0 → v2.6 (Q2)</summary>
         <div class="table-scroll">
         <table>
           <thead><tr><th style="width:90px;">Version</th><th style="width:110px;">Date</th><th>What Changed</th></tr>
@@ -4108,7 +4108,8 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
           <tr style="background:var(--orange-bg);"><td><strong>v2.3</strong></td><td><strong>2026-07-28</strong></td><td><strong>Rate story corrected (Cameron's rulings 7/28 + Matisen discount report).</strong> The single-cause "rate row never re-priced / rate-vintage" framing replaced with the corrected five-mechanism story in the exec mis-set-yardsticks callout and the Component 1 causal callout: units error in the plan's rate row (trip-fee dollars without trip hours — budget price overstated 5–15%, plan asked for too few hours, feeding truck + personnel targets; ~$150K real gap on a clean basis vs $548,138 on the plan's own yardstick); prices WERE raised in April — only the plan's rate row was never re-priced; booking lag the dominant real mechanism ($1.5–2M booked at pre-5/5 quoted prices, fading as the backlog drained); $198,611 of unbudgeted discounts (mechanics excluded per ruling) decaying May→July, the large majority from trial days ending 8/1 by design; market softness acquitted on price — only Tampa soft, on the volume axis. Both "+$148K volume beat" mentions now carry the "plan asked for too few hours" qualifier (anti-double-count rule). New 🧒 "Explain this like I'm in sixth grade" expander (lawn-mowing metaphor) under Component 1. All reconciliation figures of record unchanged (−$548,138 · 137% · −$400,110 · +$148K). Source: <code>q2-data/branch-metrics-q2-26.json</code> v0.10.6, new block <code>_discounts_q2_26</code>, amended <code>_revenue_wedge_q2_26</code>.</td></tr>
           <tr style="background:var(--orange-bg);"><td><strong>v2.3.1</strong></td><td><strong>2026-07-28</strong></td><td><strong>Component 8 review-volume placeholder filled (separate edit lane from the rate story, own PRE-REVIEWS backups).</strong> The "AWAITING DATA" note replaced with a native HTML table from new manifest block <code>_reviews_q2_26</code> (v0.10.7): 754 five-star reviews (747 reviewers) vs 688 in Q1 (+9.6%), per-branch counts + <strong>reviews per 100 moves</strong> (the Einstein Games reviews-per-move yardstick — Cameron's 7/28 ruling retired the Monday board's formula "targets" as not real targets; no %-to-target published), platform mix (Google 718 · Yelp 31 · FB 4 · ND 1), top-mover line (Luis Sanchez-Garcia 29). Callouts: Tampa 48.5/100 pairs with its 93.8 NPS; North Austin flagged on the two-instrument "not asking" signal (5.2/100 review rate + 8.7% NPS response rate, both network-lowest). Basis caveats printed: board logged through 7/21 only (restamp at July close), rates divide by full-quarter move counts (July estimated) so all figures modestly understate, 5-star-only volume tracker ≠ rating source. No Q1 PNG-export dependency — this section now re-renders from the manifest.</td></tr>
           <tr style="background:var(--orange-bg);"><td><strong>v2.4</strong></td><td><strong>2026-07-28</strong></td><td><strong>Cameron's 10-note redline fold + TUR goal-of-record re-base (rulings 7/28 PM).</strong> Cover: the DRAFT tag removed, Ben-validation/NOI-definition parenthetical cut from Lens 3, all draft-grade language removed (grade is final: B−, duplicated draft wording cleaned). Component 1 exec block restructured from a wall of text into labeled short lines (every number identical). Reader-facing discount wording standardized to "discounts" throughout ($198,611 headline still excludes the $50,664 of mechanics — pad-deposit returns / billing corrections — per the R1 ruling). Rocks headlines: "company success" → "leadership success"; Paul headline added (Prosper VCFO fully onboarded; monthly close + weekly reporting cadence running). Fleet safety elevated to a Quarter Highlight (89.0 ▲ from 80.2, at-risk pool nearly halved, per-mile event rate −13% standards-adjusted — added after the QG-rate lead line, sync anchor untouched); "we hit a thing" blockquote gains a mover-facing Now What (stationary strikes → driver-training modules + recertifications); the moved-to-full-review detail sentence tucked behind an ⓘ tooltip. <strong>TUR re-based to the goal of record per manifest <code>_tur_targets_q2_26_correction</code> (v0.10.8):</strong> 76.2% owned-fleet vs <strong>81.1%</strong> (Paul's fin-targets sheet, set at quarter open, all-trucks-on-lot basis) = a miss, ~94% of target — stated plainly in the cover hero, exec tile, Quarter Highlights, flywheel anchor, and Component 1; running-truck 83.8% kept as labeled diagnostic; the stale 65% yardstick killed everywhere; 73.0% retained once as a Component 1 footnote (EMMA dashboard's in-quarter operative set, 7.5 hr/$221 vs the sheet's 7.25 hr/$217-family); the "9 of 10 branches beat target" claim attributed to the superseded dashboard bars, with the target-defect examples printed (San Antonio June 101.3% of fleet — impossible; Houston 99% sheet vs 79.8% dashboard). Reconciliation figures unchanged (−$548,138 · 137% · −$400,110 · +$148K). No scorecard-reallocation content added (unruled).</td></tr>
-          <tr style="background:var(--orange-bg);"><td><strong>v2.5</strong></td><td><strong>2026-07-28</strong></td><td><strong>Company composite topline (ruled by Cameron 7/28 evening).</strong> Cover hero re-headlined to the <strong>company composite B+</strong> — three lenses at equal thirds on the GPA scale: <strong>Financial B−</strong> (the Financial Deck's own three-lens composite D → B → B−, inherited unchanged, now shown as Lens 1) · <strong>Theme/Critical Numbers A−</strong> (Einstein Games 7.59 Green + personnel-to-plan 101.1% Super Green) · <strong>People &amp; Customer A−</strong> (Customer NPS 88.0 vs 90 = B+ · manager/CET eNPS +81 second-highest ever (peak +84, Jul '25) = A). The build math prints on the cover — (2.7 + 3.7 + 3.7) / 3 = 3.37 → B+ (band 3.15–3.49) — with a ⓘ tooltip carrying the GPA mapping and the pointer to the Financial Deck for Lens 1's full basis. Component 1 badge relabeled "Financial Composite B−" to keep the deck's grade unambiguous. Source: manifest <code>_company_composite_q2_26</code> (<code>branch-metrics-q2-26.json</code> v0.10.9). All financial figures, reconciliation numbers, and component content unchanged.</td></tr></thead>
+          <tr style="background:var(--orange-bg);"><td><strong>v2.5</strong></td><td><strong>2026-07-28</strong></td><td><strong>Company composite topline (ruled by Cameron 7/28 evening).</strong> Cover hero re-headlined to the <strong>company composite B+</strong> — three lenses at equal thirds on the GPA scale: <strong>Financial B−</strong> (the Financial Deck's own three-lens composite D → B → B−, inherited unchanged, now shown as Lens 1) · <strong>Theme/Critical Numbers A−</strong> (Einstein Games 7.59 Green + personnel-to-plan 101.1% Super Green) · <strong>People &amp; Customer A−</strong> (Customer NPS 88.0 vs 90 = B+ · manager/CET eNPS +81 second-highest ever (peak +84, Jul '25) = A). The build math prints on the cover — (2.7 + 3.7 + 3.7) / 3 = 3.37 → B+ (band 3.15–3.49) — with a ⓘ tooltip carrying the GPA mapping and the pointer to the Financial Deck for Lens 1's full basis. Component 1 badge relabeled "Financial Composite B−" to keep the deck's grade unambiguous. Source: manifest <code>_company_composite_q2_26</code> (<code>branch-metrics-q2-26.json</code> v0.10.9). All financial figures, reconciliation numbers, and component content unchanged.</td></tr>
+          <tr style="background:var(--orange-bg);"><td><strong>v2.6</strong></td><td><strong>2026-07-28</strong></td><td><strong>Scorecards leaderboard re-ranked + section trued to the live, rebuilt cards.</strong> The intro and Source expander no longer claim the 10 branch scorecards "still show Q1 content" — they were fully rebuilt 7/27–7/28 and are live; each renders its own provisional composite (÷60 basis, TUR ungraded this quarter, Sales Target + Recognition land at the 7/31–8/1 close, at which point composites go ÷80 and letters stamp FINAL). Leaderboard re-ranked from NOI-to-plan attainment to the <strong>provisional composite FINAL grade</strong> (each card's 6-metric ÷60 composite + growth modifier), per manifest <code>_branch_composites_q2_26_provisional</code>: <strong>#1 Tampa 105.0 A+ · #2 Fort Worth 95.0 A+ · #3 Houston 93.8 A · #4 South Austin 81.5 B+ · #5 San Antonio 79.0 B · #6 Leander 77.0 B · #7 Garland 75.0 B · #8 North Austin 67.8 C · #9 Dallas 66.9 C · #10 McKinney 57.0 D.</strong> Bar length = final grade as a share of Tampa's field-leading 105.0; bar tier color now bands by letter family (A green / B blue / C amber / D red, reusing the existing NOI tier classes) instead of NOI attainment bands. NOI-to-plan % preserved per row in the title attribute as secondary context, no longer the ranking basis. The 7 branch-scorecard tiles still reading "Q1 detail · Q2 refresh pending →" (all 10 scorecards have in fact been live since the 7/27–28 rebuild) now read "Q2 scorecard →" like the other 3. Frontline Packet TOC link de-drafted — "(DRAFT)" tag removed per Cameron's ruling tonight (reverses the earlier-today framing). Source: manifest <code>branch-metrics-q2-26.json</code> v0.10.10, new block <code>_branch_composites_q2_26_provisional</code>. No other section touched (rate story, Components 1-9, older changelog rows, sync-anchored highlights unchanged).</td></tr></thead>
           <tbody>
             <tr><td>v1.0</td><td>2026-04-27</td><td>Phase 2a build — initial packet skeleton with all 9 component cards, three-lens grade hero, exec summary stat tiles, conversation starters, references. Hybrid format (embedded summaries + deep links). LQA + Salaried eNPS as explicit placeholders per locked decisions.</td></tr>
           <tr><td>v1.1</td><td>2026-04-27</td><td>Visual polish pass — sidebar active-rail, hero progression chip pattern, inline % bars on personnel branch table, table-scroll wrappers, harden print stylesheet, color-coded delta values, decorative emoji removed (functional indicators only).</td></tr>
@@ -4150,7 +4151,7 @@ details.eli6 .eli6-body strong{color:#0d2b4e;}
     </section>
 
     <div class="footer">
-      <strong>Einstein Q2 FY'26 Roundtable QGR Packet · v2.5</strong><br>
+      <strong>Einstein Q2 FY'26 Roundtable QGR Packet · v2.6</strong><br>
       Prepared by Albert (Cameron's AI Chief of Staff) · 2026-07-28 · rendered from <code>branch-metrics-q2-26.json</code> v0.10.9 · 2026-07-28<br>
       For internal Roundtable use · Do not distribute outside leadership without Cameron's approval
     </div>
