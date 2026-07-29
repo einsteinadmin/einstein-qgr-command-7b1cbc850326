@@ -199,7 +199,7 @@ function renderList(sec){
   add.addEventListener('click', function(){ state[sec].push({t:'', o:'added', d:'keep'}); save(); render(); });
   wrap.appendChild(add);
 
-  wrap.querySelectorAll('textarea').forEach(function(el){
+  wrap.querySelectorAll('textarea:not(.rownote)').forEach(function(el){
     autosize(el);
     el.addEventListener('input', function(){
       state[el.dataset.sec][+el.dataset.i].t = el.value; autosize(el); save();
