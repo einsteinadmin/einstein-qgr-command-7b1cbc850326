@@ -297,6 +297,9 @@
   }
   .agenda-meta a { font-weight: 700; }
   .agenda-meta-dep { color: #8A6D3B; }
+  .roomcopy-badge { display:inline-block; font-size:0.62rem; font-weight:800; color:#CC5500;
+    background:#FEF6EC; border:1px solid #EF8B22; border-radius:5px; padding:1px 6px; margin-left:6px;
+    vertical-align:1px; cursor:help; }
   /* v3.78 agenda rows: wrapping display text (no more clipped inputs), NOW marker, dblclick edit */
   .agenda-row { align-items: flex-start; }
   .agenda-row .phase-item-check { width: 20px; height: 20px; margin-top: 2px; cursor: pointer; }
@@ -675,8 +678,8 @@
           CHOICES self-eval, action items, goal pre-work, directs' Q3 slate, and (optional this quarter) best-things + legend.
           Returned files stage locally in <code>QGR Prep HQ/ballots-q3/</code>; the LOADED room file already carries everything returned — drag only NEW exports on top (newest-wins).
           <div style="margin-top:6px;">
-            <a href="ballot-room-q3-LOADED.html" target="_blank"><b>🗳 Ballot Room View — LOADED (6 ballots + decision digest baked in)</b></a> — ⚖️ Decisions · Aggregate ·
-            <a href="ballot-room-q3-LOADED.html#celebrate" target="_blank">🏆 Celebrate</a> · Room Reveal (local file — open the HQ from the QGR Prep HQ folder for this link; the hosted ballot-results.html ships empty by design) ·
+            <a href="ballot-room-q3-LOADED.html" data-roomcopy target="_blank"><b>🗳 Ballot Room View — LOADED (6 ballots + decision digest baked in)</b></a> — ⚖️ Decisions · Aggregate ·
+            <a href="ballot-room-q3-LOADED.html#celebrate" data-roomcopy target="_blank">🏆 Celebrate</a> · Room Reveal (local file — open the HQ from the QGR Prep HQ folder for this link; the hosted ballot-results.html ships empty by design) ·
             <a href="https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/" target="_blank">the hub leaders fill in</a>
           </div>
           <div style="margin-top:4px; color:var(--gray);">
@@ -963,8 +966,51 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v4.02 2026-07-28'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v4.03 2026-07-28'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
+  /* ── ROOM-COPY LINKS (Cameron 7/28: "the Celebrate tab loaded as a broken 404")
+     Four surfaces point at LOCAL-ONLY seeded files — the ballots and the leaders'
+     evaluations of their own directs are the sensitive layer, so the populated copies are
+     never deployed, and Cameron's rule is that these links go to the local file because
+     that is where the data actually lives. Opened from the HOSTED hub they 404, which is
+     what he hit. We do NOT silently redirect to the deployed sibling (it ships empty —
+     that would look like the data vanished). Instead: badge them, and intercept the click
+     with the exact path to open. On the room machine (local file:// or localhost) they
+     behave normally. ── */
+  var IS_HOSTED = /(^|\.)github\.io$/i.test(location.hostname);
+  var ROOM_COPY_FILES = ['ballot-room-q3-LOADED.html'];
+  var ROOM_COPY_WHERE = {
+    'ballot-room-q3-LOADED.html': 'Supporting Projects/QGR Prep HQ/ballot-room-q3-LOADED.html'
+  };
+  function roomCopyName(u) {
+    if (!u) return null;
+    for (var i = 0; i < ROOM_COPY_FILES.length; i++) {
+      if (u.indexOf(ROOM_COPY_FILES[i]) === 0) return ROOM_COPY_FILES[i];
+    }
+    return null;
+  }
+  var ROOM_COPY_BADGE = ' <span class="roomcopy-badge" title="This file holds the real data and is never deployed. You are on the hosted hub, so it cannot open from here — open the HQ from your iCloud folder on the room machine.">local file · open the HQ locally</span>';
+  function roomLinks(html) {
+    if (!IS_HOSTED || !html) return html;
+    var hit = false;
+    html.replace(/href="([^"]+)"/g, function (m, u) { if (roomCopyName(u)) hit = true; return m; });
+    return hit ? html + ROOM_COPY_BADGE : html;
+  }
+  /* one delegated guard covers every surface — agenda, toolkit, shelf, Room tab */
+  document.addEventListener('click', function (e) {
+    if (!IS_HOSTED) return;
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var name = roomCopyName(a.getAttribute('href'));
+    if (!name) return;
+    e.preventDefault();
+    alert('That one is a local file, not a hosted page — it holds the real data and is '
+      + 'deliberately never published.\n\nYou have the HQ open from the hosted URL, so it '
+      + 'cannot reach it.\n\nOn the room machine, open:\n  ' + ROOM_COPY_WHERE[name]
+      + '\n\nOr open the HQ itself from that same QGR Prep HQ folder and every link here '
+      + 'will work.');
+  }, true);
+
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
   // Phase D reordered to match the real Day-1 flow, A-5 split into build/run/cascade,
@@ -1402,7 +1448,7 @@
   // links = raw HTML (anchors) · dep = "must already be true" plain text.
   var AGENDA_META = {
     'Intro + 3 best things — around the room; Ballot Room ▶ Present for anyone who filled theirs in':
-      { links: '<a href="ballot-room-q3-LOADED.html#celebrate" target="_blank">🏆 Celebrate tab (LOADED)</a> — ▶ Present for the Best-of-Q2 slides', dep: 'Runs LIVE around the room this quarter (Cameron 7/28) — the tab is bonus color, empty is fine' },
+      { links: '<a href="ballot-room-q3-LOADED.html#celebrate" data-roomcopy target="_blank">🏆 Celebrate tab (LOADED)</a> — ▶ Present for the Best-of-Q2 slides', dep: 'Runs LIVE around the room this quarter (Cameron 7/28) — the tab is bonus color, empty is fine' },
     'Q2 Debrief + QGR packet walkthrough — the company story, then the packet + financial analysis (eNPS one-pager rides inside the packet)':
       { links: '<a href="q2-materials/q2-frontline-packet.html" target="_blank">🧢 Q2 Debrief</a> · <a href="q2-materials/q2-2026-roundtable-packet.html" target="_blank">📖 Roundtable Packet</a> · <a href="q2-materials/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html" target="_blank">📈 Financial deck</a> · <a href="https://einsteinadmin.github.io/einstein-enps-q2-85ad152731ab/" target="_blank">eNPS one-pager</a>', dep: 'Cameron + Paul redlines DONE (pre-flight) · cover grade presented as DRAFT unless ruled · Debrief Present mode = the room opener before the deck deep-dive' },
     'AAR TL;DR — 2 min per leader, then finalize goal statuses in the Review Room':
@@ -1410,7 +1456,7 @@
     'Branch scorecards review + confirm — walk one together as the example, then everyone reads their own':
       { links: '<a href="q2-materials/" target="_blank">🏬 10 branch scorecards</a>', dep: 'Scorecard rework RULED 7/27 (mover eNPS out · Games in) — walk the ruling; letters are PROVISIONAL until the July-close pull' },
     'People Analyzers as a group — review and debate':
-      { links: '<a href="http://localhost:8136/people-analyzer-leadership.html" target="_blank">🧮 People Analyzer — Leadership</a> <b>(local :8136)</b> · <a href="https://einsteinadmin.github.io/einstein-pa-directs-da2d210013ca/results.html" target="_blank">🧮 PA Directs — room results</a>', dep: ':8136 running + latest exports re-baked (pre-flight) · PA-directs returns: Mike, Anne, Matisen in · Paul exempt · Amanda + Brian still open' },
+      { links: '<a href="http://localhost:8136/directs-tier/results-LOADED.html" target="_blank">🧮 PA Directs — rollup (LOADED)</a> · <a href="http://localhost:8136/people-analyzer-leadership.html" target="_blank">🧮 People Analyzer — Leadership</a> <b>(both local :8136)</b>', dep: ':8136 running (pre-flight) — BOTH links are local; the hosted PA results page ships EMPTY by design, which is why it looked blank · the LOADED rollup opens with every staged submission already in it: 12 people, 9 A / 3 B, 3 of 7 leaders in · Paul exempt, Amanda + Brian still open · ⚠ Khevan Dueck B 4.1 = wrong seat + rehire-No with NO action plan — chase-back to Mike' },
     'Quick SWT, 7 Strata, PACe / Flywheel — review + update grades; quick pass, the workshop ran two weeks ahead':
       { links: '<a href="strata-swt-worksheet.html" target="_blank">📝 SWT + 7 Strata worksheet (RULED 7/20)</a> · <a href="https://einsteinadmin.github.io/einstein-flywheel/" target="_blank">Flywheel</a> · <a href="https://einsteinadmin.github.io/einstein-pace/" target="_blank">PACe</a>', dep: 'Both graded 7/20 (PACe v4.1 · Flywheel v3.1) — this block re-grades, it does not rebuild' },
     'Optional — Power of One exercise':
@@ -1418,13 +1464,13 @@
     'OPSP page 1 — in the OPSP Planner, minus the next-90-days column':
       { links: '<a href="https://goal-plan-access.replit.app/" target="_blank">🗺 OPSP + Vision Summary builder</a>', dep: 'Builder logged in (pre-flight) · blank OPSPs printed as the table copy · next-90-days waits for Day 2' },
     'Q3 goal confirm + ballot questions — finalize goals + theme choice (broad outline, specifics tomorrow) · check cross-dept goal dependencies · discuss the Magic-Moments-per-employee goal':
-      { links: '<a href="ballot-room-q3-LOADED.html" target="_blank">🗳 Ballot Room — Aggregate (LOADED)</a> · <a href="ballot-room-q3-LOADED.html#decisions" target="_blank">⚖ Decision Board (LOADED)</a> · <a href="qgr-triage-room.html" target="_blank">🛠 Triage Room</a> · <a href="https://einsteinadmin.github.io/einstein-magic-moments-62b30f78ff3f/" target="_blank">Magic Moments toolkit</a>', dep: 'LOADED file carries all 7 ballots + the digest baked in — nothing to drag · Decision Board triage: 3 DECIDE, 1 MISLABELED (mgr-sales-comp — chips lie, the real fork is the sales competition), 3 NARROW · theme name is 3-way: Back to School / Level Up / Training Camp' },
+      { links: '<a href="ballot-room-q3-LOADED.html" data-roomcopy target="_blank">🗳 Ballot Room — Aggregate (LOADED)</a> · <a href="ballot-room-q3-LOADED.html#decisions" target="_blank">⚖ Decision Board (LOADED)</a> · <a href="qgr-triage-room.html" target="_blank">🛠 Triage Room</a> · <a href="https://einsteinadmin.github.io/einstein-magic-moments-62b30f78ff3f/" target="_blank">Magic Moments toolkit</a>', dep: 'LOADED file carries all 7 ballots + the digest baked in — nothing to drag · Decision Board triage: 3 DECIDE, 1 MISLABELED (mgr-sales-comp — chips lie, the real fork is the sales competition), 3 NARROW · theme name is 3-way: Back to School / Level Up / Training Camp' },
     'Quarterly theme mechanics lock — mechanics per audience (managers · movers · CER + CX team · leadership + EE) plus poster, prizes and success metrics':
       { links: '<a href="ballot-room-q3-LOADED.html#decisions" target="_blank">⚖ Decision Board — q3-theme card (LOADED)</a> · <a href="https://einsteinmoving.monday.com/boards/18408300070" target="_blank">MB theme pulses</a> (12556457451/2/3)', dep: 'Theme DIRECTION is settled — only the name is open (NARROW). Mechanics + prizes are what this block actually decides' },
     'Critical Number #2 finalize — Critical #1 is theme-related':
       { links: '<a href="https://goal-plan-access.replit.app/" target="_blank">🗺 OPSP builder</a> · <a href="q2-materials/q2-2026-roundtable-packet.html" target="_blank">Packet — critical numbers</a>', dep: 'Q2 criticals for reference: Games 7.59 G · personnel 101.1% SG' },
     'Complete the cascading goals chart — every leader down through their directs':
-      { links: '<a href="https://docs.google.com/spreadsheets/d/1CEwbltgyvNbpl5_1pVsWL70qaCMGgDE9Jk7RGm1eAsM" target="_blank">📊 Q2 Cascading Goals sheet</a> · <a href="ballot-room-q3-LOADED.html" target="_blank">🗳 Ballot Room — directs’ Q3 slates (LOADED)</a>', dep: 'Below-Roundtable tier: Jalissa · Nhel · Tet · Carly · Fabian · KP · Prosper · Austin L — leaders finalize their own directs’ slates, seeded from the triage walk' },
+      { links: '<a href="https://docs.google.com/spreadsheets/d/1CEwbltgyvNbpl5_1pVsWL70qaCMGgDE9Jk7RGm1eAsM" target="_blank">📊 Q2 Cascading Goals sheet</a> · <a href="ballot-room-q3-LOADED.html" data-roomcopy target="_blank">🗳 Ballot Room — directs’ Q3 slates (LOADED)</a>', dep: 'Below-Roundtable tier: Jalissa · Nhel · Tet · Carly · Fabian · KP · Prosper · Austin L — leaders finalize their own directs’ slates, seeded from the triage walk' },
     'OPSP page 2 + Vision Summary — columns 1 + 3 and the next-90-days from page 1; use the OPSP Planner to cascade down to the Vision Summary':
       { links: '<a href="https://goal-plan-access.replit.app/" target="_blank">🗺 OPSP + Vision Summary builder</a>', dep: 'Page 1 done Day 1 — the next-90-days column comes forward from it' },
     'Redline / finalize the “Quarter in Review” tiles — what each dept and leader is working on in the background that the team should know about':
@@ -1486,6 +1532,8 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/28w', text: '\U0001F517 THE 404 CAMERON HIT, FIXED WITHOUT MOVING THE TARGET (HQ v4.03). He opened the hub from the HOSTED URL and the Celebrate / Aggregate / Decision-Board links dead-ended \u2014 they point at <code>ballot-room-q3-LOADED.html</code>, which is local-only and never deployed. He confirmed the targets are RIGHT (that file holds the ballots + digest; the hosted ballot-results.html ships empty by design), so the targets did not move. What changed: from a hosted origin those links now carry a <b>\u201clocal file \u00b7 open the HQ locally\u201d</b> badge, and a delegated click guard intercepts them with the exact iCloud path instead of a browser 404. From the room machine \u2014 file:// or the local server \u2014 nothing changes, they just open. '
+      + '\u2795 <b>PA directs rollup was blank for the same class of reason</b> (his second catch): the agenda pointed at the HOSTED PA results page, which also ships empty by design, so Mike\u2019s, Anne\u2019s and Matisen\u2019s returned evaluations were nowhere on screen. New <code>directs-tier/results-LOADED.html</code> + <code>build_pa_room_seed.py</code> mirror the ballot-room pattern exactly: every staged submission baked into a local file, seeded with the same newest-wins rule as a manual drop, room verdicts + notes untouched, never deployed. It opens populated \u2014 <b>12 people, 9 A / 3 B, 3 of 7 leaders in</b>, watch list carrying Khevan Dueck (B 4.1, wrong seat + rehire-No, no action plan). Agenda People-Analyzer block now leads with that file over :8136 and its dep line says plainly that both links are local and why the hosted one looked blank.' },
     { date: '7/28v', text: '\u{1F517} LINK REGRESSION FIXED \u2014 the v4.02 agenda rebuild reintroduced four <code>ballot-results.html</code> hrefs (the hosted-empty page) in AGENDA_META; all four repointed at <code>ballot-room-q3-LOADED.html</code> (Cameron\u2019s standing ask: every hub link goes to the LOADED room file, never the GitHub-hosted one). Also updated the Q3-goals dep line \u2014 ballots are BAKED IN now, nothing gets dragged. Note for future agenda edits: the LOADED file is the only link target for the room surface; hosted ballot-results.html ships empty by design. No version bump here \u2014 this rides the v4.02 lane\u2019s next deploy.' },
     { date: '7/28u', text: '\U0001F4CB THE ROOM AGENDA REBUILT FROM CAMERON\u2019S WHITEBOARD (HQ v4.02) \u2014 he wrote the real Day-1/Day-2 run on the glass board and said start from scratch, so both days were REPLACED, not merged. <b>Day 1 (9 blocks):</b> Intro + 3 best things \u00b7 Q2 Debrief + packet walkthrough \u00b7 AAR TL;DR + finalize goal statuses \u00b7 Branch scorecards review+confirm \u00b7 People Analyzers as a group \u00b7 Quick SWT/7-Strata/PACe/Flywheel \u00b7 Optional Power of One \u00b7 OPSP page 1 \u00b7 Q3 goal confirm + ballot questions. <b>Day 2 (10 blocks):</b> Theme mechanics lock \u00b7 Critical #2 \u00b7 Cascading goals chart \u00b7 OPSP page 2 + Vision Summary \u00b7 Quarter-in-Review redline \u00b7 Mgr/Mover/CX presentation + QGR flow improvements \u00b7 Debrief + sensitive-doc cleanup \u00b7 then three POST-QGR rows (master-backlog cleanup + OPSP uploads \u00b7 <b>regionals + Cameron redline all 10 branch scorecards</b> \u00b7 <b>Amanda + Cameron finalize the CX theme + presentation</b> \u2014 the last two are new asks from the same conversation). <b>Both of his arrows honored:</b> Day 1 \u201cQuick SWT/7-Strata/PACe/Flywheel\u201d moves from 4th down to 6th (after People Analyzers); Day 2 \u201cOPSP page 2 + Vision Summary\u201d moves from 1st down to 4th (after the cascading goals chart). The board\u2019s <b>Process Improvements</b> panel folded into the Day-2 presentation block as its flow-improvements branch (leadership \u00b7 FLM \u00b7 mover \u00b7 CX) carrying his two open questions \u2014 do they get packet access? and gut-check the live exercise. <b>Retired with his sign-off:</b> the 3 RATIFY rows (they\u2019re ballot decisions now, they run in the Ballot Room) \u00b7 eNPS results (rides inside the packet) \u00b7 revenue-targets buy-in (already done) \u00b7 Bonus Goals/Mid-Quarter Pivots (last quarter\u2019s discussion point) \u00b7 CASh/Power-of-One recap (now Day-1 optional) \u00b7 lunch-walk DP \u00b7 manager-presentation-started \u00b7 divide-and-conquer slides \u00b7 remaining-to-dos. <b>Every one of the 19 blocks carries its own links + deps</b> (AGENDA_META rebuilt mk-keyed): Celebrate tab \u00b7 Debrief/Packet/Financial deck/eNPS one-pager \u00b7 AAR Review Room + \U0001F333 Org &amp; grades confirm surface + QG tracker \u00b7 10 scorecards \u00b7 People Analyzer leadership + directs \u00b7 SWT worksheet/Flywheel/PACe \u00b7 Power of One \u00b7 OPSP builder \u00b7 Ballot Room Aggregate + \u2696 Decision Board + Triage Room + Magic Moments \u00b7 cascading-goals sheet \u00b7 Quarter in Review \u00b7 FLM run of show + BM guide + FLM hub + Mgr AAR results + chase list \u00b7 ecosystem map \u00b7 Master Backlog + SOP pulse. Migration is one-shot and destructive by design (<code>_wb0728</code>): it replaces both days, clears removedTexts so old tombstones can\u2019t suppress a new row, parks the previous agenda in <code>_archived0728</code> so nothing is lost, and carries forward any note he\u2019d typed on a row whose wording survived. \u26A0 <b>Link-target correction (from the concurrent session, folded in \u2014 see 7/28v):</b> this rebuild first pointed the four ballot links at the hosted <code>ballot-results.html</code>; Cameron\u2019s standing ask is that every hub link goes to <code>ballot-room-q3-LOADED.html</code>, the local file the room machine actually opens (the hosted page ships EMPTY by design). All four repointed. Every other agenda link verified 200 on the hosted repo, incl. the FLM run-of-show + BM guide that were still 404 mid-build.' },
     { date: '7/28t', text: '🚚 MOVER VIEW = THE BRANCH-QGR SURFACE (scorecard family redeploy + HQ v4.01). Cameron ruled the flow: FLM QGRs run Debrief → scorecards → AARs → OPSP walk (pre-printed, values blank / numbers filled); mover-level branch QGRs run ENTIRELY off the scorecard Mover View + printed Vision Summaries. Built tonight in two redline rounds (pilot naustin → 9-agent cascade, byte-identity audited): Mover View gained the money story w/ the 🧒 lawn-mowing ELI6 expander · fleet safety w/ the FULL Branch Safety Scorecard table (per-10K miles, packet-identical, manifest-mirrored as _branch_safety_live_q2_26 v0.10.11) · Claims & Magic Moments · What Customers Said w/ reviews-per-100-moves branch table · games prize podium ($75/$50/$25 per truck) · eNPS restructured said→did (6-for-6 promises) · B+ circle pill · packet-sourced Quarter Highlights · Q3-theme placeholder (POST-ROUNDTABLE fill) · Mover Comp Review CUT. Manager-view hero cleaned per Cameron screenshot: one-sentence verdict headline + label:value scan list + pill overlap fixed (Garland/Houston got the pill fresh — flagged). Tie-check PASS at 241 rows both rounds. NEW hosted: <a href="flm-qgr-run-of-show-2026-08.html" target="_blank">FLM Run of Show</a> + <a href="branch-qgr-bm-guide.html" target="_blank">BM Guide</a> (toolkit rows added). Plan of record: QGR Packet/qgr-cascade-flow-plan-2026-07-28.md.' },
@@ -3257,6 +3305,11 @@
     renderGateStrip();
     renderPhaseAccordion();
     renderOverallProgress();
+    if (IS_HOSTED) {
+      document.querySelectorAll('a[data-roomcopy]').forEach(function (a) {
+        a.insertAdjacentHTML('afterend', ROOM_COPY_BADGE);
+      });
+    }
     renderTracker();
     renderRockGrid();
     renderPreflight();
