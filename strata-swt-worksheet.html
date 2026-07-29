@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>SWT + 7 Strata Worksheet · Q3 2026</title>
+<!-- swt-strata-worksheet v1.1 2026-07-29 room-final-locked -->
 <style>
   :root { --navy:#1c2b4a; --orange:#e8762d; --bg:#f6f4ef; --card:#fff; --line:#e3ded4; --muted:#64748b; --green:#0d8a4f; --red:#c2372f; --blue:#2563eb; }
   * { box-sizing:border-box; margin:0; }
@@ -55,7 +56,7 @@
 </head>
 <body>
 <h1>SWT + <em>7 Strata</em> Worksheet — Q3 2026</h1>
-<div class="sub">Mirrors the Growth Toolkit pages, lives in the kit. Blue rows = Albert's proposed changes (rule Keep/Cut) · grey = April as-written (default keep; edit freely) · green = added live. Autosaves in this browser. <a href="index.html">← QGR HQ</a></div>
+<div class="sub"><b>✓ FINAL — locked 7/29/2026 from the room.</b> Every proposal is ruled; the ✓/✕ marks and notes below are the record. Blue = Albert's proposals · grey = April as-written · green = added live. Still editable (autosaves in this browser), but the locked state is what loads fresh. <a href="index.html">← QGR HQ</a></div>
 
 <div class="bar">
   <button class="btn primary" id="exportMd">⬇ Export (markdown)</button>
@@ -87,74 +88,79 @@
 <script>
 (function(){
 'use strict';
-var LS='swt-strata-q3-2026-v1';
+var LS='swt-strata-q3-2026-v2-FINAL';
 
-// ═══ SEED — Albert replaces this block each quarter (April Q2 as-written + 7/20 proposals) ═══
+// ═══ SEED — FINAL STATE, locked 7/29/2026 from Cameron's 2:50pm room export ═══
+// Every proposal is ruled and every edit he made in the room is baked in. The LS
+// key was bumped to -v2-FINAL so this locked state is what loads, on any browser.
+// Next quarter: flip surviving 'proposed'/'added' rows to 'april' (they become the
+// new as-written baseline), drop the cut rows, and add the fresh proposals.
 var SEED = {
  quarter:'Q3 2026',
  trends:[
-  {t:'HUGE: Tariff uncertainty, weakening economy, rising inflation, weakening of dollar',o:'april'},
-  {t:'IRAN: Rising diesel fuel costs',o:'april',why:'Albert: verify still live — April-era line'},
-  {t:'HUGE: Uncertainty around Federal Reserve moves, interest rates, continued housing-market slowdown',o:'april'},
-  {t:'HUGE: AI (agents, coding, marketing, analysis, content) in software and virtual estimates',o:'april'},
-  {t:'HUGE: Rising insurance costs — fleet alone +40% (~$200K) 2025→2026; TOTAL exposure ≈$903K/yr and UNOWNED as a rock candidate',o:'proposed',why:'Strengthened from the April line — Brief #1 + 7/20 audit: this trend wants an owner, not a bullet'},
-  {t:'NEW: AI adoption fatigue as a workforce reality — where AI fronts humans is now a norms question',o:'proposed',why:'eNPS AI-fatigue roster (Lukas, Austin L, Garrison) + "AI answering branch emails lands discouraging" (Matisen)'},
-  {t:'NEW: AI-search / LLM demand discovery — how customers find movers is shifting',o:'proposed',why:'KP LLM SEO audit already queued (MB 11728394136)'},
-  {t:'Commercial real estate issues — finding good branch spots',o:'april'},
-  {t:'Change in work culture (Gen Z work expectations)',o:'april'},
-  {t:'Personalization — more personalized offerings + higher service levels expected',o:'april'},
-  {t:'More savvy competition (private equity entry, sophisticated competitor software)',o:'april'},
-  {t:'More severe weather instances',o:'april'},
-  {t:'Used truck market is terrible — hard to cycle out trucks',o:'april'},
-  {t:'Trucks more expensive due to environmental regulations',o:'april'},
-  {t:'More senior relocations, fewer corporate relocations',o:'april'}
+  {t:'HUGE: Tariff uncertainty, weakening economy, rising inflation, weakening of dollar',o:'april',d:'keep'},
+  {t:'IRAN: Rising diesel fuel costs',o:'april',d:'keep'},
+  {t:'HUGE: Uncertainty around Federal Reserve moves, interest rates, continued housing-market slowdown',o:'april',d:'keep'},
+  {t:'HUGE: AI (agents, coding, marketing, analysis, content) in software and virtual estimates',o:'april',d:'keep'},
+  {t:'HUGE: Rising insurance costs — fleet alone +40% (~$200K) 2025→2026; TOTAL exposure ≈$903K/yr and UNOWNED as a rock candidate',o:'proposed',d:'keep',note:'This is true but we are actively working on it. So it\'s an issue but the fix is in. If we can keep what we have been doing for the last 6 months up for another 18, we should see our insurance costs start to come down'},
+  {t:'NEW: AI adoption fatigue as a workforce reality — where AI fronts humans is now a norms question',o:'proposed',d:'keep',why:'eNPS AI-fatigue roster (Lukas, Austin L, Garrison) + "AI answering branch emails lands discouraging" (Matisen)'},
+  {t:'NEW: AI-search / LLM demand discovery — how customers find movers is shifting',o:'proposed',d:'keep',why:'KP LLM SEO audit already queued (MB 11728394136)'},
+  {t:'Commercial real estate issues — finding good branch spots',o:'april',d:'keep'},
+  {t:'Change in work culture (Gen Z work expectations)',o:'april',d:'keep'},
+  {t:'Personalization — more personalized offerings + higher service levels expected',o:'april',d:'keep'},
+  {t:'More savvy competition (private equity entry, sophisticated competitor software)',o:'april',d:'cut'},
+  {t:'More severe weather instances',o:'april',d:'keep'},
+  {t:'Used truck market is terrible — hard to cycle out trucks',o:'april',d:'cut'},
+  {t:'Trucks more expensive due to environmental regulations',o:'april',d:'keep'},
+  {t:'More senior relocations, fewer corporate relocations',o:'april',d:'keep'}
  ],
  strengths:[
-  {t:'Culture and quality of movers',o:'april'},
-  {t:'Operational excellence (Scaling Up and other best practices)',o:'april'},
-  {t:'Customer service',o:'april'},
-  {t:'Proprietary software (EMMA)',o:'april'},
-  {t:'Mover training',o:'april'},
-  {t:'In great markets (market positioning)',o:'april'},
-  {t:'Mover hiring (excellent cost per application)',o:'april'},
-  {t:'Strong compensation and benefits package (industry leader in mover pay)',o:'april'},
-  {t:'Data driven',o:'april'},
-  {t:'UPGRADE: AI as a concrete operating capability — 7-leader COS network live, validated AI wedges in production (call grading, HR Command Center, VP dynamic model)',o:'proposed',why:'Was "AI forward" aspiration in April; Q2 made it real (AARs, COS network state)'},
-  {t:'NEW: Proprietary training platform — zero-bug beta, full 90-day onboarding→lead system (the Q3 theme chassis)',o:'proposed',why:'Mike AAR'},
-  {t:'NEW: Weekly dashboard/cadence discipline — a repeatable operating pattern, not luck',o:'proposed',why:'Named independently in 4 AARs (hiring dashboard SG, fleet dashboard, VP Tuesday cadence)'}
+  {t:'Culture and quality of movers',o:'april',d:'keep'},
+  {t:'Operational excellence (Scaling Up and other best practices)',o:'april',d:'keep'},
+  {t:'Customer service',o:'april',d:'keep'},
+  {t:'Proprietary software (EMMA)',o:'april',d:'keep'},
+  {t:'Mover training',o:'april',d:'keep'},
+  {t:'In great markets (market positioning)',o:'april',d:'keep'},
+  {t:'Mover hiring (excellent cost per application)',o:'april',d:'cut',why:'Albert: cut here and replaced by the new cost-per-HIRE weakness — cheap applications, expensive hires'},
+  {t:'Strong compensation and benefits package (industry leader in mover pay)',o:'april',d:'keep'},
+  {t:'Data driven',o:'april',d:'keep'},
+  {t:'UPGRADE: AI as a concrete operating capability — 7-leader COS network live, validated AI wedges in production (call grading, HR Command Center, VP dynamic model)',o:'proposed',d:'keep',why:'Was "AI forward" aspiration in April; Q2 made it real (AARs, COS network state)'},
+  {t:'NEW: Proprietary training platform — zero-bug beta, full 90-day onboarding→lead system (the Q3 theme chassis)',o:'proposed',d:'cut'},
+  {t:'NEW: Weekly dashboard/cadence discipline — a repeatable operating pattern, not luck',o:'proposed',d:'keep',why:'Named independently in 4 AARs (hiring dashboard SG, fleet dashboard, VP Tuesday cadence)'}
  ],
  weaknesses:[
-  {t:'IN MOTION (was HUGE): Tying mover promotions to quantifiable KPIs — framework decided 7/2, Rippling pull proven; first cohort = Anne\'s Q3 CRIT',o:'proposed',why:'Downgrade from HUGE-unsolved'},
-  {t:'HUGE: Education / change velocity — the org\'s ability to absorb change and improve quickly',o:'april',why:'Albert: KEEP — now with receipts: 7-voice eNPS pace-of-change cluster + "slow down before speeding up" (Amanda AAR)'},
-  {t:'HUGE: Data overload + inconsistent accuracy on data reporting',o:'april',why:'Albert: KEEP — the quarter\'s best-evidenced weakness: Games scoring fork, TUR definition gap, Rippling hours outage, conversion-basis break. Governance workstream = the proposed answer'},
-  {t:'HUGE: Need to educate customers on hidden fees and our value',o:'april',why:'Albert: see the REFINE row below — Cameron challenged this 7/20 and the call data answered'},
-  {t:'REFINE (split by channel): WEB-side value/pricing education much improved (redesign, all-inclusive framing, care-inventory, quote form) — but CALL-side delivery still weak: 181 graded sales calls 6/5–7/3 show Pricing/Differentiators flat at ~57-62%, Meet Your Mover pitched on ~1 in 5 calls, only ONE rep ever hit all 3 differentiators, zero mastery',o:'proposed',why:'Evidence: Gary\'s grader (AWARE13/dialpad-call-grader, 4 runs). Flat lines = the missing coaching loop from Amanda\'s honest-R AAR — her Q3 restructure (Nhel/Tet coaching-only) is the fix. Caveat: rubric weights uncalibrated — levels directional, hit-rates hard counts'},
-  {t:'HUGE: Lack of lead triage — getting leads to highest converters',o:'april',why:'Albert: KEEP — now a named Q3 rock candidate (C2 demand pursuit)'},
-  {t:'HUGE: Manager training and manager bench',o:'april',why:'Albert: KEEP — the single biggest eNPS cluster (7+ voices) + Rob convergence'},
-  {t:'NEW HUGE candidate: Single-person tech dependency — the Matisen queue',o:'proposed',why:'Named independently by Paul, Amanda + Matisen\'s own AAR; 4 of his anonymous eNPS entries; he\'s "ready to talk backup/delegation"'},
-  {t:'NEW: Goal-definition hygiene — definitions that can\'t be graded unambiguously',o:'proposed',why:'4 separate failures this quarter: scoring fork, inverted G/SG dates, other-team-gated bars, over-specified activities'},
-  {t:'Lack of business development strategies',o:'april'},
-  {t:'Becoming a strength slowly: lack of regular weekly KPI reporting + financial metrics (especially individual)',o:'april'},
-  {t:'Marketing spend ROI visibility + lack of multi-channel approach',o:'april'},
-  {t:'Overall leadership development and Growth Ladder defined',o:'april'},
-  {t:'Job is hard manual labor',o:'april'},
-  {t:'REWORD: Comp margin — mover comp cycle shipped (~$586K/yr, 37.8% of revenue); now a monitored position, not a drift',o:'proposed',why:'Was "giving away too much margin… could be a problem if we give mover raises in 26" — the raises happened, deliberately'},
-  {t:'General efficiency and focus for managers (ongoing performance management)',o:'april'},
-  {t:'Need to be able to grow smaller branches more quickly',o:'april'},
-  {t:'Management sometimes struggles with pace of rollouts + lack of feedback prior to rollouts',o:'april'},
-  {t:'Improving mover retention long term',o:'april'},
-  {t:'Bottlenecks in tech development side',o:'april',why:'Albert: consider merging with the new single-person-dependency line — same root'},
-  {t:'Cybersecurity threats',o:'april'}
+  {t:'IN MOTION (was HUGE): Tying mover promotions to quantifiable KPIs — framework decided 7/2, Rippling pull proven; first cohort = Anne\'s Q3 CRIT',o:'proposed',d:'cut'},
+  {t:'HUGE: Education / change velocity — the org\'s ability to absorb change and improve quickly',o:'april',d:'keep',why:'Albert: KEEP — now with receipts: 7-voice eNPS pace-of-change cluster + "slow down before speeding up" (Amanda AAR)'},
+  {t:'HUGE: Data overload + inconsistent accuracy on data reporting',o:'april',d:'keep',why:'Albert: KEEP — the quarter\'s best-evidenced weakness: Games scoring fork, TUR definition gap, Rippling hours outage, conversion-basis break'},
+  {t:'HUGE: Need to educate customers on hidden fees and our value - Could be a strength in Q4!',o:'april',d:'keep'},
+  {t:'REFINE (split by channel): WEB-side value/pricing education much improved (redesign, all-inclusive framing, care-inventory, quote form) — but CALL-side delivery still weak: 181 graded sales calls 6/5–7/3 show Pricing/Differentiators flat at ~57-62%, Meet Your Mover pitched on ~1 in 5 calls, only ONE rep ever hit all 3 differentiators, zero mastery',o:'proposed',d:'cut'},
+  {t:'HUGE: Lack of lead triage — getting leads to highest converters',o:'april',d:'keep',why:'Albert: KEEP — now a named Q3 rock candidate (C2 demand pursuit)'},
+  {t:'HUGE: Manager training and manager bench',o:'april',d:'keep',why:'Albert: KEEP — the single biggest eNPS cluster (7+ voices) + Rob convergence'},
+  {t:'NEW HUGE candidate: Single-person tech dependency — the Matisen queue',o:'proposed',d:'keep',why:'Named independently by Paul, Amanda + Matisen\'s own AAR; 4 of his anonymous eNPS entries; he\'s "ready to talk backup/delegation". The old "bottlenecks in tech development" line was merged into this one.'},
+  {t:'NEW: Goal-definition hygiene — definitions that can\'t be graded unambiguously',o:'proposed',d:'cut'},
+  {t:'Lack of business development strategies',o:'april',d:'keep'},
+  {t:'Becoming a strength slowly: lack of regular weekly KPI reporting + financial metrics (especially individual)',o:'april',d:'cut'},
+  {t:'Marketing spend ROI visibility + lack of multi-channel approach',o:'april',d:'cut',note:'This is no longer there. We are testing mailers, billboards, and other approaches and have a ROAS spreadsheet determined now.'},
+  {t:'Overall leadership development and Growth Ladder defined',o:'april',d:'keep'},
+  {t:'Job is hard manual labor',o:'april',d:'keep'},
+  {t:'REWORD: Comp margin — mover comp cycle shipped (~$586K/yr, 37.8% of revenue); now a monitored position, not a drift',o:'proposed',d:'cut'},
+  {t:'General efficiency and focus for managers (ongoing performance management)',o:'april',d:'keep'},
+  {t:'Need to be able to grow smaller branches more quickly',o:'april',d:'keep'},
+  {t:'Management sometimes struggles with pace of rollouts + lack of feedback prior to rollouts',o:'april',d:'keep',why:'⚠ Albert: the room export was ambiguous here — a twin of this row was cut as "duplicate above with education/change velocity" while this one stayed kept. Left KEPT. If it really is a duplicate, cut it; the "lack of feedback prior to rollouts" half is the part education/change velocity does not cover.'},
+  {t:'Improving mover retention long term - with a focus on regrettable terms',o:'april',d:'keep'},
+  {t:'Bottlenecks in tech development side',o:'april',d:'cut',note:'Yeah, merge with single person depedncy line'},
+  {t:'Cybersecurity threats',o:'april',d:'keep'},
+  {t:'Mover cost per hire is too high (at least $450 per hire) with leaky applicant funnel',o:'added',d:'keep',why:'Added live in the room — the flip side of cutting "mover hiring (excellent cost per application)" from Strengths: cheap applications, expensive hires'}
  ],
  strata:[
   {name:'Words You Own (Mindshare)', text:'Smart Moving · The "Smart Move System"', flag:''},
-  {name:'Sandbox + Brand Promises', text:'WHO: Middle-to-upper-income people moving in TX or FL who want their move easy and fun. WHAT: Peace of mind while moving + an easy transition. PROMISES: Easy · Happy customers for life · Do what we promise · Care for your stuff like it\'s our own. KPIs: conv rates, lead response times · NPS + reviews · estimate accuracy, late discounts · damages + ticket resolutions', flag:'⚑ KPI wording carries the broken 40% conversion basis — update once the replacement KPI is decided (Open Question 5). Flag, don\'t wordsmith yet.'},
+  {name:'Sandbox + Brand Promises', text:'WHO: Middle-to-upper-income people moving in TX or FL who want their move easy and fun. \n\nWHAT: Peace of mind while moving + an easy transition. \n\nPROMISES: Easy · Happy customers for life · Do what we promise · Care for your stuff like it\'s our own. KPIs: conv rates, lead response times · NPS + reviews · estimate accuracy, late discounts · damages + ticket resolutions', flag:'⚑ KPI wording carries the broken 40% conversion basis — update once the replacement KPI is decided (Open Question 5). Flag, don\'t wordsmith yet.', note:'Yeah, need to decide on this!'},
   {name:'Brand Promise Guarantee (Catalytic Mechanism)', text:'On Time Guarantee · No Worries Damage Coverage · No-obligations booking (no cancellation fee or deposit)', flag:''},
-  {name:'One-PHRASE Strategy (Key to Making Money)', text:'Operational excellence, happy team members, and wheels on the road.', flag:''},
-  {name:'Differentiating Activities (3–5 Hows)', text:'Simple pricing + transparent value · Autobooking + EMMA · Damage coverage included (backed by CX team) · Meet Your Mover · On Time Guarantee · Actual employees · Quirky/fun brand', flag:''},
-  {name:'X-Factor (10x–100x Advantage)', text:'Mover recruitment, retention, training, and CULTURE', flag:'⚑ Say it out loud in the room: the Q3 theme runs directly AT the X-Factor. Discussion: is the COS/AI layer a second X-Factor or an enabler of this one? (April\'s answer: enabler — probably still right.)'},
+  {name:'One-PHRASE Strategy (Key to Making Money)', text:'Wheels on the road.\n\n(requires operational excellence and happy movers)', flag:''},
+  {name:'Differentiating Activities (3–5 Hows)', text:'Simple pricing + transparent value · Autobooking + EMMA · Meet Your Mover  · Actual employees · Quirky/fun brand \nMagic Moments', flag:''},
+  {name:'X-Factor (10x–100x Advantage)', text:'Mover recruitment, retention, training, and CULTURE', flag:'⚑ Say it out loud in the room: the Q3 theme runs directly AT the X-Factor. Discussion: is the COS/AI layer a second X-Factor or an enabler of this one? (April\'s answer: enabler — probably still right.)', note:'COS/AI is enabler. Not x factor'},
   {name:'Profit per X (Economic Engine)', text:'Profit per Truck (may move to margin-per-employee or margin-per-customer if additional services launch)', flag:'⚑ T1\'s TUR-definition fix changes how Profit/Truck is MEASURED, not the choice.'},
-  {name:'BHAG (10–25 yr)', text:'300 trucks on the road by 2033 ($100M revenue). Not updating as of Q1 2026 unless the additional-services beta changes the model.', flag:''}
+  {name:'BHAG (10–25 yr)', text:'300 trucks on the road by 2033 ($100M revenue). \n\nNot updating as of Q2 2026 unless the additional-services beta changes the model.', flag:''}
  ]
 };
 // ═══ end SEED ═══
