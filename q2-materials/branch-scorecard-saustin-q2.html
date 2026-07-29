@@ -816,6 +816,60 @@
   }
   .mover-section p { font-size: 13.5px; line-height: 1.6; color: var(--gray-800); margin: 0 0 10px 0; }
 
+  /* MOVERPORT-2026-07-28: shared company-story blocks — ELI6 expander (byte-identical across all 10 cards) */
+  .mover-section details.eli6 {
+    border-left: 4px solid var(--orange);
+    background: var(--orange-bg);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0 14px 0;
+  }
+  .mover-section details.eli6 > summary {
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--orange-dark);
+  }
+  .mover-section details.eli6 .eli6-body { margin-top: 10px; }
+  .mover-section details.eli6 .eli6-body p { font-size: 13.5px; }
+  /* /MOVERPORT */
+
+  /* MOVERPORT2-2026-07-28: shared redline-2 styles (byte-identical across all 10 cards) */
+  /* Company-grade circle — mirrors the Manager view composite circle (orange circle, navy letter) */
+  .mv-company-grade { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 16px 0 6px 0; }
+  .mv-company-grade .mv-grade-circle {
+    width: 130px; height: 130px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--orange); color: var(--navy);
+    border-radius: 50%;
+    font-size: 54px; font-weight: 900; line-height: 1;
+    box-shadow: 0 6px 20px rgba(239,139,34,0.35);
+  }
+  .mv-company-grade .mv-grade-caption { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gray-600); text-align: center; }
+  /* Compact all-branches tables (fleet safety + reviews) */
+  .mv-compact-table-wrap { overflow-x: auto; margin: 12px 0 4px 0; border: 1px solid var(--gray-200); border-radius: 8px; }
+  .mv-compact-table { border-collapse: collapse; width: 100%; min-width: 420px; font-size: 12.5px; margin: 0; }
+  .mv-compact-table th { background: var(--navy); color: white; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; padding: 7px 12px; text-align: left; }
+  .mv-compact-table th.num, .mv-compact-table td.num { text-align: right; }
+  .mv-compact-table td { padding: 6px 12px; border-bottom: 1px solid var(--gray-100); color: var(--gray-800); }
+  .mv-compact-table tr:last-child td { border-bottom: none; }
+  .mv-compact-table tr.mv-row-company td { background: var(--gray-100); font-weight: 700; border-top: 2px solid var(--gray-300); }
+  .mv-table-note { font-size: 11px; color: var(--gray-600); margin: 6px 0 0 0; }
+  /* Quarter-highlights list */
+  .mv-highlights { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.6; color: var(--gray-800); }
+  .mv-highlights li { margin-bottom: 8px; }
+  /* Said → Did structure (Mover eNPS section) */
+  .mv-saiddid h3 { font-size: 11.5px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-700); margin: 16px 0 6px 0; }
+  .mv-saiddid h3.did { color: var(--orange-dark); }
+  .mv-saiddid ul { margin: 0 0 4px 0; padding-left: 20px; font-size: 13.5px; line-height: 1.6; color: var(--gray-800); }
+  .mv-saiddid li { margin-bottom: 5px; }
+  /* /MOVERPORT2 */
+
+  /* MOVERPORT2-2026-07-28: hero-pill-fix — the provisional ribbon in the cover-hero badge column
+     wraps and stays in flow instead of overflowing the 200px column into the text column */
+  .composite-badge .status-ribbon { position: static; display: block; width: 100%; box-sizing: border-box; white-space: normal; text-align: center; line-height: 1.5; }
+  /* /MOVERPORT2 */
+
   /* Company composite (sits above the 3 lenses) */
   .company-composite {
     display: grid;
@@ -1380,16 +1434,6 @@
   }
   .mover-bottom-link.placeholder strong { color: var(--gray-600); }
 
-  /* Mover comp informational block */
-  .mover-comp-info {
-    background: var(--gray-50);
-    border-radius: 8px;
-    padding: 16px 18px;
-    margin-top: 14px;
-  }
-  .mover-comp-info ul { margin: 8px 0; padding-left: 22px; }
-  .mover-comp-info li { font-size: 13px; line-height: 1.6; color: var(--gray-800); margin-bottom: 4px; }
-
   /* Mobile breakpoint for Mover View */
   @media (max-width: 720px) {
     .mover-hero { grid-template-columns: 1fr; text-align: center; }
@@ -1711,14 +1755,18 @@
       <div class="placeholder-note">Provisional stamp: the Financial lens inherits the company financial review’s grade and can re-stamp when the July books close (7/31–8/1). Sales Target (booked-vs-target EOQ pull) and Recognition (praise-count pull) land then too — branch grades render provisional until they do (see Manager View). <!-- WIRED: re-stamp the Financial lens + composite if the financial deck's composite moves at the 7/31-8/1 close (manifest _company_composite_q2_26) --></div>
 
       <p class="lens-divider-label">Company composite — Q2 2026:</p>
+      <!-- MOVERPORT2-2026-07-28: company-grade -->
+      <div class="mv-company-grade">
+        <div class="mv-grade-circle">B+</div>
+        <div class="mv-grade-caption">Company Grade <span class="status-ribbon preliminary" style="font-size:8px;">Provisional — finalizes 7/31–8/1</span></div>
+      </div>
       <div class="lens-grid" style="grid-template-columns: 1fr;">
         <div class="lens-card grade-bplus">
-          <p class="lens-eyebrow">Company Grade <span class="status-ribbon preliminary" style="font-size:8px;">Provisional — finalizes 7/31–8/1</span></p>
-          <div class="lens-grade">B+</div>
           <div class="lens-name">Whole-company composite — the three lenses below, weighted equally</div>
           <p class="lens-explainer">A good quarter with one honest drag: the money came in under the plan we set, while the quarter’s focus numbers and the people numbers both ran ahead of it. The Financial lens is the one piece that can still move at close.</p>
         </div>
       </div>
+      <!-- /MOVERPORT2 -->
       <div class="lens-grid">
         <div class="lens-card grade-c">
           <p class="lens-eyebrow">Lens 1 · Financial</p>
@@ -1775,10 +1823,52 @@
       <h2>Quarter Highlights</h2>
       <p class="lede">The big moves of Q2 — branch-side and department-side together. The wins worth opening on.</p>
 
-      <!-- NARRATIVE-SLOT: Q2 company-wide "wins to open on" list. Integrator (Albert/Fable) writes facts-only from
-           integrated-analysis-2026-07-21-FINAL.md + manifest, per BUILD-PLAN §3 row 5 (gate #14 — sparse narrative,
-           facts only, no cause claims). Q1's list is intentionally removed, not carried forward. -->
+      <!-- MOVERPORT2-2026-07-28: quarter-highlights -->
+      <ul class="mv-highlights">
+        <li><strong>Both company focus numbers hit.</strong> The Einstein Games company score landed at <strong>7.59 — Green</strong> — and staffing came in at <strong>101.1% of plan — Super Green</strong> (a deliberate summer staff-up, so crews weren't running short-handed in peak season).</li>
+        <li><strong>Biggest revenue quarter in company history: $8.4M, up almost 10% over last year.</strong> The markets around us grew about 2–5%, so we grew at roughly 3× the market's pace. That's your moves doing that.</li>
+        <li><strong>Fleet safety climbed to 89, up from 80 last quarter</strong> — and the pool of high-risk drivers nearly halved. Safer trucks, fewer wrecks, more money that stays in the company.</li>
+        <li><strong>Insurance claims: 54 in all of 2025 → just 3 so far in 2026.</strong> Rising insurance rates were becoming one of the biggest threats to the business — this is us beating it, and it's the same money that funds raises, bonuses, and new trucks.</li>
+        <li><strong>754 five-star reviews this quarter — up 9.6% from last quarter.</strong> Customers writing about your moves, often naming movers by name.</li>
+        <li><strong>Every mover got a raise in mid-May — about $1.85/hour on average.</strong> It wasn't in the budget; we moved it up because it was the right call.</li>
+        <li><strong>The mover training app went live across all of DFWT — zero bugs in its first weeks.</strong> Digital handbook, Einstein videos in context, built to reach everyone.</li>
+        <li><strong>San Antonio took the Einstein Games Season 3 championship</strong>, beating Fort Worth in the National final. Next season, that belt is up for grabs again.</li>
+      </ul>
+      <!-- /MOVERPORT2 -->
     </section>
+
+    <!-- MOVERPORT-2026-07-28: money-story -->
+    <section class="mover-section">
+      <p class="section-eyebrow-mover">Across the Company · Q2</p>
+      <h2>The Money Story, Plain English</h2>
+      <p class="lede">How the quarter's money really went — the record, the two honest misses, and why nobody should lose sleep over either one. (July numbers are estimates until the books close ~Aug 1.)</p>
+
+      <p><strong>The record:</strong> the company did <strong>$8.4M in revenue — up almost 10% over last year, the biggest quarter in company history.</strong> And we didn't just ride a good market: the moving markets around us grew about 2–5%, so we grew at roughly <strong>3× the market's pace</strong>. That's your moves doing that.</p>
+      <p><strong>The honest part:</strong> we hit about 95% of our revenue plan, and profit came in at about <strong>two-thirds of what we planned</strong>. Record revenue did not mean record profit this quarter. Why? Three things — and none of them is "customers stopped paying":</p>
+      <ul style="font-size:13.5px; line-height:1.6; color:var(--gray-800); margin:0 0 12px; padding-left:20px;">
+        <li style="margin-bottom:6px;"><strong>Work booked at the old price.</strong> A lot of Q2's moves were booked back in the spring at their old quoted price, before our new pricing went live in May — so those jobs billed at the old rate. That backlog effect faded to almost nothing by July.</li>
+        <li style="margin-bottom:6px;"><strong>Discounts we never budgeted</strong> — including trial-day crew discounts on real jobs, an expense we didn't plan for that ends Aug 1 by decision.</li>
+        <li style="margin-bottom:6px;"><strong>Your raise.</strong> In mid-May we gave <strong>every mover a raise, about $1.85/hour on average</strong> — and it wasn't budgeted in the quarter. We moved it up because it was the right call, not because the spreadsheet had room — and we'd make the same call again.</li>
+      </ul>
+      <p>Meanwhile the company stayed strong where it counts: revenue covered our bills roughly <strong>1.5 times over</strong>. Nobody should read this quarter as "the company is in trouble." It isn't.</p>
+
+      <p><strong>The short version, lawn-mowing edition:</strong> we planned the summer with a broken measuring tape, a chunk of the summer's lawns were already promised at the old price, and we sent free helpers we never budgeted. The full story — the one worth two minutes — is right here:</p>
+
+      <details class="eli6">
+        <summary>🧒 Explain this like I'm in sixth grade</summary>
+        <div class="eli6-body">
+          <p><strong>You mow lawns. You charge $20 an hour.</strong></p>
+          <p><strong>The plan.</strong> "I want to make $800 this summer. At $20/hour, I need 40 hours." That's how the Q2 plan was built: hours &times; rate = revenue.</p>
+          <p><strong>Mistake #1 — the broken ruler 📏</strong> You also charge $5 "gas money" to bike to each lawn. You counted the $5 as money you made, but you didn't count the 15 minutes of biking as time you worked. So you figured "$25 for an hour's work!" — except it took an hour and fifteen. You really make $20. Two things break: you plan to work too few hours, and your scoreboard is bent on both ends.</p>
+          <p><strong>Mistake #2 — you already shook on it 🤝</strong> In May you raise to $25/hour. Smart. But back in March you promised twenty lawns at $20. Those neighbors keep the old price. The raise barely shows in May, half in June, and by July everyone's paying the new price.</p>
+          <p><strong>Mistake #3 — you forgot to raise on some streets 🏘️</strong> Oak Street never got raised. Rich Hill got charged more than planned. On average it's a wash — but nothing happens "on average." Two real things happened on two real streets, and only one is a problem.</p>
+          <p><strong>Mistake #4 — the free helper 🧑&#8205;🌾</strong> Sometimes you bring a kid who's trying out for the job. With him helping, a lawn that should take 8 hours gets done in 5&frac12;. But he's free — it's his tryout — so you don't charge the neighbor for him. The bill comes in smaller than the number you quoted, and you never wrote that down when you planned your summer. May: $50. June: $26. July: $5. <em>(Real: $49.5K / $25.9K / $4.8K.)</em> And a chunk of the money you knocked off, you never wrote down a reason for at all.</p>
+          <p><strong>What did NOT go wrong — the neighbors ✅</strong> Nobody haggled you down. You never cut your posted price. You mowed more lawns than last year at higher prices and your schedule stayed full. One exception: on Tampa Street you bought four mowers and only found work for two. That's not a price problem — that's a too-many-mowers problem.</p>
+          <p><strong>The whole story in four sentences:</strong> We built the plan with a measuring tape that was wrong, so we aimed at too few hours and too high a rate. We raised prices in the spring — but two million dollars of work was already promised at the old price, so the raise took two months to show up. We sent free helpers on jobs and never budgeted the discount. All of that faded to almost nothing by July; customers never pushed back on price. Where we're actually hurting is Tampa, and it's empty trucks, not cheap prices.</p>
+        </div>
+      </details>
+    </section>
+    <!-- /MOVERPORT -->
 
     <!-- Mover-relevant branch metrics -->
     <section class="mover-section">
@@ -1893,69 +1983,108 @@
     <section class="mover-section">
       <p class="section-eyebrow-mover">Q1 Mover Voice · 227 Responses</p>
       <h2>Mover eNPS Trends + Our Response</h2>
-      <p class="lede"><span class="status-ribbon not-calculable">Q1 2026 SURVEY DATA — NO Q2 MOVER SURVEY CYCLE; NEXT CYCLE TBD</span></p>
-      <p class="lede">This quarter's eNPS instrument was the Manager/CET salaried survey (company-wide +81, n=52) — not the mover survey, so it can't refresh this section. What follows is carried from Q1, unchanged, as the most recent mover voice on record.</p>
+      <p class="lede"><span class="status-ribbon pending">Q1 2026 survey data</span> — this is a point-in-time read from last quarter's mover survey (Q1 2026, 227 responses); no Q2 mover survey cycle ran, and the next read comes when the regular mover-pulse cadence starts. S. Austin scored <strong>+62</strong> in that survey vs the company's <strong>+46</strong>. A separate manager/CET salaried eNPS cycle ran in Q2 (company +81, n=52) — that's a different survey population and isn't sliced to branches (small-n rule); see Critical Numbers · Q2 in Manager View for the Q2-live metrics.</p>
 
-      <div style="margin-top:14px; border:1px solid var(--gray-200); border-radius:8px; overflow:hidden;">
+      <div class="mv-saiddid">
+        <h3>What Movers Said (Q1 survey themes)</h3>
+        <ul>
+          <li><strong>Raise the wage ceiling</strong> + a clearer path to lead pay</li>
+          <li><strong>Quote accurately</strong> — stop underquoting jobs</li>
+          <li><strong>Train us deeper</strong> — drivers, leads, sales</li>
+          <li><strong>Keep hiring for fit</strong> — protect the trial-day standard</li>
+          <li><strong>Less daily friction</strong> with the tools</li>
+        </ul>
 
-        <!-- Header row -->
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0;">
-          <div style="background:var(--gray-100); padding:10px 16px; font-size:11px; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray-700); border-bottom:1px solid var(--gray-200);">What Movers Said</div>
-          <div style="background:#fff5e8; padding:10px 16px; font-size:11px; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--orange-dark); border-bottom:1px solid var(--gray-200);">What We're Doing</div>
-        </div>
-
-        <!-- Pair 1 -->
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0; border-bottom:1px solid var(--gray-100);">
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--gray-800);">
-            <strong>Raise the wage ceiling + clearer path to lead pay</strong>
-          </div>
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--navy); background:#fffaf2;">
-            <strong>Mover comp review + performance-based lead promotions</strong>
-          </div>
-        </div>
-
-        <!-- Pair 2 -->
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0; border-bottom:1px solid var(--gray-100);">
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--gray-800);">
-            <strong>Quote accurately — stop underquoting jobs</strong>
-          </div>
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--navy); background:#fffaf2;">
-            <strong>Estimate-accuracy training + automated call grading on sales calls</strong>
-          </div>
-        </div>
-
-        <!-- Pair 3 -->
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0; border-bottom:1px solid var(--gray-100);">
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--gray-800);">
-            <strong>Train us deeper — drivers, leads, sales</strong>
-          </div>
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--navy); background:#fffaf2;">
-            <strong>Digital training handbook in beta</strong> — dozens of Einstein videos in context
-          </div>
-        </div>
-
-        <!-- Pair 4 -->
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0; border-bottom:1px solid var(--gray-100);">
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--gray-800);">
-            <strong>Keep hiring for fit — protect the trial-day standard</strong>
-          </div>
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--navy); background:#fffaf2;">
-            <strong>Hiring for culture interviews</strong>
-          </div>
-        </div>
-
-        <!-- Pair 5 -->
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0;">
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--gray-800);">
-            <strong>Less daily friction with the tools</strong>
-          </div>
-          <div style="padding:14px 16px; font-size:13.5px; color:var(--navy); background:#fffaf2;">
-            <strong>Improved mobile UX on EMMA</strong>
-          </div>
-        </div>
-
+        <!-- MOVERPORT2-2026-07-28: enps-what-we-did -->
+        <h3 class="did">What We Did — 6 for 6 on the promises</h3>
+        <ul>
+          <li>✓ <strong>Comp raise delivered</strong> — every mover, about $1.85/hour on average, effective mid-May</li>
+          <li>✓ <strong>Performance-based lead promotions built</strong> — a real, earned path to lead pay</li>
+          <li>✓ <strong>Automated call grading live</strong> on sales calls — attacking the underquoting problem at the source</li>
+          <li>✓ <strong>Training app live</strong> — the digital handbook with Einstein videos in context, running across all of DFWT and built to reach everyone</li>
+          <li>✓ <strong>Culture-based interviews</strong> start Aug 1 — hiring for fit, formalized</li>
+          <li>✓ <strong>EMMA mobile views shipped</strong> — less daily friction with the tools</li>
+        </ul>
+        <p style="font-size:12.5px; color:var(--gray-600); margin-top:8px;">Every commitment from that survey got acted on. When the regular mover pulses start, the score tells us whether it landed.</p>
+        <!-- /MOVERPORT2 -->
       </div>
     </section>
+
+    <!-- MOVERPORT-2026-07-28: fleet-safety -->
+    <section class="mover-section">
+      <p class="section-eyebrow-mover">Across the Company · Safety</p>
+      <h2>Fleet Safety — the Quiet Superpower</h2>
+      <p class="lede">The company's fleet safety score climbed to <strong>89, up from 80 last quarter</strong>. And here's the number that hits the wallet.</p>
+      <p><strong>54 insurance claims in all of 2025. Just 3 so far in 2026</strong> — roughly $15K out of pocket. Over the last couple of years our insurance rates rose so fast it was becoming one of the biggest existential threats to the business. This is us beating it.</p>
+      <p><strong>What's in it for you:</strong> fewer claims = money that stays in the company — the same money that funds raises, bonuses, and new trucks — instead of going to the insurance company. Safe driving is one of the most direct ways a crew protects its own branch, its own paychecks, and the whole company.</p>
+
+      <!-- MOVERPORT2-2026-07-28: fleet-table -->
+      <h4 style="font-size:12px;color:var(--navy);margin:14px 0 4px 0;">Branch Safety Scorecard — where every branch sits</h4>
+      <div class="mv-compact-table-wrap">
+        <table class="mv-compact-table">
+          <thead><tr><th>Branch</th><th class="num">Safety Score</th><th class="num">At-Risk %</th><th class="num">Events (Q2)</th><th class="num">Miles Driven</th><th class="num">Events / 10K mi</th></tr></thead>
+          <tbody>
+            <tr><td>McKinney</td><td class="num">82</td><td class="num">23.1%</td><td class="num">122</td><td class="num">19,641</td><td class="num"><strong>62.1</strong></td></tr>
+            <tr><td>Dallas</td><td class="num">85</td><td class="num">18.8%</td><td class="num">235</td><td class="num">59,479</td><td class="num"><strong>39.5</strong></td></tr>
+            <tr><td>North Austin</td><td class="num">88</td><td class="num">15.4%</td><td class="num">145</td><td class="num">44,346</td><td class="num">32.7</td></tr>
+            <tr><td>Garland</td><td class="num">89</td><td class="num">14.3%</td><td class="num">41</td><td class="num">15,149</td><td class="num">27.1</td></tr>
+            <tr><td>Houston</td><td class="num">90</td><td class="num">11.8%</td><td class="num">90</td><td class="num">35,187</td><td class="num">25.6</td></tr>
+            <tr><td>San Antonio</td><td class="num">93</td><td class="num">0.0%</td><td class="num">81</td><td class="num">33,950</td><td class="num">23.9</td></tr>
+            <tr><td>South Austin</td><td class="num">90</td><td class="num">6.7%</td><td class="num">86</td><td class="num">36,533</td><td class="num">23.5</td></tr>
+            <tr><td>Tampa</td><td class="num">93</td><td class="num">20.0%</td><td class="num">12</td><td class="num">5,317</td><td class="num">22.6</td></tr>
+            <tr><td>Leander</td><td class="num">96</td><td class="num">0.0%</td><td class="num">38</td><td class="num">23,856</td><td class="num">15.9</td></tr>
+            <tr><td>Fort Worth</td><td class="num">98</td><td class="num">10.0%</td><td class="num">17</td><td class="num">16,693</td><td class="num"><strong>10.2</strong></td></tr>
+            <tr class="mv-row-company"><td>Company</td><td class="num">89.0</td><td class="num">10.9%</td><td class="num">902</td><td class="num">290,151</td><td class="num">31.1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mv-table-note">Sorted worst to best on <strong>events per 10K miles</strong> — the only fair race, since a 15-truck branch will always out-count a 3-truck branch on raw events. Fort Worth and Leander run cleanest. Branch event rows add to 867, not the company&rsquo;s 902 — 35 events came through with no branch tag.</p>
+      <!-- /MOVERPORT2 -->
+    </section>
+    <!-- /MOVERPORT -->
+
+    <!-- MOVERPORT-2026-07-28: claims-magic-moments -->
+    <section class="mover-section">
+      <p class="section-eyebrow-mover">Across the Company · The Job Behind the Job</p>
+      <h2>Claims &amp; Magic Moments</h2>
+      <p class="lede">We delivered <strong>36 Magic Moments</strong> this quarter against a goal of 35 — hit.</p>
+      <p><strong>And a company first:</strong> until this quarter, every Magic Moment came from the office. Q2 changed that — the first mover-submitted Magic Moments in company history. <strong>Luis Sanchez</strong> spotted a mom with two daughters (plus a cat and two dogs) navigating a divorce mid-move — his nomination became a family spa package, with treats for the pets. <strong>Noah Schroder</strong> noticed a dad and his 6-year-old bonding over toy cars — his nomination became a LEGO car set for them to build together in the new house.</p>
+      <p><strong>Why your eyes matter most: you're in the living room — we're not.</strong> Nobody spots these moments before the crew does. See one, submit it, and the claims team handles everything from there.</p>
+    </section>
+    <!-- /MOVERPORT -->
+
+    <!-- MOVERPORT-2026-07-28: what-customers-said -->
+    <section class="mover-section">
+      <p class="section-eyebrow-mover">Across the Company · Customer Voice</p>
+      <h2>What Customers Said</h2>
+      <p class="lede">Straight numbers, no spin: company-wide Customer NPS came in at <strong>88.0</strong> against our 90 target — a close miss, and down from 91.9 last quarter.</p>
+      <p>And here's the proof customers still love the work: they posted <strong>754 five-star reviews</strong> about your moves this quarter — up from <strong>688</strong> last quarter, a 9.6% jump. Those reviews name names, and the most-named mover in the company was <strong>Luis Sanchez-Garcia, named in 29 reviews</strong>. When a customer takes five minutes after a long move day to write about you by name, that's the whole job done right.</p>
+      <p><strong>Where reviews come from: crews asking.</strong> The biggest driver of a five-star review is a mover who did great work — and then asked for it. Great move first, ask second. That's the whole play.</p>
+
+      <!-- MOVERPORT2-2026-07-28: reviews-table -->
+      <h4 style="font-size:12px;color:var(--navy);margin:14px 0 4px 0;">How your branch sits across the company — five-star reviews, Q2</h4>
+      <div class="mv-compact-table-wrap">
+        <table class="mv-compact-table">
+          <thead><tr><th>Branch</th><th class="num">5★ Reviews (Q2)</th><th class="num">Reviews per 100 Moves</th></tr></thead>
+          <tbody>
+            <tr><td>Tampa</td><td class="num">95</td><td class="num">48.5</td></tr>
+            <tr><td>Houston</td><td class="num">114</td><td class="num">21.4</td></tr>
+            <tr><td>Fort Worth</td><td class="num">47</td><td class="num">17.5</td></tr>
+            <tr><td>S. Austin</td><td class="num">151</td><td class="num">17.2</td></tr>
+            <tr><td>Leander</td><td class="num">59</td><td class="num">15.1</td></tr>
+            <tr><td>San Antonio</td><td class="num">74</td><td class="num">13.9</td></tr>
+            <tr><td>McKinney</td><td class="num">52</td><td class="num">11.9</td></tr>
+            <tr><td>Garland</td><td class="num">26</td><td class="num">11.6</td></tr>
+            <tr><td>Dallas</td><td class="num">81</td><td class="num">8.1</td></tr>
+            <tr><td>N. Austin</td><td class="num">55</td><td class="num">5.2</td></tr>
+            <tr class="mv-row-company"><td>Company</td><td class="num">754</td><td class="num">13.7</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mv-table-note">Reviews per 100 moves is the fair race — it levels out branch size. Board logged through 7/21; counts refresh at the July-close pull.</p>
+      <!-- /MOVERPORT2 -->
+    </section>
+    <!-- /MOVERPORT -->
 
     <!-- Quarterly Theme Poster -->
     <section class="mover-section">
@@ -1973,6 +2102,10 @@
       <p class="section-eyebrow-mover">Season's Over — Here's How It Went</p>
       <h2>Einstein Games — Season 3</h2>
       <p class="lede">Games are a coaching tool, directionally accurate by design — in-week estimates, not resolved actuals. Final bonuses and real accountability run off reconciled hard numbers elsewhere in this scorecard, never off the games score.</p>
+
+      <!-- MOVERPORT-2026-07-28: games-prize -->
+      <p><strong>What was on the line:</strong> 1st place took home the <strong>Champ Belt, Champ Shirts, and a stocked fridge — $75 per effective truck</strong>. 2nd place got a stocked fridge at $50 per truck, 3rd at $25. The branch fridge got loaded because the crews earned it — worth remembering when the next season tips off.</p>
+      <!-- /MOVERPORT -->
 
       <h3 class="games-subhead" style="margin-top:14px;">The Conferences</h3>
       <div class="games-conf-grid">
@@ -2087,6 +2220,15 @@
       </div>
     </section>
 
+    <!-- MOVERPORT-2026-07-28: q3-theme -->
+    <!-- POST-ROUNDTABLE FILL: Q3 theme -->
+    <section class="mover-section">
+      <p class="section-eyebrow-mover">Coming Next Quarter</p>
+      <h2>Q3 Theme</h2>
+      <div class="placeholder-note" style="margin:14px 0 0;">Announced at the QGR — your manager will walk you through it. This card fills in after.</div>
+    </section>
+    <!-- /MOVERPORT -->
+
     <!-- Vision Summary -->
     <section class="mover-section">
       <p class="section-eyebrow-mover">Where We're Going</p>
@@ -2098,16 +2240,6 @@
       </div>
     </section>
 
-    <!-- Mover Comp Review -->
-    <section class="mover-section">
-      <p class="section-eyebrow-mover">FYI</p>
-      <h2>Mover Comp Review — Q2</h2>
-      <div class="mover-comp-info">
-        <p>The mover comp redesign that leadership accelerated into Q2 has shipped: roughly <strong>$586K/yr added</strong> to mover pay, about <strong>37.8% of revenue</strong>. <!-- NARRATIVE-SLOT: any branch-specific comp-cycle detail belongs here, integrator-written from confirmed comp-project artifacts — not the manifest (comp detail lives in Thread #14, not branch-metrics-q2-26.json). No per-branch numbers invented here. --></p>
-        <p>More information will come from Anne and the leadership team as the work progresses.</p>
-      </div>
-    </section>
-
   </div>
 
   <!-- ============== COVER HERO — COMPOSITE (PROVISIONAL) + GROWTH + NOI-TO-PLAN + STRATEGIC WEIGHT ============== -->
@@ -2116,7 +2248,7 @@
       <div class="composite-letter">B+</div>
       <div class="composite-score">Provisional Final 81.5</div>
       <div class="composite-breakdown">Composite 71.5 (B−) + 10 growth · 42.9 of 60 live pts</div>
-      <div style="margin:8px 0 0 0;"><span class="status-ribbon pending" style="font-size:8.5px;">PROVISIONAL — finalizes at the 7/31–8/1 pulls (sales target · recognition)</span></div>
+      <div style="margin:8px 0 0 0;"><span class="status-ribbon pending" style="font-size:8.5px;">PROVISIONAL — finalizes at July close (sales target · recognition)</span></div>
       <div class="growth-chip sg">
         <span class="growth-chip-label">Growth</span>
         <span class="growth-chip-grade">+10</span>
@@ -2134,10 +2266,23 @@
       </div>
     </div>
     <div>
-      <p class="composite-headline">Strong quarter on the restored composite — Driver Safety Super Green, Personnel-Budget Green, and the strongest revenue growth story in the file (+24.5% YoY, Breakout). Customer NPS regrades from Watch to Red under the locked band table (80.8 falls below the 86 Red threshold) — the only downgrade in this quarter's regrade pass, and a banding correction, not a performance change. The Games critical (Red, 12.90 of 15 graduated pts) is the other drag. TUR is ungraded this quarter (side metric — see Financial Engine). Grade is PROVISIONAL: 2 of 6 inputs (sales target · recognition) land at quarter close.</p>
+      <!-- MOVERPORT2-2026-07-28: hero-rewrite -->
+      <p class="composite-headline">Strong quarter, graded honestly: provisional B+ — breakout revenue growth carries the composite, despite an NPS band correction.</p>
       <p class="composite-subhead">
-        <strong>Provisional composite 71.5 (B−)</strong> on the 4 live inputs — earned 42.9 of 60 available points: Customer NPS Red (3.0/15, 80.8 vs 90 — below the locked 86 Red threshold), Driver Safety Super Green (15.0/15, 90 / 6.7% HR), Personnel-Budget Green (12.0/15, 102.45%), Einstein Games 12.90/15 (6.72 season avg — critical number MISSED at the published 7.0 bar; graduated credit now applies between 5.0 and 7.0, floor softened from 6.0 per Cameron's 7/27 ruling). <strong>TUR carries no points this quarter</strong> (retired from the composite, Cameron 7/28 — Q2 targets were built on a rate-math error; owned-fleet 78.7% reports as a side metric in Financial Engine). <strong>Growth modifier +10</strong> (Breakout, +24.5% YoY) → <strong>provisional final 81.5 (B+)</strong>. Sales Target Attainment (10 pts, booked-vs-target EOQ pull) and Recognition (10 pts, praise-count attainment) finalize 7/31–8/1 — the final letter grades on all 80 points then. <strong>NOI to plan (allocated basis, ruled by Cameron 7/21): 90.2%</strong> — $295,114 of a $327,104 Q2 reforecast plan, #2 of 10 on that basis.
+        <strong>Provisional composite 71.5 (B−)</strong> on the 4 live inputs (42.9 of 60 available points) + <strong>growth modifier +10</strong> (Breakout, +24.5% YoY — the strongest revenue growth story in the file) → <strong>provisional final 81.5 (B+)</strong>.
       </p>
+      <p class="composite-subhead" style="line-height:1.8;">
+        <strong>Customer NPS</strong> — Red, 3.0/15 (80.8 vs 90 — below the locked 86 Red threshold; regrades from Watch to Red under the locked band table, the only downgrade in this quarter's regrade pass — a banding correction, not a performance change)<br>
+        <strong>Driver Safety</strong> — Super Green, 15.0/15 (90 score · 6.7% high-risk) — bright spot<br>
+        <strong>Personnel-Budget</strong> — Green, 12.0/15 (102.45%)<br>
+        <strong>Einstein Games</strong> — critical number MISSED at the published 7.0 bar — 12.90/15 (6.72 season avg; graduated credit starts at 5.0, softened from the 6.0 floor per Cameron's 7/27 ruling)<br>
+        <strong>TUR</strong> — no points this quarter (retired from the composite, Cameron 7/28 — Q2 targets were built on a rate-math error; owned-fleet 78.7% reports as a side metric in Financial Engine)<br>
+        <strong>NOI to plan</strong> — 90.2% (allocated basis, ruled by Cameron 7/21): $295,114 of a $327,104 Q2 reforecast plan, #2 of 10 on that basis
+      </p>
+      <p class="composite-subhead">
+        <strong>Why provisional:</strong> Sales Target Attainment (10 pts, booked-vs-target EOQ pull) and Recognition (10 pts, praise-count attainment) finalize 7/31–8/1 — the final letter grades stamp on all 80 points then.
+      </p>
+      <!-- /MOVERPORT2 -->
       <div class="contribution-callout">
         <strong>Strategic Weight — Cash Leader:</strong> Generates <strong>21.0% of company NOI</strong> ($295,114 of $1,407,535) — the <strong>highest single-branch NOI dollar figure in the company this quarter</strong> — on <strong>16.6% of revenue</strong> ($1,398,738 of $8.40M) and <strong>12.0 of 81.17 trucks (14.8%)</strong>. NOI/Truck shown in Financial Engine below as ungraded reference. Not part of the grade math. All figures preliminary — July is a flash estimate; allocated-NOI basis per Cameron's 7/21 ruling.
       </div>

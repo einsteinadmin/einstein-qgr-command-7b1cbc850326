@@ -963,7 +963,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v4.00 2026-07-28'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
+  var HQ_VERSION = 'v4.01 2026-07-28'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   var LS_PREFIX = 'qgrhq-q3-2026-v2-';
   // v2 (7/20): Cameron's 7/20 export baked in as default state (notes = running log),
@@ -1262,36 +1262,30 @@
     day1: {
       label: 'Day 1 · Wed 7/29 — REVIEW + VALIDATE',
       items: [
-        '3 best things',
-        'AAR TL;DR round — 2 min per leader: colors, one win, one lesson · praise + recognize before moving forward',
-        'Slow open — re-read SWT + OPSP first 3 columns aloud, update live in the OPSP builder (go-slow-to-go-fast)',
-        'QGR packet walkthrough: financial analysis + marketing analysis',
-        'eNPS results — the one-pager + action slate (quick pass, deep-dive linked)',
-        'Branch scorecards — walk the team through them until everyone can read their own',
-        'Finalize Q2 SG/G/R for all leadership + directs',
-        'People Analyzers as a group',
-        'Q3 goals outlined per leader — exact Red/Green/Super-Green definitions + how each is measured, TESTED and validated against the team (goal-hygiene gate: no unmeasurable bars leave the room)',
-        'Lunch walk DP: comms + policy-rollout improvements (Q2 template ritual)',
-        'OPSP page 2 + Vision Summary — finalize Roundtable draft in the builder'
+        'Intro + 3 best things \u2014 around the room; Ballot Room \u25b6 Present for anyone who filled theirs in',
+        'Q2 Debrief + QGR packet walkthrough \u2014 the company story, then the packet + financial analysis (eNPS one-pager rides inside the packet)',
+        'AAR TL;DR \u2014 2 min per leader, then finalize goal statuses in the Review Room',
+        'Branch scorecards review + confirm \u2014 walk one together as the example, then everyone reads their own',
+        'People Analyzers as a group \u2014 review and debate',
+        'Quick SWT, 7 Strata, PACe / Flywheel \u2014 review + update grades; quick pass, the workshop ran two weeks ahead',
+        'Optional \u2014 Power of One exercise',
+        'OPSP page 1 \u2014 in the OPSP Planner, minus the next-90-days column',
+        'Q3 goal confirm + ballot questions \u2014 finalize goals + theme choice (broad outline, specifics tomorrow) \u00b7 check cross-dept goal dependencies \u00b7 discuss the Magic-Moments-per-employee goal'
       ]
     },
     day2: {
       label: 'Day 2 · Thu 7/30 — DECIDE + CASCADE',
       items: [
-        'Praise handouts + Legends of the Quarter',
-        'Quarterly theme locked + poster/rewards/dashboard',
-        'Cascading goals chart finalized (incl. below-Roundtable tier: Jalissa/Nhel/Tet/Carly/KP/Prosper/Fabian/Austin L)',
-        'Revenue targets buy-in (NI bonus is company-wide)',
-        'Bonus Goals / Mid-Quarter Pivots section per leader (incl. ITP follow-up bonus goals)',
-        'CASh / Power of One — RECAP of the Cameron+Paul+Ben owners’ session (5 min, decisions already made)',
-        'RATIFY: Damages reframe (decided in owners’ prep — branch-level baseline, pause individual accountability; incl. pausing the two conflicting MB items: individual damage attribution 11728394179 + damage leaderboards 11728354415)',
-        'RATIFY: AI/tool governance workstream (Master Backlog 12556198241)',
-        'RATIFY: Cross-cutting leader goals — ongoing-education module per leader · Magic-Moments-for-employees (quota + mechanics)',
-        'Quarter in Review redline (15 min) — walk "What We Built & What\'s Coming" tile-by-tile; each leader corrects their own tiles LIVE, Albert folds same-day',
-        'Manager presentation started',
-        'Divide & conquer presentation slides (Branch + Mover OPSPs) — parallel: quarterly O3s',
-        'Remaining to-dos — Roundtable OPSPs → pulses + presentation ownership assigned',
-        'Debrief + sensitive-doc access cleanup'
+        'Quarterly theme mechanics lock \u2014 mechanics per audience (managers \u00b7 movers \u00b7 CER + CX team \u00b7 leadership + EE) plus poster, prizes and success metrics',
+        'Critical Number #2 finalize \u2014 Critical #1 is theme-related',
+        'Complete the cascading goals chart \u2014 every leader down through their directs',
+        'OPSP page 2 + Vision Summary \u2014 columns 1 + 3 and the next-90-days from page 1; use the OPSP Planner to cascade down to the Vision Summary',
+        'Redline / finalize the \u201cQuarter in Review\u201d tiles \u2014 what each dept and leader is working on in the background that the team should know about',
+        'Finalize Mgr / Mover / CX team presentation + QGR flow improvements \u2014 FLM QGR run of show \u00b7 mover run of show \u00b7 remaining AAR + data chase list \u00b7 flow improvements for the leadership, FLM, mover and CX QGRs (do they get packet access? gut-check the live exercise)',
+        'Debrief + sensitive-doc access cleanup',
+        'POST-QGR \u2014 master backlog pulse cleanup + per-person OPSP uploaded',
+        'POST-QGR \u2014 regionals + Cameron redline all 10 branch scorecards',
+        'POST-QGR \u2014 Amanda + Cameron finalize the CX theme + presentation'
       ]
     }
   };
@@ -1307,6 +1301,8 @@
     { icon: '🗺', label: 'QGR Ecosystem Map', sub: 'how every tool connects — data spine → artifacts → people loops; the get-your-head-around-it one-pager', url: 'qgr-ecosystem-map.html' },
     { icon: '🗳', label: 'QGR Workshop Hub (leader link)', sub: 'send THIS to the Roundtable — debate ballot (4 redlined leans) + prep tiles; ballots export-and-return to Cameron, nobody sees anybody else\'s pre-room', url: 'https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/' },
     { icon: '🪞', label: 'Manager AAR Hub (team link)', sub: 'every BM/Ops/FM does the Roundtable exercise on their own page — send THIS link Monday; answers stay in their browser until export', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/' },
+    { icon: '🎬', label: 'FLM QGR — Run of Show (8/4 CTX · 8/5 DFWT)', sub: 'facilitation page: 12 blocks, surfaces + links + timings, Cameron rulings baked (best things warm-up · Legends at lunch · pre-printed OPSPs); orange slots = post-Roundtable fills (theme · OPSP · Q3 KPIs)', url: 'flm-qgr-run-of-show-2026-08.html' },
+    { icon: '🚚', label: 'Branch QGR — BM Guide (mover-level)', sub: 'half-page how-to for the 10 BMs: print Vision Summaries → open YOUR scorecard Mover View → 60-min sequence → close on purpose; send after 8/17 planning', url: 'branch-qgr-bm-guide.html' },
     { icon: '📽', label: 'QGR Live Results (manager AARs)', sub: 'the room view — ships EMPTY, drag the collected aar-*.json files in live · rollup + per-manager detail + arrow-key flow', url: 'https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/results.html' },
     { icon: '🪞', label: 'AAR Review Room', sub: "all 7 full write-ups — Cameron's 7/22 review BAKED IN (42 highlights + notes + Q2 headlines); loads reviewed everywhere", url: 'aar-review.html' },
     { icon: '📈', label: 'Q2 Financial Analysis Deck (LIVE)', sub: 'HOSTED · noindex (sensitive — Cameron gates before wide share) — manifest v0.8.x, §6.1a refereed findings', url: 'q2-materials/financial-analysis/Q2_2026_QGR_Analysis_Presentation.html' },
@@ -1496,6 +1492,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/28t', text: '🚚 MOVER VIEW = THE BRANCH-QGR SURFACE (scorecard family redeploy + HQ v4.01). Cameron ruled the flow: FLM QGRs run Debrief → scorecards → AARs → OPSP walk (pre-printed, values blank / numbers filled); mover-level branch QGRs run ENTIRELY off the scorecard Mover View + printed Vision Summaries. Built tonight in two redline rounds (pilot naustin → 9-agent cascade, byte-identity audited): Mover View gained the money story w/ the 🧒 lawn-mowing ELI6 expander · fleet safety w/ the FULL Branch Safety Scorecard table (per-10K miles, packet-identical, manifest-mirrored as _branch_safety_live_q2_26 v0.10.11) · Claims & Magic Moments · What Customers Said w/ reviews-per-100-moves branch table · games prize podium ($75/$50/$25 per truck) · eNPS restructured said→did (6-for-6 promises) · B+ circle pill · packet-sourced Quarter Highlights · Q3-theme placeholder (POST-ROUNDTABLE fill) · Mover Comp Review CUT. Manager-view hero cleaned per Cameron screenshot: one-sentence verdict headline + label:value scan list + pill overlap fixed (Garland/Houston got the pill fresh — flagged). Tie-check PASS at 241 rows both rounds. NEW hosted: <a href="flm-qgr-run-of-show-2026-08.html" target="_blank">FLM Run of Show</a> + <a href="branch-qgr-bm-guide.html" target="_blank">BM Guide</a> (toolkit rows added). Plan of record: QGR Packet/qgr-cascade-flow-plan-2026-07-28.md.' },
     { date: '7/28s', text: '\u{1F517} ROOM LINK MAP FIXED FOR THE PA BLOCK (HQ v4.00 \u2014 Cameron caught it checking his checklist: the "People Analyzers as a group" agenda entry still pointed ONLY at the localhost leadership tool, the OLD flow). The Day-1 block is the group review of the LEADERS\u2019 directs-PA exports, so the link map now leads with the <b>hosted PA Live Results</b> (einstein-pa-directs \u2026/results.html \u2014 alive, byte-exact, carries the new room-audit layer) with the leadership tool kept as the secondary link for Cameron\u2019s own evals of the 5. Dep line now spells the room mechanics: ships EMPTY \u2192 drag submissions-q3/ in (3/6 staged \u00B7 Paul exempt \u00B7 chasing Amanda+Brian) \u2192 verdict chips + live notes per person \u2192 \u2B07 export at block end. Same class of catch as 7/28p (checklist links must point at what actually works in the room).' },
     { date: '7/28r', text: '\u23F1 PER-QUESTION ROOM TIMERS on the Decision Board (ballot-results v1.4, HQ v3.99, Cameron\u2019s ask: keep the team focused, no major time overruns). Every decision card\u2019s header gains a timer chip: click to start, click to pause, double-click to reset \u2014 green while running, <b>blinking orange past 10:00, blinking red past 20:00</b> (paused chips hold the tint but stop blinking). Starting one timer auto-pauses any other \u2014 the room debates one question at a time. Clock state rides the same browser cache, so a mid-room reload keeps the elapsed time. Verified in-browser end-to-end incl. an injected 21-minute timer blinking red across a reload and double-click reset. LOADED room file rebuilt on v1.4 (7 ballots + digest unchanged); hosted ballot-results.html redeployed \u2014 still ships empty.' },
     { date: '7/28q', text: '\u{1F5F3} AMANDA IN \u2014 ALL 7 BALLOTS RETURNED (HQ v3.98). The \u201csent via Monday\u201d file surfaced in Downloads (5:54pm) and verified complete: all 9 questions including her two TARGETED ones. <b>Full digest re-pass \u2014 her answers move real pieces:</b> \u2460 <b>damages camps are now 4\u20133 OUT</b> (Cameron+Anne+Matisen+Amanda vs Paul+Mike+Brian) and hers is the FOURTH mislabeled chip on that question \u2014 with fresh claims-seat evidence: a real uptick in damage movers never report, surfacing only when the customer does; pay ties make the hiding worse \u2461 <b>mgr-sales-comp unanimity breaks</b> \u2014 her \u201cagree with changes\u201d argues FOR real money on GM-level team attainment now (smaller GM share of gross margin when other locations carry the number), nearly the same mechanism as Paul\u2019s Q4 multiplier \u2014 the card now names the two of them joint authors of any Q4 revisit design \u2462 <b>conversion level is settling itself</b>: her measured 18\u201320% actual post-EMMA-V4 + push-21\u201323% brackets Matisen\u2019s 20% re-anchor \u2014 the debate collapses to shape only \u2463 sales-competition now 4-of-7 run-it-now (hers = explicit stopgap: comp won\u2019t resolve in a week and we\u2019re paying overtime an incentive could replace) \u2464 flex-days gains her privilege-with-obligations condition (claims EARNED flex through ownership maturity BMs haven\u2019t shown; sales blocks non-negotiable w/ confirmed coverage \u2014 same condition Mike named) \u2465 the two AWAITING stubs became real RATIFY cards: sales-training = coaching-loop-on-call-grading as her Q3 goal + a manager empathy-before-discounts training gap (pairs w/ the $64K no-reason-code discount finding) \u00b7 carly-magic-moments = <b>she corrected the premise</b> (\u201cMM has not been parked \u2014 36 in Q2, best quarter ever\u201d; the REAL question \u2014 does Carly own the Phase 2+ rollout \u2014 is still unanswered, same vocabulary miss as the 7/28 toolkit thread). \u26a0 <b>Her mgr-sales-comp verbatim names Frank by name as the clearest example</b> \u2014 leadership-only room, but Cameron should know it\u2019s one click behind the recap before it\u2019s on the TV. Tracker col-4 Amanda \u2705 (fill-only). All 7 ballots now staged durably in <code>ballots-q3/</code> and build_room_seed.py repointed there (no more Downloads dependency); LOADED rebuilt (7 ballots + digest 23:30Z), verified in-browser: 3 DECIDE \u00b7 1 MISLABELED \u00b7 3 NARROW \u00b7 2 RATIFY.' },
