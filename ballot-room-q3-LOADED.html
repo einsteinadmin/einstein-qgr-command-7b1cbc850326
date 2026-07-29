@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>LOADED · Q3 QGR — Ballot Room View</title>
-<!-- ballot-results v1.7.1 2026-07-28 — 3-lens adversarial verification (Sonnet workflow: state attacks · export harness on real ballots · regression) → regression CLEAN, 3 real findings FIXED: ① unsaved bar-editor text was destroyed by any full re-render (ballot drop / add-goal / view toggle) → commitOpenBarEditors() auto-commits open editors before every re-render (typed text = intent; Cancel/Esc still work while open) ② export button only unlocked on status chips — a session that ONLY writes missing bars (the Cameron-8/Paul-3/Amanda-1 use case) had no export path → anyGoalWork() gates the button on any status/note/bar-edit/dep/budget work, and every handler now refreshes it ③ goalKey still collided for two identically-titled pulseless goals of the same kind (confirmed by harness; real ballots unique only by luck) → deterministic #n dup-suffix assigned in goalRoster build order. Known-accepted: rulings key off pulse-or-name, so a re-exported ballot that renames a goal or attaches a new pulse orphans that goal's prior room edits (pre-existing; ballots are frozen for tomorrow). Prior: v1.7 2026-07-28 — ✏️ LIVE BAR EDITING (Cameron's ask: agree/disagree on bars in the room): Green / Super Green / How-measured rows are click-to-edit on every non-direct card (pencil per row → textarea → Save/Cancel/Esc/↺ Revert-to-ballot). Edits live in CACHE.goalRulings[k].barEdits — the ballot is NEVER mutated (PA room-audit guardrail); edited rows render amber w/ ✏️ + the ballot original in the hover title; blank bars (Cameron's 8, Paul's 3, Amanda's 1) get WRITTEN the same way. Export: green/superGreen/howMeasured now carry the ROOM-FINAL text, barsEditedInRoom lists the edited fields, ballotOriginalBars preserves the originals, md gets per-field room-final sub-lines. + WHITEBOARD RESTRUCTURED (Cameron's ask): each column = leader's own goals first, then 👥 per-direct sub-groups with their goals below (was a flat pile w/ badges); ✏️ badge on tiles whose bars were edited. Delegated bar-edit handler bound once on #goalsView. Rollback: ballot-results.v1.6.1.2026-07-28.bak. Prior: v1.6.1 2026-07-28 — two-critic design audit applied (critics on Sonnet, synthesis + edits by Albert main thread): ⭐ BOTH critics independently caught the sticky quick-nav painting UNDER #appHeader on scroll (both sticky at top:0, header z-index 80 wins) → nav top now set at render to the live header height · deps+budget rows demoted behind a per-card "🔗 deps · 💲 budget" expander (auto-open when populated) — the 67-card height lever · visual emphasis INVERTED: unruled cards carry the orange left-border accent, ruled cards go calm (the eye hunts what's left, not what's done) · whiteboard legend line added · caution-strip grammar fixed ("1 goal depends") · goalKey() folds kind in unconditionally (two same-named pulseless additions can no longer share a ruling) · dep-chip touch targets enlarged · leaders with nothing to rule render as a muted stub ("ballot in — no goals to rule" vs "not yet returned") instead of vanishing · view-toggle button got its own class. Deliberately NOT taken: focus-preservation on mid-session ballot re-drops (all 7 ballots already in — window closed) · full keyboard access for chips (mouse/TV room tool). Rollback: ballot-results.v1.6.2026-07-28.bak (pre-audit) · ballot-results.v1.5.2026-07-28.bak (pre-room-mechanics). Prior: v1.6 2026-07-28 — 🎯 Goals tab room-mechanics: ＋ Add-goal-in-room per leader (name + optional bars, lives in its own cache layer CACHE.roomAdds, 🆕 badge, pulse created at fold) · 🧾 WHITEBOARD VIEW toggle (one-page triage-style overview: per-leader columns, tiles tinted by ruling status, badges 👥/➕/🆕/⭐/🔗n/💲, click a tile → jumps to its card; caution strip = inbound cross-dept dependency load per leader, ⚠ at 3+) · 🔗 cross-dept dependency chips on every card (tap the leaders/depts a goal depends on; rides export as crossDeptDeps + names) · 💲 expected-budget/additional-spend line on every card (optional; rides export as expectedBudget — the accounting catch-net). Backup: ballot-results.v1.5.2026-07-28.bak. Prior: v1.5 2026-07-28 — 🎯 GOALS tab: goal-confirmation board for the room. Per-leader slates from the same dropped ballots (picked + additions, G/SG/how-measured bars, MB pulse-ID chips), PLUS each leader's directs'-slate candidates as ruleable cards (grouped by direct, routed/own badges; candidates the leader already struck stay out — Cameron's ask, the directs' goals get decided in the room too). Ruling chips per goal (✅ Confirmed / ✏️ Modified / ❌ Cut — additions carry ➕ Added-in-room), per-goal ruling note, sticky quick-nav with live per-leader ruled/total counts (click scrolls + un-collapses), collapsible per-leader sections, progress strip, ⬇ Export goal rulings → einstein-qgr-goal-rulings/v1 JSON (carries pulse IDs + direct name so the Master Backlog fold is mechanical: update pulse X with finalized status) + markdown to clipboard for the HQ log. Rulings persist in the same browser cache layer as decision rulings; Clear-all wipes both. Deep link: #goals. Prior: v1.4 2026-07-28 — per-question room TIMERS on the Decision Board: click-to-start chip per card (pause on click, reset on double-click), blinks orange past 10:00 and red past 20:00 while running, starting one pauses the others, clock survives reload via the same cache. Prior: v1.3 2026-07-28 — ⚖️ DECISION BOARD tab: digest-driven room agenda (RATIFY/NARROW/DECIDE/MISLABELED triage replacing the split badge's blind spots), per-leader recap rows w/ click-to-verbatim, layer-1 prompts + layer-2 copy-button facilitation prompt, ruling strip (Decide/Defer/Delegate + dissent-noted) persisted in the same cache + export to JSON/markdown for the HQ decision log. Digest = einstein-qgr-digest/v1, dropped through the same dropzone, newest-wins on preparedAt; hosted page still ships EMPTY (digest + ballots are the sensitive layer). Prior: ballot-results v1.2 2026-07-28 — 🏆 CELEBRATE MODE folded in (Cameron: "combine ballot results and celebration presentation into one place — one drag-in"). Third header mode between Aggregate and Room Reveal: Best-of-Q2 wall (per-leader cards, Personal/Professional badges, photos rendered from the v7 exports' embedded data-URLs) + Legends board (stories + named-by tally) + full-screen ▶ Present slide stepper (arrow keys / click / Esc; best-things slides then legend slides). Reads CACHE raw (not the normalized layer — parseBallot + Node QC harness untouched); v1–v6 files still parse everywhere, they just show "no celebration sections — ask for a re-export" per leader on this tab. Deep link: #celebrate opens straight into the tab (HQ agenda links use it). Same single drop zone feeds all three modes; ballots+photos persist in this browser's cache (if photo weight ever trips the storage quota the existing not-saving toast fires — everything still works for the session, re-drop after reload). Standalone qgr-celebration-wall.html RETIRED same day → redirect stub to this page. Prior: v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
+<!-- ballot-results v1.8.1 2026-07-28 — Sonnet adversarial pass on the Theme tab (state attacks / escaping / logic / wiring / export / TV-scale CSS): NO room-blockers; guardrail (ballots never mutated), escaping, export, and event wiring all verified CLEAN. 4 findings fixed: ① custom-name box lost typed-but-unlocked text on any tab switch or re-render (every other field autosaves per keystroke) → draft autosave (themeRulings.customDraft, cleared on lock) ② a themeName write-in matching none of the three candidates was silently invisible (bucketed to "other", rendered nowhere, excluded from the no-write-in list) — dormant with tonight's 7 ballots but a real silent-failure shape → "✍️ Write-ins that don't match a listed candidate" line renders them verbatim ③ room-final gate textareas were ~2 lines tall while real ballot gate text runs 200-325 chars (and ⤵ appends) → textarea min-height 64px ④ 📝 Room note never showed the green filled border the other fields get → included. Accepted as-is: focus loss on mid-session ballot re-drop (Goals-tab precedent; all 7 ballots already in) · themeBucket substring matching (order-dependent, no word boundaries) — fine for tomorrow's frozen ballots. Prior: v1.8 2026-07-28 — 🏕 THEME & PRIZES tab (Cameron: "we need a room for theme and the associated rewards and prizes… and how the theme cascades down to individual mover/manager/CER levels"). New mode between 🎯 Goals and ⚖️ Decisions, deep link #theme. Six blocks: ① NAME VOTE — 3 candidate cards (Back to School / Level Up / Training Camp) w/ ballot write-ins derived live from buildsheet.themeName (Anne's tagline, Paul's 6 alternates, Brian's "Einstein Training Camp" all show verbatim), click-to-lock + custom-name lock bar, locked name banners + rides export ② CASCADE BOARD — 5 level cards from TRACK_META (Movers/Leads/Managers/CERs/EE+IT): every leader's build-sheet proposal behind a per-leader <details> (full take + their Green/SG w/ ⤵ use buttons that pull text into the room-final boxes), ROOM-FINAL editable boxes per level (Green gate · Super Green gate · 🎁 reward · 💲 budget · 📝 note · owner) — auto-save on every keystroke, card turns green when set ③ CELEBRATIONS & PRIZES gallery straight from ballots' celebrations{celebration,prizes} (Anne/Brian/Mike/Matisen filled; blank leaders listed honestly) + company-wide room-final plan + total budget ceiling ④ prize-philosophy prompts (one engine or two w/ the Games podium · completion-vs-outcome w/ Paul's future-quarters line · monthly beat vs finale · recognition vs cash) ⑤ two flags w/ resolution inputs (Brian capacity · Matisen scoreboard baseline) + link to the ⚖️ q3-theme card ⑥ delivery map (room → FLM QGRs 8/4-8/5 → branch/mover QGRs post-8/17 → Albert folds export). Export = einstein-qgr-theme-rulings/v1 JSON (name + per-track room-finals + ballotProposals + celebrations + flags) + md to clipboard, gated on anyThemeWork(). Room work in CACHE.themeRulings (own layer, Clear-all wipes it, ballots NEVER mutated). Rollback: ballot-results.v1.7.1.2026-07-28.bak. Prior: v1.7.1 2026-07-28 — 3-lens adversarial verification (Sonnet workflow: state attacks · export harness on real ballots · regression) → regression CLEAN, 3 real findings FIXED: ① unsaved bar-editor text was destroyed by any full re-render (ballot drop / add-goal / view toggle) → commitOpenBarEditors() auto-commits open editors before every re-render (typed text = intent; Cancel/Esc still work while open) ② export button only unlocked on status chips — a session that ONLY writes missing bars (the Cameron-8/Paul-3/Amanda-1 use case) had no export path → anyGoalWork() gates the button on any status/note/bar-edit/dep/budget work, and every handler now refreshes it ③ goalKey still collided for two identically-titled pulseless goals of the same kind (confirmed by harness; real ballots unique only by luck) → deterministic #n dup-suffix assigned in goalRoster build order. Known-accepted: rulings key off pulse-or-name, so a re-exported ballot that renames a goal or attaches a new pulse orphans that goal's prior room edits (pre-existing; ballots are frozen for tomorrow). Prior: v1.7 2026-07-28 — ✏️ LIVE BAR EDITING (Cameron's ask: agree/disagree on bars in the room): Green / Super Green / How-measured rows are click-to-edit on every non-direct card (pencil per row → textarea → Save/Cancel/Esc/↺ Revert-to-ballot). Edits live in CACHE.goalRulings[k].barEdits — the ballot is NEVER mutated (PA room-audit guardrail); edited rows render amber w/ ✏️ + the ballot original in the hover title; blank bars (Cameron's 8, Paul's 3, Amanda's 1) get WRITTEN the same way. Export: green/superGreen/howMeasured now carry the ROOM-FINAL text, barsEditedInRoom lists the edited fields, ballotOriginalBars preserves the originals, md gets per-field room-final sub-lines. + WHITEBOARD RESTRUCTURED (Cameron's ask): each column = leader's own goals first, then 👥 per-direct sub-groups with their goals below (was a flat pile w/ badges); ✏️ badge on tiles whose bars were edited. Delegated bar-edit handler bound once on #goalsView. Rollback: ballot-results.v1.6.1.2026-07-28.bak. Prior: v1.6.1 2026-07-28 — two-critic design audit applied (critics on Sonnet, synthesis + edits by Albert main thread): ⭐ BOTH critics independently caught the sticky quick-nav painting UNDER #appHeader on scroll (both sticky at top:0, header z-index 80 wins) → nav top now set at render to the live header height · deps+budget rows demoted behind a per-card "🔗 deps · 💲 budget" expander (auto-open when populated) — the 67-card height lever · visual emphasis INVERTED: unruled cards carry the orange left-border accent, ruled cards go calm (the eye hunts what's left, not what's done) · whiteboard legend line added · caution-strip grammar fixed ("1 goal depends") · goalKey() folds kind in unconditionally (two same-named pulseless additions can no longer share a ruling) · dep-chip touch targets enlarged · leaders with nothing to rule render as a muted stub ("ballot in — no goals to rule" vs "not yet returned") instead of vanishing · view-toggle button got its own class. Deliberately NOT taken: focus-preservation on mid-session ballot re-drops (all 7 ballots already in — window closed) · full keyboard access for chips (mouse/TV room tool). Rollback: ballot-results.v1.6.2026-07-28.bak (pre-audit) · ballot-results.v1.5.2026-07-28.bak (pre-room-mechanics). Prior: v1.6 2026-07-28 — 🎯 Goals tab room-mechanics: ＋ Add-goal-in-room per leader (name + optional bars, lives in its own cache layer CACHE.roomAdds, 🆕 badge, pulse created at fold) · 🧾 WHITEBOARD VIEW toggle (one-page triage-style overview: per-leader columns, tiles tinted by ruling status, badges 👥/➕/🆕/⭐/🔗n/💲, click a tile → jumps to its card; caution strip = inbound cross-dept dependency load per leader, ⚠ at 3+) · 🔗 cross-dept dependency chips on every card (tap the leaders/depts a goal depends on; rides export as crossDeptDeps + names) · 💲 expected-budget/additional-spend line on every card (optional; rides export as expectedBudget — the accounting catch-net). Backup: ballot-results.v1.5.2026-07-28.bak. Prior: v1.5 2026-07-28 — 🎯 GOALS tab: goal-confirmation board for the room. Per-leader slates from the same dropped ballots (picked + additions, G/SG/how-measured bars, MB pulse-ID chips), PLUS each leader's directs'-slate candidates as ruleable cards (grouped by direct, routed/own badges; candidates the leader already struck stay out — Cameron's ask, the directs' goals get decided in the room too). Ruling chips per goal (✅ Confirmed / ✏️ Modified / ❌ Cut — additions carry ➕ Added-in-room), per-goal ruling note, sticky quick-nav with live per-leader ruled/total counts (click scrolls + un-collapses), collapsible per-leader sections, progress strip, ⬇ Export goal rulings → einstein-qgr-goal-rulings/v1 JSON (carries pulse IDs + direct name so the Master Backlog fold is mechanical: update pulse X with finalized status) + markdown to clipboard for the HQ log. Rulings persist in the same browser cache layer as decision rulings; Clear-all wipes both. Deep link: #goals. Prior: v1.4 2026-07-28 — per-question room TIMERS on the Decision Board: click-to-start chip per card (pause on click, reset on double-click), blinks orange past 10:00 and red past 20:00 while running, starting one pauses the others, clock survives reload via the same cache. Prior: v1.3 2026-07-28 — ⚖️ DECISION BOARD tab: digest-driven room agenda (RATIFY/NARROW/DECIDE/MISLABELED triage replacing the split badge's blind spots), per-leader recap rows w/ click-to-verbatim, layer-1 prompts + layer-2 copy-button facilitation prompt, ruling strip (Decide/Defer/Delegate + dissent-noted) persisted in the same cache + export to JSON/markdown for the HQ decision log. Digest = einstein-qgr-digest/v1, dropped through the same dropzone, newest-wins on preparedAt; hosted page still ships EMPTY (digest + ballots are the sensitive layer). Prior: ballot-results v1.2 2026-07-28 — 🏆 CELEBRATE MODE folded in (Cameron: "combine ballot results and celebration presentation into one place — one drag-in"). Third header mode between Aggregate and Room Reveal: Best-of-Q2 wall (per-leader cards, Personal/Professional badges, photos rendered from the v7 exports' embedded data-URLs) + Legends board (stories + named-by tally) + full-screen ▶ Present slide stepper (arrow keys / click / Esc; best-things slides then legend slides). Reads CACHE raw (not the normalized layer — parseBallot + Node QC harness untouched); v1–v6 files still parse everywhere, they just show "no celebration sections — ask for a re-export" per leader on this tab. Deep link: #celebrate opens straight into the tab (HQ agenda links use it). Same single drop zone feeds all three modes; ballots+photos persist in this browser's cache (if photo weight ever trips the storage quota the existing not-saving toast fires — everything still works for the session, re-drop after reload). Standalone qgr-celebration-wall.html RETIRED same day → redirect stub to this page. Prior: v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
 <style>
 :root{
   --orange-50:#FEF6EC; --orange-100:#FDE3C2; --orange-500:#EF8B22; --orange-700:#D96B10; --orange-900:#CC5500;
@@ -340,6 +340,49 @@ a.pulselink:hover{text-decoration:underline}
 .decide-callbtn.active{background:var(--navy-500);color:#fff;border-color:var(--navy-500)}
 .decide-rulinginput{flex:1;min-width:200px;border:1px solid var(--grey-200);border-radius:var(--radius-sm);padding:8px 12px;font-size:12.5px;font:inherit}
 
+/* ---- 🏕 Theme & Prizes tab (v1.8) ---- */
+.thm-namegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:12px 0}
+.thm-namecard{border:1px solid var(--grey-200,#e2e6ea);border-left:4px solid var(--grey-300,#cfd6dc);border-radius:10px;padding:12px 14px;background:#fff;cursor:pointer}
+.thm-namecard:hover{filter:brightness(.97)}
+.thm-namecard.locked{border-color:#2e7d32;border-left:4px solid #2e7d32;background:#f4faf4}
+.thm-namecard.dimmed{opacity:.55}
+.thm-namecard h4{margin:0 0 4px;font-size:15px}
+.thm-backers{font-size:11.5px;font-weight:700;color:var(--grey-500,#6b7680);margin-bottom:6px}
+.thm-verbatim{font-size:12px;color:var(--grey-600,#4a5560);margin-top:3px}
+.thm-verbatim b{color:var(--navy-500,#0d2b4e)}
+.thm-lockbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 4px}
+.thm-lockbar input{flex:1;min-width:220px;border:1px solid var(--grey-300,#cfd6dc);border-radius:8px;padding:7px 10px;font-size:12.5px;font-family:inherit}
+.thm-lockbar button{font-size:12px;font-weight:700;border-radius:var(--radius-pill,999px);padding:6px 14px;cursor:pointer;border:1px solid var(--navy-500,#0d2b4e);background:#fff;color:var(--navy-500,#0d2b4e)}
+.thm-lockedbanner{font-size:14px;font-weight:700;color:#2e7d32;background:#f4faf4;border:1px solid #2e7d32;border-radius:10px;padding:10px 14px;margin:10px 0}
+.tr-card{border:1px solid var(--grey-200,#e2e6ea);border-left:4px solid var(--orange-500,#ef6c00);border-radius:10px;padding:12px 14px;margin-bottom:12px;background:#fff}
+.tr-card.set{border-left-color:#2e7d32}
+.tr-card h4{margin:0;font-size:14.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tr-owner{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--grey-500,#6b7680)}
+.tr-owner input{width:180px;border:1px solid var(--grey-300,#cfd6dc);border-radius:8px;padding:4px 8px;font-size:12px;font-family:inherit}
+.tr-props{margin:8px 0 4px}
+.tr-prop{border:1px solid var(--grey-200,#e2e6ea);border-radius:8px;margin-bottom:5px;background:var(--grey-50,#f6f7f9)}
+.tr-prop summary{cursor:pointer;font-size:12px;font-weight:700;padding:6px 10px;color:var(--navy-500,#0d2b4e)}
+.tr-prop summary .tp-peek{font-weight:400;color:var(--grey-500,#6b7680)}
+.tr-propbody{padding:2px 12px 10px;font-size:12.5px;color:var(--grey-700,#333a40);line-height:1.5}
+.tr-propbar{display:flex;gap:6px;align-items:flex-start;margin-top:6px;font-size:12px}
+.tr-propbar b{white-space:nowrap}
+.tr-copy{font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 9px;cursor:pointer;border:1px solid var(--grey-300,#cfd6dc);background:#fff;color:var(--grey-600,#4a5560);flex:none}
+.tr-copy:hover{border-color:var(--navy-500,#0d2b4e);color:var(--navy-500,#0d2b4e)}
+.tr-final{background:var(--navy-50,#eef2f7);border-radius:8px;padding:10px 12px;margin-top:8px;display:grid;gap:8px}
+.tr-final .tf-label{font-size:11px;font-weight:700;color:var(--navy-500,#0d2b4e);text-transform:uppercase;letter-spacing:.4px}
+.tr-ta{width:100%;min-height:34px;border:1px solid var(--grey-300,#cfd6dc);border-radius:8px;padding:6px 9px;font-size:12.5px;font-family:inherit;resize:vertical;background:#fff}
+textarea.tr-ta{min-height:64px}
+.tr-ta.filled{border-color:#2e7d32}
+.thm-celebgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin:10px 0}
+.thm-celebcard{border:1px solid var(--grey-200,#e2e6ea);border-radius:10px;padding:10px 12px;background:#fff;font-size:12.5px;line-height:1.5}
+.thm-celebcard b{display:block;margin-bottom:4px}
+.thm-celebcard .cc-lbl{font-size:10.5px;font-weight:700;color:var(--grey-500,#6b7680);text-transform:uppercase;letter-spacing:.4px;margin-top:6px}
+.thm-flagcard{border:1px solid #ef6c00;border-left:4px solid #ef6c00;border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#fff8f0;font-size:12.5px;line-height:1.5}
+.thm-map{display:flex;gap:0;flex-wrap:wrap;align-items:stretch;margin:10px 0}
+.thm-mapstep{flex:1;min-width:200px;border:1px solid var(--grey-200,#e2e6ea);border-radius:10px;padding:10px 12px;background:#fff;font-size:12px;line-height:1.5}
+.thm-mapstep b{display:block;font-size:12.5px;margin-bottom:3px}
+.thm-maparrow{align-self:center;font-size:18px;color:var(--grey-400,#9aa4ad);padding:0 8px;flex:none}
+.thm-progress{font-size:12.5px;font-weight:700;color:var(--grey-600,#4a5560)}
 footer{background:var(--navy-700);color:var(--navy-100);text-align:center;padding:12px;font-size:11px}
 </style>
 </head>
@@ -349,6 +392,7 @@ footer{background:var(--navy-700);color:var(--navy-100);text-align:center;paddin
   <div class="hbtns">
     <button class="modebtn active" id="btnModeAgg">Aggregate</button>
     <button class="modebtn" id="btnModeGoals">🎯 Goals</button>
+    <button class="modebtn" id="btnModeTheme">🏕 Theme</button>
     <button class="modebtn" id="btnModeDecide">⚖️ Decisions</button>
     <button class="modebtn" id="btnModeCeleb">🏆 Celebrate</button>
     <button class="modebtn" id="btnModeReveal">Room Reveal</button>
@@ -367,6 +411,7 @@ footer{background:var(--navy-700);color:var(--navy-100);text-align:center;paddin
     <div id="aggContent"></div>
   </div>
   <div id="goalsView" style="display:none"></div>
+  <div id="themeView" style="display:none"></div>
   <div id="decideView" style="display:none"></div>
   <div id="revealStage"></div>
   <div id="celebView" style="display:none"></div>
@@ -790,7 +835,8 @@ function loadCache(){
     if(!CACHE.rulings) CACHE.rulings = {};
     if(!CACHE.goalRulings) CACHE.goalRulings = {};
     if(!CACHE.roomAdds) CACHE.roomAdds = {};
-  }catch(e){ console.warn("ballot-results cache load failed", e); CACHE = { ballots:{}, rulings:{}, goalRulings:{}, roomAdds:{} }; }
+    if(!CACHE.themeRulings) CACHE.themeRulings = {};
+  }catch(e){ console.warn("ballot-results cache load failed", e); CACHE = { ballots:{}, rulings:{}, goalRulings:{}, roomAdds:{}, themeRulings:{} }; }
 }
 function persistCache(){
   try{ localStorage.setItem(LS_KEY, JSON.stringify(CACHE)); }
@@ -857,8 +903,8 @@ var fp = document.getElementById("filePick");
 if(fp) fp.addEventListener("change", function(e){ ingestFiles(e.target.files); });
 
 document.getElementById("btnClearAll").addEventListener("click", function(){
-  if(!confirm("Clear all loaded ballots, the decision digest, and any rulings (decisions + goals) from this browser? This can't be undone (leaders would need to re-drop their files).")) return;
-  CACHE = { ballots:{}, rulings:{}, goalRulings:{}, roomAdds:{} }; BALLOTS = {};
+  if(!confirm("Clear all loaded ballots, the decision digest, and any rulings (decisions + goals + theme) from this browser? This can't be undone (leaders would need to re-drop their files).")) return;
+  CACHE = { ballots:{}, rulings:{}, goalRulings:{}, roomAdds:{}, themeRulings:{} }; BALLOTS = {};
   try{ localStorage.removeItem(LS_KEY); }catch(e){}
   MODE = "agg"; setMode("agg");
   renderAll();
@@ -867,6 +913,7 @@ document.getElementById("btnClearAll").addEventListener("click", function(){
 
 document.getElementById("btnModeAgg").addEventListener("click", function(){ setMode("agg"); });
 document.getElementById("btnModeGoals").addEventListener("click", function(){ setMode("goals"); });
+document.getElementById("btnModeTheme").addEventListener("click", function(){ setMode("theme"); });
 document.getElementById("btnModeDecide").addEventListener("click", function(){ setMode("decide"); });
 document.getElementById("btnModeCeleb").addEventListener("click", function(){ setMode("celeb"); });
 document.getElementById("btnModeReveal").addEventListener("click", function(){
@@ -877,11 +924,13 @@ function setMode(m){
   MODE = m;
   document.getElementById("btnModeAgg").classList.toggle("active", m==="agg");
   document.getElementById("btnModeGoals").classList.toggle("active", m==="goals");
+  document.getElementById("btnModeTheme").classList.toggle("active", m==="theme");
   document.getElementById("btnModeDecide").classList.toggle("active", m==="decide");
   document.getElementById("btnModeCeleb").classList.toggle("active", m==="celeb");
   document.getElementById("btnModeReveal").classList.toggle("active", m==="reveal");
   document.getElementById("aggView").style.display = m==="agg" ? "" : "none";
   document.getElementById("goalsView").style.display = m==="goals" ? "" : "none";
+  document.getElementById("themeView").style.display = m==="theme" ? "" : "none";
   document.getElementById("decideView").style.display = m==="decide" ? "" : "none";
   document.getElementById("celebView").style.display = m==="celeb" ? "" : "none";
   document.getElementById("revealStage").className = m==="reveal" ? "active" : "";
@@ -889,6 +938,7 @@ function setMode(m){
   if(m==="celeb") renderCelebrate();
   if(m==="decide") renderDecide();
   if(m==="goals") renderGoalsBoard();
+  if(m==="theme") renderTheme();
 }
 
 /* ============================================================
@@ -1012,6 +1062,7 @@ function renderAll(){
   if(MODE==="celeb") renderCelebrate();
   if(MODE==="decide") renderDecide();
   if(MODE==="goals") renderGoalsBoard();
+  if(MODE==="theme") renderTheme();
 }
 
 function renderRoster(){
@@ -2166,6 +2217,349 @@ function exportGoalRulings(){
 }
 
 /* ============================================================
+   🏕 THEME & PRIZES (v1.8) — the room's theme-mechanics surface.
+   Name vote → per-level cascade board (room-final editable gates /
+   rewards / budgets) → celebrations & prizes from the ballots →
+   prize-philosophy prompts → flags → delivery map → export.
+   Room work lives in CACHE.themeRulings; ballots are NEVER mutated
+   (same guardrail as goalRulings / the PA room-audit layer).
+   ============================================================ */
+function TR(){
+  if(!CACHE.themeRulings) CACHE.themeRulings = {};
+  var t = CACHE.themeRulings;
+  if(!t.tracks) t.tracks = {};
+  if(!t.flags) t.flags = {};
+  return t;
+}
+
+var THEME_CANDIDATES = [
+  { id:"bts",     name:"Back to School",  pitch:"Fits the season — summer ends, everyone goes back to learning. It's been the working name since the pre-work, so all the prep already speaks it." },
+  { id:"levelup", name:"Level Up",        pitch:"Growth, not remedial — Paul's worry is that “Back to School” reads like punishment for people who already know their jobs. His ballot carries six more alternates in the same spirit." },
+  { id:"camp",    name:"Training Camp",   pitch:"Camp is where pros sharpen before a season — speaks the Games language; certifications = making the roster. (Brian wrote in “Einstein Training Camp”; Matisen argued it in his theme answer.)" }
+];
+// bucket a leader's themeName write-in onto one of the live candidates
+function themeBucket(s){
+  var v = (s||"").toLowerCase();
+  if(!v.trim()) return null;
+  if(v.indexOf("school")>-1) return "bts";
+  if(v.indexOf("camp")>-1) return "camp";
+  if(v.indexOf("level up")>-1) return "levelup";
+  return "other";
+}
+function themeWriteIns(){
+  var out = {};   // bucketId -> [{lid, first, verbatim}]
+  LEADERS.forEach(function(l){
+    var b = BALLOTS[l.id];
+    var wn = b && b.buildsheet ? (b.buildsheet.themeName||"").trim() : "";
+    var bucket = themeBucket(wn);
+    if(!bucket) return;
+    (out[bucket] = out[bucket]||[]).push({ lid:l.id, first:l.name.split(" ")[0], verbatim:wn });
+  });
+  return out;
+}
+
+// every leader who filled the build-sheet row for this track, in roster order
+function trackProposals(t){
+  var out = [];
+  LEADERS.forEach(function(l){
+    var b = BALLOTS[l.id];
+    if(!b || !b.buildsheet) return;
+    var tr = (b.buildsheet.tracks||[]).filter(function(x){ return x.id===t.id || x.label===t.label; })[0];
+    if(!tr) return;
+    if(!((tr.take||"").trim() || (tr.green||"").trim() || (tr.superGreen||"").trim())) return;
+    out.push({ lid:l.id, first:l.name.split(" ")[0], take:(tr.take||"").trim(), green:(tr.green||"").trim(), superGreen:(tr.superGreen||"").trim() });
+  });
+  return out;
+}
+
+var THEME_TRACK_FIELDS = ["green","superGreen","reward","budget","note","owner"];
+function trackIsSet(tid){
+  var x = TR().tracks[tid]||{};
+  return !!(((x.green||"")+(x.superGreen||"")+(x.reward||"")).trim());
+}
+function anyThemeWork(){
+  var t = TR();
+  if(t.name && (t.name.value||"").trim()) return true;
+  var tracksHave = Object.keys(t.tracks).some(function(k){
+    var x = t.tracks[k]||{};
+    return THEME_TRACK_FIELDS.some(function(f){ return (x[f]||"").trim(); });
+  });
+  if(tracksHave) return true;
+  if(((t.companyPlan||"")+(t.companyBudget||"")).trim()) return true;
+  if(((t.flags.capacity||"")+(t.flags.scoreboard||"")).trim()) return true;
+  return false;
+}
+function themeProgressText(){
+  var t = TR();
+  var name = t.name && (t.name.value||"").trim();
+  var setCount = TRACK_META.filter(function(tm){ return trackIsSet(tm.id); }).length;
+  return (name ? "name ✓ “"+name+"”" : "name open") + " · " + setCount + "/" + TRACK_META.length + " levels set";
+}
+function updateThemeProgress(){
+  var p = document.getElementById("thmProgress");
+  if(p) p.textContent = themeProgressText();
+  var b = document.getElementById("btnExportTheme");
+  if(b) b.disabled = !anyThemeWork();
+}
+
+function renderTheme(){
+  var el = document.getElementById("themeView");
+  if(!Object.keys(BALLOTS).length){
+    el.innerHTML = '<div class="section"><div class="notsub">No ballots loaded — drop files on the Aggregate tab (one drop feeds every mode).</div></div>';
+    return;
+  }
+  var t = TR();
+  var lockedName = t.name && (t.name.value||"").trim();
+  var writeIns = themeWriteIns();
+  var html = '<div class="section">';
+  html += '<div class="groom-head"><div><h2 style="margin:0">Q3 Theme & Prizes</h2>'+
+    '<div class="shint" style="margin:4px 0 0">The Day-2 theme-mechanics block runs off this tab. The direction is already locked seven-for-seven — speed to competence. What the room settles here: the NAME, the per-level gates (what Green/Super Green means for Movers, Leads, Managers, CERs, and the support crew), the rewards and prizes at each level, and the budget behind them. Everything typed here saves in this browser and rides the export; the ballots themselves are never changed.</div></div>'+
+    '<div style="display:flex;gap:12px;align-items:center"><span class="thm-progress" id="thmProgress">'+esc(themeProgressText())+'</span>'+
+    '<button class="groom-exportbtn" id="btnExportTheme"'+(anyThemeWork()?'':' disabled')+'>⬇ Export theme rulings</button></div></div>';
+
+  /* ---- 1 · name the theme ---- */
+  html += '<h3 style="margin:16px 0 4px">1 · Name the theme <span class="lrole">direction is locked — this is a 90-second vote, not a debate</span></h3>';
+  if(lockedName) html += '<div class="thm-lockedbanner">🏕 Locked in room: “'+esc(lockedName)+'” — click its card (or lock another) to change.</div>';
+  html += '<div class="thm-namegrid">';
+  THEME_CANDIDATES.forEach(function(c){
+    var isLocked = t.name && t.name.source === c.id;
+    var backers = (writeIns[c.id]||[]);
+    html += '<div class="thm-namecard'+(isLocked?' locked':(lockedName?' dimmed':''))+'" data-namecand="'+esc(c.id)+'">'+
+      '<h4>'+(isLocked?'✅ ':'')+esc(c.name)+'</h4>'+
+      '<div class="thm-backers">'+(backers.length ? 'Ballot write-ins: '+esc(backers.map(function(b){ return b.first; }).join(" · ")) : 'No ballot write-ins')+'</div>'+
+      '<div class="thm-verbatim">'+esc(c.pitch)+'</div>'+
+      backers.filter(function(b){ return b.verbatim.toLowerCase() !== c.name.toLowerCase(); }).map(function(b){
+        return '<div class="thm-verbatim"><b>'+esc(b.first)+' wrote:</b> “'+esc(b.verbatim)+'”</div>';
+      }).join('')+
+      '</div>';
+  });
+  html += '</div>';
+  var noWrite = LEADERS.filter(function(l){ var b=BALLOTS[l.id]; return b && (!b.buildsheet || !(b.buildsheet.themeName||"").trim()); }).map(function(l){ return l.name.split(" ")[0]; });
+  if(noWrite.length) html += '<div class="shint" style="margin:2px 0 6px">No name write-in on the ballot: '+esc(noWrite.join(" · "))+'</div>';
+  // a write-in that matches none of the three candidates must never vanish silently
+  var otherWriteIns = writeIns.other || [];
+  if(otherWriteIns.length) html += '<div class="shint" style="margin:2px 0 6px">✍️ Write-ins that don\'t match a listed candidate: '+otherWriteIns.map(function(o){ return esc(o.first)+' — “'+esc(o.verbatim)+'”'; }).join(' · ')+' — lock one via the box below if it wins.</div>';
+  html += '<div class="thm-lockbar"><input id="thmCustomName" placeholder="…or the room lands on a hybrid / different name — type it and lock it (e.g. “Back to School — Race to the Top of the Class”)" value="'+(t.name && t.name.source==="custom" ? esc(t.name.value) : esc(t.customDraft||""))+'"><button id="thmCustomLock">Lock this name</button></div>';
+
+  /* ---- 2 · cascade board ---- */
+  html += '<h3 style="margin:22px 0 4px">2 · How it cascades — gates, rewards & budget per level</h3>';
+  html += '<div class="shint" style="margin:0 0 10px">Each card is one level of the company. Ballot proposals sit on top (click a name to read their full take; ⤵ pulls their gate text down into the room-final box). The boxes below the line are the ROOM-FINAL calls — type straight into them as the room agrees; every keystroke saves. A card turns green once it has a gate or a reward.</div>';
+  TRACK_META.forEach(function(tm){
+    var props = trackProposals(tm);
+    var x = t.tracks[tm.id]||{};
+    html += '<div class="tr-card'+(trackIsSet(tm.id)?' set':'')+'" data-trcard="'+esc(tm.id)+'">';
+    html += '<h4>'+tm.icon+' '+esc(tm.label)+' <span class="lrole">'+props.length+' ballot proposal'+(props.length===1?'':'s')+'</span>'+
+      '<span class="tr-owner">Owner: <input data-track="'+esc(tm.id)+'" data-field="owner" placeholder="who owns this level" value="'+esc(x.owner||"")+'"></span></h4>';
+    if(props.length){
+      html += '<div class="tr-props">';
+      props.forEach(function(p){
+        var peek = p.take ? p.take.slice(0,110)+(p.take.length>110?'…':'') : '(gates only)';
+        html += '<details class="tr-prop"><summary>'+esc(p.first)+' <span class="tp-peek">— '+esc(peek)+'</span></summary><div class="tr-propbody">'+
+          (p.take?'<div style="white-space:pre-wrap">'+esc(p.take)+'</div>':'')+
+          (p.green?'<div class="tr-propbar"><b>Green:</b> <span style="flex:1">'+esc(p.green)+'</span><button class="tr-copy" data-copylid="'+esc(p.lid)+'" data-copytrack="'+esc(tm.id)+'" data-copyfield="green">⤵ use</button></div>':'')+
+          (p.superGreen?'<div class="tr-propbar"><b>Super Green:</b> <span style="flex:1">'+esc(p.superGreen)+'</span><button class="tr-copy" data-copylid="'+esc(p.lid)+'" data-copytrack="'+esc(tm.id)+'" data-copyfield="superGreen">⤵ use</button></div>':'')+
+          '</div></details>';
+      });
+      html += '</div>';
+    } else {
+      html += '<div class="gbar blank">No ballot proposals for this level — write the room-final call below from scratch.</div>';
+    }
+    html += '<div class="tr-final">';
+    html += '<div><div class="tf-label">Green gate — room-final</div><textarea class="tr-ta'+((x.green||"").trim()?' filled':'')+'" data-track="'+esc(tm.id)+'" data-field="green" placeholder="What Green means for this level by EOQ — write it as the room agrees it">'+esc(x.green||"")+'</textarea></div>';
+    html += '<div><div class="tf-label">Super Green gate — room-final</div><textarea class="tr-ta'+((x.superGreen||"").trim()?' filled':'')+'" data-track="'+esc(tm.id)+'" data-field="superGreen" placeholder="What Super Green means — the stretch bar">'+esc(x.superGreen||"")+'</textarea></div>';
+    html += '<div><div class="tf-label">🎁 Reward / prize at this level</div><textarea class="tr-ta'+((x.reward||"").trim()?' filled':'')+'" data-track="'+esc(tm.id)+'" data-field="reward" placeholder="What\'s on the line for THIS level — pull from the celebration proposals below or invent in room">'+esc(x.reward||"")+'</textarea></div>';
+    html += '<div><div class="tf-label">💲 Expected budget / additional spend</div><input class="tr-ta'+((x.budget||"").trim()?' filled':'')+'" data-track="'+esc(tm.id)+'" data-field="budget" placeholder="Dollar estimate for this level\'s rewards — blank = none known (accounting catch-net)" value="'+esc(x.budget||"")+'"></div>';
+    html += '<div><div class="tf-label">📝 Room note</div><input class="tr-ta'+((x.note||"").trim()?' filled':'')+'" data-track="'+esc(tm.id)+'" data-field="note" placeholder="Anything else the room decided for this level" value="'+esc(x.note||"")+'"></div>';
+    html += '</div></div>';
+  });
+
+  /* ---- 3 · celebrations & prizes from the ballots ---- */
+  html += '<h3 style="margin:22px 0 4px">3 · Celebrations & prizes — what leaders proposed</h3>';
+  html += '<div class="shint" style="margin:0 0 8px">Straight from the ballots\' celebration section. Steal freely — the winning ideas go into the level cards above or the company-wide plan below.</div>';
+  var celebCards = '', blankCeleb = [];
+  LEADERS.forEach(function(l){
+    var b = BALLOTS[l.id];
+    if(!b) return;
+    var c = b.celebrations || {};
+    if(!((c.celebration||"").trim() || (c.prizes||"").trim())){ blankCeleb.push(l.name.split(" ")[0]); return; }
+    celebCards += '<div class="thm-celebcard"><b>'+esc(l.name)+'</b>'+
+      ((c.celebration||"").trim() ? '<div class="cc-lbl">Celebration</div><div style="white-space:pre-wrap">'+esc(c.celebration.trim())+'</div>' : '')+
+      ((c.prizes||"").trim() ? '<div class="cc-lbl">Prizes</div><div style="white-space:pre-wrap">'+esc(c.prizes.trim())+'</div>' : '')+
+      '</div>';
+  });
+  html += celebCards ? '<div class="thm-celebgrid">'+celebCards+'</div>' : '<div class="gbar blank">No celebration sections filled in any loaded ballot.</div>';
+  if(blankCeleb.length) html += '<div class="shint" style="margin:2px 0 8px">Left the celebration section blank: '+esc(blankCeleb.join(" · "))+'</div>';
+  html += '<div class="tr-final" style="margin-top:10px">'+
+    '<div><div class="tf-label">🎊 Company-wide celebration & prize plan — room-final</div><textarea class="tr-ta'+((t.companyPlan||"").trim()?' filled':'')+'" id="thmCompanyPlan" placeholder="The cross-level plan — monthly rhythm, EOQ moment, honor roll, hats/pins, party upgrades… whatever the room lands on">'+esc(t.companyPlan||"")+'</textarea></div>'+
+    '<div><div class="tf-label">💲 Total prize/celebration budget ceiling</div><input class="tr-ta'+((t.companyBudget||"").trim()?' filled':'')+'" id="thmCompanyBudget" placeholder="One number accounting can plan around" value="'+esc(t.companyBudget||"")+'"></div></div>';
+
+  /* ---- 4 · prize philosophy prompts ---- */
+  html += '<h3 style="margin:22px 0 4px">4 · Before you pick prizes — four questions</h3>';
+  html += '<div class="decide-prompts"><div class="decide-prompts-label">🎤 Facilitation prompts</div><ol>'+
+    '<li><b>One engine or two?</b> The Einstein Games podium ($75/$50/$25 per effective truck) and the training-day rhythm already exist. Does the theme carry its own prize structure, or ride those rails? Two competing prize systems in one quarter split everyone\'s attention.</li>'+
+    '<li><b>Completion or outcome?</b> The gates are completion-based by design. Paul\'s line deserves saying verbatim: the speed-to-competence payoff lands in FUTURE quarters — nobody should expect a Q3 number from it. So do prizes pay on completing the training, on the outcomes it produces, or a little of both?</li>'+
+    '<li><b>Monthly beat or one finale?</b> Brian and Mike both wrote monthly rhythms (Aug/Sept/Oct celebration arc · Honor Roll at every training day); Anne and Matisen wrote one end-of-quarter moment (top-of-the-class awards · pool party). Momentum vs. a big finish — or both?</li>'+
+    '<li><b>Recognition or cash?</b> Hats, pins, shirts, and mover-bio accolades cost almost nothing and outlast a gift card. Where does actual money change behavior here — and whatever the ceiling is, write it in the budget lines above so accounting sees it coming.</li>'+
+    '</ol></div>';
+
+  /* ---- 5 · flags to clear before lock ---- */
+  html += '<h3 style="margin:22px 0 4px">5 · Two flags to clear before the theme locks</h3>';
+  html += '<div class="thm-flagcard"><b>⚠ Brian\'s capacity flag.</b> Mover re-cert, manager re-cert, handbook, invoice app, sales competition, normal ops — the Q3 list is full. Run it well rather than stack more and do it all at 70%. <b>Does anything move to Q4 — and if nothing moves, is the room consciously accepting the risk?</b>'+
+    '<input class="tr-ta" style="margin-top:8px" data-flag="capacity" placeholder="Room resolution — what moved / what was accepted" value="'+esc(t.flags.capacity||"")+'"></div>';
+  html += '<div class="thm-flagcard"><b>⚠ Matisen\'s scoreboard gap.</b> A theme needs a scoreboard, and there\'s no clear baseline for mover progression yet. <b>Week one\'s job is defining one — who owns it?</b>'+
+    '<input class="tr-ta" style="margin-top:8px" data-flag="scoreboard" placeholder="Room resolution — owner + first measure" value="'+esc(t.flags.scoreboard||"")+'"></div>';
+  html += '<div class="shint" style="margin:6px 0 0">The full q3-theme decision card (recaps, verbatims, timer) lives on the <span id="thmToDecide" style="color:var(--navy-500,#0d2b4e);font-weight:700;cursor:pointer;text-decoration:underline">⚖️ Decisions tab</span> — vote the name there or here, it\'s one room.</div>';
+
+  /* ---- 6 · delivery map ---- */
+  html += '<h3 style="margin:22px 0 4px">6 · Where this goes next — the cascade</h3>';
+  html += '<div class="thm-map">'+
+    '<div class="thm-mapstep"><b>1 · This room — Jul 29–30</b>Name locked, per-level gates + rewards + budget written on this tab, export at the end of the Day-2 mechanics block.</div><div class="thm-maparrow">→</div>'+
+    '<div class="thm-mapstep"><b>2 · FLM QGRs — Aug 4 (CTX) · Aug 5 (DFWT)</b>Theme block in the run-of-show gets the locked name + manager-level gates; managers write theme-aligned goals into the Q3 Cascading Goals sheet.</div><div class="thm-maparrow">→</div>'+
+    '<div class="thm-mapstep"><b>3 · Branch / mover QGRs — after Aug 17</b>Q3-theme slot on all 10 scorecard Mover Views + the Q2 Debrief theme card fill with the mover-level version: the gate, the reward, what\'s in it for them.</div><div class="thm-maparrow">→</div>'+
+    '<div class="thm-mapstep"><b>4 · Albert folds the export</b>Master Backlog theme pulses updated, every placeholder above filled from this one export — nothing gets hand-copied twice.</div></div>';
+
+  html += '</div>';
+  el.innerHTML = html;
+
+  /* ---- wiring ---- */
+  el.querySelectorAll(".thm-namecard").forEach(function(card){
+    card.addEventListener("click", function(){
+      var cid = card.getAttribute("data-namecand");
+      var cand = THEME_CANDIDATES.filter(function(c){ return c.id===cid; })[0];
+      var tt = TR();
+      if(tt.name && tt.name.source === cid){ delete tt.name; }
+      else tt.name = { value: cand.name, source: cid, at: new Date().toISOString() };
+      persistCache(); renderTheme();
+    });
+  });
+  // typed-but-not-yet-locked custom name survives tab switches + re-renders (draft autosave)
+  var cnInput = document.getElementById("thmCustomName");
+  if(cnInput) cnInput.addEventListener("input", function(){
+    TR().customDraft = cnInput.value;
+    persistCache();
+  });
+  var lockBtn = document.getElementById("thmCustomLock");
+  if(lockBtn) lockBtn.addEventListener("click", function(){
+    var v = (document.getElementById("thmCustomName").value||"").trim();
+    if(!v){ toast("Type the name first."); return; }
+    var tt = TR();
+    tt.name = { value: v, source:"custom", at: new Date().toISOString() };
+    delete tt.customDraft;
+    persistCache(); renderTheme();
+  });
+  el.querySelectorAll(".tr-ta[data-track], .tr-owner input[data-track]").forEach(function(inp){
+    inp.addEventListener("input", function(){
+      var tid = inp.getAttribute("data-track"), f = inp.getAttribute("data-field");
+      var tt = TR();
+      if(!tt.tracks[tid]) tt.tracks[tid] = {};
+      tt.tracks[tid][f] = inp.value;
+      tt.tracks[tid].at = new Date().toISOString();
+      persistCache();
+      if(f !== "owner") inp.classList.toggle("filled", !!inp.value.trim());
+      var card = inp.closest(".tr-card");
+      if(card) card.classList.toggle("set", trackIsSet(tid));
+      updateThemeProgress();
+    });
+  });
+  el.querySelectorAll(".tr-copy").forEach(function(btn){
+    btn.addEventListener("click", function(ev){
+      ev.preventDefault();
+      var lid = btn.getAttribute("data-copylid"), tid = btn.getAttribute("data-copytrack"), f = btn.getAttribute("data-copyfield");
+      var tm = TRACK_META.filter(function(x){ return x.id===tid; })[0];
+      var props = trackProposals(tm).filter(function(p){ return p.lid===lid; })[0];
+      if(!props) return;
+      var text = f==="green" ? props.green : props.superGreen;
+      var target = el.querySelector('textarea.tr-ta[data-track="'+tid+'"][data-field="'+f+'"]');
+      if(!target) return;
+      target.value = target.value.trim() ? target.value + "\n" + text : text;
+      target.dispatchEvent(new Event("input"));
+      toast("Pulled "+leaderName(lid).split(" ")[0]+"'s "+(f==="green"?"Green":"Super Green")+" text into the room-final box.");
+    });
+  });
+  el.querySelectorAll("input[data-flag]").forEach(function(inp){
+    inp.addEventListener("input", function(){
+      TR().flags[inp.getAttribute("data-flag")] = inp.value;
+      persistCache(); updateThemeProgress();
+    });
+  });
+  var cp = document.getElementById("thmCompanyPlan");
+  if(cp) cp.addEventListener("input", function(){ TR().companyPlan = cp.value; persistCache(); cp.classList.toggle("filled", !!cp.value.trim()); updateThemeProgress(); });
+  var cb = document.getElementById("thmCompanyBudget");
+  if(cb) cb.addEventListener("input", function(){ TR().companyBudget = cb.value; persistCache(); cb.classList.toggle("filled", !!cb.value.trim()); updateThemeProgress(); });
+  var td = document.getElementById("thmToDecide");
+  if(td) td.addEventListener("click", function(){ setMode("decide"); });
+  var exp = document.getElementById("btnExportTheme");
+  if(exp) exp.addEventListener("click", exportThemeRulings);
+}
+
+function exportThemeRulings(){
+  var t = TR();
+  var now = new Date();
+  var dateStr = now.toISOString().slice(0,10);
+  var tracksOut = TRACK_META.map(function(tm){
+    var x = t.tracks[tm.id]||{};
+    return {
+      id: tm.id, label: tm.label,
+      owner: (x.owner||"").trim() || null,
+      green: (x.green||"").trim() || null,
+      superGreen: (x.superGreen||"").trim() || null,
+      reward: (x.reward||"").trim() || null,
+      expectedBudget: (x.budget||"").trim() || null,
+      note: (x.note||"").trim() || null,
+      ballotProposals: trackProposals(tm)
+    };
+  });
+  var writeIns = {};
+  LEADERS.forEach(function(l){
+    var b = BALLOTS[l.id];
+    if(b && b.buildsheet && (b.buildsheet.themeName||"").trim()) writeIns[l.id] = b.buildsheet.themeName.trim();
+  });
+  var celebOut = {};
+  LEADERS.forEach(function(l){
+    var b = BALLOTS[l.id];
+    if(!b) return;
+    var c = b.celebrations||{};
+    if(((c.celebration||"")+(c.prizes||"")).trim()) celebOut[l.id] = { celebration:(c.celebration||"").trim(), prizes:(c.prizes||"").trim() };
+  });
+  var exportObj = {
+    schema: "einstein-qgr-theme-rulings/v1",
+    exportedAt: now.toISOString(),
+    quarter: "Q3 2026",
+    themeName: { final: t.name ? t.name.value : null, source: t.name ? t.name.source : null, ballotWriteIns: writeIns },
+    tracks: tracksOut,
+    companyPlan: (t.companyPlan||"").trim() || null,
+    companyBudget: (t.companyBudget||"").trim() || null,
+    flags: {
+      capacityBrian: (t.flags.capacity||"").trim() || null,
+      scoreboardMatisen: (t.flags.scoreboard||"").trim() || null
+    },
+    ballotCelebrations: celebOut
+  };
+  var blob = new Blob([JSON.stringify(exportObj, null, 2)], { type:"application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = "qgr-theme-rulings-"+dateStr+".json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  var md = "## Q3 theme & prizes — room rulings ("+dateStr+")\n\n"+
+    "**Theme name:** "+(t.name ? "“"+t.name.value+"” (locked in room)" : "NOT LOCKED")+"\n\n### Levels\n"+
+    tracksOut.map(function(tr){
+      var lines = ["- **"+tr.label+"**"+(tr.owner?" — owner: "+tr.owner:"")];
+      if(tr.green) lines.push("    - Green: "+tr.green);
+      if(tr.superGreen) lines.push("    - Super Green: "+tr.superGreen);
+      if(tr.reward) lines.push("    - 🎁 "+tr.reward);
+      if(tr.expectedBudget) lines.push("    - 💲 "+tr.expectedBudget);
+      if(tr.note) lines.push("    - 📝 "+tr.note);
+      if(lines.length===1) lines.push("    - (nothing set in room)");
+      return lines.join("\n");
+    }).join("\n")+
+    "\n\n### Company-wide plan\n"+((t.companyPlan||"").trim()||"(none)")+((t.companyBudget||"").trim()?"\n💲 Budget ceiling: "+t.companyBudget.trim():"")+
+    "\n\n### Flags\n- Capacity (Brian): "+((t.flags.capacity||"").trim()||"(unresolved)")+
+    "\n- Scoreboard baseline (Matisen): "+((t.flags.scoreboard||"").trim()||"(unresolved)")+"\n";
+  copyTextToClipboard(md, "Theme rulings downloaded + markdown copied — hand both to Albert for the fold (MB pulses, FLM run-of-show, scorecard placeholders).");
+}
+
+/* ============================================================
    ROOM REVEAL
    ============================================================ */
 function revealQuestions(){
@@ -2320,12 +2714,11 @@ loadCache();
 if(applySeedBallots() + applySeedDigest()) persistCache();
 rebuildBallotsMap();
 renderAll();
-// deep link: #celebrate opens straight into the Celebrate tab (HQ agenda links use this)
+// deep links (HQ agenda links use these): #celebrate · #decisions · #goals · #theme
 if(location.hash === "#celebrate" || location.hash === "#celeb") setMode("celeb");
-// deep link: #decisions/#decide opens straight into the ⚖️ Decision Board tab
 else if(location.hash === "#decisions" || location.hash === "#decide") setMode("decide");
-// deep link: #goals opens straight into the 🎯 Goals confirmation board
 else if(location.hash === "#goals") setMode("goals");
+else if(location.hash === "#theme") setMode("theme");
 
 } // end initApp
 
