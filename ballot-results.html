@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>Q3 QGR — Ballot Room View</title>
-<!-- ballot-results v2.1 2026-07-30 midday — DIRECT-CARD BARS EDITABLE (Amanda + Matisen room ask: they couldn't set Green/Super Green on their directs' goals). The v1.7 bar editor was scoped to non-direct cards only; that gate is removed — directs' candidate cards now render the same three click-to-edit bar rows (blank originals, written via barEdits, same amber ✏️ treatment). No export/merge changes needed: both were already kind-agnostic, so directs' room-final bars ride qgr-goal-rulings exports and merge into Cameron's room under the same authority-≠-freshness rule. Sheet note: room-final direct bars reach the Q3 Cascading Goals sheet at the MB fold (Albert updates the pre-seeded DRAFT rows from the imported exports). Rollback: ballot-results.v2.0.2026-07-30.bak. Prior: v2.0 2026-07-30 — GOALS TAB: DISTRIBUTED-ROOM ROUND TRIP (Cameron's ask — leaders update goals in the ballot room instead of the spreadsheet, export, and import into Cameron's copy for final confirm before the Master Backlog fold). ① FLYWHEEL-COMPONENT pills on every goal card — the SIX components from the flywheel exercise (Attract & Develop Great Movers / Deliver the Smart Move Experience / Earn Trust at Scale / Win Demand / Optimize Capacity / Reinvest Profit in People & Innovation) + 🏃 PACe + ❔ Other-doesn't-fit (Cameron's correction mid-build: six real components, not one generic "Flywheel" pill) — tap to set, tap again to clear; lives in goalRulings[k].flywheel, counts as room work for the export gate, rides the export as flywheelComponent + a md tag + a ①–⑥/🏃/❔ whiteboard badge. ② ADD-GOAL now has a GOAL-OWNER selector — the leader themself (default), any direct from their ballot's directs' slate (Amanda → Nhel/Tet/Carly etc.), or "someone else…" free-typed; rides roomAdds[].assignee, 👤 assigned-to badge on card + whiteboard, export carries assignedTo, md prefix [ADDED IN ROOM → name]. ③ DROPZONE now ingests qgr-goal-rulings-*.json exports from leaders' own room copies via mergeGoalRulingsExport(): entries THIS room has already RULED (status set) are never overwritten (authority ≠ freshness — the room ruling is the grade of record), unruled entries newest-wins on .at, room-added goals union by id; the goal-rulings export gained roomGoalState (raw goalRulings + roomAdds) to make the round trip lossless — older exports without it are skipped with a re-export message, schema stays /v1 (additive). Rollback: ballot-results.v1.9.1.2026-07-30.bak. Prior: v1.9.1 2026-07-28 — TWO-CRITIC DESIGN AUDIT applied on the Theme tab (critics on FABLE per Cameron's ruling tonight — "design belongs to you"; UX/cognitive-load + craft/correctness lenses, synthesis + edits by Albert main thread). Critic A's headline: the room-final surface was ILLEGIBLE FROM 3M (12.5px on a TV) → .tr-ta 16px + .tf-label 13px, filled fields get a green wash, ✓ set chip in each level h4, placeholders cut to fragments so empty boxes read empty. Also: bare .lrole rule was missing (only .groom-leader .lrole existed) so every theme heading ran together → global rule added · sticky 1–6 jump-chip nav w/ live progress + export traveling with the scroll (Goals-tab header-offset pattern) · progress now counts flags (name · n/5 levels · n/2 flags) · budget+note share one row (cards ~30% shorter) · "n/a"-style non-answers filtered from proposal counts. Critic B's headline: the GATES Claude prompt silently omitted every take-only proposal (Leads + EE+IT showed "(blank)" despite 4 real proposals each) → take excerpts (≤300 chars) now ride whenever a proposal has no bars. Also: open proposal <details> survive re-renders (snapshot/restore by track|leader — a mid-cascade name change no longer wipes reading state) · flag inputs → textareas w/ filled-state (same bug class as the note field) · ⤵ use now scrolls-to + focuses the target box (it was landing below the fold) + ⤵/copy buttons enlarged · "2-2 split" copy corrected — Mike wants BOTH monthly Honor Roll AND EOQ graduation (printed prompt + prizes Claude prompt) · name Claude prompt includes other-bucket write-ins · "four ballots" hardcode dropped. KEPT per critics: ⤵ pull-downs, orange→green hunt-what's-left convention, honest blank-state lines, delivery-map closer, per-keystroke autosave + click-time prompt assembly. Prior: v1.9 2026-07-28 — 🎤 SECTION PROMPTS on the Theme tab (Cameron's ask: prompts at each major section to guide the convo, copy/paste for bringing them into Claude/Albert). Two layers, mirroring the Decision Board pattern: printed one-line facilitation prompts in a .thm-promptstrip per section (name vote · cascade board · celebrations · flags; the prize-philosophy block already IS the printed layer) + 📋 "Claude prompt" copy buttons (5: name / gates / celebrations / prizes / flags) whose text is assembled by buildThemeClaudePrompt() from CURRENT room state at click time — locked name, room-final gate/reward/budget entries, flag resolutions, and the ballots' own gate proposals all ride the paste, so mid-room Albert answers from where the room actually stands. Verified: all 5 build with live state (1.2–4.7K chars), clipboard capture tested in-browser. Prior: v1.8.1 2026-07-28 — Sonnet adversarial pass on the Theme tab (state attacks / escaping / logic / wiring / export / TV-scale CSS): NO room-blockers; guardrail (ballots never mutated), escaping, export, and event wiring all verified CLEAN. 4 findings fixed: ① custom-name box lost typed-but-unlocked text on any tab switch or re-render (every other field autosaves per keystroke) → draft autosave (themeRulings.customDraft, cleared on lock) ② a themeName write-in matching none of the three candidates was silently invisible (bucketed to "other", rendered nowhere, excluded from the no-write-in list) — dormant with tonight's 7 ballots but a real silent-failure shape → "✍️ Write-ins that don't match a listed candidate" line renders them verbatim ③ room-final gate textareas were ~2 lines tall while real ballot gate text runs 200-325 chars (and ⤵ appends) → textarea min-height 64px ④ 📝 Room note never showed the green filled border the other fields get → included. Accepted as-is: focus loss on mid-session ballot re-drop (Goals-tab precedent; all 7 ballots already in) · themeBucket substring matching (order-dependent, no word boundaries) — fine for tomorrow's frozen ballots. Prior: v1.8 2026-07-28 — 🏕 THEME & PRIZES tab (Cameron: "we need a room for theme and the associated rewards and prizes… and how the theme cascades down to individual mover/manager/CER levels"). New mode between 🎯 Goals and ⚖️ Decisions, deep link #theme. Six blocks: ① NAME VOTE — 3 candidate cards (Back to School / Level Up / Training Camp) w/ ballot write-ins derived live from buildsheet.themeName (Anne's tagline, Paul's 6 alternates, Brian's "Einstein Training Camp" all show verbatim), click-to-lock + custom-name lock bar, locked name banners + rides export ② CASCADE BOARD — 5 level cards from TRACK_META (Movers/Leads/Managers/CERs/EE+IT): every leader's build-sheet proposal behind a per-leader <details> (full take + their Green/SG w/ ⤵ use buttons that pull text into the room-final boxes), ROOM-FINAL editable boxes per level (Green gate · Super Green gate · 🎁 reward · 💲 budget · 📝 note · owner) — auto-save on every keystroke, card turns green when set ③ CELEBRATIONS & PRIZES gallery straight from ballots' celebrations{celebration,prizes} (Anne/Brian/Mike/Matisen filled; blank leaders listed honestly) + company-wide room-final plan + total budget ceiling ④ prize-philosophy prompts (one engine or two w/ the Games podium · completion-vs-outcome w/ Paul's future-quarters line · monthly beat vs finale · recognition vs cash) ⑤ two flags w/ resolution inputs (Brian capacity · Matisen scoreboard baseline) + link to the ⚖️ q3-theme card ⑥ delivery map (room → FLM QGRs 8/4-8/5 → branch/mover QGRs post-8/17 → Albert folds export). Export = einstein-qgr-theme-rulings/v1 JSON (name + per-track room-finals + ballotProposals + celebrations + flags) + md to clipboard, gated on anyThemeWork(). Room work in CACHE.themeRulings (own layer, Clear-all wipes it, ballots NEVER mutated). Rollback: ballot-results.v1.7.1.2026-07-28.bak. Prior: v1.7.1 2026-07-28 — 3-lens adversarial verification (Sonnet workflow: state attacks · export harness on real ballots · regression) → regression CLEAN, 3 real findings FIXED: ① unsaved bar-editor text was destroyed by any full re-render (ballot drop / add-goal / view toggle) → commitOpenBarEditors() auto-commits open editors before every re-render (typed text = intent; Cancel/Esc still work while open) ② export button only unlocked on status chips — a session that ONLY writes missing bars (the Cameron-8/Paul-3/Amanda-1 use case) had no export path → anyGoalWork() gates the button on any status/note/bar-edit/dep/budget work, and every handler now refreshes it ③ goalKey still collided for two identically-titled pulseless goals of the same kind (confirmed by harness; real ballots unique only by luck) → deterministic #n dup-suffix assigned in goalRoster build order. Known-accepted: rulings key off pulse-or-name, so a re-exported ballot that renames a goal or attaches a new pulse orphans that goal's prior room edits (pre-existing; ballots are frozen for tomorrow). Prior: v1.7 2026-07-28 — ✏️ LIVE BAR EDITING (Cameron's ask: agree/disagree on bars in the room): Green / Super Green / How-measured rows are click-to-edit on every non-direct card (pencil per row → textarea → Save/Cancel/Esc/↺ Revert-to-ballot). Edits live in CACHE.goalRulings[k].barEdits — the ballot is NEVER mutated (PA room-audit guardrail); edited rows render amber w/ ✏️ + the ballot original in the hover title; blank bars (Cameron's 8, Paul's 3, Amanda's 1) get WRITTEN the same way. Export: green/superGreen/howMeasured now carry the ROOM-FINAL text, barsEditedInRoom lists the edited fields, ballotOriginalBars preserves the originals, md gets per-field room-final sub-lines. + WHITEBOARD RESTRUCTURED (Cameron's ask): each column = leader's own goals first, then 👥 per-direct sub-groups with their goals below (was a flat pile w/ badges); ✏️ badge on tiles whose bars were edited. Delegated bar-edit handler bound once on #goalsView. Rollback: ballot-results.v1.6.1.2026-07-28.bak. Prior: v1.6.1 2026-07-28 — two-critic design audit applied (critics on Sonnet, synthesis + edits by Albert main thread): ⭐ BOTH critics independently caught the sticky quick-nav painting UNDER #appHeader on scroll (both sticky at top:0, header z-index 80 wins) → nav top now set at render to the live header height · deps+budget rows demoted behind a per-card "🔗 deps · 💲 budget" expander (auto-open when populated) — the 67-card height lever · visual emphasis INVERTED: unruled cards carry the orange left-border accent, ruled cards go calm (the eye hunts what's left, not what's done) · whiteboard legend line added · caution-strip grammar fixed ("1 goal depends") · goalKey() folds kind in unconditionally (two same-named pulseless additions can no longer share a ruling) · dep-chip touch targets enlarged · leaders with nothing to rule render as a muted stub ("ballot in — no goals to rule" vs "not yet returned") instead of vanishing · view-toggle button got its own class. Deliberately NOT taken: focus-preservation on mid-session ballot re-drops (all 7 ballots already in — window closed) · full keyboard access for chips (mouse/TV room tool). Rollback: ballot-results.v1.6.2026-07-28.bak (pre-audit) · ballot-results.v1.5.2026-07-28.bak (pre-room-mechanics). Prior: v1.6 2026-07-28 — 🎯 Goals tab room-mechanics: ＋ Add-goal-in-room per leader (name + optional bars, lives in its own cache layer CACHE.roomAdds, 🆕 badge, pulse created at fold) · 🧾 WHITEBOARD VIEW toggle (one-page triage-style overview: per-leader columns, tiles tinted by ruling status, badges 👥/➕/🆕/⭐/🔗n/💲, click a tile → jumps to its card; caution strip = inbound cross-dept dependency load per leader, ⚠ at 3+) · 🔗 cross-dept dependency chips on every card (tap the leaders/depts a goal depends on; rides export as crossDeptDeps + names) · 💲 expected-budget/additional-spend line on every card (optional; rides export as expectedBudget — the accounting catch-net). Backup: ballot-results.v1.5.2026-07-28.bak. Prior: v1.5 2026-07-28 — 🎯 GOALS tab: goal-confirmation board for the room. Per-leader slates from the same dropped ballots (picked + additions, G/SG/how-measured bars, MB pulse-ID chips), PLUS each leader's directs'-slate candidates as ruleable cards (grouped by direct, routed/own badges; candidates the leader already struck stay out — Cameron's ask, the directs' goals get decided in the room too). Ruling chips per goal (✅ Confirmed / ✏️ Modified / ❌ Cut — additions carry ➕ Added-in-room), per-goal ruling note, sticky quick-nav with live per-leader ruled/total counts (click scrolls + un-collapses), collapsible per-leader sections, progress strip, ⬇ Export goal rulings → einstein-qgr-goal-rulings/v1 JSON (carries pulse IDs + direct name so the Master Backlog fold is mechanical: update pulse X with finalized status) + markdown to clipboard for the HQ log. Rulings persist in the same browser cache layer as decision rulings; Clear-all wipes both. Deep link: #goals. Prior: v1.4 2026-07-28 — per-question room TIMERS on the Decision Board: click-to-start chip per card (pause on click, reset on double-click), blinks orange past 10:00 and red past 20:00 while running, starting one pauses the others, clock survives reload via the same cache. Prior: v1.3 2026-07-28 — ⚖️ DECISION BOARD tab: digest-driven room agenda (RATIFY/NARROW/DECIDE/MISLABELED triage replacing the split badge's blind spots), per-leader recap rows w/ click-to-verbatim, layer-1 prompts + layer-2 copy-button facilitation prompt, ruling strip (Decide/Defer/Delegate + dissent-noted) persisted in the same cache + export to JSON/markdown for the HQ decision log. Digest = einstein-qgr-digest/v1, dropped through the same dropzone, newest-wins on preparedAt; hosted page still ships EMPTY (digest + ballots are the sensitive layer). Prior: ballot-results v1.2 2026-07-28 — 🏆 CELEBRATE MODE folded in (Cameron: "combine ballot results and celebration presentation into one place — one drag-in"). Third header mode between Aggregate and Room Reveal: Best-of-Q2 wall (per-leader cards, Personal/Professional badges, photos rendered from the v7 exports' embedded data-URLs) + Legends board (stories + named-by tally) + full-screen ▶ Present slide stepper (arrow keys / click / Esc; best-things slides then legend slides). Reads CACHE raw (not the normalized layer — parseBallot + Node QC harness untouched); v1–v6 files still parse everywhere, they just show "no celebration sections — ask for a re-export" per leader on this tab. Deep link: #celebrate opens straight into the tab (HQ agenda links use it). Same single drop zone feeds all three modes; ballots+photos persist in this browser's cache (if photo weight ever trips the storage quota the existing not-saving toast fires — everything still works for the session, re-drop after reload). Standalone qgr-celebration-wall.html RETIRED same day → redirect stub to this page. Prior: v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
+<!-- ballot-results v2.2 2026-07-30 midday-2 — ⭐ CRITICAL MARKING + 🗃 CUT HOLDING QUEUE (Cameron's asks after Mike/Matisen/Paul exports folded). ① ⭐ Critical toggle chip on EVERY goal card (own + directs' + room-added): each leader marks their TWO criticals, and two per direct's slate; stored as goalRulings[k].critical (override in both directions — undefined inherits the ballot's critical flag, false un-stars a ballot critical); ⭐ n/2 counters on each leader header + each direct's name row (amber until exactly 2); export carries critical (effective) + criticalSetInRoom + ballotCritical, md lines get ⭐ CRITICAL prefix, whiteboard ⭐ badge now reads the effective value. ② ❌ Cut goals leave the live view: they move to a collapsed 🗃 Holding queue <details> at the bottom of the leader's section (cards stay fully interactive — un-cutting restores them to the live list; cut/un-cut triggers a full re-render to relocate the card). ③ Cut goals no longer count in ANY live totals (Cameron: "cut goals shouldn't count towards their total goals") — progress strip, quick-nav per-leader chips, and whiteboard column counts all show ruled/live with a separate "· n cut" tail. Rollback: ballot-results.v2.1.2026-07-30.bak. Prior: v2.1 2026-07-30 midday — DIRECT-CARD BARS EDITABLE (Amanda + Matisen room ask: they couldn't set Green/Super Green on their directs' goals). The v1.7 bar editor was scoped to non-direct cards only; that gate is removed — directs' candidate cards now render the same three click-to-edit bar rows (blank originals, written via barEdits, same amber ✏️ treatment). No export/merge changes needed: both were already kind-agnostic, so directs' room-final bars ride qgr-goal-rulings exports and merge into Cameron's room under the same authority-≠-freshness rule. Sheet note: room-final direct bars reach the Q3 Cascading Goals sheet at the MB fold (Albert updates the pre-seeded DRAFT rows from the imported exports). Rollback: ballot-results.v2.0.2026-07-30.bak. Prior: v2.0 2026-07-30 — GOALS TAB: DISTRIBUTED-ROOM ROUND TRIP (Cameron's ask — leaders update goals in the ballot room instead of the spreadsheet, export, and import into Cameron's copy for final confirm before the Master Backlog fold). ① FLYWHEEL-COMPONENT pills on every goal card — the SIX components from the flywheel exercise (Attract & Develop Great Movers / Deliver the Smart Move Experience / Earn Trust at Scale / Win Demand / Optimize Capacity / Reinvest Profit in People & Innovation) + 🏃 PACe + ❔ Other-doesn't-fit (Cameron's correction mid-build: six real components, not one generic "Flywheel" pill) — tap to set, tap again to clear; lives in goalRulings[k].flywheel, counts as room work for the export gate, rides the export as flywheelComponent + a md tag + a ①–⑥/🏃/❔ whiteboard badge. ② ADD-GOAL now has a GOAL-OWNER selector — the leader themself (default), any direct from their ballot's directs' slate (Amanda → Nhel/Tet/Carly etc.), or "someone else…" free-typed; rides roomAdds[].assignee, 👤 assigned-to badge on card + whiteboard, export carries assignedTo, md prefix [ADDED IN ROOM → name]. ③ DROPZONE now ingests qgr-goal-rulings-*.json exports from leaders' own room copies via mergeGoalRulingsExport(): entries THIS room has already RULED (status set) are never overwritten (authority ≠ freshness — the room ruling is the grade of record), unruled entries newest-wins on .at, room-added goals union by id; the goal-rulings export gained roomGoalState (raw goalRulings + roomAdds) to make the round trip lossless — older exports without it are skipped with a re-export message, schema stays /v1 (additive). Rollback: ballot-results.v1.9.1.2026-07-30.bak. Prior: v1.9.1 2026-07-28 — TWO-CRITIC DESIGN AUDIT applied on the Theme tab (critics on FABLE per Cameron's ruling tonight — "design belongs to you"; UX/cognitive-load + craft/correctness lenses, synthesis + edits by Albert main thread). Critic A's headline: the room-final surface was ILLEGIBLE FROM 3M (12.5px on a TV) → .tr-ta 16px + .tf-label 13px, filled fields get a green wash, ✓ set chip in each level h4, placeholders cut to fragments so empty boxes read empty. Also: bare .lrole rule was missing (only .groom-leader .lrole existed) so every theme heading ran together → global rule added · sticky 1–6 jump-chip nav w/ live progress + export traveling with the scroll (Goals-tab header-offset pattern) · progress now counts flags (name · n/5 levels · n/2 flags) · budget+note share one row (cards ~30% shorter) · "n/a"-style non-answers filtered from proposal counts. Critic B's headline: the GATES Claude prompt silently omitted every take-only proposal (Leads + EE+IT showed "(blank)" despite 4 real proposals each) → take excerpts (≤300 chars) now ride whenever a proposal has no bars. Also: open proposal <details> survive re-renders (snapshot/restore by track|leader — a mid-cascade name change no longer wipes reading state) · flag inputs → textareas w/ filled-state (same bug class as the note field) · ⤵ use now scrolls-to + focuses the target box (it was landing below the fold) + ⤵/copy buttons enlarged · "2-2 split" copy corrected — Mike wants BOTH monthly Honor Roll AND EOQ graduation (printed prompt + prizes Claude prompt) · name Claude prompt includes other-bucket write-ins · "four ballots" hardcode dropped. KEPT per critics: ⤵ pull-downs, orange→green hunt-what's-left convention, honest blank-state lines, delivery-map closer, per-keystroke autosave + click-time prompt assembly. Prior: v1.9 2026-07-28 — 🎤 SECTION PROMPTS on the Theme tab (Cameron's ask: prompts at each major section to guide the convo, copy/paste for bringing them into Claude/Albert). Two layers, mirroring the Decision Board pattern: printed one-line facilitation prompts in a .thm-promptstrip per section (name vote · cascade board · celebrations · flags; the prize-philosophy block already IS the printed layer) + 📋 "Claude prompt" copy buttons (5: name / gates / celebrations / prizes / flags) whose text is assembled by buildThemeClaudePrompt() from CURRENT room state at click time — locked name, room-final gate/reward/budget entries, flag resolutions, and the ballots' own gate proposals all ride the paste, so mid-room Albert answers from where the room actually stands. Verified: all 5 build with live state (1.2–4.7K chars), clipboard capture tested in-browser. Prior: v1.8.1 2026-07-28 — Sonnet adversarial pass on the Theme tab (state attacks / escaping / logic / wiring / export / TV-scale CSS): NO room-blockers; guardrail (ballots never mutated), escaping, export, and event wiring all verified CLEAN. 4 findings fixed: ① custom-name box lost typed-but-unlocked text on any tab switch or re-render (every other field autosaves per keystroke) → draft autosave (themeRulings.customDraft, cleared on lock) ② a themeName write-in matching none of the three candidates was silently invisible (bucketed to "other", rendered nowhere, excluded from the no-write-in list) — dormant with tonight's 7 ballots but a real silent-failure shape → "✍️ Write-ins that don't match a listed candidate" line renders them verbatim ③ room-final gate textareas were ~2 lines tall while real ballot gate text runs 200-325 chars (and ⤵ appends) → textarea min-height 64px ④ 📝 Room note never showed the green filled border the other fields get → included. Accepted as-is: focus loss on mid-session ballot re-drop (Goals-tab precedent; all 7 ballots already in) · themeBucket substring matching (order-dependent, no word boundaries) — fine for tomorrow's frozen ballots. Prior: v1.8 2026-07-28 — 🏕 THEME & PRIZES tab (Cameron: "we need a room for theme and the associated rewards and prizes… and how the theme cascades down to individual mover/manager/CER levels"). New mode between 🎯 Goals and ⚖️ Decisions, deep link #theme. Six blocks: ① NAME VOTE — 3 candidate cards (Back to School / Level Up / Training Camp) w/ ballot write-ins derived live from buildsheet.themeName (Anne's tagline, Paul's 6 alternates, Brian's "Einstein Training Camp" all show verbatim), click-to-lock + custom-name lock bar, locked name banners + rides export ② CASCADE BOARD — 5 level cards from TRACK_META (Movers/Leads/Managers/CERs/EE+IT): every leader's build-sheet proposal behind a per-leader <details> (full take + their Green/SG w/ ⤵ use buttons that pull text into the room-final boxes), ROOM-FINAL editable boxes per level (Green gate · Super Green gate · 🎁 reward · 💲 budget · 📝 note · owner) — auto-save on every keystroke, card turns green when set ③ CELEBRATIONS & PRIZES gallery straight from ballots' celebrations{celebration,prizes} (Anne/Brian/Mike/Matisen filled; blank leaders listed honestly) + company-wide room-final plan + total budget ceiling ④ prize-philosophy prompts (one engine or two w/ the Games podium · completion-vs-outcome w/ Paul's future-quarters line · monthly beat vs finale · recognition vs cash) ⑤ two flags w/ resolution inputs (Brian capacity · Matisen scoreboard baseline) + link to the ⚖️ q3-theme card ⑥ delivery map (room → FLM QGRs 8/4-8/5 → branch/mover QGRs post-8/17 → Albert folds export). Export = einstein-qgr-theme-rulings/v1 JSON (name + per-track room-finals + ballotProposals + celebrations + flags) + md to clipboard, gated on anyThemeWork(). Room work in CACHE.themeRulings (own layer, Clear-all wipes it, ballots NEVER mutated). Rollback: ballot-results.v1.7.1.2026-07-28.bak. Prior: v1.7.1 2026-07-28 — 3-lens adversarial verification (Sonnet workflow: state attacks · export harness on real ballots · regression) → regression CLEAN, 3 real findings FIXED: ① unsaved bar-editor text was destroyed by any full re-render (ballot drop / add-goal / view toggle) → commitOpenBarEditors() auto-commits open editors before every re-render (typed text = intent; Cancel/Esc still work while open) ② export button only unlocked on status chips — a session that ONLY writes missing bars (the Cameron-8/Paul-3/Amanda-1 use case) had no export path → anyGoalWork() gates the button on any status/note/bar-edit/dep/budget work, and every handler now refreshes it ③ goalKey still collided for two identically-titled pulseless goals of the same kind (confirmed by harness; real ballots unique only by luck) → deterministic #n dup-suffix assigned in goalRoster build order. Known-accepted: rulings key off pulse-or-name, so a re-exported ballot that renames a goal or attaches a new pulse orphans that goal's prior room edits (pre-existing; ballots are frozen for tomorrow). Prior: v1.7 2026-07-28 — ✏️ LIVE BAR EDITING (Cameron's ask: agree/disagree on bars in the room): Green / Super Green / How-measured rows are click-to-edit on every non-direct card (pencil per row → textarea → Save/Cancel/Esc/↺ Revert-to-ballot). Edits live in CACHE.goalRulings[k].barEdits — the ballot is NEVER mutated (PA room-audit guardrail); edited rows render amber w/ ✏️ + the ballot original in the hover title; blank bars (Cameron's 8, Paul's 3, Amanda's 1) get WRITTEN the same way. Export: green/superGreen/howMeasured now carry the ROOM-FINAL text, barsEditedInRoom lists the edited fields, ballotOriginalBars preserves the originals, md gets per-field room-final sub-lines. + WHITEBOARD RESTRUCTURED (Cameron's ask): each column = leader's own goals first, then 👥 per-direct sub-groups with their goals below (was a flat pile w/ badges); ✏️ badge on tiles whose bars were edited. Delegated bar-edit handler bound once on #goalsView. Rollback: ballot-results.v1.6.1.2026-07-28.bak. Prior: v1.6.1 2026-07-28 — two-critic design audit applied (critics on Sonnet, synthesis + edits by Albert main thread): ⭐ BOTH critics independently caught the sticky quick-nav painting UNDER #appHeader on scroll (both sticky at top:0, header z-index 80 wins) → nav top now set at render to the live header height · deps+budget rows demoted behind a per-card "🔗 deps · 💲 budget" expander (auto-open when populated) — the 67-card height lever · visual emphasis INVERTED: unruled cards carry the orange left-border accent, ruled cards go calm (the eye hunts what's left, not what's done) · whiteboard legend line added · caution-strip grammar fixed ("1 goal depends") · goalKey() folds kind in unconditionally (two same-named pulseless additions can no longer share a ruling) · dep-chip touch targets enlarged · leaders with nothing to rule render as a muted stub ("ballot in — no goals to rule" vs "not yet returned") instead of vanishing · view-toggle button got its own class. Deliberately NOT taken: focus-preservation on mid-session ballot re-drops (all 7 ballots already in — window closed) · full keyboard access for chips (mouse/TV room tool). Rollback: ballot-results.v1.6.2026-07-28.bak (pre-audit) · ballot-results.v1.5.2026-07-28.bak (pre-room-mechanics). Prior: v1.6 2026-07-28 — 🎯 Goals tab room-mechanics: ＋ Add-goal-in-room per leader (name + optional bars, lives in its own cache layer CACHE.roomAdds, 🆕 badge, pulse created at fold) · 🧾 WHITEBOARD VIEW toggle (one-page triage-style overview: per-leader columns, tiles tinted by ruling status, badges 👥/➕/🆕/⭐/🔗n/💲, click a tile → jumps to its card; caution strip = inbound cross-dept dependency load per leader, ⚠ at 3+) · 🔗 cross-dept dependency chips on every card (tap the leaders/depts a goal depends on; rides export as crossDeptDeps + names) · 💲 expected-budget/additional-spend line on every card (optional; rides export as expectedBudget — the accounting catch-net). Backup: ballot-results.v1.5.2026-07-28.bak. Prior: v1.5 2026-07-28 — 🎯 GOALS tab: goal-confirmation board for the room. Per-leader slates from the same dropped ballots (picked + additions, G/SG/how-measured bars, MB pulse-ID chips), PLUS each leader's directs'-slate candidates as ruleable cards (grouped by direct, routed/own badges; candidates the leader already struck stay out — Cameron's ask, the directs' goals get decided in the room too). Ruling chips per goal (✅ Confirmed / ✏️ Modified / ❌ Cut — additions carry ➕ Added-in-room), per-goal ruling note, sticky quick-nav with live per-leader ruled/total counts (click scrolls + un-collapses), collapsible per-leader sections, progress strip, ⬇ Export goal rulings → einstein-qgr-goal-rulings/v1 JSON (carries pulse IDs + direct name so the Master Backlog fold is mechanical: update pulse X with finalized status) + markdown to clipboard for the HQ log. Rulings persist in the same browser cache layer as decision rulings; Clear-all wipes both. Deep link: #goals. Prior: v1.4 2026-07-28 — per-question room TIMERS on the Decision Board: click-to-start chip per card (pause on click, reset on double-click), blinks orange past 10:00 and red past 20:00 while running, starting one pauses the others, clock survives reload via the same cache. Prior: v1.3 2026-07-28 — ⚖️ DECISION BOARD tab: digest-driven room agenda (RATIFY/NARROW/DECIDE/MISLABELED triage replacing the split badge's blind spots), per-leader recap rows w/ click-to-verbatim, layer-1 prompts + layer-2 copy-button facilitation prompt, ruling strip (Decide/Defer/Delegate + dissent-noted) persisted in the same cache + export to JSON/markdown for the HQ decision log. Digest = einstein-qgr-digest/v1, dropped through the same dropzone, newest-wins on preparedAt; hosted page still ships EMPTY (digest + ballots are the sensitive layer). Prior: ballot-results v1.2 2026-07-28 — 🏆 CELEBRATE MODE folded in (Cameron: "combine ballot results and celebration presentation into one place — one drag-in"). Third header mode between Aggregate and Room Reveal: Best-of-Q2 wall (per-leader cards, Personal/Professional badges, photos rendered from the v7 exports' embedded data-URLs) + Legends board (stories + named-by tally) + full-screen ▶ Present slide stepper (arrow keys / click / Esc; best-things slides then legend slides). Reads CACHE raw (not the normalized layer — parseBallot + Node QC harness untouched); v1–v6 files still parse everywhere, they just show "no celebration sections — ask for a re-export" per leader on this tab. Deep link: #celebrate opens straight into the tab (HQ agenda links use it). Same single drop zone feeds all three modes; ballots+photos persist in this browser's cache (if photo weight ever trips the storage quota the existing not-saving toast fires — everything still works for the session, re-drop after reload). Standalone qgr-celebration-wall.html RETIRED same day → redirect stub to this page. Prior: v1.1 2026-07-27 — accepts schema v6 (directSlates): new Aggregate-mode section "Directs' Q3 Slates (drafts)" grouped leader → direct → candidate (critical stars, removed items struck, routed/own badges, pulse links). Shows "no slate returned" for the five expected leaders (amanda/anne/matisen/mike/brian) missing one; never flags cameron/paul as missing since they don't own this module. v1-v5 files still parse — directSlates absent is fine (defaults to []). Room Reveal untouched. Prior: v1.0 2026-07-27 — LOCAL-ONLY, never deploy: ballots are the sensitive layer -->
 <style>
 :root{
   --orange-50:#FEF6EC; --orange-100:#FDE3C2; --orange-500:#EF8B22; --orange-700:#D96B10; --orange-900:#CC5500;
@@ -247,6 +247,15 @@ a.pulselink:hover{text-decoration:underline}
 .groom-chip.on-confirmed{background:#2e7d32;border-color:#2e7d32;color:#fff}
 .groom-chip.on-modified{background:#ef6c00;border-color:#ef6c00;color:#fff}
 .groom-chip.on-cut{background:#c62828;border-color:#c62828;color:#fff}
+.groom-critchip{font-size:12px;font-weight:700;border-radius:var(--radius-pill,999px);padding:3px 12px;cursor:pointer;border:1px solid var(--grey-300,#cfd6dc);background:#fff;color:var(--grey-600,#4a5560);user-select:none}
+.groom-critchip.on{background:#b8860b;border-color:#b8860b;color:#fff}
+.groom-critcount{font-size:11.5px;font-weight:800;border-radius:999px;padding:1px 9px;margin-left:8px;border:1px solid #b8860b;color:#b8860b}
+.groom-critcount.warn{border-color:#ef6c00;color:#ef6c00}
+.groom-holding{margin:14px 0 4px;border:1px dashed var(--grey-300,#cfd6dc);border-radius:10px;background:var(--grey-50,#f7f9fa)}
+.groom-holding>summary{cursor:pointer;user-select:none;font-weight:700;font-size:13px;color:#c62828;padding:9px 14px;list-style:none}
+.groom-holding>summary::-webkit-details-marker{display:none}
+.groom-holding .groom-card{opacity:.75;margin:8px 12px}
+.groom-holding-direct{font-size:11.5px;font-weight:700;color:var(--grey-600,#4a5560);margin:8px 12px -4px}
 .groom-note{width:100%;margin-top:8px;font-size:12.5px;padding:6px 8px;border:1px solid var(--grey-300,#cfd6dc);border-radius:8px;font-family:inherit}
 .groom-exportbtn{font-size:13px;font-weight:700;border-radius:var(--radius-pill,999px);padding:6px 16px;cursor:pointer;border:1px solid var(--navy-500,#0d2b4e);background:var(--navy-500,#0d2b4e);color:#fff}
 .groom-exportbtn:disabled{opacity:.4;cursor:default}
@@ -1826,12 +1835,19 @@ function barRowHtml(k, field, original){
     '<button class="gbar-editbtn" title="Edit '+BAR_LABELS[field]+' live — the ballot original is kept">✏️</button></div>';
 }
 
+// v2.2: effective critical = the room's toggle where set, the ballot flag
+// otherwise (r.critical is a real override in BOTH directions — undefined
+// means "inherit ballot", false means "the room un-starred it").
+function isCriticalFinal(g, r){
+  r = r || CACHE.goalRulings[goalKey(g.leader,g)] || {};
+  return r.critical !== undefined ? !!r.critical : !!g.critical;
+}
 function goalCardHtml(g){
   var k = goalKey(g.leader, g);
   var r = CACHE.goalRulings[k] || {};
   var cls = r.status ? ' ruled-'+r.status : '';
   var html = '<div class="groom-card'+cls+(g.kind==="direct"?' groom-directcard':'')+'" data-gkey="'+esc(k)+'">';
-  html += '<div class="gt">'+(g.critical?'⭐ ':'')+esc(g.name)+
+  html += '<div class="gt">'+(isCriticalFinal(g,r)?'⭐ ':'')+esc(g.name)+
     (g.kind==="addition"?'<span class="groom-addbadge">➕ addition — no pulse yet</span>':'')+
     (g.kind==="room-added"?'<span class="groom-newbadge">🆕 added in room — pulse at fold</span>':'')+
     (g.kind==="room-added"&&g.assignee?' <span class="badge opt">👤 assigned to '+esc(g.assignee)+'</span>':'')+
@@ -1850,7 +1866,8 @@ function goalCardHtml(g){
   html += '<div class="groom-chips">'+
     '<span class="groom-chip'+(r.status==="confirmed"?' on-confirmed':'')+'" data-status="confirmed">✅ Confirmed</span>'+
     '<span class="groom-chip'+(r.status==="modified"?' on-modified':'')+'" data-status="modified">✏️ Modified</span>'+
-    '<span class="groom-chip'+(r.status==="cut"?' on-cut':'')+'" data-status="cut">❌ Cut</span></div>';
+    '<span class="groom-chip'+(r.status==="cut"?' on-cut':'')+'" data-status="cut">❌ Cut</span>'+
+    '<span class="groom-critchip'+(isCriticalFinal(g,r)?' on':'')+'" data-crit="1" title="Each leader marks their TWO critical goals — same for each direct’s slate">⭐ Critical</span></div>';
   html += '<div class="groom-fwrow"><span class="groom-fwlabel">Flywheel component:</span>'+
     FLYWHEEL_OPTS.map(function(o){
       return '<span class="groom-fwchip'+(r.flywheel===o.id?' on':'')+'" data-fw="'+o.id+'">'+o.label+'</span>';
@@ -1891,7 +1908,7 @@ function commitOpenBarEditors(){
 function anyGoalWork(){
   return Object.keys(CACHE.goalRulings||{}).some(function(k){
     var r = CACHE.goalRulings[k];
-    return !!(r && (r.status || r.flywheel || (r.note||"").trim() || (r.budget||"").trim() || (r.deps||[]).length || (r.barEdits && Object.keys(r.barEdits).length)));
+    return !!(r && (r.status || r.flywheel || r.critical !== undefined || (r.note||"").trim() || (r.budget||"").trim() || (r.deps||[]).length || (r.barEdits && Object.keys(r.barEdits).length)));
   });
 }
 function openBarEditor(wrap){
@@ -1959,7 +1976,8 @@ function goalsWhiteboardHtml(roster){
   LEADERS.forEach(function(l){
     var mine = roster.filter(function(g){ return g.leader === l.id; });
     if(!mine.length) return;
-    var mruled = mine.filter(function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return r && r.status; }).length;
+    var mliveWb = mine.filter(function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return !(r && r.status === "cut"); });
+    var mruled = mliveWb.filter(function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return r && r.status; }).length;
     function wbTile(g, isDirect){
       var k = goalKey(l.id, g);
       var r = CACHE.goalRulings[k] || {};
@@ -1969,7 +1987,7 @@ function goalsWhiteboardHtml(roster){
       if(r.barEdits && Object.keys(r.barEdits).length) badges.push('✏️');
       if((r.deps||[]).length) badges.push('🔗'+r.deps.length);
       if((r.budget||"").trim()) badges.push('💲');
-      if(g.critical) badges.push('⭐');
+      if(isCriticalFinal(g, r)) badges.push('⭐');
       if(r.flywheel){
         var fo = FLYWHEEL_OPTS.filter(function(o){ return o.id===r.flywheel; })[0];
         badges.push(fo ? fo.badge : '❔');
@@ -1979,7 +1997,7 @@ function goalsWhiteboardHtml(roster){
     }
     var ownG = mine.filter(function(g){ return g.kind !== "direct"; });
     var dirG = mine.filter(function(g){ return g.kind === "direct"; });
-    html += '<div class="wb-col"><h4>'+esc(l.name.split(" ")[0])+' <span style="color:var(--grey-500,#6b7680);font-weight:400">'+mruled+'/'+mine.length+'</span></h4>';
+    html += '<div class="wb-col"><h4>'+esc(l.name.split(" ")[0])+' <span style="color:var(--grey-500,#6b7680);font-weight:400">'+mruled+'/'+mliveWb.length+(mine.length>mliveWb.length?' · '+(mine.length-mliveWb.length)+' cut':'')+'</span></h4>';
     ownG.forEach(function(g){ html += wbTile(g, false); });
     if(dirG.length){
       var byD = {};
@@ -2003,11 +2021,16 @@ function renderGoalsBoard(){
     el.innerHTML = '<div class="section"><div class="notsub">No ballots loaded — drop files on the Aggregate tab (one drop feeds every mode).</div></div>';
     return;
   }
-  var ruled = roster.filter(function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return r && r.status; }).length;
+  // v2.2: cut goals leave the live counts entirely — the denominator is the
+  // LIVE slate (Cameron's ask), with cuts reported separately.
+  var statusOf = function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return (r && r.status) || ""; };
+  var live = roster.filter(function(g){ return statusOf(g) !== "cut"; });
+  var cutN = roster.length - live.length;
+  var ruled = live.filter(function(g){ return !!statusOf(g); }).length;
   var html = '<div class="section">';
   html += '<div class="groom-head"><div><h2 style="margin:0">Q3 Goal Confirmation</h2>'+
-    '<div class="shint" style="margin:4px 0 0">Rule each goal live: ✅ keeps it as written · ✏️ means the room changed the bars or wording (say how in the note) · ❌ cuts it. Additions start unruled — confirming one means it becomes a real Q3 goal and gets a Master Backlog pulse at the fold. Directs\' slate candidates are ruleable too (items the leader already struck stay struck and never need a ruling). Tag every goal\'s flywheel component (①–⑥ from the flywheel exercise · 🏃 PACe · ❔ Other). Export at the end of the block; Albert folds it into the Master Backlog so every confirmed goal\'s pulse gets its finalized status and leaders pull them to their boards. Working in your own copy? Export the same way and send the file to Cameron — his room merges it for final confirmation.</div></div>'+
-    '<div style="display:flex;gap:12px;align-items:center"><span class="groom-progress" id="groomProgress">'+ruled+' / '+roster.length+' ruled</span>'+
+    '<div class="shint" style="margin:4px 0 0">Rule each goal live: ✅ keeps it as written · ✏️ means the room changed the bars or wording (say how in the note) · ❌ cuts it. Additions start unruled — confirming one means it becomes a real Q3 goal and gets a Master Backlog pulse at the fold. Directs\' slate candidates are ruleable too (items the leader already struck stay struck and never need a ruling). Tag every goal\'s flywheel component (①–⑥ from the flywheel exercise · 🏃 PACe · ❔ Other). Mark each leader\'s TWO ⭐ critical goals (and two per direct\'s slate — the ⭐ n/2 counters go calm at exactly two). Cut goals drop out of the live list and counts into the 🗃 holding queue at the bottom of the leader\'s section — un-cut from there to restore. Export at the end of the block; Albert folds it into the Master Backlog so every confirmed goal\'s pulse gets its finalized status and leaders pull them to their boards. Working in your own copy? Export the same way and send the file to Cameron — his room merges it for final confirmation.</div></div>'+
+    '<div style="display:flex;gap:12px;align-items:center"><span class="groom-progress" id="groomProgress">'+ruled+' / '+live.length+' ruled'+(cutN?' · '+cutN+' cut':'')+'</span>'+
     '<button class="groom-viewbtn" id="btnGoalsView">'+(GOALS_VIEW==="board"?'🗂 Card view':'🧾 Whiteboard view')+'</button>'+
     '<button class="groom-exportbtn" id="btnExportGoals"'+(anyGoalWork()?'':' disabled')+'>⬇ Export goal rulings</button></div></div>';
 
@@ -2037,8 +2060,9 @@ function renderGoalsBoard(){
   LEADERS.forEach(function(l){
     var mine = roster.filter(function(g){ return g.leader === l.id; });
     if(!mine.length) return;
-    var mruled = mine.filter(function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return r && r.status; }).length;
-    html += '<span class="groom-navchip" data-nav="'+esc(l.id)+'"><b>'+esc(l.name.split(" ")[0])+'</b> <span class="gnc" data-navcount="'+esc(l.id)+'">'+mruled+'/'+mine.length+'</span></span>';
+    var mlive = mine.filter(function(g){ return statusOf(g) !== "cut"; });
+    var mruled = mlive.filter(function(g){ return !!statusOf(g); }).length;
+    html += '<span class="groom-navchip" data-nav="'+esc(l.id)+'"><b>'+esc(l.name.split(" ")[0])+'</b> <span class="gnc" data-navcount="'+esc(l.id)+'">'+mruled+'/'+mlive.length+'</span></span>';
   });
   html += '</div>';
 
@@ -2053,14 +2077,21 @@ function renderGoalsBoard(){
         '<div class="groom-body" data-body="'+esc(l.id)+'"><button class="groom-addgoal" data-add="'+esc(l.id)+'">＋ Add goal in room</button></div></div>';
       return;
     }
-    var own = mine.filter(function(g){ return g.kind !== "direct"; });
-    var dir = mine.filter(function(g){ return g.kind === "direct"; });
+    // v2.2: cut goals leave the live view — they render inside a collapsed
+    // 🗃 holding queue at the bottom of the leader's section (still fully
+    // interactive, so un-cutting from there restores them).
+    var mineLive = mine.filter(function(g){ return statusOf(g) !== "cut"; });
+    var mineCut = mine.filter(function(g){ return statusOf(g) === "cut"; });
+    var own = mineLive.filter(function(g){ return g.kind !== "direct"; });
+    var dir = mineLive.filter(function(g){ return g.kind === "direct"; });
+    var ownCrit = mineLive.filter(function(g){ return g.kind !== "direct" && isCriticalFinal(g); }).length;
     var collapsed = !!GOALS_COLLAPSED[l.id];
     // seats listed but no candidate goals returned (e.g. Brian's 15) — surface it, don't hide it
     var emptySeats = (aggDS[l.id]||[]).filter(function(d){ return !(d.candidates||[]).some(function(c){ return !c.removed; }); }).length;
     html += '<div class="groom-leader" id="groom-sec-'+esc(l.id)+'">';
     html += '<h3 class="groom-lhead" data-collapse="'+esc(l.id)+'" style="cursor:pointer;user-select:none"><span class="groom-arrow">'+(collapsed?'▸':'▾')+'</span> '+esc(l.name)+
-      '<span class="lrole">'+esc(l.role)+' · '+own.length+' goal'+(own.length===1?'':'s')+(dir.length?' + '+dir.length+' for directs':'')+'</span></h3>';
+      '<span class="lrole">'+esc(l.role)+' · '+own.length+' goal'+(own.length===1?'':'s')+(dir.length?' + '+dir.length+' for directs':'')+(mineCut.length?' · '+mineCut.length+' cut':'')+'</span>'+
+      '<span class="groom-critcount'+(ownCrit===2?'':' warn')+'" title="Mark exactly TWO of your own goals critical">⭐ '+ownCrit+'/2</span></h3>';
     html += '<div class="groom-body" data-body="'+esc(l.id)+'"'+(collapsed?' style="display:none"':'')+'>';
     own.forEach(function(g){ html += goalCardHtml(g); });
     if(dir.length || emptySeats){
@@ -2068,12 +2099,22 @@ function renderGoalsBoard(){
       var byDirect = {};
       dir.forEach(function(g){ (byDirect[g.direct]=byDirect[g.direct]||[]).push(g); });
       Object.keys(byDirect).forEach(function(dn){
-        html += '<div class="groom-directname">'+esc(dn)+' <span class="badge opt">'+byDirect[dn].length+' candidate'+(byDirect[dn].length===1?'':'s')+'</span></div>';
+        var dCrit = byDirect[dn].filter(function(g){ return isCriticalFinal(g); }).length;
+        html += '<div class="groom-directname">'+esc(dn)+' <span class="badge opt">'+byDirect[dn].length+' candidate'+(byDirect[dn].length===1?'':'s')+'</span>'+
+          '<span class="groom-critcount'+(dCrit===2?'':' warn')+'" title="Mark TWO of this direct’s goals critical">⭐ '+dCrit+'/2</span></div>';
         byDirect[dn].forEach(function(g){ html += goalCardHtml(g); });
       });
       if(emptySeats) html += '<div class="gbar blank" style="margin-left:18px">'+emptySeats+' direct seat'+(emptySeats===1?'':'s')+' listed with no candidate goals in the ballot — build '+(emptySeats===1?'that slate':'those slates')+' live or after the room.</div>';
     }
     html += '<button class="groom-addgoal" data-add="'+esc(l.id)+'">＋ Add goal in room</button>';
+    if(mineCut.length){
+      html += '<details class="groom-holding"><summary>🗃 Holding queue — '+mineCut.length+' cut goal'+(mineCut.length===1?'':'s')+' (click to review · un-cut restores) ▸</summary>';
+      mineCut.forEach(function(g){
+        if(g.kind==="direct") html += '<div class="groom-holding-direct">👥 '+esc(g.direct)+'</div>';
+        html += goalCardHtml(g);
+      });
+      html += '</details>';
+    }
     html += '</div></div>';
   });
   html += '</div>';
@@ -2133,16 +2174,46 @@ function renderGoalsBoard(){
       var k = card.getAttribute("data-gkey");
       var val = chip.getAttribute("data-status");
       if(!CACHE.goalRulings[k]) CACHE.goalRulings[k] = { status:"", note:"" };
-      var next = CACHE.goalRulings[k].status === val ? "" : val;
+      var prev = CACHE.goalRulings[k].status;
+      var next = prev === val ? "" : val;
       CACHE.goalRulings[k].status = next;
       CACHE.goalRulings[k].at = new Date().toISOString();
       persistCache();
-      card.className = "groom-card" + (next ? " ruled-"+next : "");
+      // cut/un-cut moves the card between the live list and the holding queue —
+      // that relocation needs a full re-render; everything else updates in place
+      if(next === "cut" || prev === "cut"){
+        commitOpenBarEditors();
+        renderGoalsBoard();
+        var sec = document.getElementById("groom-sec-"+k.split("|")[0]);
+        if(sec) sec.scrollIntoView({ block:"nearest" });
+        return;
+      }
+      card.className = "groom-card" + (next ? " ruled-"+next : "") + (card.className.indexOf("groom-directcard")>-1?" groom-directcard":"");
       card.querySelectorAll(".groom-chip").forEach(function(b){
         var s = b.getAttribute("data-status");
         b.className = "groom-chip" + (s===next && next ? " on-"+s : "");
       });
       updateGoalsProgress();
+    });
+  });
+  // ⭐ critical toggle — each leader marks their TWO criticals (and two per
+  // direct). Stored as an override in goalRulings[k].critical so the ballot's
+  // own critical flag survives untouched; counts update in place (no re-render).
+  el.querySelectorAll(".groom-critchip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      var card = chip.closest(".groom-card");
+      var k = card.getAttribute("data-gkey");
+      if(!CACHE.goalRulings[k]) CACHE.goalRulings[k] = { status:"", note:"" };
+      var g = goalRoster().filter(function(x){ return goalKey(x.leader,x)===k; })[0];
+      var cur = isCriticalFinal(g||{}, CACHE.goalRulings[k]);
+      CACHE.goalRulings[k].critical = !cur;
+      CACHE.goalRulings[k].at = new Date().toISOString();
+      persistCache();
+      chip.classList.toggle("on", !cur);
+      var star = card.querySelector(".gt");
+      if(star){ star.innerHTML = (!cur ? "⭐ " : "") + star.innerHTML.replace(/^⭐ /, ""); }
+      updateGoalsProgress();
+      updateCritCounts(k.split("|")[0]);
     });
   });
   // 🔄 flywheel-component pills — tap to set, tap again to clear
@@ -2266,17 +2337,38 @@ function renderGoalsBoard(){
 
 function updateGoalsProgress(){
   var roster = goalRoster();
-  var ruled = roster.filter(function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return r && r.status; }).length;
+  var statusOf = function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return (r && r.status) || ""; };
+  var live = roster.filter(function(g){ return statusOf(g) !== "cut"; });
+  var cutN = roster.length - live.length;
+  var ruled = live.filter(function(g){ return !!statusOf(g); }).length;
   var p = document.getElementById("groomProgress");
-  if(p) p.textContent = ruled + " / " + roster.length + " ruled";
+  if(p) p.textContent = ruled + " / " + live.length + " ruled" + (cutN ? " · " + cutN + " cut" : "");
   var b = document.getElementById("btnExportGoals");
   if(b) b.disabled = !anyGoalWork();
-  // refresh the quick-nav per-leader counts
+  // refresh the quick-nav per-leader counts (cut goals excluded — Cameron's ruling)
   document.querySelectorAll("[data-navcount]").forEach(function(c){
     var lid = c.getAttribute("data-navcount");
-    var mine = roster.filter(function(g){ return g.leader === lid; });
-    var mruled = mine.filter(function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return r && r.status; }).length;
-    c.textContent = mruled + "/" + mine.length;
+    var mlive = live.filter(function(g){ return g.leader === lid; });
+    var mruled = mlive.filter(function(g){ return !!statusOf(g); }).length;
+    c.textContent = mruled + "/" + mlive.length;
+  });
+}
+
+// refresh a leader section's ⭐ n/2 chips (leader-level + per-direct) in place
+function updateCritCounts(lid){
+  var sec = document.getElementById("groom-sec-"+lid);
+  if(!sec) return;
+  var roster = goalRoster();
+  var statusOf = function(g){ var r = CACHE.goalRulings[goalKey(g.leader,g)]; return (r && r.status) || ""; };
+  var mineLive = roster.filter(function(g){ return g.leader === lid && statusOf(g) !== "cut"; });
+  var ownCrit = mineLive.filter(function(g){ return g.kind !== "direct" && isCriticalFinal(g); }).length;
+  var head = sec.querySelector("h3 .groom-critcount");
+  if(head){ head.textContent = "⭐ " + ownCrit + "/2"; head.className = "groom-critcount" + (ownCrit===2 ? "" : " warn"); }
+  sec.querySelectorAll(".groom-directname").forEach(function(dn){
+    var name = dn.childNodes[0] && dn.childNodes[0].textContent.trim();
+    var dCrit = mineLive.filter(function(g){ return g.kind === "direct" && g.direct === name && isCriticalFinal(g); }).length;
+    var chip = dn.querySelector(".groom-critcount");
+    if(chip){ chip.textContent = "⭐ " + dCrit + "/2"; chip.className = "groom-critcount" + (dCrit===2 ? "" : " warn"); }
   });
 }
 
@@ -2298,7 +2390,8 @@ function exportGoalRulings(){
     var finHM = be.howMeasured !== undefined ? be.howMeasured : g.howMeasured;
     goalsOut.push({
       leader: g.leader, leaderName: g.leaderName, name: g.name,
-      pulse: g.pulse, kind: g.kind, direct: g.direct || null, assignedTo: g.assignee || null, critical: g.critical, shared: g.shared,
+      pulse: g.pulse, kind: g.kind, direct: g.direct || null, assignedTo: g.assignee || null,
+      critical: isCriticalFinal(g, r), criticalSetInRoom: r.critical !== undefined ? true : undefined, ballotCritical: g.critical, shared: g.shared,
       flywheelComponent: r.flywheel || null,
       green: finGreen, superGreen: finSG, howMeasured: finHM,
       barsEditedInRoom: beFields,
@@ -2309,7 +2402,7 @@ function exportGoalRulings(){
     });
     if(!mdByLeader[g.leaderName]) mdByLeader[g.leaderName] = [];
     mdByLeader[g.leaderName].push(
-      "- "+(g.kind==="direct" ? "["+g.direct+"] " : "")+(g.kind==="room-added" ? "[ADDED IN ROOM"+(g.assignee?" → "+g.assignee:"")+"] " : "")+"**"+(g.name)+"** "+(g.pulse ? "(pulse "+g.pulse+")" : "(NO PULSE — create at fold)")+
+      "- "+(isCriticalFinal(g,r) ? "⭐ CRITICAL " : "")+(g.kind==="direct" ? "["+g.direct+"] " : "")+(g.kind==="room-added" ? "[ADDED IN ROOM"+(g.assignee?" → "+g.assignee:"")+"] " : "")+"**"+(g.name)+"** "+(g.pulse ? "(pulse "+g.pulse+")" : "(NO PULSE — create at fold)")+
       " → "+(r.status||"unruled").toUpperCase()+(r.note ? " — "+r.note : "")+
       (r.flywheel ? " · "+FLYWHEEL_LABELS[r.flywheel] : "")+
       (depNames.length ? " · 🔗 depends on: "+depNames.join(", ") : "")+
