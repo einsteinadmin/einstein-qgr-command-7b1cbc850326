@@ -994,7 +994,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v4.21 2026-07-30'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip. ⚠ Cameron 7/28 late: index.html is ALBERT'S file — tool agents work their own tool files, Albert folds the HQ entries (three same-night version collisions prompted this)
+  var HQ_VERSION = 'v4.22 2026-07-30'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip. ⚠ Cameron 7/28 late: index.html is ALBERT'S file — tool agents work their own tool files, Albert folds the HQ entries (three same-night version collisions prompted this)
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   /* ── ROOM-COPY LINKS (Cameron 7/28: "the Celebrate tab loaded as a broken 404")
      Four surfaces point at LOCAL-ONLY seeded files — the ballots and the leaders'
@@ -1363,6 +1363,7 @@
     day2: {
       label: 'Day 2 · Thu 7/30 — DECIDE + CASCADE',
       items: [
+        'Share Legends \u2014 each leader brings a legend for someone else in the room',
         'Quarterly theme mechanics lock \u2014 mechanics per audience (managers \u00b7 movers \u00b7 CER + CX team \u00b7 leadership + EE) plus poster, prizes and success metrics',
         'Critical Number #2 finalize \u2014 Critical #1 is theme-related',
         'Complete the cascading goals chart \u2014 every leader down through their directs',
@@ -1578,6 +1579,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/30b', text: '\u{1F3C6} SHARE LEGENDS ADDED TO THE DAY-2 AGENDA — CHECKED (HQ v4.22). Cameron’s ask: the room opened Day 2 with Share Legends (each leader brings a legend for someone ELSE in the room) but the whiteboard-rebuilt agenda never carried the row — added as Day-2 block #1 so the record matches what ran. Inserted via the standing seed-merge with a new fill-only SEED_PRECHECKED map: because the block already ran live this morning, the row lands ALREADY CHECKED in every browser (initial insert only — existing rows and un-checks are never touched). Legends themselves ran off the Ballot Room \u{1F3C6} Celebrate tab (Mike’s pre-loaded nod to Anne + spoken-live rounds per the 7/28 optional-this-quarter ruling).' },
     { date: '7/30a', text: '\u{1F9EE} SCORING CALIBRATION ROOM ON THE DAY-2 AGENDA (HQ v4.21). New optional block inserted right before the POST-QGR rows per Cameron: the <b>PA Scoring Calibration Room</b> (calibration-room/scoring-calibration-room.html, :8136, LOCAL ONLY \u2014 real Q3 directs data). Built + two-critic-audited this morning: tests Cameron\u2019s three rulings live (all-3s = B \u00b7 A floor above standard \u00b7 all-5s = A+), 3 open forks w/ inline dials (the straight-4s/G\u21923 question \u00b7 values-vs-delivery \u00b7 the politician pattern), 8 stress-test archetypes, blind-guess-then-reveal live scorer, re-grades yesterday\u2019s 30 PA-directs people under any candidate scheme (fidelity-checked: the \u201Ctoday\u201D preset reproduces the ratified 20A/8B/2C exactly), lock step exports ruling JSON + plain-English \u2014 Albert folds the export into leadership PA + pa-directs + FLM hub 2b. Also carries the NEW two-axis Nine-More Test (see the survey-change entry below when it lands).' },
     { date: '7/29g', text: '\u{1F4DD} A RUNNING TO-DO LIST ON EVERY PHASE + THE POWER-OF-ONE CARRY (HQ v4.20). Two asks from Cameron the evening of Day 1. ① <b>“I feel like I need a place to keep a running list of post-QGR to-dos.”</b> Each phase now carries a <b>\u{1F4DD} My running list</b> tile under the ⚡ this-quarter-only tile — type a to-do, Enter or + Add, check it off, attach a note, ✕ to remove. <b>Phase ④ is the post-QGR one</b> and says so. Same register as ⚡ extras (cleared at quarter reset, kept OUT of the phase progress bar so SOP completion stays comparable across quarters) but authored in-page instead of seeded in code. Rides Export/Import; older export JSONs simply have none. ⚠ Build note: each to-do carries a <b>stable id and its own done flag</b> rather than an index-keyed entry in <code>state.phases</code> — these rows get added and deleted mid-cycle, and index-keyed checkmarks re-pointing on delete is the exact bug class this file already fixed twice (_v5/_v7 remaps). ② <b>Power of One moves to pre-QGR prep</b> — noted on the Phase ④ <b>“Debrief / retro”</b> row per Cameron: run it in the same ~2-weeks-before wave as the Flywheel and PACe exercises instead of as a Day-1 “optional if the room has time” block. The room proved it generates real backlog candidates, which is prep work, not room work. Paul’s tool was rebuilt the same evening to make that sequence work (<b>v1.2</b> — Priority + Department columns on every idea, vocabularies pulled live from Master Backlog board 18408300070, JSON export carrying Monday’s label/group ids for a COS to cross-reference + dedupe + file). New sequence: run in prep → export → COS dedupes into the backlog → the room only debates survivors. Folds into the staged leader-prep hub at the Q3 SOP close-out.' },
     { date: '7/29f', text: '\u{1F3D5} Q3 THEME LOCKED INTO THE ROOM FILE (HQ v4.19). The Day-2 theme block ran early and Cameron exported it (6:16pm) \u2014 like the SWT and flywheel before it, that ruling lived ONLY in the room machine\u2019s localStorage. It is now baked into <b>ballot-room-q3-LOADED.html</b> so the locked state loads on any browser: <b>theme name = \u201cTraining Camp\u201d</b> (custom lock, beating Back to School\u2019s 3 write-ins and Level Up\u2019s 1 \u2014 Brian wrote in \u201cEinstein Training Camp,\u201d Matisen argued it in his theme answer) \u00b7 <b>all 5 cascade levels set</b> (Movers \u00b7 Leads \u00b7 Managers \u00b7 CERs \u00b7 EE+IT) with room-final Green/Super Green gates \u2014 the spine is enroll-by-8/20 then fast-track-or-stage-4 by 10/19, managers carry a sandbox-training-by-8/19 gate plus a <b>70% adoption floor deliberately dropped from 80% to account for part-time movers</b> (Cameron\u2019s room note), CERs land on call grading (>60 avg Green / >70 Super Green, Sept 1 start after a level-set month), EE+IT = Matisen\u2019s mobile-app rollout \u00b7 <b>company celebration plan</b> written (EOQ party + EMC University hats for graduates, socks for Super Green, hired-mid-quarter still earns; Sept = perfect attendance \u2192 long sleeves; Oct = top trainer by peer vote \u2192 beanies; managers = half-day field trip, with lunch at Super Green; CERs = hats + lunch). Mechanics: <code>build_room_seed.py</code> gained a third seed layer (theme alongside ballots + digest), keyed off the export\u2019s own stamp \u2014 it fills a browser that has no theme work of its own and <b>refuses to overwrite a room in progress</b> (guard tested by injecting rival local state; it held). Verified on a clean boot: all 30 room-final fields hydrate byte-exact from the export, name banner + 5/5 progress render, 7 ballots + digest still seed. \u26a0 STILL OPEN from this block: <b>both flags are blank</b> \u2014 Brian\u2019s capacity warning and Matisen\u2019s scoreboard baseline got no room resolution \u2014 and no per-level 🎁 reward or 💲 budget was entered (the money lives only in the company plan text). Theme rulings staged at <code>theme-rulings-q3-2026.json</code>; the Master-Backlog / FLM run-of-show / scorecard-placeholder fold is still owed.' },
@@ -2244,6 +2246,11 @@
   // state gets inserted at its seed position. Rows Cameron deliberately ✕-removes are remembered
   // in state.agenda.removedTexts (written by the remove handler) and stay gone.
   (function mergeNewSeedRows() {
+    // rows that already happened in the room before their seed row existed — insert them CHECKED
+    // (fill-only: existing rows are never touched, this only affects the initial insert)
+    var SEED_PRECHECKED = {
+      'Share Legends — each leader brings a legend for someone else in the room': true // ran live Day-2 AM 7/30
+    };
     var removed = {};
     (state.agenda.removedTexts || []).forEach(function (t) { removed[t] = true; });
     var changed = false;
@@ -2271,7 +2278,7 @@
             break;
           }
         }
-        cur.splice(insertAt, 0, { text: t, checked: false, note: '', mk: t });
+        cur.splice(insertAt, 0, { text: t, checked: !!SEED_PRECHECKED[t], note: '', mk: t });
         have[t] = true;
         changed = true;
       });
