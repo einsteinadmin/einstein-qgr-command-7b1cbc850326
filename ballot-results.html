@@ -2599,6 +2599,10 @@ function renderTheme(){
   var openProps = {};
   el.querySelectorAll("details.tr-prop[open]").forEach(function(d){ openProps[d.getAttribute("data-pkey")] = 1; });
   var html = '<div class="section">';
+  // set by the seeded room copy (build_room_seed.py) once Cameron closes the theme block
+  if(typeof SEED_THEME_FINAL !== "undefined" && SEED_THEME_FINAL){
+    html += '<div class="groom-finalbanner">✅ FINAL — '+esc(SEED_THEME_FINAL)+'</div>';
+  }
   html += '<div class="groom-head"><div><h2 style="margin:0">Q3 Theme & Prizes</h2>'+
     '<div class="shint" style="margin:4px 0 0">The Day-2 theme-mechanics block runs off this tab. The direction is already locked seven-for-seven — speed to competence. What the room settles here: the NAME, the per-level gates (what Green/Super Green means for Movers, Leads, Managers, CERs, and the support crew), the rewards and prizes at each level, and the budget behind them. Everything typed here saves in this browser and rides the export; the ballots themselves are never changed.</div></div></div>';
   // sticky orientation strip — jump chips + live progress + export travel with the scroll
