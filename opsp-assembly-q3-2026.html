@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Q3 2026 OPSP — Assembly</title>
+<!-- opsp-assembly v1.0 2026-07-29 — the Q3 One-Page Strategic Plan, cell by cell, in the
+     exact order of the Growth Toolkit's two OPSP pages. Every cell carries the proposed Q3
+     value, a 📋 copy button, and an honest status: LOCKED (ruled this quarter, sourced),
+     CARRY (unchanged from the Q2 sheet), DRAFT (Albert's proposal — needs Cameron's yes),
+     OWED (blocked, and by whom). Paste cell-by-cell into the Replit OPSP + Vision Summary
+     builder, which stays the system of record. Sources: theme rulings 7/29 6:16pm ·
+     SWT + 7 Strata FINAL 7/29 2:50pm · the 7 Q3 ballots · Q2 OPSP pages 7-8 · strategy skill.
+     HOSTED on qgr-command (obscure + noindex) 7/29 so the HQ tile + the Day-1/Day-2 agenda rows
+     resolve in the room. Sensitivity pass done before the push: every content class on this page
+     is already hosted in this same repo — leader rock slates (ballot room) · strengths/weaknesses
+     and trends (SWT worksheet) · budget and reforecast figures (q2-materials financial deck). No
+     per-person grades, no PA content, no personnel detail. Re-check that before adding anything.
+     ⏰ SNAPSHOT, NOT A LIVE VIEW — it is built from those exports at a moment in time. Re-run
+     after Day-2 rulings land (goal confirm · Critical #2 · scoreboard · budget). -->
+<style>
+:root{
+  --orange-50:#FEF6EC; --orange-100:#FDE3C2; --orange-500:#EF8B22; --orange-900:#CC5500;
+  --navy-50:#EEF1F4; --navy-100:#CDD5DA; --navy-200:#9AADB7; --navy-400:#507080; --navy-500:#27343D;
+  --blue-50:#EBF4FB; --blue-100:#C3DFEF; --blue-500:#0979C3; --blue-700:#065E9A; --blue-900:#023B63;
+  --grey-50:#F4F5F5; --grey-100:#E2E3E4; --grey-200:#C0C2C4; --grey-400:#787C7F; --grey-500:#53575A; --grey-700:#363839;
+  --ok:#69995D; --warn:#CC5500; --stop:#CC0100;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--grey-50);color:var(--grey-700);
+  font-family:Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- header ---------- */
+header.top{background:var(--navy-500);color:#fff;padding:22px 0 18px;border-bottom:6px solid var(--orange-500)}
+header.top .wrap{padding-bottom:0}
+h1{margin:0;font-size:28px;font-weight:900;letter-spacing:-.01em}
+h1 span{color:var(--orange-500)}
+.sub{margin:6px 0 0;color:var(--navy-100);font-size:15px}
+.sub a{color:#fff}
+.counts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.count{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  padding:5px 13px;font-size:13px;font-weight:600;color:#fff}
+.count b{font-weight:900}
+.feeds{margin-top:14px;background:rgba(239,139,34,.13);border:1px solid rgba(239,139,34,.45);
+  border-left:4px solid var(--orange-500);border-radius:8px;padding:11px 15px;font-size:14px;
+  line-height:1.55;color:#F2F5F7;max-width:1000px}
+.feeds b{color:#fff}
+.feeds a{color:#FFD9AC;font-weight:600}
+
+/* ---------- sticky nav ---------- */
+nav.jump{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--grey-200);
+  box-shadow:0 1px 6px rgba(0,0,0,.05)}
+nav.jump .wrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding-top:9px;padding-bottom:9px}
+nav.jump a{font-size:13px;font-weight:600;color:var(--navy-500);text-decoration:none;border:1px solid var(--grey-200);
+  border-radius:999px;padding:5px 11px;background:#fff;white-space:nowrap}
+nav.jump a:hover{background:var(--blue-50);border-color:var(--blue-100);color:var(--blue-700)}
+nav.jump .spacer{flex:1}
+nav.jump .pgtag{font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--grey-400);
+  padding-right:2px}
+
+/* ---------- page + section ---------- */
+.page{margin-top:30px;background:#fff;border:1px solid var(--grey-200);border-radius:10px;overflow:hidden}
+.page > .phead{background:var(--orange-500);color:#fff;padding:14px 20px}
+.page > .phead h2{margin:0;font-size:21px;font-weight:900}
+.page > .phead p{margin:3px 0 0;font-size:14px;color:#FFF3E4}
+section.blk{border-top:1px solid var(--grey-200)}
+.bhead{background:var(--blue-500);color:#fff;padding:10px 20px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.bhead h3{margin:0;font-size:16px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.bhead .hint{font-size:13px;color:var(--blue-50);font-style:italic}
+.bhead .secbtn{margin-left:auto;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+  color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.bhead .secbtn:hover{background:rgba(255,255,255,.28)}
+.cells{display:grid;gap:1px;background:var(--grey-200)}
+.cells.c1{grid-template-columns:1fr}
+.cells.c2{grid-template-columns:repeat(2,1fr)}
+.cells.c3{grid-template-columns:repeat(3,1fr)}
+.cells.c4{grid-template-columns:repeat(4,1fr)}
+
+/* ---------- cell ---------- */
+.cell{background:#fff;padding:14px 16px 12px;display:flex;flex-direction:column;gap:7px;position:relative}
+.cell.span2{grid-column:span 2}
+.cell .lab{font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--navy-400)}
+.cell .val{font-size:15.5px;color:var(--grey-700);white-space:pre-wrap;word-break:break-word}
+.cell .val.big{font-size:20px;font-weight:900;color:var(--navy-500);line-height:1.25}
+.cell .val ol,.cell .val ul{margin:0;padding-left:20px}
+.cell .val li{margin-bottom:4px}
+.cell .val .who{color:var(--blue-700);font-weight:700}
+.cell .note{font-size:13px;color:var(--grey-500);border-left:3px solid var(--grey-200);padding-left:9px;line-height:1.45}
+.cell .note b{color:var(--grey-700)}
+.cell .foot{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:4px;flex-wrap:wrap}
+.src{font-size:11.5px;color:var(--grey-400);font-style:italic}
+.copy{background:#fff;border:1px solid var(--grey-200);border-radius:6px;padding:3px 9px;font-size:12px;
+  font-weight:700;color:var(--navy-500);cursor:pointer;font-family:inherit;white-space:nowrap}
+.copy:hover{background:var(--blue-50);border-color:var(--blue-100);color:var(--blue-700)}
+.copy.done{background:var(--ok);border-color:var(--ok);color:#fff}
+
+/* ---------- status ---------- */
+.chip{font-size:10.5px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;
+  padding:2px 7px;white-space:nowrap}
+.chip.locked{background:#E8F2E4;color:#3E6234;border:1px solid #C4DBBB}
+.chip.carry{background:var(--grey-100);color:var(--grey-500);border:1px solid var(--grey-200)}
+.chip.draft{background:var(--blue-50);color:var(--blue-700);border:1px solid var(--blue-100)}
+.chip.owed{background:var(--orange-50);color:var(--orange-900);border:1px solid var(--orange-100)}
+.cell.st-owed{background:#FFFCF7}
+.cell.st-owed .val{color:var(--orange-900);font-weight:600}
+.cell.st-draft{box-shadow:inset 3px 0 0 var(--blue-100)}
+.cell.st-locked{box-shadow:inset 3px 0 0 #C4DBBB}
+.cell.st-owed{box-shadow:inset 3px 0 0 var(--orange-500)}
+
+/* ---------- legend + closer ---------- */
+.legend{margin-top:26px;background:#fff;border:1px solid var(--grey-200);border-radius:10px;padding:16px 20px}
+.legend h4{margin:0 0 10px;font-size:13px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--navy-400)}
+.legend .row{display:flex;gap:11px;align-items:flex-start;margin-bottom:8px;font-size:14px}
+.legend .row:last-child{margin-bottom:0}
+.owedlist{margin-top:26px;background:#fff;border:1px solid var(--orange-100);border-left:5px solid var(--orange-500);
+  border-radius:10px;padding:16px 20px}
+.owedlist h4{margin:0 0 8px;font-size:16px;font-weight:900;color:var(--orange-900)}
+.owedlist ol{margin:0;padding-left:20px}
+.owedlist li{margin-bottom:7px;font-size:15px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--navy-500);color:#fff;
+  padding:11px 20px;border-radius:8px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;
+  transition:opacity .18s;z-index:99;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.toast.show{opacity:1}
+@media (max-width:900px){
+  .cells.c4{grid-template-columns:repeat(2,1fr)}
+  .cells.c3{grid-template-columns:1fr}
+  .cell.span2{grid-column:span 1}
+}
+@media (max-width:600px){ .cells.c4,.cells.c2{grid-template-columns:1fr} }
+@media print{
+  body{background:#fff} nav.jump,.copy,.secbtn{display:none}
+  .page{break-inside:auto;border-color:#999}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>Einstein Moving Co. <span>|</span> Q3 2026 One-Page Strategic Plan <span>—</span> assembly</h1>
+    <p class="sub">Every cell of the two OPSP pages, in builder order, ready to paste into the
+      <a href="https://goal-plan-access.replit.app/" target="_blank" rel="noopener">OPSP + Vision Summary builder</a>.
+      Q3 = Aug · Sep · Oct 2026, quarter ends 10/31.</p>
+    <div class="counts" id="counts"></div>
+    <div class="feeds">
+      <b>⏰ This page is populated from exports — it is a snapshot, not a live view.</b>
+      Its cells are built from the <a href="ballot-room-q3-LOADED.html#theme" target="_blank">Ballot Room 🏕 theme export</a> (theme name, gates, celebration, reward),
+      the <a href="strata-swt-worksheet.html" target="_blank">SWT + 7 Strata worksheet</a> (purpose, BHAG, brand promises, sandbox, Profit/X, strengths, weaknesses, trends),
+      the seven returned Q3 ballots (rock slate and who), and last quarter's OPSP sheet.
+      <b>Re-export from the room and have Albert re-run this</b> once the Day-2 rulings land — goal confirmation, Critical #2, the theme scoreboard and the theme budget are all still showing ⛔ owed below.
+    </div>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap" id="jumpnav"></div>
+</nav>
+
+<div class="wrap" id="root"></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   THE DATA — one object per OPSP cell, in the printed order of
+   the Growth Toolkit's two pages. status: locked | carry | draft | owed
+   ============================================================ */
+var PAGES = [
+{
+  id:"p1", title:"OPSP Page 1 — People (Reputation Drivers)",
+  sub:"The left page. Values, purpose, targets, one-year goals, strengths and weaknesses.",
+  blocks:[
+
+  { id:"p1-kpi", head:"People KPIs", hint:"Three each — employees, customers, shareholders", cols:3, cells:[
+    { lab:"Employees", status:"draft", src:"Q2 sheet + 7/27 eNPS ruling",
+      val:"1. eNPS — KPI = 45+\n2. Voluntary A-player retention — ?%\n3. Cost per hire — under $450",
+      note:"Two changes to rule. <b>eNPS:</b> the 7/27 ruling took mover eNPS out of the scorecard composite permanently and moved the survey to voluntary + regular pulses — the 45+ target survives as a company KPI, but say out loud that it is now a side metric, not a graded one. <b>Row 3</b> was an unanswered '?' on the Q2 sheet; the SWT gave it a number — mover cost per hire is at least $450 with a leaky applicant funnel." },
+    { lab:"Customers", status:"carry", src:"Q2 OPSP page 1 — unchanged",
+      val:"1. Net Promoter Score — KPI = 90+\n2. Damage ticket resolution — 72 hours\n3. New lead response time — under 1 hour",
+      note:"Q2 landed NPS 88 against the 90 target (a B+). Target stays; the gap is the story, not the number." },
+    { lab:"Shareholders", status:"draft", src:"Q2 OPSP page 1 + Ben's H2 reforecast",
+      val:"1. Cash increase per pay cycle — % increase\n2. Revenue increase = 20%\n3. Gross margin = 53%",
+      note:"Carried as written, but <b>Paul and Ben should re-baseline both numbers before this is locked</b> — the H2 reforecast puts NI at −$1.68M against a −$151K budget, and Q2 adjusted GM came in at 53.38%. Holding a 20% growth line into Q3 is a decision, not a carry." } ]},
+
+  { id:"p1-core", head:"Core Values · Purpose · Targets · One-Year Goals", hint:"The four blue columns", cols:4, cells:[
+    { lab:"Core Values / Beliefs (Should / Shouldn't)", status:"carry", src:"CHOICES — unchanged since founding",
+      val:"CHOICES\n\nC — Communicate clearly, professionally, and with kindness\nH — Hustle but don't rush\nO — Ownership over results\nI — Improve everyday with enthusiasm\nC — Conscientious attention to detail\nE — Elevate attitudes and have fun\nS — Support one another generously\n\nMake these “CHOICES” and we will win by a mile" },
+    { lab:"Purpose (Why)", status:"carry", src:"7 Strata — unchanged",
+      val:"Making moving easy and fun (cause it usually sucks) by creating a customer service experience that is so remarkable, so exceptional across every touch point, it is studied in college courses and analyzed in books.\n\nWe want to be the example that all other moving companies strive to model themselves after." },
+    { lab:"Targets 3–5 Yrs (Where)", status:"carry", src:"Q2 OPSP page 1",
+      val:"Future date: 1/31/2029\nRevenues: $40,000,000\nProfit: $8,000,000\nMkt. Cap / Cash: $4,500,000" },
+    { lab:"Goals 1 Yr (What)", status:"owed", src:"Paul + Ben — Q3 reforecast",
+      val:"Year ending: confirm 1/31/2027\nRev (ops budget): $26,735,078\nProfit (NOI): $4.69M (17.55%)\nBreakeven (cash): $21,464,209\nAdj. gross margin: $14.5M (54.2%)\nOperating cash: $4.52M (+$2.13M)\nTruck utilization: 66.35%\nNPS: 90\nProfit per truck: $58,045",
+      note:"These are the Q2 sheet's numbers and <b>at least two of them are known-stale</b>. The 66.35% TUR sits on the broken basis — the plan's rate row added trip-fee dollars without trip hours, and the 65% KPI is dead company-wide; the goal of record is now 81.08% owned-fleet from Paul's targets sheet. The revenue and profit lines predate Ben's H2 reforecast. <b>Do not type these in until Paul restates them.</b> The Q2 sheet also reads 'Year ending 1/31/26' for a Feb '26–Jan '27 budget year — confirm which convention the builder wants." },
+
+    { lab:"Actions — to live values, purpose, BHAG", status:"draft", src:"Albert, from the Q3 ballots + theme rulings",
+      val:"1. Training Camp — every mover and lead re-certified through the training app\n2. Manager bench — sandbox training, Scrum re-cert, and the manager pipeline\n3. AI / tool governance — central data bus, tool registry, COS Tier 3\n4. 100-point behavioral system + mover promotion first cohort live\n5. Call grading pipeline live as the CER standard",
+      note:"Q2's five were Games S3, hiring-for-culture, AI implementation, finance onboarding, and call grading. Four of the five above are the same threads one quarter further along — the new entry is the training re-cert, which is the theme itself." },
+    { lab:"Key Thrusts / Capabilities — 3–5 yr priorities", status:"carry", src:"Q2 OPSP page 1",
+      val:"1. Improve TUR (realization rates, pricing strategy)\n2. CRM improvements (lead triage, pricing, customer portal)\n3. Add $5M in additional home services / concierge\n4. Biz dev strategy in place with 3 outside sales reps\n5. All 10 branches profitable with avg revenue of $3.5M" },
+    { lab:"Key Initiatives — 1 yr priorities", status:"draft", src:"Q2 sheet, row 3 sharpened by the SWT",
+      val:"1. Improve TUR (realization rates, pricing strategy)\n2. Track MQL > SQL > CPA > Rev/Lead. Use to budget\n3. Hiring funnel visualized & cost per hire down from $450+ (ATS)\n4. Improve CRM (lead triage, pricing, comms)\n5. Beta test add-on service(s) & raise revenue per customer",
+      note:"Only row 3 moves: the SWT put a number on it. 'Cost per hire down' was directional; it is now down-from-$450." },
+
+    { lab:"Profit per X (Economic Engine)", status:"locked", src:"7 Strata FINAL 7/29",
+      val:"Profit per Truck\n(may move to margin-per-employee or margin-per-customer if additional services launch)",
+      note:"Confirmed unchanged in the room. The TUR-definition fix changes how Profit per Truck is <b>measured</b>, not which X we picked." },
+    { lab:"Brand Promise KPIs", status:"owed", src:"7 Strata FINAL — Cameron flagged it",
+      val:"Conversion rates · lead response times\nNPS + reviews\nEstimate accuracy · late discounts\nDamages + ticket resolutions",
+      note:"Cameron's own note on this cell in the SWT room: <b>“Yeah, need to decide on this!”</b> The 40% conversion-rate basis is broken and the replacement KPI has not been picked. Type the four lines, leave the conversion number off until the basis decision lands." },
+    { lab:"Critical # — People or B/S (annual)", status:"carry", src:"Q2 OPSP page 1 — verify with Paul",
+      val:"\u{1F7E9} $4,500,000\n\u{1F7E2} $4,100,000\n\u{1F7E8} between green and red\n\u{1F7E5} $3,700,000",
+      note:"Cash bands, carried verbatim. Worth a 60-second check with Paul that they still match the reforecast." },
+    { lab:"Critical # — Process or P/L (annual)", status:"carry", src:"Q2 OPSP page 1 — verify with Paul",
+      val:"\u{1F7E9} 40% lower claims cost (YoY)\n\u{1F7E2} 30% lower claims cost\n\u{1F7E8} between green and red\n\u{1F7E5} <30%" },
+
+    { lab:"BHAG®", status:"locked", src:"7 Strata FINAL 7/29 — explicitly unchanged",
+      val:"300 trucks on the road by 2033 ($100 million in revenue)",
+      note:"Confirmed in the room: not updating unless the additional-services beta changes the model." },
+    { lab:"Brand Promises", status:"locked", src:"7 Strata FINAL 7/29",
+      val:"• Easy\n• Happy customers for life\n• Do what we promise\n• Care for your stuff like it's our own",
+      note:"Guarantees behind them (unchanged): On-Time Guarantee · No Worries Damage Coverage · no-obligation booking, no cancellation fee or deposit." },
+    { lab:"Sandbox (who / what)", status:"locked", src:"7 Strata FINAL 7/29",
+      val:"WHO: Middle-to-upper-income people moving in Texas or Florida who want their move easy and fun.\n\nWHAT: Peace of mind while moving + an easy transition." },
+    { lab:"Also settled in the 7-Strata room", status:"locked", src:"7 Strata FINAL 7/29 — context, not an OPSP cell",
+      val:"One-phrase strategy: “Wheels on the road.” (requires operational excellence and happy movers)\n\nX-Factor: mover recruitment, retention, training, and CULTURE — and COS/AI is an <b>enabler of it, not a second X-Factor</b> (Cameron's ruling).\n\nDifferentiating activities: simple pricing + transparent value · autobooking + EMMA · Meet Your Mover · actual employees · quirky/fun brand · Magic Moments (added).\n\nWords we own: Smart Moving · The “Smart Move System.”",
+      html:true,
+      note:"The Q3 theme runs directly at the X-Factor. That is the sentence to say out loud when the plan gets presented." } ]},
+
+  { id:"p1-sw", head:"Strengths / Core Competencies · Weaknesses", hint:"Three each — the OPSP only has room for three", cols:2, cells:[
+    { lab:"Strengths / core competencies", status:"draft", src:"SWT FINAL 7/29 — Albert's pick of three",
+      val:"1. Culture and quality of movers (built on CHOICES)\n2. Operational excellence (Scaling Up and other best practices)\n3. AI as a concrete operating capability — 7-leader COS network live, validated AI wedges in production",
+      note:"Row 3 is the upgrade the room approved and it earns the slot over EMMA this quarter. <b>Alternates still on the sheet:</b> proprietary software (EMMA) · customer service · mover training · strong comp and benefits · weekly dashboard/cadence discipline. <b>Cut in the room:</b> 'mover hiring — excellent cost per application' and 'proprietary training platform.'" },
+    { lab:"Weaknesses", status:"draft", src:"SWT FINAL 7/29 — Albert's pick of three",
+      val:"1. Education / change velocity — the org's ability to absorb change and improve quickly\n2. Manager training and manager bench\n3. Mover cost per hire is too high (at least $450) with a leaky applicant funnel",
+      note:"Rows 1 and 2 are HUGE-flagged and carried. Row 3 is the sharpest flip in the sheet — cheap applications, expensive hires — and it replaces the Q2 sheet's 'lack of true CRM with comms hub and lead triage.' <b>Alternates, all HUGE:</b> data overload + inconsistent accuracy · customer education on hidden fees and value · lack of lead triage · single-person tech dependency (the Matisen queue)." } ]}
+  ]
+},
+{
+  id:"p2", title:"OPSP Page 2 — Process (Productivity Drivers)",
+  sub:"The right page. This quarter's numbers, rocks, theme, and your own accountability.",
+  blocks:[
+
+  { id:"p2-kpi", head:"Process KPIs", hint:"Three each — make/buy, sell, recordkeeping", cols:3, cells:[
+    { lab:"Make / Buy", status:"carry", src:"Q2 OPSP page 2",
+      val:"1. Samsara score = 95+\n2. OT % of revenue — less than 1.5%\n3. Damages per hour — under $1.23",
+      note:"Flag on row 2: Ben's Q2 work found structural overtime at $220K+ against a $46K budget — scheduling, not people. The target is right; it is a long way from where we are." },
+    { lab:"Sell", status:"owed", src:"Q2 OPSP page 2 — two of three are on a broken basis",
+      val:"1. Conversion rate $ — 40%\n2. Truck utilization rate — >75%\n3. Cost per conversion — ?",
+      note:"<b>Row 1</b> carries the broken conversion basis Cameron flagged in the SWT. <b>Row 2</b> is stale in the other direction — the goal of record is now 81.08% owned-fleet from Paul's targets sheet, and TUR was retired from the Q2 scorecard composite as an ungraded side metric. <b>Row 3</b> has been a question mark for two quarters. All three want a decision before they go in." },
+    { lab:"Recordkeeping", status:"draft", src:"Q2 OPSP page 2 + Sage close",
+      val:"1. Weekly cash reports (with positive cash flow)\n2. Timely reports of P/L and balance sheets\n3. Monthly close complete by [day] — Sage Intacct",
+      note:"Rows 1 and 2 carry. Row 3 was blank on the Q2 sheet; 'improving time to close books' is already a live accounting critical number, so it belongs here — Paul and Ben pick the day." } ]},
+
+  { id:"p2-qtr", head:"Actions (Qtr) — How", hint:"This quarter's plan numbers and the five leadership rocks", cols:2, cells:[
+    { lab:"Quarter numbers", status:"owed", src:"Paul + Ben — Q3 reforecast",
+      val:"Quarter ending: Q3 (Aug, Sep, Oct) — ends 10/31/2026\nRev (ops budget): —\nProfit (NOI): —\nBreakeven (cash): —\nAdj. gross margin: —\nOperating cash: —\nTruck utilization: —\nNPS: 90\nProfit per truck: —",
+      note:"Only the quarter label and the NPS target are safe to type today. <b>Everything else is a Paul/Ben pull</b> — and the truck-utilization row must come back on the corrected trip-inclusive basis, not the old one. This is the single biggest blocker on the page." },
+    { lab:"Rocks — quarterly priorities, and who", status:"draft", src:"The 7 Q3 ballots — room confirms Day 2",
+      html:true,
+      val:"<ol>"+
+          "<li><span class='who'>Amanda</span> — chatbot launch + Leadferno sunset · quarterly manager sales comp ⭐ · extend the new email design system to the full suite</li>"+
+          "<li><span class='who'>Anne</span> — 100-point behavioral system ⭐ · weekly Start/Stop/Keep conversations ⭐ · mover promotion framework, first cohort live · workers-comp process + eNPS transition</li>"+
+          "<li><span class='who'>Brian</span> — CTXH quarterly theme management, every manager hits their QGs ⭐ · Scrum Accountability Part 3 ⭐ · CTXH branch audits, 3 of 5 · connection cadence · ATX flex + SA ops manager development</li>"+
+          "<li><span class='who'>Matisen</span> — central data bus + tool registry ⭐ · QG and COS support blocks, 16 half lab days ⭐ · EMMA API external access · chatbot replaces Leadferno</li>"+
+          "<li><span class='who'>Mike</span> — mover training app company-wide rollout + driver-training port ⭐ Fleet Safety Part 3 · dept-head/regional split with boots-on-ground weeks · sell remaining trucks and fund the 2026 fleet</li>"+
+          "</ol>",
+      note:"⭐ = the leader's own designated critical number. Straight from their returned ballots — <b>these are pre-room and the goal-confirmation block runs Day 2</b>, so re-pull after tomorrow before this is final. Paul's slate (mover comp review ⭐ · acquisition case study ⭐ · BM financial accountability · invoicing + AR · branch visits) and Cameron's live in the accountability column; the OPSP only prints five rows." } ]},
+
+  { id:"p2-theme", head:"Theme — Where", hint:"Locked in the room 7/29", cols:2, cells:[
+    { lab:"Theme name", status:"locked", status2:"", src:"Theme rulings 7/29, 6:16pm", big:true,
+      val:"Training Camp",
+      note:"Locked as a custom name over the three candidates. Back to School had three write-ins (Amanda, Mike, Anne — Anne's version was 'Race to the top of the class'), Level Up had Paul's and six alternates, and Brian wrote in 'Einstein Training Camp' with Matisen arguing it in his theme answer. Camp is where pros sharpen before a season — it speaks the Games language and makes certification feel like making the roster." },
+    { lab:"Deadline", status:"draft", src:"Albert, from the locked gates",
+      val:"October 19, 2026",
+      note:"Every gate in the cascade lands on 10/19 — two weeks before quarter end, deliberately, so there is room to close out. Q2 used the Games championship date the same way." },
+    { lab:"Measurable target / Critical #", status:"locked", src:"Theme rulings — the Managers track",
+      val:"100% of active movers enrolled in the training app by 8/20, and 100% of manager sandbox training complete by 8/19.\n\nGreen: ≥70% of movers enrolled by 8/20 complete through stage 4 by EOQ.\nSuper Green: ≥70% complete the full pipeline (Lead Ready) by 10/19, plus Scrum re-cert complete by 10/19.",
+      note:"The adoption floor was <b>deliberately dropped from 80% to 70% to account for part-time movers</b> — Cameron's own room note. Say that out loud when this is presented; it will read as softening otherwise." },
+    { lab:"Scoreboard design", status:"owed", src:"Matisen — flag left unresolved in the room",
+      val:"—",
+      note:"The theme tab carries a scoreboard-baseline flag for Matisen and it came out of the room <b>blank</b>. Q2's answer was an 8-week Replit season display tied to the EMMA Games dashboard; Q3 needs the equivalent for training completion. This is a Day-2 or first-week-of-August item, and nothing about the theme is presentable to the field without it." },
+    { lab:"Celebration", status:"locked", src:"Theme rulings — company plan",
+      val:"Movers — end-of-quarter graduation party. EMC University hats for graduates (Green); hats plus socks for Super Green. Hired mid-quarter still earns the award if the benchmark is hit.\n\nSeptember — perfect attendance, top 10% by callouts and lates per hours worked.\nOctober — top trainer, peer vote picking the top 20% of leads.\n\nManagers — a branch or regional half-day “field trip” (movie, Top Golf, or a budgeted activity).\n\nCERs — EMC University hats for graduates.",
+      note:"Built from the ballots: Mike's honor-roll-plus-graduation (he wants both the monthly beat and the finale), Anne's top-of-the-class moment and field-trip day, Brian's monthly arc, Matisen's pool party." },
+    { lab:"Reward", status:"locked", src:"Theme rulings — company plan",
+      val:"EMC University hats for graduates · socks for Super Green · field-approved long sleeves (September, perfect attendance) · field-approved beanies (October, top trainer) · managers: half-day field trip, with lunch at Super Green · CERs: hats plus lunch.",
+      note:"⚠ <b>No dollars were entered.</b> Every per-level budget box in the cascade board came out of the room empty and there is no total ceiling. Mike's pins-and-patches idea — collectible achievements that ride the hat quarter after quarter — is the one piece with real reuse value and it needs a price before anyone orders." },
+    { lab:"Critical # — People or B/S (quarter)", status:"draft", src:"Albert, from the locked theme gates",
+      val:"\u{1F7E9} 100% enrolled by 8/20 + ≥70% complete the full pipeline (Lead Ready) by 10/19\n\u{1F7E2} 100% enrolled by 8/20 + ≥70% through stage 4 by EOQ\n\u{1F7E8} between green and red\n\u{1F7E5} enrollment misses 8/20 or completion falls below 70%",
+      note:"This is the theme expressed as a band, which is what the OPSP wants. It follows the Managers-track gate exactly." },
+    { lab:"Critical # — Process or P/L (quarter)", status:"owed", src:"The room — Day 2 agenda item",
+      val:"—",
+      note:"<b>Critical Number 2 is a named Day-2 block</b> and has not been decided. The strongest evidence-backed candidates on the table: CER call grading (>60 average Green, >70 Super Green, starting 9/1 after a level-set month — already written into the CX gate), branch scorecard average, or estimate accuracy, which came in at 46.3% on the 20% band against a 50% target and is the one metric two independent leaders flagged as needing attention." } ]},
+
+  { id:"p2-acct", head:"Your Accountability — Who / When", hint:"Cameron's own page", cols:2, cells:[
+    { lab:"Your KPIs and goals", status:"draft", src:"Q2 sheet — two of three need restating",
+      val:"1. Truck utilization rate — restate on the corrected basis (Q2 goal of record: 81.08% owned-fleet)\n2. Conversion rate $ — pending the replacement KPI decision\n3. NPS 90+ / eNPS 45+",
+      note:"The Q2 sheet said TUR 80% and conversion 30% 'pending variable pricing.' Variable pricing has since landed and the rate story is decomposed, so both numbers should be set deliberately rather than carried. eNPS stays as written but is now a side metric per the 7/27 ruling." },
+    { lab:"Your quarterly priorities, and due", status:"draft", src:"Cameron's ballot — 8 picked, 5 print",
+      html:true,
+      val:"<ol>"+
+          "<li>Q3 theme stewardship — Training Camp launch + scoreboard</li>"+
+          "<li>COS / World Model Part 2 ⭐ — Tier 3 pilot, beta the COS with power-user BMs (Claude Tags)</li>"+
+          "<li>AI / tool governance ⭐ — central data bus, EMMA toolkit, monthly Big Rocks review</li>"+
+          "<li>Website redesign oversight — Smart Move System rollout Part 2</li>"+
+          "<li>ECP certification + coaching tool for managers</li>"+
+          "</ol>",
+      note:"⭐ = the two you marked critical. Three more came back on your ballot and did not make the five: one-page personal plans for the leadership team (trial), evaluating flex Fridays or a compressed slow-season schedule, and ongoing education. <b>Due dates are blank on every row</b> — the builder wants them." },
+    { lab:"Critical # — People or B/S (yours)", status:"draft", src:"Albert, from Cameron's own rocks",
+      val:"\u{1F7E9} COS Tier 3 piloted and beta'd with power-user BMs\n\u{1F7E2} COS Tier 3 piloted with the Roundtable only\n\u{1F7E8} between green and red\n\u{1F7E5} Tier 3 does not leave design" },
+    { lab:"Critical # — Process or P/L (yours)", status:"draft", src:"Albert, from Cameron's own rocks",
+      val:"\u{1F7E9} Central data bus live with the tool registry standing and adopted\n\u{1F7E2} Data bus live, registry stood up\n\u{1F7E8} between green and red\n\u{1F7E5} governance workstream does not ship" } ]},
+
+  { id:"p2-trends", head:"Trends", hint:"Six lines — ruled in the SWT room 7/29", cols:1, cells:[
+    { lab:"Trends", status:"locked", src:"SWT FINAL 7/29 — the HUGE-flagged six",
+      val:"1. Tariff uncertainty, weakening economy, rising inflation, weakening dollar\n2. Uncertainty around Federal Reserve moves, interest rates, continued housing-market slowdown\n3. AI in software and virtual estimates — agents, coding, marketing, analysis, content\n4. Rising insurance costs — fleet alone +40% (~$200K) 2025→2026; total exposure ≈$903K/yr and still unowned\n5. Rising diesel fuel costs (Iran)\n6. AI-search / LLM demand discovery — how customers find movers is shifting",
+      note:"All six are HUGE-flagged or new-and-kept in the ruled sheet. <b>Cut in the room:</b> 'more savvy competition / private equity entry' and 'used truck market is terrible.' <b>Alternates if a line gets swapped:</b> AI adoption fatigue as a workforce reality · Gen Z work expectations · personalization and higher service-level expectations · more severe weather · more senior and fewer corporate relocations · commercial real estate making branch sites hard to find." } ]}
+  ]
+}
+];
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+var CHIP = { locked:"\u{1F512} Locked", carry:"↩ Carry", draft:"✏️ Draft", owed:"⛔ Owed" };
+
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function stripTags(s){ var d=document.createElement("div"); d.innerHTML=s; return d.textContent||""; }
+
+function cellPlain(c){
+  var v = c.html ? stripTags(c.val).replace(/\n{3,}/g,"\n\n").trim() : c.val;
+  return c.lab + "\n" + v;
+}
+
+function renderCell(c, key){
+  var h = '<div class="cell st-'+c.status+(c.span2?' span2':'')+'" id="'+key+'">';
+  h += '<div class="lab">'+esc(c.lab)+'</div>';
+  h += '<div class="val'+(c.big?' big':'')+'">'+(c.html ? c.val : esc(c.val))+'</div>';
+  if(c.note) h += '<div class="note">'+c.note+'</div>';
+  h += '<div class="foot"><span class="chip '+c.status+'">'+CHIP[c.status]+'</span>'+
+       '<button class="copy" data-copy="'+key+'">\u{1F4CB} Copy</button>'+
+       '<span class="src">'+esc(c.src||"")+'</span></div>';
+  return h + '</div>';
+}
+
+var CELLMAP = {};
+function render(){
+  var root = document.getElementById("root"), nav = document.getElementById("jumpnav"), html = "", navHtml = "";
+  var tally = { locked:0, carry:0, draft:0, owed:0 };
+  PAGES.forEach(function(pg){
+    navHtml += '<span class="pgtag">'+(pg.id==="p1"?"Page 1":"Page 2")+'</span>';
+    html += '<div class="page" id="'+pg.id+'"><div class="phead"><h2>'+esc(pg.title)+'</h2><p>'+esc(pg.sub)+'</p></div>';
+    pg.blocks.forEach(function(b){
+      navHtml += '<a href="#'+b.id+'">'+esc(b.head)+'</a>';
+      html += '<section class="blk" id="'+b.id+'"><div class="bhead"><h3>'+esc(b.head)+'</h3>'+
+              (b.hint?'<span class="hint">'+esc(b.hint)+'</span>':'')+
+              '<button class="secbtn" data-sec="'+b.id+'">\u{1F4CB} Copy this block</button></div>'+
+              '<div class="cells c'+b.cols+'">';
+      b.cells.forEach(function(c,i){
+        var key = b.id+"-"+i;
+        CELLMAP[key] = c;
+        tally[c.status]++;
+        html += renderCell(c, key);
+      });
+      html += '</div></section>';
+    });
+    html += '</div>';
+  });
+
+  html += '<div class="owedlist"><h4>⛔ What blocks a finished OPSP</h4><ol>'+
+    '<li><b>Q3 quarter numbers</b> — revenue, NOI, breakeven, gross margin, operating cash, profit per truck. Paul + Ben, off the Q3 reforecast. Nothing else on page 2 can be typed around this.</li>'+
+    '<li><b>Truck utilization, restated</b> — the 65% KPI is dead and 66.35% on the annual line sits on the broken trip-inclusive basis. Paul’s targets sheet (81.08% owned-fleet) is the goal of record; the OPSP needs the Q3 equivalent.</li>'+
+    '<li><b>Conversion-rate KPI</b> — the 40% basis is broken. Cameron’s own SWT note: “need to decide on this.” It appears three times on the two pages.</li>'+
+    '<li><b>Critical Number 2 (company, quarter)</b> — a named Day-2 block, undecided. Call grading, branch scorecard average, and estimate accuracy are the live candidates.</li>'+
+    '<li><b>Theme scoreboard</b> — Matisen’s flag came out of the room blank. The theme has no visible scoreboard, which is what made Games work.</li>'+
+    '<li><b>Theme budget</b> — every per-level budget box and the company ceiling are empty. Hats, pins, socks, beanies, long sleeves, field trips and lunches all have real cost.</li>'+
+    '<li><b>Rock slate confirmation</b> — the five rows above are pre-room ballots. Re-pull after Day 2’s goal-confirmation block.</li>'+
+    '<li><b>Due dates</b> — every one of Cameron’s five quarterly priorities is missing one.</li>'+
+    '</ol></div>';
+
+  html += '<div class="legend"><h4>How to read the chips</h4>'+
+    '<div class="row"><span class="chip locked">'+CHIP.locked+'</span><span>Ruled this quarter with a source you can point at — the theme rulings export, the SWT/7-Strata FINAL sheet. Type it as written.</span></div>'+
+    '<div class="row"><span class="chip carry">'+CHIP.carry+'</span><span>Unchanged from the Q2 sheet. No decision needed, but read it once — a carry is still a choice.</span></div>'+
+    '<div class="row"><span class="chip draft">'+CHIP.draft+'</span><span>Albert’s proposal, built from the ballots and the locked material. Needs your yes before it goes in the builder.</span></div>'+
+    '<div class="row"><span class="chip owed">'+CHIP.owed+'</span><span>Genuinely blocked, and the cell names who owes it. Leave it empty in the builder rather than typing a stale number.</span></div>'+
+    '</div>';
+
+  root.innerHTML = html;
+  nav.innerHTML = navHtml + '<span class="spacer"></span>';
+  document.getElementById("counts").innerHTML =
+    '<span class="count">\u{1F512} <b>'+tally.locked+'</b> locked</span>'+
+    '<span class="count">↩ <b>'+tally.carry+'</b> carry</span>'+
+    '<span class="count">✏️ <b>'+tally.draft+'</b> draft — needs your yes</span>'+
+    '<span class="count">⛔ <b>'+tally.owed+'</b> owed — blocked</span>';
+}
+
+function toast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._h); t._h = setTimeout(function(){ t.classList.remove("show"); }, 2100);
+}
+function copyText(txt, btn, msg){
+  function done(){ if(btn){ var o=btn.textContent; btn.textContent="✓ Copied"; btn.classList.add("done");
+    setTimeout(function(){ btn.textContent=o; btn.classList.remove("done"); },1400); } toast(msg); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt, done); });
+  } else fallback(txt, done);
+}
+function fallback(txt, cb){
+  var ta = document.createElement("textarea");
+  ta.value = txt; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); cb(); }catch(e){ toast("Copy failed — select the text manually"); }
+  document.body.removeChild(ta);
+}
+
+document.addEventListener("click", function(e){
+  var cb = e.target.closest("[data-copy]");
+  if(cb){ var c = CELLMAP[cb.getAttribute("data-copy")];
+    copyText(c.html ? stripTags(c.val).replace(/\n{3,}/g,"\n\n").trim() : c.val, cb, "“"+c.lab+"” copied — paste it into the builder");
+    return; }
+  var sb = e.target.closest("[data-sec]");
+  if(sb){
+    var id = sb.getAttribute("data-sec"), blk = null;
+    PAGES.forEach(function(p){ p.blocks.forEach(function(b){ if(b.id===id) blk=b; }); });
+    if(!blk) return;
+    var txt = "## " + blk.head + "\n\n" + blk.cells.map(function(c){
+      return "### " + c.lab + "  [" + c.status.toUpperCase() + "]\n" +
+             (c.html ? stripTags(c.val).replace(/\n{3,}/g,"\n\n").trim() : c.val) +
+             (c.note ? "\n\nNote: " + stripTags(c.note) : "");
+    }).join("\n\n");
+    copyText(txt, sb, "Block copied as markdown");
+  }
+});
+
+render();
+</script>
+</body>
+</html>
