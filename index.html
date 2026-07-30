@@ -978,7 +978,7 @@
      SEED DATA
      ============================================================ */
 
-  var HQ_VERSION = 'v4.18 2026-07-29'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip. ⚠ Cameron 7/28 late: index.html is ALBERT'S file — tool agents work their own tool files, Albert folds the HQ entries (three same-night version collisions prompted this)
+  var HQ_VERSION = 'v4.19 2026-07-29'; // bump on every deploy — live verification greps for this; also rendered in the topbar chip. ⚠ Cameron 7/28 late: index.html is ALBERT'S file — tool agents work their own tool files, Albert folds the HQ entries (three same-night version collisions prompted this)
   (function(){ var c = document.getElementById('hqVersionChip'); if(c) c.textContent = HQ_VERSION; })();
   /* ── ROOM-COPY LINKS (Cameron 7/28: "the Celebrate tab loaded as a broken 404")
      Four surfaces point at LOCAL-ONLY seeded files — the ballots and the leaders'
@@ -1107,7 +1107,8 @@
     changelog: LS_PREFIX + 'changelog',
     activeZone: LS_PREFIX + 'activeZone',
     chase: LS_PREFIX + 'chase',
-    preflight: LS_PREFIX + 'preflight'
+    preflight: LS_PREFIX + 'preflight',
+    todos: LS_PREFIX + 'todos'
   };
 
   var GATES_SEED = [
@@ -1267,7 +1268,8 @@
         { text: '🧮 People Analyzer — cascade: each leader runs it for their team → movers',
           ctx: 'MOVED from Phase ① per Cameron 7/22 — cascade is post-QGR work. After the Cam/Paul run proves the tool; needs the leader share-variant build (SELF lanes exist). Brian is the willing first adopter — his AAR explicitly asked for the performance-mirror as the BM promotion lens.' },
         'Recognition budget (0.5–1% payroll) ideas',
-        'Debrief / retro — what to change in the SOP pulse for next quarter',
+        { text: 'Debrief / retro — what to change in the SOP pulse for next quarter',
+          ctx: 'CARRY INTO Q3 (Cameron 7/29, straight out of running the Power of One block in the room): MOVE THE POWER OF ONE EXERCISE OUT OF THE QGR DAY AND INTO PRE-QGR PREP — run it in the same ~2-weeks-before wave as the Flywheel and PACe exercises. It sat as a Day-1 "optional if the room has time" block; the room proved it generates real backlog candidates, and that is prep work, not room work. Paul\'s tool now exports straight to the Master Backlog (v1.2, 7/29 — Priority + Department columns matching the board\'s own labels and groups), so the sequence becomes: run it in prep → export → a COS cross-references + dedupes + files → the room only debates the survivors. Fold into the staged leader-prep hub at the Q3 SOP close-out.' },
         { text: '🧮 Leaders: prepare O3s off the FINAL People Analyzer (not self-evals)',
           ctx: 'Cameron 7/29 in-room: regionals + department heads run their O3s off the room-ratified FINAL results — where the room edited a score, the room read is the grade of record. Final surface: results-LOADED.html (✅ FINAL banner, ratified 7/29).' },
         { text: '🧮 Leaders: download their FINAL People Analyzer results for their O3 packets',
@@ -1554,6 +1556,7 @@
   CHASE_SEED.forEach(function (it) { DEFAULT_CHASE[it.id] = !!it.landed; });
 
   var CHANGELOG_SEED = [
+    { date: '7/29f', text: '\u{1F3D5} Q3 THEME LOCKED INTO THE ROOM FILE (HQ v4.19). The Day-2 theme block ran early and Cameron exported it (6:16pm) \u2014 like the SWT and flywheel before it, that ruling lived ONLY in the room machine\u2019s localStorage. It is now baked into <b>ballot-room-q3-LOADED.html</b> so the locked state loads on any browser: <b>theme name = \u201cTraining Camp\u201d</b> (custom lock, beating Back to School\u2019s 3 write-ins and Level Up\u2019s 1 \u2014 Brian wrote in \u201cEinstein Training Camp,\u201d Matisen argued it in his theme answer) \u00b7 <b>all 5 cascade levels set</b> (Movers \u00b7 Leads \u00b7 Managers \u00b7 CERs \u00b7 EE+IT) with room-final Green/Super Green gates \u2014 the spine is enroll-by-8/20 then fast-track-or-stage-4 by 10/19, managers carry a sandbox-training-by-8/19 gate plus a <b>70% adoption floor deliberately dropped from 80% to account for part-time movers</b> (Cameron\u2019s room note), CERs land on call grading (>60 avg Green / >70 Super Green, Sept 1 start after a level-set month), EE+IT = Matisen\u2019s mobile-app rollout \u00b7 <b>company celebration plan</b> written (EOQ party + EMC University hats for graduates, socks for Super Green, hired-mid-quarter still earns; Sept = perfect attendance \u2192 long sleeves; Oct = top trainer by peer vote \u2192 beanies; managers = half-day field trip, with lunch at Super Green; CERs = hats + lunch). Mechanics: <code>build_room_seed.py</code> gained a third seed layer (theme alongside ballots + digest), keyed off the export\u2019s own stamp \u2014 it fills a browser that has no theme work of its own and <b>refuses to overwrite a room in progress</b> (guard tested by injecting rival local state; it held). Verified on a clean boot: all 30 room-final fields hydrate byte-exact from the export, name banner + 5/5 progress render, 7 ballots + digest still seed. \u26a0 STILL OPEN from this block: <b>both flags are blank</b> \u2014 Brian\u2019s capacity warning and Matisen\u2019s scoreboard baseline got no room resolution \u2014 and no per-level 🎁 reward or 💲 budget was entered (the money lives only in the company plan text). Theme rulings staged at <code>theme-rulings-q3-2026.json</code>; the Master-Backlog / FLM run-of-show / scorecard-placeholder fold is still owed.' },
     { date: '7/29e', text: '\u{1F512} STRATEGY SURFACES LOCKED FOR THE QUARTER — SWT/7-STRATA + FLYWHEEL (HQ v4.18). Both were room-graded live today and both existed only in the room machine’s localStorage; both are now baked into their files so the locked state loads on any browser. ① <b>SWT + 7 Strata worksheet v1.1 = FINAL</b> from Cameron’s 2:50pm export — all 11 proposals ruled (0 left), 38 keeps / 11 cuts, his notes preserved as the why on every cut. Rulings of record: <b>insurance trend KEPT</b> ("the fix is in — 6 more months of this for another 18 and costs start coming down") · <b>marketing-ROI weakness CUT</b> (mailers/billboards + a real ROAS sheet now) · <b>tech-bottleneck CUT into the Matisen single-person-dependency line</b> · <b>"mover hiring (excellent cost per application)" CUT from Strengths and replaced by a NEW weakness — "mover cost per hire is too high (at least $450) with leaky applicant funnel"</b> (cheap applications, expensive hires — the sharpest flip in the sheet) · <b>proprietary training platform CUT from Strengths</b> even though it’s the Q3 theme chassis · 7 Strata edits: One-Phrase simplified to "Wheels on the road" w/ operational-excellence-and-happy-movers as the requirement, Magic Moments added to Differentiating Activities, damage-coverage + on-time dropped from that list (they live in the Guarantee), <b>X-Factor confirmed — COS/AI is an enabler, NOT a second X-Factor</b>, BHAG unchanged, Sandbox KPI wording still owed a decision ("Yeah, need to decide on this!" — the broken 40% conversion basis). ⚠ Two things to know: the export contained <b>4 duplicate artifact rows</b> (his cut-notes had overwritten the row text in a prior session, and the seed-merge then re-appended the pristine rows) — collapsed to one row each, note preserved; and the <b>"management struggles with pace of rollouts" row is genuinely ambiguous</b> — one copy was cut as "duplicate above with education/change velocity" while the other stayed kept, so it was LEFT KEPT with an inline flag. Cameron’s call. ② <b>Flywheel v3.2 — Q2 TEAM-final scores locked</b> (live byte-exact): Attract & Develop 6→7 · Smart Move Experience 7→7 · Earn Trust 8→8 · <b>Win Demand 6→4</b> · Optimize Capacity 6→7 · Reinvest Profit 7→8. Win Demand is the team’s loudest signal — the only component graded DOWN, and now the wheel’s floor by 3 points, which lines up with the SWT lead-triage + business-development weaknesses that survived the cut. ⚠ Component 1’s May baseline stays <b>6</b>, not the 7 his export shows: that 7 is residue of the v3.0 baseline-overwrite bug (v3.0 labeled the baseline row "Q2 2026" so scoring the component overwrote it in place, and the v3.1 migration relabeled the corrupted row to "May 2026"). Real Q2 story on the entry point is 6→7, not flat. Next scoring pass belongs to Q3.' },
     { date: '7/29d', text: '\u{1F3C1} QGR DAY 1 EXECUTED THROUGH THE ROOM (HQ v4.17). ① <b>AAR Review Room FINALIZED</b> — Cameron’s 12:26pm rundown folded: 7/7 leaders reviewed, 40/40 leadership grades CONFIRMED (0 changed, 32/40 = 80.0% stands) + Nhel’s 5; full room state (notes · 39 highlights · legend picks · rulings) baked in as the 7/29 seed, ledger stamped qgr_day1_confirmation, sync --check green, live byte-exact. ② <b>Per-goal DRILL-IN shipped for Day 2</b> (Cameron: notes were too condensed) — click any goal in the grade board or directs tree → modal w/ the Green/Super-Green bars it was graded against (goal-bars-2026-Q2.json snapshot, 40/40), tracker evidence, carry, and that goal’s full AAR section. ③ <b>PA directs = FINAL</b> — room export (30 people · 20A/8B/2C · 13 room score-edits · 4 needs-plan) baked into results-LOADED.html v1.6 w/ ✅ FINAL banner; composites cross-verified 13/13. ④ <b>Scoring-rules rulings logged</b>: default-3 on every 1–5 scale · notes REQUIRED on every score incl. 5s + ITP + GWC · 5-anchors visible at scoring · BMs eval their ops/field/flex managers (rides the PA directs tool) — build lane running. ⑤ Phase ④ gains the 3 leader to-dos: O3s off FINAL PA · download final results · action plans ready (4 flagged: Garrison · Lukas · Nick · Khevan—PIP note, chase Mike). Q2 Debrief v1.9 deployed same day (5 block edits · Nazier off Dream Team 24→23 cascaded to Tampa card + packet · FCP headline · NPS Now What rebuilt); manifest v0.10.12, tie-check 240/240.' },
     { date: '7/29c', text: '\u{1F50D} LEADER-BY-LEADER ROOM FLOW on PA Live Results (results v1.5 · HQ v4.16 — Cameron: the 30-person audit list got too long; the room walks leader by leader anyway). ① <b>Leader cards are now filters</b> — click Amanda’s card and the watch list + room audit scope to just her directs (orange ring + "showing only this leader," click again to clear). ② Matching <b>filter-pill row</b> above the audit table (All (30) · Mike (10) · Brian (15) · …) for switching without scrolling up. ③ <b>Pagination fallback:</b> the unfiltered audit shows 25 per page w/ Prev/Next, so "All" never eats the whole screen. ④ Guardrail: <b>⬇ Export room notes ALWAYS covers everyone</b> regardless of the active filter — a filtered view can never quietly truncate the export. Browser-verified: Brian card → 15 rows + only his 3 watch names; Amanda pill → her 3; All → 1–25 of 30 paged. LOADED room file regenerated on v1.5.' },
@@ -1934,7 +1937,12 @@
     changelog: loadState(LS_KEYS.changelog, null), // [{date,text}] or null = use seed
     activeZone: loadState(LS_KEYS.activeZone, 'zone1'),
     chase: loadState(LS_KEYS.chase, JSON.parse(JSON.stringify(DEFAULT_CHASE))),  // { feedId: bool }
-    preflight: loadState(LS_KEYS.preflight, {})    // { pfId: bool }
+    preflight: loadState(LS_KEYS.preflight, {}),   // { pfId: bool }
+    // v4.19: Cameron's running to-do list per phase — "a place to keep a running list of post-QGR to-dos."
+    // { P1:[{id,text,done,note,noteOpen,ts}], P2:[...], ... }. Each item carries a STABLE id and its own
+    // done flag rather than an index-keyed entry in state.phases: these rows get added and deleted mid-cycle,
+    // and index-keyed checkmarks re-pointing on delete is exactly the bug class this file has fixed twice.
+    todos: loadState(LS_KEYS.todos, {})
   };
 
 
@@ -2468,6 +2476,42 @@
         });
       }
 
+      /* 📝 MY RUNNING LIST — Cameron's own to-dos for this phase, added as they come up.
+         Same spirit as the ⚡ extras above (this-quarter-only, cleared at reset, out of the
+         progress bar) but authored in-page instead of seeded in code. Phase ④ is the one he
+         asked for: the running post-QGR to-do list. */
+      var todos = state.todos[phase.id] || [];
+      var tDone = todos.filter(function (t) { return t.done; }).length;
+      var tWrap = document.createElement('div');
+      tWrap.className = 'phase-extras phase-todos';
+      tWrap.innerHTML =
+        '<div class="phase-extras-hd">📝 My running list' +
+          (todos.length ? '<span class="x-count">' + tDone + ' / ' + todos.length + '</span>' : '') + '</div>' +
+        '<div class="phase-extras-sub">' + esc(phase.todoHint || 'Anything you want to remember for this phase — add it here as it comes up.') +
+          ' Cleared at quarter reset, kept out of the progress bar, and rides Export/Import.</div>';
+      itemsWrap.appendChild(tWrap);
+
+      todos.forEach(function (t) {
+        var row = document.createElement('div');
+        row.className = 'phase-item-row';
+        row.innerHTML =
+          '<div class="todo-check phase-item-check' + (t.done ? ' checked' : '') + '" data-todo="' + esc(t.id) + '">' + (t.done ? '✓' : '') + '</div>' +
+          '<div class="phase-item-text-wrap">' +
+            '<div class="phase-item-text' + (t.done ? ' checked-text' : '') + '">' + esc(t.text) + '</div>' +
+            '<button class="note-toggle todo-note-toggle" data-todo="' + esc(t.id) + '">' + (t.note ? '✎ edit note' : '✎ add note') + '</button>' +
+            '<textarea class="phase-item-note todo-note" data-todo="' + esc(t.id) + '" placeholder="Note…" style="display:' + (t.noteOpen ? 'block' : 'none') + '">' + esc(t.note || '') + '</textarea>' +
+          '</div>' +
+          '<button class="todo-remove" data-todo="' + esc(t.id) + '" aria-label="Remove to-do">✕</button>';
+        tWrap.appendChild(row);
+      });
+
+      var addRow = document.createElement('div');
+      addRow.className = 'todo-add';
+      addRow.innerHTML =
+        '<input type="text" class="todo-input" data-phase="' + phase.id + '" placeholder="Add a to-do…">' +
+        '<button class="btn small todo-add-btn" data-phase="' + phase.id + '">+ Add</button>';
+      tWrap.appendChild(addRow);
+
       block.querySelector('.phase-head').addEventListener('click', function () {
         phaseOpenState[phase.id] = !phaseOpenState[phase.id];
         renderPhaseAccordion();
@@ -2486,7 +2530,7 @@
         });
       });
 
-      itemsWrap.querySelectorAll('.note-toggle').forEach(function (el) {
+      itemsWrap.querySelectorAll('.note-toggle:not(.todo-note-toggle)').forEach(function (el) {
         el.addEventListener('click', function (e) {
           e.stopPropagation();
           var k = el.getAttribute('data-key');
@@ -2497,6 +2541,84 @@
           renderPhaseAccordion();
         });
       });
+
+      /* v4.19: running-list handlers. Items are found by stable id, never by index. */
+      function findTodo(id) {
+        var list = state.todos[phase.id] || [];
+        for (var i = 0; i < list.length; i++) { if (list[i].id === id) return list[i]; }
+        return null;
+      }
+      function addTodo(text) {
+        var val = (text || '').trim();
+        if (!val) return;
+        if (!state.todos[phase.id]) state.todos[phase.id] = [];
+        state.todos[phase.id].push({
+          id: 't' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+          text: val, done: false, note: '', noteOpen: false, ts: todayISODate()
+        });
+        saveStateNow(LS_KEYS.todos, state.todos);
+        phaseOpenState[phase.id] = true;   // keep the phase open so the new row is visible
+        renderPhaseAccordion();
+        var next = document.querySelector('.todo-input[data-phase="' + phase.id + '"]');
+        if (next) next.focus();
+      }
+
+      tWrap.querySelectorAll('.todo-check').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var t = findTodo(el.getAttribute('data-todo'));
+          if (!t) return;
+          t.done = !t.done;
+          saveStateNow(LS_KEYS.todos, state.todos);
+          renderPhaseAccordion();
+        });
+      });
+
+      tWrap.querySelectorAll('.todo-note-toggle').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var t = findTodo(el.getAttribute('data-todo'));
+          if (!t) return;
+          t.noteOpen = !t.noteOpen;
+          saveStateNow(LS_KEYS.todos, state.todos);
+          renderPhaseAccordion();
+        });
+      });
+
+      tWrap.querySelectorAll('.todo-note').forEach(function (el) {
+        el.addEventListener('input', function () {
+          var t = findTodo(el.getAttribute('data-todo'));
+          if (!t) return;
+          t.note = el.value;
+          saveState(LS_KEYS.todos, state.todos);
+        });
+        el.addEventListener('click', function (e) { e.stopPropagation(); });
+      });
+
+      tWrap.querySelectorAll('.todo-remove').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var id = el.getAttribute('data-todo');
+          var t = findTodo(id);
+          if (!t) return;
+          if (!window.confirm('Remove this to-do?\n\n' + t.text)) return;
+          state.todos[phase.id] = (state.todos[phase.id] || []).filter(function (x) { return x.id !== id; });
+          saveStateNow(LS_KEYS.todos, state.todos);
+          renderPhaseAccordion();
+        });
+      });
+
+      var tInput = tWrap.querySelector('.todo-input');
+      var tBtn = tWrap.querySelector('.todo-add-btn');
+      if (tInput) {
+        tInput.addEventListener('click', function (e) { e.stopPropagation(); });
+        tInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') { e.preventDefault(); addTodo(tInput.value); }
+        });
+      }
+      if (tBtn) {
+        tBtn.addEventListener('click', function (e) { e.stopPropagation(); addTodo(tInput ? tInput.value : ''); });
+      }
 
       itemsWrap.querySelectorAll('.phase-item-note').forEach(function (el) {
         el.addEventListener('click', function (e) { e.stopPropagation(); });
