@@ -501,7 +501,7 @@
     padding: 8px 16px;
   }
   .mode-draft-chip {
-    background: #fff7e6; border: 1.5px dashed #cc7700; color: #8a5200;
+    background: #e8f3e8; border: 1.5px solid #2e7d32; color: #2e7d32;
     font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px;
     padding: 3px 8px; border-radius: 10px; flex-shrink: 0;
   }
@@ -669,7 +669,7 @@
 
 <div class="mode-bar" id="modeBar">
   <div class="mode-bar-inner">
-    <span class="mode-draft-chip">DRAFT</span>
+    <span class="mode-draft-chip">FINAL · 8/3</span>
     <div class="mode-btns" role="group" aria-label="View mode">
       <button type="button" class="mode-btn" data-mode="read">Read</button>
       <button type="button" class="mode-btn" data-mode="present">Present</button>
@@ -1107,11 +1107,11 @@
 
     <div class="wsw">
       <span class="wsw-label">What</span>
-      <p data-eid="nps-what-1">Customer NPS came in at <strong>88</strong> vs our <strong>90</strong> bar (just under 92 in Q1).</p>
+      <p data-eid="nps-what-1">Customer NPS came in at <strong>87</strong> vs our <strong>90</strong> bar (just under 92 in Q1).</p>
     </div>
 
     <div class="yoy-bars" role="img" aria-label="Customer NPS bar chart, 88 versus 90 target">
-      <div class="yoy-row"><div class="yoy-branch">Q2'26</div><div class="yoy-track"><div class="yoy-fill" style="width:88%;"></div></div><div class="yoy-pct" style="color:var(--navy);">88</div></div>
+      <div class="yoy-row"><div class="yoy-branch">Q2'26</div><div class="yoy-track"><div class="yoy-fill" style="width:87%;"></div></div><div class="yoy-pct" style="color:var(--navy);">87</div></div>
       <div class="yoy-row"><div class="yoy-branch">Target</div><div class="yoy-track"><div class="yoy-fill" style="width:90%;background:repeating-linear-gradient(45deg, var(--gray-300) 0 6px, var(--gray-100) 6px 12px);"></div></div><div class="yoy-pct" style="color:var(--gray-600);">90</div></div>
     </div>
 
@@ -1121,17 +1121,17 @@
     <table style="width:100%; border-collapse:collapse; font-size:14px;">
       <thead><tr style="border-bottom:2px solid var(--gray-200); text-align:left;"><th style="padding:5px 8px;">Branch</th><th style="padding:5px 8px;">Q2 NPS</th><th style="padding:5px 8px;">Q1 NPS</th><th style="padding:5px 8px;">Surveys back</th><th style="padding:5px 8px;">Response rate</th></tr></thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Leander</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">99.1</td><td style="padding:5px 8px;">87.7</td><td style="padding:5px 8px;">107</td><td style="padding:5px 8px;">34.2%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Houston</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">96.2</td><td style="padding:5px 8px;">93.6</td><td style="padding:5px 8px;">238</td><td style="padding:5px 8px;">53.1%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Tampa</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">93.8</td><td style="padding:5px 8px;">100.0</td><td style="padding:5px 8px;">32</td><td style="padding:5px 8px;">20.5%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">North Austin</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">92.3</td><td style="padding:5px 8px;">91.4</td><td style="padding:5px 8px;">78</td><td style="padding:5px 8px;">8.7%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Fort Worth</td><td style="padding:5px 8px;font-weight:700;">88.2</td><td style="padding:5px 8px;">96.2</td><td style="padding:5px 8px;">68</td><td style="padding:5px 8px;">29.8%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Garland</td><td style="padding:5px 8px;font-weight:700;">86.4</td><td style="padding:5px 8px;">100.0</td><td style="padding:5px 8px;">44</td><td style="padding:5px 8px;">21.4%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">McKinney</td><td style="padding:5px 8px;font-weight:700;">81.0</td><td style="padding:5px 8px;">94.8</td><td style="padding:5px 8px;">84</td><td style="padding:5px 8px;">21.3%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">South Austin</td><td style="padding:5px 8px;font-weight:700;">80.8</td><td style="padding:5px 8px;">89.6</td><td style="padding:5px 8px;">104</td><td style="padding:5px 8px;">14.5%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">San Antonio</td><td style="padding:5px 8px;font-weight:700;">79.8</td><td style="padding:5px 8px;">85.2</td><td style="padding:5px 8px;">114</td><td style="padding:5px 8px;">22.4%</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Dallas</td><td style="padding:5px 8px;font-weight:700;">79.5</td><td style="padding:5px 8px;">91.4</td><td style="padding:5px 8px;">156</td><td style="padding:5px 8px;">18.3%</td></tr>
-        <tr style="font-weight:700;"><td style="padding:5px 8px;">Company</td><td style="padding:5px 8px;">88.0</td><td style="padding:5px 8px;">91.9</td><td style="padding:5px 8px;">1,025</td><td style="padding:5px 8px;">—</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Leander</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">97</td><td style="padding:5px 8px;">87.7</td><td style="padding:5px 8px;">134</td><td style="padding:5px 8px;">34.2%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Houston</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">94</td><td style="padding:5px 8px;">93.6</td><td style="padding:5px 8px;">273</td><td style="padding:5px 8px;">53.1%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Tampa</td><td style="padding:5px 8px;font-weight:700;color:var(--green);">96</td><td style="padding:5px 8px;">100.0</td><td style="padding:5px 8px;">44</td><td style="padding:5px 8px;">20.5%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">North Austin</td><td style="padding:5px 8px;font-weight:700;">88</td><td style="padding:5px 8px;">91.4</td><td style="padding:5px 8px;">119</td><td style="padding:5px 8px;">8.7%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Fort Worth</td><td style="padding:5px 8px;font-weight:700;">89</td><td style="padding:5px 8px;">96.2</td><td style="padding:5px 8px;">81</td><td style="padding:5px 8px;">29.8%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Garland</td><td style="padding:5px 8px;font-weight:700;">85</td><td style="padding:5px 8px;">100.0</td><td style="padding:5px 8px;">58</td><td style="padding:5px 8px;">21.4%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">McKinney</td><td style="padding:5px 8px;font-weight:700;">80</td><td style="padding:5px 8px;">94.8</td><td style="padding:5px 8px;">102</td><td style="padding:5px 8px;">21.3%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">South Austin</td><td style="padding:5px 8px;font-weight:700;">80</td><td style="padding:5px 8px;">89.6</td><td style="padding:5px 8px;">133</td><td style="padding:5px 8px;">14.5%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">San Antonio</td><td style="padding:5px 8px;font-weight:700;">82</td><td style="padding:5px 8px;">85.2</td><td style="padding:5px 8px;">135</td><td style="padding:5px 8px;">22.4%</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Dallas</td><td style="padding:5px 8px;font-weight:700;">79</td><td style="padding:5px 8px;">91.4</td><td style="padding:5px 8px;">200</td><td style="padding:5px 8px;">18.3%</td></tr>
+        <tr style="font-weight:700;"><td style="padding:5px 8px;">Company</td><td style="padding:5px 8px;">87</td><td style="padding:5px 8px;">91.9</td><td style="padding:5px 8px;">1,279</td><td style="padding:5px 8px;">—</td></tr>
       </tbody>
     </table>
     </div>
@@ -1141,7 +1141,7 @@
       <span class="wsw-label">So What</span>
       <p data-eid="nps-sowhat-1">Reviews and referrals are the cheapest jobs we ever book — every point of NPS is future work your branch doesn't have to buy.</p>
       <p data-eid="nps-sowhat-1b">Some honest context on the dip: like we mentioned above, this quarter we had more new movers, new managers, and new CX reps in the system at once than we've ever had. More new people means more chances for a rough edge — and it means the fix is reps and coaching, not panic.</p>
-      <p data-eid="nps-reviews-1">And here's the proof customers still love the work: they posted <strong>754 five-star reviews</strong> about your moves this quarter — up from <strong>688</strong> last quarter. When a customer takes five minutes after a long move day to write about you by name, that's the whole job done right.</p>
+      <p data-eid="nps-reviews-1">And here's the proof customers still love the work: they posted <strong>824 five-star reviews</strong> about your moves this quarter — up from <strong>688</strong> last quarter. When a customer takes five minutes after a long move day to write about you by name, that's the whole job done right.</p>
     </div>
 
     <!-- ── Branch-by-branch reviews table (Cameron 7/28) ── -->
@@ -1150,17 +1150,17 @@
     <table style="width:100%; border-collapse:collapse; font-size:14px;">
       <thead><tr style="border-bottom:2px solid var(--gray-200); text-align:left;"><th style="padding:5px 8px;">Branch</th><th style="padding:5px 8px;">5-star reviews</th><th style="padding:5px 8px;">Per 100 moves</th></tr></thead>
       <tbody>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Tampa</td><td style="padding:5px 8px;">95</td><td style="padding:5px 8px;font-weight:700;">48.5</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Houston</td><td style="padding:5px 8px;">114</td><td style="padding:5px 8px;font-weight:700;">21.4</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Fort Worth</td><td style="padding:5px 8px;">47</td><td style="padding:5px 8px;font-weight:700;">17.5</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">South Austin</td><td style="padding:5px 8px;">151</td><td style="padding:5px 8px;font-weight:700;">17.2</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Leander</td><td style="padding:5px 8px;">59</td><td style="padding:5px 8px;font-weight:700;">15.1</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">San Antonio</td><td style="padding:5px 8px;">74</td><td style="padding:5px 8px;font-weight:700;">13.9</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">McKinney</td><td style="padding:5px 8px;">52</td><td style="padding:5px 8px;font-weight:700;">11.9</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Garland</td><td style="padding:5px 8px;">26</td><td style="padding:5px 8px;font-weight:700;">11.6</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Dallas</td><td style="padding:5px 8px;">81</td><td style="padding:5px 8px;font-weight:700;">8.1</td></tr>
-        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">North Austin</td><td style="padding:5px 8px;">55</td><td style="padding:5px 8px;font-weight:700;">5.2</td></tr>
-        <tr style="font-weight:700;"><td style="padding:5px 8px;">Company</td><td style="padding:5px 8px;">754</td><td style="padding:5px 8px;">13.7</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Tampa</td><td style="padding:5px 8px;">104</td><td style="padding:5px 8px;font-weight:700;">53.1</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Houston</td><td style="padding:5px 8px;">123</td><td style="padding:5px 8px;font-weight:700;">23.1</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Fort Worth</td><td style="padding:5px 8px;">52</td><td style="padding:5px 8px;font-weight:700;">19.4</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">South Austin</td><td style="padding:5px 8px;">161</td><td style="padding:5px 8px;font-weight:700;">18.3</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Leander</td><td style="padding:5px 8px;">66</td><td style="padding:5px 8px;font-weight:700;">16.8</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">San Antonio</td><td style="padding:5px 8px;">79</td><td style="padding:5px 8px;font-weight:700;">14.8</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">McKinney</td><td style="padding:5px 8px;">57</td><td style="padding:5px 8px;font-weight:700;">13.0</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Garland</td><td style="padding:5px 8px;">32</td><td style="padding:5px 8px;font-weight:700;">14.2</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">Dallas</td><td style="padding:5px 8px;">89</td><td style="padding:5px 8px;font-weight:700;">8.9</td></tr>
+        <tr style="border-bottom:1px solid var(--gray-100);"><td style="padding:5px 8px;">North Austin</td><td style="padding:5px 8px;">61</td><td style="padding:5px 8px;font-weight:700;">5.7</td></tr>
+        <tr style="font-weight:700;"><td style="padding:5px 8px;">Company</td><td style="padding:5px 8px;">824</td><td style="padding:5px 8px;">14.9</td></tr>
       </tbody>
     </table>
     </div>
@@ -1168,7 +1168,7 @@
 
     <div class="wsw nowwhat">
       <span class="wsw-label">Now What</span>
-      <p data-eid="nps-nowwhat-1">90 isn't a stretch goal for us — it's the floor. And the fix is already named above: this dip came from ramping the most new people we've ever had at once, so the way back is reps and coaching — new movers and managers getting up the curve, and crews nailing the basics customers actually write about: on time, careful, communicating the whole way. The 754 five-star reviews prove the standard is alive and well. Goal: back above 90 this quarter, and hold it the rest of the year.</p>
+      <p data-eid="nps-nowwhat-1">90 isn't a stretch goal for us — it's the floor. And the fix is already named above: this dip came from ramping the most new people we've ever had at once, so the way back is reps and coaching — new movers and managers getting up the curve, and crews nailing the basics customers actually write about: on time, careful, communicating the whole way. The 824 five-star reviews prove the standard is alive and well. Goal: back above 90 this quarter, and hold it the rest of the year.</p>
     </div>
 
     <div class="review-note" data-section="nps-enps">
@@ -1313,12 +1313,12 @@
     <div class="mini-stat-row three">
       <div class="mini-stat green"><div class="ms-label" data-eid="cmm-stat-1-label">Claims Accuracy</div><div class="ms-value">99–100%</div><div class="ms-sub" data-eid="cmm-stat-1-sub">Every rep above the 95 bar — Super Green</div></div>
       <div class="mini-stat green"><div class="ms-label" data-eid="cmm-stat-2-label">Time to Close</div><div class="ms-value">~1 week</div><div class="ms-sub" data-eid="cmm-stat-2-sub">6.1–6.9 days per rep — Green all quarter</div></div>
-      <div class="mini-stat green"><div class="ms-label" data-eid="cmm-stat-3-label">Magic Moments</div><div class="ms-value">36</div><div class="ms-sub" data-eid="cmm-stat-3-sub">Goal was 35 — hit</div></div>
+      <div class="mini-stat green"><div class="ms-label" data-eid="cmm-stat-3-label">Magic Moments</div><div class="ms-value">41</div><div class="ms-sub" data-eid="cmm-stat-3-sub">Goal was 35 — 117%</div></div>
     </div>
 
     <div class="wsw">
       <span class="wsw-label">What</span>
-      <p data-eid="cmm-what-1">The claims team closed the average claim in <strong>under a week</strong> and ran <strong>99–100% claims accuracy</strong> (we audit claims to ensure they are factual and not missing details) against a 95 bar — Super Green. And we delivered <strong>36 Magic Moments</strong> against a goal of 35.</p>
+      <p data-eid="cmm-what-1">The claims team closed the average claim in <strong>under a week</strong> and ran <strong>99–100% claims accuracy</strong> (we audit claims to ensure they are factual and not missing details) against a 95 bar — Super Green. And we delivered <strong>41 Magic Moments</strong> against a goal of 35 — the final count.</p>
     </div>
 
     <div class="wsw sowhat">
