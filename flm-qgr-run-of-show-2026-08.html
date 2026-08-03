@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>FLM QGR — Run of Show · Q2 Close / Q3 Launch</title>
+<!-- v2.0 2026-08-03: rebuilt to the 8/3 planning-meeting rulings (Cameron+Brian+Mike+Paul) — goal-by-goal AAR live block, PA+scorecard walk-around, lunch breakouts, flywheel app exercise, theme→SOP→OPSP order, forward-looking closer; start-time input + live timer + per-block actual times added (Paul's ask) -->
 <style>
   :root { --navy:#0d2b4e; --navy2:#123a68; --blue:#1565c0; --orange:#ef8b22; --ink:#1c2733; --soft:#5a6b7d; --bg:#f4f6f9; --line:#dfe6ee; --green:#1e7d43; --amber:#b47800; }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -15,12 +16,20 @@
   header.hero .sub { color:#bcd0e6; font-size:14px; margin-top:6px; }
   .meta-strip { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
   .meta-chip { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; }
-  .internal { background:#fff4e3; border:1px solid #f0d3a1; border-radius:8px; padding:10px 14px; font-size:13px; color:#7a5410; margin-bottom:20px; }
+  .internal { background:#fff4e3; border:1px solid #f0d3a1; border-radius:8px; padding:10px 14px; font-size:13px; color:#7a5410; margin-bottom:14px; }
+  .timerbar { background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px 18px; margin-bottom:18px; display:flex; gap:16px; align-items:center; flex-wrap:wrap; font-size:14px; }
+  .timerbar label { font-weight:800; color:var(--navy); font-size:12.5px; text-transform:uppercase; letter-spacing:0.4px; }
+  .timerbar input[type=time] { border:1px solid var(--line); border-radius:6px; padding:5px 8px; font-size:14px; font-weight:700; }
+  .timerbar .clock { font-weight:900; font-size:18px; color:var(--navy); font-variant-numeric:tabular-nums; }
+  .timerbar .drift { font-weight:800; font-size:13px; }
+  .drift.ok { color:var(--green); } .drift.late { color:#b02a1a; }
   .block { background:#fff; border:1px solid var(--line); border-radius:10px; margin-bottom:14px; overflow:hidden; page-break-inside:avoid; }
-  .block-head { display:flex; align-items:baseline; gap:12px; padding:14px 18px 10px; border-bottom:1px solid var(--line); }
+  .block.now { border:2px solid var(--orange); box-shadow:0 4px 14px rgba(239,139,34,.18); }
+  .block-head { display:flex; align-items:baseline; gap:12px; padding:14px 18px 10px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
   .block-num { background:var(--navy); color:#fff; font-weight:900; font-size:13px; border-radius:6px; padding:2px 9px; flex-shrink:0; }
-  .block-head h2 { font-size:17px; font-weight:900; color:var(--navy); flex:1; }
+  .block-head h2 { font-size:17px; font-weight:900; color:var(--navy); flex:1; min-width:200px; }
   .block-time { font-size:12px; font-weight:800; color:var(--soft); white-space:nowrap; }
+  .sched { font-size:12px; font-weight:900; color:var(--blue); white-space:nowrap; font-variant-numeric:tabular-nums; }
   .block-body { padding:12px 18px 16px; }
   .row { display:flex; gap:8px; margin-bottom:6px; font-size:14px; }
   .row .k { font-weight:800; color:var(--navy); min-width:92px; flex-shrink:0; font-size:12.5px; text-transform:uppercase; letter-spacing:0.4px; padding-top:2px; }
@@ -29,19 +38,20 @@
   .row .v a:hover { text-decoration:underline; }
   .notes { background:#f2f6fb; border-left:3px solid var(--blue); border-radius:0 6px 6px 0; padding:8px 12px; margin-top:8px; font-size:13.5px; }
   .fill { background:#fff8ec; border:1px dashed var(--orange); border-radius:6px; padding:8px 12px; margin-top:8px; font-size:13px; color:#8a5a10; font-weight:600; }
-  .breaker { background:var(--navy); color:#fff; border-radius:10px; padding:12px 18px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; page-break-inside:avoid; }
+  .actual { display:flex; gap:8px; align-items:center; margin-top:10px; font-size:12.5px; flex-wrap:wrap; }
+  .actual button { border:1px solid var(--line); background:#f7f9fc; border-radius:6px; padding:4px 10px; font-weight:800; font-size:12px; cursor:pointer; }
+  .actual button.set { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .actual input[type=text] { flex:1; min-width:160px; border:1px solid var(--line); border-radius:6px; padding:4px 8px; font-size:12.5px; }
+  .breaker { background:var(--navy); color:#fff; border-radius:10px; padding:12px 18px; margin-bottom:14px; page-break-inside:avoid; }
+  .breaker .bh { display:flex; justify-content:space-between; align-items:center; }
   .breaker strong { font-size:15px; font-weight:900; }
   .breaker span { font-size:12.5px; color:#bcd0e6; }
+  .breaker .sub2 { font-size:13px; color:#d7e3f2; margin-top:6px; }
   .legend { font-size:12.5px; color:var(--soft); margin:18px 2px 8px; }
   .print-btn { position:fixed; top:14px; right:14px; background:var(--orange); color:#fff; border:none; border-radius:8px; padding:9px 16px; font-weight:800; font-size:13px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.18); }
   h3.part { font-size:13px; font-weight:900; letter-spacing:1.2px; text-transform:uppercase; color:var(--soft); margin:22px 4px 10px; }
-  @media print {
-    body { background:#fff; font-size:11.5px; }
-    .print-btn { display:none; }
-    .page { max-width:none; padding:0; }
-    header.hero { border-radius:0; padding:16px 20px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-    .block, .breaker { border-radius:4px; margin-bottom:8px; }
-  }
+  @media print { body { background:#fff; font-size:11.5px; } .print-btn, .timerbar, .actual { display:none; } .page { max-width:none; padding:0; }
+    header.hero { border-radius:0; padding:16px 20px; -webkit-print-color-adjust:exact; print-color-adjust:exact; } .block, .breaker { border-radius:4px; margin-bottom:8px; } }
 </style>
 </head>
 <body>
@@ -49,118 +59,194 @@
 <div class="page">
 
 <header class="hero">
-  <h1>FLM QGR — Run of Show</h1>
+  <h1>FLM QGR — Run of Show <span style="font-size:13px;font-weight:700;color:#bcd0e6;">v2.0 · the master planner</span></h1>
   <div class="sub">Q2 2026 close &amp; Q3 launch · presented to Branch Managers, Ops Managers &amp; Field Managers</div>
   <div class="meta-strip">
-    <span class="meta-chip">CTX · Tue Aug 4</span>
+    <span class="meta-chip">CTX · Tue Aug 4 (Austin joins AM)</span>
     <span class="meta-chip">DFWT · Wed Aug 5</span>
-    <span class="meta-chip">~5 hrs incl. lunch</span>
-    <span class="meta-chip">Facilitators: Cameron + Regional</span>
+    <span class="meta-chip">Mover QGRs also Wed: N. Austin + Leander (Brian)</span>
+    <span class="meta-chip">9:30 → ~4:15 (~6¾ hrs incl. lunch — OPSP block is the safety valve)</span>
+    <span class="meta-chip">Facilitators: Cameron + Regional (+ Paul)</span>
   </div>
 </header>
 
-<div class="internal"><strong>Internal facilitation page — not distributed to managers.</strong> Durations are suggestions; the agenda order is the plan of record (ruled 7/28). Orange dashed boxes = content that fills after the 7/29–30 Roundtable.</div>
+<div class="internal"><strong>Internal facilitation page — not distributed to managers.</strong> Order re-ruled at the 8/3 planning meeting (Cameron + Brian + Mike + Paul) — this v2.0 IS the plan of record. Set the start time below; expected block times compute from it (Paul's ask: track how far behind we run — first block carries a built-in 10-min fumble allowance). ▶/⏹ record actual times per block; notes save in this browser.</div>
+
+<div class="timerbar">
+  <label>Room start</label> <input type="time" id="startTime" value="09:30">
+  <span class="clock" id="liveClock">--:--</span>
+  <span class="drift" id="driftRead"></span>
+  <span style="flex:1"></span>
+  <button class="actual-reset" style="border:1px solid var(--line);background:#f7f9fc;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px;cursor:pointer;" onclick="if(confirm('Clear recorded times + notes for this day?')){localStorage.removeItem(LS_KEY);location.reload()}">Reset day</button>
+</div>
 
 <h3 class="part">Part 1 · Looking Back — Q2</h3>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">1</span><h2>Warm-Up — Best Things from Q2</h2><span class="block-time">20 min</span></div>
+<div class="block" data-mins="20">
+  <div class="block-head"><span class="block-num">1</span><h2>Warm-Up — Best Things from Q2</h2><span class="sched"></span><span class="block-time">20 min</span></div>
   <div class="block-body">
     <div class="row"><span class="k">Surface</span><span class="v">Live round — no screen needed.</span></div>
-    <div class="row"><span class="k">Mechanic</span><span class="v">Each manager shares one personal + one professional best thing from the quarter. Fast, warm, everyone talks in the first 20 minutes.</span></div>
-    <div class="notes">Ruled 7/28: <strong>best things only</strong> here. Legend-of-the-Quarter stories move to lunch (block 6).</div>
+    <div class="row"><span class="k">Mechanic</span><span class="v">One personal + one professional best thing each — <em>optional</em>: "we'd like you to share if you have something; if you don't, pass." Fast, warm, everyone who wants to talks in the first 20 minutes.</span></div>
+    <div class="notes">Legends of the Quarter stories live at lunch (block 6), not here. First block absorbs the 10-min settling-in fumble.</div>
   </div>
 </div>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">2</span><h2>The Company Story — Q2 Debrief, top to bottom</h2><span class="block-time">60 min</span></div>
+<div class="block" data-mins="60">
+  <div class="block-head"><span class="block-num">2</span><h2>The Company Story — Q2 Debrief, top to bottom</h2><span class="sched"></span><span class="block-time">60 min</span></div>
   <div class="block-body">
     <div class="row"><span class="k">Surface</span><span class="v"><a href="https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/q2-materials/q2-frontline-packet.html" target="_blank">Q2 Debrief</a> (includes the FLM-only manager deep dive)</span></div>
     <div class="row"><span class="k">Presenter</span><span class="v">Cameron leads · Regional takes the People sections</span></div>
     <div class="row"><span class="k">Covers</span><span class="v">Big Picture → the money story (lawn-mowing version if the room wants it) → Numbers (revenue by branch, trucks &amp; staffing, leads) → People (Games, Fleet Safety, NPS + reviews, eNPS, Claims &amp; Magic Moments, First-Class Precision).</span></div>
-    <div class="notes">This replaces the old deck's highlights → headlines → KPI look-back → praise/eNPS/NPS → critical-numbers sections. Don't re-present any of it later from other surfaces — later blocks <em>reference</em> it.</div>
+    <div class="notes">Don't re-present any of it later from other surfaces — later blocks <em>reference</em> it.</div>
   </div>
 </div>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">3</span><h2>The Branch Mirror — Scorecards, managers presenting</h2><span class="block-time">45 min</span></div>
+<div class="block" data-mins="45">
+  <div class="block-head"><span class="block-num">3</span><h2>After-Action Results LIVE — goal by goal, not person by person</h2><span class="sched"></span><span class="block-time">45 min</span></div>
   <div class="block-body">
-    <div class="row"><span class="k">Surface</span><span class="v">Each BM opens <strong>their own</strong> scorecard (Manager view) — <a href="https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/q2-materials/" target="_blank">q2-materials index</a></span></div>
-    <div class="row"><span class="k">Presenter</span><span class="v"><strong>The managers, not Cameron.</strong> ~4 min each: my grade, what drove it, one highlight, one lowlight, my Q3 watch item.</span></div>
-    <div class="notes">Grades are provisional until July close (÷60 basis right now; Sales Target + Recognition land 7/31–8/1 and the letters re-stamp FINAL on ÷80). Say that up front so nobody argues a letter that's about to move. TUR is a side metric this quarter — it returns as a graded KPI in Q3 on the one-measured-rate convention; that lands in block 10.</div>
+    <div class="row"><span class="k">Surface</span><span class="v"><a href="https://einsteinadmin.github.io/einstein-aar-results-9906378dc163/room-rollup-a7c91e04d2b8.html" target="_blank"><strong>Goal-by-Goal Room Rollup</strong></a> (set the region tab) · depth on demand: <a href="https://einsteinadmin.github.io/einstein-aar-results-9906378dc163/" target="_blank">AAR Live Results — LOADED</a></span></div>
+    <div class="row"><span class="k">Mechanic</span><span class="v">Ruled 8/3 (Mike's design): walk goal FAMILIES at role altitude — Einstein Games, individual sales, driver safety, praise, hiring. Per family: how the company did → which branches went green/red → compiled wins + tried-differentlies → <strong>ping the 2–4 flagged managers to speak</strong> ("you went green — what did you do?" / "you fired a real bullet — tell them"). Click into any individual only when the room wants depth.</span></div>
+    <div class="notes">Answers Rob's "too superficial" note without 25 read-alouds — depth comes from the pings, not the roster walk. Self-graded baseline: 65.7% (49SG/20G/36R). Praise + sales-target attainment weren't in when they self-graded — say so; those letters may move at July close.</div>
   </div>
 </div>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">4</span><h2>Manager AARs + Flywheel Votes</h2><span class="block-time">40 min</span></div>
+<div class="block" data-mins="45">
+  <div class="block-head"><span class="block-num">4</span><h2>People Analyzers + The Branch Mirror — walk-around</h2><span class="sched"></span><span class="block-time">45 min</span></div>
   <div class="block-body">
-    <div class="row"><span class="k">Surface</span><span class="v"><a href="https://einsteinadmin.github.io/einstein-aar-results-9906378dc163/" target="_blank">AAR Live Results — LOADED, leadership only</a> (all 25 baked in — open your region page, no dragging) · <a href="https://einsteinadmin.github.io/einstein-mgr-aar-476141c7097f/" target="_blank">FLM Prep tool</a></span></div>
-    <div class="row"><span class="k">Mechanic</span><span class="v">Rollup first (Q2 success-rate baseline), then 2–3 managers walk one goal each — what they tried, what they'd do differently. Flywheel votes run <strong>live in the room</strong> (Cameron's ruling — pre-work reviewed the site, votes happen here).</span></div>
+    <div class="row"><span class="k">Surface</span><span class="v">PA spreadsheet (managers work it in branch groups) + each BM's own scorecard from the <a href="https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/q2-materials/" target="_blank">q2-materials index</a></span></div>
+    <div class="row"><span class="k">Mechanic</span><span class="v">Ruled 8/3: branches circle up and <strong>finish their People Analyzers</strong> (spreadsheet this cycle) while Cameron + Regional + Paul walk the room — reviewing each branch's PA <em>and</em> their scorecard with them at the table. No stand-and-present this time.</span></div>
+    <div class="notes">Scorecard letters are provisional until sales-target attainment + July revenue land (Matisen). Brian pre-reviews his 5 scorecards tonight/early AM; TV display of results ruled OK ("it's Christmas colors").</div>
   </div>
 </div>
 
-<div class="breaker"><strong>5 · BREAK</strong><span>10 min</span></div>
+<div class="breaker" data-mins="10"><div class="bh"><strong>5 · BREAK</strong><span><span class="sched" style="color:#d7e3f2;"></span> · 10 min</span></div></div>
 
-<div class="breaker"><strong>6 · LUNCH — Legend of the Quarter stories</strong><span>45 min · each manager tells their Legend story aloud over food (ruled 7/28: Legends live here, not in the warm-up)</span></div>
+<div class="breaker" data-mins="55"><div class="bh"><strong>6 · LUNCH — Legends + position breakouts</strong><span><span class="sched" style="color:#d7e3f2;"></span> · 55 min</span></div>
+  <div class="sub2">Legend-of-the-Quarter stories over food, then <strong>position breakouts</strong> (BMs together · Ops + FMs together): everyone brings the biggest constraint + biggest opportunity from their AAR — bring a constraint, leave with a proposed solution. Cameron / Regional / Paul each sit with a group and keep it moving. (Constraints are pre-seeded from their exports — Nick's one-mechanic-for-three-branches is real; let the group work it.)</div>
+</div>
 
 <h3 class="part">Part 2 · Looking Forward — Q3</h3>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">7</span><h2>Values &amp; Purpose — Hand-Write on the OPSP</h2><span class="block-time">20 min</span></div>
+<div class="block" data-mins="40">
+  <div class="block-head"><span class="block-num">7</span><h2>The Einstein Flywheel — build it, then grade it (app exercise)</h2><span class="sched"></span><span class="block-time">40 min</span></div>
   <div class="block-body">
-    <div class="row"><span class="k">Surface</span><span class="v"><strong>Pre-printed Q3 One-Page Strategic Plans</strong> — one per attendee. Values + purpose fields BLANK (they hand-write); financials + branch numbers PRE-POPULATED (nobody copies numbers).</span></div>
-    <div class="row"><span class="k">Mechanic</span><span class="v">Write values + purpose from memory → "think you got them all?" → reveal + fill gaps together.</span></div>
-    <div class="fill">POST-ROUNDTABLE: finalize Q3 OPSP → populate branch numbers → print per attendee before 8/4. Owner: Cameron + regionals (print job, block D1 on the cascade plan).</div>
+    <div class="row"><span class="k">Surface</span><span class="v">Flywheel Live app — QR on screen, phones out. <span class="fill" style="display:inline-block;padding:2px 8px;margin:0;">URL + QR land here after Cameron's Replit deploy</span></span></div>
+    <div class="row"><span class="k">Mechanic</span><span class="v">Ruled 8/3: ① <strong>drag-and-drop the components into order</strong> (individually — engages the brain, no notes preloaded) → ② Cameron confirms the real order, teaches the wheel + its KPIs → ③ <strong>guided live grading, component by component</strong> (Mentimeter-style, everyone votes each gear before moving on — no "finish it all and wait") with an optional biggest-opportunity text box per gear → ④ discuss the lowest-scored gears live: "if we're a 5 here, what gets us to 7?"</span></div>
+    <div class="notes">Their pre-work brings (24/25 substantive) fuel the discussion — the <a href="https://einsteinadmin.github.io/einstein-aar-results-9906378dc163/flywheel-brings-f14d20a1f852.html" target="_blank">brings one-pager</a> is Cameron's crib sheet for drawing people out (Lukas needs drawing out). The lowest gears should land on Training Camp — that's the segue.</div>
   </div>
 </div>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">8</span><h2>The OPSP Walk</h2><span class="block-time">30 min</span></div>
+<div class="block" data-mins="30">
+  <div class="block-head"><span class="block-num">8</span><h2>Q3 Theme — Reveal: "Training Camp" 🥋</h2><span class="sched"></span><span class="block-time">30 min</span></div>
   <div class="block-body">
-    <div class="row"><span class="k">Surface</span><span class="v">The same pre-printed OPSP in their hands — presented <em>against</em>, never <em>from</em>.</span></div>
-    <div class="row"><span class="k">Covers</span><span class="v">90-day actions → Profit per X → BHAG → 3–5 year target + key thrusts/capabilities → 1-year goals + actions. Managers follow along column by column on paper.</span></div>
-    <div class="fill">POST-ROUNDTABLE: this block's talking points come straight from the ratified Q3 OPSP. Nothing to build — just present the sheet.</div>
-  </div>
-</div>
-
-<div class="block">
-  <div class="block-head"><span class="block-num">9</span><h2>Q3 Theme — Reveal: "Training Camp" 🥋</h2><span class="block-time">30 min</span></div>
-  <div class="block-body">
-    <div class="row"><span class="k">Surface</span><span class="v">The <a href="https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/theme-assets-q3/training-day-poster-q3-2026-web.jpg" target="_blank"><strong>Training Camp poster</strong></a> ("Pad on. Pad off.") on screen + the Q2 Debrief "What's Next" Q3 Theme card (filled 7/30).</span></div>
+    <div class="row"><span class="k">Surface</span><span class="v">The <a href="https://einsteinadmin.github.io/einstein-qgr-command-7b1cbc850326/theme-assets-q3/training-day-poster-q3-2026-web.jpg" target="_blank"><strong>Training Camp poster</strong></a> ("Pad on. Pad off.") on screen + the Q2 Debrief "What's Next" Q3 Theme card.</span></div>
     <div class="row"><span class="k">The pitch</span><span class="v">We're rolling out the new training app to the whole company — every mover, and every lead on a back-to-basics fast track to confirm fundamentals. And for the first time, the few dozen training videos we filmed showing the exact Einstein standard are all in one place, in the app.</span></div>
-    <div class="row"><span class="k">Why now (3 beats)</span><span class="v">① <strong>Speed to competence</strong> — our #1 constraint is how fast a new mover becomes a field-ready mover; the app compresses that. ② <strong>Performance management gets easier</strong> — a real record of who's completed what, so coaching starts from facts, not memory. ③ <strong>Trial days are sunsetting soon</strong> — the app plus regular check-ins through a mover's first six months replaces the one-day audition with real evaluation over their actual first months.</span></div>
-    <div class="row"><span class="k">Your part (the gates)</span><span class="v">Sandbox training done by <strong>8/19</strong> (before rollout) · 100% of your active movers enrolled by <strong>8/20</strong> · ≥<strong>70% of enrolled movers through stage 4 by EOQ</strong> (floor is 70% on purpose — part-timers are real). Super Green adds the full pipeline (Lead Ready) + Scrum recert by 10/19.</span></div>
+    <div class="row"><span class="k">Why now (3 beats)</span><span class="v">① <strong>Speed to competence</strong> — our #1 constraint. ② <strong>Performance management gets easier</strong> — a real record of who's completed what. ③ <strong>Trial days are sunsetting soon</strong> — the app plus first-six-months check-ins replaces the one-day audition. (If asked for details on trial days: "it's coming this month, details soon" — Anne + Brian are finalizing; stay vague, ruled 8/3.)</span></div>
+    <div class="row"><span class="k">Your part (the gates)</span><span class="v">Sandbox training done by <strong>8/19</strong> · 100% of active movers enrolled by <strong>8/20</strong> · ≥<strong>70% of enrolled movers through stage 4 by EOQ</strong> (floor is 70% on purpose — part-timers are real). Super Green adds the full pipeline (Lead Ready) + Scrum recert by 10/19.</span></div>
     <div class="row"><span class="k">WIFM (movers)</span><span class="v">EOQ graduation party — EMC University hats for graduates, hat + socks for Super Green, hired-mid-quarter still counts · Sept perfect attendance (top 10%) → long sleeves · Oct peer-voted top trainers (top 20% of leads) → beanies · managers → half-day field trip, lunch added at SG.</span></div>
-    <div class="fill">Print the poster for the room if you can — and watch for the yellow TRAIN sign gag (Ted Lasso riff, also in theme-assets-q3/). Rewards/budget detail per level still finalizing; the celebration plan above is room-final.</div>
+    <div class="fill">Theme must land BEFORE the SOP walkthrough (ruled 8/3 — the SOP references Training Camp celebration; they need the why first). Print the poster if you can.</div>
   </div>
 </div>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">10</span><h2>Quarter in Review — What Leadership Built</h2><span class="block-time">15 min</span></div>
+<div class="block" data-mins="30">
+  <div class="block-head"><span class="block-num">9</span><h2>Training App SOP — live run-through, together</h2><span class="sched"></span><span class="block-time">30 min</span></div>
   <div class="block-body">
-    <div class="row"><span class="k">Surface</span><span class="v"><a href="https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/q2-quarter-in-review.html" target="_blank">Quarter in Review</a> — set the audience filter to <strong>FLM</strong>.</span></div>
-    <div class="row"><span class="k">Mechanic</span><span class="v">Walk the tiles WIFM-first: quote form, field app, training app, hiring-for-culture, call grading, chatbot, finance + AI, website. This replaces the old deck's ~30-slide "other projects" section.</span></div>
+    <div class="row"><span class="k">Surface</span><span class="v">The training app, projected — all managers have accounts (Mike added them 8/3). Laptops out where they exist; huddle 2–3 around a screen where they don't.</span></div>
+    <div class="row"><span class="k">Mechanic</span><span class="v">Ruled 8/3 (Mike's design): run Module 1 together, guided — <strong>intentionally answer some questions wrong</strong> so the room sees the app teach the why. Don't get ahead; learn it together. Questions we fumble = SOP improvement fuel — "great question, Mike leads this, we'll get you an answer by end of week." Dial Mike in live only if something big lands.</span></div>
+    <div class="row"><span class="k">Mover side</span><span class="v">Dummy mover account (Mike creating for Cameron + Brian) to click through what a MOVER sees; Mike also owes a short Loom of the mover side — future "Module 11." A mover-side SOP mirroring the manager one is on the roadmap.</span></div>
+    <div class="notes">Follow-up expectation to state: everyone re-runs the training solo within the first week ("refresh your training — I want to see it done again").</div>
   </div>
 </div>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">11</span><h2>Individual Accountability — Your Q3</h2><span class="block-time">25 min</span></div>
+<div class="block" data-mins="40">
+  <div class="block-head"><span class="block-num">10</span><h2>OPSP — hand out, hand-write, walk it</h2><span class="sched"></span><span class="block-time">40 min</span></div>
   <div class="block-body">
-    <div class="row"><span class="k">Surface</span><span class="v">Scorecards (Q3 Watch + printed praise targets + side metrics) + the ratified Q3 KPI set.</span></div>
-    <div class="row"><span class="k">Covers</span><span class="v">What's graded in Q3 (TUR returns as a graded KPI on the clean one-measured-rate basis) · praise targets per role (printed on every card) · sales expectations · what "green" means for a BM / Ops / FM this quarter.</span></div>
-    <div class="fill">POST-ROUNDTABLE: confirm the Q3 graded-KPI list + any points reallocation (the reallocation discussion is Cameron's, still open — do not present a reweight that hasn't been ruled).</div>
+    <div class="row"><span class="k">Surface</span><span class="v"><strong>Printed Q3 OPSPs</strong> (Brian prints per branch from the Replit app — front/back PDF). Values + purpose BLANK (hand-write) · Q3 actions + financials also hand-written this cycle (numbers weren't final at print — ruled 8/3, managers write them in from the screen).</span></div>
+    <div class="row"><span class="k">Mechanic</span><span class="v">Values + purpose from memory → reveal + fill gaps → the OPSP walk (90-day actions → Profit per X → BHAG → 3–5 yr → 1-yr) → flip to page 2, set individual accountabilities (transfer from screen, ~10 min). Vision summaries: quarterly priorities now read <strong>"complete Training Camp requirements"</strong> in place of EMC Games (damages · 5-star reviews · praise · Samsara stay).</span></div>
+    <div class="row"><span class="k">Sales note</span><span class="v">Ruled 8/3: <strong>100% attainment = individual + branch target attainment — still a critical number for everyone.</strong> Sept/Oct individual targets are being rebalanced for transitions (some BMs/FMs go to zero; Khevan + Frank carry full targets); present October's numbers as <em>pending</em>. No company-wide sales competition this quarter.</span></div>
+    <div class="fill">SAFETY VALVE (ruled 8/3): if the day runs long, this block is the one that can be cut and finished later — it's a transfer exercise, ~10–15 min of real work.</div>
   </div>
 </div>
 
-<div class="block">
-  <div class="block-head"><span class="block-num">12</span><h2>Close — Purpose + Ask Us Anything</h2><span class="block-time">15 min</span></div>
+<div class="block" data-mins="15">
+  <div class="block-head"><span class="block-num">11</span><h2>What's Coming This Quarter — leadership build preview</h2><span class="sched"></span><span class="block-time">15 min</span></div>
+  <div class="block-body">
+    <div class="row"><span class="k">Surface</span><span class="v"><a href="https://einsteinadmin.github.io/einstein-qgr-workshop-e84484dcfd5b/q2-quarter-in-review.html" target="_blank">Quarter in Review</a> — audience filter set to <strong>FLM</strong>.</span></div>
+    <div class="row"><span class="k">Mechanic</span><span class="v">Frame it FORWARD (Brian's note 8/3: "quarter in review sounds like looking back — this is what's coming"): quote form, field app, training app, hiring-for-culture (Anne's real interview questions are in the tile now), call grading, chatbot, finance + AI, website. Quick per-project "here's what's rolling out, more info as it lands." No details — and if the day is long, compress to 5 minutes.</span></div>
+  </div>
+</div>
+
+<div class="block" data-mins="15">
+  <div class="block-head"><span class="block-num">12</span><h2>Close — Purpose + Ask Us Anything</h2><span class="sched"></span><span class="block-time">15 min</span></div>
   <div class="block-body">
     <div class="row"><span class="k">Mechanic</span><span class="v">Read the purpose aloud together (it's on the OPSP in their hands). Open floor — anything, any topic. Contact line: regionalteam@einsteinmoving.com.</span></div>
   </div>
 </div>
 
-<p class="legend">Sources: Q1 legacy deck flow (215 slides, mapped 7/28) · cascade plan <em>qgr-cascade-flow-plan-2026-07-28.md</em> · Cameron rulings 7/28 (best-things warm-up, Legends at lunch, pre-printed OPSPs with partial blanks). Mover-level branch QGRs run on the scorecard Mover View — see the BM guide.</p>
+<p class="legend">Plan of record: 8/3 planning meeting (Cameron · Brian · Mike · Paul) — supersedes the 7/28 order. Deferred by ruling: live PA-builder session (~8/17, Cameron's first day back) · supervisor redline of QG success rates runs OUTSIDE the room (Brian/Mike redline tools). Mover-level branch QGRs run on the scorecard Mover View — see the BM guide; first one Wed 8/5 (N. Austin + Leander, Brian) while Cameron runs DFWT.</p>
 
 </div>
+<script>
+(function(){
+  var LS_KEY = 'flm-ros-times-v2-' + new Date().toISOString().slice(0,10);
+  window.LS_KEY = LS_KEY;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch(e){ state = {}; }
+  function save(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('[data-mins]'));
+  var startInput = document.getElementById('startTime');
+  if (state.start) startInput.value = state.start;
+  function fmt(mins){ var h=Math.floor(mins/60)%24, m=Math.round(mins%60); var ap=h>=12?'pm':'am'; var hh=h%12||12; return hh+':'+String(m).padStart(2,'0')+ap; }
+  function computeSched(){
+    var parts = startInput.value.split(':'); if(parts.length<2) return;
+    var t = (+parts[0])*60 + (+parts[1]);
+    blocks.forEach(function(b){
+      var s = b.querySelector('.sched'); if (s) s.textContent = '⏱ ' + fmt(t);
+      b.dataset.sched = t;
+      t += +b.dataset.mins;
+    });
+    var endEl = document.getElementById('driftRead');
+    state.start = startInput.value; save();
+    updateNow();
+  }
+  function nowMins(){ var d=new Date(); return d.getHours()*60 + d.getMinutes(); }
+  function updateNow(){
+    var n = nowMins();
+    document.getElementById('liveClock').textContent = fmt(n).replace(/(am|pm)$/,' $1');
+    var current=null;
+    blocks.forEach(function(b,i){
+      var s=+b.dataset.sched, e=s + (+b.dataset.mins);
+      b.classList.toggle('now', n>=s && n<e);
+      if(n>=s && n<e) current=b;
+    });
+    var d=document.getElementById('driftRead');
+    if(current){
+      // drift = how far into the day vs plan, using recorded actual starts when present
+      var idx = blocks.indexOf(current);
+      var rec = state['b'+idx] && state['b'+idx].start;
+      if(rec){ var diff = rec - (+current.dataset.sched); d.textContent = diff>3 ? ('running '+Math.round(diff)+' min behind') : diff<-3 ? ('running '+Math.round(-diff)+' min ahead') : 'on pace'; d.className='drift '+(diff>3?'late':'ok'); }
+      else { d.textContent='block '+(idx+1)+' scheduled now'; d.className='drift ok'; }
+    } else { d.textContent=''; }
+  }
+  blocks.forEach(function(b, i){
+    var body = b.querySelector('.block-body'); if(!body) return;
+    var wrap = document.createElement('div'); wrap.className='actual';
+    var st = document.createElement('button'); var en = document.createElement('button');
+    var note = document.createElement('input'); note.type='text'; note.placeholder='block note (what actually happened)…';
+    var rec = state['b'+i] || {};
+    function label(){ st.textContent = rec.start!=null ? ('▶ started '+fmt(rec.start)) : '▶ Start'; st.className = rec.start!=null?'set':''; en.textContent = rec.end!=null ? ('⏹ ended '+fmt(rec.end)) : '⏹ End'; en.className = rec.end!=null?'set':''; }
+    note.value = rec.note || '';
+    st.onclick = function(){ rec.start = nowMins(); state['b'+i]=rec; save(); label(); updateNow(); };
+    en.onclick = function(){ rec.end = nowMins(); state['b'+i]=rec; save(); label(); };
+    note.oninput = function(){ rec.note = note.value; state['b'+i]=rec; save(); };
+    label();
+    wrap.appendChild(st); wrap.appendChild(en); wrap.appendChild(note);
+    body.appendChild(wrap);
+  });
+  startInput.addEventListener('change', computeSched);
+  computeSched();
+  setInterval(updateNow, 30000);
+})();
+</script>
 </body>
 </html>
