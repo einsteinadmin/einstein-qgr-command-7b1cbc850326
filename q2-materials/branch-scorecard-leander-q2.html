@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leander — Q2'26 Branch Scorecard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -816,6 +817,15 @@
   .dt-badge.dt-sm { padding: 2px 8px 2px 6px; font-size: 10.5px; }
   .dt-badge.dt-sm svg { width: 11px; height: 11px; }
   .dt-empty-note { font-size: 12px; color: var(--gray-600); font-style: italic; }
+  details.dt-pill { display: inline-block; vertical-align: top; margin: 0 4px 4px 0; }
+  details.dt-pill summary { list-style: none; cursor: pointer; display: inline-block; }
+  details.dt-pill summary::-webkit-details-marker { display: none; }
+  details.dt-pill summary:hover .dt-badge { background: var(--ein-orange-100); }
+  details.dt-pill summary:focus-visible { outline: 2px solid var(--ein-orange-500); outline-offset: 2px; border-radius: 20px; }
+  details.dt-pill[open] .dt-badge { background: var(--ein-orange-100); }
+  details.dt-pill.dt-own .dt-badge { border-width: 2px; border-color: var(--ein-orange-500); }
+  details.dt-pill .dt-names { font-size: 12px; color: var(--navy); line-height: 1.5; background: var(--orange-bg); border: 1px solid var(--ein-orange-100); border-radius: 8px; padding: 8px 12px; margin: 4px 4px 6px 0; max-width: 340px; }
+
 
   /* Placeholder / status-ribbon grammar (BUILD-PLAN §7). */
   .status-ribbon {
@@ -1935,15 +1945,15 @@
     <section class="mover-section">
       <p class="section-eyebrow-mover">The Big Picture</p>
       <h2>How the Company Did in Q2</h2>
-      <p class="lede">Branch composites are back this quarter on the restored Q2 basis (provisional — 2 of 7 inputs land at the 7/31–8/1 quarter-close pulls). The company’s own report card is stamped below — three lenses, weighted equally, rolled into one grade. <span class="status-ribbon preliminary">Provisional — finalizes at the 7/31–8/1 close pulls</span></p>
+      <p class="lede">Branch composites are FINAL this quarter on the restored Q2 basis — all 6 metrics + growth modifier stamped 8/3. The company’s own report card is stamped below — three lenses, weighted equally, rolled into one grade. <span class="status-ribbon preliminary">Company grade still provisional — finalizes when July books close</span></p>
 
-      <div class="placeholder-note">Provisional stamp: the Financial lens inherits the company financial review’s grade and can re-stamp when the July books close (7/31–8/1). Sales Target (booked-vs-target EOQ pull) and Recognition (praise-count pull) land then too — branch grades render provisional until they do (see Manager View). <!-- WIRED: re-stamp the Financial lens + composite if the financial deck's composite moves at the 7/31-8/1 close (manifest _company_composite_q2_26) --></div>
+      <div class="placeholder-note">Branch grades are FINAL as of 8/3: Sales Target (booked-vs-target EOQ pull) and Recognition (praise-count pull) both landed at July close and are baked into every branch's 80-point composite below (see Manager View). The company-level Financial lens is the one piece still provisional — it inherits the company financial review's grade and re-stamps when the July books close.</div>
 
       <p class="lens-divider-label">Company composite — Q2 2026:</p>
       <!-- MOVERPORT2-2026-07-28: company-grade -->
       <div class="mv-company-grade">
         <div class="mv-grade-circle">B+</div>
-        <div class="mv-grade-caption">Company Grade <span class="status-ribbon preliminary" style="font-size:8px;">Provisional — finalizes 7/31–8/1</span></div>
+        <div class="mv-grade-caption">Company Grade <span class="status-ribbon preliminary" style="font-size:8px;">Provisional — finalizes when July books close</span></div>
       </div>
       <div class="lens-grid" style="grid-template-columns: 1fr;">
         <div class="lens-card grade-bplus">
@@ -2055,72 +2065,16 @@
     </section>
     <!-- /MOVERPORT -->
 
-    <!-- Mover-relevant branch metrics -->
-    <section class="mover-section">
-      <p class="section-eyebrow-mover">Our Branch · Q2</p>
-      <h2>The Numbers That Matter to Movers</h2>
-      <p class="lede">These are the metrics movers and drivers most directly influence. The full breakdown is in Manager View. The branch letter grade is back this quarter (provisional — it finalizes when the last two inputs land at quarter close, 7/31–8/1); individual tiles show actual vs target.</p>
-      <div class="mover-metrics-grid">
-        <div class="mover-metric grade-sg">
-          <div class="metric-label">Customer NPS <span class="metric-grade-pill sg">Super Green</span> <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></div>
-          <div class="metric-value">99.1</div>
-          <div class="metric-explainer">+9.1 above the standing 90 target — #1 of all 10 branches. Customers love us. Service excellence on every move keeps that score where it is.</div>
-          <details class="why-it-matters">
-            <summary>Why this matters</summary>
-            <p>NPS measures how likely customers are to recommend Einstein after their move. It's calculated from post-move surveys: % of promoters minus % of detractors. NPS is the strongest leading indicator of revenue growth — high-NPS branches see more repeat bookings, more referrals, and better online reviews. Service quality on every move is what moves this number.</p>
-          </details>
-        </div>
-        <div class="mover-metric">
-          <div class="metric-label">Mover eNPS <span class="status-ribbon pending" style="font-size:8px;">Side metric — last read Q1</span></div>
-          <div class="metric-value">+47 <span style="font-size:14px;color:var(--gray-600);">· Q1 2026 (stale reference)</span></div>
-          <div class="metric-explainer">No mover eNPS survey ran this quarter — Q2's eNPS cycle was the manager/CET salaried survey (company +81, n=52), not the mover population. Shown value is last quarter's read (Leander +47, n=15, vs company +46). No longer part of the branch grade — it returns as a KPI when the regular mover-engagement survey cadence starts (~2 quarters).</div>
-          <details class="why-it-matters">
-            <summary>Why this matters</summary>
-            <p>eNPS measures how likely movers are to recommend Einstein as a place to work. It's the employee equivalent of customer NPS. eNPS is one of the clearest signals of team health and tracks closely with retention. Its old share of the branch grade now measures Driver Safety instead, until the constant survey cadence brings this back — see the Q1 trend section below for the last mover-population read and what's already moving in response.</p>
-          </details>
-        </div>
-        <div class="mover-metric grade-sg">
-          <div class="metric-label">Driver Safety <span class="metric-grade-pill sg">Super Green</span> <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></div>
-          <div class="metric-value">96 <span style="font-size:14px;color:var(--gray-600);">· 0% high-risk</span></div>
-          <div class="metric-explainer">Up from 58/50% high-risk in Q1 — a complete flip. 0 of 12 active drivers flagged high-risk. Now a permanent part of the branch grade (15%, every quarter) — it took the slot the mover survey held until that cadence returns.</div>
-          <details class="why-it-matters">
-            <summary>Why this matters</summary>
-            <p>Driver Safety Score combines a driver's Samsara harsh-event data with the % of drivers in the high-risk band. Safer driving lowers fleet insurance premiums, reduces accident-related downtime, and prevents claims. Drivers are the line of defense — every habit shows up here.</p>
-          </details>
-        </div>
-        <div class="mover-metric">
-          <div class="metric-label">Recognition <span class="status-ribbon pending">Pending</span> <span class="metric-display-only-tag">Manager-driven</span></div>
-          <div class="metric-value">—</div>
-          <div class="metric-explainer">Fills in at the 7/31 praise pull. Ruled Q2 basis (published 7/28, before the count): praise-count attainment vs Leander's own roster-derived target on the Praise Tracking board. Your Q2 target: <strong>91 praises</strong> (BM 4/wk + OPs 3/wk × 13 weeks, 2 filled seats; vacant seats carry no target; mid-quarter seat changes prorate by weeks-in-seat). Graded: SG ≥120% · G ≥100% · Watch 70–99.9% · Red <70%. Count lands at the 7/31 pull.</div>
-          <details class="why-it-matters">
-            <summary>Why this matters</summary>
-            <p>Recognition tracks how consistently managers praise the team, measured now as praise-count attainment against a roster-derived branch target (not a % of movers surveyed). It's a leading indicator for retention and team morale — recognized teams stay longer, perform more consistently, and train new hires faster. This metric is manager-driven; it's shown in the mover view so the team knows where the branch landed.</p>
-          </details>
-          <!-- WIRED: populate from branches.n_austin.recognition_pct once status flips from pending to a real value -->
-        </div>
-        <div class="mover-metric" style="grid-column: 1 / -1;">
-          <div class="metric-label">Damages per Hour <span class="status-ribbon pending">Pending</span></div>
-          <div class="metric-value">—</div>
-          <div class="metric-explainer">Pending post-season reconciliation on closed claims + Rippling hours (Matisen, post-week-8). Rippling punch-clock outage since 6/29 also taints the hours denominator until backfilled.</div>
-          <details class="why-it-matters">
-            <summary>Why this matters</summary>
-            <p>Damages per Hour is the dollar value of customer property damaged per labor hour worked across the quarter. It's a direct read on care and craft: every move where things stay protected drives this number down.</p>
-          </details>
-          <!-- WIRED: populate from branches.n_austin.damages_per_hour once status flips from pending to a real value -->
-        </div>
-      </div>
-    </section>
-
     <!-- Performance Charts -->
     <section class="mover-section">
       <p class="section-eyebrow-mover">The Visuals</p>
       <h2>Branch Performance — At a Glance</h2>
-      <p class="lede">The same charts the leadership team reviews. The 6-metric radar is on the restored Q2 composite basis (TUR is off the radar this quarter — ungraded side metric) — 2 of its axes (Sales Target · Recognition) are pending until the 7/31–8/1 quarter-close pulls; the bars show how the branch ranks vs the other 9.</p>
+      <p class="lede">The same charts the leadership team reviews. The 6-metric radar is on the restored Q2 composite basis (TUR is off the radar this quarter — ungraded side metric), FINAL as of the 8/3 close; the bars show how the branch ranks vs the other 9.</p>
 
       <div class="mover-charts-grid">
         <div class="mover-chart-card mover-chart-full">
-          <div class="mover-chart-title">Six-Metric Radar <span class="status-ribbon pending" style="font-size:8px;">2 axes pending</span></div>
-          <p class="mover-chart-sub">Filled shape = Leander's Q2 grades on the 4 live inputs; dashed line = the "all Green" target shape. Sales Target and Recognition are <strong>pending, not zero</strong> — they render at the center until the 7/31–8/1 pulls land. TUR is ungraded this quarter (shown as its own chart below, actuals only).</p>
+          <div class="mover-chart-title">Six-Metric Radar <span class="status-ribbon" style="font-size:8px;background:var(--gray-200);color:var(--gray-700);">Final</span></div>
+          <p class="mover-chart-sub">Filled shape = Leander's final Q2 grades on all 6 composite inputs; dashed line = the "all Green" target shape. TUR is ungraded this quarter (shown as its own chart below, actuals only).</p>
           <div class="chart-canvas-wrap"><canvas id="moverChartRadar"></canvas></div>
         </div>
         <div class="mover-chart-card">
@@ -2367,14 +2321,19 @@
       <p style="font-size:12.5px;color:var(--gray-800);margin-top:14px;"><strong>Final standing:</strong> #3 of 10 · 8.48 pts &mdash; <em>Season score = the average of the weekly averages (Cameron's 7/23 ruling), the mean of Leander's 8 weekly scorecards (W1-W8, wrapped Week 8 National 7/11). Matisen confirmed the games data authoritative in the 7/23 session.</em></p>
 
       <div class="dt-strip" style="margin-top:14px;">
-        <h4 style="margin:0 0 6px 0;font-size:13px;color:var(--navy);">Dream Team — Leander's 5 trophy holders</h4>
-        <p style="font-size:11.5px;color:var(--gray-600);margin:0 0 8px 0;">The Season 3 Dream Team = the top 10% of Overall Q2 score among the 212 movers who cleared the 250 Rippling-hour busy-season floor (24 trophy holders company-wide — inclusive-tie rule: all movers tied at the cutline qualify).</p>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;">
-          <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Nathan Swain — 9.8</span>
-          <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Brendon Steele — 9.75</span>
-          <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Emily Harris — 9.5</span>
-          <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Joseph Michaud Jr — 9.4</span>
-          <span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Robert Taylor — 9.25</span>
+        <h4 style="margin:0 0 6px 0;font-size:15px;color:var(--navy);">Dream Team — Season 3 (20 company-wide)</h4>
+        <p style="font-size:12px;color:var(--gray-600);margin:0 0 8px 0;">The top 10% of Q2-average Overall Games score among active movers who cleared the 250+ Q2 Rippling-hour busy-season floor (ties at the cutoff all make it — cutoff 10.32). Congrats to Leander's 1 member: Nathan Swain (10.45). Tap a branch to see its Dream Team.</p>
+        <div>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Tampa · 5 members</span></summary><div class="dt-names" data-eid="dt-tampa-mv">Eric Corbitt Jr (11.89) · Stephen Crilly (11.29) · Connor Legro (11.26) · Sloan Kraus (10.91) · Ronald Peterson (10.89)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>S. Austin · 4 members</span></summary><div class="dt-names" data-eid="dt-saustin-mv">Jakob Steen (11.55) · Gabrial Bickford (10.69) · Shawn Smith (10.64) · Allister Suber (10.45)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>San Antonio · 3 members</span></summary><div class="dt-names" data-eid="dt-sanantonio-mv">Richard Martinez (10.93) · Leeroy Delgado (10.43) · Matthew Murphy (10.40)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Houston · 3 members</span></summary><div class="dt-names" data-eid="dt-houston-mv">Israel Serrano (10.79) · Manuel Chupungco (10.38) · Jalen Gregor (10.32)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Ft. Worth · 2 members</span></summary><div class="dt-names" data-eid="dt-fortworth-mv">Elijah Rasberry (10.70) · Ernesto Padilla (10.42)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Dallas · 1 member</span></summary><div class="dt-names" data-eid="dt-dallas-mv">Noah Halpin (10.66)</div></details>
+      <details class="dt-pill dt-own" open><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Leander · 1 member</span></summary><div class="dt-names" data-eid="dt-leander-mv">Nathan Swain (10.45)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Garland · 1 member</span></summary><div class="dt-names" data-eid="dt-garland-mv">Brandon Vanlehn (10.44)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>N. Austin · 0 members</span></summary><div class="dt-names" data-eid="dt-naustin-mv">No Dream Team members this season — the door&#39;s open for Season 4.</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>McKinney · 0 members</span></summary><div class="dt-names" data-eid="dt-mckinney-mv">No Dream Team members this season — the door&#39;s open for Season 4.</div></details>
         </div>
       </div>
 
@@ -2462,9 +2421,9 @@
   <div class="cover-hero manager-only">
     <div class="composite-badge">
       <div class="composite-letter">B</div>
-      <div class="composite-score">Provisional Final 77.0</div>
-      <div class="composite-breakdown">Composite 80.0 (B+) − 3 growth · 48.0 of 60 live pts</div>
-      <div style="margin:8px 0 0 0;"><span class="status-ribbon pending" style="font-size:8.5px;">PROVISIONAL — finalizes at July close (sales target · recognition)</span></div>
+      <div class="composite-score">Final 77.0</div>
+      <div class="composite-breakdown">Composite 80.0 (B+) − 3 growth · 64.0 of 80 pts</div>
+      <div style="margin:8px 0 0 0;"><span class="status-ribbon" style="font-size:8.5px;background:var(--gray-200);color:var(--gray-700);">FINAL — stamped at July close (8/3)</span></div>
       <div class="growth-chip w">
         <span class="growth-chip-label">Growth</span>
         <span class="growth-chip-grade">−3</span>
@@ -2483,20 +2442,22 @@
     </div>
     <div>
       <!-- MOVERPORT2-2026-07-28: hero-rewrite -->
-      <p class="composite-headline">Solid quarter, provisional B — NPS and Driver Safety hit Super Green, but Personnel-Budget stayed Red all three months.</p>
+      <p class="composite-headline">Solid quarter, FINAL B — NPS and Driver Safety hit Super Green, but Personnel-Budget stayed Red all three months.</p>
       <p class="composite-subhead">
-        <strong>Provisional composite 80.0 (B+)</strong> on the 4 live inputs (48.0 of 60 available points) + <strong>growth modifier −3</strong> (Slight decline, −1.1% YoY — seasonality applies) → <strong>provisional final 77.0 (B)</strong>.
+        <strong>Composite 80.0 (B+)</strong> on all 6 metrics (64.0 of 80 available points) + <strong>growth modifier −3</strong> (Slight decline, −1.1% YoY — seasonality applies) → <strong>FINAL 77.0 (B)</strong>.
       </p>
       <p class="composite-subhead" style="line-height:1.8;">
         <strong>Customer NPS</strong> — Super Green, 15/15 (99.1 vs 90, #1 of 10) — bright spot<br>
         <strong>Driver Safety</strong> — flipped to Super Green, 15/15 (96 score · 0% high-risk) — bright spot<br>
+        <strong>Sales Target</strong> — Green, 8/10 (99.9% booked-vs-target)<br>
+        <strong>Recognition</strong> — Green, 8/10 (106.0%, 89 of 84 praises)<br>
         <strong>Personnel-Budget</strong> — Red, 3/15 (88.8% — chronic miss all 3 months below the 95% floor)<br>
         <strong>Einstein Games</strong> — critical number MET clean, 15/15 (8.48 season avg — well above the published 7.0 bar) — bright spot<br>
         <strong>TUR</strong> — no points this quarter (retired from the composite, Cameron 7/28 — Q2 targets were built on a rate-math error; owned-fleet 77.7% reports as a side metric in Financial Engine)<br>
         <strong>NOI to plan</strong> — 82.75% (allocated basis, ruled by Cameron 7/21): $138,458 of a $167,321 Q2 reforecast plan, #3 of 10 on that basis
       </p>
       <p class="composite-subhead">
-        <strong>Why provisional:</strong> Sales Target Attainment (10 pts, booked-vs-target EOQ pull) and Recognition (10 pts, praise-count attainment) finalize 7/31–8/1 — the final letter grades on all 80 points then.
+        <strong>Final basis:</strong> Sales Target Attainment (10 pts, booked-vs-target EOQ pull) and Recognition (10 pts, praise-count attainment) both landed at the 8/3 July close — every one of the 6 composite inputs is now live, and the letter grade is final.
       </p>
       <!-- /MOVERPORT2 -->
       <div class="contribution-callout">
@@ -2507,13 +2468,13 @@
 
   <!-- ============== PHILOSOPHY ============== -->
   <section class="philosophy manager-only">
-    <h2>How We Grade a Branch <span class="status-ribbon pending" style="font-size:9px;">Provisional — finalizes 7/31–8/1</span></h2>
-    <p class="philosophy-lede">Final grade = composite + growth modifier. The composite measures where you landed; the growth modifier measures where you're going. <strong>The composite is BACK this quarter on the ruled Q2 basis (Cameron, 7/27)</strong> — zero reweighting from Q1; only the labels rotate. The crit slots were always 15% apiece by design: Q1's crits were Personnel-Budget + Driver Safety; Q2's crits are Personnel-Budget + Einstein Games. Driver Safety is now a <strong>permanent constant</strong>, taking the 15% that Mover eNPS held — eNPS is out of the composite (no survey cycle) and renders as a side metric until the constant mover-engagement cadence starts (~2 quarters). Two inputs (Sales Target · Recognition) land at the 7/31–8/1 quarter-close pulls, so the grade renders <strong>provisional</strong>: earned points ÷ the 60 points currently live. <strong>TUR is out of the graded composite for Q2 (Cameron, 7/28)</strong> — its 20 points retired from the denominator entirely (the Q2 utilization targets were built on a rate-math error); TUR reports as a side metric in Financial Engine and returns as a graded KPI in Q3 on corrected math.</p>
+    <h2>How We Grade a Branch <span class="status-ribbon" style="font-size:9px;background:var(--gray-200);color:var(--gray-700);">Final — stamped 8/3</span></h2>
+    <p class="philosophy-lede">Final grade = composite + growth modifier. The composite measures where you landed; the growth modifier measures where you're going. <strong>The composite is BACK this quarter on the ruled Q2 basis (Cameron, 7/27)</strong> — zero reweighting from Q1; only the labels rotate. The crit slots were always 15% apiece by design: Q1's crits were Personnel-Budget + Driver Safety; Q2's crits are Personnel-Budget + Einstein Games. Driver Safety is now a <strong>permanent constant</strong>, taking the 15% that Mover eNPS held — eNPS is out of the composite (no survey cycle) and renders as a side metric until the constant mover-engagement cadence starts (~2 quarters). Two inputs (Sales Target · Recognition) landed at the 7/31–8/1 quarter-close pulls, stamped final 8/3 — the grade now runs on <strong>all 80 points</strong>. <strong>TUR is out of the graded composite for Q2 (Cameron, 7/28)</strong> — its 20 points retired from the denominator entirely (the Q2 utilization targets were built on a rate-math error); TUR reports as a side metric in Financial Engine and returns as a graded KPI in Q3 on corrected math.</p>
 
     <div class="philosophy-grid">
       <div class="bucket">
         <h3>Composite · 6 Metrics · Q2 Basis</h3>
-        <p>Customer NPS <strong>15</strong> · Driver Safety <strong>15</strong> (constant — takes Mover eNPS's old slot) · Sales Target <strong>10</strong> (booked-vs-target, EOQ pull — <em>pending</em>) · Recognition <strong>10</strong> (praise-count attainment vs position targets — <em>pending</em>) · Critical #1 Personnel-Budget <strong>15</strong> · Critical #2 Einstein Games <strong>15</strong> (graduated points — see the math below). Weights sum to 80 — TUR's 20 points are retired for Q2 (side metric, no points; see the TUR card in Financial Engine). Each metric counted exactly once.</p>
+        <p>Customer NPS <strong>15</strong> · Driver Safety <strong>15</strong> (constant — takes Mover eNPS's old slot) · Sales Target <strong>10</strong> (booked-vs-target, EOQ pull — <em>final</em>) · Recognition <strong>10</strong> (praise-count attainment vs position targets — <em>final</em>) · Critical #1 Personnel-Budget <strong>15</strong> · Critical #2 Einstein Games <strong>15</strong> (graduated points — see the math below). Weights sum to 80 — TUR's 20 points are retired for Q2 (side metric, no points; see the TUR card in Financial Engine). Each metric counted exactly once.</p>
       </div>
       <div class="bucket">
         <h3>Growth Modifier · Revenue YoY</h3>
@@ -2525,7 +2486,7 @@
       </div>
     </div>
 
-    <details class="drill" style="margin-top:12px;"><summary>How the composite math works — and Leander's provisional numbers (tap to expand)</summary><div class="composite-math">
+    <details class="drill" style="margin-top:12px;"><summary>How the composite math works — and Leander's final numbers (tap to expand)</summary><div class="composite-math">
       <p>Each metric has a weight (the six weights sum to <strong>80</strong> — TUR's 20 points are retired for Q2, see the TUR side-metric card in Financial Engine) and a grade worth points: Super Green = <strong>5</strong>, Green = <strong>4</strong>, Watch = <strong>2</strong>, Red = <strong>1</strong>. A metric's earned points = weight × (grade points ÷ 5) — so a Super Green earns its full weight, a Green earns 80% of it, a Watch 40%, a Red 20%.</p>
       <div class="math-grades">
         <span class="grade-pill">SG = 5</span>
@@ -2534,8 +2495,8 @@
         <span class="grade-pill">R = 1</span>
       </div>
       <p><strong>The one exception — Einstein Games (critical #2) uses graduated points, not the SG/G/W/R ladder (Cameron ruling, 7/27).</strong> The critical-number line stays exactly where it was published: <strong>7.0 pass/fail — a miss reads RED, visibly, nothing hidden.</strong> But the 15 composite points resolve finer than the cliff: <strong>≥7.0 → full 15</strong> · <strong>5.0–6.99 → 7.5 × (avg − 5.0)</strong> · <strong>&lt;5.0 → 0</strong>. Why: with an all-or-nothing cliff, a 6.87 and a 5.67 take the identical 15-point hit — a near-miss by a hair grades the same as a miss by a mile and a half, which makes the scorecard a worse lens. <strong>The floor itself was softened from 6.0 to 5.0 (Cameron ruling, 7/27)</strong> so a just-under-6 miss doesn’t grade identical to a true blowout — the same cliff logic that already applies at the top of the curve, now applied at the bottom too. Worked example of the curve: a branch at <strong>6.87</strong> still shows a RED missed critical, but earns 7.5 × 1.87 = <strong>~14.0 of 15</strong> composite points; a 6.0 earns 7.5; below 5.0 earns 0. The bar didn't move — only the credit curve under it resolves.</p>
-      <div class="math-formula">Provisional grade % = earned points ÷ points currently live (60 of 80) · final grade % = earned ÷ 80 after the 7/31–8/1 pulls</div>
-      <p><strong>Leander provisional arithmetic (4 live inputs):</strong> Customer NPS Super Green → 15 × 5/5 = <strong>15.0</strong> · Driver Safety Super Green → 15 × 5/5 = <strong>15.0</strong> · Personnel-Budget Red → 15 × 1/5 = <strong>3.0</strong> · Einstein Games 8.48 (≥ 7.0 — full graduated credit) → <strong>15.0</strong> of 15. Side metrics carry no points (TUR — retired for Q2 per Cameron's 7/28 ruling; Mover eNPS — no survey cycle). Sum = <strong>48.0 earned of 60 available</strong> → 48.0 ÷ 60 = <strong>80.0 (B+)</strong>. Growth modifier <strong>−3</strong> (Slight decline, −1.1% YoY) → provisional final <strong>77.0 (B)</strong>. Sales Target (10) + Recognition (10) land at quarter close and re-base the grade on all 80 points.</p>
+      <div class="math-formula">Final grade % = earned points ÷ 80 total points, stamped 8/3</div>
+      <p><strong>Leander final arithmetic (all 6 inputs live):</strong> Customer NPS Super Green → 15 × 5/5 = <strong>15.0</strong> · Driver Safety Super Green → 15 × 5/5 = <strong>15.0</strong> · Personnel-Budget Red → 15 × 1/5 = <strong>3.0</strong> · Einstein Games 8.48 (≥ 7.0 — full graduated credit) → <strong>15.0</strong> of 15. Side metrics carry no points (TUR — retired for Q2 per Cameron's 7/28 ruling; Mover eNPS — no survey cycle). Sales Target Green (99.9%) → 10 × 4/5 = <strong>8.0</strong> · Recognition Green (106.0%) → 10 × 4/5 = <strong>8.0</strong>. Side metrics carry no points (TUR — retired for Q2 per Cameron's 7/28 ruling; Mover eNPS — no survey cycle). Sum = <strong>64.0 earned of 80 available</strong> → 64.0 ÷ 80 = <strong>80.0 (B+)</strong>. Growth modifier <strong>−3</strong> (Slight decline, −1.1% YoY) → FINAL <strong>77.0 (B)</strong>.</p>
       <p>Why <em>SG=5, G=4, W=2, R=1</em> and not 5/4/3/2/1? The skip from G to W creates a real penalty for Watch — a Watch metric isn't "halfway between Green and Red," it's noticeably off pace. An all-Green branch lands at 80 (B+ baseline). All-Watch lands at 40. All-Red lands at 20. Hitting plan should read as above-average; this scale enforces that.</p>
     </div></details>
 
@@ -2547,14 +2508,14 @@
   </div>
 
   <div class="cover-radar-wrap manager-only">
-    <p class="chart-title">Six-Metric Radar — Leander vs Target ("All Green" Shape) <span class="status-ribbon pending" style="font-size:8px;">2 axes pending</span></p>
-    <p class="chart-sub">Filled shape = Leander Q2 grades on the 4 live inputs; dashed line = "all Green" target shape. <strong>2 axes are pending, not zero:</strong> Sales Target and Recognition land at the 7/31–8/1 quarter-close pulls — they render at the center until then. TUR is off the radar this quarter (ungraded side metric — see Financial Engine). Live reads: NPS and Driver Safety push outside the target line (Super Green); Einstein Games sits on it (full graduated credit); Personnel-Budget sits deep inside it (Red).</p>
+    <p class="chart-title">Six-Metric Radar — Leander vs Target ("All Green" Shape) <span class="status-ribbon" style="font-size:8px;background:var(--gray-200);color:var(--gray-700);">Final</span></p>
+    <p class="chart-sub">Filled shape = Leander's final Q2 grades on all 6 composite inputs; dashed line = "all Green" target shape. TUR is off the radar this quarter (ungraded side metric — see Financial Engine). Live reads: NPS and Driver Safety push outside the target line (Super Green); Einstein Games sits on it (full graduated credit); Personnel-Budget sits deep inside it (Red).</p>
     <div class="chart-canvas-wrap"><canvas id="chartRadar"></canvas></div>
   </div>
 
   <!-- ============== FINANCIAL ENGINE ============== -->
   <section class="manager-only">
-    <h2>Financial Engine <span class="cat-grade">Category Grade <span class="pill" style="background:var(--gray-200);color:var(--gray-700);" title="pending input — Sales Target Attainment (booked-vs-target) lands at the 7/31–8/1 EOQ pull; it is this category's only graded component for Q2 (TUR = ungraded side metric, NOI/Truck = reference)">—</span></span></h2>
+    <h2>Financial Engine <span class="cat-grade">Category Grade <span class="pill g" title="Sales Target Attainment landed final 8/3: 99.9% → Green, 8.0 of 10 points. It is this category's only graded component for Q2 (TUR = ungraded side metric, NOI/Truck = reference).">G</span></span></h2>
     <div class="metric-grid">
 
       <div class="metric ref">
@@ -2563,31 +2524,31 @@
           <span class="metric-weight">side metric · no points this quarter (ruled 7/28)</span>
         </div>
         <div class="metric-value-row">
-          <span class="metric-actual">77.7%</span>
+          <span class="metric-actual">78.7%</span>
           <span class="metric-grade ref">Reference</span>
         </div>
         <p class="metric-target">Owned-fleet TUR (all trucks on the lot — the topline basis) · reported, not graded · no Q2 target</p>
-        <p class="metric-footnote" style="font-size:11px;color:var(--gray-600);margin-top:4px;">Running-truck TUR (reference — crew-out truck-days excluded): <strong>89.8%</strong> · 79 crew-out truck-days in Q2.</p>
+        <p class="metric-footnote" style="font-size:11px;color:var(--gray-600);margin-top:4px;">Running-truck TUR (reference — crew-out truck-days excluded): <strong>91.2%</strong> · 80 crew-out truck-days in Q2 (July-close v11 actuals).</p>
         <div style="margin-top:8px;padding:10px 12px;background:var(--gray-50);border-left:3px solid var(--gray-400);border-radius:4px;font-size:12px;color:var(--gray-700);">
           <p style="margin:0 0 6px;"><strong>Why ungraded:</strong> TUR doesn't carry points this quarter. The Q2 utilization targets were built on a rate-math error (trip-fee dollars counted without trip-fee time), which set every branch's bar wrong — some too easy, some impossible. Grading against a bent bar isn't a grade, so the 20 points come out of the denominator instead of counting against anyone.</p>
           <p style="margin:0 0 6px;"><strong>How it comes back:</strong> TUR returns as a graded KPI in Q3 on corrected math — one measured rate (total dollars ÷ total billed hours, trip time included) and targets built from it.</p>
           <p style="margin:0;"><strong>Fair in both directions:</strong> branches that took TUR Reds against bent bars recover those points from the denominator, and branches that had full TUR credit lose nothing they earned — their grade now stands entirely on real, correctly-measured components.</p>
         </div>
-        <details class="metric-source"><summary></summary><p class="source-detail">Manifest <code>branch-metrics-q2-26.json</code> v0.10.9 <code>_tur_correction_q2_26.by_branch</code> (owned + running actuals; Matisen feed tur-actuals-q2-26-2026-07-21.csv v8) · Q2 TUR targets retired from grading per Cameron's 7/28 ruling (<code>_tur_targets_q2_26_correction</code>) · <strong>caveats:</strong> Rippling punch-clock outage 6/29→ (hours approximated) · July = projected-landing estimate</p></details>
+        <details class="metric-source"><summary></summary><p class="source-detail">Manifest <code>branch-metrics-q2-26.json</code> v0.11.0 <code>_tur_correction_q2_26.by_branch</code> (owned + running actuals; Matisen Q2 close-out feed 2026-08-03, tur-actuals-q2-26-v11) · Q2 TUR targets retired from grading per Cameron's 7/28 ruling (<code>_tur_targets_q2_26_correction</code>) · pulled post-close 8/3.</p></details>
       </div>
 
-      <div class="metric" style="opacity:0.65;">
+      <div class="metric g">
         <div class="metric-row1">
           <span class="metric-name">Sales Target Attainment</span>
-          <span class="metric-weight">10% · pending quarter close</span>
+          <span class="metric-weight">10% · earned 8.0 of 10</span>
         </div>
         <div class="metric-value-row">
-          <span class="metric-actual">—</span>
-          <span class="status-ribbon pending">Pending — lands 7/31–8/1</span>
+          <span class="metric-actual">99.9%</span>
+          <span class="metric-grade g">Green</span>
         </div>
-        <p class="metric-target">Ruled Q2 basis (Cameron 7/27): <strong>booked-vs-target</strong>, pulled at end of quarter. This tile and its 10 composite points fill at the 7/31–8/1 EOQ pull; until then the grade renders provisional on the other 60 points.</p>
-        <details class="drill"><summary>Why this matters</summary><p>Sales Target Attainment measures the branch's sales-contributing team against quarterly targets. Q2 carried three competing revenue reads for most of the quarter; the 7/27 ruling resolved the graded basis to <strong>booked-vs-target at the EOQ pull</strong> — booked $ against the sales target, pulled once the quarter closes so July is whole. Per the feed's no-blended-rate rule, Q2 is not scored against the 40% conversion target. The branch's live quotes/bookings/conversion figures are in Reference Data below.</p></details>
-        <details class="metric-source"><summary></summary><p class="source-detail">Basis ruled in <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code> (Cameron's 3pm rulings) · manifest caveat <code>booked_vs_realized_basis</code> still governs labeling · value lands at the 7/31–8/1 EOQ pull.</p></details>
+        <p class="metric-target">Final Q2 basis (Cameron 7/27, pulled 8/3): <strong>booked-vs-target</strong>, $661,667 booked vs $662,143 target. Bands: SG ≥100% · G 80–100% · W 60–80% · R &lt;60% — 99.9% lands Green, 8.0 of 10 composite points.</p>
+        <details class="drill"><summary>Why this matters</summary><p>Sales Target Attainment measures the branch's sales-contributing team against quarterly targets. Q2 carried three competing revenue reads for most of the quarter; the 7/27 ruling resolved the graded basis to <strong>booked-vs-target at the EOQ pull</strong> — booked $ against the sales target, pulled once the quarter closed so July was whole (pulled 8/3). Per the feed's no-blended-rate rule, Q2 is not scored against the 40% conversion target. The branch's live quotes/bookings/conversion figures are in Reference Data below.</p></details>
+        <details class="metric-source"><summary></summary><p class="source-detail">Basis ruled in <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code> (Cameron's 3pm rulings) · manifest caveat <code>booked_vs_realized_basis</code> still governs labeling · Matisen Q2 close-out feed 2026-08-03 · <code>_sales_attainment_q2_26.by_branch.leander</code>.</p></details>
       </div>
 
       <div class="metric ref">
@@ -2649,6 +2610,23 @@
 
     </div>
 
+    <div class="dt-strip" style="margin-top:14px;">
+        <h4 style="margin:0 0 6px 0;font-size:15px;color:var(--navy);">Dream Team — Season 3 (20 company-wide)</h4>
+        <p style="font-size:12px;color:var(--gray-600);margin:0 0 8px 0;">The top 10% of Q2-average Overall Games score among active movers who cleared the 250+ Q2 Rippling-hour busy-season floor (ties at the cutoff all make it — cutoff 10.32). Congrats to Leander's 1 member: Nathan Swain (10.45). Tap a branch to see its Dream Team.</p>
+        <div>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Tampa · 5 members</span></summary><div class="dt-names" data-eid="dt-tampa-mgr">Eric Corbitt Jr (11.89) · Stephen Crilly (11.29) · Connor Legro (11.26) · Sloan Kraus (10.91) · Ronald Peterson (10.89)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>S. Austin · 4 members</span></summary><div class="dt-names" data-eid="dt-saustin-mgr">Jakob Steen (11.55) · Gabrial Bickford (10.69) · Shawn Smith (10.64) · Allister Suber (10.45)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>San Antonio · 3 members</span></summary><div class="dt-names" data-eid="dt-sanantonio-mgr">Richard Martinez (10.93) · Leeroy Delgado (10.43) · Matthew Murphy (10.40)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Houston · 3 members</span></summary><div class="dt-names" data-eid="dt-houston-mgr">Israel Serrano (10.79) · Manuel Chupungco (10.38) · Jalen Gregor (10.32)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Ft. Worth · 2 members</span></summary><div class="dt-names" data-eid="dt-fortworth-mgr">Elijah Rasberry (10.70) · Ernesto Padilla (10.42)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Dallas · 1 member</span></summary><div class="dt-names" data-eid="dt-dallas-mgr">Noah Halpin (10.66)</div></details>
+      <details class="dt-pill dt-own" open><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Leander · 1 member</span></summary><div class="dt-names" data-eid="dt-leander-mgr">Nathan Swain (10.45)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>Garland · 1 member</span></summary><div class="dt-names" data-eid="dt-garland-mgr">Brandon Vanlehn (10.44)</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>N. Austin · 0 members</span></summary><div class="dt-names" data-eid="dt-naustin-mgr">No Dream Team members this season — the door&#39;s open for Season 4.</div></details>
+      <details class="dt-pill"><summary><span class="dt-badge dt-md"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2H22l-6 4.6L18.4 21 12 16.4 5.6 21 8 13.8l-6-4.6h7.6z"/></svg>McKinney · 0 members</span></summary><div class="dt-names" data-eid="dt-mckinney-mgr">No Dream Team members this season — the door&#39;s open for Season 4.</div></details>
+        </div>
+      </div>
+
     <div class="placeholder-note">TUR by Branch chart moved to the Financial Engine section above (that's where the TUR side-metric card lives — TUR is ungraded for Q2 per Cameron's 7/28 ruling). <!-- SWAP: TUR chart-wrap relocated from Critical Numbers to Financial Engine per Phase-B agent brief §1b — named decision, not a silent drop. --></div>
 
     <div class="chart-wrap">
@@ -2692,7 +2670,7 @@
 
   <!-- ============== PEOPLE + CUSTOMER ============== -->
   <section class="manager-only">
-    <h2>People + Customer <span class="cat-grade">Category Grade <span class="pill" style="background:var(--gray-200);color:var(--gray-700);" title="pending inputs — Recognition (praise-count attainment) lands at the 7/31 pull; the category grade renders once every graded input in this category is live. Mover eNPS is a side metric (zero points) and doesn't gate the category.">—</span></span></h2>
+    <h2>People + Customer <span class="cat-grade">Category Grade <span class="pill g" title="Category = points earned ÷ points possible: Customer NPS 15/15 + Recognition 8/10 = 23/25 (92.0%) — reads Green. Mover eNPS is a side metric (zero points) and doesn't gate the category.">G</span></span></h2>
     <div class="metric-grid">
 
       <div class="metric sg">
@@ -2723,19 +2701,18 @@
         <details class="metric-source"><summary></summary><p class="source-detail">Q1 value: QGR Packet v1.26 Component 5 (Q1 mover survey, 227 responses; Leander +47, n=15, company +46) · Manifest caveat <code>enps_population_change_q2</code> — mover population not surveyed this cycle · composite removal ruled in <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code>.</p></details>
       </div>
 
-      <div class="metric" style="opacity:0.65;">
+      <div class="metric g">
         <div class="metric-row1">
           <span class="metric-name">Recognition — Praise-Count Attainment</span>
-          <span class="metric-weight">10% · pending quarter close</span>
+          <span class="metric-weight">10% · earned 8.0 of 10</span>
         </div>
         <div class="metric-value-row">
-          <span class="metric-actual">—</span>
-          <span class="status-ribbon pending">Pending — lands 7/31</span>
+          <span class="metric-actual">106.0%</span>
+          <span class="metric-grade g">Green</span>
         </div>
-        <p class="metric-target"><strong>NEW basis (ruled 7/27):</strong> praise-count attainment vs position targets on the Praise Tracking board — each position carries a praise target; the branch metric = current praise count as a % of target, rolled up per branch. Replaces Q1's %-recognized-in-last-2-weeks, which was sourced from the retired mover eNPS survey. Your Q2 target: <strong>91 praises</strong> (BM 4/wk + OPs 3/wk × 13 weeks, 2 filled seats; vacant seats carry no target; mid-quarter seat changes prorate by weeks-in-seat). Graded: SG ≥120% · G ≥100% · Watch 70–99.9% · Red <70%. Count lands at the 7/31 pull.</p>
-        <details class="drill"><summary>Why this matters</summary><p>Recognition is a leading indicator for retention and morale — recognized teams stay longer and perform more consistently. Q1's source (the mover survey) is gone, so the Q2 basis moves to the Praise Tracking board's praise-count attainment against a roster-derived branch target (ruled 7/28, published before the count). Your Q2 target: <strong>91 praises</strong> (BM 4/wk + OPs 3/wk × 13 weeks, 2 filled seats; vacant seats carry no target; mid-quarter seat changes prorate by weeks-in-seat). Graded: SG ≥120% · G ≥100% · Watch 70–99.9% · Red <70%. Count lands at the 7/31 pull. This tile and its 10 composite points fill at the 7/31 pull.</p></details>
-        <details class="metric-source"><summary></summary><p class="source-detail">Basis ruled in <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code> · source board = Praise Tracking (praise-count vs position targets) · the by-giver praise data in <code>_praise_q2_26</code> is not a branch recognition rate and is not used as a substitute.</p></details>
-        <!-- WIRED: populate from the 7/31 Praise Tracking pull once it lands -->
+        <p class="metric-target"><strong>Final basis (ruled 8/3):</strong> praise-count attainment vs the praise board's own goal lines — BM 48 · Ops/Flex/FM 36, 12-week basis (supersedes the 13-week draft table published 7/28). Leander's Q2 target: <strong>84 praises</strong> (Frank Williams 41/48, Garrison Cobe 48/36). Actual 89 of 84 = <strong>106.0% — Green</strong>, 8.0 of 10 composite points.</p>
+        <details class="drill"><summary>Why this matters</summary><p>Recognition is a leading indicator for retention and morale — recognized teams stay longer and perform more consistently. Q1's source (the mover survey) is gone, so the Q2 basis moves to the Praise Tracking board's praise-count attainment against a roster-derived branch target (ruled 7/28, targets finalized 8/3 on the 12-week board-line basis). Leander's Q2 target: <strong>84 praises</strong> (Frank Williams 41/48, Garrison Cobe 48/36). Graded: SG ≥120% · G ≥100% · Watch 70–99.9% · Red &lt;70%. Final count landed at the 8/3 pull: 89 (106.0%) — Green.</p></details>
+        <details class="metric-source"><summary></summary><p class="source-detail">Monday board 6601150575 chart view 144293059 + seat map <code>_shared/org-chart.md</code> · rulings Cameron 8/3 PM · <code>_recognition_q2_26.by_branch.leander</code> · the by-giver praise data in <code>_praise_q2_26</code> is not a branch recognition rate and is not used as a substitute.</p></details>
       </div>
 
     </div>
@@ -2751,20 +2728,20 @@
 
   <!-- ============== TRAJECTORY · GROWTH MODIFIER (v3.2) ============== -->
   <section class="manager-only">
-    <h2>Trajectory · Revenue YoY <span class="cat-grade">Growth Modifier <span class="pill w" title="Slight decline band (−3% to 0%) → −3 points applied to the provisional composite">−3</span></span></h2>
+    <h2>Trajectory · Revenue YoY <span class="cat-grade">Growth Modifier <span class="pill w" title="Slight decline band (−3% to 0%) → −3 points applied to the final composite">−3</span></span></h2>
     <div class="metric-grid">
 
       <div class="metric w">
         <div class="metric-row1">
           <span class="metric-name">Revenue YoY</span>
-          <span class="metric-weight">Modifier · −3 applied to the provisional composite <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></span>
+          <span class="metric-weight">Modifier · −3 applied to the final composite <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></span>
         </div>
         <div class="metric-value-row">
           <span class="metric-actual">−1.1%</span>
           <span class="metric-grade w">Slight decline tier</span>
         </div>
         <p class="metric-target">$633,917 Q2'26 (prelim) vs <strong>$640,868</strong> Q2'25 · "Slight decline" band (−3% to 0%) · 2nd-weakest YoY of any branch this quarter (#9 of 10)</p>
-        <details class="drill"><summary>How the modifier scale works</summary><p>The growth modifier scale is unchanged from Q1: <strong>Breakout ≥+20% → +10</strong> · <strong>Strong +10-20% → +7</strong> · <strong>Stable growth +3-10% → +4</strong> · <strong>Flat 0-3% → 0</strong> · <strong>Slight decline −3-0% → −3</strong> · <strong>Declining &lt;−3% → −7</strong>. Leander's −1.1% lands in the Slight decline band → <strong>−3 applied to the provisional composite</strong> (80.0 − 3 = 77.0 provisional final). Seasonality caveat: this compares May–Jul 2026 to the same window in 2025, so part of any YoY move is calendar, not just performance.</p></details>
+        <details class="drill"><summary>How the modifier scale works</summary><p>The growth modifier scale is unchanged from Q1: <strong>Breakout ≥+20% → +10</strong> · <strong>Strong +10-20% → +7</strong> · <strong>Stable growth +3-10% → +4</strong> · <strong>Flat 0-3% → 0</strong> · <strong>Slight decline −3-0% → −3</strong> · <strong>Declining &lt;−3% → −7</strong>. Leander's −1.1% lands in the Slight decline band → <strong>−3 applied to the final composite</strong> (80.0 − 3 = 77.0 final). Seasonality caveat: this compares May–Jul 2026 to the same window in 2025, so part of any YoY move is calendar, not just performance.</p></details>
         <details class="metric-source"><summary></summary><p class="source-detail">Derived by Albert per Cameron ruling 7/21: revenue_q2_26 ($633,917.19, preliminary — contains July flash estimate) ÷ revenue_q2_25 ($640,867.50, final) − 1. Both via Sage Intacct/Ben Young workbook v4 + Q2 REFORECAST Fiscal 2026 v4.</p></details>
       </div>
 
@@ -2785,7 +2762,7 @@
 
     <div class="chart-wrap">
       <p class="chart-title">Revenue YoY by Branch — Ranked, Leander Highlighted <span class="status-ribbon preliminary" style="font-size:8px;">Prelim</span></p>
-      <p class="chart-sub">Garland leads at +38.3%, Fort Worth +28.6%, Tampa +24.7%. Leander sits 9th of 10 at −1.1%, essentially flat and just ahead of N. Austin's −10.9%. Dashed bands show the modifier rubric thresholds — Leander's Slight decline band applies −3 to the provisional composite.</p>
+      <p class="chart-sub">Garland leads at +38.3%, Fort Worth +28.6%, Tampa +24.7%. Leander sits 9th of 10 at −1.1%, essentially flat and just ahead of N. Austin's −10.9%. Dashed bands show the modifier rubric thresholds — Leander's Slight decline band applies −3 to the final composite.</p>
       <div class="chart-canvas-wrap tall"><canvas id="chartRevenueYoY"></canvas></div>
     </div>
   </section>
@@ -2969,7 +2946,7 @@
   <!-- ============== METHODOLOGY ============== -->
   <section class="manager-only">
     <h2>Methodology &amp; Source Map</h2>
-    <details class="data-source-collapsible"><summary>📍 How the grade is built — Q2 <span class="status-ribbon pending" style="font-size:8px;">Provisional</span></summary><div class="data-source-content">The 6-metric composite (TUR retired to an ungraded side metric, Cameron 7/28) is <strong>restored on the ruled Q2 basis (Cameron 7/27)</strong> — zero reweighting from Q1; the crit slots rotate by design (always 15% apiece): Q1 crits = Personnel-Budget + Driver Safety; Q2 crits = Personnel-Budget + Einstein Games. Driver Safety is now a permanent constant carrying Mover eNPS's old 15% (eNPS = side metric, zero points, returns as a KPI when the mover-engagement cadence starts, ~2 quarters). TUR is retired from the Q2 composite entirely (Cameron 7/28 — targets built on a rate-math error; side metric, zero points, returns graded in Q3 on corrected math), so the composite runs on 6 metrics / 80 points. Two inputs (Sales Target · Recognition) land at the 7/31–8/1 quarter-close pulls, so the grade is <strong>provisional: earned ÷ the 60 live points</strong>, re-based on all 80 at close.
+    <details class="data-source-collapsible"><summary>📍 How the grade is built — Q2 <span class="status-ribbon" style="font-size:8px;background:var(--gray-200);color:var(--gray-700);">Final</span></summary><div class="data-source-content">The 6-metric composite (TUR retired to an ungraded side metric, Cameron 7/28) is <strong>restored on the ruled Q2 basis (Cameron 7/27)</strong> — zero reweighting from Q1; the crit slots rotate by design (always 15% apiece): Q1 crits = Personnel-Budget + Driver Safety; Q2 crits = Personnel-Budget + Einstein Games. Driver Safety is now a permanent constant carrying Mover eNPS's old 15% (eNPS = side metric, zero points, returns as a KPI when the mover-engagement cadence starts, ~2 quarters). TUR is retired from the Q2 composite entirely (Cameron 7/28 — targets built on a rate-math error; side metric, zero points, returns graded in Q3 on corrected math), so the composite runs on 6 metrics / 80 points. Sales Target and Recognition landed at the 8/3 July close, so the grade is <strong>FINAL: earned ÷ all 80 points</strong>.
  <table class="ref-table" style="margin-top: 8px;">
  <thead>
  <tr><th>Component</th><th>Weight</th><th>Leander</th><th>Earned</th></tr>
@@ -2977,29 +2954,29 @@
  <tbody>
  <tr><td>Customer NPS</td><td>15</td><td>99.1 vs 90 → <strong>Super Green</strong></td><td><strong>15.0</strong> (15 × 5/5)</td></tr>
  <tr><td>Driver Safety (constant)</td><td>15</td><td>96 / 0% HR → <strong>Super Green</strong></td><td><strong>15.0</strong> (15 × 5/5)</td></tr>
- <tr><td>Sales Target (booked-vs-target, EOQ pull)</td><td>10</td><td>Pending — lands 7/31–8/1</td><td>—</td></tr>
- <tr><td>Recognition (praise-count attainment)</td><td>10</td><td>Pending — lands 7/31</td><td>—</td></tr>
+ <tr><td>Sales Target (booked-vs-target, EOQ pull)</td><td>10</td><td>99.9% → <strong>Green</strong></td><td><strong>8.0</strong></td></tr>
+ <tr><td>Recognition (praise-count attainment)</td><td>10</td><td>106.0% (89 of 84) → <strong>Green</strong></td><td><strong>8.0</strong></td></tr>
  <tr><td>Critical #1 · Personnel-Budget</td><td>15</td><td>88.8% → <strong>Red</strong> (chronic, all 3 months &lt;95%)</td><td><strong>3.0</strong> (15 × 1/5)</td></tr>
  <tr><td>Critical #2 · Einstein Games (graduated)</td><td>15</td><td>8.48 → <strong>Green, crit MET</strong> (clears the 7.0 bar)</td><td><strong>15.0</strong></td></tr>
- <tr><td><strong>Side metrics (no points)</strong></td><td>—</td><td colspan="2">TUR — retired for Q2 (Cameron 7/28): owned-fleet <strong>77.7%</strong> · running-truck 89.8% reference. Mover eNPS — no Q2 survey cycle. Neither carries composite points.</td></tr>
- <tr><td><strong>Provisional composite</strong></td><td><strong>60 live</strong></td><td colspan="2"><strong>48.0 ÷ 60 = 80.0 → B+</strong></td></tr>
+ <tr><td><strong>Side metrics (no points)</strong></td><td>—</td><td colspan="2">TUR — retired for Q2 (Cameron 7/28): owned-fleet <strong>78.7%</strong> · running-truck 91.2% reference. Mover eNPS — no Q2 survey cycle. Neither carries composite points.</td></tr>
+ <tr><td><strong>Composite</strong></td><td><strong>80</strong></td><td colspan="2"><strong>64.0 ÷ 80 = 80.0 → B+</strong></td></tr>
  <tr><td><strong>Growth modifier</strong></td><td>—</td><td>−1.1% YoY → Slight decline</td><td><strong>−3</strong></td></tr>
- <tr><td><strong>Provisional final</strong></td><td>—</td><td colspan="2"><strong>80.0 − 3 = 77.0 → B</strong> · finalizes at the 7/31–8/1 pulls</td></tr>
+ <tr><td><strong>FINAL</strong></td><td>—</td><td colspan="2"><strong>80.0 − 3 = 77.0 → B</strong> · stamped at the 8/3 July close</td></tr>
  <tr><td><strong>Strategic Weight</strong></td><td>—</td><td colspan="2">Parallel display lens (NOT in grade math). NOI share 9.8% / Rev 7.5% / trucks 7.8% → <strong>Cash Contributor</strong>. NOI-to-plan 82.75% shown beside the grade on the cover.</td></tr>
  </tbody>
  </table></div></details>
-    <details class="data-source-collapsible"><summary>📍 Composite Math — live (provisional basis)</summary><div class="data-source-content">SG=5, G=4, W=2 (Watch), R=1; a metric earns weight × (grade ÷ 5). Exception: Einstein Games earns graduated points (≥7.0 → 15 · 5.0–6.99 → 7.5 × (avg − 5.0) · &lt;5.0 → 0, floor softened from 6.0 per Cameron's 7/27 ruling) while the crit line stays pass/fail at 7.0 — a miss reads Red visibly; a 6.87 would earn ~14.0 of 15 without hiding the miss. TUR carries no points this quarter (retired 7/28 — side metric; see the TUR card in Financial Engine), so the full-quarter denominator is 80. Provisional score = earned ÷ 60 live points; final = earned ÷ 80 after the 7/31–8/1 pulls. Anchor percentages unchanged: all-Green = 80 (B+ baseline), all-Super Green = 100 (A+), all-Red = 20 (F floor).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Growth Modifier Rubric</summary><div class="data-source-content">Breakout (≥+20%) <strong>+10</strong> · Strong (+10-20%) <strong>+7</strong> · Stable growth (+3-10%) <strong>+4</strong> · Flat (0-3%) <strong>0</strong> · Slight decline (−3-0%) <strong>−3</strong> · Declining (&lt;−3%) <strong>−7</strong>. Leander's −1.1% YoY → Slight decline tier → <strong>−3 applied to the provisional composite</strong> (80.0 − 3 = 77.0).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Letter thresholds</summary><div class="data-source-content">95+ A+ · 90+ A · 85+ A− · 80+ B+ · 75+ B · 70+ B− · 60+ C · 50+ D · &lt;50 F. Q1 cutoffs, unchanged. This quarter's letter renders PROVISIONAL (÷60 live points — TUR's 20 retired 7/28) until the 7/31–8/1 pulls land (then ÷80).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Locked grade bands (Q1-consistent, formalized 7/27)</summary><div class="data-source-content"><strong>TUR:</strong> ungraded for Q2 (targets retired 7/28 — rate-math error; see the TUR side-metric card). Q1 bands (SG ≥ +5 · G −4 to +4.9 · W −5 to −7.9 · R ≤ −8 vs branch target) preserved for the Q3 return on corrected targets.<br><strong>Customer NPS (absolute, 90 target):</strong> Super Green ≥ 91 · Green 88–90.9 · Watch 86–87.9 · Red &lt; 86.<br><strong>Driver Safety Score (v3.3.7 — see the standing rubric reference on this page):</strong> SG ≥90 score AND &lt;10% high-risk · G ≥80 score AND ≤20% high-risk · W 70–79 OR (≥80 AND &gt;20% high-risk) · R &lt;70.<br><strong>Personnel-Budget (v3.4.4 — see the standing rubric reference on this page):</strong> SG &gt;110% · G 95–110% · W 85–94% · R chronic &lt;95% sustained across all three months.<br><strong>Einstein Games:</strong> graduated 5.0–7.0 credit curve (≥7.0 → full 15 pts · 5.0–6.99 → 7.5×(avg−5.0) · &lt;5.0 → 0); critical number stays pass/fail at 7.0 — see the games tile above.<br><strong>Recognition (praise-count attainment):</strong> basis = praise count vs roster-derived branch target (position budgets BM 4/wk · OPs 3/wk · FM 3/wk · Flex 3/wk × 13 quarter weeks, filled seats only; mid-quarter seat changes prorate by weeks-in-seat). Leander's Q2 target: <strong>91</strong> (BM 4/wk + OPs 3/wk × 13 weeks, 2 filled seats). Bands: Super Green ≥120% of target · Green ≥100% · Watch 70–99.9% · Red &lt;70%. Ruled 7/28 (published before the 7/31 count).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Sales Target — pending quarter close (basis ruled 7/27)</summary><div class="data-source-content">Ruled Q2 basis: <strong>booked-vs-target, pulled at end of quarter (7/31–8/1)</strong> — resolves the three-competing-revenue-bases issue for grading purposes (manifest caveat <code>booked_vs_realized_basis</code> still governs labeling). Q1's attainment rubric (SG ≥100% · G 80-100% · W 60-80% · R &lt;60%) carries forward for the graded read once the EOQ pull lands. Until then this component's 10 points sit out of the provisional denominator.</div></details><details class="data-source-collapsible"><summary>📍 Recognition — pending quarter close (basis ruled 7/28)</summary><div class="data-source-content">Ruled Q2 basis (Cameron 7/28, published before the 7/31 count — not built from the distribution): <strong>praise-count attainment vs a roster-derived branch target.</strong> Position budgets: BM 4/week · OPs 3/week · FM 3/week · Flex 3/week, × 13 quarter weeks, summed over filled seats only (vacant seats carry no target). Managers not in seat the full quarter prorate: weekly budget × weeks-in-seat. <strong>Leander's Q2 target: 91 praises</strong> (BM 4/wk + OPs 3/wk × 13 weeks, 2 filled seats). Bands: Super Green ≥120% of target · Green ≥100% · Watch 70–99.9% · Red &lt;70%. Actuals land at the 7/31 praise pull (Cameron pulls); bands are published now, tweakable only after finals per the standing rule.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Composite Math — final basis</summary><div class="data-source-content">SG=5, G=4, W=2 (Watch), R=1; a metric earns weight × (grade ÷ 5). Exception: Einstein Games earns graduated points (≥7.0 → 15 · 5.0–6.99 → 7.5 × (avg − 5.0) · &lt;5.0 → 0, floor softened from 6.0 per Cameron's 7/27 ruling) while the crit line stays pass/fail at 7.0 — a miss reads Red visibly; a 6.87 would earn ~14.0 of 15 without hiding the miss. TUR carries no points this quarter (retired 7/28 — side metric; see the TUR card in Financial Engine), so the full-quarter denominator is 80. Final score = earned ÷ 80 points, stamped 8/3. Anchor percentages unchanged: all-Green = 80 (B+ baseline), all-Super Green = 100 (A+), all-Red = 20 (F floor).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Growth Modifier Rubric</summary><div class="data-source-content">Breakout (≥+20%) <strong>+10</strong> · Strong (+10-20%) <strong>+7</strong> · Stable growth (+3-10%) <strong>+4</strong> · Flat (0-3%) <strong>0</strong> · Slight decline (−3-0%) <strong>−3</strong> · Declining (&lt;−3%) <strong>−7</strong>. Leander's −1.1% YoY → Slight decline tier → <strong>−3 applied to the final composite</strong> (80.0 − 3 = 77.0).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Letter thresholds</summary><div class="data-source-content">95+ A+ · 90+ A · 85+ A− · 80+ B+ · 75+ B · 70+ B− · 60+ C · 50+ D · &lt;50 F. Q1 cutoffs, unchanged. This quarter's letter is FINAL (÷80 points) as of the 8/3 close.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Locked grade bands (Q1-consistent, formalized 7/27)</summary><div class="data-source-content"><strong>TUR:</strong> ungraded for Q2 (targets retired 7/28 — rate-math error; see the TUR side-metric card). Q1 bands (SG ≥ +5 · G −4 to +4.9 · W −5 to −7.9 · R ≤ −8 vs branch target) preserved for the Q3 return on corrected targets.<br><strong>Customer NPS (absolute, 90 target):</strong> Super Green ≥ 91 · Green 88–90.9 · Watch 86–87.9 · Red &lt; 86.<br><strong>Driver Safety Score (v3.3.7 — see the standing rubric reference on this page):</strong> SG ≥90 score AND &lt;10% high-risk · G ≥80 score AND ≤20% high-risk · W 70–79 OR (≥80 AND &gt;20% high-risk) · R &lt;70.<br><strong>Personnel-Budget (v3.4.4 — see the standing rubric reference on this page):</strong> SG &gt;110% · G 95–110% · W 85–94% · R chronic &lt;95% sustained across all three months.<br><strong>Einstein Games:</strong> graduated 5.0–7.0 credit curve (≥7.0 → full 15 pts · 5.0–6.99 → 7.5×(avg−5.0) · &lt;5.0 → 0); critical number stays pass/fail at 7.0 — see the games tile above.<br><strong>Recognition (praise-count attainment):</strong> basis = praise count vs the praise board's own goal lines (BM/Exp/Regional/Dept-Head 48 · Ops/Flex/FM 36, 12-week basis — Cameron's 8/3 ruling supersedes the 13-week draft table published 7/28). Leander's Q2 target: <strong>84</strong> (Frank Williams 41/48, Garrison Cobe 48/36). Bands: Super Green ≥120% of target · Green ≥100% · Watch 70–99.9% · Red &lt;70%.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Sales Target — final (basis ruled 7/27, pulled 8/3)</summary><div class="data-source-content">Final Q2 basis: <strong>booked-vs-target, pulled after close (8/3)</strong> — resolves the three-competing-revenue-bases issue for grading purposes (manifest caveat <code>booked_vs_realized_basis</code> still governs labeling). Q1's attainment rubric (SG ≥100% · G 80-100% · W 60-80% · R &lt;60%) carries forward for the final graded read. Leander: $661,667 booked vs $662,143 target = 99.9% → Green, 8.0 of 10 points.</div></details><details class="data-source-collapsible"><summary>📍 Recognition — final (basis ruled 7/28, targets finalized 8/3)</summary><div class="data-source-content">Final Q2 basis (Cameron 8/3): <strong>praise-count attainment vs the praise board's own goal lines.</strong> Position targets: BM/Exp/Regional/Dept-Head 48 · Ops/Flex/FM 36, 12-week basis — supersedes the 13-week draft table published 7/28. <strong>Leander's Q2 target: 84 praises</strong> (Frank Williams 41/48, Garrison Cobe 48/36). Bands: Super Green ≥120% of target · Green ≥100% · Watch 70–99.9% · Red &lt;70%. Final count: 89 of 84 = 106.0% — Green, 8.0 of 10 points.</div></details>
     <details class="data-source-collapsible"><summary>📍 NOI/Truck — actively calibrating</summary><div class="data-source-content">Shown as Reference (ungraded) in the Financial Engine top block. Single-quarter data is still too thin to calibrate a ratio-to-plan rubric, and plan accuracy itself remains unmeasured. Revisit once multi-quarter data exists. NOI/Truck remains the OPSP "profit per truck" economic denominator. Q2 basis: allocated NOI (Cameron 7/21 ruling) ÷ trucks.</div></details>
     <details class="data-source-collapsible"><summary>📍 Mover eNPS — side metric, out of the composite (ruled 7/27)</summary><div class="data-source-content"><strong>Ruled by Cameron 7/27: Mover eNPS is out of the composite permanently</strong> — its 15% now belongs to Driver Safety as a permanent constant. It renders as a side metric (zero points) showing the last survey value as a stale reference (Q1 2026: Leander +47, n=15, company +46), and <strong>returns as a KPI when the constant mover-engagement cadence starts (~2 quarters)</strong>. Q1's rubric (SG ≥+60 · G +40-59 · W +30-39 · R &lt;+30, locked by Cameron 5/2) is preserved for that return. No Q2 mover-population cycle ran — the Q2 instrument surveyed manager/CET salaried staff instead (company +81, n=52).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Driver Safety Score rubric (v3.3.7) — standing reference this quarter</summary><div class="data-source-content">SG ≥90 score AND &lt;10% high-risk · G ≥80 AND ≤20% HR · W 70-79 OR (≥80 AND &gt;20% HR) · R &lt;70. Leander Q2: 96 score / 0% high-risk (0 of 12 active drivers) → <strong>Super Green</strong> under this rubric, up from Watch (58/50%) in Q1. Driver Safety is no longer one of Q2's 2 rotating Critical Numbers (Cameron's 7/22 ruling replaced it with Personal-Goal Attainment + Einstein Games) — instead it was <strong>promoted to a permanent composite constant at 15% (Cameron 7/27)</strong>, taking Mover eNPS's old slot, and stays visible every quarter (Samsara data is continuous; theme-independent, permanent per the qgr-packet-builder skill). Super Green here earns 15.0 of 15 points in the provisional composite. Source: Mike Vandenbroader manual Samsara pull, master org 7005377, delivered 2026-07-22.</div></details>
+    <details class="data-source-collapsible"><summary>📍 Driver Safety Score rubric (v3.3.7) — standing reference this quarter</summary><div class="data-source-content">SG ≥90 score AND &lt;10% high-risk · G ≥80 AND ≤20% HR · W 70-79 OR (≥80 AND &gt;20% HR) · R &lt;70. Leander Q2: 96 score / 0% high-risk (0 of 12 active drivers) → <strong>Super Green</strong> under this rubric, up from Watch (58/50%) in Q1. Driver Safety is no longer one of Q2's 2 rotating Critical Numbers (Cameron's 7/22 ruling replaced it with Personal-Goal Attainment + Einstein Games) — instead it was <strong>promoted to a permanent composite constant at 15% (Cameron 7/27)</strong>, taking Mover eNPS's old slot, and stays visible every quarter (Samsara data is continuous; theme-independent, permanent per the qgr-packet-builder skill). Super Green here earns 15.0 of 15 points in the final composite. Source: Mike Vandenbroader manual Samsara pull, master org 7005377, delivered 2026-07-22.</div></details>
     <details class="data-source-collapsible"><summary>📍 Personnel-Budget rubric (v3.4.4, Cameron 5/4 ruling — LOCKED, now "Avg % to Personal (Budget) Goal — Q2")</summary><div class="data-source-content">SG &gt;110% (over plan) · G 95-110% (on plan) · W 85-94% (under plan) · R chronic-F (&lt;95% sustained). Over-budget alone does NOT dock. Leander Q2: 88.8% day-weighted → <strong>Red</strong> (chronic-F — all 3 months, 82.9%/92.2%/93.2%, sat below the 95% floor, closing steadily but never clearing it). This metric is now one of Q2's 2 graded Critical Numbers per Cameron's 7/22 ruling, standing in for "average % to personal goal" — see the flag under that tile above.</div></details>
     <details class="data-source-collapsible"><summary>📍 Strategic Weight (v3.3.2 lens)</summary><div class="data-source-content">Cover-hero chip frames each branch's cash-contribution scale separately from the operational composite. Tiers: Cash Leader (≥20% NOI) · Cash Contributor (8-20%) · Cash Neutral (0-8%) · Growth Bet (negative NOI, planned-loss / new market) · Underperforming (negative NOI, NOT designated investment). NO impact on grade math — parallel display only. Leander stayed in the Cash Contributor tier both quarters, but NOI share slipped (Q1 14.9% → Q2 9.8% of company NOI) — a trend worth naming, not explained without proof.</div></details>
-    <details class="data-source-collapsible"><summary>📍 Sources</summary><div class="data-source-content">Manifest <code>branch-metrics-q2-26.json</code> v0.10.9 (validator-clean) — the sole number source for this file. Composite basis + graduated-points + pending-input rules per <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code> (Cameron's 7/27 rulings). Feed lineage: Matisen's 5-feed fold (sales, TUR, personnel-budget, Samsara safety, GatherUp NPS), intake-validated, folded via <code>fold_feeds_v080.py</code> v0.8.0→v0.10.4. Sage Intacct via Ben Young workbook v4 (financials, posted 7/20). Games data: <code>_games_s3_q2_26</code> block + <code>q2-data/games-s3-branch-slices/leander.json</code>. Metric registry: <code>metric-registry.json</code> — stable metric ids + basis_version; watch the TUR basis note (the Matisen staffing-model redefinition, if it lands, is a basis bump + trend break, not a silent re-baseline).</div></details>
-    <details class="data-source-collapsible"><summary>📍 Known data gaps (Q3 collection target)</summary><div class="data-source-content">Sales Target booked-vs-target EOQ pull (7/31–8/1 — basis ruled 7/27) · Recognition praise-count pull (7/31 — new basis ruled 7/27) · Mover eNPS cycle resumption (~2 quarters; side metric until then) · Conversion #, Cancellation Rate, Contracts Count (EMMA missing-contracts backfill) · Damages per Hour (post-season reconciliation) · <code>nps_moves</code> · Magic Moments per Move · QGR Rock Performance · People Analyzer A/B/C mix · On-Site Eval coverage — all carried from the Q1 wishlist, none newly landed this quarter except Damages (now a scored Einstein Games component).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Sources</summary><div class="data-source-content">Manifest <code>branch-metrics-q2-26.json</code> v0.11.0 (validator-clean) — the sole number source for this file. Composite basis + graduated-points rules per <code>scorecard-q2-reallocation-proposal-2026-07-27.md</code> (Cameron's 7/27 rulings); Sales Target + Recognition finalized 8/3 per Cameron's July-close rulings (<code>_sales_attainment_q2_26</code>, <code>_recognition_q2_26</code>, <code>_branch_composites_q2_26_final</code>). Feed lineage: Matisen's 5-feed fold (sales, TUR, personnel-budget, Samsara safety, GatherUp NPS), intake-validated, folded via <code>fold_feeds_v080.py</code> v0.8.0→v0.10.4. Sage Intacct via Ben Young workbook v4 (financials, posted 7/20). Games data: <code>_games_s3_q2_26</code> block + <code>q2-data/games-s3-branch-slices/leander.json</code>. Metric registry: <code>metric-registry.json</code> — stable metric ids + basis_version; watch the TUR basis note (the Matisen staffing-model redefinition, if it lands, is a basis bump + trend break, not a silent re-baseline).</div></details>
+    <details class="data-source-collapsible"><summary>📍 Known data gaps (Q3 collection target)</summary><div class="data-source-content">Mover eNPS cycle resumption (~2 quarters; side metric until then) · Conversion #, Cancellation Rate, Contracts Count (EMMA missing-contracts backfill) · Damages per Hour (post-season reconciliation) · <code>nps_moves</code> · Magic Moments per Move · QGR Rock Performance · People Analyzer A/B/C mix · On-Site Eval coverage — all carried from the Q1 wishlist, none newly landed this quarter except Damages (now a scored Einstein Games component).</div></details>
 
     <div class="audit-callout">
       <strong>✓ Data quality reviewed.</strong> Every datapoint is traced to its primary source — click "📍 Source" under any metric tile or hover the 📍 icon in the reference table to verify. Methodology + version log + open architectural questions live in the QGR packet's <strong>"How the Branch Scorecards Are Built"</strong> expandable section.
@@ -3007,7 +2984,7 @@
   </section>
 
   <p class="manifest-stamp" style="font-size:11px;color:var(--gray-500);text-align:center;margin-top:24px;">
-    Rendered from branch-metrics-q2-26.json v0.10.9 &middot; 2026-07-28 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate) &middot; composite PROVISIONAL — finalizes at the 7/31&ndash;8/1 pulls
+    Rendered from branch-metrics-q2-26.json v0.11.0 &middot; 2026-08-03 &middot; Q2 window May 1&ndash;Jul 31 (July = flash estimate) &middot; composite FINAL — stamped at the 7/31&ndash;8/1 July close
   </p>
 
   <div class="footer">
@@ -3077,19 +3054,17 @@ function instantiatePendingMoverCharts() {
 // ── 1. Cover Radar Chart — RESTORED 2026-07-27 on the ruled Q2 composite basis (Cameron's 7/27 rulings).
 // 6 axes = the Q2 composite components (Driver Safety takes Mover eNPS's old slot as a permanent constant).
 // TUR axis REMOVED 2026-07-28 — TUR retired from the composite (ungraded side metric; Cameron 7/28 ruling).
-// 2 axes (Sales Target · Recognition) are PENDING until the 7/31–8/1 quarter-close pulls — they render at 0
-// (chart center) with "pending" in the axis label and a tooltip that says pending, never a fake grade.
+// FINAL 2026-08-03: Sales Target and Recognition landed at July close — all 6 axes are now live grades.
 // Radar viz scale: SG=4, G=3, W=2, R=1. Live values: NPS SG=4 (99.1),
 // Driver Safety SG=4 (96/0%HR), Personnel R=1 (88.8%), Games G=3 (8.48 — crit MET clean at 7.0, full 15 graduated pts).
-const RADAR_PENDING_AXES = [0, 3]; // Sales Target, Recognition
 dualChart('chartRadar', 'moverChartRadar', {
   type: 'radar',
   data: {
-    labels: [['Sales Target (10)', 'pending 7/31–8/1'], 'Customer NPS (15)', 'Driver Safety (15)', ['Recognition (10)', 'pending 7/31'], 'Personnel-Budget (15)', 'Einstein Games (15)'],
+    labels: ['Sales Target (10)', 'Customer NPS (15)', 'Driver Safety (15)', 'Recognition (10)', 'Personnel-Budget (15)', 'Einstein Games (15)'],
     datasets: [
       {
-        label: 'Leander Q2 Grades (4 live · 2 pending)',
-        data: [0, 4, 4, 0, 1, 3],
+        label: 'Leander Q2 Final Grades',
+        data: [3, 4, 4, 3, 1, 3],
         backgroundColor: ORANGE_FILL,
         borderColor: ORANGE,
         borderWidth: 2,
@@ -3115,9 +3090,6 @@ dualChart('chartRadar', 'moverChartRadar', {
       tooltip: {
         callbacks: {
           label: (ctx) => {
-            if (ctx.datasetIndex === 0 && RADAR_PENDING_AXES.includes(ctx.dataIndex)) {
-              return ctx.dataset.label + ': Pending — lands at the quarter-close pull';
-            }
             const labels = { 4: 'Super Green', 3: 'Green', 2: 'Watch', 1: 'Red' };
             return ctx.dataset.label + ': ' + (labels[ctx.parsed.r] || ctx.parsed.r);
           }
